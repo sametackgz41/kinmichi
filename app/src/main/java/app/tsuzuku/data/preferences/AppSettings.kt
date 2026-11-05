@@ -77,7 +77,7 @@ data class AppSettings(
     val vacationStartEpochDay: Long? = null,
     val vacationEndEpochDay: Long? = null,
     val todaySectionOrder: String = "summary,habits,plan,goals,library,focus,health,routines,intelligence",
-    val todayHiddenSections: String = "",
+    val todayHiddenSections: String = DEFAULT_TODAY_HIDDEN_SECTIONS,
     val healthSyncEnabled: Boolean = true,
     val offlineIntelligenceEnabled: Boolean = true,
     val cloudAiEnabled: Boolean = false,
@@ -225,8 +225,8 @@ class SettingsRepository(context: Context) {
         lastCloudSyncAt = getLong(KEY_LAST_CLOUD_SYNC_AT, 0L),
         vacationStartEpochDay = getLong(KEY_VACATION_START, Long.MIN_VALUE).takeUnless { it == Long.MIN_VALUE },
         vacationEndEpochDay = getLong(KEY_VACATION_END, Long.MIN_VALUE).takeUnless { it == Long.MIN_VALUE },
-        todaySectionOrder = getString(KEY_TODAY_SECTION_ORDER, "summary,habits,plan,goals,library,focus,health,routines") ?: "summary,habits,plan,goals,library,focus,health,routines",
-        todayHiddenSections = getString(KEY_TODAY_HIDDEN_SECTIONS, "").orEmpty(),
+        todaySectionOrder = getString(KEY_TODAY_SECTION_ORDER, "summary,habits,plan,goals,library,focus,health,routines,intelligence") ?: "summary,habits,plan,goals,library,focus,health,routines,intelligence",
+        todayHiddenSections = getString(KEY_TODAY_HIDDEN_SECTIONS, DEFAULT_TODAY_HIDDEN_SECTIONS).orEmpty(),
         healthSyncEnabled = getBoolean(KEY_HEALTH_SYNC_ENABLED, true),
         offlineIntelligenceEnabled = getBoolean(KEY_OFFLINE_INTELLIGENCE_ENABLED, true),
         cloudAiEnabled = getBoolean(KEY_CLOUD_AI_ENABLED, false),
@@ -288,3 +288,6 @@ object AppLocaleContext {
         return context.createConfigurationContext(configuration)
     }
 }
+
+/** Today starts focused on habits; other sections can be turned on from the customise sheet. */
+const val DEFAULT_TODAY_HIDDEN_SECTIONS = "plan,goals,library,focus,health,routines,intelligence"

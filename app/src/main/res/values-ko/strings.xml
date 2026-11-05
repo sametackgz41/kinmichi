@@ -575,4 +575,11 @@
     <string name="choose_date">날짜 선택</string>
     <string name="personal_category_description">개인 카테고리 · 추적 단위 선택</string>
     <string name="progress_tab">진행</string>
+    <string name="today_all_done">오늘 모두 완료 🎉</string>
+    <string name="habits_done_of">%2$d개 중 %1$d개 완료</string>
+    <string name="more_actions">더보기</string>
+    <plurals name="streak_days">
+        <item quantity="one">%d일 연속</item>
+        <item quantity="other">%d일 연속</item>
+    </plurals>
 </resources>

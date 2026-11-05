@@ -575,4 +575,11 @@
     <string name="choose_date">日付を選択してください</string>
     <string name="personal_category_description">個人カテゴリ · 追跡ユニットを選択します</string>
     <string name="progress_tab">進捗</string>
+    <string name="today_all_done">今日はすべて完了 🎉</string>
+    <string name="habits_done_of">%2$d件中%1$d件完了</string>
+    <string name="more_actions">その他</string>
+    <plurals name="streak_days">
+        <item quantity="one">%d日連続</item>
+        <item quantity="other">%d日連続</item>
+    </plurals>
 </resources>

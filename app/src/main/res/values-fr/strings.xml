@@ -575,4 +575,11 @@
     <string name="choose_date">Choisir une date</string>
     <string name="personal_category_description">Catégorie personnelle · vous choisissez l\'unité de suivi</string>
     <string name="progress_tab">Progrès</string>
+    <string name="today_all_done">Tout est fait pour aujourd'hui 🎉</string>
+    <string name="habits_done_of">%1$d sur %2$d faits</string>
+    <string name="more_actions">Plus</string>
+    <plurals name="streak_days">
+        <item quantity="one">%d jour d'affilée</item>
+        <item quantity="other">%d jours d'affilée</item>
+    </plurals>
 </resources>

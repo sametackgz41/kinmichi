@@ -138,7 +138,6 @@ fun TodayScreen(
 ) {
     val active = habits.filterNot(TodayHabit::isComplete)
     val completed = habits.filter(TodayHabit::isComplete)
-    var completedExpanded by rememberSaveable { mutableStateOf(false) }
     var showConfigSheet by remember { mutableStateOf(false) }
     var skipHabitTarget by remember { mutableStateOf<TodayHabit?>(null) }
     var selectedCarryTask by remember { mutableStateOf<PlanTask?>(null) }
@@ -157,9 +156,44 @@ fun TodayScreen(
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(start = 16.dp, top = 4.dp, end = 16.dp, bottom = 96.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        item { GreetingBlock(profileName) }
+        item(key = "header") {
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                Box(Modifier.weight(1f)) { GreetingBlock(profileName) }
+                IconButton(onClick = { showConfigSheet = true }) {
+                    Icon(Icons.Rounded.Tune, contentDescription = stringResource(R.string.customize_sections))
+                }
+                Box {
+                    var moreExpanded by remember { mutableStateOf(false) }
+                    IconButton(onClick = { moreExpanded = true }) {
+                        Icon(Icons.Rounded.MoreVert, contentDescription = stringResource(R.string.more_actions))
+                    }
+                    DropdownMenu(expanded = moreExpanded, onDismissRequest = { moreExpanded = false }) {
+                        DropdownMenuItem(
+                            text = { Text(stringResource(R.string.inbox_label)) },
+                            leadingIcon = { Icon(Icons.Rounded.Inbox, contentDescription = null) },
+                            onClick = { moreExpanded = false; onOpenInbox() },
+                        )
+                        DropdownMenuItem(
+                            text = { Text(stringResource(R.string.open_goals)) },
+                            leadingIcon = { Icon(Icons.Rounded.Flag, contentDescription = null) },
+                            onClick = { moreExpanded = false; onOpenGoals() },
+                        )
+                        DropdownMenuItem(
+                            text = { Text(stringResource(R.string.tsuzuku_intelligence)) },
+                            leadingIcon = { Icon(Icons.Rounded.Lightbulb, contentDescription = null) },
+                            onClick = { moreExpanded = false; onOpenIntelligence() },
+                        )
+                        DropdownMenuItem(
+                            text = { Text(stringResource(R.string.reorder_habits)) },
+                            leadingIcon = { Icon(Icons.Rounded.SwapVert, contentDescription = null) },
+                            onClick = { moreExpanded = false; onReorderHabits() },
+                        )
+                    }
+                }
+            }
+        }
         if (vacationActive) {
             item {
                 Surface(
@@ -170,40 +204,15 @@ fun TodayScreen(
                 }
             }
         }
-        item {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 4.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Column {
-                    Text(stringResource(R.string.today), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
-                }
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    IconButton(onClick = onOpenIntelligence) {
-                        Icon(Icons.Rounded.Lightbulb, contentDescription = "Tsuzuku Intelligence")
-                    }
-                    IconButton(onClick = onOpenInbox) {
-                        Icon(Icons.Rounded.Inbox, contentDescription = stringResource(R.string.inbox_label))
-                    }
-                    IconButton(onClick = onOpenGoals) {
-                        Icon(Icons.Rounded.Flag, contentDescription = stringResource(R.string.open_goals))
-                    }
-                    IconButton(onClick = { showConfigSheet = true }) {
-                        Icon(Icons.Rounded.Tune, contentDescription = stringResource(R.string.customize_sections))
-                    }
-                }
-            }
-        }
 
         orderList.forEach { sectionId ->
             if (sectionId !in hiddenSet) {
                 when (sectionId) {
                     "summary" -> {
-                        if (showDailySummary) {
-                            item(key = "section-summary") { DailySummary(completed = completed.size, total = habits.size) }
+                        if (showDailySummary && habits.isNotEmpty()) {
+                            item(key = "section-summary") {
+                                TodayProgressHeader(completed = completed.size, total = habits.size, modifier = Modifier.animateItem())
+                            }
                         }
                     }
                     "intelligence" -> {
@@ -217,108 +226,46 @@ fun TodayScreen(
                         }
                     }
                     "habits" -> {
-                        item(key = "section-habits-header") {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(top = 8.dp),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.CenterVertically,
-                            ) {
-                                Column {
-                                    Text(stringResource(R.string.todays_habits), style = MaterialTheme.typography.titleLarge)
-                                }
-                                IconButton(onClick = onReorderHabits) {
-                                    Icon(Icons.Rounded.SwapVert, contentDescription = stringResource(R.string.reorder_habits))
-                                }
-                            }
-                        }
                         if (habits.isEmpty()) {
                             item(key = "empty-habits") { EmptyTodayCard(onAddHabit) }
                         }
-                        active.groupBy { it.habit.routineName }.forEach { (routine, routineHabits) ->
+                        habits.groupBy { it.habit.routineName }.forEach { (routine, routineHabits) ->
                             if (routine.isNotBlank()) {
                                 item(key = "routine-$routine") {
                                     Row(
-                                        modifier = Modifier.fillMaxWidth(),
-                                        horizontalArrangement = Arrangement.SpaceBetween,
-                                        verticalAlignment = Alignment.CenterVertically,
-                                    ) {
-                                        Row(verticalAlignment = Alignment.CenterVertically) {
-                                            Box(Modifier.size(5.dp).background(MaterialTheme.colorScheme.secondary, CircleShape))
-                                            Text(
-                                                routine.uppercase(LocalConfiguration.current.locales[0]),
-                                                modifier = Modifier.padding(start = 8.dp),
-                                                style = MaterialTheme.typography.labelMedium,
-                                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                                letterSpacing = 1.1.sp,
-                                            )
-                                        }
-                                        TextButton(onClick = { onStartRoutine(routine) }) {
-                                            Icon(Icons.Rounded.PlayArrow, contentDescription = null, modifier = Modifier.size(16.dp))
-                                            Spacer(Modifier.width(4.dp))
-                                            Text(stringResource(R.string.start_routine), style = MaterialTheme.typography.labelMedium)
-                                        }
-                                    }
-                                }
-                            }
-                            items(routineHabits, key = { it.habit.id }) { todayHabit ->
-                                TodayHabitCard(
-                                    todayHabit = todayHabit,
-                                    onToggle = { onToggleHabit(todayHabit.habit.id) },
-                                    onIncrement = { onIncrementHabit(todayHabit.habit.id) },
-                                    onDecrement = { onDecrementHabit(todayHabit.habit.id) },
-                                    timerRunning = timer.habitId == todayHabit.habit.id,
-                                    timerElapsedSeconds = if (timer.habitId == todayHabit.habit.id) timer.elapsedSeconds else 0,
-                                    onToggleTimer = { onToggleTimer(todayHabit.habit.id) },
-                                    onOpen = { onOpenHabit(todayHabit.habit.id) },
-                                    onSkip = { reason -> onSkipHabit(todayHabit.habit.id, reason) },
-                                    onOpenSkipDialog = { skipHabitTarget = todayHabit },
-                                    interactionDisabled = vacationActive,
-                                )
-                            }
-                        }
-                        if (completed.isNotEmpty()) {
-                            item(key = "completed-header") {
-                                Surface(
-                                    onClick = { completedExpanded = !completedExpanded },
-                                    shape = RoundedCornerShape(8.dp),
-                                    color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f),
-                                ) {
-                                    Row(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(horizontal = 16.dp, vertical = 13.dp),
-                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                        modifier = Modifier.fillMaxWidth().padding(top = 8.dp).animateItem(),
                                         verticalAlignment = Alignment.CenterVertically,
                                     ) {
                                         Text(
-                                            pluralStringResource(R.plurals.completed_section, completed.size, completed.size),
+                                            routine,
                                             style = MaterialTheme.typography.titleSmall,
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                            modifier = Modifier.weight(1f),
                                         )
-                                        Icon(
-                                            if (completedExpanded) Icons.Rounded.ExpandLess else Icons.Rounded.ExpandMore,
-                                            contentDescription = null,
-                                        )
+                                        TextButton(onClick = { onStartRoutine(routine) }) {
+                                            Icon(Icons.Rounded.PlayArrow, contentDescription = null, modifier = Modifier.size(18.dp))
+                                            Spacer(Modifier.width(4.dp))
+                                            Text(stringResource(R.string.start_routine))
+                                        }
                                     }
                                 }
                             }
-                            items(completed, key = { "completed-${it.habit.id}" }) { todayHabit ->
-                                AnimatedVisibility(visible = completedExpanded) {
-                                    TodayHabitCard(
-                                        todayHabit = todayHabit,
-                                        onToggle = { onToggleHabit(todayHabit.habit.id) },
-                                        onIncrement = { onIncrementHabit(todayHabit.habit.id) },
-                                        onDecrement = { onDecrementHabit(todayHabit.habit.id) },
-                                        timerRunning = timer.habitId == todayHabit.habit.id,
-                                        timerElapsedSeconds = if (timer.habitId == todayHabit.habit.id) timer.elapsedSeconds else 0,
-                                        onToggleTimer = { onToggleTimer(todayHabit.habit.id) },
-                                        onOpen = { onOpenHabit(todayHabit.habit.id) },
-                                        onSkip = { reason -> onSkipHabit(todayHabit.habit.id, reason) },
-                                        onOpenSkipDialog = { skipHabitTarget = todayHabit },
-                                        interactionDisabled = vacationActive,
-                                    )
-                                }
+                            // Completed habits glide to the bottom of their group instead of disappearing.
+                            items(routineHabits.sortedBy { it.isComplete }, key = { it.habit.id }) { todayHabit ->
+                                HabitRow(
+                                    todayHabit = todayHabit,
+                                    timerRunning = timer.habitId == todayHabit.habit.id,
+                                    timerElapsedSeconds = if (timer.habitId == todayHabit.habit.id) timer.elapsedSeconds else 0,
+                                    interactionDisabled = vacationActive,
+                                    onToggle = { onToggleHabit(todayHabit.habit.id) },
+                                    onIncrement = { onIncrementHabit(todayHabit.habit.id) },
+                                    onDecrement = { onDecrementHabit(todayHabit.habit.id) },
+                                    onToggleTimer = { onToggleTimer(todayHabit.habit.id) },
+                                    onOpen = { onOpenHabit(todayHabit.habit.id) },
+                                    onOpenSkipDialog = { skipHabitTarget = todayHabit },
+                                    onUndoSkip = { onSkipHabit(todayHabit.habit.id, null) },
+                                    modifier = Modifier.animateItem(),
+                                )
                             }
                         }
                     }
@@ -486,57 +433,6 @@ private fun GreetingBlock(profileName: String) {
 }
 
 @Composable
-private fun DailySummary(completed: Int, total: Int) {
-    val progress = if (total == 0) 0f else completed.toFloat() / total
-    val remaining = (total - completed).coerceAtLeast(0)
-    Surface(
-        shape = RoundedCornerShape(10.dp),
-        color = MaterialTheme.colorScheme.surface,
-        modifier = Modifier
-            .fillMaxWidth()
-            .border(1.dp, MaterialTheme.colorScheme.outlineVariant, RoundedCornerShape(10.dp)),
-    ) {
-        Row {
-            Box(Modifier.width(4.dp).height(118.dp).background(MaterialTheme.colorScheme.secondary))
-            Column(Modifier.padding(14.dp).weight(1f), verticalArrangement = Arrangement.spacedBy(9.dp)) {
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                Column {
-                    Text(
-                        stringResource(R.string.daily_progress).uppercase(LocalConfiguration.current.locales[0]),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                    Text("%${(progress * 100).toInt()}", style = MaterialTheme.typography.headlineMedium, color = MaterialTheme.colorScheme.onSurface)
-                }
-                Surface(color = MaterialTheme.colorScheme.surfaceVariant, shape = RoundedCornerShape(6.dp)) {
-                    Text(
-                        stringResource(R.string.goal_fraction, completed, total),
-                        modifier = Modifier.padding(horizontal = 11.dp, vertical = 7.dp),
-                        style = MaterialTheme.typography.labelMedium,
-                    )
-                }
-            }
-            LinearProgressIndicator(
-                progress = { progress },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(6.dp)
-                    .clip(CircleShape),
-                color = MaterialTheme.colorScheme.primary,
-                trackColor = MaterialTheme.colorScheme.surfaceVariant,
-                gapSize = 0.dp,
-                drawStopIndicator = {},
-            )
-            Row(horizontalArrangement = Arrangement.spacedBy(18.dp)) {
-                Text(stringResource(R.string.completed_short, completed), style = MaterialTheme.typography.labelSmall)
-                Text(stringResource(R.string.remaining_short, remaining), style = MaterialTheme.typography.labelSmall)
-            }
-            }
-        }
-    }
-}
-
-@Composable
 private fun EmptyTodayCard(onAddHabit: () -> Unit) {
     Surface(
         shape = RoundedCornerShape(10.dp),
@@ -556,305 +452,6 @@ private fun EmptyTodayCard(onAddHabit: () -> Unit) {
         }
     }
 }
-
-@Composable
-private fun TodayHabitCard(
-    todayHabit: TodayHabit,
-    onToggle: () -> Unit,
-    onIncrement: () -> Unit,
-    onDecrement: () -> Unit,
-    timerRunning: Boolean,
-    timerElapsedSeconds: Long,
-    onToggleTimer: () -> Unit,
-    onOpen: () -> Unit,
-    onSkip: (String?) -> Unit = {},
-    onOpenSkipDialog: () -> Unit = {},
-    interactionDisabled: Boolean = false,
-) {
-    val habit = todayHabit.habit
-    val haptic = LocalHapticFeedback.current
-    val containerColor by animateColorAsState(
-        if (todayHabit.isComplete) MaterialTheme.colorScheme.primary.copy(alpha = 0.07f) else Color.Transparent,
-        label = "habit-card",
-    )
-    Card(
-        colors = CardDefaults.cardColors(containerColor = containerColor),
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(0.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
-    ) {
-        Column(Modifier.padding(15.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Column(
-                    modifier = Modifier.width(48.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(6.dp),
-                ) {
-                    Text(
-                        habit.reminderMinutes?.let(::formatReminderTime) ?: "•",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = if (habit.reminderMinutes != null) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.secondary,
-                    )
-                    Box(Modifier.size(7.dp).background(Color(habit.colorArgb.toInt()), CircleShape))
-                }
-                Surface(
-                    modifier = Modifier.size(40.dp),
-                    shape = RoundedCornerShape(6.dp),
-                    color = Color(habit.colorArgb.toInt()).copy(alpha = 0.14f),
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Text(habit.emoji, fontSize = 21.sp)
-                    }
-                }
-                Spacer(Modifier.width(12.dp))
-                Column(Modifier.weight(1f)) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(6.dp),
-                    ) {
-                        Text(habit.name, style = MaterialTheme.typography.titleMedium)
-                        if (habit.currentLevel > 1) {
-                            Surface(
-                                shape = RoundedCornerShape(4.dp),
-                                color = MaterialTheme.colorScheme.primaryContainer,
-                            ) {
-                                Text(
-                                    "Lv. ${habit.currentLevel}",
-                                    modifier = Modifier.padding(horizontal = 5.dp, vertical = 1.dp),
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = MaterialTheme.colorScheme.onPrimaryContainer,
-                                    fontWeight = FontWeight.Bold,
-                                )
-                            }
-                        }
-                        Surface(
-                            shape = RoundedCornerShape(4.dp),
-                            color = MaterialTheme.colorScheme.surfaceVariant,
-                        ) {
-                            Text(
-                                "${todayHabit.masteryStage.icon} ${todayHabit.masteryStage.title}",
-                                modifier = Modifier.padding(horizontal = 5.dp, vertical = 1.dp),
-                                style = MaterialTheme.typography.labelSmall,
-                            )
-                        }
-                    }
-                    Spacer(Modifier.height(3.dp))
-                    Text(
-                        scheduleSummary(habit.scheduleDaysMask),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                    if (todayHabit.skipReason != null) {
-                        val (parsedType, parsedLabel) = SkipReasonType.parse(todayHabit.skipReason)
-                        Spacer(Modifier.height(3.dp))
-                        Surface(
-                            shape = RoundedCornerShape(6.dp),
-                            color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.7f),
-                            modifier = Modifier.clickable { onOpenSkipDialog() },
-                        ) {
-                            Row(
-                                modifier = Modifier.padding(horizontal = 7.dp, vertical = 3.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(4.dp),
-                            ) {
-                                Text(
-                                    "${parsedType.icon} $parsedLabel",
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    fontWeight = FontWeight.Medium,
-                                )
-                                Text("✎", fontSize = 10.sp, color = MaterialTheme.colorScheme.secondary)
-                            }
-                        }
-                    }
-                    if (todayHabit.badHabitLimitExceeded) {
-                        Spacer(Modifier.height(3.dp))
-                        Surface(
-                            shape = RoundedCornerShape(4.dp),
-                            color = MaterialTheme.colorScheme.errorContainer,
-                        ) {
-                            Text(
-                                stringResource(R.string.limit_exceeded, formatAmount(todayHabit.progress), formatAmount(habit.maximumTarget ?: habit.target), habit.unit),
-                                modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
-                                style = MaterialTheme.typography.labelSmall,
-                                color = MaterialTheme.colorScheme.onErrorContainer,
-                                fontWeight = FontWeight.SemiBold,
-                            )
-                        }
-                    } else if (todayHabit.badHabitLimitWarning) {
-                        Spacer(Modifier.height(3.dp))
-                        Surface(
-                            shape = RoundedCornerShape(4.dp),
-                            color = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.5f),
-                        ) {
-                            Text(
-                                stringResource(R.string.limit_approaching, formatAmount(todayHabit.progress), formatAmount(habit.maximumTarget ?: habit.target), habit.unit),
-                                modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
-                                style = MaterialTheme.typography.labelSmall,
-                                color = MaterialTheme.colorScheme.onTertiaryContainer,
-                            )
-                        }
-                    }
-                    if (habit.type != HabitType.Check) {
-                        Spacer(Modifier.height(4.dp))
-                        Text(
-                            stringResource(
-                                R.string.progress_template,
-                                formatAmount(todayHabit.progress),
-                                formatAmount(habit.target),
-                                habit.unit,
-                            ),
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
-                    }
-                    if (habit.goalPeriod != GoalPeriod.Daily) {
-                        Text(
-                            stringResource(R.string.period_progress, todayHabit.periodProgress, habit.periodTarget),
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.primary,
-                        )
-                    }
-                    if (todayHabit.isMinimumComplete && !todayHabit.isComplete) {
-                        Text(
-                            stringResource(R.string.minimum_goal_reached),
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.secondary,
-                        )
-                    }
-                    if (todayHabit.isBlocked) {
-                        Text(
-                            stringResource(R.string.blocked_by_habit, todayHabit.blockedByName.orEmpty()),
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.error,
-                        )
-                    }
-                }
-                var menuExpanded by remember { mutableStateOf(false) }
-                Box {
-                    IconButton(onClick = { menuExpanded = true }) {
-                        Icon(Icons.Rounded.MoreVert, contentDescription = stringResource(R.string.manage_habit))
-                    }
-                    DropdownMenu(
-                        expanded = menuExpanded,
-                        onDismissRequest = { menuExpanded = false },
-                    ) {
-                        DropdownMenuItem(
-                            text = { Text(stringResource(R.string.open_details)) },
-                            onClick = {
-                                menuExpanded = false
-                                onOpen()
-                            },
-                        )
-                        if (todayHabit.skipReason == null) {
-                            DropdownMenuItem(
-                                text = { Text(stringResource(R.string.skip_with_reason)) },
-                                onClick = {
-                                    menuExpanded = false
-                                    onOpenSkipDialog()
-                                },
-                            )
-                        } else {
-                            DropdownMenuItem(
-                                text = { Text(stringResource(R.string.undo_skip)) },
-                                onClick = {
-                                    menuExpanded = false
-                                    onSkip(null)
-                                },
-                            )
-                        }
-                    }
-                }
-                if (habit.type == HabitType.Check) {
-                    FilledTonalIconButton(
-                        enabled = !todayHabit.isBlocked && !interactionDisabled,
-                        onClick = {
-                            haptic.performHapticFeedback(HapticFeedbackType.Confirm)
-                            onToggle()
-                        },
-                    ) {
-                        Icon(Icons.Rounded.Check, contentDescription = stringResource(R.string.complete_habit))
-                    }
-                } else {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        IconButton(onClick = onDecrement, enabled = todayHabit.progress > 0 && !todayHabit.isBlocked && !interactionDisabled) {
-                            Icon(Icons.Rounded.Remove, contentDescription = stringResource(R.string.decrease_progress))
-                        }
-                        FilledIconButton(
-                            enabled = !todayHabit.isBlocked && !interactionDisabled,
-                            onClick = {
-                                haptic.performHapticFeedback(HapticFeedbackType.ContextClick)
-                                onIncrement()
-                            },
-                            modifier = Modifier.size(40.dp),
-                        ) {
-                            Icon(Icons.Rounded.Add, contentDescription = stringResource(R.string.increase_progress))
-                        }
-                    }
-                }
-            }
-            if (habit.type != HabitType.Check) {
-                Spacer(Modifier.height(12.dp))
-                LinearProgressIndicator(
-                    progress = { todayHabit.progressFraction },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(5.dp)
-                        .clip(CircleShape),
-                    color = if (habit.direction == HabitDirection.Quit) {
-                        if (todayHabit.badHabitLimitExceeded) MaterialTheme.colorScheme.error
-                        else if (todayHabit.badHabitLimitWarning) MaterialTheme.colorScheme.tertiary
-                        else MaterialTheme.colorScheme.primary
-                    } else {
-                        if (todayHabit.isComplete) MaterialTheme.colorScheme.primary else Color(habit.colorArgb.toInt())
-                    },
-                    trackColor = MaterialTheme.colorScheme.surfaceVariant,
-                    gapSize = 0.dp,
-                    drawStopIndicator = {},
-                )
-                if (habit.type == HabitType.Duration && (!todayHabit.isComplete || habit.direction == HabitDirection.Quit)) {
-                    Spacer(Modifier.height(10.dp))
-                    Surface(
-                        onClick = onToggleTimer,
-                        enabled = !todayHabit.isBlocked && !interactionDisabled,
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(8.dp),
-                        color = if (timerRunning) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant,
-                    ) {
-                        Row(
-                            Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(10.dp),
-                        ) {
-                            Icon(
-                                if (timerRunning) Icons.Rounded.Stop else Icons.Rounded.PlayArrow,
-                                contentDescription = null,
-                            )
-                            Text(
-                                if (timerRunning) stringResource(R.string.stop_timer) else stringResource(R.string.start_timer),
-                                style = MaterialTheme.typography.titleSmall,
-                            )
-                            Spacer(Modifier.weight(1f))
-                            Text(
-                                formatTimer(timerElapsedSeconds),
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.Bold,
-                            )
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-private fun formatAmount(value: Double): String =
-    if (value % 1.0 == 0.0) value.toInt().toString() else String.format(java.util.Locale.getDefault(), "%.1f", value)
-
-private fun formatTimer(totalSeconds: Long): String =
-    "%02d:%02d".format(totalSeconds / 60, totalSeconds % 60)
-
-private fun formatReminderTime(minutes: Int): String = "%02d:%02d".format(minutes / 60, minutes % 60)
 
 @Composable
 private fun scheduleSummary(daysMask: Int): String = when (daysMask) {

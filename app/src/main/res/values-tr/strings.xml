@@ -965,4 +965,11 @@
     <string name="level_target_value">Hedef: %1$s %2$s</string>
     <string name="test_notification_body">Hatırlatıcıların böyle görünecek.</string>
     <string name="progress_tab">İlerleme</string>
+    <string name="today_all_done">Bugünlük hepsi tamam 🎉</string>
+    <string name="habits_done_of">%2$d alışkanlıktan %1$d tamamlandı</string>
+    <string name="more_actions">Daha fazla</string>
+    <plurals name="streak_days">
+        <item quantity="one">%d günlük seri</item>
+        <item quantity="other">%d günlük seri</item>
+    </plurals>
 </resources>
