@@ -388,13 +388,13 @@
     <string name="restore_label">Geri yükle</string>
 
     <string name="widget_brand" translatable="false">Tsuzuku</string>
-    <string name="widget_description">Günlük alışkanlık ilerlemesi</string>
+    <string name="widget_description">Bugünün alışkanlıklarını ana ekrandan işaretle</string>
     <string name="widget_empty_progress">Bugün için hazır</string>
     <string name="widget_progress_value">%1$d / %2$d tamamlandı · %%%3$d</string>
     <string name="widget_habit_line">%1$s  %2$s  %3$s</string>
     <string name="widget_locked">Tsuzuku kilitli</string>
     <string name="configure_widget">Widget’ı düzenle</string>
-    <string name="configure_widget_description">Gösterilecek alışkanlıkları ve renk paletini seç.</string>
+    <string name="configure_widget_description">Gösterilecek alışkanlıkları seç.</string>
     <string name="widget_palette">Hazır renk paleti</string>
     <string name="widget_habits">Gösterilecek alışkanlıklar</string>
     <string name="widget_habit_limit">En fazla dört alışkanlık seçebilirsin. Seçmezsen ilk dört alışkanlık gösterilir.</string>
@@ -972,4 +972,12 @@
         <item quantity="one">%d günlük seri</item>
         <item quantity="other">%d günlük seri</item>
     </plurals>
+    <string name="widget_today_name">Bugün</string>
+    <string name="widget_habit_name">Tek alışkanlık</string>
+    <string name="widget_week_name">Bu hafta</string>
+    <string name="widget_habit_description">İlerleme halkası ve serisiyle tek bir alışkanlık</string>
+    <string name="widget_week_description">Son yedi gün tek bakışta</string>
+    <string name="widget_week_title">Bu hafta</string>
+    <string name="widget_no_habits">Bugün için alışkanlık yok</string>
+    <string name="widget_pick_one">Gösterilecek alışkanlığı seç.</string>
 </resources>

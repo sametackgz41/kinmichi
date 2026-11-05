@@ -21,7 +21,7 @@ import androidx.core.view.WindowCompat
  * Fallback for devices without Material You (Android 11 and lower): a calm, neutral blue
  * scheme generated from a single seed so every M3 role is defined.
  */
-private val FallbackLight = lightColorScheme(
+internal val FallbackLight = lightColorScheme(
     primary = Color(0xFF405F90), onPrimary = Color(0xFFFFFFFF),
     primaryContainer = Color(0xFFD6E3FF), onPrimaryContainer = Color(0xFF274777),
     secondary = Color(0xFF565F71), onSecondary = Color(0xFFFFFFFF),
@@ -42,7 +42,7 @@ private val FallbackLight = lightColorScheme(
     surfaceDim = Color(0xFFD9D9E0), surfaceBright = Color(0xFFF9F9FF),
 )
 
-private val FallbackDark = darkColorScheme(
+internal val FallbackDark = darkColorScheme(
     primary = Color(0xFFAAC7FF), onPrimary = Color(0xFF0A305F),
     primaryContainer = Color(0xFF284777), onPrimaryContainer = Color(0xFFD6E3FF),
     secondary = Color(0xFFBEC6DC), onSecondary = Color(0xFF283141),

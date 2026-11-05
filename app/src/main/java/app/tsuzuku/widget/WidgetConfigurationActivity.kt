@@ -23,6 +23,9 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
+import androidx.compose.ui.semantics.Role
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -60,6 +63,9 @@ class WidgetConfigurationActivity : ComponentActivity() {
         if (widgetId == AppWidgetManager.INVALID_APPWIDGET_ID) { finish(); return }
         val application = application as TsuzukuApplication
         val widgetSettings = WidgetSettings(this)
+        // The single-habit widget shows exactly one habit; the Today widget can show several.
+        val singleHabit = AppWidgetManager.getInstance(this).getAppWidgetInfo(widgetId)
+            ?.provider?.className == HabitWidgetReceiver::class.java.name
         setContent {
             TsuzukuTheme {
                 val history by application.habitRepository.observeHistory().collectAsStateWithLifecycle(
@@ -67,12 +73,12 @@ class WidgetConfigurationActivity : ComponentActivity() {
                 )
                 WidgetConfigurationScreen(
                     habits = history.habits,
+                    singleHabit = singleHabit,
                     initialSelection = widgetSettings.selectedHabitIds(widgetId),
-                    initialPalette = widgetSettings.palette(widgetId),
-                    onSave = { ids, palette ->
-                        widgetSettings.save(widgetId, ids, palette)
+                    onSave = { ids ->
+                        widgetSettings.save(widgetId, ids)
                         CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
-                            TsuzukuWidgetProvider.updateWidget(this@WidgetConfigurationActivity, AppWidgetManager.getInstance(this@WidgetConfigurationActivity), widgetId)
+                            TsuzukuWidgets.updateAll(this@WidgetConfigurationActivity)
                         }
                         setResult(RESULT_OK, Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId))
                         finish()
@@ -86,65 +92,53 @@ class WidgetConfigurationActivity : ComponentActivity() {
 @Composable
 private fun WidgetConfigurationScreen(
     habits: List<Habit>,
+    singleHabit: Boolean,
     initialSelection: Set<Long>,
-    initialPalette: WidgetPalette,
-    onSave: (Set<Long>, WidgetPalette) -> Unit,
+    onSave: (Set<Long>) -> Unit,
 ) {
     val selected = remember { mutableStateListOf<Long>().apply { addAll(initialSelection) } }
-    var palette by remember { mutableStateOf(initialPalette) }
     LazyColumn(
         modifier = Modifier.fillMaxSize().statusBarsPadding(),
         contentPadding = PaddingValues(20.dp, 18.dp, 20.dp, 30.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         item {
-            Text(stringResource(R.string.configure_widget), style = MaterialTheme.typography.headlineMedium)
-            Text(stringResource(R.string.configure_widget_description), color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(stringResource(R.string.configure_widget), style = MaterialTheme.typography.headlineSmall)
+            Text(
+                stringResource(if (singleHabit) R.string.widget_pick_one else R.string.configure_widget_description),
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
         }
-        item { Text(stringResource(R.string.widget_palette), style = MaterialTheme.typography.titleMedium) }
-        items(WidgetPalette.entries) { option ->
-            Row(
-                Modifier.fillMaxWidth().clickable { palette = option }.padding(vertical = 5.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                RadioButton(selected = palette == option, onClick = { palette = option })
-                Text(stringResource(option.labelRes()), modifier = Modifier.padding(start = 8.dp))
-            }
-        }
-        item { Text(stringResource(R.string.widget_habits), style = MaterialTheme.typography.titleMedium) }
-        item { Text(stringResource(R.string.widget_habit_limit), color = MaterialTheme.colorScheme.onSurfaceVariant) }
         items(habits, key = Habit::id) { habit ->
             val checked = habit.id in selected
-            val enabled = checked || selected.size < 4
-            Card(shape = RoundedCornerShape(16.dp)) {
-                Row(
-                    Modifier.fillMaxWidth().clickable(enabled = enabled) {
+            Card(shape = MaterialTheme.shapes.large) {
+                val rowModifier = if (singleHabit) {
+                    Modifier.selectable(selected = checked, role = Role.RadioButton) {
+                        selected.clear(); selected.add(habit.id)
+                    }
+                } else {
+                    Modifier.toggleable(value = checked, role = Role.Checkbox) {
                         if (checked) selected.remove(habit.id) else selected.add(habit.id)
-                    }.padding(14.dp),
+                    }
+                }
+                Row(
+                    rowModifier.fillMaxWidth().padding(14.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(habit.emoji, style = MaterialTheme.typography.titleLarge)
                     Text(habit.name, modifier = Modifier.padding(start = 12.dp).weight(1f))
-                    Checkbox(
-                        checked = checked,
-                        onCheckedChange = {
-                            if (checked) selected.remove(habit.id) else if (enabled) selected.add(habit.id)
-                        },
-                        enabled = enabled,
-                    )
+                    if (singleHabit) RadioButton(selected = checked, onClick = null) else Checkbox(checked = checked, onCheckedChange = null)
                 }
             }
         }
         item {
-            Button(onClick = { onSave(selected.toSet(), palette) }, modifier = Modifier.fillMaxWidth()) {
+            Button(
+                onClick = { onSave(selected.toSet()) },
+                enabled = !singleHabit || selected.isNotEmpty(),
+                modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+            ) {
                 Text(stringResource(R.string.save_widget))
             }
         }
     }
-}
-
-private fun WidgetPalette.labelRes(): Int = when (this) {
-    WidgetPalette.Indigo -> R.string.palette_indigo
-    WidgetPalette.Light -> R.string.palette_light
-    WidgetPalette.Sage -> R.string.palette_sage
 }

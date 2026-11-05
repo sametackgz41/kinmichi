@@ -1,0 +1,95 @@
+package app.tsuzuku.widget
+
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.RectF
+import android.os.Build
+import androidx.compose.runtime.Composable
+import androidx.glance.GlanceId
+import androidx.glance.GlanceTheme
+import androidx.glance.action.ActionParameters
+import androidx.glance.appwidget.action.ActionCallback
+import androidx.glance.appwidget.updateAll
+import androidx.glance.material3.ColorProviders
+import app.tsuzuku.TsuzukuApplication
+import app.tsuzuku.ui.theme.FallbackDark
+import app.tsuzuku.ui.theme.FallbackLight
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+
+/** Habit id passed from a widget tap to its action callback. */
+val HabitIdKey = ActionParameters.Key<Long>("habit_id")
+
+/** Material You on Android 12+, the app's neutral fallback scheme below that. */
+@Composable
+fun TsuzukuGlanceTheme(content: @Composable () -> Unit) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        GlanceTheme(content = content)
+    } else {
+        GlanceTheme(colors = ColorProviders(light = FallbackLight, dark = FallbackDark), content = content)
+    }
+}
+
+/** Refreshes every Tsuzuku widget kind after data changed anywhere in the app. */
+object TsuzukuWidgets {
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+
+    fun requestUpdate(context: Context) {
+        val appContext = context.applicationContext
+        scope.launch { updateAll(appContext) }
+    }
+
+    suspend fun updateAll(context: Context) {
+        runCatching { TodayWidget().updateAll(context) }
+        runCatching { HabitWidget().updateAll(context) }
+        runCatching { WeekWidget().updateAll(context) }
+    }
+}
+
+private fun Context.tsuzuku(): TsuzukuApplication = applicationContext as TsuzukuApplication
+
+/** Completes / un-completes a check habit straight from a widget. */
+class ToggleHabitAction : ActionCallback {
+    override suspend fun onAction(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
+        val id = parameters[HabitIdKey] ?: return
+        context.tsuzuku().habitRepository.toggleHabit(id)
+        TsuzukuWidgets.updateAll(context)
+    }
+}
+
+/** Adds one unit to a count habit straight from a widget. */
+class IncrementHabitAction : ActionCallback {
+    override suspend fun onAction(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
+        val id = parameters[HabitIdKey] ?: return
+        context.tsuzuku().habitRepository.incrementHabit(id)
+        TsuzukuWidgets.updateAll(context)
+    }
+}
+
+/**
+ * Glance cannot draw arcs, so the progress ring is rendered into a small bitmap.
+ * [sizePx] should match the on-screen size to stay crisp.
+ */
+fun ringBitmap(sizePx: Int, fraction: Float, trackColor: Int, progressColor: Int, strokePx: Float): Bitmap {
+    val bitmap = Bitmap.createBitmap(sizePx, sizePx, Bitmap.Config.ARGB_8888)
+    val canvas = Canvas(bitmap)
+    val inset = strokePx / 2f
+    val bounds = RectF(inset, inset, sizePx - inset, sizePx - inset)
+    val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.STROKE
+        strokeWidth = strokePx
+        strokeCap = Paint.Cap.ROUND
+    }
+    paint.color = trackColor
+    canvas.drawArc(bounds, 0f, 360f, false, paint)
+    val sweep = 360f * fraction.coerceIn(0f, 1f)
+    if (sweep > 0f) {
+        paint.color = progressColor
+        canvas.drawArc(bounds, -90f, sweep, false, paint)
+    }
+    return bitmap
+}

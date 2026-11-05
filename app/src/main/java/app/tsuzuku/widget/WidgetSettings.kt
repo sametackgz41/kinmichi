@@ -2,8 +2,7 @@ package app.tsuzuku.widget
 
 import android.content.Context
 
-enum class WidgetPalette { Indigo, Light, Sage }
-
+/** Per-widget habit selection, keyed by the platform app widget id. */
 class WidgetSettings(context: Context) {
     private val preferences = context.getSharedPreferences("tsuzuku_widgets", Context.MODE_PRIVATE)
 
@@ -12,14 +11,10 @@ class WidgetSettings(context: Context) {
         .mapNotNull(String::toLongOrNull)
         .toSet()
 
-    fun palette(widgetId: Int): WidgetPalette = runCatching {
-        WidgetPalette.valueOf(preferences.getString("palette_$widgetId", null).orEmpty())
-    }.getOrDefault(WidgetPalette.Indigo)
-
-    fun save(widgetId: Int, habitIds: Set<Long>, palette: WidgetPalette) {
+    fun save(widgetId: Int, habitIds: Set<Long>) {
         preferences.edit()
             .putStringSet("habits_$widgetId", habitIds.map(Long::toString).toSet())
-            .putString("palette_$widgetId", palette.name)
+            .remove("palette_$widgetId")
             .apply()
     }
 
@@ -27,4 +22,3 @@ class WidgetSettings(context: Context) {
         preferences.edit().remove("habits_$widgetId").remove("palette_$widgetId").apply()
     }
 }
-
