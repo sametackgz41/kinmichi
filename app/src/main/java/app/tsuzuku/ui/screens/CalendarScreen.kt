@@ -119,10 +119,6 @@ fun CalendarScreen(
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         item {
-            Text(stringResource(R.string.calendar), style = MaterialTheme.typography.headlineMedium)
-            Text(stringResource(R.string.calendar_history_subtitle), color = MaterialTheme.colorScheme.onSurfaceVariant)
-        }
-        item {
             Card(shape = RoundedCornerShape(10.dp)) {
                 Column(Modifier.fillMaxWidth().padding(16.dp)) {
                     Row(

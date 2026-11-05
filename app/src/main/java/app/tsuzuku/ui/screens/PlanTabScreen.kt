@@ -93,7 +93,7 @@ fun PlanTabScreen(
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(20.dp, 18.dp, 20.dp, 110.dp),
+        contentPadding = PaddingValues(16.dp, 4.dp, 16.dp, 110.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         item {
@@ -102,10 +102,7 @@ fun PlanTabScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Column {
-                    Text(stringResource(R.string.plan), style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.SemiBold)
-                    Text(stringResource(R.string.plan_subtitle), color = MaterialTheme.colorScheme.onSurfaceVariant)
-                }
+                Text(stringResource(R.string.plan_subtitle), color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     IconButton(onClick = onOpenPlanAssistant) {
                         Icon(Icons.Rounded.AutoAwesome, contentDescription = stringResource(R.string.ai_plan_assistant))

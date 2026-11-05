@@ -574,4 +574,5 @@
     <string name="remove_from_device">Supprimer de l\'appareil</string>
     <string name="choose_date">Choisir une date</string>
     <string name="personal_category_description">Catégorie personnelle · vous choisissez l\'unité de suivi</string>
+    <string name="progress_tab">Progrès</string>
 </resources>

@@ -20,9 +20,11 @@ import androidx.compose.material.icons.rounded.CalendarMonth
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Checklist
 import androidx.compose.material.icons.rounded.Person
+import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -145,9 +147,7 @@ private val mainDestinations = listOf(
     MainDestination("today", R.string.today, Icons.Rounded.Home),
     MainDestination("plan", R.string.plan, Icons.Rounded.Checklist),
     MainDestination("library", R.string.library, Icons.AutoMirrored.Rounded.MenuBook),
-    MainDestination("calendar", R.string.calendar, Icons.Rounded.CalendarMonth),
-    MainDestination("statistics", R.string.statistics, Icons.Rounded.BarChart),
-    MainDestination("profile", R.string.profile, Icons.Rounded.Person),
+    MainDestination("progress", R.string.progress_tab, Icons.Rounded.BarChart),
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -262,39 +262,41 @@ fun TsuzukuApp(
     val activePlanProposal by intelligenceViewModel.activePlanProposal.collectAsStateWithLifecycle()
     val weeklyCommentary by intelligenceViewModel.weeklyCommentary.collectAsStateWithLifecycle()
     var statisticsTab by remember { mutableStateOf(app.tsuzuku.ui.screens.StatisticsTab.General) }
+    var progressPage by androidx.compose.runtime.saveable.rememberSaveable { mutableStateOf(0) }
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = backStackEntry?.destination?.route ?: "today"
 
     Scaffold(
+        topBar = {
+            mainDestinations.firstOrNull { it.route == currentRoute }?.let { destination ->
+                MainTopBar(
+                    title = stringResource(destination.labelRes),
+                    profileName = settings.profileName,
+                    onSearch = { navController.navigate("search") },
+                    onOpenProfile = { navController.navigate("profile") },
+                )
+            }
+        },
         floatingActionButton = {
             when (currentRoute) {
                 "today" -> FloatingActionButton(
                     onClick = { showQuickAddSheet = true },
-                    shape = MaterialTheme.shapes.medium,
-                    containerColor = MaterialTheme.colorScheme.secondary,
                 ) { Icon(Icons.Rounded.Add, contentDescription = stringResource(R.string.quick_add)) }
                 "plan" -> FloatingActionButton(
                     onClick = { navController.navigate("plan/new") },
-                    shape = MaterialTheme.shapes.medium,
-                    containerColor = MaterialTheme.colorScheme.secondary,
                 ) { Icon(Icons.Rounded.Add, contentDescription = stringResource(R.string.add_task)) }
                 "library" -> FloatingActionButton(
                     onClick = { navController.navigate("library/new") },
-                    shape = MaterialTheme.shapes.medium,
-                    containerColor = MaterialTheme.colorScheme.secondary,
                 ) { Icon(Icons.Rounded.Add, contentDescription = stringResource(R.string.add_content)) }
                 else -> {}
             }
         },
         bottomBar = {
             if (currentRoute in mainDestinations.map { it.route }) {
-                EditorialNavigationBar(
+                MainNavigationBar(
                     destinations = mainDestinations,
                     currentRoute = currentRoute,
                     onSelect = { destination ->
-                        if (destination.route == "statistics") {
-                            statisticsTab = app.tsuzuku.ui.screens.StatisticsTab.General
-                        }
                         navController.navigate(destination.route) {
                             popUpTo(navController.graph.findStartDestination().id) { saveState = true }
                             launchSingleTop = true
@@ -493,17 +495,20 @@ fun TsuzukuApp(
                     )
                 }
             }
-            composable("calendar") {
-                CalendarScreen(
-                    history = history,
-                    weekStartsMonday = settings.weekStart == WeekStartPreference.Monday,
-                    onToggle = todayViewModel::toggleHabitOnDate,
-                    onIncrement = todayViewModel::incrementHabitOnDate,
-                    onDecrement = todayViewModel::decrementHabitOnDate,
-                )
-            }
-            composable("statistics") {
-                StatisticsScreen(
+            composable("progress") {
+                Column(Modifier.fillMaxSize()) {
+                    androidx.compose.material3.PrimaryTabRow(selectedTabIndex = progressPage) {
+                        listOf(R.string.statistics, R.string.calendar).forEachIndexed { index, label ->
+                            androidx.compose.material3.Tab(
+                                selected = progressPage == index,
+                                onClick = { progressPage = index },
+                                text = { Text(stringResource(label)) },
+                            )
+                        }
+                    }
+                    androidx.compose.animation.Crossfade(targetState = progressPage, label = "progress-page") { page ->
+                        if (page == 0) {
+                            StatisticsScreen(
                     history = history,
                     libraryItems = libraryItems,
                     heatmapDays = heatmapDays,
@@ -525,6 +530,17 @@ fun TsuzukuApp(
                     skipReasonStats = skipReasonStats,
                     initialTab = statisticsTab,
                 )
+                        } else {
+                            CalendarScreen(
+                    history = history,
+                    weekStartsMonday = settings.weekStart == WeekStartPreference.Monday,
+                    onToggle = todayViewModel::toggleHabitOnDate,
+                    onIncrement = todayViewModel::incrementHabitOnDate,
+                    onDecrement = todayViewModel::decrementHabitOnDate,
+                )
+                        }
+                    }
+                }
             }
             composable("profile") {
                 ProfileScreen(
@@ -546,8 +562,13 @@ fun TsuzukuApp(
                     onOpenProjects = { navController.navigate("projects") },
                     onOpenRecords = {
                         statisticsTab = app.tsuzuku.ui.screens.StatisticsTab.Records
-                        navController.navigate("statistics")
+                        progressPage = 0
+                        navController.navigate("progress") {
+                            popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                            launchSingleTop = true
+                        }
                     },
+                    onBack = navController::popBackStack,
                     onOpenAiPrivacy = { showAiPrivacyDialog = true },
                 )
             }
@@ -1249,47 +1270,53 @@ fun TsuzukuApp(
 }
 
 @Composable
-private fun EditorialNavigationBar(
+private fun MainNavigationBar(
     destinations: List<MainDestination>,
     currentRoute: String,
     onSelect: (MainDestination) -> Unit,
 ) {
-    Surface(color = MaterialTheme.colorScheme.surface, tonalElevation = 0.dp) {
-        // Do not react to transient system-bar visibility. Otherwise the app's
-        // navigation row jumps whenever the immersive navigation bar appears.
-        Column {
-            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
-            Row(Modifier.fillMaxWidth().height(62.dp)) {
-                destinations.forEach { destination ->
-                    val selected = destination.route == currentRoute
-                    val label = stringResource(destination.labelRes)
-                    Column(
-                        modifier = Modifier
-                            .weight(1f)
-                            .clickable { onSelect(destination) }
-                            .padding(top = 7.dp, bottom = 5.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
-                        Box(
-                            Modifier
-                                .size(width = 26.dp, height = 2.dp)
-                                .background(if (selected) MaterialTheme.colorScheme.secondary else Color.Transparent),
-                        )
-                        Icon(
-                            destination.icon,
-                            contentDescription = label,
-                            modifier = Modifier.padding(top = 5.dp).size(20.dp),
-                            tint = if (selected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
-                        Text(
-                            label,
-                            style = MaterialTheme.typography.labelSmall,
-                            fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal,
-                            color = if (selected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
+    androidx.compose.material3.NavigationBar {
+        destinations.forEach { destination ->
+            NavigationBarItem(
+                selected = destination.route == currentRoute,
+                onClick = { onSelect(destination) },
+                icon = { Icon(destination.icon, contentDescription = null) },
+                label = { Text(stringResource(destination.labelRes)) },
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun MainTopBar(
+    title: String,
+    profileName: String,
+    onSearch: () -> Unit,
+    onOpenProfile: () -> Unit,
+) {
+    androidx.compose.material3.TopAppBar(
+        title = { Text(title) },
+        actions = {
+            androidx.compose.material3.IconButton(onClick = onSearch) {
+                Icon(Icons.Rounded.Search, contentDescription = stringResource(R.string.search_everything))
+            }
+            androidx.compose.material3.IconButton(onClick = onOpenProfile) {
+                val initial = profileName.trim().firstOrNull()?.uppercaseChar()
+                Surface(
+                    shape = androidx.compose.foundation.shape.CircleShape,
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    modifier = Modifier.size(32.dp),
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        if (initial != null) {
+                            Text(initial.toString(), style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onPrimaryContainer)
+                        } else {
+                            Icon(Icons.Rounded.Person, contentDescription = null, tint = MaterialTheme.colorScheme.onPrimaryContainer, modifier = Modifier.size(20.dp))
+                        }
                     }
                 }
             }
-        }
-    }
+        },
+    )
 }

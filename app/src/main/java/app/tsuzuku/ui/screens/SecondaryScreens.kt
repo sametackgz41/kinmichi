@@ -1,5 +1,6 @@
 package app.tsuzuku.ui.screens
 
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
@@ -103,6 +104,7 @@ fun ProfileScreen(
     onOpenProjects: () -> Unit = {},
     onOpenRecords: () -> Unit = {},
     onOpenAiPrivacy: () -> Unit = {},
+    onBack: () -> Unit = {},
 ) {
     val context = LocalContext.current
     val appName = stringResource(R.string.app_name)
@@ -122,9 +124,12 @@ fun ProfileScreen(
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         item {
-            Text(stringResource(R.string.profile), style = MaterialTheme.typography.headlineMedium)
-            Text(stringResource(R.string.profile_subtitle), color = MaterialTheme.colorScheme.onSurfaceVariant)
-            Spacer(Modifier.height(6.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                IconButton(onClick = onBack) {
+                    Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.back))
+                }
+                Text(stringResource(R.string.profile), style = MaterialTheme.typography.titleLarge)
+            }
         }
         item {
             Column {

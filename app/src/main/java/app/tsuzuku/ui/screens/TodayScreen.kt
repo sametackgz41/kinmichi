@@ -155,13 +155,10 @@ fun TodayScreen(
     }
 
     LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .statusBarsPadding(),
-        contentPadding = PaddingValues(start = 18.dp, top = 12.dp, end = 18.dp, bottom = 24.dp),
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(start = 16.dp, top = 4.dp, end = 16.dp, bottom = 96.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
-        item { BrandLockup() }
         item { GreetingBlock(profileName) }
         if (vacationActive) {
             item {
@@ -190,9 +187,6 @@ fun TodayScreen(
                     }
                     IconButton(onClick = onOpenInbox) {
                         Icon(Icons.Rounded.Inbox, contentDescription = stringResource(R.string.inbox_label))
-                    }
-                    IconButton(onClick = onSearch) {
-                        Icon(Icons.Rounded.Search, contentDescription = stringResource(R.string.search_everything))
                     }
                     IconButton(onClick = onOpenGoals) {
                         Icon(Icons.Rounded.Flag, contentDescription = stringResource(R.string.open_goals))
@@ -467,15 +461,6 @@ fun TodayScreen(
             },
         )
     }
-}
-
-@Composable
-private fun BrandLockup() {
-    Text(
-        stringResource(R.string.app_name),
-        style = MaterialTheme.typography.titleLarge,
-        color = MaterialTheme.colorScheme.primary,
-    )
 }
 
 @Composable

@@ -109,13 +109,10 @@ fun LibraryScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Column {
-                    Text(stringResource(R.string.library), style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.SemiBold)
-                    Text(
-                        stringResource(R.string.library_item_count, items.size),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                }
+                Text(
+                    stringResource(R.string.library_item_count, items.size),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     IconButton(onClick = { gridMode = !gridMode }) {
                         Icon(

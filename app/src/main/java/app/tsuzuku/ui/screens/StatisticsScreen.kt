@@ -129,11 +129,6 @@ fun StatisticsScreen(
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         item {
-            Text(stringResource(R.string.statistics), style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.SemiBold)
-            Text(stringResource(R.string.statistics_history_subtitle), color = MaterialTheme.colorScheme.onSurfaceVariant)
-        }
-
-        item {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
