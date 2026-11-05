@@ -748,7 +748,7 @@
     <string name="heatmap_focus_minutes">Odak Süresi: %1$s dk</string>
     <string name="heatmap_review_done">Akşam Değerlendirmesi: ✓</string>
     <string name="heatmap_review_missing">Akşam Değerlendirmesi: —</string>
-    <string name="inbox_title">Gelen Kutusu (Inbox)</string>
+    <string name="inbox_title">Gelen kutusu</string>
     <string name="inbox_empty">Gelen kutusu temiz. Aklına gelenleri buraya hızla not alabilirsin.</string>
     <string name="make_task">Görev Yap</string>
     <string name="make_habit">Alışkanlık Yap</string>
@@ -951,7 +951,7 @@
     <string name="health_info_section">Sağlık Bilgileri</string>
     <string name="routines_label">Rutinler</string>
     <string name="sections_config_hint">Bölümleri sıralayın ve görünürlüklerini ayarlayın.</string>
-    <string name="quick_add_title">Hızlı Ekle (Quick Add)</string>
+    <string name="quick_add_title">Hızlı ekle</string>
     <string name="tomorrow_chip">📅 Yarın</string>
     <string name="what_to_create">Ne oluşturmak istiyorsun?</string>
     <string name="focus_action">Odaklan</string>

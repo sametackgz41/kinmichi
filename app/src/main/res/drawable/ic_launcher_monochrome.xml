@@ -4,10 +4,18 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+    <!-- Three-quarter progress ring with a check mark: "keep going". -->
     <path
-        android:fillColor="#FF000000"
-        android:pathData="M28,28 L80,28 L80,39 L60,39 L60,82 L48,82 L48,39 L28,39 Z" />
+        android:fillColor="#00000000"
+        android:strokeColor="#FF000000"
+        android:strokeWidth="7"
+        android:strokeLineCap="round"
+        android:pathData="M54,30 A24,24 0 1,1 30,54" />
     <path
-        android:fillColor="#FF000000"
-        android:pathData="M68,52 L80,52 L80,64 L68,64 Z M68,70 L80,70 L80,82 L68,82 Z" />
+        android:fillColor="#00000000"
+        android:strokeColor="#FF000000"
+        android:strokeWidth="7"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M43,55 L51,63 L66,46" />
 </vector>
