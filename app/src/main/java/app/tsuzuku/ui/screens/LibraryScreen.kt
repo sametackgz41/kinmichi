@@ -267,7 +267,7 @@ fun LibraryScreen(
         } else {
             if (gridMode) {
                 items(filteredItems.chunked(2), key = { row -> row.joinToString("-") { it.content.id.toString() } }) { row ->
-                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Row(Modifier.fillMaxWidth().animateItem(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         row.forEach { item ->
                             LibraryGridCard(item, { onOpenContent(item.content.id) }, Modifier.weight(1f))
                         }
@@ -276,7 +276,9 @@ fun LibraryScreen(
                 }
             } else {
                 items(filteredItems, key = { it.content.id }) { item ->
-                    LibraryContentCard(item = item, onClick = { onOpenContent(item.content.id) })
+                    Box(Modifier.animateItem()) {
+                        LibraryContentCard(item = item, onClick = { onOpenContent(item.content.id) })
+                    }
                 }
             }
         }

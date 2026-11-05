@@ -310,10 +310,24 @@ fun TsuzukuApp(
         NavHost(
             navController = navController,
             startDestination = "today",
-            enterTransition = { fadeIn() },
-            exitTransition = { fadeOut() },
-            popEnterTransition = { fadeIn() },
-            popExitTransition = { fadeOut() },
+            // Tabs cross-fade with a slight zoom (M3 "fade through"); detail screens slide in
+            // along the x-axis and back out the same way (M3 "shared axis").
+            enterTransition = {
+                if (isTabSwitch(initialState.destination.route, targetState.destination.route)) fadeThroughIn()
+                else sharedAxisIn(forward = true)
+            },
+            exitTransition = {
+                if (isTabSwitch(initialState.destination.route, targetState.destination.route)) fadeThroughOut()
+                else sharedAxisOut(forward = true)
+            },
+            popEnterTransition = {
+                if (isTabSwitch(initialState.destination.route, targetState.destination.route)) fadeThroughIn()
+                else sharedAxisIn(forward = false)
+            },
+            popExitTransition = {
+                if (isTabSwitch(initialState.destination.route, targetState.destination.route)) fadeThroughOut()
+                else sharedAxisOut(forward = false)
+            },
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding),
@@ -1320,3 +1334,22 @@ private fun MainTopBar(
         },
     )
 }
+
+private val mainRoutes = setOf("today", "plan", "library", "progress")
+
+private fun isTabSwitch(from: String?, to: String?): Boolean = from in mainRoutes && to in mainRoutes
+
+private fun fadeThroughIn(): androidx.compose.animation.EnterTransition =
+    fadeIn(androidx.compose.animation.core.tween(220, delayMillis = 90)) +
+        androidx.compose.animation.scaleIn(androidx.compose.animation.core.tween(220, delayMillis = 90), initialScale = 0.96f)
+
+private fun fadeThroughOut(): androidx.compose.animation.ExitTransition =
+    fadeOut(androidx.compose.animation.core.tween(90))
+
+private fun sharedAxisIn(forward: Boolean): androidx.compose.animation.EnterTransition =
+    androidx.compose.animation.slideInHorizontally(androidx.compose.animation.core.tween(300)) { width -> if (forward) width / 10 else -width / 10 } +
+        fadeIn(androidx.compose.animation.core.tween(210, delayMillis = 90))
+
+private fun sharedAxisOut(forward: Boolean): androidx.compose.animation.ExitTransition =
+    androidx.compose.animation.slideOutHorizontally(androidx.compose.animation.core.tween(300)) { width -> if (forward) -width / 10 else width / 10 } +
+        fadeOut(androidx.compose.animation.core.tween(90))

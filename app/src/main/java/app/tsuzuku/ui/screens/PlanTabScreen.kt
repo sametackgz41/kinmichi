@@ -173,6 +173,7 @@ fun PlanTabScreen(
                     }
                 }
                 SwipeToDismissBox(
+                    modifier = Modifier.animateItem(),
                     state = dismissState,
                     enableDismissFromStartToEnd = selectedIds.isEmpty(),
                     enableDismissFromEndToStart = selectedIds.isEmpty() && !task.completed,
