@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#F7F6F2</color>
+    <color name="widget_text_light">#FFFDFB</color>
+    <color name="widget_text_dark">#202126</color>
+    <color name="widget_progress">#DCCBFF</color>
+    <color name="widget_progress_track">#55707C9D</color>
+</resources>

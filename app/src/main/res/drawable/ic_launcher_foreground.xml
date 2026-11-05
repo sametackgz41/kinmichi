@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/tsuzuku_launcher_art"
+        android:gravity="center"
+        android:height="88dp"
+        android:width="88dp" />
+</layer-list>

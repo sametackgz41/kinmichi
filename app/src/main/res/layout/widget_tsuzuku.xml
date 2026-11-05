@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/widget_background_indigo">
+
+    <TextView
+        android:id="@+id/widget_brand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/widget_brand"
+        android:textColor="@color/widget_text_light"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.08" />
+
+    <TextView
+        android:id="@+id/widget_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:text="@string/widget_empty_progress"
+        android:textColor="@color/widget_text_light"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <ProgressBar
+        android:id="@+id/widget_progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginTop="8dp"
+        android:max="100"
+        android:progress="0"
+        android:progressTint="@color/widget_progress"
+        android:progressBackgroundTint="@color/widget_progress_track" />
+
+    <TextView
+        android:id="@+id/widget_habit_1"
+        style="@style/WidgetHabitLine" />
+    <TextView
+        android:id="@+id/widget_habit_2"
+        style="@style/WidgetHabitLine" />
+    <TextView
+        android:id="@+id/widget_habit_3"
+        style="@style/WidgetHabitLine" />
+    <TextView
+        android:id="@+id/widget_habit_4"
+        style="@style/WidgetHabitLine" />
+</LinearLayout>
+

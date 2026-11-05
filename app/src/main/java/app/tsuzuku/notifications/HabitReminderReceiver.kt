@@ -1,0 +1,155 @@
+package app.tsuzuku.notifications
+
+import android.Manifest
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
+import app.tsuzuku.MainActivity
+import app.tsuzuku.R
+import app.tsuzuku.data.RoomHabitRepository
+import app.tsuzuku.data.local.TsuzukuDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+
+class HabitReminderReceiver : BroadcastReceiver() {
+    override fun onReceive(context: Context, intent: Intent) {
+        val habitId = intent.getLongExtra(EXTRA_HABIT_ID, -1L)
+        if (habitId < 0) return
+        val pendingResult = goAsync()
+        CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
+            try {
+                val dao = TsuzukuDatabase.getInstance(context).habitDao()
+                when (intent.action) {
+                    ACTION_COMPLETE -> {
+                        RoomHabitRepository(dao).toggleHabit(habitId)
+                        context.getSystemService(NotificationManager::class.java).cancel(habitId.hashCode())
+                    }
+                    ACTION_REMIND -> {
+                        val habit = dao.getHabit(habitId) ?: return@launch
+                        HabitNotifications.show(
+                            context,
+                            habitId,
+                            habit.name,
+                            habit.emoji,
+                            habit.reminderRepeatMinutes,
+                        )
+                        HabitReminderScheduler(context, dao).schedule(habit)
+                    }
+                }
+            } finally {
+                pendingResult.finish()
+            }
+        }
+    }
+
+    companion object {
+        const val ACTION_REMIND = "app.tsuzuku.action.REMIND_HABIT"
+        const val ACTION_COMPLETE = "app.tsuzuku.action.COMPLETE_HABIT"
+        const val EXTRA_HABIT_ID = "habit_id"
+    }
+}
+
+class ReminderBootReceiver : BroadcastReceiver() {
+    override fun onReceive(context: Context, intent: Intent) {
+        if (intent.action != Intent.ACTION_BOOT_COMPLETED && intent.action != Intent.ACTION_MY_PACKAGE_REPLACED) return
+        val pendingResult = goAsync()
+        CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
+            try {
+                HabitReminderScheduler(context, TsuzukuDatabase.getInstance(context).habitDao()).rescheduleAll()
+            } finally {
+                pendingResult.finish()
+            }
+        }
+    }
+}
+
+object HabitNotifications {
+    const val CHANNEL_ID = "habit_reminders"
+
+    fun createChannel(context: Context) {
+        val manager = context.getSystemService(NotificationManager::class.java)
+        manager.createNotificationChannel(
+            NotificationChannel(
+                CHANNEL_ID,
+                context.getString(R.string.reminder_channel_name),
+                NotificationManager.IMPORTANCE_DEFAULT,
+            ).apply {
+                description = context.getString(R.string.reminder_channel_description)
+            },
+        )
+    }
+
+    fun show(context: Context, habitId: Long, name: String, emoji: String, repeatMinutes: Int? = null) {
+        if (Build.VERSION.SDK_INT >= 33 && context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) return
+        val openIntent = PendingIntent.getActivity(
+            context,
+            habitId.hashCode(),
+            Intent(context, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+        )
+        val completeIntent = PendingIntent.getBroadcast(
+            context,
+            habitId.hashCode(),
+            Intent(context, HabitReminderReceiver::class.java).apply {
+                action = HabitReminderReceiver.ACTION_COMPLETE
+                putExtra(HabitReminderReceiver.EXTRA_HABIT_ID, habitId)
+            },
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+        )
+        val builder = Notification.Builder(context, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentTitle("$emoji $name")
+            .setContentText(context.getString(R.string.reminder_notification_text))
+            .setContentIntent(openIntent)
+            .setAutoCancel(true)
+            .setCategory(Notification.CATEGORY_REMINDER)
+            .addAction(
+                Notification.Action.Builder(
+                    android.graphics.drawable.Icon.createWithResource(context, R.drawable.ic_notification),
+                    context.getString(R.string.complete_habit),
+                    completeIntent,
+                ).build(),
+            )
+        if (repeatMinutes != null) {
+            val snoozeIntent = PendingIntent.getBroadcast(
+                context,
+                habitId.hashCode() xor 0x20000000,
+                Intent(context, HabitReminderSnoozeReceiver::class.java).apply {
+                    putExtra(HabitReminderReceiver.EXTRA_HABIT_ID, habitId)
+                    putExtra(HabitReminderSnoozeReceiver.EXTRA_MINUTES, repeatMinutes)
+                },
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+            )
+            builder.addAction(
+                Notification.Action.Builder(
+                    android.graphics.drawable.Icon.createWithResource(context, R.drawable.ic_notification),
+                    context.getString(R.string.remind_again_minutes, repeatMinutes),
+                    snoozeIntent,
+                ).build(),
+            )
+        }
+        context.getSystemService(NotificationManager::class.java).notify(habitId.hashCode(), builder.build())
+    }
+}
+
+class HabitReminderSnoozeReceiver : BroadcastReceiver() {
+    override fun onReceive(context: Context, intent: Intent) {
+        val habitId = intent.getLongExtra(HabitReminderReceiver.EXTRA_HABIT_ID, -1L)
+        val minutes = intent.getIntExtra(EXTRA_MINUTES, 0)
+        if (habitId < 0 || minutes <= 0) return
+        HabitReminderScheduler(context, TsuzukuDatabase.getInstance(context).habitDao()).snooze(habitId, minutes)
+        context.getSystemService(NotificationManager::class.java).cancel(habitId.hashCode())
+    }
+
+    companion object {
+        const val EXTRA_MINUTES = "repeat_minutes"
+    }
+}
