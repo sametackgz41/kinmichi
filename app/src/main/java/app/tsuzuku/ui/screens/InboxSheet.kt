@@ -97,7 +97,7 @@ fun InboxSheet(
                     )
                     Spacer(modifier = Modifier.width(10.dp))
                     Text(
-                        text = "Gelen Kutusu (Inbox)",
+                        text = stringResource(R.string.inbox_title),
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.SemiBold,
                     )
@@ -145,7 +145,7 @@ fun InboxSheet(
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(
-                        text = "Gelen kutusu temiz. Aklına gelenleri buraya hızla not alabilirsin.",
+                        text = stringResource(R.string.inbox_empty),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -196,27 +196,27 @@ fun InboxSheet(
                                 ) {
                                     AssistChip(
                                         onClick = { onConvertToTask(item.text, item.id) },
-                                        label = { Text("Görev Yap") },
+                                        label = { Text(stringResource(R.string.make_task)) },
                                         leadingIcon = { Icon(Icons.Rounded.Checklist, contentDescription = null, modifier = Modifier.size(16.dp)) },
                                     )
                                     AssistChip(
                                         onClick = { onConvertToHabit(item.text, item.id) },
-                                        label = { Text("Alışkanlık Yap") },
+                                        label = { Text(stringResource(R.string.make_habit)) },
                                         leadingIcon = { Icon(Icons.Rounded.Repeat, contentDescription = null, modifier = Modifier.size(16.dp)) },
                                     )
                                     AssistChip(
                                         onClick = { onConvertToGoal(item.text, item.id) },
-                                        label = { Text("Hedef Yap") },
+                                        label = { Text(stringResource(R.string.make_goal)) },
                                         leadingIcon = { Icon(Icons.Rounded.Flag, contentDescription = null, modifier = Modifier.size(16.dp)) },
                                     )
                                     AssistChip(
                                         onClick = { onConvertToContent(item.text, item.id) },
-                                        label = { Text("İçerik Yap") },
+                                        label = { Text(stringResource(R.string.make_content)) },
                                         leadingIcon = { Icon(Icons.Rounded.MenuBook, contentDescription = null, modifier = Modifier.size(16.dp)) },
                                     )
                                     AssistChip(
                                         onClick = { onConvertToNote(item.text, item.id) },
-                                        label = { Text("Not Yap") },
+                                        label = { Text(stringResource(R.string.make_note)) },
                                         leadingIcon = { Icon(Icons.Rounded.Edit, contentDescription = null, modifier = Modifier.size(16.dp)) },
                                     )
                                 }

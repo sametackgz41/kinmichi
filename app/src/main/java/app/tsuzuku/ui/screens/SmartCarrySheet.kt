@@ -1,5 +1,7 @@
 package app.tsuzuku.ui.screens
 
+import app.tsuzuku.R
+import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -70,14 +72,14 @@ fun SmartCarrySheet(
         ) {
             Column {
                 Text(
-                    "延期 · ERTELEME FARKINDALIĞI",
+                    stringResource(R.string.carry_mark),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.secondary,
                     letterSpacing = 1.2.sp,
                 )
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    "Bu görevi ${task.carryCount} kez erteledin",
+                    stringResource(R.string.carry_count_title, task.carryCount),
                     style = MaterialTheme.typography.headlineSmall,
                 )
                 Spacer(Modifier.height(4.dp))
@@ -89,9 +91,9 @@ fun SmartCarrySheet(
                 Spacer(Modifier.height(4.dp))
                 Text(
                     if (isSplittingMode) {
-                        "Görevi ilk 5 dakikada başlayabileceğin küçük checklist adımlarına ayırarak zihinsel direnci kırabilirsin:"
+                        stringResource(R.string.carry_split_hint)
                     } else {
-                        "Sürekli ertelenen işler genellikle ya gereğinden büyüktür ya da şu an anlamını yitirmiştir. Kendine yüklenmeden bir adım seç:"
+                        stringResource(R.string.carry_intro)
                     },
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -103,8 +105,8 @@ fun SmartCarrySheet(
                     OutlinedTextField(
                         value = step1,
                         onValueChange = { step1 = it },
-                        label = { Text("1. İlk Küçük Adım (5 dk)") },
-                        placeholder = { Text("Örn. Taslak dosyayı aç / 1 sayfa oku") },
+                        label = { Text(stringResource(R.string.carry_step_1)) },
+                        placeholder = { Text(stringResource(R.string.carry_step_1_example)) },
                         modifier = Modifier.fillMaxWidth(),
                         singleLine = true,
                         shape = RoundedCornerShape(10.dp),
@@ -112,8 +114,8 @@ fun SmartCarrySheet(
                     OutlinedTextField(
                         value = step2,
                         onValueChange = { step2 = it },
-                        label = { Text("2. İkinci Adım (Opsiyonel)") },
-                        placeholder = { Text("Örn. Başlıkları belirle") },
+                        label = { Text(stringResource(R.string.carry_step_2)) },
+                        placeholder = { Text(stringResource(R.string.carry_step_2_example)) },
                         modifier = Modifier.fillMaxWidth(),
                         singleLine = true,
                         shape = RoundedCornerShape(10.dp),
@@ -121,8 +123,8 @@ fun SmartCarrySheet(
                     OutlinedTextField(
                         value = step3,
                         onValueChange = { step3 = it },
-                        label = { Text("3. Üçüncü Adım (Opsiyonel)") },
-                        placeholder = { Text("Örn. İlk taslağı tamamla") },
+                        label = { Text(stringResource(R.string.carry_step_3)) },
+                        placeholder = { Text(stringResource(R.string.carry_step_3_example)) },
                         modifier = Modifier.fillMaxWidth(),
                         singleLine = true,
                         shape = RoundedCornerShape(10.dp),
@@ -137,7 +139,7 @@ fun SmartCarrySheet(
                             modifier = Modifier.weight(1f),
                             shape = RoundedCornerShape(10.dp),
                         ) {
-                            Text("Geri")
+                            Text(stringResource(R.string.back))
                         }
                         Button(
                             onClick = {
@@ -151,7 +153,7 @@ fun SmartCarrySheet(
                             modifier = Modifier.weight(1.5f),
                             shape = RoundedCornerShape(10.dp),
                         ) {
-                            Text("Adımları Ekle & Başla")
+                            Text(stringResource(R.string.add_steps_and_start))
                         }
                     }
                 }
@@ -159,32 +161,32 @@ fun SmartCarrySheet(
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     CarryOptionItem(
                         icon = Icons.Rounded.PlayArrow,
-                        title = "Bugün Yap",
-                        subtitle = "Bugünün önceliği yap ve ilk 5 dakikasını başlat.",
+                        title = stringResource(R.string.do_today),
+                        subtitle = stringResource(R.string.do_today_desc),
                         onClick = { onDoToday(); onDismiss() },
                     )
                     CarryOptionItem(
                         icon = Icons.Rounded.CalendarMonth,
-                        title = "Yarına Taşı",
-                        subtitle = "Bugünün gündeminden çıkar, yarın taze bir başlangıç yap.",
+                        title = stringResource(R.string.move_to_tomorrow),
+                        subtitle = stringResource(R.string.move_tomorrow_desc),
                         onClick = { onMoveTomorrow(); onDismiss() },
                     )
                     CarryOptionItem(
                         icon = Icons.Rounded.CalendarMonth,
-                        title = "Gelecek Haftaya Ertele",
-                        subtitle = "Şu an zamanı değilse 7 gün sonraya ötele.",
+                        title = stringResource(R.string.postpone_next_week),
+                        subtitle = stringResource(R.string.postpone_next_week_desc),
                         onClick = { onMoveNextWeek(); onDismiss() },
                     )
                     CarryOptionItem(
                         icon = Icons.Rounded.FormatListBulleted,
-                        title = "Daha Küçük Parçalara Böl",
-                        subtitle = "Alt görevler veya checklist adımları ekle.",
+                        title = stringResource(R.string.split_smaller),
+                        subtitle = stringResource(R.string.split_smaller_desc),
                         onClick = { isSplittingMode = true },
                     )
                     CarryOptionItem(
                         icon = Icons.Rounded.Close,
-                        title = "Görevi İptal Et / Sil",
-                        subtitle = "Artık gerekli değilse vicdan azabı çekmeden serbest bırak.",
+                        title = stringResource(R.string.cancel_or_delete_task),
+                        subtitle = stringResource(R.string.cancel_or_delete_task_desc),
                         onClick = { onDeleteOrCancel(); onDismiss() },
                     )
                 }

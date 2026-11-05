@@ -1,5 +1,7 @@
 package app.tsuzuku.ui.screens
 
+import app.tsuzuku.R
+import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -67,7 +69,7 @@ fun AiPrivacyDialog(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 Icon(Icons.Rounded.Shield, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
-                Text("Yapay Zeka & Gizlilik Ayarları", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.ai_privacy_settings_title), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
             }
         },
         text = {
@@ -92,13 +94,13 @@ fun AiPrivacyDialog(
                         Text(if (isCloudActive) "🟢" else "🌱", fontSize = 16.sp)
                         Column {
                             Text(
-                                if (isCloudActive) "Google Gemini (${settings.cloudAiModel})" else "Çevrimdışı Kural Motoru (Aktif)",
+                                if (isCloudActive) "Google Gemini (${settings.cloudAiModel})" else stringResource(R.string.ai_offline_engine_active),
                                 fontWeight = FontWeight.Bold,
                                 style = MaterialTheme.typography.labelMedium,
                             )
                             Text(
-                                if (isCloudActive) "Sorularınız ve açıklamalarınız kendi API anahtarınızla Gemini tarafından zenginleştirilir."
-                                else "Sıfır internet ve tam gizlilik. Analizler cihazınızdaki Room verilerinden yerel üretilir.",
+                                if (isCloudActive) stringResource(R.string.ai_cloud_mode_desc)
+                                else stringResource(R.string.ai_offline_mode_desc),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
@@ -115,8 +117,8 @@ fun AiPrivacyDialog(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
-                        Text("Bulut Yapay Zeka (Gemini)", fontWeight = FontWeight.SemiBold, style = MaterialTheme.typography.bodyMedium)
-                        Text("İsteğe bağlı gelişmiş doğal dil açıklamaları", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(stringResource(R.string.ai_cloud_title), fontWeight = FontWeight.SemiBold, style = MaterialTheme.typography.bodyMedium)
+                        Text(stringResource(R.string.ai_cloud_subtitle), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                     Switch(
                         checked = settings.cloudAiEnabled,
@@ -130,14 +132,14 @@ fun AiPrivacyDialog(
                         value = apiKeyInput,
                         onValueChange = { apiKeyInput = it },
                         modifier = Modifier.fillMaxWidth(),
-                        label = { Text("Gemini API Anahtarı (BYOK)") },
+                        label = { Text(stringResource(R.string.ai_api_key_label)) },
                         placeholder = { Text("AIzaSy...") },
                         singleLine = true,
                         leadingIcon = { Icon(Icons.Rounded.Key, contentDescription = null) },
                     )
 
                     Spacer(modifier = Modifier.height(12.dp))
-                    Text("Model Seçimi", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
+                    Text(stringResource(R.string.ai_model_selection), style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
                     Spacer(modifier = Modifier.height(6.dp))
                     models.forEach { (modelKey, label) ->
                         FilterChip(
@@ -153,8 +155,8 @@ fun AiPrivacyDialog(
                 HorizontalDivider()
                 Spacer(modifier = Modifier.height(10.dp))
 
-                Text("Paylaşılan Veri İzinleri", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
-                Text("Analiz bağlamına hangi verilerin dahil edileceğini seçin:", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(stringResource(R.string.ai_shared_data_permissions), style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.ai_shared_data_desc), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
 
                 Spacer(modifier = Modifier.height(8.dp))
 
@@ -164,7 +166,7 @@ fun AiPrivacyDialog(
                         onCheckedChange = onSetAiShareHabitTitles,
                     )
                     Spacer(modifier = Modifier.width(6.dp))
-                    Text("Alışkanlık İsimleri (Açıksa isimler, kapalıysa anonim)", style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.ai_share_habit_names), style = MaterialTheme.typography.bodySmall)
                 }
 
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -173,7 +175,7 @@ fun AiPrivacyDialog(
                         onCheckedChange = onSetAiShareTaskTitles,
                     )
                     Spacer(modifier = Modifier.width(6.dp))
-                    Text("Görev Başlıkları (Açıksa başlıklar, kapalıysa anonim)", style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.ai_share_task_titles), style = MaterialTheme.typography.bodySmall)
                 }
 
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -182,7 +184,7 @@ fun AiPrivacyDialog(
                         onCheckedChange = onSetAiShareNotes,
                     )
                     Spacer(modifier = Modifier.width(6.dp))
-                    Text("Günlük Kişisel Notlar (Varsayılan olarak kapalı)", style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.ai_share_daily_notes), style = MaterialTheme.typography.bodySmall)
                 }
             }
         },
@@ -195,12 +197,12 @@ fun AiPrivacyDialog(
                     onDismiss()
                 },
             ) {
-                Text("Kaydet & Kapat")
+                Text(stringResource(R.string.ai_save_and_close))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("İptal")
+                Text(stringResource(R.string.cancel))
             }
         },
     )

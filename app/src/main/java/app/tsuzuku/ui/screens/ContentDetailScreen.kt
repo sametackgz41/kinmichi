@@ -175,7 +175,7 @@ fun ContentDetailScreen(
                         }) {
                             Icon(
                                 if (isFavorite) Icons.Rounded.Favorite else Icons.Rounded.FavoriteBorder,
-                                contentDescription = "Favori",
+                                contentDescription = stringResource(R.string.favorite_label),
                                 tint = if (isFavorite) Color(0xFFE91E63) else LocalContentColor.current,
                             )
                         }
@@ -246,7 +246,7 @@ fun ContentDetailScreen(
             // Collections membership chips
             if (availableCollections.isNotEmpty()) {
                 item {
-                    Text("Koleksiyonlar", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.collections_label), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -343,11 +343,11 @@ fun ContentDetailScreen(
                         modifier = Modifier.fillMaxWidth().padding(16.dp),
                         verticalArrangement = Arrangement.spacedBy(12.dp),
                     ) {
-                        Text("Değerlendirme & Yansıma", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                        Text(stringResource(R.string.review_and_reflection), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
 
                         // 5-Star Rating
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text("Puan:", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(60.dp))
+                            Text(stringResource(R.string.rating_label), style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(60.dp))
                             (1..5).forEach { star ->
                                 IconButton(
                                     onClick = {
@@ -384,9 +384,9 @@ fun ContentDetailScreen(
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Column {
-                                Text("Başlama Tarihi", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                Text(stringResource(R.string.start_date_label), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                 Text(
-                                    startDate?.let { LocalDate.ofEpochDay(it).format(dtf) } ?: "Belirtilmedi",
+                                    startDate?.let { LocalDate.ofEpochDay(it).format(dtf) } ?: stringResource(R.string.not_specified),
                                     style = MaterialTheme.typography.bodyMedium,
                                 )
                             }
@@ -394,12 +394,12 @@ fun ContentDetailScreen(
                                 TextButton(onClick = {
                                     startDate = todayEpoch
                                     saveReviewState()
-                                }) { Text("Bugün Başladım") }
+                                }) { Text(stringResource(R.string.started_today)) }
                             } else {
                                 TextButton(onClick = {
                                     startDate = null
                                     saveReviewState()
-                                }) { Text("Temizle") }
+                                }) { Text(stringResource(R.string.clear_label)) }
                             }
                         }
 
@@ -409,9 +409,9 @@ fun ContentDetailScreen(
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Column {
-                                Text("Bitirme Tarihi", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                Text(stringResource(R.string.finish_date_label), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                 Text(
-                                    finishDate?.let { LocalDate.ofEpochDay(it).format(dtf) } ?: "Belirtilmedi",
+                                    finishDate?.let { LocalDate.ofEpochDay(it).format(dtf) } ?: stringResource(R.string.not_specified),
                                     style = MaterialTheme.typography.bodyMedium,
                                 )
                             }
@@ -419,12 +419,12 @@ fun ContentDetailScreen(
                                 TextButton(onClick = {
                                     finishDate = todayEpoch
                                     saveReviewState()
-                                }) { Text("Bugün Bitirdim") }
+                                }) { Text(stringResource(R.string.finished_today)) }
                             } else {
                                 TextButton(onClick = {
                                     finishDate = null
                                     saveReviewState()
-                                }) { Text("Temizle") }
+                                }) { Text(stringResource(R.string.clear_label)) }
                             }
                         }
 
@@ -435,7 +435,7 @@ fun ContentDetailScreen(
                                 rewatchDesired = !rewatchDesired
                                 saveReviewState()
                             },
-                            label = { Text("🔄 Tekrar okumak / izlemek isterim") },
+                            label = { Text(stringResource(R.string.want_to_revisit)) },
                         )
 
                         // Review Note
@@ -443,8 +443,8 @@ fun ContentDetailScreen(
                             value = reviewNote,
                             onValueChange = { reviewNote = it },
                             modifier = Modifier.fillMaxWidth(),
-                            label = { Text("Eleştiri & Detaylı Değerlendirme") },
-                            placeholder = { Text("Bu eser size ne kattı? Düşünceleriniz, analiziniz ve tavsiyeleriniz...") },
+                            label = { Text(stringResource(R.string.critique_title)) },
+                            placeholder = { Text(stringResource(R.string.critique_placeholder)) },
                             minLines = 3,
                             maxLines = 6,
                         )
@@ -455,7 +455,7 @@ fun ContentDetailScreen(
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             if (reviewSavedMessage) {
-                                Text("✓ Kaydedildi", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+                                Text(stringResource(R.string.saved_check), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
                             } else {
                                 Spacer(Modifier.width(1.dp))
                             }
@@ -463,7 +463,7 @@ fun ContentDetailScreen(
                                 saveReviewState()
                                 reviewSavedMessage = true
                             }) {
-                                Text("Değerlendirmeyi Kaydet")
+                                Text(stringResource(R.string.save_review))
                             }
                         }
                     }

@@ -90,7 +90,7 @@ fun RoutinePlayerScreen(
                         letterSpacing = 1.2.sp,
                     )
                     Text(
-                        text = routineName.ifBlank { "Rutin" },
+                        text = routineName.ifBlank { stringResource(R.string.routine_label) },
                         style = MaterialTheme.typography.headlineMedium,
                         fontWeight = FontWeight.SemiBold,
                     )
@@ -143,7 +143,7 @@ fun RoutinePlayerScreen(
         // Steps List
         item {
             Text(
-                text = "Rutin Adımları",
+                text = stringResource(R.string.routine_steps),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.padding(top = 8.dp),
@@ -214,7 +214,7 @@ fun RoutinePlayerScreen(
                             }
                             if (isBlocked) {
                                 Text(
-                                    text = todayHabit.blockedByName?.let { "Önce $it tamamlanmalı" } ?: "Kilitli",
+                                    text = todayHabit.blockedByName?.let { stringResource(R.string.must_complete_first, it) } ?: stringResource(R.string.locked_label),
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.error,
                                 )
@@ -260,19 +260,19 @@ fun RoutinePlayerScreen(
                     ) {
                         Icon(Icons.Rounded.Check, contentDescription = null, tint = Success, modifier = Modifier.size(36.dp))
                         Text(
-                            text = "Rutin Tamamlandı!",
+                            text = stringResource(R.string.routine_completed_title),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
                             color = Success,
                         )
                         Text(
-                            text = "Bu rutindeki tüm adımları başarıyla tamamladın.",
+                            text = stringResource(R.string.routine_completed_body),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Button(onClick = onBack, shape = RoundedCornerShape(10.dp)) {
-                            Text("Bugün Ekranına Dön")
+                            Text(stringResource(R.string.back_to_today))
                         }
                     }
                 }

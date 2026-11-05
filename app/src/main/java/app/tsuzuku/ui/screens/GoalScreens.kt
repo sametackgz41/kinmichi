@@ -299,7 +299,7 @@ fun GoalDetailScreen(
         if (linkedHabits.isEmpty()) {
             item {
                 Text(
-                    text = "Henüz bağlı alışkanlık yok.",
+                    text = stringResource(R.string.no_linked_habits),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -319,9 +319,9 @@ fun GoalDetailScreen(
                         Column(modifier = Modifier.weight(1f)) {
                             Text(habit.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
                             val modeDesc = if (link.contributionMode == HabitGoalContributionMode.HabitAmount) {
-                                "Alışkanlık miktarı kadar katkı"
+                                stringResource(R.string.contribution_by_habit_amount)
                             } else {
-                                "+${link.contributionValue} katkı"
+                                stringResource(R.string.contribution_plus, link.contributionValue)
                             }
                             Text(modeDesc, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
@@ -352,7 +352,7 @@ fun GoalDetailScreen(
         if (linkedTasks.isEmpty()) {
             item {
                 Text(
-                    text = "Henüz bağlı görev yok.",
+                    text = stringResource(R.string.no_linked_tasks),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -375,7 +375,7 @@ fun GoalDetailScreen(
                         )
                         Column(modifier = Modifier.weight(1f)) {
                             Text(task.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
-                            Text("+${link.contributionValue} puan katkı", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            Text(stringResource(R.string.contribution_plus_points, link.contributionValue), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                         IconButton(onClick = { onUnlinkTask(task.id) }) {
                             Icon(Icons.Rounded.LinkOff, contentDescription = stringResource(R.string.unlink), tint = MaterialTheme.colorScheme.error)
@@ -410,10 +410,10 @@ fun GoalDetailScreen(
             title = { Text(stringResource(R.string.link_habit)) },
             text = {
                 if (unlinked.isEmpty()) {
-                    Text("Bağlanabilecek başka alışkanlık yok.")
+                    Text(stringResource(R.string.no_more_habits_to_link))
                 } else {
                     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                        Text("Alışkanlık seçin:", style = MaterialTheme.typography.labelLarge)
+                        Text(stringResource(R.string.select_habit), style = MaterialTheme.typography.labelLarge)
                         unlinked.forEach { habit ->
                             Row(
                                 modifier = Modifier.fillMaxWidth().clickable { selectedHabitId = habit.id }.padding(vertical = 4.dp),
@@ -429,14 +429,14 @@ fun GoalDetailScreen(
                                 selected = mode == HabitGoalContributionMode.HabitAmount,
                                 onClick = { mode = HabitGoalContributionMode.HabitAmount },
                             )
-                            Text("Alışkanlık Miktarı", modifier = Modifier.padding(start = 6.dp))
+                            Text(stringResource(R.string.habit_amount), modifier = Modifier.padding(start = 6.dp))
                         }
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             RadioButton(
                                 selected = mode == HabitGoalContributionMode.FixedValue,
                                 onClick = { mode = HabitGoalContributionMode.FixedValue },
                             )
-                            Text("Sabit Değer", modifier = Modifier.padding(start = 6.dp))
+                            Text(stringResource(R.string.fixed_value), modifier = Modifier.padding(start = 6.dp))
                         }
                         if (mode == HabitGoalContributionMode.FixedValue) {
                             OutlinedTextField(
@@ -477,10 +477,10 @@ fun GoalDetailScreen(
             title = { Text(stringResource(R.string.link_task)) },
             text = {
                 if (unlinked.isEmpty()) {
-                    Text("Bağlanabilecek başka görev yok.")
+                    Text(stringResource(R.string.no_more_tasks_to_link))
                 } else {
                     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                        Text("Görev seçin:", style = MaterialTheme.typography.labelLarge)
+                        Text(stringResource(R.string.select_task), style = MaterialTheme.typography.labelLarge)
                         unlinked.forEach { task ->
                             Row(
                                 modifier = Modifier.fillMaxWidth().clickable { selectedTaskId = task.id }.padding(vertical = 4.dp),

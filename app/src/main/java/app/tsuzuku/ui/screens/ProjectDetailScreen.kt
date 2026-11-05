@@ -1,5 +1,7 @@
 package app.tsuzuku.ui.screens
 
+import app.tsuzuku.R
+import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -85,7 +87,7 @@ fun ProjectDetailScreen(
 ) {
     if (detail == null) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            Text("Proje yükleniyor...", style = MaterialTheme.typography.bodyMedium)
+            Text(stringResource(R.string.project_loading), style = MaterialTheme.typography.bodyMedium)
         }
         return
     }
@@ -108,27 +110,27 @@ fun ProjectDetailScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Geri")
+                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.back))
                     }
                 },
                 actions = {
                     IconButton(onClick = { showMenu = true }) {
-                        Icon(Icons.Rounded.MoreVert, contentDescription = "Seçenekler")
+                        Icon(Icons.Rounded.MoreVert, contentDescription = stringResource(R.string.options_label))
                     }
                     DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
                         DropdownMenuItem(
-                            text = { Text("Düzenle") },
+                            text = { Text(stringResource(R.string.edit_action)) },
                             leadingIcon = { Icon(Icons.Rounded.Edit, contentDescription = null) },
                             onClick = { showMenu = false; onEdit() },
                         )
                         val nextStatus = if (project.status == ProjectStatus.Completed) ProjectStatus.Active else ProjectStatus.Completed
                         DropdownMenuItem(
-                            text = { Text(if (project.status == ProjectStatus.Completed) "Aktif Yap" else "Tamamlandı Olarak İşaretle") },
+                            text = { Text(if (project.status == ProjectStatus.Completed) stringResource(R.string.mark_active) else stringResource(R.string.mark_completed)) },
                             leadingIcon = { Icon(Icons.Rounded.CheckCircle, contentDescription = null) },
                             onClick = { showMenu = false; onToggleStatus(nextStatus) },
                         )
                         DropdownMenuItem(
-                            text = { Text("Projeyi Sil", color = MaterialTheme.colorScheme.error) },
+                            text = { Text(stringResource(R.string.delete_project), color = MaterialTheme.colorScheme.error) },
                             leadingIcon = { Icon(Icons.Rounded.Delete, contentDescription = null, tint = MaterialTheme.colorScheme.error) },
                             onClick = { showMenu = false; onDelete() },
                         )
@@ -154,12 +156,12 @@ fun ProjectDetailScreen(
                     Column(modifier = Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                             Text(
-                                if (project.status == ProjectStatus.Completed) "Tamamlandı" else "Devam Ediyor",
+                                if (project.status == ProjectStatus.Completed) stringResource(R.string.habit_completed) else stringResource(R.string.in_progress_label),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = if (project.status == ProjectStatus.Completed) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary,
                             )
                             val pct = (detail.progressFraction * 100).toInt()
-                            Text("%$pct Tamamlandı", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
+                            Text(stringResource(R.string.percent_completed, pct), style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
                         }
 
                         LinearProgressIndicator(
@@ -175,7 +177,7 @@ fun ProjectDetailScreen(
                         }
 
                         project.targetDate?.let { date ->
-                            Text("Hedef Tarih: $date", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.secondary)
+                            Text(stringResource(R.string.target_date_value, date), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.secondary)
                         }
                     }
                 }
@@ -188,18 +190,18 @@ fun ProjectDetailScreen(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Text("Kilometre Taşları (${detail.milestones.count { it.completed }}/${detail.milestones.size})", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.milestones_count, detail.milestones.count { it.completed }, detail.milestones.size), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                     TextButton(onClick = { showAddMilestoneDialog = true }) {
                         Icon(Icons.Rounded.Add, contentDescription = null, modifier = Modifier.size(18.dp))
                         Spacer(Modifier.width(4.dp))
-                        Text("Aşama Ekle")
+                        Text(stringResource(R.string.add_milestone))
                     }
                 }
             }
 
             if (detail.milestones.isEmpty()) {
                 item {
-                    Text("Henüz bir kilometre taşı eklenmedi. Projeni ana aşamalara bölerek odaklanabilirsin.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(stringResource(R.string.no_milestones), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             } else {
                 items(detail.milestones, key = { it.id }) { milestone ->
@@ -242,18 +244,18 @@ fun ProjectDetailScreen(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Text("Bağlı Görevler (${detail.linkedTasks.size})", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.linked_tasks_count, detail.linkedTasks.size), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                     TextButton(onClick = { showLinkTaskDialog = true }) {
                         Icon(Icons.Rounded.Add, contentDescription = null, modifier = Modifier.size(18.dp))
                         Spacer(Modifier.width(4.dp))
-                        Text("Görev Bağla")
+                        Text(stringResource(R.string.link_task))
                     }
                 }
             }
 
             if (detail.linkedTasks.isEmpty()) {
                 item {
-                    Text("Bu projeye bağlı bir görev yok.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(stringResource(R.string.no_tasks_linked_to_project), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             } else {
                 items(detail.linkedTasks, key = { it.id }) { task ->
@@ -288,7 +290,7 @@ fun ProjectDetailScreen(
                                 }
                             }
                             IconButton(onClick = { onUnlinkTask(task.id) }) {
-                                Icon(Icons.Rounded.Close, contentDescription = "Bağlantıyı Kaldır", modifier = Modifier.size(18.dp))
+                                Icon(Icons.Rounded.Close, contentDescription = stringResource(R.string.remove_link), modifier = Modifier.size(18.dp))
                             }
                         }
                     }
@@ -303,18 +305,18 @@ fun ProjectDetailScreen(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Text("Bağlı Hedefler (${detail.linkedGoals.size})", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.linked_goals_count, detail.linkedGoals.size), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                     TextButton(onClick = { showLinkGoalDialog = true }) {
                         Icon(Icons.Rounded.Add, contentDescription = null, modifier = Modifier.size(18.dp))
                         Spacer(Modifier.width(4.dp))
-                        Text("Hedef Bağla")
+                        Text(stringResource(R.string.link_goal))
                     }
                 }
             }
 
             if (detail.linkedGoals.isEmpty()) {
                 item {
-                    Text("Bu projeye bağlı bir hedef bulunmuyor.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(stringResource(R.string.no_goals_linked_to_project), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             } else {
                 items(detail.linkedGoals, key = { it.id }) { goal ->
@@ -338,7 +340,7 @@ fun ProjectDetailScreen(
                                 Text("${goal.currentValue} / ${goal.targetValue} ${goal.unit}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary)
                             }
                             IconButton(onClick = { onUnlinkGoal(goal.id) }) {
-                                Icon(Icons.Rounded.Close, contentDescription = "Bağlantıyı Kaldır", modifier = Modifier.size(18.dp))
+                                Icon(Icons.Rounded.Close, contentDescription = stringResource(R.string.remove_link), modifier = Modifier.size(18.dp))
                             }
                         }
                     }
@@ -352,13 +354,13 @@ fun ProjectDetailScreen(
         var milestoneTitle by remember { mutableStateOf("") }
         AlertDialog(
             onDismissRequest = { showAddMilestoneDialog = false },
-            title = { Text("Yeni Aşama Ekle") },
+            title = { Text(stringResource(R.string.add_new_milestone)) },
             text = {
                 OutlinedTextField(
                     value = milestoneTitle,
                     onValueChange = { milestoneTitle = it },
-                    label = { Text("Aşama Başlığı") },
-                    placeholder = { Text("Örn: Veritabanı tasarımını bitir") },
+                    label = { Text(stringResource(R.string.milestone_title)) },
+                    placeholder = { Text(stringResource(R.string.milestone_title_example)) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                 )
@@ -373,12 +375,12 @@ fun ProjectDetailScreen(
                     },
                     enabled = milestoneTitle.isNotBlank(),
                 ) {
-                    Text("Ekle")
+                    Text(stringResource(R.string.add_label))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showAddMilestoneDialog = false }) {
-                    Text("İptal")
+                    Text(stringResource(R.string.cancel))
                 }
             },
         )
@@ -390,10 +392,10 @@ fun ProjectDetailScreen(
         val unlinkedTasks = availableTasks.filter { it.id !in linkedIds }
         AlertDialog(
             onDismissRequest = { showLinkTaskDialog = false },
-            title = { Text("Görev Bağla") },
+            title = { Text(stringResource(R.string.link_task)) },
             text = {
                 if (unlinkedTasks.isEmpty()) {
-                    Text("Bağlanabilecek başka görev bulunamadı.")
+                    Text(stringResource(R.string.no_more_tasks_found))
                 } else {
                     LazyColumn(modifier = Modifier.fillMaxWidth()) {
                         items(unlinkedTasks) { task ->
@@ -415,7 +417,7 @@ fun ProjectDetailScreen(
                 }
             },
             confirmButton = {
-                TextButton(onClick = { showLinkTaskDialog = false }) { Text("Kapat") }
+                TextButton(onClick = { showLinkTaskDialog = false }) { Text(stringResource(R.string.close_action)) }
             },
         )
     }
@@ -426,10 +428,10 @@ fun ProjectDetailScreen(
         val unlinkedGoals = availableGoals.filter { it.id !in linkedIds }
         AlertDialog(
             onDismissRequest = { showLinkGoalDialog = false },
-            title = { Text("Hedef Bağla") },
+            title = { Text(stringResource(R.string.link_goal)) },
             text = {
                 if (unlinkedGoals.isEmpty()) {
-                    Text("Bağlanabilecek başka hedef bulunamadı.")
+                    Text(stringResource(R.string.no_more_goals_found))
                 } else {
                     LazyColumn(modifier = Modifier.fillMaxWidth()) {
                         items(unlinkedGoals) { goal ->
@@ -451,7 +453,7 @@ fun ProjectDetailScreen(
                 }
             },
             confirmButton = {
-                TextButton(onClick = { showLinkGoalDialog = false }) { Text("Kapat") }
+                TextButton(onClick = { showLinkGoalDialog = false }) { Text(stringResource(R.string.close_action)) }
             },
         )
     }

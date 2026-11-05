@@ -109,10 +109,10 @@ fun PlanTabScreen(
                 }
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     IconButton(onClick = onOpenPlanAssistant) {
-                        Icon(Icons.Rounded.AutoAwesome, contentDescription = "AI Plan Asistanı")
+                        Icon(Icons.Rounded.AutoAwesome, contentDescription = stringResource(R.string.ai_plan_assistant))
                     }
                     IconButton(onClick = onOpenProjects) {
-                        Icon(Icons.Rounded.AccountTree, contentDescription = "Projeler")
+                        Icon(Icons.Rounded.AccountTree, contentDescription = stringResource(R.string.projects_title))
                     }
                 }
             }

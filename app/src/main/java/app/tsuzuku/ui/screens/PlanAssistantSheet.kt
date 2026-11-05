@@ -1,5 +1,7 @@
 package app.tsuzuku.ui.screens
 
+import app.tsuzuku.R
+import androidx.compose.ui.res.stringResource
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
@@ -103,12 +105,12 @@ fun PlanAssistantSheet(
                 ) {
                     Icon(Icons.Rounded.AutoAwesome, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
                     Column {
-                        Text("AI Plan Asistanı", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                        Text("Modlar & Önizleme-Onay Mekanizması", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(stringResource(R.string.ai_plan_assistant), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        Text(stringResource(R.string.plan_assistant_subtitle), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
                 IconButton(onClick = onClose) {
-                    Icon(Icons.Rounded.Close, contentDescription = "Kapat")
+                    Icon(Icons.Rounded.Close, contentDescription = stringResource(R.string.close_action))
                 }
             }
 
@@ -117,7 +119,7 @@ fun PlanAssistantSheet(
             if (proposal == null) {
                 // Input mode
                 Text(
-                    "Plan Modunu Seç",
+                    stringResource(R.string.choose_plan_mode),
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.SemiBold,
                 )
@@ -159,8 +161,8 @@ fun PlanAssistantSheet(
                     value = promptInput,
                     onValueChange = { promptInput = it },
                     modifier = Modifier.fillMaxWidth(),
-                    label = { Text("İsteğe Bağlı Ek Talimat (Örn: 'Yarın öğleden sonra')") },
-                    placeholder = { Text("Varsayılan akışı kullanmak için boş bırakabilirsin") },
+                    label = { Text(stringResource(R.string.plan_extra_instruction)) },
+                    placeholder = { Text(stringResource(R.string.plan_extra_instruction_hint)) },
                     maxLines = 2,
                 )
 
@@ -174,9 +176,9 @@ fun PlanAssistantSheet(
                     if (isGenerating) {
                         CircularProgressIndicator(modifier = Modifier.size(18.dp), strokeWidth = 2.dp, color = MaterialTheme.colorScheme.onPrimary)
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("Taslak Hazırlanıyor...")
+                        Text(stringResource(R.string.preparing_draft))
                     } else {
-                        Text("Taslak Plan Oluştur (Önizle)")
+                        Text(stringResource(R.string.create_draft_plan))
                     }
                 }
             } else {
@@ -216,7 +218,7 @@ fun PlanAssistantSheet(
                     ) {
                         Text("🛡️", fontSize = 14.sp)
                         Text(
-                            "Görevler henüz plana yazılmadı. Görevlere dokunarak başlık, süre ve alt adımları düzenleyebilirsin.",
+                            stringResource(R.string.draft_not_saved_hint),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -225,7 +227,7 @@ fun PlanAssistantSheet(
 
                 Spacer(modifier = Modifier.height(10.dp))
 
-                Text("Önerilen Görevler (${proposal.proposedTasks.size})", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.proposed_tasks_count, proposal.proposedTasks.size), style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
 
                 Spacer(modifier = Modifier.height(6.dp))
 
@@ -271,13 +273,13 @@ fun PlanAssistantSheet(
                                             verticalAlignment = Alignment.CenterVertically,
                                         ) {
                                             Text(
-                                                "⏱️ ${task.estimatedMinutes} dk",
+                                                stringResource(R.string.duration_short, task.estimatedMinutes),
                                                 style = MaterialTheme.typography.labelSmall,
                                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                             )
                                             if (task.subtasks.isNotEmpty()) {
                                                 Text(
-                                                    "• ${task.subtasks.size} alt adım",
+                                                    stringResource(R.string.substeps_count, task.subtasks.size),
                                                     style = MaterialTheme.typography.labelSmall,
                                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                                                 )
@@ -287,7 +289,7 @@ fun PlanAssistantSheet(
                                     IconButton(onClick = { expandedEditIndex = if (isExpanded) -1 else index }) {
                                         Icon(
                                             Icons.Rounded.Edit,
-                                            contentDescription = "Düzenle",
+                                            contentDescription = stringResource(R.string.edit_action),
                                             modifier = Modifier.size(16.dp),
                                             tint = MaterialTheme.colorScheme.primary,
                                         )
@@ -307,7 +309,7 @@ fun PlanAssistantSheet(
                                         OutlinedTextField(
                                             value = task.title,
                                             onValueChange = { onUpdateTaskTitle(index, it) },
-                                            label = { Text("Görev Başlığı") },
+                                            label = { Text(stringResource(R.string.task_title_label)) },
                                             modifier = Modifier.fillMaxWidth(),
                                             singleLine = true,
                                         )
@@ -318,7 +320,7 @@ fun PlanAssistantSheet(
                                             horizontalArrangement = Arrangement.SpaceBetween,
                                             verticalAlignment = Alignment.CenterVertically,
                                         ) {
-                                            Text("Süre: ${task.estimatedMinutes} dk", style = MaterialTheme.typography.bodySmall)
+                                            Text(stringResource(R.string.duration_minutes, task.estimatedMinutes), style = MaterialTheme.typography.bodySmall)
                                             Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                                                 OutlinedButton(onClick = { onUpdateTaskDuration(index, -15) }) { Text("-15") }
                                                 OutlinedButton(onClick = { onUpdateTaskDuration(index, 15) }) { Text("+15") }
@@ -327,7 +329,7 @@ fun PlanAssistantSheet(
 
                                         // Subtasks list
                                         if (task.subtasks.isNotEmpty()) {
-                                            Text("Alt Adımlar:", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold)
+                                            Text(stringResource(R.string.substeps_label), style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold)
                                             task.subtasks.forEachIndexed { subIndex, sub ->
                                                 Row(
                                                     modifier = Modifier.fillMaxWidth(),
@@ -351,7 +353,7 @@ fun PlanAssistantSheet(
                                             OutlinedTextField(
                                                 value = newSubtaskInput,
                                                 onValueChange = { newSubtaskInput = it },
-                                                placeholder = { Text("Yeni alt adım ekle...") },
+                                                placeholder = { Text(stringResource(R.string.add_substep_placeholder)) },
                                                 modifier = Modifier.weight(1f),
                                                 singleLine = true,
                                             )
@@ -363,7 +365,7 @@ fun PlanAssistantSheet(
                                                     }
                                                 },
                                             ) {
-                                                Icon(Icons.Rounded.Add, contentDescription = "Ekle")
+                                                Icon(Icons.Rounded.Add, contentDescription = stringResource(R.string.add_label))
                                             }
                                         }
                                     }
@@ -385,7 +387,7 @@ fun PlanAssistantSheet(
                         onClick = onDismissProposal,
                         modifier = Modifier.weight(1f),
                     ) {
-                        Text("Vazgeç")
+                        Text(stringResource(R.string.dismiss_action))
                     }
                     Button(
                         onClick = {
@@ -397,7 +399,7 @@ fun PlanAssistantSheet(
                     ) {
                         Icon(Icons.Rounded.Check, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(modifier = Modifier.width(6.dp))
-                        Text("Seçilenleri Plana Ekle (${selectedTasks.size})")
+                        Text(stringResource(R.string.add_selected_to_plan, selectedTasks.size))
                     }
                 }
             }

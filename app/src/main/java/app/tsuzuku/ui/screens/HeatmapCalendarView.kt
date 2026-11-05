@@ -1,5 +1,7 @@
 package app.tsuzuku.ui.screens
 
+import app.tsuzuku.R
+import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -93,7 +95,7 @@ fun HeatmapCalendarView(
             FilterChip(
                 selected = selectedHabitId == null,
                 onClick = { onSelectHabit(null) },
-                label = { Text("Genel Aktivite") },
+                label = { Text(stringResource(R.string.overall_activity)) },
             )
             habits.forEach { habit ->
                 FilterChip(
@@ -119,7 +121,7 @@ fun HeatmapCalendarView(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        "熱量図 · AKTİVİTE YOĞUNLUĞU",
+                        stringResource(R.string.heatmap_mark),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.secondary,
                     )
@@ -128,7 +130,7 @@ fun HeatmapCalendarView(
                         horizontalArrangement = Arrangement.spacedBy(4.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        Text("Az", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(stringResource(R.string.heatmap_less), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         (0..4).forEach { lvl ->
                             Box(
                                 modifier = Modifier
@@ -137,7 +139,7 @@ fun HeatmapCalendarView(
                                     .background(heatmapColorForIntensity(lvl, primaryColor, MaterialTheme.colorScheme.surfaceVariant)),
                             )
                         }
-                        Text("Çok", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(stringResource(R.string.heatmap_more), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
 
@@ -148,21 +150,23 @@ fun HeatmapCalendarView(
                         .horizontalScroll(scrollState),
                     horizontalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
-                    // Day of week labels (Pzt, Çar, Cum)
+                    // Day of week labels (Mon, Wed, Fri, Sun) in the app's locale.
+                    val dayLabelLocale = LocalLocale.current.platformLocale
                     Column(
                         verticalArrangement = Arrangement.spacedBy(4.dp),
                         modifier = Modifier.padding(end = 4.dp),
                     ) {
-                        listOf("Pt", "Sa", "Ça", "Pe", "Cu", "Ct", "Pz").forEachIndexed { index, label ->
+                        DayOfWeek.entries.forEachIndexed { index, day ->
                             Box(
-                                modifier = Modifier.size(14.dp),
-                                contentAlignment = Alignment.Center,
+                                modifier = Modifier.height(14.dp),
+                                contentAlignment = Alignment.CenterStart,
                             ) {
                                 if (index % 2 == 0) {
                                     Text(
-                                        label,
-                                        fontSize = 8.sp,
+                                        day.getDisplayName(java.time.format.TextStyle.SHORT, dayLabelLocale),
+                                        style = MaterialTheme.typography.labelSmall.copy(lineHeight = 14.sp),
                                         color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        maxLines = 1,
                                     )
                                 }
                             }
@@ -216,16 +220,16 @@ fun HeatmapCalendarView(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceBetween,
                             ) {
-                                Text("Tamamlanan Alışkanlık: ${day.habitsCompleted}", style = MaterialTheme.typography.bodySmall)
-                                Text("Görevler: ${day.tasksCompleted}", style = MaterialTheme.typography.bodySmall)
+                                Text(stringResource(R.string.heatmap_habits_completed, day.habitsCompleted), style = MaterialTheme.typography.bodySmall)
+                                Text(stringResource(R.string.heatmap_tasks, day.tasksCompleted), style = MaterialTheme.typography.bodySmall)
                             }
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceBetween,
                             ) {
-                                Text("Odak Süresi: ${day.focusMinutes} dk", style = MaterialTheme.typography.bodySmall)
+                                Text(stringResource(R.string.heatmap_focus_minutes, day.focusMinutes), style = MaterialTheme.typography.bodySmall)
                                 Text(
-                                    if (day.dailyReviewDone) "Akşam Değerlendirmesi: ✓" else "Akşam Değerlendirmesi: —",
+                                    if (day.dailyReviewDone) stringResource(R.string.heatmap_review_done) else stringResource(R.string.heatmap_review_missing),
                                     style = MaterialTheme.typography.bodySmall,
                                     color = if (day.dailyReviewDone) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
                                 )

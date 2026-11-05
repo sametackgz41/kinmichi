@@ -175,7 +175,7 @@ fun PlanningScreen(
                     ) {
                         Icon(Icons.Rounded.AutoAwesome, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(modifier = Modifier.width(6.dp))
-                        Text("Tsuzuku AI Koç Değerlendirmesi Al")
+                        Text(stringResource(R.string.get_ai_coach_review))
                     }
                 }
 

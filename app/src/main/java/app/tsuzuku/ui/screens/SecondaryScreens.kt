@@ -208,14 +208,14 @@ fun ProfileScreen(
                 )
                 ValueSettingRow(
                     icon = Icons.Rounded.AccountTree,
-                    title = "Projeler",
-                    value = "Hedef ve görevleri birbirine bağlayan kilometre taşları",
+                    title = stringResource(R.string.projects_title),
+                    value = stringResource(R.string.projects_settings_desc),
                     onClick = onOpenProjects,
                 )
                 ValueSettingRow(
                     icon = Icons.Rounded.Star,
-                    title = "Kişisel Rekorlar ve Dönüm Noktaları",
-                    value = "Kazanılan rozetler, en uzun seriler ve kilometre taşları",
+                    title = stringResource(R.string.personal_records_milestones),
+                    value = stringResource(R.string.personal_records_desc),
                     onClick = onOpenRecords,
                 )
             }
@@ -276,15 +276,15 @@ fun ProfileScreen(
                 )
                 SwitchSettingRow(
                     Icons.Rounded.Lightbulb,
-                    "Tsuzuku Intelligence (Çevrimdışı)",
-                    "Alışkanlık ve planlama örüntülerinizi cihazınızda yerel olarak analiz eder. Sıfır veri aktarımı, tam gizlilik.",
+                    stringResource(R.string.intelligence_offline_title),
+                    stringResource(R.string.intelligence_offline_desc),
                     checked = settings.offlineIntelligenceEnabled,
                     onCheckedChange = onSetOfflineIntelligenceEnabled,
                 )
                 ValueSettingRow(
                     Icons.Rounded.Shield,
-                    "Yapay Zeka & Gizlilik Ayarları",
-                    if (settings.cloudAiEnabled && settings.geminiApiKey.isNotBlank()) "Gemini Bulut AI (Aktif)" else "Çevrimdışı Kural Motoru (Aktif)",
+                    stringResource(R.string.ai_privacy_settings_title),
+                    if (settings.cloudAiEnabled && settings.geminiApiKey.isNotBlank()) stringResource(R.string.gemini_cloud_active) else stringResource(R.string.ai_offline_engine_active),
                     onClick = onOpenAiPrivacy,
                 )
                 ValueSettingRow(

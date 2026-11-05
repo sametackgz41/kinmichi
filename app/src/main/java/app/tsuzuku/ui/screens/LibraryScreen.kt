@@ -146,7 +146,7 @@ fun LibraryScreen(
                         favoritesOnly = false
                         onSelectCollection(null)
                     },
-                    label = { Text("Tümü") },
+                    label = { Text(stringResource(R.string.all_categories)) },
                 )
                 FilterChip(
                     selected = favoritesOnly,
@@ -169,7 +169,7 @@ fun LibraryScreen(
                 TextButton(onClick = { showCreateCollectionDialog = true }) {
                     Icon(Icons.Rounded.Add, contentDescription = null, modifier = Modifier.size(16.dp))
                     Spacer(Modifier.width(4.dp))
-                    Text("Yeni Koleksiyon", style = MaterialTheme.typography.labelMedium)
+                    Text(stringResource(R.string.new_collection), style = MaterialTheme.typography.labelMedium)
                 }
             }
         }
@@ -191,7 +191,7 @@ fun LibraryScreen(
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Text(
-                                "Koleksiyon: ${activeCol.emoji} ${activeCol.name}",
+                                stringResource(R.string.collection_filter_label, activeCol.emoji, activeCol.name),
                                 style = MaterialTheme.typography.labelMedium,
                                 fontWeight = FontWeight.SemiBold,
                             )
@@ -201,7 +201,7 @@ fun LibraryScreen(
                             ) {
                                 Icon(
                                     Icons.Rounded.DeleteOutline,
-                                    contentDescription = "Koleksiyonu Sil",
+                                    contentDescription = stringResource(R.string.delete_collection),
                                     tint = MaterialTheme.colorScheme.error,
                                     modifier = Modifier.size(18.dp),
                                 )
@@ -301,8 +301,8 @@ fun LibraryScreen(
         val col = collectionToDelete!!
         AlertDialog(
             onDismissRequest = { collectionToDelete = null },
-            title = { Text("Koleksiyonu Sil") },
-            text = { Text("\"${col.name}\" koleksiyonu silinsin mi? İçindeki eserler kitaplığınızdan silinmez.") },
+            title = { Text(stringResource(R.string.delete_collection)) },
+            text = { Text(stringResource(R.string.delete_collection_message, col.name)) },
             confirmButton = {
                 TextButton(onClick = {
                     onDeleteCollection(col.id)
@@ -313,7 +313,7 @@ fun LibraryScreen(
             },
             dismissButton = {
                 TextButton(onClick = { collectionToDelete = null }) {
-                    Text("İptal")
+                    Text(stringResource(R.string.cancel))
                 }
             },
         )
@@ -331,18 +331,18 @@ private fun CreateCollectionDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Yeni Koleksiyon Oluştur") },
+        title = { Text(stringResource(R.string.create_new_collection)) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 OutlinedTextField(
                     value = name,
                     onValueChange = { name = it },
-                    label = { Text("Koleksiyon Adı") },
-                    placeholder = { Text("Örn: 2026'da Okunacaklar, Başyapıtlar") },
+                    label = { Text(stringResource(R.string.collection_name)) },
+                    placeholder = { Text(stringResource(R.string.collection_name_example)) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                 )
-                Text("Simge Seçin", style = MaterialTheme.typography.labelMedium)
+                Text(stringResource(R.string.choose_icon), style = MaterialTheme.typography.labelMedium)
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -369,12 +369,12 @@ private fun CreateCollectionDialog(
                 onClick = { if (name.isNotBlank()) onConfirm(name.trim(), selectedEmoji) },
                 enabled = name.isNotBlank(),
             ) {
-                Text("Oluştur")
+                Text(stringResource(R.string.create_action))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("İptal")
+                Text(stringResource(R.string.cancel))
             }
         },
     )
@@ -444,7 +444,7 @@ private fun LibraryGridCard(item: LibraryItem, onClick: () -> Unit, modifier: Mo
                 color = MaterialTheme.colorScheme.secondary,
             )
             if (content.rewatchDesired) {
-                Text("🔄 Tekrar", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
+                Text(stringResource(R.string.revisit_short), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
             }
         }
         LinearProgressIndicator(

@@ -1,5 +1,6 @@
 package app.tsuzuku.ui.screens
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -47,18 +48,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.tsuzuku.R
 
-data class SectionItem(val id: String, val title: String, val icon: ImageVector)
+data class SectionItem(val id: String, @param:StringRes val titleRes: Int, val icon: ImageVector)
 
 val ALL_SECTIONS = listOf(
-    SectionItem("summary", "Günlük Özet", Icons.Rounded.PieChart),
-    SectionItem("habits", "Alışkanlıklar", Icons.Rounded.Repeat),
-    SectionItem("plan", "Bugünkü Plan", Icons.Rounded.Checklist),
-    SectionItem("goals", "Hedef İlerlemeleri", Icons.Rounded.Flag),
-    SectionItem("library", "Devam Eden İçerikler", Icons.Rounded.MenuBook),
-    SectionItem("focus", "Odaklanma Bilgisi", Icons.Rounded.Timer),
-    SectionItem("health", "Sağlık Bilgileri", Icons.Rounded.HealthAndSafety),
-    SectionItem("routines", "Rutinler", Icons.Rounded.Repeat),
-    SectionItem("intelligence", "Tsuzuku Intelligence", Icons.Rounded.Lightbulb),
+    SectionItem("summary", R.string.daily_summary_section, Icons.Rounded.PieChart),
+    SectionItem("habits", R.string.habits, Icons.Rounded.Repeat),
+    SectionItem("plan", R.string.todays_plan_section, Icons.Rounded.Checklist),
+    SectionItem("goals", R.string.goal_progress_section, Icons.Rounded.Flag),
+    SectionItem("library", R.string.content_in_progress_section, Icons.Rounded.MenuBook),
+    SectionItem("focus", R.string.focus_info_section, Icons.Rounded.Timer),
+    SectionItem("health", R.string.health_info_section, Icons.Rounded.HealthAndSafety),
+    SectionItem("routines", R.string.routines_label, Icons.Rounded.Repeat),
+    SectionItem("intelligence", R.string.tsuzuku_intelligence, Icons.Rounded.Lightbulb),
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -110,7 +111,7 @@ fun TodaySectionsConfigSheet(
                         fontWeight = FontWeight.SemiBold,
                     )
                     Text(
-                        text = "Bölümleri sıralayın ve görünürlüklerini ayarlayın.",
+                        text = stringResource(R.string.sections_config_hint),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -157,7 +158,7 @@ fun TodaySectionsConfigSheet(
                                 )
                                 Spacer(modifier = Modifier.size(12.dp))
                                 Text(
-                                    text = section.title,
+                                    text = stringResource(section.titleRes),
                                     style = MaterialTheme.typography.bodyMedium,
                                     fontWeight = if (isVisible) FontWeight.SemiBold else FontWeight.Normal,
                                     color = if (isVisible) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),

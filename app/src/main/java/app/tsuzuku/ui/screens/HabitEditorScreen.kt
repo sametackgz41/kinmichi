@@ -486,9 +486,9 @@ private fun GoalStep(
             modifier = Modifier.fillMaxWidth(),
         ) {
             Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Text("🛑 Kötü Alışkanlık / Limit Takibi", style = MaterialTheme.typography.titleSmall, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
+                Text(stringResource(R.string.bad_habit_limit_title), style = MaterialTheme.typography.titleSmall, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
                 Text(
-                    "Bu alışkanlıkta amaç tüketimi sınırlandırmak veya sıfırlamaktır. Limit yaklaşımı (%80) ve aşımı sakin editoryal göstergelerle takip edilir.",
+                    stringResource(R.string.bad_habit_limit_desc),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onTertiaryContainer,
                 )
@@ -500,13 +500,13 @@ private fun GoalStep(
                         horizontalArrangement = Arrangement.spacedBy(6.dp),
                     ) {
                         Surface(shape = RoundedCornerShape(6.dp), color = MaterialTheme.colorScheme.primaryContainer) {
-                            Text("🟢 İdeal: ≤ $target $unit", modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp), style = MaterialTheme.typography.labelSmall)
+                            Text(stringResource(R.string.bad_habit_ideal, target, unit), modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp), style = MaterialTheme.typography.labelSmall)
                         }
                         Surface(shape = RoundedCornerShape(6.dp), color = MaterialTheme.colorScheme.tertiaryContainer) {
-                            Text("⚡ Uyarı: ≥ ${"%.1f".format(warnVal)} $unit", modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp), style = MaterialTheme.typography.labelSmall)
+                            Text(stringResource(R.string.bad_habit_warning, "%.1f".format(warnVal), unit), modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp), style = MaterialTheme.typography.labelSmall)
                         }
                         Surface(shape = RoundedCornerShape(6.dp), color = MaterialTheme.colorScheme.errorContainer) {
-                            Text("⚠️ Aşım: > $maxVal $unit", modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onErrorContainer)
+                            Text(stringResource(R.string.bad_habit_exceeded, maxVal, unit), modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onErrorContainer)
                         }
                     }
                 }
@@ -530,7 +530,7 @@ private fun GoalStep(
             value = target,
             onValueChange = onTargetChange,
             modifier = Modifier.fillMaxWidth(),
-            label = { Text(if (direction == HabitDirection.Quit) "İdeal Hedef / Üst Sınır" else stringResource(R.string.target_label)) },
+            label = { Text(if (direction == HabitDirection.Quit) stringResource(R.string.ideal_target_upper) else stringResource(R.string.target_label)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
             singleLine = true,
         )
@@ -557,7 +557,7 @@ private fun GoalStep(
                 value = minimumTarget,
                 onValueChange = onMinimumTargetChange,
                 modifier = Modifier.weight(1f),
-                label = { Text(if (direction == HabitDirection.Quit) "İdeal Alt Sınır" else stringResource(R.string.minimum_target)) },
+                label = { Text(if (direction == HabitDirection.Quit) stringResource(R.string.ideal_lower_limit) else stringResource(R.string.minimum_target)) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                 singleLine = true,
             )
@@ -565,13 +565,13 @@ private fun GoalStep(
                 value = maximumTarget,
                 onValueChange = onMaximumTargetChange,
                 modifier = Modifier.weight(1f),
-                label = { Text(if (direction == HabitDirection.Quit) "Maksimum Limit" else stringResource(R.string.maximum_target)) },
+                label = { Text(if (direction == HabitDirection.Quit) stringResource(R.string.maximum_limit) else stringResource(R.string.maximum_target)) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                 singleLine = true,
             )
         }
     } else {
-        InfoCard(if (direction == HabitDirection.Quit) "✓ Tamamlandı: Bugün bu kötü alışkanlıktan tamamen uzak duruldu (Temiz gün)." else stringResource(R.string.check_goal_explanation))
+        InfoCard(if (direction == HabitDirection.Quit) stringResource(R.string.bad_habit_clean_day) else stringResource(R.string.check_goal_explanation))
     }
     EditorLabel(R.string.difficulty)
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {

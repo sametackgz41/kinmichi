@@ -1,5 +1,6 @@
 package app.tsuzuku.ui.screens
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -68,18 +69,18 @@ import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
-enum class StatisticsTab(val label: String) {
-    General("Genel"),
-    Heatmap("Isı Haritası"),
-    Reviews("Değerlendirmeler"),
-    Records("Rekorlar"),
-    SkipReasons("Atlananlar"),
+enum class StatisticsTab(@param:StringRes val labelRes: Int) {
+    General(R.string.stats_tab_general),
+    Heatmap(R.string.stats_tab_heatmap),
+    Reviews(R.string.stats_tab_reviews),
+    Records(R.string.stats_tab_records),
+    SkipReasons(R.string.stats_tab_skips),
 }
 
-enum class ReviewSubTab(val label: String) {
-    Weekly("Haftalık"),
-    Monthly("Aylık"),
-    Yearly("Yıllık"),
+enum class ReviewSubTab(@param:StringRes val labelRes: Int) {
+    Weekly(R.string.weekly),
+    Monthly(R.string.monthly),
+    Yearly(R.string.yearly),
 }
 
 @Composable
@@ -144,7 +145,7 @@ fun StatisticsScreen(
                     FilterChip(
                         selected = currentTab == tab,
                         onClick = { currentTab = tab },
-                        label = { Text(tab.label) },
+                        label = { Text(stringResource(tab.labelRes)) },
                     )
                 }
             }
@@ -245,7 +246,7 @@ fun StatisticsScreen(
                             FilterChip(
                                 selected = reviewSubTab == subTab,
                                 onClick = { reviewSubTab = subTab },
-                                label = { Text(subTab.label) },
+                                label = { Text(stringResource(subTab.labelRes)) },
                             )
                         }
                     }
@@ -267,11 +268,11 @@ fun StatisticsScreen(
                                     verticalAlignment = Alignment.CenterVertically,
                                 ) {
                                     IconButton(onClick = onPreviousWeek) {
-                                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Önceki Hafta")
+                                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.previous_week))
                                     }
                                     Text(weekRange, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                                     IconButton(onClick = onNextWeek) {
-                                        Icon(Icons.AutoMirrored.Rounded.ArrowForward, contentDescription = "Sonraki Hafta")
+                                        Icon(Icons.AutoMirrored.Rounded.ArrowForward, contentDescription = stringResource(R.string.next_week))
                                     }
                                 }
                             }
@@ -283,7 +284,7 @@ fun StatisticsScreen(
                                         verticalAlignment = Alignment.CenterVertically,
                                     ) {
                                         Column {
-                                            Text("Haftalık Tamamlama Oranı", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                            Text(stringResource(R.string.weekly_completion_rate), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                             Text("%${(summary.habitCompletionRate * 100).toInt()}", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
                                         }
                                         summary.changeRatePercentage?.let { change ->
@@ -292,7 +293,7 @@ fun StatisticsScreen(
                                                 color = if (change >= 0) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.errorContainer,
                                             ) {
                                                 Text(
-                                                    text = "${if (change >= 0) "+$change" else "$change"}% geçen haftaya göre",
+                                                    text = stringResource(R.string.vs_last_week, if (change >= 0) "+$change" else "$change"),
                                                     modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
                                                     style = MaterialTheme.typography.labelSmall,
                                                     fontWeight = FontWeight.SemiBold,
@@ -306,7 +307,7 @@ fun StatisticsScreen(
                                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                                     Card(modifier = Modifier.weight(1f), shape = RoundedCornerShape(10.dp)) {
                                         Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                                            Text("🌟 En Başarılı", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary)
+                                            Text(stringResource(R.string.most_successful), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary)
                                             Text(
                                                 summary.bestHabit?.let { "${it.habit.emoji} ${it.habit.name}" } ?: "—",
                                                 style = MaterialTheme.typography.titleSmall,
@@ -316,7 +317,7 @@ fun StatisticsScreen(
                                     }
                                     Card(modifier = Modifier.weight(1f), shape = RoundedCornerShape(10.dp)) {
                                         Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                                            Text("🌱 Geliştirilebilir", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary)
+                                            Text(stringResource(R.string.could_improve), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary)
                                             Text(
                                                 summary.strugglingHabit?.let { "${it.habit.emoji} ${it.habit.name}" } ?: "—",
                                                 style = MaterialTheme.typography.titleSmall,
@@ -329,14 +330,14 @@ fun StatisticsScreen(
                             item {
                                 Surface(shape = RoundedCornerShape(10.dp), color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)) {
                                     Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                                        Text("Görev ve Odaklanma Dengesi", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
+                                        Text(stringResource(R.string.task_focus_balance), style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
                                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                                            Text("Tamamlanan Görev: ${summary.completedTasksCount} / ${summary.plannedTasksCount}", style = MaterialTheme.typography.bodySmall)
-                                            Text("Ertelenen: ${summary.carriedTasksCount}", style = MaterialTheme.typography.bodySmall)
+                                            Text(stringResource(R.string.completed_tasks_of, summary.completedTasksCount, summary.plannedTasksCount), style = MaterialTheme.typography.bodySmall)
+                                            Text(stringResource(R.string.postponed_count, summary.carriedTasksCount), style = MaterialTheme.typography.bodySmall)
                                         }
                                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                                            Text("Odaklanma Süresi: ${summary.focusDurationMinutes} dk", style = MaterialTheme.typography.bodySmall)
-                                            Text("Hedef Adımları: ${summary.goalProgressCount}", style = MaterialTheme.typography.bodySmall)
+                                            Text(stringResource(R.string.focus_duration_minutes, summary.focusDurationMinutes), style = MaterialTheme.typography.bodySmall)
+                                            Text(stringResource(R.string.goal_steps_count, summary.goalProgressCount), style = MaterialTheme.typography.bodySmall)
                                         }
                                     }
                                 }
@@ -344,7 +345,7 @@ fun StatisticsScreen(
                             item {
                                 ReviewNoteCard(
                                     initialNote = summary.note,
-                                    label = "Haftalık Yansıma & Not",
+                                    label = stringResource(R.string.weekly_reflection_note),
                                     onSave = { onSaveWeeklyNote(summary.weekStart, it) },
                                 )
                             }
@@ -364,11 +365,11 @@ fun StatisticsScreen(
                                     verticalAlignment = Alignment.CenterVertically,
                                 ) {
                                     IconButton(onClick = onPreviousMonth) {
-                                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Önceki Ay")
+                                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.previous_month))
                                     }
                                     Text(monthName, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                                     IconButton(onClick = onNextMonth) {
-                                        Icon(Icons.AutoMirrored.Rounded.ArrowForward, contentDescription = "Sonraki Ay")
+                                        Icon(Icons.AutoMirrored.Rounded.ArrowForward, contentDescription = stringResource(R.string.next_month))
                                     }
                                 }
                             }
@@ -381,12 +382,12 @@ fun StatisticsScreen(
                                             verticalAlignment = Alignment.CenterVertically,
                                         ) {
                                             Column {
-                                                Text("Aylık Başarı Oranı", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                                Text(stringResource(R.string.monthly_success_rate), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                                 Text("%${(summary.habitCompletionRate * 100).toInt()}", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
                                             }
                                             Column(horizontalAlignment = Alignment.End) {
-                                                Text("Odaklanma: ${summary.focusDurationMinutes / 60} sa ${summary.focusDurationMinutes % 60} dk", style = MaterialTheme.typography.bodyMedium)
-                                                Text("Tamamlanan Görev: ${summary.completedTasksCount}", style = MaterialTheme.typography.bodyMedium)
+                                                Text(stringResource(R.string.focus_hours_minutes, summary.focusDurationMinutes / 60, summary.focusDurationMinutes % 60), style = MaterialTheme.typography.bodyMedium)
+                                                Text(stringResource(R.string.completed_tasks_value, summary.completedTasksCount), style = MaterialTheme.typography.bodyMedium)
                                             }
                                         }
                                     }
@@ -394,7 +395,7 @@ fun StatisticsScreen(
                             }
                             if (summary.topHabits.isNotEmpty()) {
                                 item {
-                                    Text("Alışkanlık Sıralaması", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
+                                    Text(stringResource(R.string.habit_ranking), style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
                                 }
                                 items(summary.topHabits.take(5)) { habitStat ->
                                     HabitStatisticCard(habitStat)
@@ -403,7 +404,7 @@ fun StatisticsScreen(
                             item {
                                 ReviewNoteCard(
                                     initialNote = summary.note,
-                                    label = "Aylık Yansıma & Değerlendirme",
+                                    label = stringResource(R.string.monthly_reflection),
                                     onSave = { onSaveMonthlyNote(summary.yearMonth, it) },
                                 )
                             }
@@ -419,37 +420,37 @@ fun StatisticsScreen(
                                     verticalAlignment = Alignment.CenterVertically,
                                 ) {
                                     IconButton(onClick = onPreviousYear) {
-                                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Önceki Yıl")
+                                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.previous_year))
                                     }
                                     Text(summary.year.toString(), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                                     IconButton(onClick = onNextYear) {
-                                        Icon(Icons.AutoMirrored.Rounded.ArrowForward, contentDescription = "Sonraki Yıl")
+                                        Icon(Icons.AutoMirrored.Rounded.ArrowForward, contentDescription = stringResource(R.string.next_year))
                                     }
                                 }
                             }
                             item {
                                 Surface(shape = RoundedCornerShape(12.dp), color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)) {
                                     Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                                        Text("Yıllık Özet ve Dönüm Noktaları", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                                        Text(stringResource(R.string.yearly_summary_milestones), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                                            Text("Toplam Alışkanlık:", style = MaterialTheme.typography.bodyMedium)
+                                            Text(stringResource(R.string.total_habits_label), style = MaterialTheme.typography.bodyMedium)
                                             Text("${summary.totalHabitCompletions} kez", fontWeight = FontWeight.Bold)
                                         }
                                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                                            Text("Toplam Odaklanma:", style = MaterialTheme.typography.bodyMedium)
+                                            Text(stringResource(R.string.total_focus_label), style = MaterialTheme.typography.bodyMedium)
                                             Text("${summary.totalFocusMinutes / 60} saat", fontWeight = FontWeight.Bold)
                                         }
                                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                                            Text("Tamamlanan Hedefler:", style = MaterialTheme.typography.bodyMedium)
+                                            Text(stringResource(R.string.completed_goals_label), style = MaterialTheme.typography.bodyMedium)
                                             Text("${summary.completedGoalsCount}", fontWeight = FontWeight.Bold)
                                         }
                                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                                            Text("Bitirilen Kitap & İçerik:", style = MaterialTheme.typography.bodyMedium)
+                                            Text(stringResource(R.string.finished_books_content_label), style = MaterialTheme.typography.bodyMedium)
                                             Text("${summary.completedLibraryItemsCount}", fontWeight = FontWeight.Bold)
                                         }
                                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                                            Text("En Uzun Zincir:", style = MaterialTheme.typography.bodyMedium)
-                                            Text("${summary.bestStreakDays} gün", fontWeight = FontWeight.Bold)
+                                            Text(stringResource(R.string.longest_chain_label), style = MaterialTheme.typography.bodyMedium)
+                                            Text(stringResource(R.string.days_value, summary.bestStreakDays), fontWeight = FontWeight.Bold)
                                         }
                                     }
                                 }
@@ -457,7 +458,7 @@ fun StatisticsScreen(
                             item {
                                 ReviewNoteCard(
                                     initialNote = summary.note,
-                                    label = "Yıllık Değerlendirme & Gelecek Vizyonu",
+                                    label = stringResource(R.string.yearly_review_vision),
                                     onSave = { onSaveYearlyNote(summary.year, it) },
                                 )
                             }
@@ -469,21 +470,21 @@ fun StatisticsScreen(
             StatisticsTab.Records -> {
                 personalRecords?.let { records ->
                     item {
-                        Text("Kişisel Rekorlar", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                        Text(stringResource(R.string.personal_records), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                     }
                     item {
                         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                 RecordTile(
                                     icon = "🏆",
-                                    title = "En Uzun Zincir",
-                                    value = "${records.longestHabitStreak} gün",
+                                    title = stringResource(R.string.longest_chain),
+                                    value = stringResource(R.string.days_value_records, records.longestHabitStreak),
                                     subtitle = records.longestHabitName,
                                     modifier = Modifier.weight(1f),
                                 )
                                 RecordTile(
                                     icon = "⚡",
-                                    title = "En Verimli Gün",
+                                    title = stringResource(R.string.most_productive_day),
                                     value = records.mostProductiveDayName,
                                     subtitle = "${records.mostProductiveDayCount} tamamlama",
                                     modifier = Modifier.weight(1f),
@@ -492,16 +493,16 @@ fun StatisticsScreen(
                             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                 RecordTile(
                                     icon = "⏱️",
-                                    title = "Toplam Odaklanma",
+                                    title = stringResource(R.string.total_focus),
                                     value = "${records.totalFocusHours} saat",
-                                    subtitle = "Derin Çalışma",
+                                    subtitle = stringResource(R.string.deep_work),
                                     modifier = Modifier.weight(1f),
                                 )
                                 RecordTile(
                                     icon = "🎯",
-                                    title = "Başarılan Hedef",
+                                    title = stringResource(R.string.goals_achieved),
                                     value = "${records.totalGoalsCompleted}",
-                                    subtitle = "${records.totalLibraryCompleted} içerik bitti",
+                                    subtitle = stringResource(R.string.content_finished_count, records.totalLibraryCompleted),
                                     modifier = Modifier.weight(1f),
                                 )
                             }
@@ -509,7 +510,7 @@ fun StatisticsScreen(
                     }
                     item {
                         Spacer(Modifier.height(4.dp))
-                        Text("Dönüm Noktaları & Rozetler", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                        Text(stringResource(R.string.milestones_and_badges), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                     }
                     items(records.milestones) { milestone ->
                         MilestoneBadgeCard(milestone)
@@ -522,9 +523,9 @@ fun StatisticsScreen(
                 item {
                     Surface(shape = RoundedCornerShape(12.dp), color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                            Text("Alışkanlık Atlanma Analizi", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                            Text(stringResource(R.string.habit_skip_analysis), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                             Text(
-                                "Toplam $totalSkips kez alışkanlık atlandı. Nedenleri fark etmek, hedeflerinizi daha esnek ve sürdürülebilir hale getirmenize yardım eder.",
+                                stringResource(R.string.habit_skip_analysis_desc, totalSkips),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
@@ -615,7 +616,7 @@ private fun MilestoneBadgeCard(milestone: PersonalMilestone) {
                     if (milestone.isUnlocked) {
                         Surface(shape = RoundedCornerShape(4.dp), color = MaterialTheme.colorScheme.primary) {
                             Text(
-                                "Kazanıldı ✨",
+                                stringResource(R.string.earned_label),
                                 modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.onPrimary,
@@ -664,7 +665,7 @@ private fun ReviewNoteCard(
                 value = text,
                 onValueChange = { text = it },
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("Düşüncelerinizi, öğrendiklerinizi ve notlarınızı buraya yazın...") },
+                placeholder = { Text(stringResource(R.string.reflection_placeholder)) },
                 minLines = 3,
                 maxLines = 6,
             )
@@ -674,7 +675,7 @@ private fun ReviewNoteCard(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 if (savedMessage) {
-                    Text("✓ Kaydedildi", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+                    Text(stringResource(R.string.saved_check), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
                 } else {
                     Spacer(Modifier.width(1.dp))
                 }
@@ -682,7 +683,7 @@ private fun ReviewNoteCard(
                     onSave(text)
                     savedMessage = true
                 }) {
-                    Text("Notu Kaydet")
+                    Text(stringResource(R.string.save_note))
                 }
             }
         }

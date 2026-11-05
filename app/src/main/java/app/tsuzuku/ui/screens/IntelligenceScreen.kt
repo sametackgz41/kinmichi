@@ -1,5 +1,8 @@
 package app.tsuzuku.ui.screens
 
+import androidx.annotation.StringRes
+import app.tsuzuku.R
+import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -62,10 +65,10 @@ import app.tsuzuku.model.InsightConfidence
 import app.tsuzuku.model.InsightPeriod
 import app.tsuzuku.model.Recommendation
 
-enum class IntelligenceTab(val label: String) {
-    Today("Günün İçgörüleri"),
-    Trends("Trendler & Kalıplar"),
-    Recommendations("Öneriler"),
+enum class IntelligenceTab(@param:StringRes val labelRes: Int) {
+    Today(R.string.insights_of_the_day),
+    Trends(R.string.trends_and_patterns),
+    Recommendations(R.string.recommendations),
 }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
@@ -92,7 +95,7 @@ fun IntelligenceScreen(
                 title = { Text("Tsuzuku Intelligence", fontWeight = FontWeight.SemiBold) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Geri")
+                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.back))
                     }
                 },
                 actions = {
@@ -112,11 +115,11 @@ fun IntelligenceScreen(
         ) {
             // Header
             item {
-                Text("知性 · İÇGÖRÜ MOTORU", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary, letterSpacing = 1.6.sp)
+                Text(stringResource(R.string.intelligence_mark), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary, letterSpacing = 1.6.sp)
                 Spacer(Modifier.height(2.dp))
-                Text("Kişisel Davranış Kalıpların", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.SemiBold)
+                Text(stringResource(R.string.personal_patterns_title), style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.SemiBold)
                 Text(
-                    "Verilerin tamamen cihazında offline olarak incelenir. Asla yargılamadan, sana en uygun çalışma ve alışkanlık ritmini fark ettirir.",
+                    stringResource(R.string.intelligence_intro),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -137,9 +140,9 @@ fun IntelligenceScreen(
                         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.45f)),
                     ) {
                         Column(modifier = Modifier.padding(12.dp)) {
-                            Text("🌱 Tsuzuku'ya Sor", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
+                            Text(stringResource(R.string.ask_tsuzuku_cta), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
                             Spacer(Modifier.height(4.dp))
-                            Text("Verilerinle sohbet et, ritmini keşfet", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            Text(stringResource(R.string.ask_tsuzuku_cta_desc), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                     Card(
@@ -151,9 +154,9 @@ fun IntelligenceScreen(
                         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.45f)),
                     ) {
                         Column(modifier = Modifier.padding(12.dp)) {
-                            Text("✨ AI Plan Asistanı", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
+                            Text(stringResource(R.string.ai_plan_assistant_cta), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
                             Spacer(Modifier.height(4.dp))
-                            Text("Kişisel gün taslağı oluştur ve onayla", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            Text(stringResource(R.string.ai_plan_assistant_cta_desc), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                 }
@@ -173,7 +176,7 @@ fun IntelligenceScreen(
                         Icon(Icons.Rounded.Shield, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(20.dp))
                         Spacer(Modifier.width(10.dp))
                         Text(
-                            "%100 Çevrimdışı Analiz · İsteğe Bağlı Bulut AI & Tam Gizlilik",
+                            stringResource(R.string.intelligence_privacy_footer),
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -193,7 +196,7 @@ fun IntelligenceScreen(
                         FilterChip(
                             selected = selectedTab == tab,
                             onClick = { selectedTab = tab },
-                            label = { Text(tab.label) },
+                            label = { Text(stringResource(tab.labelRes)) },
                         )
                     }
                 }
@@ -204,7 +207,7 @@ fun IntelligenceScreen(
                 IntelligenceTab.Today -> {
                     if (todayInsights.isEmpty()) {
                         item {
-                            EmptyInsightsCard(message = "Bugün için henüz belirgin bir kalıp tespit edilmedi. Alışkanlıklarını ve görevlerini takip etmeye devam et.")
+                            EmptyInsightsCard(message = stringResource(R.string.no_patterns_today))
                         }
                     } else {
                         items(todayInsights, key = { it.id }) { insight ->
@@ -219,7 +222,7 @@ fun IntelligenceScreen(
                 IntelligenceTab.Trends -> {
                     if (trendInsights.isEmpty()) {
                         item {
-                            EmptyInsightsCard(message = "Trend analizi için birkaç günlük daha veriye ihtiyaç var. Gün sonu değerlendirmeleri ve alışkanlık girişleri arttıkça trendler burada belirecek.")
+                            EmptyInsightsCard(message = stringResource(R.string.trends_need_more_data))
                         }
                     } else {
                         items(trendInsights, key = { it.id }) { insight ->
@@ -234,7 +237,7 @@ fun IntelligenceScreen(
                 IntelligenceTab.Recommendations -> {
                     if (recommendations.isEmpty()) {
                         item {
-                            EmptyInsightsCard(message = "Şu anda uygulanmayı bekleyen aktif bir öneri yok. Her şey dengeli görünüyor.")
+                            EmptyInsightsCard(message = stringResource(R.string.no_pending_recommendations))
                         }
                     } else {
                         items(recommendations, key = { it.id }) { rec ->
@@ -267,9 +270,9 @@ fun IntelligenceScreen(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 Column {
-                    Text("透明性 · ŞEFFAFLIK RAPORU", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary, letterSpacing = 1.4.sp)
+                    Text(stringResource(R.string.transparency_mark), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary, letterSpacing = 1.4.sp)
                     Spacer(Modifier.height(4.dp))
-                    Text("Neden Bunu Söylüyoruz?", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.why_we_say_this), style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
                 }
 
                 Text(
@@ -279,7 +282,7 @@ fun IntelligenceScreen(
                 )
 
                 if (insight.supportingMetrics.isNotEmpty()) {
-                    Text("Kullanılan Sayısal Metrikler:", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
+                    Text(stringResource(R.string.metrics_used), style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
                     FlowRow(
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -310,7 +313,7 @@ fun IntelligenceScreen(
                         Icon(Icons.Rounded.Info, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(20.dp))
                         Spacer(Modifier.width(10.dp))
                         Text(
-                            "Güven Derecesi: ${insight.confidence.label}. Bu analiz tamamen cihazındaki yerel kayıtlar taranarak hesaplanmıştır.",
+                            stringResource(R.string.confidence_explanation, insight.confidence.label),
                             style = MaterialTheme.typography.bodySmall,
                         )
                     }
@@ -320,7 +323,7 @@ fun IntelligenceScreen(
                     onClick = { selectedWhyInsight = null },
                     modifier = Modifier.fillMaxWidth(),
                 ) {
-                    Text("Anladım")
+                    Text(stringResource(R.string.got_it))
                 }
             }
         }
@@ -349,7 +352,7 @@ fun IntelligenceScreen(
                         )
                     }
                     Text(
-                        "Tsuzuku hiçbir değişikliği senin onayın olmadan yapmaz.",
+                        stringResource(R.string.no_change_without_approval),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.secondary,
                     )
@@ -362,12 +365,12 @@ fun IntelligenceScreen(
                         pendingRecommendation = null
                     },
                 ) {
-                    Text("Onayla ve Uygula")
+                    Text(stringResource(R.string.approve_and_apply))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { pendingRecommendation = null }) {
-                    Text("Vazgeç")
+                    Text(stringResource(R.string.dismiss_action))
                 }
             },
         )
@@ -415,7 +418,7 @@ private fun InsightCard(
                 TextButton(onClick = onWhyClick) {
                     Icon(Icons.Rounded.Info, contentDescription = null, modifier = Modifier.size(16.dp))
                     Spacer(Modifier.width(4.dp))
-                    Text("Neden?", style = MaterialTheme.typography.labelMedium)
+                    Text(stringResource(R.string.why_question), style = MaterialTheme.typography.labelMedium)
                 }
 
                 insight.recommendation?.let { rec ->
@@ -471,7 +474,7 @@ private fun RecommendationItemCard(
                 modifier = Modifier.align(Alignment.End),
                 shape = RoundedCornerShape(10.dp),
             ) {
-                Text("Uygula")
+                Text(stringResource(R.string.apply_action))
             }
         }
     }
@@ -515,7 +518,7 @@ private fun EmptyInsightsCard(message: String) {
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Text("🌱", fontSize = 32.sp)
-            Text("Veri Toplanıyor", fontWeight = FontWeight.Medium)
+            Text(stringResource(R.string.collecting_data), fontWeight = FontWeight.Medium)
             Text(
                 message,
                 style = MaterialTheme.typography.bodySmall,

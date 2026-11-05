@@ -1,5 +1,6 @@
 package app.tsuzuku.ui.screens
 
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -173,7 +174,7 @@ fun HabitDetailScreen(
             if (linkedGoals.isEmpty()) {
                 item {
                     Text(
-                        text = "Henüz bağlı hedef yok.",
+                        text = stringResource(R.string.no_linked_goals),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -193,9 +194,9 @@ fun HabitDetailScreen(
                             Column(modifier = Modifier.weight(1f)) {
                                 Text(goal.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
                                 val modeDesc = if (link.contributionMode == HabitGoalContributionMode.HabitAmount) {
-                                    "Alışkanlık miktarı kadar katkı"
+                                    stringResource(R.string.contribution_by_habit_amount)
                                 } else {
-                                    "+${link.contributionValue} katkı"
+                                    stringResource(R.string.contribution_plus, link.contributionValue)
                                 }
                                 Text(modeDesc, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             }
@@ -219,14 +220,14 @@ fun HabitDetailScreen(
                     FilledTonalButton(onClick = { showLinkContentDialog = true }) {
                         Icon(Icons.Rounded.Add, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(Modifier.width(4.dp))
-                        Text("İçerik Bağla")
+                        Text(stringResource(R.string.link_content))
                     }
                 }
             }
             if (linkedContents.isEmpty()) {
                 item {
                     Text(
-                        text = "Henüz bağlı kütüphane içeriği yok.",
+                        text = stringResource(R.string.no_linked_library_content),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -245,7 +246,7 @@ fun HabitDetailScreen(
                             Icon(Icons.Rounded.MenuBook, contentDescription = null, tint = MaterialTheme.colorScheme.secondary)
                             Column(modifier = Modifier.weight(1f)) {
                                 Text(content.content.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
-                                Text("1 alışkanlık = ${link.contributionMultiplier} ilerleme", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                Text(stringResource(R.string.habit_progress_multiplier, link.contributionMultiplier), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             }
                             IconButton(onClick = { onUnlinkContent(content.content.id) }) {
                                 Icon(Icons.Rounded.LinkOff, contentDescription = stringResource(R.string.unlink), tint = MaterialTheme.colorScheme.error)
@@ -265,12 +266,12 @@ fun HabitDetailScreen(
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                         Icon(Icons.Rounded.TrendingUp, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(20.dp))
-                        Text("Gelişim Seviyeleri", style = MaterialTheme.typography.titleMedium)
+                        Text(stringResource(R.string.growth_levels), style = MaterialTheme.typography.titleMedium)
                     }
                     FilledTonalButton(onClick = { showLevelsDialog = true }) {
                         Icon(if (habitLevels.isEmpty()) Icons.Rounded.Add else Icons.Rounded.Edit, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(Modifier.width(4.dp))
-                        Text(if (habitLevels.isEmpty()) "Seviye Ekle" else "Düzenle")
+                        Text(if (habitLevels.isEmpty()) stringResource(R.string.add_level) else stringResource(R.string.edit_action))
                     }
                 }
             }
@@ -283,12 +284,12 @@ fun HabitDetailScreen(
                     ) {
                         Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                             Text(
-                                "Bu alışkanlık için aşamalı gelişim seviyeleri belirleyin (örn. 1. Seviye: 1 km, 2. Seviye: 3 km, 3. Seviye: 5 km).",
+                                stringResource(R.string.growth_levels_hint),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
                             OutlinedButton(onClick = { showLevelsDialog = true }) {
-                                Text("Aşamaları Yapılandır")
+                                Text(stringResource(R.string.configure_stages))
                             }
                         }
                     }
@@ -332,25 +333,25 @@ fun HabitDetailScreen(
                                             color = MaterialTheme.colorScheme.primary,
                                         ) {
                                             Text(
-                                                "Aktif Seviye",
+                                                stringResource(R.string.active_level),
                                                 modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
                                                 style = MaterialTheme.typography.labelSmall,
                                                 color = MaterialTheme.colorScheme.onPrimary,
                                             )
                                         }
                                     } else if (isPassed) {
-                                        Text("✓ Tamamlandı", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary)
+                                        Text(stringResource(R.string.completed_check), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary)
                                     }
                                 }
                                 Text(
-                                    "Hedef: ${formatLibraryAmount(level.target)} ${habit.unit}${if (level.rewardNote.isNotBlank()) " · ${level.rewardNote}" else ""}",
+                                    stringResource(R.string.level_target_value, formatLibraryAmount(level.target), habit.unit) + if (level.rewardNote.isNotBlank()) " · ${level.rewardNote}" else "",
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
                             }
                             if (!isCurrent && !isPassed) {
                                 FilledTonalButton(onClick = { levelToAdvance = level }) {
-                                    Text("Bu Seviyeye Geç")
+                                    Text(stringResource(R.string.switch_to_level))
                                 }
                             }
                         }
@@ -366,7 +367,7 @@ fun HabitDetailScreen(
                         ) {
                             Icon(Icons.Rounded.Star, contentDescription = null, modifier = Modifier.size(18.dp))
                             Spacer(Modifier.width(8.dp))
-                            Text("Seviye Atla: ${nextLevel.name} (${formatLibraryAmount(nextLevel.target)} ${habit.unit})")
+                            Text(stringResource(R.string.level_up_to, nextLevel.name, formatLibraryAmount(nextLevel.target), habit.unit))
                         }
                     }
                 } else if (habitLevels.isNotEmpty() && habit.currentLevel >= habitLevels.maxOf { it.levelNumber }) {
@@ -383,7 +384,7 @@ fun HabitDetailScreen(
                             ) {
                                 Text("👑", style = MaterialTheme.typography.titleMedium)
                                 Text(
-                                    "Tebrikler! Bu alışkanlığın en üst gelişim seviyesindesiniz.",
+                                    stringResource(R.string.top_level_reached),
                                     style = MaterialTheme.typography.bodyMedium,
                                     color = MaterialTheme.colorScheme.onTertiaryContainer,
                                     fontWeight = FontWeight.Medium,
@@ -452,10 +453,10 @@ fun HabitDetailScreen(
             title = { Text(stringResource(R.string.link_goal)) },
             text = {
                 if (unlinked.isEmpty()) {
-                    Text("Bağlanabilecek başka aktif hedef yok.")
+                    Text(stringResource(R.string.no_more_active_goals_to_link))
                 } else {
                     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                        Text("Hedef seçin:", style = MaterialTheme.typography.labelLarge)
+                        Text(stringResource(R.string.select_goal), style = MaterialTheme.typography.labelLarge)
                         unlinked.forEach { goal ->
                             Row(
                                 modifier = Modifier.fillMaxWidth().clickable { selectedGoalId = goal.id }.padding(vertical = 4.dp),
@@ -471,14 +472,14 @@ fun HabitDetailScreen(
                                 selected = mode == HabitGoalContributionMode.HabitAmount,
                                 onClick = { mode = HabitGoalContributionMode.HabitAmount },
                             )
-                            Text("Alışkanlık Miktarı", modifier = Modifier.padding(start = 6.dp))
+                            Text(stringResource(R.string.habit_amount), modifier = Modifier.padding(start = 6.dp))
                         }
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             RadioButton(
                                 selected = mode == HabitGoalContributionMode.FixedValue,
                                 onClick = { mode = HabitGoalContributionMode.FixedValue },
                             )
-                            Text("Sabit Değer", modifier = Modifier.padding(start = 6.dp))
+                            Text(stringResource(R.string.fixed_value), modifier = Modifier.padding(start = 6.dp))
                         }
                         if (mode == HabitGoalContributionMode.FixedValue) {
                             OutlinedTextField(
@@ -516,13 +517,13 @@ fun HabitDetailScreen(
 
         AlertDialog(
             onDismissRequest = { showLinkContentDialog = false },
-            title = { Text("Kütüphane İçeriği Bağla") },
+            title = { Text(stringResource(R.string.link_library_content)) },
             text = {
                 if (unlinked.isEmpty()) {
-                    Text("Bağlanabilecek başka içerik yok.")
+                    Text(stringResource(R.string.no_more_content_to_link))
                 } else {
                     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                        Text("İçerik seçin:", style = MaterialTheme.typography.labelLarge)
+                        Text(stringResource(R.string.select_content), style = MaterialTheme.typography.labelLarge)
                         unlinked.forEach { item ->
                             Row(
                                 modifier = Modifier.fillMaxWidth().clickable { selectedContentId = item.content.id }.padding(vertical = 4.dp),
@@ -535,7 +536,7 @@ fun HabitDetailScreen(
                         OutlinedTextField(
                             value = multiplierText,
                             onValueChange = { multiplierText = it },
-                            label = { Text("İlerleme Çarpanı (varsayılan: 1)") },
+                            label = { Text(stringResource(R.string.progress_multiplier_label)) },
                             modifier = Modifier.fillMaxWidth(),
                         )
                     }
@@ -550,7 +551,7 @@ fun HabitDetailScreen(
                             onLinkContent(id, m)
                             showLinkContentDialog = false
                         },
-                    ) { Text("Bağla") }
+                    ) { Text(stringResource(R.string.link_action)) }
                 }
             },
             dismissButton = {
@@ -577,10 +578,10 @@ fun HabitDetailScreen(
     levelToAdvance?.let { targetLevel ->
         AlertDialog(
             onDismissRequest = { levelToAdvance = null },
-            title = { Text("Seviye Yükselt") },
+            title = { Text(stringResource(R.string.level_up_title)) },
             text = {
                 Text(
-                    "${targetLevel.name} seviyesine geçmek üzeresiniz. Günlük hedefiniz ${formatLibraryAmount(targetLevel.target)} ${habit.unit} olarak güncellenecektir.\n\nGeçmiş kayıtlarınız, eski istatistikleriniz ve serileriniz olduğu gibi korunacaktır."
+                    stringResource(R.string.level_up_message, targetLevel.name, formatLibraryAmount(targetLevel.target), habit.unit)
                 )
             },
             confirmButton = {
@@ -588,7 +589,7 @@ fun HabitDetailScreen(
                     onAdvanceLevel(targetLevel.levelNumber)
                     levelToAdvance = null
                 }) {
-                    Text("Seviyeyi Yükselt")
+                    Text(stringResource(R.string.level_up_confirm))
                 }
             },
             dismissButton = {
@@ -620,13 +621,19 @@ fun HabitLevelsDialog(
     onSave: (List<HabitLevel>) -> Unit,
 ) {
     data class LevelDraft(val name: String, val target: String, val rewardNote: String)
+    val context = LocalContext.current
+    val defaultLevelNames = listOf(
+        stringResource(R.string.level_beginner),
+        stringResource(R.string.level_intermediate),
+        stringResource(R.string.level_advanced),
+    )
     var items by remember {
         mutableStateOf(
             if (initialLevels.isEmpty()) {
                 listOf(
-                    LevelDraft("Başlangıç", "1.0", ""),
-                    LevelDraft("Orta Düzey", "3.0", ""),
-                    LevelDraft("İleri Seviye", "5.0", ""),
+                    LevelDraft(defaultLevelNames[0], "1.0", ""),
+                    LevelDraft(defaultLevelNames[1], "3.0", ""),
+                    LevelDraft(defaultLevelNames[2], "5.0", ""),
                 )
             } else {
                 initialLevels.map { LevelDraft(it.name, formatLibraryAmount(it.target), it.rewardNote) }
@@ -636,7 +643,7 @@ fun HabitLevelsDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Gelişim Seviyelerini Düzenle") },
+        title = { Text(stringResource(R.string.edit_growth_levels)) },
         text = {
             LazyColumn(
                 modifier = Modifier.fillMaxWidth(),
@@ -653,7 +660,7 @@ fun HabitLevelsDialog(
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically,
                             ) {
-                                Text("Seviye ${index + 1}", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
+                                Text(stringResource(R.string.level_number, index + 1), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
                                 if (items.size > 1) {
                                     IconButton(
                                         onClick = {
@@ -670,7 +677,7 @@ fun HabitLevelsDialog(
                                 onValueChange = { newName ->
                                     items = items.toMutableList().apply { set(index, item.copy(name = newName)) }
                                 },
-                                label = { Text("Seviye Başlığı") },
+                                label = { Text(stringResource(R.string.level_title)) },
                                 singleLine = true,
                                 modifier = Modifier.fillMaxWidth(),
                             )
@@ -680,7 +687,7 @@ fun HabitLevelsDialog(
                                     onValueChange = { newTarget ->
                                         items = items.toMutableList().apply { set(index, item.copy(target = newTarget)) }
                                     },
-                                    label = { Text("Hedef ($unit)") },
+                                    label = { Text(stringResource(R.string.target_with_unit, unit)) },
                                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                                     singleLine = true,
                                     modifier = Modifier.weight(1f),
@@ -690,7 +697,7 @@ fun HabitLevelsDialog(
                                     onValueChange = { newNote ->
                                         items = items.toMutableList().apply { set(index, item.copy(rewardNote = newNote)) }
                                     },
-                                    label = { Text("Ödül / Not") },
+                                    label = { Text(stringResource(R.string.reward_note)) },
                                     singleLine = true,
                                     modifier = Modifier.weight(1f),
                                 )
@@ -702,13 +709,13 @@ fun HabitLevelsDialog(
                     FilledTonalButton(
                         onClick = {
                             val nextNum = items.size + 1
-                            items = items + LevelDraft("Seviye $nextNum", "${nextNum * 2}.0", "")
+                            items = items + LevelDraft(context.getString(R.string.level_number_next, nextNum), "${nextNum * 2}.0", "")
                         },
                         modifier = Modifier.fillMaxWidth(),
                     ) {
                         Icon(Icons.Rounded.Add, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(Modifier.width(6.dp))
-                        Text("Yeni Seviye Ekle")
+                        Text(stringResource(R.string.add_new_level))
                     }
                 }
             }
@@ -722,7 +729,7 @@ fun HabitLevelsDialog(
                             id = 0L,
                             habitId = 0L,
                             levelNumber = index + 1,
-                            name = item.name.ifBlank { "Seviye ${index + 1}" },
+                            name = item.name.ifBlank { context.getString(R.string.level_number, index + 1) },
                             target = target,
                             rewardNote = item.rewardNote,
                         )
@@ -731,12 +738,12 @@ fun HabitLevelsDialog(
                     onDismiss()
                 }
             ) {
-                Text("Kaydet")
+                Text(stringResource(R.string.save_label))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("İptal")
+                Text(stringResource(R.string.cancel))
             }
         },
     )

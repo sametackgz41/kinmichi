@@ -1,5 +1,7 @@
 package app.tsuzuku.ui.screens
 
+import app.tsuzuku.R
+import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -71,7 +73,7 @@ fun ProjectEditorSheet(
                 Text("計画 · PROJE", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary, letterSpacing = 1.4.sp)
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    if (existing == null) "Yeni Proje Başlat" else "Projeyi Düzenle",
+                    if (existing == null) stringResource(R.string.start_new_project) else stringResource(R.string.edit_project),
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.SemiBold,
                 )
@@ -80,8 +82,8 @@ fun ProjectEditorSheet(
             OutlinedTextField(
                 value = title,
                 onValueChange = { title = it },
-                label = { Text("Proje Başlığı") },
-                placeholder = { Text("Örn: Tsuzuku 2.0 veya Tez Çalışması") },
+                label = { Text(stringResource(R.string.project_title)) },
+                placeholder = { Text(stringResource(R.string.project_title_example)) },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
                 shape = RoundedCornerShape(12.dp),
@@ -90,14 +92,14 @@ fun ProjectEditorSheet(
             OutlinedTextField(
                 value = description,
                 onValueChange = { description = it },
-                label = { Text("Açıklama / Kapsam") },
-                placeholder = { Text("Bu projenin temel amacı nedir?") },
+                label = { Text(stringResource(R.string.project_description)) },
+                placeholder = { Text(stringResource(R.string.project_description_hint)) },
                 modifier = Modifier.fillMaxWidth(),
                 maxLines = 3,
                 shape = RoundedCornerShape(12.dp),
             )
 
-            Text("Simge Seç", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(stringResource(R.string.choose_icon_short), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             FlowRow(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -117,7 +119,7 @@ fun ProjectEditorSheet(
                 }
             }
 
-            Text("Hedef Bitiş Zamanı", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(stringResource(R.string.target_finish_date), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 listOf(null to "Yok", 14 to "2 Hafta", 30 to "1 Ay", 90 to "3 Ay").forEach { (days, label) ->
                     FilterChip(
@@ -135,7 +137,7 @@ fun ProjectEditorSheet(
                 horizontalArrangement = Arrangement.End,
             ) {
                 TextButton(onClick = onDismiss) {
-                    Text("İptal")
+                    Text(stringResource(R.string.cancel))
                 }
                 Spacer(Modifier.size(8.dp))
                 Button(
@@ -155,7 +157,7 @@ fun ProjectEditorSheet(
                     },
                     enabled = title.isNotBlank(),
                 ) {
-                    Text("Kaydet")
+                    Text(stringResource(R.string.save_label))
                 }
             }
         }

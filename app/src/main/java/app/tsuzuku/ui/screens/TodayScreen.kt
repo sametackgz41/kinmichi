@@ -191,7 +191,7 @@ fun TodayScreen(
                         Icon(Icons.Rounded.Lightbulb, contentDescription = "Tsuzuku Intelligence")
                     }
                     IconButton(onClick = onOpenInbox) {
-                        Icon(Icons.Rounded.Inbox, contentDescription = "Gelen Kutusu")
+                        Icon(Icons.Rounded.Inbox, contentDescription = stringResource(R.string.inbox_label))
                     }
                     IconButton(onClick = onSearch) {
                         Icon(Icons.Rounded.Search, contentDescription = stringResource(R.string.search_everything))
@@ -258,7 +258,7 @@ fun TodayScreen(
                                             Text(
                                                 routine.uppercase(LocalConfiguration.current.locales[0]),
                                                 modifier = Modifier.padding(start = 8.dp),
-                                                style = MaterialTheme.typography.labelLarge,
+                                                style = MaterialTheme.typography.labelMedium,
                                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                                 letterSpacing = 1.1.sp,
                                             )
@@ -363,7 +363,7 @@ fun TodayScreen(
                         val activeGoals = goals.filter { it.status == GoalStatus.Active }
                         if (activeGoals.isNotEmpty()) {
                             item(key = "section-goals-header") {
-                                TodaySectionHeader(icon = Icons.Rounded.Flag, title = stringResource(R.string.section_goals), actionText = "Tümü", onAction = onOpenGoals)
+                                TodaySectionHeader(icon = Icons.Rounded.Flag, title = stringResource(R.string.section_goals), actionText = stringResource(R.string.all_categories), onAction = onOpenGoals)
                             }
                             items(activeGoals.take(3), key = { "today-goal-${it.id}" }) { goal ->
                                 TodayGoalCard(goal = goal, onOpen = onOpenGoals)
@@ -581,7 +581,7 @@ private fun EmptyTodayCard(onAddHabit: () -> Unit) {
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            Text("最初の一歩 · İLK ADIM", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary, letterSpacing = 1.4.sp)
+            Text(stringResource(R.string.first_step_mark), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary, letterSpacing = 1.4.sp)
             Text(stringResource(R.string.empty_today), color = MaterialTheme.colorScheme.onSurfaceVariant)
             FilledTonalIconButton(onClick = onAddHabit) {
                 Icon(Icons.Rounded.Add, contentDescription = null)
@@ -655,7 +655,6 @@ private fun TodayHabitCard(
                                     "Lv. ${habit.currentLevel}",
                                     modifier = Modifier.padding(horizontal = 5.dp, vertical = 1.dp),
                                     style = MaterialTheme.typography.labelSmall,
-                                    fontSize = 10.sp,
                                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                                     fontWeight = FontWeight.Bold,
                                 )
@@ -669,7 +668,6 @@ private fun TodayHabitCard(
                                 "${todayHabit.masteryStage.icon} ${todayHabit.masteryStage.title}",
                                 modifier = Modifier.padding(horizontal = 5.dp, vertical = 1.dp),
                                 style = MaterialTheme.typography.labelSmall,
-                                fontSize = 10.sp,
                             )
                         }
                     }
@@ -709,7 +707,7 @@ private fun TodayHabitCard(
                             color = MaterialTheme.colorScheme.errorContainer,
                         ) {
                             Text(
-                                "⚠️ Limit aşıldı! (${formatAmount(todayHabit.progress)} / ${formatAmount(habit.maximumTarget ?: habit.target)} ${habit.unit})",
+                                stringResource(R.string.limit_exceeded, formatAmount(todayHabit.progress), formatAmount(habit.maximumTarget ?: habit.target), habit.unit),
                                 modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.onErrorContainer,
@@ -723,7 +721,7 @@ private fun TodayHabitCard(
                             color = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.5f),
                         ) {
                             Text(
-                                "⚡ Limite yaklaşıldı (${formatAmount(todayHabit.progress)} / ${formatAmount(habit.maximumTarget ?: habit.target)} ${habit.unit})",
+                                stringResource(R.string.limit_approaching, formatAmount(todayHabit.progress), formatAmount(habit.maximumTarget ?: habit.target), habit.unit),
                                 modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.onTertiaryContainer,
@@ -775,7 +773,7 @@ private fun TodayHabitCard(
                         onDismissRequest = { menuExpanded = false },
                     ) {
                         DropdownMenuItem(
-                            text = { Text("Detayları Aç") },
+                            text = { Text(stringResource(R.string.open_details)) },
                             onClick = {
                                 menuExpanded = false
                                 onOpen()
@@ -783,7 +781,7 @@ private fun TodayHabitCard(
                         )
                         if (todayHabit.skipReason == null) {
                             DropdownMenuItem(
-                                text = { Text("Atla (Sebep Belirt)") },
+                                text = { Text(stringResource(R.string.skip_with_reason)) },
                                 onClick = {
                                     menuExpanded = false
                                     onOpenSkipDialog()
@@ -791,7 +789,7 @@ private fun TodayHabitCard(
                             )
                         } else {
                             DropdownMenuItem(
-                                text = { Text("Atlamayı Kaldır") },
+                                text = { Text(stringResource(R.string.undo_skip)) },
                                 onClick = {
                                     menuExpanded = false
                                     onSkip(null)
@@ -966,7 +964,7 @@ private fun TodayPlanTaskCard(
                     }
                     if (task.carryCount > 0) {
                         Text(
-                            "↩ ${task.carryCount}. kez taşındı",
+                            stringResource(R.string.carried_times, task.carryCount),
                             style = MaterialTheme.typography.labelSmall,
                             color = if (task.carryCount >= 3) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -975,7 +973,7 @@ private fun TodayPlanTaskCard(
             }
             if (task.carryCount >= 3 && onSmartCarry != null) {
                 TextButton(onClick = onSmartCarry) {
-                    Text("Çözüm", style = MaterialTheme.typography.labelSmall)
+                    Text(stringResource(R.string.resolve_action), style = MaterialTheme.typography.labelSmall)
                 }
             }
         }
@@ -1013,12 +1011,12 @@ private fun SmartCarryBanner(
             }
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = "Akıllı Erteleme Asistanı",
+                    text = stringResource(R.string.smart_carry_assistant),
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.SemiBold,
                 )
                 Text(
-                    text = "$carryTasksCount görev 3+ gündür erteleniyor. Düzenlemek için dokunun.",
+                    text = stringResource(R.string.carry_banner_message, carryTasksCount),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -1066,14 +1064,14 @@ private fun TodayDailyReviewCard(
             }
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = "一日を振り返る · GÜNÜ DEĞERLENDİR",
+                    text = stringResource(R.string.evening_review_mark),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.secondary,
                     letterSpacing = 1.2.sp,
                 )
                 Spacer(Modifier.height(2.dp))
                 Text(
-                    text = if (review != null) "Günün Değerlendirmesi Tamamlandı" else "Akşam Değerlendirmesi Yap",
+                    text = if (review != null) stringResource(R.string.daily_review_completed) else stringResource(R.string.do_evening_review),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.SemiBold,
                 )
@@ -1242,7 +1240,7 @@ private fun TodayHealthCard(steps: Long) {
             Column {
                 Text(stringResource(R.string.section_health), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                 Text(
-                    if (steps > 0) "$steps adım tamamlandı" else "Henüz adım verisi senkronize edilmedi",
+                    if (steps > 0) stringResource(R.string.steps_completed, steps) else stringResource(R.string.no_step_data),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -1272,7 +1270,7 @@ private fun TodayRoutineCard(
         ) {
             Column {
                 Text(name, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-                Text("$completed / $total tamamlandı", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(stringResource(R.string.completed_of_total, completed, total), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
             Button(onClick = onStart, shape = RoundedCornerShape(10.dp)) {
                 Icon(Icons.Rounded.PlayArrow, contentDescription = null, modifier = Modifier.size(16.dp))
@@ -1376,7 +1374,7 @@ private fun TodayIntelligenceCard(
             if (insights.size > 1) {
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    text = "+${insights.size - 1} ek içgörü · Tümünü Gör",
+                    text = stringResource(R.string.more_insights_see_all, insights.size - 1),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Medium,

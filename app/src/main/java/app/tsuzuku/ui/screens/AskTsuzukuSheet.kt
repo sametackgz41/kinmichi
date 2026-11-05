@@ -1,5 +1,7 @@
 package app.tsuzuku.ui.screens
 
+import app.tsuzuku.R
+import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
@@ -80,10 +82,10 @@ fun AskTsuzukuSheet(
     }
 
     val quickPrompts = listOf(
-        "En verimli olduğum saatler?",
-        "Hangi alışkanlığım aksıyor?",
-        "Ertelenen görevlerimde durum ne?",
-        "Son 30 günlük genel gelişimim",
+        stringResource(R.string.ask_suggestion_productive_hours),
+        stringResource(R.string.ask_suggestion_struggling_habit),
+        stringResource(R.string.ask_suggestion_postponed_tasks),
+        stringResource(R.string.ask_suggestion_30_day_progress),
     )
 
     ModalBottomSheet(
@@ -117,18 +119,18 @@ fun AskTsuzukuSheet(
                         }
                     }
                     Column {
-                        Text("Tsuzuku'ya Sor", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                        Text("Çok turlu, veriye dayalı sakin içgörüler", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(stringResource(R.string.ask_tsuzuku_title), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        Text(stringResource(R.string.ask_tsuzuku_subtitle), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
                 Row {
                     if (messages.isNotEmpty()) {
                         IconButton(onClick = onClearChat) {
-                            Icon(Icons.Rounded.DeleteOutline, contentDescription = "Temizle")
+                            Icon(Icons.Rounded.DeleteOutline, contentDescription = stringResource(R.string.clear_label))
                         }
                     }
                     IconButton(onClick = onClose) {
-                        Icon(Icons.Rounded.Close, contentDescription = "Kapat")
+                        Icon(Icons.Rounded.Close, contentDescription = stringResource(R.string.close_action))
                     }
                 }
             }
@@ -168,10 +170,10 @@ fun AskTsuzukuSheet(
                             modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
                         ) {
                             Column(modifier = Modifier.padding(16.dp)) {
-                                Text("Nasıl yardımcı olabilirim?", fontWeight = FontWeight.SemiBold, style = MaterialTheme.typography.bodyMedium)
+                                Text(stringResource(R.string.ask_empty_title), fontWeight = FontWeight.SemiBold, style = MaterialTheme.typography.bodyMedium)
                                 Spacer(modifier = Modifier.height(6.dp))
                                 Text(
-                                    "Alışkanlıkların, odak seansların, ertelenen işlerin veya hedeflerin hakkında sorular sorabilirsin. Asistan önceki yanıtlarını hatırlar ve konuşmayı bağlamıyla sürdürür.",
+                                    stringResource(R.string.ask_empty_body),
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
@@ -215,7 +217,7 @@ fun AskTsuzukuSheet(
                                         HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
                                         Spacer(modifier = Modifier.height(8.dp))
                                         Text(
-                                            "Kullanılan Veriler:",
+                                            stringResource(R.string.ask_data_used),
                                             style = MaterialTheme.typography.labelSmall,
                                             fontWeight = FontWeight.Bold,
                                             color = MaterialTheme.colorScheme.primary,
@@ -245,7 +247,7 @@ fun AskTsuzukuSheet(
                                     if (msg.followUpQuestions.isNotEmpty()) {
                                         Spacer(modifier = Modifier.height(10.dp))
                                         Text(
-                                            "Takip Edebileceğin Sorular:",
+                                            stringResource(R.string.ask_follow_ups),
                                             style = MaterialTheme.typography.labelSmall,
                                             fontWeight = FontWeight.Bold,
                                             color = MaterialTheme.colorScheme.secondary,
@@ -276,7 +278,7 @@ fun AskTsuzukuSheet(
                                         ) {
                                             Icon(
                                                 Icons.Rounded.ContentCopy,
-                                                contentDescription = "Kopyala",
+                                                contentDescription = stringResource(R.string.copy_action),
                                                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                                 modifier = Modifier.size(16.dp),
                                             )
@@ -296,7 +298,7 @@ fun AskTsuzukuSheet(
                             modifier = Modifier.padding(8.dp),
                         ) {
                             CircularProgressIndicator(modifier = Modifier.size(16.dp), strokeWidth = 2.dp)
-                            Text("Tsuzuku verilerini ve bağlamı inceliyor...", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            Text(stringResource(R.string.ask_thinking), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                 }
@@ -313,7 +315,7 @@ fun AskTsuzukuSheet(
                 OutlinedTextField(
                     value = inputQuery,
                     onValueChange = { inputQuery = it },
-                    placeholder = { Text("Bir soru veya takip sorusu sor...", style = MaterialTheme.typography.bodyMedium) },
+                    placeholder = { Text(stringResource(R.string.ask_input_placeholder), style = MaterialTheme.typography.bodyMedium) },
                     modifier = Modifier.weight(1f),
                     shape = RoundedCornerShape(24.dp),
                     singleLine = true,
@@ -333,7 +335,7 @@ fun AskTsuzukuSheet(
                 ) {
                     Icon(
                         Icons.AutoMirrored.Rounded.Send,
-                        contentDescription = "Gönder",
+                        contentDescription = stringResource(R.string.send_action),
                         tint = if (inputQuery.isNotBlank() && !isGenerating) MaterialTheme.colorScheme.onPrimary
                         else MaterialTheme.colorScheme.onSurfaceVariant,
                     )

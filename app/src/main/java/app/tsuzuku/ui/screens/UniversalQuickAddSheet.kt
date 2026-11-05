@@ -93,7 +93,7 @@ fun UniversalQuickAddSheet(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    text = "Hızlı Ekle (Quick Add)",
+                    text = stringResource(R.string.quick_add_title),
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.SemiBold,
                 )
@@ -121,7 +121,7 @@ fun UniversalQuickAddSheet(
                             shape = RoundedCornerShape(8.dp),
                             color = MaterialTheme.colorScheme.secondaryContainer,
                         ) {
-                            Text("📅 Yarın", modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp), style = MaterialTheme.typography.labelSmall)
+                            Text(stringResource(R.string.tomorrow_chip), modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp), style = MaterialTheme.typography.labelSmall)
                         }
                     }
                     if (parsedDueMinutes != null) {
@@ -139,7 +139,7 @@ fun UniversalQuickAddSheet(
 
             HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
 
-            Text("Ne oluşturmak istiyorsun?", style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(stringResource(R.string.what_to_create), style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -147,7 +147,7 @@ fun UniversalQuickAddSheet(
             ) {
                 QuickActionCard(
                     icon = Icons.Rounded.Checklist,
-                    title = "Görev",
+                    title = stringResource(R.string.task_label),
                     modifier = Modifier.weight(1f),
                     onClick = {
                         val epochDay = if (isTomorrow) LocalDate.now().plusDays(1).toEpochDay() else LocalDate.now().toEpochDay()
@@ -156,13 +156,13 @@ fun UniversalQuickAddSheet(
                 )
                 QuickActionCard(
                     icon = Icons.Rounded.Repeat,
-                    title = "Alışkanlık",
+                    title = stringResource(R.string.habit_label),
                     modifier = Modifier.weight(1f),
                     onClick = { onNewHabit(cleanedTitle.ifBlank { text }) },
                 )
                 QuickActionCard(
                     icon = Icons.Rounded.Flag,
-                    title = "Hedef",
+                    title = stringResource(R.string.goal_step),
                     modifier = Modifier.weight(1f),
                     onClick = { onNewGoal(cleanedTitle.ifBlank { text }) },
                 )
@@ -174,19 +174,19 @@ fun UniversalQuickAddSheet(
             ) {
                 QuickActionCard(
                     icon = Icons.Rounded.MenuBook,
-                    title = "Kütüphane",
+                    title = stringResource(R.string.library),
                     modifier = Modifier.weight(1f),
                     onClick = { onNewContent(cleanedTitle.ifBlank { text }) },
                 )
                 QuickActionCard(
                     icon = Icons.Rounded.Timer,
-                    title = "Odaklan",
+                    title = stringResource(R.string.focus_action),
                     modifier = Modifier.weight(1f),
                     onClick = onStartFocus,
                 )
                 QuickActionCard(
                     icon = Icons.Rounded.Inbox,
-                    title = "Gelen Kutusu",
+                    title = stringResource(R.string.inbox_label),
                     modifier = Modifier.weight(1f),
                     onClick = {
                         if (text.isNotBlank()) {

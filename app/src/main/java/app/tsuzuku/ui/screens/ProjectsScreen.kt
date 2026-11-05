@@ -1,5 +1,7 @@
 package app.tsuzuku.ui.screens
 
+import app.tsuzuku.R
+import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -64,10 +66,10 @@ fun ProjectsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Projeler", fontWeight = FontWeight.SemiBold) },
+                title = { Text(stringResource(R.string.projects_title), fontWeight = FontWeight.SemiBold) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Geri")
+                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.back))
                     }
                 },
             )
@@ -77,7 +79,7 @@ fun ProjectsScreen(
                 onClick = { showCreateSheet = true },
                 containerColor = MaterialTheme.colorScheme.primary,
             ) {
-                Icon(Icons.Rounded.Add, contentDescription = "Yeni Proje")
+                Icon(Icons.Rounded.Add, contentDescription = stringResource(R.string.new_project))
             }
         },
     ) { padding ->
@@ -89,10 +91,10 @@ fun ProjectsScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             item {
-                Text("プロジェクト · BÜYÜK RESİM", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary, letterSpacing = 1.6.sp)
+                Text(stringResource(R.string.projects_mark), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary, letterSpacing = 1.6.sp)
                 Spacer(Modifier.height(2.dp))
-                Text("Projeler & Yol Haritaları", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.SemiBold)
-                Text("Büyük çalışmalarını kilometre taşları ve görevlerle adım adım tamamla.", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(stringResource(R.string.projects_and_roadmaps), style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.SemiBold)
+                Text(stringResource(R.string.projects_intro), color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
 
             item {
@@ -100,12 +102,12 @@ fun ProjectsScreen(
                     FilterChip(
                         selected = selectedFilter == ProjectStatus.Active,
                         onClick = { selectedFilter = ProjectStatus.Active },
-                        label = { Text("Aktif (${projects.count { it.status == ProjectStatus.Active }})") },
+                        label = { Text(stringResource(R.string.projects_active_count, projects.count { it.status == ProjectStatus.Active })) },
                     )
                     FilterChip(
                         selected = selectedFilter == ProjectStatus.Completed,
                         onClick = { selectedFilter = ProjectStatus.Completed },
-                        label = { Text("Tamamlanan (${projects.count { it.status == ProjectStatus.Completed }})") },
+                        label = { Text(stringResource(R.string.projects_completed_count, projects.count { it.status == ProjectStatus.Completed })) },
                     )
                 }
             }
@@ -128,11 +130,11 @@ fun ProjectsScreen(
                         ) {
                             Text("📁", fontSize = 32.sp)
                             Text(
-                                if (selectedFilter == ProjectStatus.Active) "Henüz aktif bir proje yok" else "Tamamlanan proje bulunmuyor",
+                                if (selectedFilter == ProjectStatus.Active) stringResource(R.string.no_active_projects) else stringResource(R.string.no_completed_projects),
                                 fontWeight = FontWeight.Medium,
                             )
                             Text(
-                                "Sağ alttaki + butonuna dokunarak ilk projeni oluşturabilirsin.",
+                                stringResource(R.string.create_first_project_hint),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
@@ -167,7 +169,7 @@ fun ProjectsScreen(
                                     )
                                 }
                                 project.targetDate?.let { date ->
-                                    Text("Bitiş Hedefi: $date", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary)
+                                    Text(stringResource(R.string.finish_target_value, date), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary)
                                 }
                             }
                         }

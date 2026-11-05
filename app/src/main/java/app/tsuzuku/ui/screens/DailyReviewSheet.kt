@@ -1,5 +1,7 @@
 package app.tsuzuku.ui.screens
 
+import app.tsuzuku.R
+import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -63,11 +65,11 @@ fun DailyReviewSheet(
     var note by remember { mutableStateOf(existingReview?.note.orEmpty()) }
 
     val moodOptions = listOf(
-        1 to Pair("Zor", "😣"),
-        2 to Pair("Yorgun", "🥱"),
-        3 to Pair("Nötr", "😐"),
-        4 to Pair("İyi", "🙂"),
-        5 to Pair("Harika", "😊"),
+        1 to Pair(stringResource(R.string.mood_hard), "😣"),
+        2 to Pair(stringResource(R.string.mood_tired), "🥱"),
+        3 to Pair(stringResource(R.string.mood_neutral), "😐"),
+        4 to Pair(stringResource(R.string.mood_good), "🙂"),
+        5 to Pair(stringResource(R.string.mood_great), "😊"),
     )
 
     ModalBottomSheet(
@@ -83,19 +85,19 @@ fun DailyReviewSheet(
         ) {
             Column {
                 Text(
-                    "内省 · GÜN SONU DEĞERLENDİRMESİ",
+                    stringResource(R.string.daily_review_mark),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.secondary,
                     letterSpacing = 1.2.sp,
                 )
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    "Bugünü Nasıl Geçirdin?",
+                    stringResource(R.string.daily_review_title),
                     style = MaterialTheme.typography.headlineSmall,
                 )
                 Spacer(Modifier.height(2.dp))
                 Text(
-                    "Birkaç saniyelik sakin bir mola, zihnini yarına hazırlar.",
+                    stringResource(R.string.daily_review_subtitle),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -103,7 +105,7 @@ fun DailyReviewSheet(
 
             // Mood
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Text("Ruh Hali", style = MaterialTheme.typography.titleSmall)
+                Text(stringResource(R.string.mood_label), style = MaterialTheme.typography.titleSmall)
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -136,17 +138,17 @@ fun DailyReviewSheet(
             }
 
             // Sliders / Scales: Energy, Productivity, Stress
-            ScoreRatingRow(title = "⚡ Enerji Seviyesi", value = energy, onSelect = { energy = it })
-            ScoreRatingRow(title = "🎯 Verimlilik Hissi", value = productivity, onSelect = { productivity = it })
-            ScoreRatingRow(title = "🌊 Stres Düzeyi", value = stress, onSelect = { stress = it })
+            ScoreRatingRow(title = stringResource(R.string.energy_level), value = energy, onSelect = { energy = it })
+            ScoreRatingRow(title = stringResource(R.string.productivity_feeling), value = productivity, onSelect = { productivity = it })
+            ScoreRatingRow(title = stringResource(R.string.stress_level), value = stress, onSelect = { stress = it })
 
             // Reflection Note
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Text("Günün Notu / Minnettarlık", style = MaterialTheme.typography.titleSmall)
+                Text(stringResource(R.string.daily_note_gratitude), style = MaterialTheme.typography.titleSmall)
                 OutlinedTextField(
                     value = note,
                     onValueChange = { note = it.take(1_000) },
-                    placeholder = { Text("Bugün aklında kalan bir düşünce, kazandığın bir farkındalık veya bir not...") },
+                    placeholder = { Text(stringResource(R.string.daily_note_placeholder)) },
                     modifier = Modifier.fillMaxWidth(),
                     minLines = 3,
                     maxLines = 6,
@@ -158,11 +160,11 @@ fun DailyReviewSheet(
             if (incompleteTodayTasks.isNotEmpty()) {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
-                        "Kalan Görevler (${incompleteTodayTasks.size})",
+                        stringResource(R.string.remaining_tasks_count, incompleteTodayTasks.size),
                         style = MaterialTheme.typography.titleSmall,
                     )
                     Text(
-                        "Bugün yetişmeyen işleri yarına aktarabilirsin:",
+                        stringResource(R.string.carry_unfinished_hint),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -185,7 +187,7 @@ fun DailyReviewSheet(
                                 TextButton(onClick = { onCarryTaskToTomorrow(task) }) {
                                     Icon(Icons.Rounded.ArrowForward, contentDescription = null, modifier = Modifier.size(16.dp))
                                     Spacer(Modifier.width(4.dp))
-                                    Text("Yarına Taşı", style = MaterialTheme.typography.labelSmall)
+                                    Text(stringResource(R.string.move_to_tomorrow), style = MaterialTheme.typography.labelSmall)
                                 }
                             }
                         }
@@ -204,7 +206,7 @@ fun DailyReviewSheet(
                     .padding(vertical = 4.dp),
                 shape = RoundedCornerShape(12.dp),
             ) {
-                Text("Günü Tamamla ve Kaydet")
+                Text(stringResource(R.string.complete_day_and_save))
             }
 
             Spacer(Modifier.height(16.dp))

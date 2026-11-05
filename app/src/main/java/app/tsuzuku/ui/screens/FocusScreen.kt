@@ -183,7 +183,7 @@ fun FocusScreen(
                                 ) {
                                     Icon(Icons.Rounded.PlayArrow, contentDescription = null)
                                     Spacer(modifier = Modifier.width(6.dp))
-                                    Text("Devam")
+                                    Text(stringResource(R.string.resume_action))
                                 }
                             } else {
                                 OutlinedButton(
@@ -192,7 +192,7 @@ fun FocusScreen(
                                 ) {
                                     Icon(Icons.Rounded.Pause, contentDescription = null)
                                     Spacer(modifier = Modifier.width(6.dp))
-                                    Text("Duraklat")
+                                    Text(stringResource(R.string.pause_action))
                                 }
                             }
 
@@ -203,7 +203,7 @@ fun FocusScreen(
                             ) {
                                 Icon(Icons.Rounded.Check, contentDescription = null)
                                 Spacer(modifier = Modifier.width(6.dp))
-                                Text("Bitir ve Kaydet")
+                                Text(stringResource(R.string.finish_and_save))
                             }
 
                             IconButton(onClick = onCancel) {
@@ -408,7 +408,7 @@ fun FocusScreen(
                 ) {
                     Column {
                         Text(
-                            text = "Bugünkü Odaklanma",
+                            text = stringResource(R.string.focus_today),
                             style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.secondary,
                         )
@@ -431,7 +431,7 @@ fun FocusScreen(
         if (todaySessions.isNotEmpty()) {
             item {
                 Text(
-                    text = "Bugünkü Oturumlar",
+                    text = stringResource(R.string.sessions_today),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.SemiBold,
                     modifier = Modifier.padding(top = 8.dp),
@@ -453,9 +453,9 @@ fun FocusScreen(
                         Column {
                             Text(
                                 text = when {
-                                    session.taskId != null -> tasks.firstOrNull { it.id == session.taskId }?.let { "Görev: ${it.title}" } ?: "Görev"
-                                    session.habitId != null -> habits.firstOrNull { it.id == session.habitId }?.let { "Alışkanlık: ${it.emoji} ${it.name}" } ?: "Alışkanlık"
-                                    session.goalId != null -> goals.firstOrNull { it.id == session.goalId }?.let { "Hedef: ${it.title}" } ?: "Hedef"
+                                    session.taskId != null -> tasks.firstOrNull { it.id == session.taskId }?.let { stringResource(R.string.focus_target_task, it.title) } ?: stringResource(R.string.task_label)
+                                    session.habitId != null -> habits.firstOrNull { it.id == session.habitId }?.let { stringResource(R.string.focus_target_habit, it.emoji, it.name) } ?: stringResource(R.string.habit_label)
+                                    session.goalId != null -> goals.firstOrNull { it.id == session.goalId }?.let { stringResource(R.string.focus_target_goal, it.title) } ?: stringResource(R.string.goal_step)
                                     else -> stringResource(R.string.free_focus)
                                 },
                                 style = MaterialTheme.typography.bodyMedium,

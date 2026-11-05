@@ -42,15 +42,15 @@ fun SkipReasonDialog(
         onDismissRequest = onDismiss,
         title = {
             Column {
-                Text("休息 · ESNEK ATLA", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary)
+                Text(stringResource(R.string.skip_mark), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary)
                 Spacer(Modifier.height(4.dp))
-                Text("Alışkanlığı Atla", style = MaterialTheme.typography.headlineSmall)
+                Text(stringResource(R.string.skip_habit_title), style = MaterialTheme.typography.headlineSmall)
             }
         },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 Text(
-                    "\"$habitName\" için bu seferlik atlama nedeni belirtebilirsin. Disiplin esneklikle güçlenir.",
+                    stringResource(R.string.skip_habit_message, habitName),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -72,8 +72,8 @@ fun SkipReasonDialog(
                     OutlinedTextField(
                         value = customText,
                         onValueChange = { customText = it.take(80) },
-                        label = { Text("Özel Sebep") },
-                        placeholder = { Text("Örn. Proje teslimi") },
+                        label = { Text(stringResource(R.string.custom_reason)) },
+                        placeholder = { Text(stringResource(R.string.custom_reason_example)) },
                         modifier = Modifier.fillMaxWidth(),
                         singleLine = true,
                         shape = RoundedCornerShape(8.dp),
@@ -88,7 +88,7 @@ fun SkipReasonDialog(
                     onConfirm(formatted)
                 },
             ) {
-                Text("Kaydet ve Atla")
+                Text(stringResource(R.string.save_and_skip))
             }
         },
         dismissButton = {
@@ -97,7 +97,7 @@ fun SkipReasonDialog(
                     Text(stringResource(R.string.cancel))
                 }
                 TextButton(onClick = { onConfirm(null) }) {
-                    Text("Nedensiz Atla")
+                    Text(stringResource(R.string.skip_without_reason))
                 }
             }
         },

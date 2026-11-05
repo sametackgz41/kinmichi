@@ -132,7 +132,7 @@ fun PlanTaskDetailScreen(
                         Icon(Icons.Rounded.Flag, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
                         Column(modifier = Modifier.weight(1f)) {
                             Text(goal.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
-                            Text("+${link.contributionValue} puan katkı", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            Text(stringResource(R.string.contribution_plus_points, link.contributionValue), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                         IconButton(onClick = { onUnlinkGoal(goal.id) }) {
                             Icon(Icons.Rounded.LinkOff, contentDescription = stringResource(R.string.unlink), tint = MaterialTheme.colorScheme.error)
@@ -197,13 +197,13 @@ fun PlanTaskDetailScreen(
                         Text("⏳", fontSize = 18.sp)
                         Column {
                             Text(
-                                "Erteleme Farkındalığı (${task.carryCount} kez ertelendi)",
+                                stringResource(R.string.postpone_awareness, task.carryCount),
                                 style = MaterialTheme.typography.labelMedium,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.onErrorContainer,
                             )
                             Text(
-                                "Bu görev gizli bir direnç yaratıyor olabilir. Yukarıdaki checklist alanından görevi 5 dakikalık alt adımlara bölmeyi deneyebilirsin.",
+                                stringResource(R.string.postpone_awareness_hint),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
@@ -248,10 +248,10 @@ fun PlanTaskDetailScreen(
             title = { Text(stringResource(R.string.link_goal)) },
             text = {
                 if (availableGoals.isEmpty()) {
-                    Text("Bağlanabilecek aktif hedef yok.")
+                    Text(stringResource(R.string.no_active_goals_to_link))
                 } else {
                     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                        Text("Hedef seçin:", style = MaterialTheme.typography.labelLarge)
+                        Text(stringResource(R.string.select_goal), style = MaterialTheme.typography.labelLarge)
                         availableGoals.forEach { goal ->
                             Row(
                                 modifier = Modifier.fillMaxWidth().clickable { selectedGoalId = goal.id }.padding(vertical = 4.dp),
