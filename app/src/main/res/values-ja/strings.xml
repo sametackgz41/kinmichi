@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="app_name">Tsuzuku</string>
-    <string name="brand_japanese">続く</string>
     <string name="today">今日</string>
     <string name="library">ライブラリ</string>
     <string name="statistics">統計</string>
@@ -304,13 +303,6 @@
     <string name="theme_system">時計システム設定</string>
     <string name="theme_light">オープン</string>
     <string name="theme_dark">ダーク</string>
-    <string name="light_theme_color">ライトモードカラー</string>
-    <string name="dark_theme_color">ダークモードカラー</string>
-    <string name="theme_color_matcha">抹茶</string>
-    <string name="theme_color_sakura">さくら</string>
-    <string name="theme_color_fuji">富士</string>
-    <string name="theme_color_amber">アンバー</string>
-    <string name="theme_color_ocean">オーシャン</string>
     <string name="language_system">システム言語</string>
     <string name="language_turkish">トルコ語</string>
     <string name="language_english">英語</string>
@@ -396,7 +388,7 @@
     <string name="confirm_restore">既存のデータを変更しますか?</string>
     <string name="restore_summary">このバックアップには、%1$d 習慣、%2$d 履歴レコード、%3$d コンテンツ、および %4$d ターゲットが含まれています。既存のアプリケーションデータはこれらに置き換えられます。</string>
     <string name="restore_label">復元</string>
-    <string name="widget_brand">つづく</string>
+    <string name="widget_brand" translatable="false">Tsuzuku</string>
     <string name="widget_description">毎日の習慣の進捗状況</string>
     <string name="widget_empty_progress">今日の準備完了</string>
     <string name="widget_progress_value">%1$d / %2$d 完了 %%%3$d</string>

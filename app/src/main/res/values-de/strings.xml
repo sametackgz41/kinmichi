@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="app_name">Tsuzuku</string>
-    <string name="brand_japanese">続く</string>
     <string name="today">Heute</string>
     <string name="library">Bibliothek</string>
     <string name="statistics">Statistiken</string>
@@ -304,13 +303,6 @@
     <string name="theme_system">Beobachten Sie die Systemeinstellungen</string>
     <string name="theme_light">Offen</string>
     <string name="theme_dark">Dunkel</string>
-    <string name="light_theme_color">Farbe im Lichtmodus</string>
-    <string name="dark_theme_color">Farbe im Dunkelmodus</string>
-    <string name="theme_color_matcha">Matcha</string>
-    <string name="theme_color_sakura">Sakura</string>
-    <string name="theme_color_fuji">Fuji</string>
-    <string name="theme_color_amber">Bernstein</string>
-    <string name="theme_color_ocean">Ozean</string>
     <string name="language_system">Systemsprache</string>
     <string name="language_turkish">Türkisch</string>
     <string name="language_english">Englisch</string>
@@ -396,7 +388,7 @@
     <string name="confirm_restore">Vorhandene Daten ersetzen?</string>
     <string name="restore_summary">Diese Sicherung enthält %1$d-Gewohnheit, %2$d-Verlaufsdatensatz, %3$d-Inhalt und %4$d-Ziel. Vorhandene App-Daten werden durch diese ersetzt.</string>
     <string name="restore_label">Wiederherstellen</string>
-    <string name="widget_brand">続く TSUZUKU</string>
+    <string name="widget_brand" translatable="false">Tsuzuku</string>
     <string name="widget_description">Täglicher Gewohnheitsfortschritt</string>
     <string name="widget_empty_progress">Bereit für heute</string>
     <string name="widget_progress_value">%1$d / %2$d abgeschlossen · %%%3$d</string>

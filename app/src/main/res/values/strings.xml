@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Tsuzuku</string>
-    <string name="brand_japanese">続く</string>
     <string name="today">Today</string>
     <string name="library">Library</string>
     <string name="statistics">Statistics</string>
@@ -299,13 +298,6 @@
     <string name="theme_system">Follow system</string>
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>
-    <string name="light_theme_color">Light mode color</string>
-    <string name="dark_theme_color">Dark mode color</string>
-    <string name="theme_color_matcha">Matcha</string>
-    <string name="theme_color_sakura">Sakura</string>
-    <string name="theme_color_fuji">Fuji</string>
-    <string name="theme_color_amber">Amber</string>
-    <string name="theme_color_ocean">Ocean</string>
     <string name="language_system">System language</string>
     <string name="language_turkish">Turkish</string>
     <string name="language_english">English</string>
@@ -395,7 +387,7 @@
     <string name="restore_summary">This backup contains %1$d habits, %2$d history records, %3$d content items and %4$d goals. Current app data will be replaced.</string>
     <string name="restore_label">Restore</string>
 
-    <string name="widget_brand">続く  TSUZUKU</string>
+    <string name="widget_brand" translatable="false">Tsuzuku</string>
     <string name="widget_description">Daily habit progress</string>
     <string name="widget_empty_progress">Ready for today</string>
     <string name="widget_progress_value">%1$d / %2$d complete · %3$d%%</string>
@@ -674,7 +666,6 @@
     <string name="mood_neutral">Neutral</string>
     <string name="mood_good">Good</string>
     <string name="mood_great">Great</string>
-    <string name="daily_review_mark">内省 · END-OF-DAY REVIEW</string>
     <string name="daily_review_title">How did today go?</string>
     <string name="daily_review_subtitle">A calm pause of a few seconds prepares your mind for tomorrow.</string>
     <string name="mood_label">Mood</string>
@@ -751,7 +742,6 @@
     <string name="level_number_next">Level %1$s</string>
     <string name="add_new_level">Add new level</string>
     <string name="overall_activity">Overall activity</string>
-    <string name="heatmap_mark">熱量図 · ACTIVITY DENSITY</string>
     <string name="heatmap_more">More</string>
     <string name="heatmap_habits_completed">Habits completed: %1$s</string>
     <string name="heatmap_tasks">Tasks: %1$s</string>
@@ -768,7 +758,6 @@
     <string name="insights_of_the_day">Today\'s insights</string>
     <string name="trends_and_patterns">Trends &amp; Patterns</string>
     <string name="recommendations">Recommendations</string>
-    <string name="intelligence_mark">知性 · INSIGHT ENGINE</string>
     <string name="personal_patterns_title">Your personal behaviour patterns</string>
     <string name="intelligence_intro">Your data is analysed entirely offline on your device. Without judgement, it helps you notice the work and habit rhythm that suits you best.</string>
     <string name="ask_tsuzuku_cta">🌱 Ask Tsuzuku</string>
@@ -779,7 +768,6 @@
     <string name="no_patterns_today">No clear pattern detected for today yet. Keep tracking your habits and tasks.</string>
     <string name="trends_need_more_data">A few more days of data are needed for trend analysis. Trends will appear here as daily reviews and habit entries grow.</string>
     <string name="no_pending_recommendations">There are no recommendations waiting to be applied. Everything looks balanced.</string>
-    <string name="transparency_mark">透明性 · TRANSPARENCY REPORT</string>
     <string name="why_we_say_this">Why are we saying this?</string>
     <string name="metrics_used">Numerical metrics used:</string>
     <string name="confidence_explanation">Confidence: %1$s. This analysis was computed entirely from the local records on your device.</string>
@@ -848,7 +836,6 @@
     <string name="choose_icon_short">Choose icon</string>
     <string name="target_finish_date">Target finish date</string>
     <string name="new_project">New project</string>
-    <string name="projects_mark">プロジェクト · BIG PICTURE</string>
     <string name="projects_and_roadmaps">Projects &amp; Roadmaps</string>
     <string name="projects_intro">Complete your big work step by step with milestones and tasks.</string>
     <string name="projects_active_count">Active (%1$s)</string>
@@ -870,14 +857,12 @@
     <string name="intelligence_offline_title">Tsuzuku Intelligence (Offline)</string>
     <string name="intelligence_offline_desc">Analyses your habit and planning patterns locally on your device. Zero data transfer, full privacy.</string>
     <string name="gemini_cloud_active">Gemini Cloud AI (Active)</string>
-    <string name="skip_mark">休息 · FLEXIBLE SKIP</string>
     <string name="skip_habit_title">Skip habit</string>
     <string name="skip_habit_message">You can give a reason for skipping "%1$s" this time. Discipline grows stronger with flexibility.</string>
     <string name="custom_reason">Custom reason</string>
     <string name="custom_reason_example">e.g. Project deadline</string>
     <string name="save_and_skip">Save and skip</string>
     <string name="skip_without_reason">Skip without a reason</string>
-    <string name="carry_mark">延期 · POSTPONEMENT AWARENESS</string>
     <string name="carry_count_title">You\'ve postponed this task %1$s times</string>
     <string name="carry_split_hint">Break the mental resistance by splitting the task into small checklist steps you can start in the first 5 minutes:</string>
     <string name="carry_intro">Work that keeps getting postponed is usually either bigger than it should be or has lost its meaning for now. Pick a step without being hard on yourself:</string>
@@ -943,7 +928,6 @@
     <string name="earned_label">Earned ✨</string>
     <string name="reflection_placeholder">Write your thoughts, learnings and notes here…</string>
     <string name="inbox_label">Inbox</string>
-    <string name="first_step_mark">最初の一歩 · FIRST STEP</string>
     <string name="limit_exceeded">⚠️ Limit exceeded! (%1$s / %2$s %3$s)</string>
     <string name="limit_approaching">⚡ Approaching the limit (%1$s / %2$s %3$s)</string>
     <string name="open_details">Open details</string>
@@ -953,7 +937,6 @@
     <string name="resolve_action">Resolve</string>
     <string name="smart_carry_assistant">Smart postponement assistant</string>
     <string name="carry_banner_message">%1$s tasks have been postponed for 3+ days. Tap to sort them out.</string>
-    <string name="evening_review_mark">一日を振り返る · REVIEW THE DAY</string>
     <string name="daily_review_completed">Today\'s review is complete</string>
     <string name="do_evening_review">Do your evening review</string>
     <string name="steps_completed">%1$s steps completed</string>
@@ -981,4 +964,5 @@
     <string name="bad_habit_warning">⚡ Warning: ≥ %1$s %2$s</string>
     <string name="level_target_value">Target: %1$s %2$s</string>
     <string name="tsuzuku_intelligence" translatable="false">Tsuzuku Intelligence</string>
+    <string name="test_notification_body">This is how your reminders will look.</string>
 </resources>

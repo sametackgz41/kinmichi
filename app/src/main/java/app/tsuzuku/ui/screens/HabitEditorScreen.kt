@@ -138,7 +138,6 @@ fun HabitEditorScreen(
             TopAppBar(
                 title = {
                     Column {
-                        Text("習慣 · EDITOR", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary)
                         Text(stringResource(if (existing == null) R.string.new_habit else R.string.edit_habit))
                     }
                 },

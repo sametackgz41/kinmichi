@@ -110,7 +110,6 @@ fun LibraryScreen(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Column {
-                    Text("本棚 · LIBRARY", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary, letterSpacing = 1.6.sp)
                     Text(stringResource(R.string.library), style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.SemiBold)
                     Text(
                         stringResource(R.string.library_item_count, items.size),

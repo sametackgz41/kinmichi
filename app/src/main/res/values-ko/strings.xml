@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="app_name">Tsuzuku</string>
-    <string name="brand_japanese">続く</string>
     <string name="today">오늘</string>
     <string name="library">라이브러리</string>
     <string name="statistics">통계</string>
@@ -304,13 +303,6 @@
     <string name="theme_system">시계 시스템 설정</string>
     <string name="theme_light">열려 있는</string>
     <string name="theme_dark">어두운</string>
-    <string name="light_theme_color">라이트 모드 색상</string>
-    <string name="dark_theme_color">다크 모드 색상</string>
-    <string name="theme_color_matcha">말차</string>
-    <string name="theme_color_sakura">사쿠라</string>
-    <string name="theme_color_fuji">후지산</string>
-    <string name="theme_color_amber">호박색</string>
-    <string name="theme_color_ocean">대양</string>
     <string name="language_system">시스템 언어</string>
     <string name="language_turkish">터키어</string>
     <string name="language_english">영어</string>
@@ -396,7 +388,7 @@
     <string name="confirm_restore">기존 데이터를 바꾸시겠습니까?</string>
     <string name="restore_summary">이 백업에는 %1$d 습관, %2$d 기록 기록, %3$d 콘텐츠 및 %4$d 대상이 포함되어 있습니다. 기존 앱 데이터는 다음으로 대체됩니다.</string>
     <string name="restore_label">복원</string>
-    <string name="widget_brand">続KU TSUZUKU</string>
+    <string name="widget_brand" translatable="false">Tsuzuku</string>
     <string name="widget_description">일상 습관 진행</string>
     <string name="widget_empty_progress">오늘을 위한 준비</string>
     <string name="widget_progress_value">%1$d / %2$d 완료 · %%%3$d</string>

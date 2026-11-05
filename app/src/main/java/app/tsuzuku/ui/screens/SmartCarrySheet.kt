@@ -72,13 +72,6 @@ fun SmartCarrySheet(
         ) {
             Column {
                 Text(
-                    stringResource(R.string.carry_mark),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.secondary,
-                    letterSpacing = 1.2.sp,
-                )
-                Spacer(Modifier.height(4.dp))
-                Text(
                     stringResource(R.string.carry_count_title, task.carryCount),
                     style = MaterialTheme.typography.headlineSmall,
                 )

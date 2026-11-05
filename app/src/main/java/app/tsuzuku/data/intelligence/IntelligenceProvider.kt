@@ -495,8 +495,8 @@ class GeminiCloudIntelligenceProvider(
 
         try {
             val promptText = buildString {
-                append("Sen Tsuzuku adında sakin, minimalist, bilge ve yargılamayan bir Japon yaşam asistanısın. ")
-                append("Kullanıcının 30 günlük verilerine göre sorusunu nazikçe, editoryal ve şeffaf bir dille yanıtla. ")
+                append("Sen Tsuzuku adında sakin, sade ve yargılamayan bir alışkanlık asistanısın. ")
+                append("Kullanıcının 30 günlük verilerine göre sorusunu nazikçe, sade ve şeffaf bir dille yanıtla. ")
                 appendLine("Veride olmayan sayıları uydurma.")
                 appendLine()
                 appendLine("Kullanıcı Verileri:")
@@ -585,7 +585,7 @@ class GeminiCloudIntelligenceProvider(
         }
 
         try {
-            val promptText = "Sen sakin ve editoryal Tsuzuku asistanısın. Şu içgörüyü kullanıcıya şeffaf, motive edici ve sakin bir dille açıkla: Başlık: ${insight.title}. Açıklama: ${insight.description}. Neden: ${insight.whyWeSayThis}."
+            val promptText = "Sen sakin ve sade Tsuzuku asistanısın. Şu içgörüyü kullanıcıya şeffaf, motive edici ve sakin bir dille açıkla: Başlık: ${insight.title}. Açıklama: ${insight.description}. Neden: ${insight.whyWeSayThis}."
             val response = callGemini(apiKey, modelProvider(), promptText)
             if (response != null) Result.success(response) else fallbackProvider.explainInsight(insight, context)
         } catch (e: Exception) {

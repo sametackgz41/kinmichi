@@ -85,13 +85,6 @@ fun DailyReviewSheet(
         ) {
             Column {
                 Text(
-                    stringResource(R.string.daily_review_mark),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.secondary,
-                    letterSpacing = 1.2.sp,
-                )
-                Spacer(Modifier.height(4.dp))
-                Text(
                     stringResource(R.string.daily_review_title),
                     style = MaterialTheme.typography.headlineSmall,
                 )

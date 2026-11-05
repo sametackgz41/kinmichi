@@ -66,7 +66,6 @@ import app.tsuzuku.data.HealthConnectRepository
 import app.tsuzuku.data.preferences.AppSettings
 import app.tsuzuku.data.preferences.LanguagePreference
 import app.tsuzuku.data.preferences.ThemePreference
-import app.tsuzuku.data.preferences.ThemeColorPreference
 import app.tsuzuku.data.preferences.WeekStartPreference
 import app.tsuzuku.data.preferences.TimerSessionStore
 import app.tsuzuku.model.DailyReview
@@ -169,8 +168,6 @@ fun TsuzukuApp(
     settings: AppSettings,
     onSetProfileName: (String) -> Unit,
     onSetTheme: (ThemePreference) -> Unit,
-    onSetLightThemeColor: (ThemeColorPreference) -> Unit,
-    onSetDarkThemeColor: (ThemeColorPreference) -> Unit,
     onSetLanguage: (LanguagePreference) -> Unit,
     onSetWeekStart: (WeekStartPreference) -> Unit,
     onSetShowDailySummary: (Boolean) -> Unit,
@@ -535,8 +532,6 @@ fun TsuzukuApp(
                     cloudAccount = cloudAccount,
                     onSetProfileName = onSetProfileName,
                     onSetTheme = onSetTheme,
-                    onSetLightThemeColor = onSetLightThemeColor,
-                    onSetDarkThemeColor = onSetDarkThemeColor,
                     onSetLanguage = onSetLanguage,
                     onSetWeekStart = onSetWeekStart,
                     onSetShowDailySummary = onSetShowDailySummary,

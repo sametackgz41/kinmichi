@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="app_name">Tsuzuku</string>
-    <string name="brand_japanese">続く</string>
     <string name="today">Hoy</string>
     <string name="library">Biblioteca</string>
     <string name="statistics">Estadísticas</string>
@@ -304,13 +303,6 @@
     <string name="theme_system">Configuración del sistema de vigilancia</string>
     <string name="theme_light">Abierto</string>
     <string name="theme_dark">Oscuro</string>
-    <string name="light_theme_color">Color del modo de luz</string>
-    <string name="dark_theme_color">Color del modo oscuro</string>
-    <string name="theme_color_matcha">matcha</string>
-    <string name="theme_color_sakura">sakura</string>
-    <string name="theme_color_fuji">fuji</string>
-    <string name="theme_color_amber">Ámbar</string>
-    <string name="theme_color_ocean">Océano</string>
     <string name="language_system">Idioma del sistema</string>
     <string name="language_turkish">turco</string>
     <string name="language_english">Inglés</string>
@@ -396,7 +388,7 @@
     <string name="confirm_restore">¿Cambiar datos existentes?</string>
     <string name="restore_summary">Esta copia de seguridad contiene el hábito %1$d, el registro histórico %2$d, el contenido %3$d y el destino %4$d. Los datos de la aplicación existentes serán reemplazados por estos.</string>
     <string name="restore_label">Restaurar</string>
-    <string name="widget_brand">続く TSUZUKU</string>
+    <string name="widget_brand" translatable="false">Tsuzuku</string>
     <string name="widget_description">Progreso del hábito diario</string>
     <string name="widget_empty_progress">Listo para hoy</string>
     <string name="widget_progress_value">%1$d / %2$d completado %%%3$d</string>

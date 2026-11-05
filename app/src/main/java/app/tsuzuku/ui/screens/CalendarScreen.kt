@@ -119,7 +119,6 @@ fun CalendarScreen(
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         item {
-            Text("暦 · CALENDAR", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary)
             Text(stringResource(R.string.calendar), style = MaterialTheme.typography.headlineMedium)
             Text(stringResource(R.string.calendar_history_subtitle), color = MaterialTheme.colorScheme.onSurfaceVariant)
         }

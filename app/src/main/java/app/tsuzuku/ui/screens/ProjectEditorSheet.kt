@@ -70,7 +70,6 @@ fun ProjectEditorSheet(
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             Column {
-                Text("計画 · PROJE", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary, letterSpacing = 1.4.sp)
                 Spacer(Modifier.height(4.dp))
                 Text(
                     if (existing == null) stringResource(R.string.start_new_project) else stringResource(R.string.edit_project),

@@ -76,7 +76,6 @@ import app.tsuzuku.R
 import app.tsuzuku.model.Goal
 import app.tsuzuku.model.GoalDraft
 import app.tsuzuku.model.GoalStatus
-import app.tsuzuku.ui.theme.Success
 import java.time.LocalDate
 import java.time.Instant
 import java.time.ZoneOffset
@@ -192,7 +191,7 @@ private fun GoalCard(goal: Goal, onOpen: () -> Unit, onDecrement: () -> Unit, on
             LinearProgressIndicator(
                 progress = { goal.progressFraction },
                 modifier = Modifier.fillMaxWidth().height(6.dp).clip(CircleShape),
-                color = if (goal.status == GoalStatus.Completed) Success else MaterialTheme.colorScheme.primary,
+                color = if (goal.status == GoalStatus.Completed) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.primary,
                 gapSize = 0.dp,
                 drawStopIndicator = {},
             )
@@ -253,7 +252,7 @@ fun GoalDetailScreen(
                     LinearProgressIndicator(
                         progress = { goal.progressFraction },
                         modifier = Modifier.fillMaxWidth().height(8.dp).clip(CircleShape),
-                        color = if (goal.status == GoalStatus.Completed) Success else MaterialTheme.colorScheme.primary,
+                        color = if (goal.status == GoalStatus.Completed) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.primary,
                         gapSize = 0.dp,
                         drawStopIndicator = {},
                     )
@@ -371,7 +370,7 @@ fun GoalDetailScreen(
                         Icon(
                             if (task.completed) Icons.Rounded.CheckCircle else Icons.Rounded.Flag,
                             contentDescription = null,
-                            tint = if (task.completed) Success else MaterialTheme.colorScheme.primary,
+                            tint = if (task.completed) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.primary,
                         )
                         Column(modifier = Modifier.weight(1f)) {
                             Text(task.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
@@ -668,7 +667,6 @@ internal fun ScreenHeader(title: String, onBack: () -> Unit, action: @Composable
     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
         IconButton(onClick = onBack) { Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.back)) }
         Column(modifier = Modifier.weight(1f)) {
-            Text("続く · TSUZUKU", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary)
             Text(title, style = MaterialTheme.typography.headlineMedium)
         }
         action()

@@ -85,7 +85,6 @@ fun PlanTaskDetailScreen(
     ) {
         item { ScreenHeader(stringResource(R.string.task_details), onBack) { IconButton(onClick = onEdit) { Icon(Icons.Rounded.Edit, stringResource(R.string.edit_task)) } } }
         item {
-            Text("計画 · TASK", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.secondary)
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Checkbox(checked = task.completed, onCheckedChange = { onToggle() })
                 Text(task.title, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)

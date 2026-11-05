@@ -121,9 +121,8 @@ fun HeatmapCalendarView(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        stringResource(R.string.heatmap_mark),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.secondary,
+                        stringResource(R.string.stats_tab_heatmap),
+                        style = MaterialTheme.typography.titleSmall,
                     )
                     // Legend
                     Row(

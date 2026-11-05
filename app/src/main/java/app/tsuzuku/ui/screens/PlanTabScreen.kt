@@ -103,7 +103,6 @@ fun PlanTabScreen(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Column {
-                    Text("計画 · PLAN", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.secondary)
                     Text(stringResource(R.string.plan), style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.SemiBold)
                     Text(stringResource(R.string.plan_subtitle), color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }

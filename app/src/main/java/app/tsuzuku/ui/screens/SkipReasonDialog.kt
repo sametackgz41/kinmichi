@@ -42,7 +42,6 @@ fun SkipReasonDialog(
         onDismissRequest = onDismiss,
         title = {
             Column {
-                Text(stringResource(R.string.skip_mark), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary)
                 Spacer(Modifier.height(4.dp))
                 Text(stringResource(R.string.skip_habit_title), style = MaterialTheme.typography.headlineSmall)
             }

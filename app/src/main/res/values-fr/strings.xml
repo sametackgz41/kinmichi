@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="app_name">Tsuzuku</string>
-    <string name="brand_japanese">続く</string>
     <string name="today">Aujourd\'hui</string>
     <string name="library">Bibliothèque</string>
     <string name="statistics">Statistiques</string>
@@ -304,13 +303,6 @@
     <string name="theme_system">Paramètres du système de surveillance</string>
     <string name="theme_light">Ouvrir</string>
     <string name="theme_dark">Sombre</string>
-    <string name="light_theme_color">Couleur du mode lumière</string>
-    <string name="dark_theme_color">Couleur du mode sombre</string>
-    <string name="theme_color_matcha">matcha</string>
-    <string name="theme_color_sakura">Sakura</string>
-    <string name="theme_color_fuji">Fuji</string>
-    <string name="theme_color_amber">Ambre</string>
-    <string name="theme_color_ocean">Océan</string>
     <string name="language_system">Langue du système</string>
     <string name="language_turkish">turc</string>
     <string name="language_english">Anglais</string>
@@ -396,7 +388,7 @@
     <string name="confirm_restore">Remplacer les données existantes ?</string>
     <string name="restore_summary">Cette sauvegarde contient l\'habitude %1$d, l\'enregistrement d\'historique %2$d, le contenu %3$d et la cible %4$d. Les données de l\'application existantes seront remplacées par celles-ci.</string>
     <string name="restore_label">Restaurer</string>
-    <string name="widget_brand">続く TSUZUKU</string>
+    <string name="widget_brand" translatable="false">Tsuzuku</string>
     <string name="widget_description">Progression des habitudes quotidiennes</string>
     <string name="widget_empty_progress">Prêt pour aujourd\'hui</string>
     <string name="widget_progress_value">%1$d / %2$d terminé · %%%3$d</string>

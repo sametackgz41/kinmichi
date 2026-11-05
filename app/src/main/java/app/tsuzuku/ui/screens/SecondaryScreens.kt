@@ -75,10 +75,8 @@ import app.tsuzuku.data.preferences.AppSettings
 import app.tsuzuku.data.CloudAccountState
 import app.tsuzuku.data.preferences.LanguagePreference
 import app.tsuzuku.data.preferences.ThemePreference
-import app.tsuzuku.data.preferences.ThemeColorPreference
 import app.tsuzuku.data.preferences.WeekStartPreference
 import app.tsuzuku.notifications.HabitNotifications
-import app.tsuzuku.ui.theme.themePreviewColor
 
 private const val DIALOG_NAME = "name"
 private const val DIALOG_THEME = "theme"
@@ -91,8 +89,6 @@ fun ProfileScreen(
     cloudAccount: CloudAccountState,
     onSetProfileName: (String) -> Unit,
     onSetTheme: (ThemePreference) -> Unit,
-    onSetLightThemeColor: (ThemeColorPreference) -> Unit,
-    onSetDarkThemeColor: (ThemeColorPreference) -> Unit,
     onSetLanguage: (LanguagePreference) -> Unit,
     onSetWeekStart: (WeekStartPreference) -> Unit,
     onSetShowDailySummary: (Boolean) -> Unit,
@@ -110,8 +106,9 @@ fun ProfileScreen(
 ) {
     val context = LocalContext.current
     val appName = stringResource(R.string.app_name)
+    val testBody = stringResource(R.string.test_notification_body)
     val postTestNotification = {
-        HabitNotifications.show(context, 9_000_000L, appName, "続く", repeatMinutes = 10)
+        HabitNotifications.show(context, 9_000_000L, appName, testBody, repeatMinutes = 10)
     }
     val notificationPermissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission(),
@@ -125,7 +122,6 @@ fun ProfileScreen(
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         item {
-            Text("私 · PROFILE", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary)
             Text(stringResource(R.string.profile), style = MaterialTheme.typography.headlineMedium)
             Text(stringResource(R.string.profile_subtitle), color = MaterialTheme.colorScheme.onSurfaceVariant)
             Spacer(Modifier.height(6.dp))
@@ -228,20 +224,6 @@ fun ProfileScreen(
                     stringResource(R.string.theme_mode_label),
                     themeLabel(settings.theme),
                     onClick = { activeDialog = DIALOG_THEME },
-                )
-                ThemePaletteRow(
-                    icon = Icons.Rounded.LightMode,
-                    title = stringResource(R.string.light_theme_color),
-                    selected = settings.lightThemeColor,
-                    darkPreview = false,
-                    onSelect = onSetLightThemeColor,
-                )
-                ThemePaletteRow(
-                    icon = Icons.Rounded.DarkMode,
-                    title = stringResource(R.string.dark_theme_color),
-                    selected = settings.darkThemeColor,
-                    darkPreview = true,
-                    onSelect = onSetDarkThemeColor,
                 )
                 ValueSettingRow(
                     Icons.Rounded.Language,
@@ -455,64 +437,6 @@ private fun SwitchSettingRow(
     }
 }
 
-@Composable
-private fun ThemePaletteRow(
-    icon: ImageVector,
-    title: String,
-    selected: ThemeColorPreference,
-    darkPreview: Boolean,
-    onSelect: (ThemeColorPreference) -> Unit,
-) {
-    Column(Modifier.fillMaxWidth()) {
-        Row(
-            Modifier.fillMaxWidth().padding(top = 14.dp, bottom = 10.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            SettingIcon(icon)
-            Column(Modifier.padding(start = 14.dp).weight(1f)) {
-                Text(title, style = MaterialTheme.typography.titleMedium)
-                Text(
-                    themeColorLabel(selected),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-            }
-        }
-        Row(
-            modifier = Modifier.fillMaxWidth().padding(start = 34.dp, end = 2.dp, bottom = 14.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            ThemeColorPreference.entries.forEach { choice ->
-                val isSelected = choice == selected
-                val preview = themePreviewColor(choice, darkPreview)
-                val choiceLabel = themeColorLabel(choice)
-                Surface(
-                    onClick = { onSelect(choice) },
-                    modifier = Modifier.size(42.dp).semantics { contentDescription = choiceLabel },
-                    shape = CircleShape,
-                    color = preview,
-                    border = BorderStroke(
-                        width = if (isSelected) 3.dp else 1.dp,
-                        color = if (isSelected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.outlineVariant,
-                    ),
-                ) {
-                    if (isSelected) {
-                        Box(contentAlignment = Alignment.Center) {
-                            Icon(
-                                Icons.Rounded.Check,
-                                contentDescription = null,
-                                tint = if (darkPreview) Color(0xFF172019) else Color.White,
-                                modifier = Modifier.size(20.dp),
-                            )
-                        }
-                    }
-                }
-            }
-        }
-        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
-    }
-}
 
 @Composable
 private fun SettingIcon(icon: ImageVector) {
@@ -563,16 +487,6 @@ private fun themeLabel(value: ThemePreference): String = stringResource(
     },
 )
 
-@Composable
-private fun themeColorLabel(value: ThemeColorPreference): String = stringResource(
-    when (value) {
-        ThemeColorPreference.Matcha -> R.string.theme_color_matcha
-        ThemeColorPreference.Sakura -> R.string.theme_color_sakura
-        ThemeColorPreference.Fuji -> R.string.theme_color_fuji
-        ThemeColorPreference.Amber -> R.string.theme_color_amber
-        ThemeColorPreference.Ocean -> R.string.theme_color_ocean
-    },
-)
 
 @Composable
 private fun languageLabel(value: LanguagePreference): String = stringResource(

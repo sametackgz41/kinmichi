@@ -90,7 +90,6 @@ import app.tsuzuku.model.Insight
 import app.tsuzuku.model.LibraryItem
 import app.tsuzuku.model.PlanTask
 import app.tsuzuku.model.TodayHabit
-import app.tsuzuku.ui.theme.Success
 import app.tsuzuku.ui.HabitTimerState
 import java.time.LocalDate
 import java.time.LocalTime
@@ -183,7 +182,6 @@ fun TodayScreen(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Column {
-                    Text("今日 · TODAY", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary, letterSpacing = 1.6.sp)
                     Text(stringResource(R.string.today), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
                 }
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -234,7 +232,6 @@ fun TodayScreen(
                                 verticalAlignment = Alignment.CenterVertically,
                             ) {
                                 Column {
-                                    Text("習慣", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary, letterSpacing = 1.8.sp)
                                     Text(stringResource(R.string.todays_habits), style = MaterialTheme.typography.titleLarge)
                                 }
                                 IconButton(onClick = onReorderHabits) {
@@ -474,25 +471,11 @@ fun TodayScreen(
 
 @Composable
 private fun BrandLockup() {
-    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-        Text(
-            stringResource(R.string.brand_japanese),
-            style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.ExtraBold,
-        )
-        Box(
-            Modifier
-                .width(1.dp)
-                .height(22.dp)
-                .background(MaterialTheme.colorScheme.outlineVariant),
-        )
-        Text(
-            stringResource(R.string.app_name).uppercase(LocalConfiguration.current.locales[0]),
-            style = MaterialTheme.typography.labelSmall,
-            letterSpacing = 2.8.sp,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
-    }
+    Text(
+        stringResource(R.string.app_name),
+        style = MaterialTheme.typography.titleLarge,
+        color = MaterialTheme.colorScheme.primary,
+    )
 }
 
 @Composable
@@ -581,7 +564,6 @@ private fun EmptyTodayCard(onAddHabit: () -> Unit) {
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            Text(stringResource(R.string.first_step_mark), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary, letterSpacing = 1.4.sp)
             Text(stringResource(R.string.empty_today), color = MaterialTheme.colorScheme.onSurfaceVariant)
             FilledTonalIconButton(onClick = onAddHabit) {
                 Icon(Icons.Rounded.Add, contentDescription = null)
@@ -607,7 +589,7 @@ private fun TodayHabitCard(
     val habit = todayHabit.habit
     val haptic = LocalHapticFeedback.current
     val containerColor by animateColorAsState(
-        if (todayHabit.isComplete) Success.copy(alpha = 0.07f) else Color.Transparent,
+        if (todayHabit.isComplete) MaterialTheme.colorScheme.primary.copy(alpha = 0.07f) else Color.Transparent,
         label = "habit-card",
     )
     Card(
@@ -837,9 +819,9 @@ private fun TodayHabitCard(
                     color = if (habit.direction == HabitDirection.Quit) {
                         if (todayHabit.badHabitLimitExceeded) MaterialTheme.colorScheme.error
                         else if (todayHabit.badHabitLimitWarning) MaterialTheme.colorScheme.tertiary
-                        else Success
+                        else MaterialTheme.colorScheme.primary
                     } else {
-                        if (todayHabit.isComplete) Success else Color(habit.colorArgb.toInt())
+                        if (todayHabit.isComplete) MaterialTheme.colorScheme.primary else Color(habit.colorArgb.toInt())
                     },
                     trackColor = MaterialTheme.colorScheme.surfaceVariant,
                     gapSize = 0.dp,
@@ -1063,13 +1045,6 @@ private fun TodayDailyReviewCard(
                 }
             }
             Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = stringResource(R.string.evening_review_mark),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.secondary,
-                    letterSpacing = 1.2.sp,
-                )
-                Spacer(Modifier.height(2.dp))
                 Text(
                     text = if (review != null) stringResource(R.string.daily_review_completed) else stringResource(R.string.do_evening_review),
                     style = MaterialTheme.typography.titleMedium,

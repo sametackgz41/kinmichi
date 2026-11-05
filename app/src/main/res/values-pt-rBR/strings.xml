@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="app_name">Tsuzuku</string>
-    <string name="brand_japanese">続く</string>
     <string name="today">Hoje</string>
     <string name="library">Biblioteca</string>
     <string name="statistics">Estatísticas</string>
@@ -304,13 +303,6 @@
     <string name="theme_system">Observe a configuração do sistema</string>
     <string name="theme_light">Abrir</string>
     <string name="theme_dark">Escuro</string>
-    <string name="light_theme_color">Cor do modo claro</string>
-    <string name="dark_theme_color">Cor do modo escuro</string>
-    <string name="theme_color_matcha">matchá</string>
-    <string name="theme_color_sakura">Sakura</string>
-    <string name="theme_color_fuji">Fuji</string>
-    <string name="theme_color_amber">Âmbar</string>
-    <string name="theme_color_ocean">Oceano</string>
     <string name="language_system">Idioma do sistema</string>
     <string name="language_turkish">turco</string>
     <string name="language_english">Inglês</string>
@@ -396,7 +388,7 @@
     <string name="confirm_restore">Alterar dados existentes?</string>
     <string name="restore_summary">Este backup contém o hábito %1$d, o registro do histórico %2$d, o conteúdo %3$d e o destino %4$d. Os dados de aplicativos existentes serão substituídos por estes.</string>
     <string name="restore_label">restaurar</string>
-    <string name="widget_brand">続く TSUZUKU</string>
+    <string name="widget_brand" translatable="false">Tsuzuku</string>
     <string name="widget_description">Progresso do hábito diário</string>
     <string name="widget_empty_progress">pronto para hoje</string>
     <string name="widget_progress_value">%1$d / %2$d concluído %%%3$d</string>

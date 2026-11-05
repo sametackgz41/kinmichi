@@ -129,7 +129,6 @@ fun StatisticsScreen(
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         item {
-            Text("記録 · INSIGHTS", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary, letterSpacing = 1.6.sp)
             Text(stringResource(R.string.statistics), style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.SemiBold)
             Text(stringResource(R.string.statistics_history_subtitle), color = MaterialTheme.colorScheme.onSurfaceVariant)
         }

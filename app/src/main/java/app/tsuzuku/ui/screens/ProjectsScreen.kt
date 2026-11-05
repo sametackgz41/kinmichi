@@ -91,7 +91,6 @@ fun ProjectsScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             item {
-                Text(stringResource(R.string.projects_mark), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary, letterSpacing = 1.6.sp)
                 Spacer(Modifier.height(2.dp))
                 Text(stringResource(R.string.projects_and_roadmaps), style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.SemiBold)
                 Text(stringResource(R.string.projects_intro), color = MaterialTheme.colorScheme.onSurfaceVariant)

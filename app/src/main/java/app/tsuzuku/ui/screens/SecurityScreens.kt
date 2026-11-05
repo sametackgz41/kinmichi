@@ -193,7 +193,6 @@ fun AppLockScreen(
     var error by rememberSaveable { mutableStateOf(false) }
     Box(Modifier.fillMaxSize().statusBarsPadding().padding(28.dp), contentAlignment = Alignment.Center) {
         Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            Text(stringResource(R.string.brand_japanese), style = MaterialTheme.typography.displayMedium)
             Text(stringResource(R.string.app_locked), style = MaterialTheme.typography.headlineMedium)
             Text(stringResource(R.string.enter_pin_to_continue), color = MaterialTheme.colorScheme.onSurfaceVariant)
             PinField(

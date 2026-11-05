@@ -87,7 +87,6 @@ fun PlanTaskEditorScreen(existing: PlanTask? = null, customCategories: List<Cate
     ) {
         item { ScreenHeader(stringResource(if (existing == null) R.string.new_task else R.string.edit_task), onBack) }
         item {
-            Text("計画 · EDITOR", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.secondary)
             Text(stringResource(R.string.task_identity), style = MaterialTheme.typography.headlineSmall)
         }
         item { OutlinedTextField(title, { title = it.take(120) }, Modifier.fillMaxWidth(), label = { Text(stringResource(R.string.task_title)) }, singleLine = true) }

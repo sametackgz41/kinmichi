@@ -52,7 +52,7 @@ fun OnboardingScreen(onComplete: () -> Unit) {
     ) {
         Column {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                Text(stringResource(R.string.brand_japanese), style = MaterialTheme.typography.headlineMedium)
+                Text(stringResource(R.string.app_name), style = MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.primary)
                 TextButton(onClick = onComplete) { Text(stringResource(R.string.skip_label)) }
             }
             LinearProgressIndicator(

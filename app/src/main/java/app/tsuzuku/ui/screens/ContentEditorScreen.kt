@@ -110,7 +110,6 @@ fun ContentEditorScreen(
             TopAppBar(
                 title = {
                     Column {
-                        Text("本棚 · EDITOR", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary)
                         Text(stringResource(if (existing == null) R.string.new_content else R.string.edit_content))
                     }
                 },

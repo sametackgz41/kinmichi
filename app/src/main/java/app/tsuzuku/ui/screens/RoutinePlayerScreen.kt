@@ -49,7 +49,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.tsuzuku.R
 import app.tsuzuku.model.TodayHabit
-import app.tsuzuku.ui.theme.Success
 
 @Composable
 fun RoutinePlayerScreen(
@@ -83,12 +82,6 @@ fun RoutinePlayerScreen(
                 }
                 Spacer(modifier = Modifier.width(8.dp))
                 Column {
-                    Text(
-                        text = "日課 · ROUTINE",
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.secondary,
-                        letterSpacing = 1.2.sp,
-                    )
                     Text(
                         text = routineName.ifBlank { stringResource(R.string.routine_label) },
                         style = MaterialTheme.typography.headlineMedium,
@@ -184,11 +177,11 @@ fun RoutinePlayerScreen(
                             modifier = Modifier
                                 .size(40.dp)
                                 .clip(CircleShape)
-                                .background(if (isDone) Success.copy(alpha = 0.15f) else MaterialTheme.colorScheme.surfaceVariant),
+                                .background(if (isDone) MaterialTheme.colorScheme.primary.copy(alpha = 0.15f) else MaterialTheme.colorScheme.surfaceVariant),
                             contentAlignment = Alignment.Center,
                         ) {
                             if (isDone) {
-                                Icon(Icons.Rounded.Check, contentDescription = null, tint = Success, modifier = Modifier.size(20.dp))
+                                Icon(Icons.Rounded.Check, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(20.dp))
                             } else if (isBlocked) {
                                 Icon(Icons.Rounded.Lock, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.size(18.dp))
                             } else {
@@ -234,7 +227,7 @@ fun RoutinePlayerScreen(
                             Button(
                                 onClick = { onToggleHabit(habit.id) },
                                 shape = RoundedCornerShape(10.dp),
-                                colors = ButtonDefaults.buttonColors(containerColor = Success),
+                                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                             ) {
                                 Text(stringResource(R.string.complete_habit))
                             }
@@ -249,7 +242,7 @@ fun RoutinePlayerScreen(
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(14.dp),
-                    colors = CardDefaults.cardColors(containerColor = Success.copy(alpha = 0.12f)),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)),
                 ) {
                     Column(
                         modifier = Modifier
@@ -258,12 +251,12 @@ fun RoutinePlayerScreen(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
-                        Icon(Icons.Rounded.Check, contentDescription = null, tint = Success, modifier = Modifier.size(36.dp))
+                        Icon(Icons.Rounded.Check, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(36.dp))
                         Text(
                             text = stringResource(R.string.routine_completed_title),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
-                            color = Success,
+                            color = MaterialTheme.colorScheme.primary,
                         )
                         Text(
                             text = stringResource(R.string.routine_completed_body),

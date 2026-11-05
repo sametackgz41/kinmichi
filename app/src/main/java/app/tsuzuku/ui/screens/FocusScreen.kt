@@ -111,12 +111,6 @@ fun FocusScreen(
                 Spacer(modifier = Modifier.width(8.dp))
                 Column {
                     Text(
-                        text = "集中 · FOCUS",
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.secondary,
-                        letterSpacing = 1.2.sp,
-                    )
-                    Text(
                         text = stringResource(R.string.focus),
                         style = MaterialTheme.typography.headlineMedium,
                         fontWeight = FontWeight.SemiBold,

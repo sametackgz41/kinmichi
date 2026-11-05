@@ -115,7 +115,6 @@ fun IntelligenceScreen(
         ) {
             // Header
             item {
-                Text(stringResource(R.string.intelligence_mark), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary, letterSpacing = 1.6.sp)
                 Spacer(Modifier.height(2.dp))
                 Text(stringResource(R.string.personal_patterns_title), style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.SemiBold)
                 Text(
@@ -270,7 +269,6 @@ fun IntelligenceScreen(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 Column {
-                    Text(stringResource(R.string.transparency_mark), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary, letterSpacing = 1.4.sp)
                     Spacer(Modifier.height(4.dp))
                     Text(stringResource(R.string.why_we_say_this), style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
                 }
