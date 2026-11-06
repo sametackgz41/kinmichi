@@ -75,7 +75,7 @@ class HabitWidgetReceiver : GlanceAppWidgetReceiver() {
 }
 
 @Composable
-private fun HabitContent(item: TodayHabit?, locked: Boolean) {
+internal fun HabitContent(item: TodayHabit?, locked: Boolean) {
     val context = LocalContext.current
     val openApp: Action = actionStartActivity<MainActivity>()
     val tapAction: Action = when {

@@ -137,13 +137,13 @@ import app.tsuzuku.ui.screens.PlanAssistantSheet
 import app.tsuzuku.ui.screens.AiPrivacyDialog
 import app.tsuzuku.widget.TsuzukuWidgetProvider
 
-private data class MainDestination(
+internal data class MainDestination(
     val route: String,
     @param:StringRes val labelRes: Int,
     val icon: ImageVector,
 )
 
-private val mainDestinations = listOf(
+internal val mainDestinations = listOf(
     MainDestination("today", R.string.today, Icons.Rounded.Home),
     MainDestination("plan", R.string.plan, Icons.Rounded.Checklist),
     MainDestination("library", R.string.library, Icons.AutoMirrored.Rounded.MenuBook),
@@ -1284,7 +1284,7 @@ fun TsuzukuApp(
 }
 
 @Composable
-private fun MainNavigationBar(
+internal fun MainNavigationBar(
     destinations: List<MainDestination>,
     currentRoute: String,
     onSelect: (MainDestination) -> Unit,
@@ -1303,7 +1303,7 @@ private fun MainNavigationBar(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun MainTopBar(
+internal fun MainTopBar(
     title: String,
     profileName: String,
     onSearch: () -> Unit,

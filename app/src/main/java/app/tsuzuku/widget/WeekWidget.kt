@@ -78,7 +78,7 @@ class WeekWidgetReceiver : GlanceAppWidgetReceiver() {
 }
 
 @Composable
-private fun WeekContent(days: List<DayScore>, bestStreak: Int, locked: Boolean) {
+internal fun WeekContent(days: List<DayScore>, bestStreak: Int, locked: Boolean) {
     val context = LocalContext.current
     val locale = context.resources.configuration.locales[0] ?: Locale.getDefault()
     val primary = GlanceTheme.colors.primary.getColor(context)

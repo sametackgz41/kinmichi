@@ -748,7 +748,7 @@ private fun TodayFocusCard(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
                 Box(
                     modifier = Modifier
                         .size(40.dp)
@@ -764,8 +764,9 @@ private fun TodayFocusCard(
                     Text(stringResource(R.string.focus_minutes_today, minutesToday), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
-            Button(onClick = onStartFocus, shape = RoundedCornerShape(10.dp)) {
-                Text(stringResource(R.string.start_focus))
+            Spacer(Modifier.width(12.dp))
+            Button(onClick = onStartFocus) {
+                Text(stringResource(R.string.start_focus), maxLines = 1)
             }
         }
     }

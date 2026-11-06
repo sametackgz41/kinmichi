@@ -10,6 +10,9 @@ if (hasFirebaseConfig) {
 }
 
 android {
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+    }
     namespace = "app.tsuzuku"
     compileSdk = 36
 
@@ -97,9 +100,26 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     testImplementation("junit:junit:4.13.2")
+    // JVM screenshot rendering for the preview gallery (no emulator needed)
+    testImplementation("org.robolectric:robolectric:4.14.1")
+    testImplementation(composeBom)
+    testImplementation("androidx.compose.ui:ui-test-junit4")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
     testImplementation("org.json:json:20251224")
     androidTestImplementation("androidx.test.ext:junit:1.3.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+}
+
+// The preview gallery renders screenshots on the JVM. It is slow, so it only runs on request:
+//   ./gradlew :app:testDebugUnitTest -Ppreviews --tests "app.tsuzuku.previews.*"
+tasks.withType<Test>().configureEach {
+    if (!project.hasProperty("previews")) {
+        exclude("**/previews/**")
+    }
+    systemProperty("previews.dir", rootProject.layout.projectDirectory.dir("previews/images").asFile.absolutePath)
+    maxHeapSize = "2g"
+    // Robolectric native libs are looked up with a lowercased OS name; a Turkish default
+    // locale turns "windows" into "wındows" and the lookup fails.
+    jvmArgs("-Duser.language=en", "-Duser.country=US")
 }

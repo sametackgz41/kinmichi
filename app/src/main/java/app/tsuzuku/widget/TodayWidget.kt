@@ -25,8 +25,7 @@ import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.appwidget.appWidgetBackground
 import androidx.glance.appwidget.components.CircleIconButton
 import androidx.glance.appwidget.cornerRadius
-import androidx.glance.appwidget.lazy.LazyColumn
-import androidx.glance.appwidget.lazy.items
+import androidx.glance.LocalSize
 import androidx.glance.appwidget.provideContent
 import androidx.glance.background
 import androidx.glance.layout.Alignment
@@ -88,7 +87,7 @@ class TsuzukuWidgetProvider : GlanceAppWidgetReceiver() {
 }
 
 @Composable
-private fun TodayContent(habits: List<TodayHabit>, loaded: Boolean, locked: Boolean) {
+internal fun TodayContent(habits: List<TodayHabit>, loaded: Boolean, locked: Boolean) {
     val context = LocalContext.current
     val completed = habits.count(TodayHabit::isComplete)
     val total = habits.size
@@ -128,8 +127,21 @@ private fun TodayContent(habits: List<TodayHabit>, loaded: Boolean, locked: Bool
             locked -> Message(context.getString(R.string.widget_locked))
             !loaded -> Unit
             habits.isEmpty() -> Message(context.getString(R.string.widget_no_habits))
-            else -> LazyColumn {
-                items(habits, itemId = { it.habit.id }) { item -> HabitLine(item) }
+            else -> {
+                // A plain column (not a scrolling collection) keeps the check boxes in the main
+                // RemoteViews, so their state changes animate and the widget updates in one pass.
+                // Show as many rows as the widget height allows.
+                val rows = ((LocalSize.current.height.value - 64f) / 42f).toInt().coerceIn(1, 8)
+                Column(modifier = GlanceModifier.fillMaxWidth()) {
+                    habits.take(rows).forEach { item -> HabitLine(item) }
+                    if (habits.size > rows) {
+                        Text(
+                            "+${habits.size - rows}",
+                            style = TextStyle(color = GlanceTheme.colors.onSurfaceVariant, fontSize = 12.sp),
+                            modifier = GlanceModifier.padding(top = 2.dp).clickable(actionStartActivity<MainActivity>()),
+                        )
+                    }
+                }
             }
         }
     }
@@ -166,10 +178,9 @@ private fun HabitLine(item: TodayHabit) {
             HabitType.Check -> CheckBox(
                 checked = item.isComplete,
                 onCheckedChange = if (item.isBlocked) null else actionRunCallback<ToggleHabitAction>(params),
-                colors = CheckboxDefaults.colors(
-                    checkedColor = GlanceTheme.colors.primary,
-                    uncheckedColor = GlanceTheme.colors.outline,
-                ),
+                // The no-argument defaults follow GlanceTheme; passing dynamic (resource-backed)
+                // colors explicitly throws on Android 12+.
+                colors = CheckboxDefaults.colors(),
             )
             HabitType.Count -> {
                 Text(
