@@ -196,6 +196,41 @@ class PreviewGalleryTest {
         captureScreen("progress_${lang}_${if (dark) "dark" else "light"}")
     }
 
+    @Test fun editorTrLight() = renderEditorAndSettings("tr", false)
+    @Test fun editorTrDark() = renderEditorAndSettings("tr", true)
+    @Test fun editorEnLight() = renderEditorAndSettings("en", false)
+    @Test fun editorEnDark() = renderEditorAndSettings("en", true)
+
+    private fun renderEditorAndSettings(lang: String, dark: Boolean) {
+        setVariant(lang, dark)
+        val suffix = "${lang}_${if (dark) "dark" else "light"}"
+        val screen = mutableStateOf("editor")
+        compose.setContent {
+            TsuzukuTheme(darkTheme = dark) {
+                if (screen.value == "editor") {
+                    app.tsuzuku.ui.screens.HabitEditorScreen(onBack = {}, onSave = {})
+                } else {
+                    Shell(title = if (lang == "tr") "Ayarlar" else "Settings", route = "settings", profile = "Samet") { modifier ->
+                        Box(modifier) {
+                            app.tsuzuku.ui.screens.ProfileScreen(
+                                settings = app.tsuzuku.data.preferences.AppSettings(profileName = "Samet"),
+                                cloudAccount = app.tsuzuku.data.CloudAccountState.SignedOut,
+                                onSetProfileName = {}, onSetTheme = {}, onSetLanguage = {}, onSetWeekStart = {},
+                                onSetShowDailySummary = {}, onSetProtectScreen = {}, onOpenCloudAccount = {},
+                                onOpenPlanning = {}, onOpenSecurity = {}, onOpenBackup = {}, onOpenDiagnostics = {},
+                                onOpenCategories = {},
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        captureScreen("editor_$suffix")
+        screen.value = "settings"
+        compose.mainClock.advanceTimeBy(500)
+        captureScreen("settings_$suffix")
+    }
+
     // ---- animations: frame strips, stitched into GIFs by the gallery script ------------------
 
     @Test fun animationsTrLight() = renderAnimations("tr", false)
