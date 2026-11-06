@@ -149,6 +149,19 @@ data class HabitHistorySnapshot(
         }.toList()
     }
 
+    /** Logged amount on [date]; 0 when nothing was logged, null when the day was skipped. */
+    fun progressOn(habit: Habit, date: LocalDate): Double? {
+        val record = recordsByDateAndHabit[date]?.get(habit.id)
+        return when {
+            record?.status == HabitDayStatus.Skipped -> null
+            record == null -> 0.0
+            else -> record.progress
+        }
+    }
+
+    /** Whether [habit] counts as done on [date] (target met, or within limits for a quit habit). */
+    fun isDone(habit: Habit, date: LocalDate): Boolean = isComplete(habit, date)
+
     /** How one day looks on a habit's year heatmap. */
     fun heatDay(habit: Habit, date: LocalDate): HeatDay {
         val record = recordsByDateAndHabit[date]?.get(habit.id)

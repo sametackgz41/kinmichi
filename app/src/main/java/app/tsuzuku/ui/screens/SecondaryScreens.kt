@@ -243,6 +243,17 @@ fun ProfileScreen(
                     checked = settings.showDailySummary,
                     onCheckedChange = onSetShowDailySummary,
                 )
+                var moodReminderOn by remember { mutableStateOf(app.tsuzuku.notifications.MoodReminder.isEnabled(context)) }
+                SwitchSettingRow(
+                    Icons.Rounded.Notifications,
+                    stringResource(R.string.mood_reminder_setting),
+                    stringResource(R.string.mood_reminder_setting_description),
+                    moodReminderOn,
+                    onCheckedChange = {
+                        moodReminderOn = it
+                        app.tsuzuku.notifications.MoodReminder.setEnabled(context, it)
+                    },
+                )
                 var weeklySummaryOn by remember { mutableStateOf(app.tsuzuku.notifications.WeeklySummary.isEnabled(context)) }
                 SwitchSettingRow(
                     Icons.Rounded.Notifications,

@@ -254,8 +254,22 @@ fun TsuzukuApp(
                 val todayStartMillis = remember {
                     java.time.LocalDate.now().atStartOfDay(java.time.ZoneId.systemDefault()).toInstant().toEpochMilli()
                 }
+                val coaching = remember { app.tsuzuku.data.CoachingPrefs(context) }
+                var adviceVersion by remember { mutableIntStateOf(0) }
+                val targetAdvice = remember(history, adviceVersion) { coaching.pickAdvice(history, java.time.LocalDate.now()) }
                 TodayScreen(
                     habits = habits,
+                    targetAdvice = targetAdvice,
+                    onAcceptAdvice = { advice ->
+                        coaching.accepted(advice, java.time.LocalDate.now())
+                        todayViewModel.setHabitTarget(advice.habit.id, advice.newTarget)
+                        adviceVersion++
+                    },
+                    onDismissAdvice = { advice ->
+                        coaching.dismissed(advice, java.time.LocalDate.now())
+                        adviceVersion++
+                    },
+                    onQuickMood = { mood -> reviewViewModel.quickMood(mood, dailyReviewToday) },
                     vacationActive = settings.vacationStartEpochDay?.let { start ->
                         settings.vacationEndEpochDay?.let { end -> java.time.LocalDate.now().toEpochDay() in start..end }
                     } == true,
@@ -425,6 +439,10 @@ fun TsuzukuApp(
                 val heatmapDays by reviewViewModel.heatmapDays.collectAsStateWithLifecycle()
                 val selectedHeatmapHabitId by reviewViewModel.selectedHeatmapHabitId.collectAsStateWithLifecycle()
                 val skipReasonStats by reviewViewModel.skipReasonStats.collectAsStateWithLifecycle()
+                val moodsByDay by reviewViewModel.moodsByDay.collectAsStateWithLifecycle()
+                val moodInsights = remember(history, moodsByDay) {
+                    app.tsuzuku.model.moodInsights(history, moodsByDay, java.time.LocalDate.now())
+                }
                 Column(Modifier.fillMaxSize()) {
                     PrimaryTabRow(selectedTabIndex = progressPage) {
                         listOf(R.string.statistics, R.string.calendar).forEachIndexed { index, label ->
@@ -457,6 +475,7 @@ fun TsuzukuApp(
                                 onSaveYearlyNote = { y, note -> reviewViewModel.savePeriodNote(ReviewPeriodType.Yearly, y.toString(), note) },
                                 personalRecords = personalRecords,
                                 skipReasonStats = skipReasonStats,
+                                moodInsights = moodInsights,
                                 initialTab = statisticsTab,
                             )
                         } else {

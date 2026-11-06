@@ -13,6 +13,7 @@ import app.tsuzuku.model.SkipReasonType
 import app.tsuzuku.model.WeeklySummary
 import app.tsuzuku.model.YearlySummary
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -36,6 +37,25 @@ class ReviewViewModel(
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = null,
     )
+
+    /** Mood per day, for the mood insights card. */
+    val moodsByDay: StateFlow<Map<LocalDate, Int>> = repository.observeDailyReviews()
+        .map { reviews -> reviews.associate { LocalDate.ofEpochDay(it.epochDay) to it.mood } }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyMap())
+
+    /** One-tap mood: keeps whatever else today's review already holds. */
+    fun quickMood(mood: Int, existing: app.tsuzuku.model.DailyReview?) {
+        viewModelScope.launch {
+            repository.saveDailyReview(
+                today().toEpochDay(),
+                mood,
+                existing?.energy ?: 3,
+                existing?.productivity ?: 3,
+                existing?.stress ?: 3,
+                existing?.note.orEmpty(),
+            )
+        }
+    }
 
     private val mutableSelectedWeekStart = MutableStateFlow(initialWeekStart)
     val selectedWeekStart: StateFlow<LocalDate> = mutableSelectedWeekStart

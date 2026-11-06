@@ -1041,4 +1041,28 @@
         <item quantity="other">%d days done in the last year</item>
     </plurals>
     <string name="widget_tap_to_complete">Tap to complete</string>
+    <string name="advice_lower">You reached the target on %1$d of the last %2$d days. Most days you get to about %3$s — start there and build up?</string>
+    <string name="advice_raise">You\'ve hit your target nearly every day for two weeks. Ready to step up to %1$s?</string>
+    <string name="advice_accept">Set to %1$s</string>
+    <string name="advice_not_now">Not now</string>
+    <string name="mood_question">How was today?</string>
+    <string name="mood_logged">Today: %1$s</string>
+    <string name="mood_add_note">Add a note</string>
+    <string name="mood_edit_note">Edit note</string>
+    <string name="mood_notification_body">One tap. Over time Tsuzuku shows which habits line up with your better days.</string>
+    <string name="mood_quick_rough">😕 Rough</string>
+    <string name="mood_quick_okay">😐 Okay</string>
+    <string name="mood_quick_good">🙂 Good</string>
+    <string name="mood_insights_title">Habits and your mood</string>
+    <string name="mood_insights_none">No clear pattern yet. Keep logging how your days feel.</string>
+    <string name="mood_insights_footnote">From your own logs, on this phone only. Mood is on a 1–5 scale; these are patterns, not proof.</string>
+    <string name="mood_insight_better">Days with %1$s feel better</string>
+    <string name="mood_insight_worse">Days with %1$s feel harder</string>
+    <string name="mood_insight_detail">Average mood %1$s with it, %2$s without</string>
+    <string name="mood_reminder_setting">Evening mood check-in</string>
+    <string name="mood_reminder_setting_description">At 21:00 if you haven\'t logged how today felt</string>
+    <plurals name="mood_insights_collecting">
+        <item quantity="one">Log your mood %d more day to see which habits line up with your better days.</item>
+        <item quantity="other">Log your mood %d more days to see which habits line up with your better days.</item>
+    </plurals>
 </resources>

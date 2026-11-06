@@ -39,6 +39,7 @@ interface HabitRepository {
     suspend fun addHabit(draft: HabitDraft): Long
     suspend fun updateHabit(id: Long, draft: HabitDraft)
     suspend fun updateHabitNote(id: Long, note: String)
+    suspend fun setHabitTarget(id: Long, target: Double)
     suspend fun archiveHabit(id: Long)
     suspend fun deleteHabit(id: Long)
     suspend fun duplicateHabit(id: Long): Long?
@@ -272,6 +273,17 @@ class RoomHabitRepository(
                 reminderMinutes = draft.reminderMinutes,
                 reminderRepeatMinutes = draft.reminderRepeatMinutes,
                 generalNote = draft.generalNote.trim(),
+                updatedAt = now(),
+            ),
+        )
+    }
+
+    override suspend fun setHabitTarget(id: Long, target: Double) {
+        val current = dao.getHabit(id) ?: return
+        dao.insertHabit(
+            current.copy(
+                target = target,
+                minimumTarget = current.minimumTarget.coerceAtMost(target),
                 updatedAt = now(),
             ),
         )

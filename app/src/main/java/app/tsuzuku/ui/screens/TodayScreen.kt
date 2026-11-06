@@ -126,6 +126,10 @@ fun TodayScreen(
     onMovePlanTask: (Long, Long?) -> Unit = { _, _ -> },
     onDeletePlanTask: (Long) -> Unit = {},
     onDividePlanTaskIntoSubtasks: (Long, List<String>) -> Unit = { _, _ -> },
+    targetAdvice: app.tsuzuku.model.TargetAdvice? = null,
+    onAcceptAdvice: (app.tsuzuku.model.TargetAdvice) -> Unit = {},
+    onDismissAdvice: (app.tsuzuku.model.TargetAdvice) -> Unit = {},
+    onQuickMood: (Int) -> Unit = {},
 ) {
     val active = habits.filterNot(TodayHabit::isComplete)
     val completed = habits.filter(TodayHabit::isComplete)
@@ -197,6 +201,16 @@ fun TodayScreen(
                         }
                     }
                     "habits" -> {
+                        if (targetAdvice != null) {
+                            item(key = "target-advice-${targetAdvice.habit.id}") {
+                                TargetAdviceCard(
+                                    advice = targetAdvice,
+                                    onAccept = { onAcceptAdvice(targetAdvice) },
+                                    onDismiss = { onDismissAdvice(targetAdvice) },
+                                    modifier = Modifier.animateItem(),
+                                )
+                            }
+                        }
                         if (habits.isEmpty()) {
                             item(key = "empty-habits") { StarterTemplatesCard(onAddTemplate = onAddTemplate, onCreateOwn = onAddHabit, modifier = Modifier.animateItem()) }
                         }
@@ -308,9 +322,10 @@ fun TodayScreen(
 
         item(key = "daily-review-card") {
             Spacer(Modifier.height(6.dp))
-            TodayDailyReviewCard(
+            MoodCheckInCard(
                 review = dailyReview,
-                onClick = onOpenDailyReview,
+                onPick = onQuickMood,
+                onOpenDetails = onOpenDailyReview,
             )
         }
     }

@@ -102,6 +102,13 @@ class TodayViewModel(
         }
     }
 
+    fun setHabitTarget(id: Long, target: Double) {
+        viewModelScope.launch {
+            repository.setHabitTarget(id, target)
+            onDataChanged()
+        }
+    }
+
     fun updateHabit(id: Long, draft: HabitDraft, onSaved: () -> Unit) {
         viewModelScope.launch {
             repository.updateHabit(id, draft)

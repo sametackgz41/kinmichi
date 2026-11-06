@@ -104,6 +104,7 @@ fun StatisticsScreen(
     onSaveYearlyNote: (Int, String) -> Unit = { _, _ -> },
     personalRecords: PersonalRecords? = null,
     skipReasonStats: Map<SkipReasonType, Int> = emptyMap(),
+    moodInsights: app.tsuzuku.model.MoodInsights? = null,
     initialTab: StatisticsTab = StatisticsTab.General,
 ) {
     var currentTab by rememberSaveable(initialTab) { mutableStateOf(initialTab) }
@@ -154,6 +155,9 @@ fun StatisticsScreen(
                             availableTags.forEach { tag -> FilterChip(selected = selectedTag == tag, onClick = { selectedTag = tag }, label = { Text("#$tag") }) }
                         }
                     }
+                }
+                if (moodInsights != null) {
+                    item { MoodInsightsCard(moodInsights) }
                 }
                 item {
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {

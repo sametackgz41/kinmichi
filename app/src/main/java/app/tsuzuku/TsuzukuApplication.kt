@@ -101,6 +101,7 @@ class TsuzukuApplication : Application() {
         applicationScope.launch {
             reminderScheduler.rescheduleAll()
             app.tsuzuku.notifications.WeeklySummary.schedule(this@TsuzukuApplication)
+            app.tsuzuku.notifications.MoodReminder.schedule(this@TsuzukuApplication)
             TsuzukuWidgetProvider.requestUpdate(this@TsuzukuApplication)
             cloudSyncRepository.synchronize()
         }

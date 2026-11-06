@@ -1040,4 +1040,28 @@
         <item quantity="other">Son bir yılda %d gün tamamlandı</item>
     </plurals>
     <string name="widget_tap_to_complete">Tamamlamak için dokun</string>
+    <string name="advice_lower">Son %2$d günün %1$d gününde hedefe ulaştın. Çoğu gün yaklaşık %3$s seviyesinde kalıyorsun — oradan başlayıp büyütelim mi?</string>
+    <string name="advice_raise">İki haftadır neredeyse her gün hedefini tutturdun. %1$s seviyesine çıkalım mı?</string>
+    <string name="advice_accept">Hedefi %1$s yap</string>
+    <string name="advice_not_now">Şimdi değil</string>
+    <string name="mood_question">Bugün nasıl geçti?</string>
+    <string name="mood_logged">Bugün: %1$s</string>
+    <string name="mood_add_note">Not ekle</string>
+    <string name="mood_edit_note">Notu düzenle</string>
+    <string name="mood_notification_body">Tek dokunuş. Zamanla hangi alışkanlıkların iyi günlerinle örtüştüğünü gösteririz.</string>
+    <string name="mood_quick_rough">😕 Zor</string>
+    <string name="mood_quick_okay">😐 İdare eder</string>
+    <string name="mood_quick_good">🙂 İyi</string>
+    <string name="mood_insights_title">Alışkanlıklar ve ruh halin</string>
+    <string name="mood_insights_none">Henüz belirgin bir örüntü yok. Günlerinin nasıl geçtiğini kaydetmeye devam et.</string>
+    <string name="mood_insights_footnote">Kendi kayıtlarından, yalnızca bu telefonda hesaplanır. Ruh hali 1–5 arası; bunlar kanıt değil, örüntü.</string>
+    <string name="mood_insight_better">%1$s yaptığın günler daha iyi geçiyor</string>
+    <string name="mood_insight_worse">%1$s yaptığın günler daha zor geçiyor</string>
+    <string name="mood_insight_detail">Ortalama ruh hali: yaptığında %1$s, yapmadığında %2$s</string>
+    <string name="mood_reminder_setting">Akşam ruh hali sorusu</string>
+    <string name="mood_reminder_setting_description">Bugünü kaydetmediysen saat 21:00\'de sorar</string>
+    <plurals name="mood_insights_collecting">
+        <item quantity="one">Hangi alışkanlıkların iyi günlerinle örtüştüğünü görmek için %d gün daha kaydet.</item>
+        <item quantity="other">Hangi alışkanlıkların iyi günlerinle örtüştüğünü görmek için %d gün daha kaydet.</item>
+    </plurals>
 </resources>

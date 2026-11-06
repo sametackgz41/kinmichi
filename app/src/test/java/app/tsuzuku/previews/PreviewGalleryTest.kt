@@ -231,6 +231,44 @@ class PreviewGalleryTest {
         captureScreen("settings_$suffix")
     }
 
+    // ---- coaching: target advice, mood check-in, mood insights ------------------------------
+
+    @Test fun coachingTrLight() = renderCoaching("tr", false)
+    @Test fun coachingTrDark() = renderCoaching("tr", true)
+    @Test fun coachingEnLight() = renderCoaching("en", false)
+    @Test fun coachingEnDark() = renderCoaching("en", true)
+
+    private fun renderCoaching(lang: String, dark: Boolean) {
+        setVariant(lang, dark)
+        val habits = sampleToday(lang).map { it.habit }
+        val advice = app.tsuzuku.model.TargetAdvice(habits[1], app.tsuzuku.model.TargetAdvice.Kind.Lower, 5.0, hits = 3, days = 14)
+        val review = app.tsuzuku.model.DailyReview(LocalDate.now().toEpochDay(), 4, 3, 3, 3, "", 0L)
+        val insights = app.tsuzuku.model.MoodInsights(
+            loggedDays = 34,
+            insights = listOf(
+                app.tsuzuku.model.MoodInsight(habits[4], 4.1, 3.0, 15, 12),
+                app.tsuzuku.model.MoodInsight(habits[2], 3.9, 3.2, 18, 9),
+                app.tsuzuku.model.MoodInsight(habits[3], 2.9, 3.6, 8, 20),
+            ),
+        )
+        compose.setContent {
+            TsuzukuTheme(darkTheme = dark) {
+                androidx.compose.material3.Surface(color = androidx.compose.material3.MaterialTheme.colorScheme.background) {
+                    androidx.compose.foundation.layout.Column(
+                        Modifier.fillMaxSize().padding(16.dp),
+                        verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(14.dp),
+                    ) {
+                        app.tsuzuku.ui.screens.TargetAdviceCard(advice, onAccept = {}, onDismiss = {})
+                        app.tsuzuku.ui.screens.MoodCheckInCard(review, onPick = {}, onOpenDetails = {})
+                        app.tsuzuku.ui.screens.MoodInsightsCard(insights)
+                    }
+                }
+            }
+        }
+        compose.mainClock.advanceTimeBy(800)
+        captureScreen("coaching_${lang}_${if (dark) "dark" else "light"}")
+    }
+
     // ---- habit detail: year heatmap --------------------------------------------------------
 
     @Test fun detailTrLight() = renderDetail("tr", false)
