@@ -1017,4 +1017,15 @@
     <string name="widget_mark_not_done">%1$s tamamlanmadı olarak işaretle</string>
     <string name="notifications_blocked">Tsuzuku için bildirimler kapalı, bu hatırlatıcı gelmeyecek.</string>
     <string name="open_notification_settings">Aç</string>
+    <string name="shortcut_add_habit">Yeni alışkanlık</string>
+    <string name="shortcut_add_habit_long">Yeni alışkanlık ekle</string>
+    <string name="shortcut_progress">İlerleme</string>
+    <string name="shortcut_progress_long">İlerlemeni gör</string>
+    <string name="tile_today_label">Tsuzuku</string>
+    <string name="tile_no_habits">Bugün alışkanlık yok</string>
+    <string name="tile_all_done">Bugün hepsi tamam</string>
+    <plurals name="tile_habits_left">
+        <item quantity="one">%d alışkanlık kaldı</item>
+        <item quantity="other">%d alışkanlık kaldı</item>
+    </plurals>
 </resources>

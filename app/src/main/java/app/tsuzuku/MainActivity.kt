@@ -1,6 +1,7 @@
 package app.tsuzuku
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.compose.setContent
@@ -31,6 +32,9 @@ class MainActivity : FragmentActivity() {
     private var biometricPromptActive = false
     private var backgroundedAt: Long = 0L
 
+    /** Screen requested by a launcher shortcut, consumed once the main UI is showing. */
+    private var launchRoute by mutableStateOf<String?>(null)
+
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(AppLocaleContext.wrap(newBase))
     }
@@ -45,6 +49,7 @@ class MainActivity : FragmentActivity() {
         val goalRepository = application.goalRepository
         val settingsRepository = application.settingsRepository
         isUnlocked = !settingsRepository.settings.value.appLockEnabled
+        if (savedInstanceState == null) launchRoute = routeFor(intent)
         setContent {
             val settings by settingsRepository.settings.collectAsStateWithLifecycle()
             val darkTheme = when (settings.theme) {
@@ -127,10 +132,23 @@ class MainActivity : FragmentActivity() {
                         connectionRepository = application.connectionRepository,
                         onSetTodaySectionOrder = settingsRepository::setTodaySectionOrder,
                         onSetTodayHiddenSections = settingsRepository::setTodayHiddenSections,
+                        launchRoute = launchRoute,
+                        onLaunchRouteHandled = { launchRoute = null },
                     )
                 }
             }
         }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        routeFor(intent)?.let { launchRoute = it }
+    }
+
+    private fun routeFor(intent: Intent?): String? = when (intent?.action) {
+        ACTION_ADD_HABIT -> "habit/new"
+        ACTION_PROGRESS -> "progress"
+        else -> null
     }
 
     override fun onStop() {
@@ -200,5 +218,10 @@ class MainActivity : FragmentActivity() {
             .setNegativeButtonText(getString(R.string.use_pin_instead))
             .build()
         prompt.authenticate(info)
+    }
+
+    companion object {
+        const val ACTION_ADD_HABIT = "app.tsuzuku.action.ADD_HABIT"
+        const val ACTION_PROGRESS = "app.tsuzuku.action.PROGRESS"
     }
 }

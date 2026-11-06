@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Long-press the launcher icon: jump straight to adding a habit or to progress. -->
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="add_habit"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_add"
+        android:shortcutShortLabel="@string/shortcut_add_habit"
+        android:shortcutLongLabel="@string/shortcut_add_habit_long">
+        <intent
+            android:action="app.tsuzuku.action.ADD_HABIT"
+            android:targetPackage="app.tsuzuku"
+            android:targetClass="app.tsuzuku.MainActivity" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="progress"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_progress"
+        android:shortcutShortLabel="@string/shortcut_progress"
+        android:shortcutLongLabel="@string/shortcut_progress_long">
+        <intent
+            android:action="app.tsuzuku.action.PROGRESS"
+            android:targetPackage="app.tsuzuku"
+            android:targetClass="app.tsuzuku.MainActivity" />
+    </shortcut>
+</shortcuts>

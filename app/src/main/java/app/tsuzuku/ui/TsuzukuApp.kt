@@ -26,6 +26,7 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -141,9 +142,22 @@ fun TsuzukuApp(
     connectionRepository: ConnectionRepository,
     onSetTodaySectionOrder: (String) -> Unit = {},
     onSetTodayHiddenSections: (String) -> Unit = {},
+    launchRoute: String? = null,
+    onLaunchRouteHandled: () -> Unit = {},
 ) {
     val context = LocalContext.current
     val navController = rememberNavController()
+    LaunchedEffect(launchRoute) {
+        val route = launchRoute ?: return@LaunchedEffect
+        navController.navigate(route) {
+            if (route == "progress") {
+                popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                restoreState = true
+            }
+            launchSingleTop = true
+        }
+        onLaunchRouteHandled()
+    }
     val todayViewModel: TodayViewModel = viewModel(
         factory = TodayViewModel.factory(repository, timerSessionStore) {
             TsuzukuWidgetProvider.requestUpdate(context.applicationContext)

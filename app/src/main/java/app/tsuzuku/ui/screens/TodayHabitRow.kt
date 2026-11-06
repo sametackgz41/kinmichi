@@ -365,6 +365,12 @@ private fun RingButton(
     onClick: () -> Unit,
 ) {
     val haptic = LocalHapticFeedback.current
+    // A firmer confirm when this tap is the one that reaches the target.
+    var wasDone by remember { mutableStateOf(done) }
+    LaunchedEffect(done) {
+        if (done && !wasDone) haptic.performHapticFeedback(HapticFeedbackType.Confirm)
+        wasDone = done
+    }
     val animated by animateFloatAsState(
         fraction.coerceIn(0f, 1f),
         spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessLow),
@@ -418,7 +424,12 @@ internal fun TodayProgressHeader(completed: Int, total: Int, modifier: Modifier 
     val percent by animateIntAsState((fraction * 100).toInt(), tween(600), label = "day-percent")
     val allDone = total > 0 && completed == total
     val celebrate = remember { Animatable(1f) }
+    val haptic = LocalHapticFeedback.current
+    // Starts as the current value so opening an already finished day doesn't buzz.
+    var wasAllDone by remember { mutableStateOf(allDone) }
     LaunchedEffect(allDone) {
+        if (allDone && !wasAllDone) haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+        wasAllDone = allDone
         if (allDone) {
             celebrate.animateTo(1.12f, spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessMedium))
             celebrate.animateTo(1f, spring(dampingRatio = Spring.DampingRatioMediumBouncy))

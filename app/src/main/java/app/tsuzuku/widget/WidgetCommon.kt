@@ -44,6 +44,7 @@ object TsuzukuWidgets {
     }
 
     suspend fun updateAll(context: Context) {
+        app.tsuzuku.tile.TodayTileService.requestRefresh(context)
         runCatching { TodayWidget().updateAll(context) }
         runCatching { HabitWidget().updateAll(context) }
         runCatching { WeekWidget().updateAll(context) }

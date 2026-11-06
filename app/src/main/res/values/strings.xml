@@ -1018,4 +1018,15 @@
     <string name="widget_mark_not_done">Mark %1$s not done</string>
     <string name="notifications_blocked">Notifications are off for Tsuzuku, so this reminder won\'t appear.</string>
     <string name="open_notification_settings">Turn on</string>
+    <string name="shortcut_add_habit">New habit</string>
+    <string name="shortcut_add_habit_long">Add a new habit</string>
+    <string name="shortcut_progress">Progress</string>
+    <string name="shortcut_progress_long">See your progress</string>
+    <string name="tile_today_label">Tsuzuku</string>
+    <string name="tile_no_habits">No habits today</string>
+    <string name="tile_all_done">All done today</string>
+    <plurals name="tile_habits_left">
+        <item quantity="one">%d habit left</item>
+        <item quantity="other">%d habits left</item>
+    </plurals>
 </resources>
