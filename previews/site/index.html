@@ -295,12 +295,16 @@
     </div>
     <div class="home">
       <figure>
-        <img class="widget w-today" data-widget="today" alt="Bugün widget'ı: alışkanlık listesi ve ilerleme çubuğu">
-        <figcaption>Bugün: yuvarlak onay ve +1 düğmesiyle uygulamayı açmadan işaretleme.</figcaption>
+        <img class="widget w-today" data-widget="today" alt="Bugün widget'ı: ilerleme halkası, kalan alışkanlık sayısı ve renkli işaretleme düğmeleri">
+        <figcaption>Bugün: günün halkası, kalan sayı ve + ile yeni alışkanlık. Her satırda alışkanlığın rengi; işaretle, +1 ya da zamanlayıcı.</figcaption>
       </figure>
       <figure>
         <img class="widget w-today" data-widget="today_done" alt="Bugün widget'ı: bütün alışkanlıklar tamamlanmış">
-        <figcaption>Tamamlananlar dolu düğmeyle gösterilir.</figcaption>
+        <figcaption>Hepsi bitince halka dolar, düğmeler alışkanlığın rengine boyanır.</figcaption>
+      </figure>
+      <figure>
+        <img class="widget w-today" data-widget="today_compact" alt="Küçültülmüş Bugün widget'ı: yalnızca özet">
+        <figcaption>Küçültülünce yalnızca özet kalır.</figcaption>
       </figure>
       <figure>
         <img class="widget w-habit" data-widget="habit" alt="Tek alışkanlık widget'ı: tamamlanmış kitap okuma">
@@ -308,11 +312,15 @@
       </figure>
       <figure>
         <img class="widget w-habit" data-widget="habit_progress" alt="Tek alışkanlık widget'ı: su içme halkası yolda">
-        <figcaption>Dokundukça dolan halka.</figcaption>
+        <figcaption>Dokundukça dolan, alışkanlığın renginde halka.</figcaption>
       </figure>
       <figure>
-        <img class="widget w-week" data-widget="week" alt="Bu hafta widget'ı: son yedi gün">
-        <figcaption>Bu hafta: son 7 gün, en iyi seriyle.</figcaption>
+        <img class="widget w-today" data-widget="habit_wide" alt="Geniş tek alışkanlık widget'ı">
+        <figcaption>Genişletilince yazı yana geçer.</figcaption>
+      </figure>
+      <figure>
+        <img class="widget w-week" data-widget="week" alt="Bu hafta widget'ı: her gün için bir halka">
+        <figcaption>Bu hafta: her gün bir halka, haftanın yüzdesi ve en iyi seri. Hafta başı ayardan gelir.</figcaption>
       </figure>
       <figure>
         <img class="widget w-locked" data-widget="today_locked" alt="Uygulama kilitliyken Bugün widget'ı">
@@ -320,9 +328,9 @@
       </figure>
     </div>
     <div class="note">
-      <p><b>Önizlemenin yakaladığı hata:</b> Bugün widget'ındaki onay kutusu Android 12 ve sonrasında Material You renkleriyle çöküyordu. Düzeltildi.</p>
-      <p><b>Onay kutusu değişti:</b> Sistem onay kutusu yerine uygulamadaki gibi yuvarlak bir düğme kullanılıyor. Tamamlanma hali artık ana ekran uygulamasına bırakılmadan çiziliyor, her telefonda aynı görünür.</p>
-      <p><b>Statik çizimin sınırı:</b> Köşeler burada yuvarlanmıyor; bunu Android 12+ ana ekranı yapıyor.</p>
+      <p><b>Kaydırma:</b> Telefonda Bugün listesi kaydırılır; buradaki statik çizim yalnızca sığan satırları gösterir.</p>
+      <p><b>Widget seçici:</b> Widget eklerken artık uygulama simgesi yerine bu görüntüler çıkar (Türkçe ve İngilizce).</p>
+      <p><b>Statik çizimin sınırı:</b> Köşeler burada yuvarlanmıyor; bunu ana ekran yapıyor.</p>
     </div>
   </section>
 

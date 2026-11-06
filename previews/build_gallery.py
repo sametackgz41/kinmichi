@@ -8,7 +8,7 @@ width, widgets kept sharp, and animation frames stitched into looping GIFs.
 """
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageDraw
 
 ROOT = Path(__file__).resolve().parent
 SRC = ROOT / "images"
@@ -19,6 +19,22 @@ WIDGET_SCALE = 0.5  # renders are xxhdpi (3x); 1.5x keeps widgets crisp on retin
 
 def save_webp(image: Image.Image, path: Path) -> None:
     image.save(path.with_suffix(".webp"), "WEBP", quality=88, method=6)
+
+
+RES = ROOT.parent / "app" / "src" / "main" / "res"
+
+
+def export_widget_previews() -> None:
+    """Widget-picker previews (android:previewImage): light renders with rounded corners."""
+    for lang, folder in (("en", "drawable-nodpi"), ("tr", "drawable-tr-nodpi")):
+        (RES / folder).mkdir(exist_ok=True)
+        for kind in ("today", "habit", "week"):
+            image = Image.open(SRC / f"widget_{kind}_{lang}_light.png").convert("RGBA")
+            image = image.resize((image.width // 2, image.height // 2), Image.LANCZOS)
+            mask = Image.new("L", image.size, 0)
+            ImageDraw.Draw(mask).rounded_rectangle((0, 0, *image.size), radius=36, fill=255)
+            image.putalpha(mask)
+            image.save(RES / folder / f"widget_preview_{kind}.webp", "WEBP", quality=90, method=6)
 
 
 def main() -> None:
@@ -55,6 +71,7 @@ def main() -> None:
             loop=0,
             optimize=True,
         )
+    export_widget_previews()
     total = sum(p.stat().st_size for p in OUT.iterdir())
     print(f"{len(list(OUT.iterdir()))} assets, {total / 1024:.0f} KB")
 

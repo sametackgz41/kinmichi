@@ -4,10 +4,14 @@ import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.glance.GlanceId
+import app.tsuzuku.ui.screens.formatHabitAmount
+import androidx.compose.ui.unit.Dp
+import androidx.glance.layout.width
+import androidx.glance.layout.Row
+import androidx.glance.LocalSize
 import androidx.glance.GlanceModifier
 import androidx.glance.GlanceTheme
 import androidx.glance.Image
@@ -77,6 +81,7 @@ class HabitWidgetReceiver : GlanceAppWidgetReceiver() {
 @Composable
 internal fun HabitContent(item: TodayHabit?, locked: Boolean) {
     val context = LocalContext.current
+    val size = LocalSize.current
     val openApp: Action = actionStartActivity<MainActivity>()
     val tapAction: Action = when {
         item == null || locked || item.isBlocked -> openApp
@@ -91,7 +96,7 @@ internal fun HabitContent(item: TodayHabit?, locked: Boolean) {
             .background(GlanceTheme.colors.widgetBackground)
             .cornerRadius(24.dp)
             .clickable(tapAction)
-            .padding(10.dp),
+            .padding(12.dp),
         contentAlignment = Alignment.Center,
     ) {
         if (item == null || locked) {
@@ -101,45 +106,66 @@ internal fun HabitContent(item: TodayHabit?, locked: Boolean) {
             )
             return@Box
         }
-        val ringSize = 64.dp
-        val density = context.resources.displayMetrics.density
-        val ring = ringBitmap(
-            sizePx = (ringSize.value * density).toInt(),
-            fraction = if (item.isComplete) 1f else item.progressFraction,
-            trackColor = GlanceTheme.colors.secondaryContainer.getColor(context).toArgb(),
-            progressColor = GlanceTheme.colors.primary.getColor(context).toArgb(),
-            strokePx = 6f * density,
-        )
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Box(modifier = GlanceModifier.size(ringSize), contentAlignment = Alignment.Center) {
-                Image(
-                    provider = ImageProvider(ring),
-                    contentDescription = null,
-                    modifier = GlanceModifier.size(ringSize),
-                )
-                if (item.isComplete) {
-                    Image(
-                        provider = ImageProvider(R.drawable.ic_widget_check),
-                        contentDescription = context.getString(R.string.habit_completed),
-                        modifier = GlanceModifier.size(28.dp),
-                        colorFilter = androidx.glance.ColorFilter.tint(GlanceTheme.colors.primary),
-                    )
-                } else {
-                    Text(item.habit.emoji, style = TextStyle(fontSize = 24.sp))
-                }
+        // Wide widgets put the text beside the ring; square ones stack it underneath.
+        val wide = size.width > size.height * 1.6f
+        val ringSize = if (wide) (size.height - 24.dp).coerceIn(48.dp, 96.dp) else (minOf(size.width, size.height - 52.dp) - 16.dp).coerceIn(48.dp, 110.dp)
+        if (wide) {
+            Row(modifier = GlanceModifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically) {
+                HabitRing(item, ringSize)
+                Spacer(GlanceModifier.width(14.dp))
+                Column(modifier = GlanceModifier.defaultWeight()) { HabitText(item, TextAlign.Start) }
             }
-            Spacer(GlanceModifier.height(6.dp))
-            Text(
-                item.habit.name,
-                maxLines = 1,
-                style = TextStyle(color = GlanceTheme.colors.onSurface, fontSize = 13.sp, fontWeight = FontWeight.Medium, textAlign = TextAlign.Center),
-            )
-            if (item.streakDays > 0) {
-                Text(
-                    "🔥 ${item.streakDays}",
-                    style = TextStyle(color = GlanceTheme.colors.onSurfaceVariant, fontSize = 12.sp, textAlign = TextAlign.Center),
-                )
+        } else {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                HabitRing(item, ringSize)
+                Spacer(GlanceModifier.height(8.dp))
+                HabitText(item, TextAlign.Center)
             }
         }
     }
+}
+
+@Composable
+private fun HabitRing(item: TodayHabit, ringSize: Dp) {
+    val context = LocalContext.current
+    val density = context.resources.displayMetrics.density
+    val accent = item.habit.colorArgb.toInt()
+    val done = item.isComplete
+    val ring = ringBitmap(
+        sizePx = (ringSize.value * density).toInt(),
+        fraction = if (done) 1f else item.progressFraction,
+        trackColor = accent.withAlpha(0.18f),
+        progressColor = accent,
+        strokePx = (ringSize.value / 11f) * density,
+        fillColor = if (done) accent.withAlpha(0.16f) else null,
+    )
+    Box(modifier = GlanceModifier.size(ringSize), contentAlignment = Alignment.Center) {
+        Image(ImageProvider(ring), contentDescription = null, modifier = GlanceModifier.size(ringSize))
+        Text(item.habit.emoji, style = TextStyle(fontSize = (ringSize.value * 0.36f).sp, textAlign = TextAlign.Center))
+    }
+}
+
+@Composable
+private fun HabitText(item: TodayHabit, align: TextAlign) {
+    val context = LocalContext.current
+    val habit = item.habit
+    val status = when {
+        item.isComplete -> context.getString(R.string.habit_completed)
+        habit.type == HabitType.Check -> context.getString(R.string.widget_tap_to_complete)
+        else -> "${formatHabitAmount(item.progress)}/${formatHabitAmount(habit.target)} ${habit.unit}".trim()
+    }
+    Text(
+        habit.name,
+        maxLines = 1,
+        style = TextStyle(color = GlanceTheme.colors.onSurface, fontSize = 14.sp, fontWeight = FontWeight.Medium, textAlign = align),
+    )
+    Text(
+        status + if (item.streakDays > 1) "  ·  🔥 ${item.streakDays}" else "",
+        maxLines = 1,
+        style = TextStyle(
+            color = if (item.isComplete) GlanceTheme.colors.primary else GlanceTheme.colors.onSurfaceVariant,
+            fontSize = 12.sp,
+            textAlign = align,
+        ),
+    )
 }

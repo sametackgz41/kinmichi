@@ -71,13 +71,39 @@ class IncrementHabitAction : ActionCallback {
     }
 }
 
+/** Opens the app straight on the new-habit screen (same route as the launcher shortcut). */
+fun addHabitIntent(context: Context): android.content.Intent =
+    android.content.Intent(context, app.tsuzuku.MainActivity::class.java)
+        .setAction(app.tsuzuku.MainActivity.ACTION_ADD_HABIT)
+        .addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK or android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP)
+
+/** A filled circle, used where Glance can't round corners (Android 11 and older). */
+fun dotBitmap(sizePx: Int, color: Int): Bitmap {
+    val bitmap = Bitmap.createBitmap(sizePx, sizePx, Bitmap.Config.ARGB_8888)
+    Canvas(bitmap).drawCircle(sizePx / 2f, sizePx / 2f, sizePx / 2f, Paint(Paint.ANTI_ALIAS_FLAG).apply { this.color = color })
+    return bitmap
+}
+
+/** [color] with its alpha replaced, for soft tints of a habit's colour. */
+fun Int.withAlpha(alpha: Float): Int = (this and 0x00FFFFFF) or ((alpha.coerceIn(0f, 1f) * 255).toInt() shl 24)
+
 /**
  * Glance cannot draw arcs, so the progress ring is rendered into a small bitmap.
  * [sizePx] should match the on-screen size to stay crisp.
  */
-fun ringBitmap(sizePx: Int, fraction: Float, trackColor: Int, progressColor: Int, strokePx: Float): Bitmap {
+fun ringBitmap(
+    sizePx: Int,
+    fraction: Float,
+    trackColor: Int,
+    progressColor: Int,
+    strokePx: Float,
+    fillColor: Int? = null,
+): Bitmap {
     val bitmap = Bitmap.createBitmap(sizePx, sizePx, Bitmap.Config.ARGB_8888)
     val canvas = Canvas(bitmap)
+    if (fillColor != null) {
+        canvas.drawCircle(sizePx / 2f, sizePx / 2f, sizePx / 2f, Paint(Paint.ANTI_ALIAS_FLAG).apply { color = fillColor })
+    }
     val inset = strokePx / 2f
     val bounds = RectF(inset, inset, sizePx - inset, sizePx - inset)
     val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {

@@ -9,7 +9,7 @@
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="1800000"
     android:initialLayout="@layout/glance_default_loading_layout"
-    android:previewImage="@mipmap/ic_launcher"
+    android:previewImage="@drawable/widget_preview_today"
     android:configure="app.tsuzuku.widget.WidgetConfigurationActivity"
     android:widgetFeatures="reconfigurable|configuration_optional"
     android:widgetCategory="home_screen"

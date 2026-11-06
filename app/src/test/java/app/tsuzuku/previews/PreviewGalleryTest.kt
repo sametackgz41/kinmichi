@@ -50,7 +50,7 @@ import app.tsuzuku.widget.HabitContent
 import app.tsuzuku.widget.TodayContent
 import app.tsuzuku.widget.TsuzukuGlanceTheme
 import app.tsuzuku.widget.WeekContent
-import app.tsuzuku.widget.lastSevenDays
+import app.tsuzuku.widget.thisWeek
 import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
@@ -353,13 +353,15 @@ class PreviewGalleryTest {
         val suffix = "${lang}_${if (dark) "dark" else "light"}"
         val today = sampleToday(lang)
         val todaySorted = today.sortedBy { it.isComplete } // same order as TodayWidget
-        renderWidget("widget_today_$suffix", 300, 220) { TsuzukuGlanceTheme { TodayContent(todaySorted, loaded = true, locked = false) } }
+        renderWidget("widget_today_$suffix", 300, 260) { TsuzukuGlanceTheme { TodayContent(todaySorted, loaded = true, locked = false, scrollable = false) } }
+        renderWidget("widget_today_compact_$suffix", 250, 110) { TsuzukuGlanceTheme { TodayContent(todaySorted, loaded = true, locked = false, scrollable = false) } }
         val allDone = sampleToday(lang, allDone = true).take(4)
-        renderWidget("widget_today_done_$suffix", 300, 220) { TsuzukuGlanceTheme { TodayContent(allDone, loaded = true, locked = false) } }
+        renderWidget("widget_today_done_$suffix", 300, 260) { TsuzukuGlanceTheme { TodayContent(allDone, loaded = true, locked = false, scrollable = false) } }
         renderWidget("widget_habit_$suffix", 150, 150) { TsuzukuGlanceTheme { HabitContent(today[0], locked = false) } }
         renderWidget("widget_habit_progress_$suffix", 150, 150) { TsuzukuGlanceTheme { HabitContent(today[1], locked = false) } }
-        val days = lastSevenDays(sampleHistory(lang))
-        renderWidget("widget_week_$suffix", 320, 130) { TsuzukuGlanceTheme { WeekContent(days, bestStreak = 12, locked = false) } }
-        renderWidget("widget_today_locked_$suffix", 300, 140) { TsuzukuGlanceTheme { TodayContent(emptyList(), loaded = true, locked = true) } }
+        renderWidget("widget_habit_wide_$suffix", 300, 120) { TsuzukuGlanceTheme { HabitContent(today[1], locked = false) } }
+        val days = thisWeek(sampleHistory(lang), firstDay = if (lang == "tr") java.time.DayOfWeek.MONDAY else java.time.DayOfWeek.SUNDAY)
+        renderWidget("widget_week_$suffix", 320, 150) { TsuzukuGlanceTheme { WeekContent(days, bestStreak = 12, locked = false) } }
+        renderWidget("widget_today_locked_$suffix", 300, 140) { TsuzukuGlanceTheme { TodayContent(emptyList(), loaded = true, locked = true, scrollable = false) } }
     }
 }
