@@ -140,7 +140,7 @@ class PreviewGalleryTest {
     @Composable
     private fun Shell(title: String, route: String, profile: String, content: @Composable (Modifier) -> Unit) {
         Scaffold(
-            topBar = { MainTopBar(title = title, profileName = profile, onSearch = {}, onOpenProfile = {}) },
+            topBar = { MainTopBar(title = title, onSearch = if (route == "today") ({}) else null) },
             bottomBar = { MainNavigationBar(destinations = mainDestinations, currentRoute = route, onSelect = {}) },
         ) { padding -> content(Modifier.padding(padding)) }
     }

@@ -104,12 +104,6 @@ fun PlanTabScreen(
             ) {
                 Text(stringResource(R.string.plan_subtitle), color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    IconButton(onClick = onOpenPlanAssistant) {
-                        Icon(Icons.Rounded.AutoAwesome, contentDescription = stringResource(R.string.ai_plan_assistant))
-                    }
-                    IconButton(onClick = onOpenProjects) {
-                        Icon(Icons.Rounded.AccountTree, contentDescription = stringResource(R.string.projects_title))
-                    }
                 }
             }
         }

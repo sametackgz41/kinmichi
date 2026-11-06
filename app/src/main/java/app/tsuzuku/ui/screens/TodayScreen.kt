@@ -80,14 +80,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.tsuzuku.R
 import app.tsuzuku.model.DailyReview
-import app.tsuzuku.model.ContentStatus
 import app.tsuzuku.model.Goal
 import app.tsuzuku.model.GoalStatus
 import app.tsuzuku.model.HabitDirection
 import app.tsuzuku.model.HabitType
 import app.tsuzuku.model.GoalPeriod
-import app.tsuzuku.model.Insight
-import app.tsuzuku.model.LibraryItem
 import app.tsuzuku.model.PlanTask
 import app.tsuzuku.model.TodayHabit
 import app.tsuzuku.ui.HabitTimerState
@@ -103,6 +100,8 @@ fun TodayScreen(
     showDailySummary: Boolean,
     timer: HabitTimerState,
     onAddHabit: () -> Unit,
+    onAddTemplate: (app.tsuzuku.model.HabitDraft) -> Unit = {},
+    onOpenPlan: () -> Unit = {},
     onToggleHabit: (Long) -> Unit,
     onIncrementHabit: (Long) -> Unit,
     onDecrementHabit: (Long) -> Unit,
@@ -113,28 +112,20 @@ fun TodayScreen(
     onSearch: () -> Unit,
     planTasks: List<PlanTask> = emptyList(),
     goals: List<Goal> = emptyList(),
-    libraryItems: List<LibraryItem> = emptyList(),
     focusMinutesToday: Int = 0,
     todaySectionOrder: String = "summary,intelligence,habits,plan,goals,library,focus,health,routines",
     todayHiddenSections: String = "",
-    healthSteps: Long = 0L,
     onUpdateSectionConfig: (newOrder: String, newHidden: String) -> Unit = { _, _ -> },
     onStartFocus: () -> Unit = {},
-    onOpenInbox: () -> Unit = {},
     onStartRoutine: (String) -> Unit = {},
     onTogglePlanTask: (PlanTask) -> Unit = {},
     onOpenPlanTask: (Long) -> Unit = {},
-    onOpenContent: (Long) -> Unit = {},
-    onIncrementContent: (Long, Double) -> Unit = { _, _ -> },
     dailyReview: DailyReview? = null,
     onOpenDailyReview: () -> Unit = {},
     onSkipHabit: (Long, String?) -> Unit = { _, _ -> },
     onMovePlanTask: (Long, Long?) -> Unit = { _, _ -> },
     onDeletePlanTask: (Long) -> Unit = {},
     onDividePlanTaskIntoSubtasks: (Long, List<String>) -> Unit = { _, _ -> },
-    insights: List<Insight> = emptyList(),
-    onOpenIntelligence: () -> Unit = {},
-    onOpenProjects: () -> Unit = {},
 ) {
     val active = habits.filterNot(TodayHabit::isComplete)
     val completed = habits.filter(TodayHabit::isComplete)
@@ -171,19 +162,9 @@ fun TodayScreen(
                     }
                     DropdownMenu(expanded = moreExpanded, onDismissRequest = { moreExpanded = false }) {
                         DropdownMenuItem(
-                            text = { Text(stringResource(R.string.inbox_label)) },
-                            leadingIcon = { Icon(Icons.Rounded.Inbox, contentDescription = null) },
-                            onClick = { moreExpanded = false; onOpenInbox() },
-                        )
-                        DropdownMenuItem(
                             text = { Text(stringResource(R.string.open_goals)) },
                             leadingIcon = { Icon(Icons.Rounded.Flag, contentDescription = null) },
                             onClick = { moreExpanded = false; onOpenGoals() },
-                        )
-                        DropdownMenuItem(
-                            text = { Text(stringResource(R.string.tsuzuku_intelligence)) },
-                            leadingIcon = { Icon(Icons.Rounded.Lightbulb, contentDescription = null) },
-                            onClick = { moreExpanded = false; onOpenIntelligence() },
                         )
                         DropdownMenuItem(
                             text = { Text(stringResource(R.string.reorder_habits)) },
@@ -215,19 +196,9 @@ fun TodayScreen(
                             }
                         }
                     }
-                    "intelligence" -> {
-                        if (insights.isNotEmpty()) {
-                            item(key = "section-intelligence") {
-                                TodayIntelligenceCard(
-                                    insights = insights,
-                                    onOpenIntelligence = onOpenIntelligence,
-                                )
-                            }
-                        }
-                    }
                     "habits" -> {
                         if (habits.isEmpty()) {
-                            item(key = "empty-habits") { EmptyTodayCard(onAddHabit) }
+                            item(key = "empty-habits") { StarterTemplatesCard(onAddTemplate = onAddTemplate, onCreateOwn = onAddHabit, modifier = Modifier.animateItem()) }
                         }
                         habits.groupBy { it.habit.routineName }.forEach { (routine, routineHabits) ->
                             if (routine.isNotBlank()) {
@@ -283,7 +254,7 @@ fun TodayScreen(
                         }
                         if (todaysTasks.isNotEmpty()) {
                             item(key = "section-plan-header") {
-                                TodaySectionHeader(icon = Icons.Rounded.Checklist, title = stringResource(R.string.section_plan))
+                                TodaySectionHeader(icon = Icons.Rounded.Checklist, title = stringResource(R.string.section_plan), actionText = stringResource(R.string.all_categories), onAction = onOpenPlan)
                             }
                             items(todaysTasks.take(5), key = { "today-task-${it.id}" }) { task ->
                                 TodayPlanTaskCard(
@@ -308,25 +279,9 @@ fun TodayScreen(
                             }
                         }
                     }
-                    "library" -> {
-                        val inProgressItems = libraryItems.filter { it.content.status == ContentStatus.InProgress }
-                        if (inProgressItems.isNotEmpty()) {
-                            item(key = "section-library-header") {
-                                TodaySectionHeader(icon = Icons.Rounded.MenuBook, title = stringResource(R.string.section_library))
-                            }
-                            items(inProgressItems.take(3), key = { "today-lib-${it.content.id}" }) { item ->
-                                TodayLibraryCard(item = item, onOpen = { onOpenContent(item.content.id) }, onIncrement = { onIncrementContent(item.content.id, 1.0) })
-                            }
-                        }
-                    }
                     "focus" -> {
                         item(key = "section-focus") {
                             TodayFocusCard(minutesToday = focusMinutesToday, onStartFocus = onStartFocus)
-                        }
-                    }
-                    "health" -> {
-                        item(key = "section-health") {
-                            TodayHealthCard(steps = healthSteps)
                         }
                     }
                     "routines" -> {
@@ -429,27 +384,6 @@ private fun GreetingBlock(profileName: String) {
         )
         Spacer(Modifier.height(5.dp))
         Text(formattedDate, color = MaterialTheme.colorScheme.onSurfaceVariant)
-    }
-}
-
-@Composable
-private fun EmptyTodayCard(onAddHabit: () -> Unit) {
-    Surface(
-        shape = RoundedCornerShape(10.dp),
-        modifier = Modifier.border(1.dp, MaterialTheme.colorScheme.outlineVariant, RoundedCornerShape(10.dp)),
-    ) {
-        Column(
-            Modifier
-                .fillMaxWidth()
-                .padding(18.dp),
-            horizontalAlignment = Alignment.Start,
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-        ) {
-            Text(stringResource(R.string.empty_today), color = MaterialTheme.colorScheme.onSurfaceVariant)
-            FilledTonalIconButton(onClick = onAddHabit) {
-                Icon(Icons.Rounded.Add, contentDescription = null)
-            }
-        }
     }
 }
 
@@ -693,45 +627,6 @@ private fun TodayGoalCard(
 }
 
 @Composable
-private fun TodayLibraryCard(
-    item: LibraryItem,
-    onOpen: () -> Unit,
-    onIncrement: () -> Unit,
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(12.dp))
-            .clickable(onClick = onOpen),
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(12.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
-        ) {
-            Column(modifier = Modifier.weight(1f)) {
-                Text(item.content.title, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
-                Text(
-                    "${item.content.currentUnits.toInt()} / ${item.content.totalUnits.toInt()} ${item.content.unit}",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-            }
-            Button(
-                onClick = onIncrement,
-                shape = RoundedCornerShape(8.dp),
-            ) {
-                Text("+1")
-            }
-        }
-    }
-}
-
-@Composable
 private fun TodayFocusCard(
     minutesToday: Int,
     onStartFocus: () -> Unit,
@@ -773,41 +668,6 @@ private fun TodayFocusCard(
 }
 
 @Composable
-private fun TodayHealthCard(steps: Long) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(14.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(40.dp)
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.secondaryContainer),
-                contentAlignment = Alignment.Center,
-            ) {
-                Icon(Icons.Rounded.HealthAndSafety, contentDescription = null, tint = MaterialTheme.colorScheme.secondary)
-            }
-            Spacer(Modifier.width(12.dp))
-            Column {
-                Text(stringResource(R.string.section_health), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-                Text(
-                    if (steps > 0) stringResource(R.string.steps_completed, steps) else stringResource(R.string.no_step_data),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-            }
-        }
-    }
-}
-
-@Composable
 private fun TodayRoutineCard(
     name: String,
     total: Int,
@@ -834,109 +694,6 @@ private fun TodayRoutineCard(
                 Icon(Icons.Rounded.PlayArrow, contentDescription = null, modifier = Modifier.size(16.dp))
                 Spacer(Modifier.width(4.dp))
                 Text(stringResource(R.string.start_routine))
-            }
-        }
-    }
-}
-
-@Composable
-private fun TodayIntelligenceCard(
-    insights: List<Insight>,
-    onOpenIntelligence: () -> Unit,
-) {
-    if (insights.isEmpty()) return
-    val topInsight = insights.first()
-
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(onClick = onOpenIntelligence),
-        shape = RoundedCornerShape(14.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f),
-        ),
-        border = androidx.compose.foundation.BorderStroke(
-            1.dp,
-            MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
-        ),
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(14.dp),
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .size(28.dp)
-                            .clip(CircleShape)
-                            .background(MaterialTheme.colorScheme.primaryContainer),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Icon(
-                            Icons.Rounded.Lightbulb,
-                            contentDescription = null,
-                            modifier = Modifier.size(16.dp),
-                            tint = MaterialTheme.colorScheme.primary,
-                        )
-                    }
-                    Text(
-                        "TSUZUKU INTELLIGENCE",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold,
-                        letterSpacing = 1.1.sp,
-                    )
-                }
-
-                Surface(
-                    shape = RoundedCornerShape(12.dp),
-                    color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f),
-                ) {
-                    Text(
-                        text = topInsight.confidence.label,
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                }
-            }
-
-            Spacer(Modifier.height(8.dp))
-
-            Text(
-                text = "${topInsight.type.icon} ${topInsight.title}",
-                style = MaterialTheme.typography.titleSmall,
-                fontWeight = FontWeight.SemiBold,
-            )
-
-            Spacer(Modifier.height(4.dp))
-
-            Text(
-                text = topInsight.description,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                lineHeight = 18.sp,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-            )
-
-            if (insights.size > 1) {
-                Spacer(Modifier.height(8.dp))
-                Text(
-                    text = stringResource(R.string.more_insights_see_all, insights.size - 1),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.Medium,
-                )
             }
         }
     }

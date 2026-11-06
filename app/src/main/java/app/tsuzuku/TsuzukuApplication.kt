@@ -8,7 +8,6 @@ import app.tsuzuku.data.RoomGoalRepository
 import app.tsuzuku.data.BackupRepository
 import app.tsuzuku.data.CloudSyncRepository
 import app.tsuzuku.data.DiagnosticStore
-import app.tsuzuku.data.HealthConnectRepository
 import app.tsuzuku.data.RoomHabitRepository
 import app.tsuzuku.data.RoomLibraryRepository
 import app.tsuzuku.data.ReviewRepository
@@ -17,11 +16,6 @@ import app.tsuzuku.data.PlanRepository
 import app.tsuzuku.data.CategoryRepository
 import app.tsuzuku.data.ConnectionRepository
 import app.tsuzuku.data.FocusRepository
-import app.tsuzuku.data.InboxRepository
-import app.tsuzuku.data.ProjectRepository
-import app.tsuzuku.data.RoomProjectRepository
-import app.tsuzuku.data.intelligence.IntelligenceRepository
-import app.tsuzuku.data.intelligence.RoomIntelligenceRepository
 import app.tsuzuku.data.local.TsuzukuDatabase
 import app.tsuzuku.data.preferences.SettingsRepository
 import app.tsuzuku.data.preferences.TimerSessionStore
@@ -73,32 +67,8 @@ class TsuzukuApplication : Application() {
         FocusRepository(TsuzukuDatabase.getInstance(this).focusDao())
     }
 
-    val inboxRepository: InboxRepository by lazy {
-        InboxRepository(TsuzukuDatabase.getInstance(this).inboxDao())
-    }
-
     val connectionRepository: ConnectionRepository by lazy {
         ConnectionRepository(TsuzukuDatabase.getInstance(this).connectionDao())
-    }
-
-    val projectRepository: ProjectRepository by lazy {
-        val db = TsuzukuDatabase.getInstance(this)
-        RoomProjectRepository(
-            projectDao = db.projectDao(),
-            planDao = db.planDao(),
-            goalDao = db.goalDao(),
-        )
-    }
-
-    val intelligenceRepository: IntelligenceRepository by lazy {
-        val db = TsuzukuDatabase.getInstance(this)
-        RoomIntelligenceRepository(
-            habitDao = db.habitDao(),
-            planDao = db.planDao(),
-            goalDao = db.goalDao(),
-            focusDao = db.focusDao(),
-            reviewDao = db.reviewDao(),
-        )
     }
 
     val backupRepository: BackupRepository by lazy {
@@ -115,10 +85,6 @@ class TsuzukuApplication : Application() {
         CloudSyncRepository(this, backupRepository, settingsRepository)
     }
 
-    val healthConnectRepository: HealthConnectRepository by lazy {
-        HealthConnectRepository(this, habitRepository)
-    }
-
     val reminderScheduler: HabitReminderScheduler by lazy {
         HabitReminderScheduler(this, TsuzukuDatabase.getInstance(this).habitDao())
     }
@@ -131,11 +97,11 @@ class TsuzukuApplication : Application() {
         super.onCreate()
         HabitNotifications.createChannel(this)
         diagnosticStore.installCrashCapture()
+        if (settingsRepository.settings.value.geminiApiKey.isNotBlank()) settingsRepository.setGeminiApiKey("")
         applicationScope.launch {
             reminderScheduler.rescheduleAll()
             TsuzukuWidgetProvider.requestUpdate(this@TsuzukuApplication)
             cloudSyncRepository.synchronize()
-            healthConnectRepository.refreshAndSync()
         }
     }
 
@@ -147,7 +113,4 @@ class TsuzukuApplication : Application() {
         applicationScope.launch { cloudSyncRepository.initializeFreshInstallation() }
     }
 
-    fun requestHealthSync() {
-        applicationScope.launch { healthConnectRepository.refreshAndSync() }
-    }
 }

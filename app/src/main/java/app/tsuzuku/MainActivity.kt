@@ -101,7 +101,6 @@ class MainActivity : FragmentActivity() {
                         categoryRepository = application.categoryRepository,
                         backupRepository = application.backupRepository,
                         cloudSyncRepository = application.cloudSyncRepository,
-                        healthConnectRepository = application.healthConnectRepository,
                         diagnosticStore = application.diagnosticStore,
                         reminderScheduler = application.reminderScheduler,
                         timerSessionStore = application.timerSessionStore,
@@ -125,20 +124,9 @@ class MainActivity : FragmentActivity() {
                         onSetBiometric = settingsRepository::setBiometricUnlock,
                         onSetLockDelayMinutes = settingsRepository::setLockDelayMinutes,
                         focusRepository = application.focusRepository,
-                        inboxRepository = application.inboxRepository,
                         connectionRepository = application.connectionRepository,
-                        projectRepository = application.projectRepository,
-                        intelligenceRepository = application.intelligenceRepository,
                         onSetTodaySectionOrder = settingsRepository::setTodaySectionOrder,
                         onSetTodayHiddenSections = settingsRepository::setTodayHiddenSections,
-                        onSetHealthSyncEnabled = settingsRepository::setHealthSyncEnabled,
-                        onSetOfflineIntelligenceEnabled = settingsRepository::setOfflineIntelligenceEnabled,
-                        onSetCloudAiEnabled = settingsRepository::setCloudAiEnabled,
-                        onSetGeminiApiKey = settingsRepository::setGeminiApiKey,
-                        onSetAiShareHabitTitles = settingsRepository::setAiShareHabitTitles,
-                        onSetAiShareTaskTitles = settingsRepository::setAiShareTaskTitles,
-                        onSetAiShareNotes = settingsRepository::setAiShareNotes,
-                        onSetCloudAiModel = settingsRepository::setCloudAiModel,
                     )
                 }
             }
@@ -166,7 +154,6 @@ class MainActivity : FragmentActivity() {
             System.currentTimeMillis() - backgroundedAt >= settings.lockDelayMinutes * 60_000L
         ) isUnlocked = false
         backgroundedAt = 0L
-        tsuzukuApplication.requestHealthSync()
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

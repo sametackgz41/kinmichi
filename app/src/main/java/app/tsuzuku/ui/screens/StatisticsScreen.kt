@@ -207,16 +207,6 @@ fun StatisticsScreen(
                         HabitStatisticCard(visibleHabitStats[index])
                     }
                 }
-                item { Text(stringResource(R.string.library_summary), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold) }
-                if (libraryCategories.size > 1) {
-                    item {
-                        Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                            FilterChip(selected = libraryCategory.isBlank(), onClick = { libraryCategory = "" }, label = { Text(stringResource(R.string.all_label)) })
-                            libraryCategories.forEach { category -> FilterChip(selected = libraryCategory == category.name, onClick = { libraryCategory = category.name }, label = { Text(stringResource(categoryLabelRes(category))) }) }
-                        }
-                    }
-                }
-                item { LibraryStatisticCard(visibleLibrary) }
             }
 
             StatisticsTab.Heatmap -> {
@@ -724,37 +714,3 @@ private fun HabitStatisticCard(stat: HabitPeriodStat) {
     }
 }
 
-@Composable
-private fun LibraryStatisticCard(items: List<LibraryItem>) {
-    val completed = items.count { it.content.status == ContentStatus.Completed }
-    val inProgress = items.count { it.content.status == ContentStatus.InProgress }
-    Card(shape = RoundedCornerShape(10.dp)) {
-        Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                Column {
-                    Text(items.size.toString(), style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-                    Text(stringResource(R.string.total_content), color = MaterialTheme.colorScheme.onSurfaceVariant)
-                }
-                Column(horizontalAlignment = Alignment.End) {
-                    Text(stringResource(R.string.library_status_counts, inProgress, completed), style = MaterialTheme.typography.titleMedium)
-                    Text(
-                        pluralStringResource(R.plurals.category_count, items.map { it.content.category }.distinct().size, items.map { it.content.category }.distinct().size),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                }
-            }
-            if (items.isNotEmpty()) {
-                items.groupingBy { it.content.category }.eachCount().entries
-                    .sortedByDescending { it.value }
-                    .forEach { (category, count) ->
-                        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                            Text("${categoryEmoji(category)} ${stringResource(categoryLabelRes(category))}")
-                            Text(count.toString(), fontWeight = FontWeight.Bold)
-                        }
-                    }
-            } else {
-                Text(stringResource(R.string.library_empty_statistics), color = MaterialTheme.colorScheme.onSurfaceVariant)
-            }
-        }
-    }
-}

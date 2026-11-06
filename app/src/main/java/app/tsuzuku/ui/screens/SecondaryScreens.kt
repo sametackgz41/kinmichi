@@ -100,11 +100,8 @@ fun ProfileScreen(
     onOpenBackup: () -> Unit,
     onOpenDiagnostics: () -> Unit,
     onOpenCategories: () -> Unit,
-    onSetOfflineIntelligenceEnabled: (Boolean) -> Unit = {},
-    onOpenProjects: () -> Unit = {},
     onOpenRecords: () -> Unit = {},
-    onOpenAiPrivacy: () -> Unit = {},
-    onBack: () -> Unit = {},
+    onBack: (() -> Unit)? = null,
 ) {
     val context = LocalContext.current
     val appName = stringResource(R.string.app_name)
@@ -119,16 +116,18 @@ fun ProfileScreen(
     var nameDraft by rememberSaveable(settings.profileName) { mutableStateOf(settings.profileName) }
 
     LazyColumn(
-        modifier = Modifier.fillMaxSize().statusBarsPadding(),
-        contentPadding = PaddingValues(18.dp, 14.dp, 18.dp, 24.dp),
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(16.dp, 4.dp, 16.dp, 24.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         item {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                IconButton(onClick = onBack) {
-                    Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.back))
+            if (onBack != null) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    IconButton(onClick = onBack) {
+                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.back))
+                    }
+                    Text(stringResource(R.string.settings_label), style = MaterialTheme.typography.titleLarge)
                 }
-                Text(stringResource(R.string.profile), style = MaterialTheme.typography.titleLarge)
             }
         }
         item {
@@ -208,12 +207,6 @@ fun ProfileScreen(
                     onClick = onOpenPlanning,
                 )
                 ValueSettingRow(
-                    icon = Icons.Rounded.AccountTree,
-                    title = stringResource(R.string.projects_title),
-                    value = stringResource(R.string.projects_settings_desc),
-                    onClick = onOpenProjects,
-                )
-                ValueSettingRow(
                     icon = Icons.Rounded.Star,
                     title = stringResource(R.string.personal_records_milestones),
                     value = stringResource(R.string.personal_records_desc),
@@ -260,19 +253,6 @@ fun ProfileScreen(
                     stringResource(R.string.screen_protection_description),
                     checked = settings.protectScreen,
                     onCheckedChange = onSetProtectScreen,
-                )
-                SwitchSettingRow(
-                    Icons.Rounded.Lightbulb,
-                    stringResource(R.string.intelligence_offline_title),
-                    stringResource(R.string.intelligence_offline_desc),
-                    checked = settings.offlineIntelligenceEnabled,
-                    onCheckedChange = onSetOfflineIntelligenceEnabled,
-                )
-                ValueSettingRow(
-                    Icons.Rounded.Shield,
-                    stringResource(R.string.ai_privacy_settings_title),
-                    if (settings.cloudAiEnabled && settings.geminiApiKey.isNotBlank()) stringResource(R.string.gemini_cloud_active) else stringResource(R.string.ai_offline_engine_active),
-                    onClick = onOpenAiPrivacy,
                 )
                 ValueSettingRow(
                     Icons.Rounded.Lock,

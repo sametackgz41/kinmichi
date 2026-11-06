@@ -980,4 +980,14 @@
     <string name="widget_week_title">Bu hafta</string>
     <string name="widget_no_habits">Bugün için alışkanlık yok</string>
     <string name="widget_pick_one">Gösterilecek alışkanlığı seç.</string>
+    <string name="template_water">Su iç</string>
+    <string name="unit_glasses">bardak</string>
+    <string name="template_read">Kitap oku</string>
+    <string name="template_walk">Yürüyüş</string>
+    <string name="template_stretch">Sabah esnemesi</string>
+    <string name="template_wake_early">Erken kalk</string>
+    <string name="template_no_phone_bed">Yatakta telefon yok</string>
+    <string name="starter_title">Bir alışkanlıkla başla</string>
+    <string name="starter_body">Eklemek için birine dokun. Her şeyi sonra değiştirebilirsin.</string>
+    <string name="create_own_habit">Kendininkini oluştur</string>
 </resources>

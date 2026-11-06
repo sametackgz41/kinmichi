@@ -981,4 +981,14 @@
     <string name="widget_week_title">This week</string>
     <string name="widget_no_habits">No habits for today</string>
     <string name="widget_pick_one">Choose the habit to show.</string>
+    <string name="template_water">Drink water</string>
+    <string name="unit_glasses">glasses</string>
+    <string name="template_read">Read</string>
+    <string name="template_walk">Walk</string>
+    <string name="template_stretch">Morning stretch</string>
+    <string name="template_wake_early">Wake up early</string>
+    <string name="template_no_phone_bed">No phone in bed</string>
+    <string name="starter_title">Start with a habit</string>
+    <string name="starter_body">Tap one to add it. You can change everything later.</string>
+    <string name="create_own_habit">Create your own</string>
 </resources>

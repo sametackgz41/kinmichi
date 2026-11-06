@@ -55,11 +55,8 @@ val ALL_SECTIONS = listOf(
     SectionItem("habits", R.string.habits, Icons.Rounded.Repeat),
     SectionItem("plan", R.string.todays_plan_section, Icons.Rounded.Checklist),
     SectionItem("goals", R.string.goal_progress_section, Icons.Rounded.Flag),
-    SectionItem("library", R.string.content_in_progress_section, Icons.Rounded.MenuBook),
     SectionItem("focus", R.string.focus_info_section, Icons.Rounded.Timer),
-    SectionItem("health", R.string.health_info_section, Icons.Rounded.HealthAndSafety),
     SectionItem("routines", R.string.routines_label, Icons.Rounded.Repeat),
-    SectionItem("intelligence", R.string.tsuzuku_intelligence, Icons.Rounded.Lightbulb),
 )
 
 @OptIn(ExperimentalMaterial3Api::class)

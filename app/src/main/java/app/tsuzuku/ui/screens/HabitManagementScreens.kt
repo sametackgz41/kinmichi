@@ -209,52 +209,6 @@ fun HabitDetailScreen(
             }
 
             // Linked Library Content Section
-            item {
-                Spacer(Modifier.height(8.dp))
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(stringResource(R.string.linked_library), style = MaterialTheme.typography.titleMedium)
-                    FilledTonalButton(onClick = { showLinkContentDialog = true }) {
-                        Icon(Icons.Rounded.Add, contentDescription = null, modifier = Modifier.size(16.dp))
-                        Spacer(Modifier.width(4.dp))
-                        Text(stringResource(R.string.link_content))
-                    }
-                }
-            }
-            if (linkedContents.isEmpty()) {
-                item {
-                    Text(
-                        text = stringResource(R.string.no_linked_library_content),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                }
-            } else {
-                items(linkedContents, key = { it.first.content.id }) { (content, link) ->
-                    Card(
-                        shape = RoundedCornerShape(10.dp),
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
-                    ) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth().padding(12.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(10.dp),
-                        ) {
-                            Icon(Icons.Rounded.MenuBook, contentDescription = null, tint = MaterialTheme.colorScheme.secondary)
-                            Column(modifier = Modifier.weight(1f)) {
-                                Text(content.content.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
-                                Text(stringResource(R.string.habit_progress_multiplier, link.contributionMultiplier), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                            }
-                            IconButton(onClick = { onUnlinkContent(content.content.id) }) {
-                                Icon(Icons.Rounded.LinkOff, contentDescription = stringResource(R.string.unlink), tint = MaterialTheme.colorScheme.error)
-                            }
-                        }
-                    }
-                }
-            }
 
             // Habit Levels Section
             item {
@@ -826,3 +780,5 @@ private fun habitStatusLabel(status: HabitDayStatus): String = stringResource(wh
     HabitDayStatus.Failed -> R.string.failed_label
     HabitDayStatus.Skipped -> R.string.skipped_label
 })
+
+internal fun formatLibraryAmount(value: Double): String = formatHabitAmount(value)
