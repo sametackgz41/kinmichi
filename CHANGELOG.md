@@ -1,5 +1,12 @@
 # Değişiklik günlüğü
 
+## 2.2.0 — Hedef koçu ve ruh hali
+
+- Akıllı hedef önerisi: sayılı/süreli bir alışkanlıkta son 14 günün %40'ından azında hedefe ulaşıldıysa, gerçekte ulaştığın miktardan başlamayı öneren kart; yeni hedef tutunca kademeli olarak geri büyütme önerisi (kabul ya da redden sonra 14 gün sessiz)
+- Bugün ekranında tek dokunuşla ruh hali (5 yüz); not ve ayrıntılı değerlendirme "Not ekle" ile
+- Akşam 21:00'de "Bugün nasıl geçti?" bildirimi, üç hızlı yanıtla; Ayarlar'dan kapatılabilir
+- İlerleme sekmesinde ruh hali içgörüleri: 10 gün kayıttan sonra hangi alışkanlıkların yapıldığı günlerin daha iyi ya da daha zor geçtiğini gösterir
+
 ## 2.1.0 — Yeni widget'lar
 
 - Bugün widget'ı: günün ilerleme halkası ve kalan alışkanlık sayısı, + ile yeni alışkanlık, her satırda alışkanlığın rengi ve seri bilgisi
