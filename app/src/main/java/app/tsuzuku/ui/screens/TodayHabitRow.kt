@@ -34,6 +34,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.Bedtime
 import androidx.compose.material.icons.rounded.LocalFireDepartment
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material.icons.rounded.Stop
@@ -156,7 +157,7 @@ internal fun HabitRow(
                 )
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     if (todayHabit.streakDays > 1) {
-                        StreakBadge(todayHabit.streakDays)
+                        StreakBadge(todayHabit.streakDays, todayHabit.restUsedThisWeek)
                         Spacer(Modifier.width(8.dp))
                     }
                     Text(
@@ -256,7 +257,7 @@ internal fun formatHabitAmount(value: Double): String =
 
 /** Streak flame that bumps whenever the streak grows. */
 @Composable
-private fun StreakBadge(days: Int) {
+private fun StreakBadge(days: Int, restUsed: Boolean) {
     val bump = remember { Animatable(1f) }
     var last by remember { mutableStateOf(days) }
     LaunchedEffect(days) {
@@ -266,7 +267,8 @@ private fun StreakBadge(days: Int) {
         }
         last = days
     }
-    val description = pluralStringResource(R.plurals.streak_days, days, days)
+    val description = pluralStringResource(R.plurals.streak_days, days, days) +
+        if (restUsed) ", " + stringResource(R.string.rest_day_used) else ""
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -287,6 +289,15 @@ private fun StreakBadge(days: Int) {
             label = "streak-count",
         ) { value ->
             Text(value.toString(), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.tertiary)
+        }
+        if (restUsed) {
+            Spacer(Modifier.width(4.dp))
+            Icon(
+                Icons.Rounded.Bedtime,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.size(13.dp),
+            )
         }
     }
 }

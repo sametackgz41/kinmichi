@@ -1029,4 +1029,6 @@
         <item quantity="one">%d habit left</item>
         <item quantity="other">%d habits left</item>
     </plurals>
+    <string name="rest_day_used">this week\'s rest day is used</string>
+    <string name="rest_day_rule">Forgot a day? One missed day a week won\'t break your streak.</string>
 </resources>

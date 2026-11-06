@@ -86,6 +86,7 @@ data class TodayHabit(
     val progress: Double,
     val status: HabitDayStatus = HabitDayStatus.Pending,
     val streakDays: Int = 0,
+    val restUsedThisWeek: Boolean = false,
     val periodProgress: Int = 0,
     val isBlocked: Boolean = false,
     val blockedByName: String? = null,

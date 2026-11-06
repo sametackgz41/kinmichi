@@ -116,7 +116,7 @@ class PreviewGalleryTest {
         return listOf(
             TodayHabit(read, progress = 1.0, status = HabitDayStatus.Completed, streakDays = 12),
             TodayHabit(water, progress = if (allDone) 8.0 else 5.0, status = if (allDone) HabitDayStatus.Completed else HabitDayStatus.Pending, streakDays = 4),
-            TodayHabit(meditate, progress = if (allDone) 15.0 else 10.0, status = if (allDone) HabitDayStatus.Completed else HabitDayStatus.Pending, streakDays = 7),
+            TodayHabit(meditate, progress = if (allDone) 15.0 else 10.0, status = if (allDone) HabitDayStatus.Completed else HabitDayStatus.Pending, streakDays = 7, restUsedThisWeek = true),
             TodayHabit(run, progress = if (allDone) 1.0 else 0.0, status = if (allDone) HabitDayStatus.Completed else HabitDayStatus.Pending, streakDays = 3),
             TodayHabit(walk, progress = if (allDone) 1.0 else 0.0, status = if (allDone) HabitDayStatus.Completed else HabitDayStatus.Pending, streakDays = 0),
         )

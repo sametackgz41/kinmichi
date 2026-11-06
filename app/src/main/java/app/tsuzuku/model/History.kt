@@ -94,8 +94,8 @@ data class HabitHistorySnapshot(
                 scheduledCount = scheduledCount,
                 completedCount = completedCount,
                 completionRate = ratio(completedCount, scheduledCount),
-                currentStreak = if (habit.goalPeriod == GoalPeriod.Daily) currentStreak(habit, allScheduledDates) else currentBooleanStreak(allPeriodResults),
-                bestStreak = if (habit.goalPeriod == GoalPeriod.Daily) bestStreak(habit, allScheduledDates) else bestBooleanStreak(allPeriodResults),
+                currentStreak = if (habit.goalPeriod == GoalPeriod.Daily) streakOf(streakDays(habit, allScheduledDates, endDate)).current else currentBooleanStreak(allPeriodResults),
+                bestStreak = if (habit.goalPeriod == GoalPeriod.Daily) streakOf(streakDays(habit, allScheduledDates, endDate)).best else bestBooleanStreak(allPeriodResults),
             )
         }.sortedWith(compareByDescending<HabitPeriodStat> { it.completionRate }.thenBy { it.habit.sortOrder })
         val scheduled = perHabit.sumOf(HabitPeriodStat::scheduledCount)
@@ -131,6 +131,13 @@ data class HabitHistorySnapshot(
         }
     }
 
+    /** An explicit failure, as opposed to a day that was simply not logged. */
+    private fun isBroken(habit: Habit, date: LocalDate): Boolean {
+        val record = recordsByDateAndHabit[date]?.get(habit.id) ?: return false
+        return record.status == HabitDayStatus.Failed ||
+            (habit.direction == HabitDirection.Quit && habit.maximumTarget != null && record.progress > habit.maximumTarget)
+    }
+
     private fun generateScheduledDates(habit: Habit, endDate: LocalDate): List<LocalDate> {
         val firstRecord = records.asSequence().filter { it.habitId == habit.id }.minOfOrNull(HabitHistoryRecord::date)
         val start = maxOf(habit.createdOn, firstRecord ?: habit.createdOn, endDate.minusDays(365))
@@ -142,27 +149,23 @@ data class HabitHistorySnapshot(
         }.toList()
     }
 
-    private fun currentStreak(habit: Habit, scheduledDates: List<LocalDate>): Int {
-        var streak = 0
-        for (date in scheduledDates.asReversed()) {
-            if (preservesStreak(habit, date)) streak++ else break
+    /** Streak for a daily habit as of [today], with this week's rest day applied. */
+    fun streak(habit: Habit, today: LocalDate): StreakResult =
+        if (habit.goalPeriod != GoalPeriod.Daily) {
+            StreakResult(0, 0, restUsedThisWeek = false)
+        } else {
+            streakOf(streakDays(habit, generateScheduledDates(habit, today), today))
         }
-        return streak
-    }
 
-    private fun bestStreak(habit: Habit, scheduledDates: List<LocalDate>): Int {
-        var best = 0
-        var current = 0
-        scheduledDates.forEach { date ->
-            if (preservesStreak(habit, date)) {
-                current++
-                best = maxOf(best, current)
-            } else {
-                current = 0
+    private fun streakDays(habit: Habit, scheduledDates: List<LocalDate>, today: LocalDate): List<Pair<LocalDate, StreakDay>> =
+        scheduledDates.map { date ->
+            date to when {
+                preservesStreak(habit, date) -> StreakDay.Kept
+                isBroken(habit, date) -> StreakDay.Broken
+                date == today -> StreakDay.Pending
+                else -> StreakDay.Missed
             }
         }
-        return best
-    }
 
     private fun currentBooleanStreak(results: List<Boolean>): Int = results.asReversed().takeWhile { it }.size
 

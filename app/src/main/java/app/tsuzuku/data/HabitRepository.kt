@@ -93,7 +93,9 @@ class RoomHabitRepository(
             }
             val entitiesById = habits.associateBy(HabitEntity::id)
             val namesById = habits.associate { it.id to it.name }
+            val history = HabitHistorySnapshot(habits.map(HabitEntity::toDomain), entries.toHistoryRecords())
             mapped.map { item ->
+                val streak = history.streak(item.habit, date)
                 val prerequisiteId = item.habit.prerequisiteHabitId
                 val blocked = prerequisiteId?.let { id ->
                     entitiesById[id]?.let { prerequisite ->
@@ -105,7 +107,12 @@ class RoomHabitRepository(
                         !(dayComplete || (prerequisite.goalPeriod != GoalPeriod.Daily.name && periodComplete))
                     } ?: false
                 } ?: false
-                item.copy(isBlocked = blocked, blockedByName = if (blocked) namesById[prerequisiteId] else null)
+                item.copy(
+                    isBlocked = blocked,
+                    blockedByName = if (blocked) namesById[prerequisiteId] else null,
+                    streakDays = streak.current,
+                    restUsedThisWeek = streak.restUsedThisWeek,
+                )
             }
         }
     }
@@ -114,24 +121,7 @@ class RoomHabitRepository(
         dao.observeActiveHabits(),
         dao.observeAllEntries(),
     ) { habits, entries ->
-        val domainHabits = habits.map(HabitEntity::toDomain)
-        val records = entries
-            .groupBy { it.habitId to it.localDate }
-            .mapNotNull { (key, dayEntries) ->
-                val date = runCatching { LocalDate.parse(key.second) }.getOrNull() ?: return@mapNotNull null
-                val status = dayEntries.toDayStatus()
-                val skipped = dayEntries.firstOrNull { it.status == HabitEntryEntity.STATUS_SKIPPED }
-                HabitHistoryRecord(
-                    habitId = key.first,
-                    date = date,
-                    progress = dayEntries
-                        .filter(HabitEntryEntity::isProgress)
-                        .sumOf(HabitEntryEntity::amount),
-                    status = status,
-                    note = skipped?.note,
-                )
-            }
-        HabitHistorySnapshot(domainHabits, records)
+        HabitHistorySnapshot(habits.map(HabitEntity::toDomain), entries.toHistoryRecords())
     }
 
     override suspend fun toggleHabit(id: Long) = toggleHabitOnDate(id, today())
@@ -524,6 +514,19 @@ private fun periodCompletionCount(habit: HabitEntity, entries: List<HabitEntryEn
         .groupBy(HabitEntryEntity::localDate)
         .count { (_, dayEntries) -> dayEntries.any { it.status == HabitEntryEntity.STATUS_COMPLETED } || dayEntries.filter(HabitEntryEntity::isProgress).sumOf(HabitEntryEntity::amount) >= habit.target }
 }
+
+private fun List<HabitEntryEntity>.toHistoryRecords(): List<HabitHistoryRecord> =
+    groupBy { it.habitId to it.localDate }
+        .mapNotNull { (key, dayEntries) ->
+            val date = runCatching { LocalDate.parse(key.second) }.getOrNull() ?: return@mapNotNull null
+            HabitHistoryRecord(
+                habitId = key.first,
+                date = date,
+                progress = dayEntries.filter(HabitEntryEntity::isProgress).sumOf(HabitEntryEntity::amount),
+                status = dayEntries.toDayStatus(),
+                note = dayEntries.firstOrNull { it.status == HabitEntryEntity.STATUS_SKIPPED }?.note,
+            )
+        }
 
 private fun List<HabitEntryEntity>.toDayStatus(): HabitDayStatus = when {
     any { it.status == HabitEntryEntity.STATUS_SKIPPED } -> HabitDayStatus.Skipped

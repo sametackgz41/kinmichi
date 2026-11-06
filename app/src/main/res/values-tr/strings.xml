@@ -1028,4 +1028,6 @@
         <item quantity="one">%d alışkanlık kaldı</item>
         <item quantity="other">%d alışkanlık kaldı</item>
     </plurals>
+    <string name="rest_day_used">bu haftaki dinlenme hakkı kullanıldı</string>
+    <string name="rest_day_rule">Bir gün unuttun mu? Haftada bir kaçırılan gün serini bozmaz.</string>
 </resources>
