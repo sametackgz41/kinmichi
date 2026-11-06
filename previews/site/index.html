@@ -292,7 +292,11 @@
     <div class="home">
       <figure>
         <img class="widget w-today" data-widget="today" alt="Bugün widget'ı: alışkanlık listesi ve ilerleme çubuğu">
-        <figcaption>Bugün: onay kutusu ve +1 düğmesiyle uygulamayı açmadan işaretleme.</figcaption>
+        <figcaption>Bugün: yuvarlak onay ve +1 düğmesiyle uygulamayı açmadan işaretleme.</figcaption>
+      </figure>
+      <figure>
+        <img class="widget w-today" data-widget="today_done" alt="Bugün widget'ı: bütün alışkanlıklar tamamlanmış">
+        <figcaption>Tamamlananlar dolu düğmeyle gösterilir.</figcaption>
       </figure>
       <figure>
         <img class="widget w-habit" data-widget="habit" alt="Tek alışkanlık widget'ı: tamamlanmış kitap okuma">
@@ -313,7 +317,8 @@
     </div>
     <div class="note">
       <p><b>Önizlemenin yakaladığı hata:</b> Bugün widget'ındaki onay kutusu Android 12 ve sonrasında Material You renkleriyle çöküyordu. Düzeltildi.</p>
-      <p><b>Statik çizimin sınırı:</b> Burada onay kutuları tamamlanmış alışkanlıklarda da boş görünüyor ve köşeler yuvarlanmıyor. İkisi de ana ekran uygulamasının yaptığı şeyler; gerçek cihazda bir kez kontrol edilmeli.</p>
+      <p><b>Onay kutusu değişti:</b> Sistem onay kutusu yerine uygulamadaki gibi yuvarlak bir düğme kullanılıyor. Tamamlanma hali artık ana ekran uygulamasına bırakılmadan çiziliyor, her telefonda aynı görünür.</p>
+      <p><b>Statik çizimin sınırı:</b> Köşeler burada yuvarlanmıyor; bunu Android 12+ ana ekranı yapıyor.</p>
     </div>
   </section>
 

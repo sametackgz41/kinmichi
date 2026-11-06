@@ -44,11 +44,17 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
+import android.content.Intent
+import android.provider.Settings
+import androidx.core.app.NotificationManagerCompat
+import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -178,6 +184,40 @@ internal class HabitEditorState(existing: Habit?) {
             tags = tags,
         )
     }
+
+    private fun snapshot(): List<Any?> = listOf(
+        name, emoji, colorIndex, direction.name, type.name, targetText, unit, stepText,
+        minimumTargetText, maximumTargetText, difficulty, contextLabel, intention,
+        activeStartEpochDay, activeEndEpochDay, pausedUntilEpochDay, repeatIntervalText, tags,
+        selectedDays, goalPeriod.name, periodTargetText, routineName, prerequisiteId,
+        reminderEnabled, reminderTime, repeatEnabled, repeatMinutes,
+    )
+
+    private fun restore(values: List<Any?>) {
+        var i = 0
+        fun <T> next(): T {
+            @Suppress("UNCHECKED_CAST")
+            return values[i++] as T
+        }
+        name = next(); emoji = next(); colorIndex = next()
+        direction = HabitDirection.valueOf(next()); type = HabitType.valueOf(next())
+        targetText = next(); unit = next(); stepText = next()
+        minimumTargetText = next(); maximumTargetText = next(); difficulty = next()
+        contextLabel = next(); intention = next()
+        activeStartEpochDay = next(); activeEndEpochDay = next(); pausedUntilEpochDay = next()
+        repeatIntervalText = next(); tags = next(); selectedDays = next()
+        goalPeriod = GoalPeriod.valueOf(next()); periodTargetText = next(); routineName = next()
+        prerequisiteId = next(); reminderEnabled = next(); reminderTime = next()
+        repeatEnabled = next(); repeatMinutes = next()
+    }
+
+    companion object {
+        /** Keeps unsaved edits across rotation and process death. */
+        fun saver(existing: Habit?): Saver<HabitEditorState, Any> = listSaver(
+            save = { it.snapshot() },
+            restore = { values -> HabitEditorState(existing).also { it.restore(values) } },
+        )
+    }
 }
 
 /**
@@ -193,7 +233,7 @@ fun HabitEditorScreen(
     onBack: () -> Unit,
     onSave: (HabitDraft) -> Unit,
 ) {
-    val state = remember(existing?.id) { HabitEditorState(existing) }
+    val state = rememberSaveable(existing?.id, saver = HabitEditorState.saver(existing)) { HabitEditorState(existing) }
     var showAdvanced by rememberSaveable { mutableStateOf(false) }
 
     Scaffold(
@@ -360,7 +400,16 @@ private fun DaysSection(state: HabitEditorState) {
 @Composable
 private fun ReminderSection(state: HabitEditorState) {
     val context = LocalContext.current
-    val permissionLauncher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { }
+    // Re-checked on every resume so the hint disappears after the user allows notifications in
+    // system settings and comes back.
+    var notificationsAllowed by remember { mutableStateOf(NotificationManagerCompat.from(context).areNotificationsEnabled()) }
+    LifecycleResumeEffect(Unit) {
+        notificationsAllowed = NotificationManagerCompat.from(context).areNotificationsEnabled()
+        onPauseOrDispose { }
+    }
+    val permissionLauncher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        notificationsAllowed = granted && NotificationManagerCompat.from(context).areNotificationsEnabled()
+    }
     Card(shape = MaterialTheme.shapes.large) {
         Row(
             Modifier.fillMaxWidth().padding(16.dp),
@@ -381,6 +430,29 @@ private fun ReminderSection(state: HabitEditorState) {
                     }
                 },
             )
+        }
+    }
+    AnimatedVisibility(visible = state.reminderEnabled && !notificationsAllowed) {
+        Card(
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer),
+            modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
+        ) {
+            Column(Modifier.padding(start = 16.dp, top = 12.dp, end = 8.dp, bottom = 4.dp)) {
+                Text(
+                    stringResource(R.string.notifications_blocked),
+                    color = MaterialTheme.colorScheme.onErrorContainer,
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+                TextButton(
+                    onClick = {
+                        context.startActivity(
+                            Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+                                .putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName),
+                        )
+                    },
+                    modifier = Modifier.align(Alignment.End),
+                ) { Text(stringResource(R.string.open_notification_settings)) }
+            }
         }
     }
     if (state.reminderEnabled) {

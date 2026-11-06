@@ -1014,4 +1014,8 @@
     <string name="delete_account_confirm">Delete permanently</string>
     <string name="delete_account_reauth">For your security, sign in again and then delete your account.</string>
     <string name="deleting_account">Deleting your account…</string>
+    <string name="widget_mark_done">Mark %1$s done</string>
+    <string name="widget_mark_not_done">Mark %1$s not done</string>
+    <string name="notifications_blocked">Notifications are off for Tsuzuku, so this reminder won\'t appear.</string>
+    <string name="open_notification_settings">Turn on</string>
 </resources>

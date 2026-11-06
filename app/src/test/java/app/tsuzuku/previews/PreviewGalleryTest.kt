@@ -318,6 +318,8 @@ class PreviewGalleryTest {
         val today = sampleToday(lang)
         val todaySorted = today.sortedBy { it.isComplete } // same order as TodayWidget
         renderWidget("widget_today_$suffix", 300, 220) { TsuzukuGlanceTheme { TodayContent(todaySorted, loaded = true, locked = false) } }
+        val allDone = sampleToday(lang, allDone = true).take(4)
+        renderWidget("widget_today_done_$suffix", 300, 220) { TsuzukuGlanceTheme { TodayContent(allDone, loaded = true, locked = false) } }
         renderWidget("widget_habit_$suffix", 150, 150) { TsuzukuGlanceTheme { HabitContent(today[0], locked = false) } }
         renderWidget("widget_habit_progress_$suffix", 150, 150) { TsuzukuGlanceTheme { HabitContent(today[1], locked = false) } }
         val days = lastSevenDays(sampleHistory(lang))

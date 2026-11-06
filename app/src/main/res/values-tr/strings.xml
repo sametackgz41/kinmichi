@@ -1013,4 +1013,8 @@
     <string name="delete_account_confirm">Kalıcı olarak sil</string>
     <string name="delete_account_reauth">Güvenliğin için tekrar giriş yap, sonra hesabını sil.</string>
     <string name="deleting_account">Hesabın siliniyor…</string>
+    <string name="widget_mark_done">%1$s tamamlandı olarak işaretle</string>
+    <string name="widget_mark_not_done">%1$s tamamlanmadı olarak işaretle</string>
+    <string name="notifications_blocked">Tsuzuku için bildirimler kapalı, bu hatırlatıcı gelmeyecek.</string>
+    <string name="open_notification_settings">Aç</string>
 </resources>

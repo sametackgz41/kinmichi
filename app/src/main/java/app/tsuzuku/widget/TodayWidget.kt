@@ -14,8 +14,6 @@ import androidx.glance.LocalContext
 import androidx.glance.action.actionParametersOf
 import androidx.glance.action.actionStartActivity
 import androidx.glance.action.clickable
-import androidx.glance.appwidget.CheckBox
-import androidx.glance.appwidget.CheckboxDefaults
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetManager
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
@@ -49,9 +47,8 @@ import app.tsuzuku.model.TodayHabit
 import app.tsuzuku.ui.screens.formatHabitAmount
 
 /**
- * "Today" widget: the day's habits with live check boxes and +1 buttons, so habits can be
- * completed without opening the app. Check boxes and the progress bar animate natively on
- * Android 12+ when their state changes.
+ * "Today" widget: the day's habits with round check and +1 buttons, so habits can be
+ * completed without opening the app. The progress bar animates natively on Android 12+.
  */
 class TodayWidget : GlanceAppWidget() {
     override val sizeMode = SizeMode.Exact
@@ -175,12 +172,20 @@ private fun HabitLine(item: TodayHabit) {
             modifier = GlanceModifier.defaultWeight().clickable(actionStartActivity<MainActivity>()),
         )
         when (habit.type) {
-            HabitType.Check -> CheckBox(
-                checked = item.isComplete,
-                onCheckedChange = if (item.isBlocked) null else actionRunCallback<ToggleHabitAction>(params),
-                // The no-argument defaults follow GlanceTheme; passing dynamic (resource-backed)
-                // colors explicitly throws on Android 12+.
-                colors = CheckboxDefaults.colors(),
+            // A round button rather than Glance's CheckBox: it matches the in-app check button and
+            // the +1 button beside it, and its done state is drawn by us instead of by the
+            // launcher's compound-button theme, so it looks the same on every launcher.
+            HabitType.Check -> CircleIconButton(
+                imageProvider = ImageProvider(R.drawable.ic_widget_check),
+                contentDescription = context.getString(
+                    if (item.isComplete) R.string.widget_mark_not_done else R.string.widget_mark_done,
+                    habit.name,
+                ),
+                onClick = actionRunCallback<ToggleHabitAction>(params),
+                enabled = !item.isBlocked,
+                backgroundColor = if (item.isComplete) GlanceTheme.colors.primary else GlanceTheme.colors.surfaceVariant,
+                contentColor = if (item.isComplete) GlanceTheme.colors.onPrimary else GlanceTheme.colors.outline,
+                modifier = GlanceModifier.size(36.dp),
             )
             HabitType.Count -> {
                 Text(
