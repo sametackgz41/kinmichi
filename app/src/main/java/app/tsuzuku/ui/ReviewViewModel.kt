@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.time.DayOfWeek
@@ -32,7 +33,7 @@ class ReviewViewModel(
 
     private val initialWeekStart: LocalDate = today().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
 
-    val dailyReviewToday: StateFlow<DailyReview?> = repository.observeDailyReview(today().toEpochDay()).stateIn(
+    val dailyReviewToday: StateFlow<DailyReview?> = repository.observeDailyReview(today().toEpochDay()).flowOn(kotlinx.coroutines.Dispatchers.Default).stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = null,
@@ -41,7 +42,7 @@ class ReviewViewModel(
     /** Mood per day, for the mood insights card. */
     val moodsByDay: StateFlow<Map<LocalDate, Int>> = repository.observeDailyReviews()
         .map { reviews -> reviews.associate { LocalDate.ofEpochDay(it.epochDay) to it.mood } }
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyMap())
+        .flowOn(kotlinx.coroutines.Dispatchers.Default).stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyMap())
 
     /** One-tap mood: keeps whatever else today's review already holds. */
     fun quickMood(mood: Int, existing: app.tsuzuku.model.DailyReview?) {
@@ -63,7 +64,7 @@ class ReviewViewModel(
     @OptIn(ExperimentalCoroutinesApi::class)
     val weeklySummary: StateFlow<WeeklySummary> = mutableSelectedWeekStart.flatMapLatest { weekStart ->
         repository.observeWeeklySummary(weekStart)
-    }.stateIn(
+    }.flowOn(kotlinx.coroutines.Dispatchers.Default).stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = WeeklySummary(
@@ -86,7 +87,7 @@ class ReviewViewModel(
     @OptIn(ExperimentalCoroutinesApi::class)
     val monthlySummary: StateFlow<MonthlySummary> = mutableSelectedMonth.flatMapLatest { month ->
         repository.observeMonthlySummary(month)
-    }.stateIn(
+    }.flowOn(kotlinx.coroutines.Dispatchers.Default).stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = MonthlySummary(
@@ -104,7 +105,7 @@ class ReviewViewModel(
     @OptIn(ExperimentalCoroutinesApi::class)
     val yearlySummary: StateFlow<YearlySummary> = mutableSelectedYear.flatMapLatest { year ->
         repository.observeYearlySummary(year)
-    }.stateIn(
+    }.flowOn(kotlinx.coroutines.Dispatchers.Default).stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = YearlySummary(
@@ -117,7 +118,7 @@ class ReviewViewModel(
         ),
     )
 
-    val personalRecords: StateFlow<PersonalRecords> = repository.observePersonalRecords().stateIn(
+    val personalRecords: StateFlow<PersonalRecords> = repository.observePersonalRecords().flowOn(kotlinx.coroutines.Dispatchers.Default).stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = PersonalRecords(
@@ -139,13 +140,13 @@ class ReviewViewModel(
     @OptIn(ExperimentalCoroutinesApi::class)
     val heatmapDays: StateFlow<List<ActivityHeatmapDay>> = mutableHeatmapHabitId.flatMapLatest { habitId ->
         repository.observeActivityHeatmap(habitId = habitId, days = 112) // 16 weeks * 7 days
-    }.stateIn(
+    }.flowOn(kotlinx.coroutines.Dispatchers.Default).stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = emptyList(),
     )
 
-    val skipReasonStats: StateFlow<Map<SkipReasonType, Int>> = repository.observeSkipReasonStatistics().stateIn(
+    val skipReasonStats: StateFlow<Map<SkipReasonType, Int>> = repository.observeSkipReasonStatistics().flowOn(kotlinx.coroutines.Dispatchers.Default).stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = emptyMap(),

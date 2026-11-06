@@ -38,6 +38,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -73,8 +74,8 @@ fun CalendarScreen(
     var showDaySheet by rememberSaveable { mutableStateOf(false) }
     val displayedMonth = YearMonth.parse(monthText)
     val selectedDate = LocalDate.parse(selectedText)
-    val selectedHabits = history.habitsForDay(selectedDate)
-    val selectedSummary = history.daySummary(selectedDate)
+    val selectedHabits = remember(history, selectedDate) { history.habitsForDay(selectedDate) }
+    val selectedSummary = remember(history, selectedDate) { history.daySummary(selectedDate) }
     val locale = LocalLocale.current.platformLocale
     val monthTitle = displayedMonth.atDay(1)
         .format(DateTimeFormatter.ofPattern("MMMM yyyy", locale))

@@ -89,13 +89,14 @@ data class HabitHistorySnapshot(
                 .map { (_, periodDates) -> periodDates.count { isComplete(habit, it) } >= habit.periodTarget }
             val scheduledCount = if (habit.goalPeriod == GoalPeriod.Daily) scheduledDates.size else periodResults.size
             val completedCount = if (habit.goalPeriod == GoalPeriod.Daily) completedDates.size else periodResults.count { it }
+            val dailyStreak = if (habit.goalPeriod == GoalPeriod.Daily) streakOf(streakDays(habit, allScheduledDates, endDate)) else null
             HabitPeriodStat(
                 habit = habit,
                 scheduledCount = scheduledCount,
                 completedCount = completedCount,
                 completionRate = ratio(completedCount, scheduledCount),
-                currentStreak = if (habit.goalPeriod == GoalPeriod.Daily) streakOf(streakDays(habit, allScheduledDates, endDate)).current else currentBooleanStreak(allPeriodResults),
-                bestStreak = if (habit.goalPeriod == GoalPeriod.Daily) streakOf(streakDays(habit, allScheduledDates, endDate)).best else bestBooleanStreak(allPeriodResults),
+                currentStreak = dailyStreak?.current ?: currentBooleanStreak(allPeriodResults),
+                bestStreak = dailyStreak?.best ?: bestBooleanStreak(allPeriodResults),
             )
         }.sortedWith(compareByDescending<HabitPeriodStat> { it.completionRate }.thenBy { it.habit.sortOrder })
         val scheduled = perHabit.sumOf(HabitPeriodStat::scheduledCount)

@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -37,13 +38,13 @@ class TodayViewModel(
     private val today: () -> LocalDate = LocalDate::now,
     private val onDataChanged: () -> Unit = {},
 ) : ViewModel() {
-    val habits: StateFlow<List<TodayHabit>> = repository.observeToday().stateIn(
+    val habits: StateFlow<List<TodayHabit>> = repository.observeToday().flowOn(kotlinx.coroutines.Dispatchers.Default).stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = emptyList(),
     )
 
-    val history: StateFlow<HabitHistorySnapshot> = repository.observeHistory().stateIn(
+    val history: StateFlow<HabitHistorySnapshot> = repository.observeHistory().flowOn(kotlinx.coroutines.Dispatchers.Default).stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = HabitHistorySnapshot(emptyList(), emptyList()),

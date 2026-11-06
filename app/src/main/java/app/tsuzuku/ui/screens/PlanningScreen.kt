@@ -32,6 +32,7 @@ import androidx.compose.material3.rememberDateRangePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -71,7 +72,7 @@ fun PlanningScreen(
     val scope = rememberCoroutineScope()
     val today = LocalDate.now()
     val weekStart = today.minusDays((today.dayOfWeek.value - 1).toLong())
-    val weekStats = history.statistics(7, today)
+    val weekStats = remember(history, today) { history.statistics(7, today) }
     val currentReview = reviews.firstOrNull { it.weekStart == weekStart }
     var reviewNote by rememberSaveable(currentReview?.updatedAt) { mutableStateOf(currentReview?.note.orEmpty()) }
     var showVacationPicker by rememberSaveable { mutableStateOf(false) }

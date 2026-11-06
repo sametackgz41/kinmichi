@@ -13,6 +13,7 @@ import app.tsuzuku.model.TaskGoalLink
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -23,13 +24,13 @@ class ConnectionViewModel(
 ) : ViewModel() {
 
     val habitGoalLinks: StateFlow<List<HabitGoalLink>> = connectionRepository.observeHabitGoalLinks()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+        .flowOn(kotlinx.coroutines.Dispatchers.Default).stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     val taskGoalLinks: StateFlow<List<TaskGoalLink>> = connectionRepository.observeTaskGoalLinks()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+        .flowOn(kotlinx.coroutines.Dispatchers.Default).stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     val habitLibraryLinks: StateFlow<List<HabitLibraryLink>> = connectionRepository.observeHabitLibraryLinks()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+        .flowOn(kotlinx.coroutines.Dispatchers.Default).stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     fun linkHabitGoal(habitId: Long, goalId: Long, mode: HabitGoalContributionMode = HabitGoalContributionMode.HabitAmount, value: Double = 1.0) {
         viewModelScope.launch {

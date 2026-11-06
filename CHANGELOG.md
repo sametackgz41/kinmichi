@@ -1,5 +1,10 @@
 # Değişiklik günlüğü
 
+## 2.3.2 — Akıcılık
+
+- İstatistik, seri, rekor ve bugün listesi hesapları artık arka planda yapılıyor; dokunma ve sekme geçişlerinde ekran donmuyor
+- İlerleme, takvim ve planlama ekranları istatistikleri her çizimde baştan hesaplamıyor
+
 ## 2.3.1 — Hız
 
 - APK artık optimize edilmiş sürüm derlemesi (hata ayıklama modu kapalı, R8 ve hazır derleme profilleri): geçişler ve dokunmalar belirgin biçimde daha akıcı, dosya 30 MB'tan 5 MB'a indi

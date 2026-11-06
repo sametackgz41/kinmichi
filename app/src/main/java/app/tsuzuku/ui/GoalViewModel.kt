@@ -8,11 +8,12 @@ import app.tsuzuku.model.Goal
 import app.tsuzuku.model.GoalDraft
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class GoalViewModel(private val repository: GoalRepository) : ViewModel() {
-    val goals: StateFlow<List<Goal>> = repository.observeGoals().stateIn(
+    val goals: StateFlow<List<Goal>> = repository.observeGoals().flowOn(kotlinx.coroutines.Dispatchers.Default).stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = emptyList(),

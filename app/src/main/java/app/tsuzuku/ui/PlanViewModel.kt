@@ -7,12 +7,13 @@ import app.tsuzuku.data.PlanRepository
 import app.tsuzuku.model.PlanTask
 import app.tsuzuku.model.PlanTaskDraft
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class PlanViewModel(private val repository: PlanRepository) : ViewModel() {
-    val tasks = repository.observeTasks().stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
-    val templates = repository.observeTemplates().stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+    val tasks = repository.observeTasks().flowOn(kotlinx.coroutines.Dispatchers.Default).stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+    val templates = repository.observeTemplates().flowOn(kotlinx.coroutines.Dispatchers.Default).stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
     fun create(draft: PlanTaskDraft, onCreated: (Long) -> Unit = {}) = viewModelScope.launch {
         val id = repository.create(draft)
         onCreated(id)

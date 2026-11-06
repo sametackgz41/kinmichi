@@ -115,9 +115,9 @@ fun StatisticsScreen(
     var selectedTag by rememberSaveable { mutableStateOf("") }
     var libraryCategory by rememberSaveable { mutableStateOf("") }
 
-    val stats = history.statistics(days)
-    val availableTags = stats.habits.flatMap { it.habit.tags.split(',') }.map(String::trim).filter(String::isNotBlank).distinct().sorted()
-    val visibleHabitStats = if (selectedTag.isBlank()) stats.habits else stats.habits.filter { stat -> stat.habit.tags.split(',').any { it.trim().equals(selectedTag, true) } }
+    val stats = remember(history, days) { history.statistics(days) }
+    val availableTags = remember(stats) { stats.habits.flatMap { it.habit.tags.split(',') }.map(String::trim).filter(String::isNotBlank).distinct().sorted() }
+    val visibleHabitStats = remember(stats, selectedTag) { if (selectedTag.isBlank()) stats.habits else stats.habits.filter { stat -> stat.habit.tags.split(',').any { it.trim().equals(selectedTag, true) } } }
     val filteredScheduled = visibleHabitStats.sumOf(HabitPeriodStat::scheduledCount)
     val filteredCompleted = visibleHabitStats.sumOf(HabitPeriodStat::completedCount)
     val filteredRate = if (filteredScheduled == 0) 0f else filteredCompleted.toFloat() / filteredScheduled
