@@ -10,3 +10,9 @@ app/build
 .kotlin
 /previews/images
 /previews/site/assets
+
+# Firebase config and signing secrets stay local (see FIREBASE_SETUP.md)
+app/google-services.json
+*.jks
+*.keystore
+keystore.properties
