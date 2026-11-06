@@ -441,7 +441,7 @@ internal fun TodayProgressHeader(completed: Int, total: Int, modifier: Modifier 
     val fraction = if (total == 0) 0f else completed.toFloat() / total
     val animatedFraction by animateFloatAsState(
         fraction,
-        spring(dampingRatio = Spring.DampingRatioNoBouncy, stiffness = Spring.StiffnessVeryLow),
+        spring(dampingRatio = Spring.DampingRatioNoBouncy, stiffness = Spring.StiffnessMediumLow),
         label = "day-progress",
     )
     val percent by animateIntAsState((fraction * 100).toInt(), tween(600), label = "day-percent")

@@ -17,8 +17,17 @@ android {
         applicationId = "app.tsuzuku"
         minSdk = 30
         targetSdk = 36
-        versionCode = 23
-        versionName = "2.3.0"
+        versionCode = 24
+        versionName = "2.3.1"
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            signingConfig = signingConfigs.getByName("debug")
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
+        }
     }
 
     compileOptions {

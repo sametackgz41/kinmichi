@@ -879,16 +879,16 @@ private val mainRoutes = mainDestinations.map { it.route }.toSet()
 private fun isTabSwitch(from: String?, to: String?): Boolean = from in mainRoutes && to in mainRoutes
 
 private fun fadeThroughIn(): androidx.compose.animation.EnterTransition =
-    fadeIn(androidx.compose.animation.core.tween(220, delayMillis = 90)) +
-        androidx.compose.animation.scaleIn(androidx.compose.animation.core.tween(220, delayMillis = 90), initialScale = 0.96f)
+    fadeIn(androidx.compose.animation.core.tween(160, delayMillis = 40)) +
+        androidx.compose.animation.scaleIn(androidx.compose.animation.core.tween(160, delayMillis = 40), initialScale = 0.97f)
 
 private fun fadeThroughOut(): androidx.compose.animation.ExitTransition =
-    fadeOut(androidx.compose.animation.core.tween(90))
+    fadeOut(androidx.compose.animation.core.tween(60))
 
 private fun sharedAxisIn(forward: Boolean): androidx.compose.animation.EnterTransition =
-    androidx.compose.animation.slideInHorizontally(androidx.compose.animation.core.tween(300)) { width -> if (forward) width / 10 else -width / 10 } +
-        fadeIn(androidx.compose.animation.core.tween(210, delayMillis = 90))
+    androidx.compose.animation.slideInHorizontally(androidx.compose.animation.core.tween(220)) { width -> if (forward) width / 10 else -width / 10 } +
+        fadeIn(androidx.compose.animation.core.tween(160, delayMillis = 40))
 
 private fun sharedAxisOut(forward: Boolean): androidx.compose.animation.ExitTransition =
-    androidx.compose.animation.slideOutHorizontally(androidx.compose.animation.core.tween(300)) { width -> if (forward) -width / 10 else width / 10 } +
-        fadeOut(androidx.compose.animation.core.tween(90))
+    androidx.compose.animation.slideOutHorizontally(androidx.compose.animation.core.tween(220)) { width -> if (forward) -width / 10 else width / 10 } +
+        fadeOut(androidx.compose.animation.core.tween(60))

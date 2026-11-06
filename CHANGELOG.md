@@ -1,5 +1,10 @@
 # Değişiklik günlüğü
 
+## 2.3.1 — Hız
+
+- APK artık optimize edilmiş sürüm derlemesi (hata ayıklama modu kapalı, R8 ve hazır derleme profilleri): geçişler ve dokunmalar belirgin biçimde daha akıcı, dosya 30 MB'tan 5 MB'a indi
+- Sekme ve ekran geçişleri kısaltıldı, günlük ilerleme halkası daha çabuk oturuyor
+
 ## 2.3.0 — Expressive, paylaşım ve saat
 
 - Material 3 Expressive görünüm: yaylanan geçişler, daha yuvarlak şekiller, kalın başlıklar, dalgalı ilerleme halkaları ve yeni alt gezinme çubuğu

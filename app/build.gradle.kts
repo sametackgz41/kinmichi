@@ -24,8 +24,8 @@ android {
         applicationId = "app.tsuzuku"
         minSdk = 26
         targetSdk = 36
-        versionCode = 23
-        versionName = "2.3.0"
+        versionCode = 24
+        versionName = "2.3.1"
 
         buildConfigField("boolean", "FIREBASE_CONFIGURED", hasFirebaseConfig.toString())
 
@@ -35,7 +35,12 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            // Optimised, non-debuggable build: Compose runs several times faster than in debug.
+            isMinifyEnabled = true
+            isShrinkResources = true
+            // Signed with the same key as earlier releases so updates install in place and
+            // Google sign-in (registered with this key's SHA-1) keeps working.
+            signingConfig = signingConfigs.getByName("debug")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
@@ -77,6 +82,8 @@ dependencies {
     androidTestImplementation(composeBom)
 
     implementation("androidx.activity:activity-compose:1.12.1")
+    // Compiles the libraries' bundled baseline profiles at install, so the first launches are fast too.
+    implementation("androidx.profileinstaller:profileinstaller:1.4.1")
     // 1.5 brings the Material 3 Expressive APIs (shapes, motion, wavy progress, loading indicator).
     implementation("androidx.compose.material3:material3:1.5.0-alpha18")
     implementation("androidx.compose.material:material-icons-core")
