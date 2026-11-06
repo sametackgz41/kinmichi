@@ -61,3 +61,7 @@ python previews/build_gallery.py   # writes previews/site/ (open index.html)
 | `previews/` | JVM screenshot gallery |
 
 See [CHANGELOG.md](CHANGELOG.md) for release notes (in Turkish).
+
+## License
+
+[MIT](LICENSE)
