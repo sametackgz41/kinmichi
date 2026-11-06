@@ -1,5 +1,13 @@
 # Değişiklik günlüğü
 
+## 2.1.0 — Yeni widget'lar
+
+- Bugün widget'ı: günün ilerleme halkası ve kalan alışkanlık sayısı, + ile yeni alışkanlık, her satırda alışkanlığın rengi ve seri bilgisi
+- Sayılı alışkanlıklarda +1 çevresinde ilerleme halkası, süreli alışkanlıklarda başlat düğmesi; liste kaydırılabiliyor, küçültülünce yalnızca özet
+- Tek alışkanlık widget'ı: alışkanlığın renginde, boyuta göre büyüyen halka, ilerleme ve seri yazısı, genişken yatay düzen
+- Bu hafta widget'ı: takvim haftası (hafta başı ayardan), her gün için halka, haftanın yüzdesi
+- Widget seçicide gerçek önizlemeler (Türkçe ve İngilizce)
+
 ## 2.0.0 — Sade, odaklı alışkanlık takibi
 
 - Japon temalı editoryal görünüm yerine Material You (duvar kâğıdından renk), standart tipografi ve şekiller
