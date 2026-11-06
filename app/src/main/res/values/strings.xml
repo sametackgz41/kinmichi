@@ -1065,4 +1065,11 @@
         <item quantity="one">Log your mood %d more day to see which habits line up with your better days.</item>
         <item quantity="other">Log your mood %d more days to see which habits line up with your better days.</item>
     </plurals>
+    <string name="share_streak">Share streak</string>
+    <string name="share_card_streak">day streak</string>
+    <string name="share_card_done">days done</string>
+    <string name="share_card_rate">Last 30 days</string>
+    <string name="share_card_weeks">Last %1$d weeks</string>
+    <string name="share_card_text">%1$s: a %2$d-day streak with Tsuzuku 🔥</string>
+    <string name="share_card_text_done">%1$s: %2$d days done with Tsuzuku</string>
 </resources>

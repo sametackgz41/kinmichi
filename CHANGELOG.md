@@ -1,5 +1,12 @@
 # Değişiklik günlüğü
 
+## 2.3.0 — Expressive, paylaşım ve saat
+
+- Material 3 Expressive görünüm: yaylanan geçişler, daha yuvarlak şekiller, kalın başlıklar, dalgalı ilerleme halkaları ve yeni alt gezinme çubuğu
+- Tamamlanınca dairesinden tırtıklı bir şekle dönüşen işaretleme düğmesi
+- Seri kartı paylaşma: alışkanlık detayındaki paylaş düğmesi, alışkanlığın renginde seri, son 20 hafta ve son 30 günün oranını içeren bir görsel oluşturur
+- Wear OS: "Bugünkü alışkanlıklar" kutucuğu ve küçük bir saat uygulaması; dokunulan alışkanlık telefonda işaretlenir (saat APK'sı ayrı dosya olarak yayında)
+
 ## 2.2.0 — Hedef koçu ve ruh hali
 
 - Akıllı hedef önerisi: sayılı/süreli bir alışkanlıkta son 14 günün %40'ından azında hedefe ulaşıldıysa, gerçekte ulaştığın miktardan başlamayı öneren kart; yeni hedef tutunca kademeli olarak geri büyütme önerisi (kabul ya da redden sonra 14 gün sessiz)

@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Tsuzuku"
 include(":app")
+include(":wear")

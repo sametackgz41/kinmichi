@@ -107,7 +107,7 @@ internal fun TargetAdviceCard(
                 TextButton(onClick = onDismiss) {
                     Text(stringResource(R.string.advice_not_now), color = MaterialTheme.colorScheme.onTertiaryContainer)
                 }
-                Button(onClick = onAccept, modifier = Modifier.padding(bottom = 6.dp)) {
+                Button(onClick = onAccept, shapes = androidx.compose.material3.ButtonDefaults.shapes(), modifier = Modifier.padding(bottom = 6.dp)) {
                     Text(stringResource(R.string.advice_accept, "$newAmount $unit".trim()))
                 }
             }
@@ -192,7 +192,7 @@ internal fun MoodInsightsCard(insights: MoodInsights, modifier: Modifier = Modif
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSecondaryContainer,
                     )
-                    LinearProgressIndicator(
+                    androidx.compose.material3.LinearWavyProgressIndicator(
                         progress = { insights.loggedDays / app.tsuzuku.model.MOOD_MIN_DAYS.toFloat() },
                         modifier = Modifier.fillMaxWidth(),
                     )

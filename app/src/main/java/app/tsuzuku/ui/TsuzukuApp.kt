@@ -701,6 +701,13 @@ fun TsuzukuApp(
                         records = history.records.filter { it.habitId == habitId },
                         onBack = navController::popBackStack,
                         onEdit = { navController.navigate("habit/$habitId/edit") },
+                        onShare = {
+                            val weekStart = if (settings.weekStart == WeekStartPreference.Sunday) java.time.DayOfWeek.SUNDAY else java.time.DayOfWeek.MONDAY
+                            app.tsuzuku.share.shareStreakCard(
+                                context,
+                                app.tsuzuku.model.streakCardData(history, habit, java.time.LocalDate.now(), weekStart),
+                            )
+                        },
                         onSaveNote = { todayViewModel.saveHabitNote(habitId, it) },
                         onArchive = {
                             reminderScheduler.cancel(habitId)
@@ -837,9 +844,9 @@ internal fun MainNavigationBar(
     currentRoute: String,
     onSelect: (MainDestination) -> Unit,
 ) {
-    NavigationBar {
+    androidx.compose.material3.ShortNavigationBar {
         destinations.forEach { destination ->
-            NavigationBarItem(
+            androidx.compose.material3.ShortNavigationBarItem(
                 selected = destination.route == currentRoute,
                 onClick = { onSelect(destination) },
                 icon = { Icon(destination.icon, contentDescription = null) },

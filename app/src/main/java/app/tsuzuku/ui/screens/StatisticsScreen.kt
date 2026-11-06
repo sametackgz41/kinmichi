@@ -186,10 +186,11 @@ fun StatisticsScreen(
                                 )
                             }
                             Box(contentAlignment = Alignment.Center) {
-                                CircularProgressIndicator(
+                                androidx.compose.material3.CircularWavyProgressIndicator(
                                     progress = { filteredRate },
                                     modifier = Modifier.size(96.dp),
-                                    strokeWidth = 10.dp,
+                                    stroke = androidx.compose.ui.graphics.drawscope.Stroke(width = with(androidx.compose.ui.platform.LocalDensity.current) { 10.dp.toPx() }, cap = androidx.compose.ui.graphics.StrokeCap.Round),
+                                    trackStroke = androidx.compose.ui.graphics.drawscope.Stroke(width = with(androidx.compose.ui.platform.LocalDensity.current) { 10.dp.toPx() }, cap = androidx.compose.ui.graphics.StrokeCap.Round),
                                 )
                                 Text("%${(filteredRate * 100).toInt()}", fontWeight = FontWeight.Bold)
                             }
@@ -708,7 +709,7 @@ private fun HabitStatisticCard(stat: HabitPeriodStat) {
                 }
                 Text("%${(stat.completionRate * 100).toInt()}", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
             }
-            LinearProgressIndicator(progress = { stat.completionRate }, modifier = Modifier.fillMaxWidth().height(5.dp).clip(CircleShape))
+            androidx.compose.material3.LinearWavyProgressIndicator(progress = { stat.completionRate }, modifier = Modifier.fillMaxWidth())
             Text(
                 stringResource(R.string.streak_pair, stat.currentStreak, stat.bestStreak),
                 style = MaterialTheme.typography.bodySmall,

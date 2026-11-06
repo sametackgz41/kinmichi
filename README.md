@@ -13,9 +13,13 @@ Built with Jetpack Compose and Material You, works fully offline, in English and
 
 ## Features
 
+- **Material 3 Expressive** — springy motion, wavy progress and a check button that morphs when you finish a habit.
 - **Today** — one list, one tap per habit. Check, count (+1) and timed habits, grouped by routine.
 - **Streaks that forgive** — one forgotten day a week doesn't break your streak; skipped days never count against you.
 - **Progress** — statistics, a calendar, and a 12-month heatmap for every habit.
+- **Coaching** — suggests a smaller target when one is rarely reached, then steps it back up; a one-tap evening mood with habit–mood insights.
+- **Share** — turn any habit into an image card with its streak and the last 20 weeks.
+- **Wear OS** — a Today tile and a small watch app; tapping a habit marks it on the phone.
 - **Widgets** — Today list, single-habit ring and a weekly grid, all tappable from the home screen.
 - **Reminders** — per-habit reminders with a "Done" action, plus an optional Sunday-evening weekly recap.
 - **Quick access** — Quick Settings tile showing habits left today, and launcher shortcuts.
@@ -58,6 +62,8 @@ python previews/build_gallery.py   # writes previews/site/ (open index.html)
 | `app/src/main/java/app/tsuzuku/data` | Room database, repositories, backup and cloud sync |
 | `app/src/main/java/app/tsuzuku/widget` | Glance home-screen widgets |
 | `app/src/main/java/app/tsuzuku/notifications` | Reminders and the weekly recap |
+| `app/src/main/java/app/tsuzuku/wear` | Phone side of the watch sync (Data Layer) |
+| `wear/` | Wear OS app and tile |
 | `previews/` | JVM screenshot gallery |
 
 See [CHANGELOG.md](CHANGELOG.md) for release notes (in Turkish).

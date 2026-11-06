@@ -71,6 +71,9 @@ def main() -> None:
             loop=0,
             optimize=True,
         )
+    tile = ROOT.parent / "wear/src/main/res/drawable-nodpi/tile_preview.png"
+    if tile.exists():
+        save_webp(Image.open(tile).convert("RGBA"), OUT / "tile_preview.webp")
     export_widget_previews()
     total = sum(p.stat().st_size for p in OUT.iterdir())
     print(f"{len(list(OUT.iterdir()))} assets, {total / 1024:.0f} KB")

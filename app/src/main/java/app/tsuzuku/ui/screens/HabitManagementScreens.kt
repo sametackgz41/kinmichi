@@ -17,6 +17,7 @@ import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.ArrowDownward
 import androidx.compose.material.icons.rounded.ArrowUpward
 import androidx.compose.material.icons.rounded.Edit
+import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -94,6 +95,7 @@ fun HabitDetailScreen(
     onUnlinkContent: (contentId: Long) -> Unit = {},
     onSaveLevels: (List<HabitLevel>) -> Unit = {},
     onAdvanceLevel: (Int) -> Unit = {},
+    onShare: (() -> Unit)? = null,
 ) {
     var note by rememberSaveable(habit.id, habit.generalNote) { mutableStateOf(habit.generalNote) }
     var confirmDelete by rememberSaveable { mutableStateOf(false) }
@@ -112,6 +114,11 @@ fun HabitDetailScreen(
                     }
                 },
                 actions = {
+                    if (onShare != null) {
+                        IconButton(onClick = onShare) {
+                            Icon(Icons.Rounded.Share, contentDescription = stringResource(R.string.share_streak))
+                        }
+                    }
                     IconButton(onClick = onEdit) {
                         Icon(Icons.Rounded.Edit, contentDescription = stringResource(R.string.edit_habit))
                     }

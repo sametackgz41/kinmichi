@@ -298,11 +298,41 @@ class PreviewGalleryTest {
                 app.tsuzuku.ui.screens.HabitDetailScreen(
                     habit = water, records = records,
                     onBack = {}, onEdit = {}, onSaveNote = {}, onArchive = {}, onDuplicate = {}, onDelete = {},
+                    onShare = {},
                 )
             }
         }
         compose.mainClock.advanceTimeBy(1500)
         captureScreen("detail_${lang}_${if (dark) "dark" else "light"}")
+    }
+
+    // ---- shareable streak card -------------------------------------------------------------
+
+    @Test fun shareCardTr() = renderShareCard("tr")
+    @Test fun shareCardEn() = renderShareCard("en")
+
+    private fun renderShareCard(lang: String) {
+        setVariant(lang, false)
+        val today = LocalDate.now()
+        val read = sampleToday(lang)[0].habit.copy(createdOn = today.minusDays(200))
+        val walk = sampleToday(lang)[4].habit.copy(createdOn = today.minusDays(200))
+        val records = (0L..150L).flatMap { back ->
+            val date = today.minusDays(back)
+            listOfNotNull(
+                if (back < 34 || (back * 13) % 10 < 7) HabitHistoryRecord(read.id, date, 1.0, HabitDayStatus.Completed) else null,
+                if (back in 1L..120L && (back * 7) % 10 < 6) HabitHistoryRecord(walk.id, date, 1.0, HabitDayStatus.Completed) else null,
+            )
+        }
+        val history = HabitHistorySnapshot(listOf(read, walk), records)
+        val context = RuntimeEnvironment.getApplication()
+        save(
+            "share_${lang}",
+            app.tsuzuku.share.renderStreakCard(context, app.tsuzuku.model.streakCardData(history, read, today, java.time.DayOfWeek.MONDAY)),
+        )
+        save(
+            "share_${lang}_nostreak",
+            app.tsuzuku.share.renderStreakCard(context, app.tsuzuku.model.streakCardData(history, walk, today, java.time.DayOfWeek.MONDAY)),
+        )
     }
 
     // ---- animations: frame strips, stitched into GIFs by the gallery script ------------------

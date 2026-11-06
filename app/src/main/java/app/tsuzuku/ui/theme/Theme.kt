@@ -3,7 +3,9 @@ package app.tsuzuku.ui.theme
 import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialExpressiveTheme
+import androidx.compose.material3.MotionScheme
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
@@ -13,6 +15,8 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
@@ -87,11 +91,34 @@ fun TsuzukuTheme(
         }
     }
 
-    // Standard Material 3 type scale and shapes keep the app familiar across locales and devices.
-    MaterialTheme(
+    // Material 3 Expressive: springy motion, rounder shapes and bolder headings.
+    MaterialExpressiveTheme(
         colorScheme = colorScheme,
-        typography = Typography(),
-        shapes = Shapes(),
+        motionScheme = MotionScheme.expressive(),
+        typography = ExpressiveTypography,
+        shapes = ExpressiveShapes,
         content = content,
+    )
+}
+
+internal val ExpressiveShapes = Shapes(
+    extraSmall = RoundedCornerShape(8.dp),
+    small = RoundedCornerShape(12.dp),
+    medium = RoundedCornerShape(20.dp),
+    large = RoundedCornerShape(28.dp),
+    extraLarge = RoundedCornerShape(36.dp),
+)
+
+/** The standard type scale with emphasised headings; body text stays as is for readability. */
+internal val ExpressiveTypography = Typography().let { t ->
+    t.copy(
+        displayLarge = t.displayLarge.copy(fontWeight = FontWeight.SemiBold),
+        displayMedium = t.displayMedium.copy(fontWeight = FontWeight.SemiBold),
+        displaySmall = t.displaySmall.copy(fontWeight = FontWeight.SemiBold),
+        headlineLarge = t.headlineLarge.copy(fontWeight = FontWeight.SemiBold),
+        headlineMedium = t.headlineMedium.copy(fontWeight = FontWeight.SemiBold),
+        headlineSmall = t.headlineSmall.copy(fontWeight = FontWeight.SemiBold),
+        titleLarge = t.titleLarge.copy(fontWeight = FontWeight.SemiBold),
+        titleMedium = t.titleMedium.copy(fontWeight = FontWeight.SemiBold),
     )
 }

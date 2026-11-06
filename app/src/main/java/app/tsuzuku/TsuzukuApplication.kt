@@ -105,6 +105,12 @@ class TsuzukuApplication : Application() {
             TsuzukuWidgetProvider.requestUpdate(this@TsuzukuApplication)
             cloudSyncRepository.synchronize()
         }
+        // Keep a paired watch in step with today's list while the app process is alive.
+        applicationScope.launch {
+            habitRepository.observeToday().collect { habits ->
+                app.tsuzuku.wear.WearSync.push(this@TsuzukuApplication, habits)
+            }
+        }
     }
 
     fun requestCloudSync() {

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tsuzuku</string>
+    <string name="tile_label">Today\'s habits</string>
+    <string name="tile_description">Mark today\'s habits from your watch</string>
+    <string name="tile_title">Today</string>
+    <string name="tile_title_progress">Today %1$d/%2$d</string>
+    <string name="tile_waiting">Open Tsuzuku on your phone to sync</string>
+    <string name="tile_nothing_today">Nothing scheduled today</string>
+    <string name="tile_all_done">All done for today 🎉</string>
+    <string name="tile_open_all">All</string>
+    <string name="tile_refresh">Refresh</string>
+</resources>

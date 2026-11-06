@@ -1064,4 +1064,11 @@
         <item quantity="one">Hangi alışkanlıkların iyi günlerinle örtüştüğünü görmek için %d gün daha kaydet.</item>
         <item quantity="other">Hangi alışkanlıkların iyi günlerinle örtüştüğünü görmek için %d gün daha kaydet.</item>
     </plurals>
+    <string name="share_streak">Seriyi paylaş</string>
+    <string name="share_card_streak">günlük seri</string>
+    <string name="share_card_done">gün tamamlandı</string>
+    <string name="share_card_rate">Son 30 gün</string>
+    <string name="share_card_weeks">Son %1$d hafta</string>
+    <string name="share_card_text">%1$s: Tsuzuku ile %2$d günlük seri 🔥</string>
+    <string name="share_card_text_done">%1$s: Tsuzuku ile %2$d gün tamamlandı</string>
 </resources>

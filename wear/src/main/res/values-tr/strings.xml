@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tile_label">Bugünkü alışkanlıklar</string>
+    <string name="tile_description">Bugünkü alışkanlıkları saatinden işaretle</string>
+    <string name="tile_title">Bugün</string>
+    <string name="tile_title_progress">Bugün %1$d/%2$d</string>
+    <string name="tile_waiting">Eşitlemek için telefonda Tsuzuku\'yu aç</string>
+    <string name="tile_nothing_today">Bugün planlı alışkanlık yok</string>
+    <string name="tile_all_done">Bugünlük hepsi tamam 🎉</string>
+    <string name="tile_open_all">Tümü</string>
+    <string name="tile_refresh">Yenile</string>
+</resources>

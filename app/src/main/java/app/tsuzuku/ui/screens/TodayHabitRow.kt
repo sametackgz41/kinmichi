@@ -6,6 +6,8 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.material3.toPath
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
@@ -321,6 +323,14 @@ private fun CheckButton(done: Boolean, enabled: Boolean, onToggle: () -> Unit) {
         label = "check-ring",
     )
     val description = stringResource(R.string.complete_habit)
+    // Expressive touch: the circle morphs into a scalloped "cookie" when the habit is done.
+    val morph = remember { androidx.graphics.shapes.Morph(androidx.compose.material3.MaterialShapes.Circle, androidx.compose.material3.MaterialShapes.Cookie9Sided) }
+    val morphProgress by animateFloatAsState(
+        if (done) 1f else 0f,
+        MaterialTheme.motionScheme.fastSpatialSpec(),
+        label = "check-morph",
+    )
+    val shape = remember(morphProgress) { MorphShape(morph, morphProgress) }
     Box(
         Modifier
             .size(48.dp)
@@ -343,10 +353,11 @@ private fun CheckButton(done: Boolean, enabled: Boolean, onToggle: () -> Unit) {
     ) {
         Box(
             Modifier
-                .size(32.dp)
+                .size(34.dp)
                 .scale(squash.value)
-                .background(fill, CircleShape)
-                .border(2.dp, ring, CircleShape)
+                .graphicsLayer { rotationZ = morphProgress * 40f }
+                .background(fill, shape)
+                .border(2.dp, ring, shape)
                 .alpha(if (enabled) 1f else 0.38f),
             contentAlignment = Alignment.Center,
         ) {
@@ -359,7 +370,8 @@ private fun CheckButton(done: Boolean, enabled: Boolean, onToggle: () -> Unit) {
                     Icons.Rounded.Check,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.onPrimary,
-                    modifier = Modifier.size(20.dp),
+                    // Undo the background's rotation so the check stays upright.
+                    modifier = Modifier.size(20.dp).graphicsLayer { rotationZ = -morphProgress * 40f },
                 )
             }
         }
@@ -453,17 +465,16 @@ internal fun TodayProgressHeader(completed: Int, total: Int, modifier: Modifier 
     ) {
         Row(Modifier.padding(18.dp), verticalAlignment = Alignment.CenterVertically) {
             Box(Modifier.size(64.dp).scale(celebrate.value), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator(
+                androidx.compose.material3.CircularWavyProgressIndicator(
                     progress = { animatedFraction },
                     modifier = Modifier.size(64.dp),
-                    strokeWidth = 6.dp,
                     color = MaterialTheme.colorScheme.primary,
                     trackColor = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.12f),
-                    gapSize = 0.dp,
                 )
                 Text(
                     "$percent%",
                     style = MaterialTheme.typography.labelLarge,
+                    fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                 )
             }
@@ -499,5 +510,21 @@ internal fun TodayProgressHeader(completed: Int, total: Int, modifier: Modifier 
                 }
             }
         }
+    }
+}
+
+/** A [androidx.graphics.shapes.Morph] frozen at [progress], scaled to the component size. */
+private class MorphShape(
+    private val morph: androidx.graphics.shapes.Morph,
+    private val progress: Float,
+) : androidx.compose.ui.graphics.Shape {
+    override fun createOutline(
+        size: androidx.compose.ui.geometry.Size,
+        layoutDirection: androidx.compose.ui.unit.LayoutDirection,
+        density: androidx.compose.ui.unit.Density,
+    ): androidx.compose.ui.graphics.Outline {
+        val path = morph.toPath(progress)
+        path.transform(androidx.compose.ui.graphics.Matrix().apply { scale(size.width, size.height) })
+        return androidx.compose.ui.graphics.Outline.Generic(path)
     }
 }
