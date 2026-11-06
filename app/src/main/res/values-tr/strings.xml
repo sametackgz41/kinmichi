@@ -301,12 +301,6 @@
     <string name="language_system">Sistem dili</string>
     <string name="language_turkish">Türkçe</string>
     <string name="language_english">İngilizce</string>
-    <string name="language_japanese">日本語</string>
-    <string name="language_spanish">Español</string>
-    <string name="language_brazilian_portuguese">Português (Brasil)</string>
-    <string name="language_german">Deutsch</string>
-    <string name="language_french">Français</string>
-    <string name="language_korean">한국어</string>
     <string name="week_start_label">Haftanın başlangıcı</string>
     <string name="monday">Pazartesi</string>
     <string name="sunday">Pazar</string>
@@ -990,4 +984,18 @@
     <string name="starter_title">Bir alışkanlıkla başla</string>
     <string name="starter_body">Eklemek için birine dokun. Her şeyi sonra değiştirebilirsin.</string>
     <string name="create_own_habit">Kendininkini oluştur</string>
+    <string name="skip_reason_forgot">Unuttum</string>
+    <string name="skip_reason_no_time">Zamanım yoktu</string>
+    <string name="skip_reason_travel">Seyahatteydim</string>
+    <string name="skip_reason_sick">Hastaydım</string>
+    <string name="skip_reason_intentional">Bilerek atladım</string>
+    <string name="skip_reason_other">Diğer</string>
+    <string name="milestone_streak_title">%1$d günlük seri</string>
+    <string name="milestone_streak_desc">Bir alışkanlığı %1$d gün aralıksız sürdür.</string>
+    <string name="milestone_completions_title">%1$d tamamlama</string>
+    <string name="milestone_completions_desc">Toplam %1$d kez alışkanlık tamamla.</string>
+    <string name="milestone_focus_title">%1$d saat odak</string>
+    <string name="milestone_focus_desc">Toplam %1$d saat odak seansı tamamla.</string>
+    <string name="milestone_goal_title">%1$d hedef</string>
+    <string name="milestone_goal_desc">%1$d hedef tamamla.</string>
 </resources>

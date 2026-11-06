@@ -479,12 +479,6 @@ private fun languageLabel(value: LanguagePreference): String = stringResource(
         LanguagePreference.System -> R.string.language_system
         LanguagePreference.Turkish -> R.string.language_turkish
         LanguagePreference.English -> R.string.language_english
-        LanguagePreference.Japanese -> R.string.language_japanese
-        LanguagePreference.Spanish -> R.string.language_spanish
-        LanguagePreference.BrazilianPortuguese -> R.string.language_brazilian_portuguese
-        LanguagePreference.German -> R.string.language_german
-        LanguagePreference.French -> R.string.language_french
-        LanguagePreference.Korean -> R.string.language_korean
     },
 )
 

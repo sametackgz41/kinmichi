@@ -35,13 +35,7 @@ enum class ThemeColorPreference {
 enum class LanguagePreference(val languageTag: String?) {
     System(null),
     Turkish("tr"),
-    English("en"),
-    Japanese("ja"),
-    Spanish("es"),
-    BrazilianPortuguese("pt-BR"),
-    German("de"),
-    French("fr"),
-    Korean("ko");
+    English("en");
 
     companion object {
         fun fromStored(value: String?): LanguagePreference = entries.firstOrNull { it.name == value } ?: System

@@ -126,11 +126,11 @@ data class TodayHabit(
 }
 
 
-enum class HabitMasteryStage(val title: String, val icon: String, val minDays: Int, val maxDays: Int) {
-    Seed("Tohum", "🌱", 1, 7),
-    Sprout("Filiz", "🌿", 8, 30),
-    Habit("Alışkanlık", "🌳", 31, 90),
-    Mastery("Ustalık", "🗻", 91, Int.MAX_VALUE);
+enum class HabitMasteryStage(val icon: String, val minDays: Int, val maxDays: Int) {
+    Seed("🌱", 1, 7),
+    Sprout("🌿", 8, 30),
+    Habit("🌳", 31, 90),
+    Mastery("🗻", 91, Int.MAX_VALUE);
 
     companion object {
         fun fromDays(days: Int): HabitMasteryStage = when {

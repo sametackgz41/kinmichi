@@ -1,5 +1,8 @@
 package app.tsuzuku.model
 
+import androidx.annotation.StringRes
+import app.tsuzuku.R
+
 import java.time.LocalDate
 import java.time.YearMonth
 
@@ -102,24 +105,29 @@ data class ActivityHeatmapDay(
         get() = (habitsCompleted * 2) + tasksCompleted + (focusMinutes / 25) + (if (dailyReviewDone) 1 else 0)
 }
 
-enum class SkipReasonType(val defaultLabel: String, val icon: String) {
-    Forgot("Unuttum", "🧠"),
-    NoTime("Zamanım yoktu", "⏳"),
-    Travel("Seyahatteydim", "✈️"),
-    Sick("Hastaydım", "🤒"),
-    Intentional("Bilerek atladım", "🎯"),
-    Other("Diğer", "📝");
+/**
+ * Why a habit was skipped. Stored as `SKIP_REASON:<name>`; [legacyLabel] keeps reading notes
+ * written by older versions, which stored the Turkish label instead of the name.
+ */
+enum class SkipReasonType(@param:StringRes val labelRes: Int, val icon: String, private val legacyLabel: String) {
+    Forgot(R.string.skip_reason_forgot, "🧠", "Unuttum"),
+    NoTime(R.string.skip_reason_no_time, "⏳", "Zamanım yoktu"),
+    Travel(R.string.skip_reason_travel, "✈️", "Seyahatteydim"),
+    Sick(R.string.skip_reason_sick, "🤒", "Hastaydım"),
+    Intentional(R.string.skip_reason_intentional, "🎯", "Bilerek atladım"),
+    Other(R.string.skip_reason_other, "📝", "Diğer");
 
     companion object {
         fun parse(note: String?): Pair<SkipReasonType, String> {
             if (note.isNullOrBlank()) return Pair(Other, "")
-            if (note.equals("VACATION", ignoreCase = true)) return Pair(Travel, "Tatil")
+            if (note.equals("VACATION", ignoreCase = true)) return Pair(Travel, "")
             val clean = if (note.startsWith("SKIP_REASON:")) note.removePrefix("SKIP_REASON:") else note
             val match = entries.firstOrNull {
-                it.name.equals(clean, ignoreCase = true) || it.defaultLabel.equals(clean, ignoreCase = true)
+                it.name.equals(clean, ignoreCase = true) || it.legacyLabel.equals(clean, ignoreCase = true)
             }
             return if (match != null) {
-                Pair(match, match.defaultLabel)
+                // Known reasons carry no free text; the UI shows the localized label.
+                Pair(match, "")
             } else {
                 Pair(Other, clean)
             }
@@ -130,7 +138,7 @@ enum class SkipReasonType(val defaultLabel: String, val icon: String) {
             return if (text.isNotBlank() && type == Other) {
                 "SKIP_REASON:$text"
             } else {
-                "SKIP_REASON:${type.defaultLabel}"
+                "SKIP_REASON:${type.name}"
             }
         }
     }

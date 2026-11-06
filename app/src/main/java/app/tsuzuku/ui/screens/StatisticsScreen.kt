@@ -486,7 +486,7 @@ fun StatisticsScreen(
                                     icon = "🎯",
                                     title = stringResource(R.string.goals_achieved),
                                     value = "${records.totalGoalsCompleted}",
-                                    subtitle = stringResource(R.string.content_finished_count, records.totalLibraryCompleted),
+                                    subtitle = "",
                                     modifier = Modifier.weight(1f),
                                 )
                             }
@@ -527,7 +527,7 @@ fun StatisticsScreen(
                                 verticalAlignment = Alignment.CenterVertically,
                             ) {
                                 Text(
-                                    "${reason.icon} ${reason.defaultLabel}",
+                                    "${reason.icon} ${stringResource(reason.labelRes)}",
                                     style = MaterialTheme.typography.bodyMedium,
                                     fontWeight = FontWeight.Medium,
                                 )
@@ -596,7 +596,7 @@ private fun MilestoneBadgeCard(milestone: PersonalMilestone) {
             }
             Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                    Text(milestone.title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
+                    Text(milestoneTitle(milestone), style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
                     if (milestone.isUnlocked) {
                         Surface(shape = RoundedCornerShape(4.dp), color = MaterialTheme.colorScheme.primary) {
                             Text(
@@ -614,7 +614,7 @@ private fun MilestoneBadgeCard(milestone: PersonalMilestone) {
                         )
                     }
                 }
-                Text(milestone.description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(milestoneDescription(milestone), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 LinearProgressIndicator(
                     progress = { progress },
                     modifier = Modifier.fillMaxWidth().height(4.dp).clip(CircleShape),
@@ -714,3 +714,20 @@ private fun HabitStatisticCard(stat: HabitPeriodStat) {
     }
 }
 
+@Composable
+private fun milestoneTitle(milestone: app.tsuzuku.model.PersonalMilestone): String = when (milestone.id.substringBefore('_')) {
+    "streak" -> stringResource(R.string.milestone_streak_title, milestone.targetValue)
+    "completions" -> stringResource(R.string.milestone_completions_title, milestone.targetValue)
+    "focus" -> stringResource(R.string.milestone_focus_title, milestone.targetValue)
+    "goal" -> stringResource(R.string.milestone_goal_title, milestone.targetValue)
+    else -> milestone.title
+}
+
+@Composable
+private fun milestoneDescription(milestone: app.tsuzuku.model.PersonalMilestone): String = when (milestone.id.substringBefore('_')) {
+    "streak" -> stringResource(R.string.milestone_streak_desc, milestone.targetValue)
+    "completions" -> stringResource(R.string.milestone_completions_desc, milestone.targetValue)
+    "focus" -> stringResource(R.string.milestone_focus_desc, milestone.targetValue)
+    "goal" -> stringResource(R.string.milestone_goal_desc, milestone.targetValue)
+    else -> milestone.description
+}

@@ -23,10 +23,13 @@ class ReviewModelTest {
     @Test
     fun skipReasonParsingAndFormatting() {
         val sickFormatted = SkipReasonType.format(SkipReasonType.Sick)
-        assertEquals("SKIP_REASON:Hastaydım", sickFormatted)
+        assertEquals("SKIP_REASON:Sick", sickFormatted)
         val (parsedSick, label) = SkipReasonType.parse(sickFormatted)
         assertEquals(SkipReasonType.Sick, parsedSick)
-        assertEquals("Hastaydım", label)
+        assertEquals("", label)
+
+        // Notes written by older versions stored the Turkish label.
+        assertEquals(SkipReasonType.Sick, SkipReasonType.parse("SKIP_REASON:Hastaydım").first)
 
         val vacationLegacy = SkipReasonType.parse("VACATION")
         assertEquals(SkipReasonType.Travel, vacationLegacy.first)

@@ -224,7 +224,9 @@ private fun habitContextLine(todayHabit: TodayHabit, timerRunning: Boolean, time
     val habit = todayHabit.habit
     return when {
         todayHabit.isBlocked -> stringResource(R.string.blocked_by_habit, todayHabit.blockedByName.orEmpty())
-        todayHabit.skipReason != null -> SkipReasonType.parse(todayHabit.skipReason).let { (type, label) -> "${type.icon} $label" }
+        todayHabit.skipReason != null -> SkipReasonType.parse(todayHabit.skipReason).let { (type, label) ->
+            "${type.icon} ${label.ifBlank { stringResource(type.labelRes) }}"
+        }
         timerRunning -> "%d:%02d".format(timerElapsedSeconds / 60, timerElapsedSeconds % 60)
         todayHabit.badHabitLimitExceeded -> stringResource(
             R.string.limit_exceeded,

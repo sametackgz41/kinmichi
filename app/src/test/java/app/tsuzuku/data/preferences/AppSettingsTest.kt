@@ -25,15 +25,11 @@ class AppSettingsTest {
 
     @Test
     fun languageTagsRepresentExplicitLocalesOnly() {
+        // Saved values for languages that were dropped fall back to the system language.
+        assertEquals(LanguagePreference.System, LanguagePreference.fromStored("Japanese"))
         assertNull(LanguagePreference.System.languageTag)
         assertEquals("tr", LanguagePreference.Turkish.languageTag)
         assertEquals("en", LanguagePreference.English.languageTag)
-        assertEquals("ja", LanguagePreference.Japanese.languageTag)
-        assertEquals("es", LanguagePreference.Spanish.languageTag)
-        assertEquals("pt-BR", LanguagePreference.BrazilianPortuguese.languageTag)
-        assertEquals("de", LanguagePreference.German.languageTag)
-        assertEquals("fr", LanguagePreference.French.languageTag)
-        assertEquals("ko", LanguagePreference.Korean.languageTag)
     }
 
     @Test

@@ -301,12 +301,6 @@
     <string name="language_system">System language</string>
     <string name="language_turkish">Turkish</string>
     <string name="language_english">English</string>
-    <string name="language_japanese">日本語</string>
-    <string name="language_spanish">Español</string>
-    <string name="language_brazilian_portuguese">Português (Brasil)</string>
-    <string name="language_german">Deutsch</string>
-    <string name="language_french">Français</string>
-    <string name="language_korean">한국어</string>
     <string name="week_start_label">Start of week</string>
     <string name="monday">Monday</string>
     <string name="sunday">Sunday</string>
@@ -991,4 +985,18 @@
     <string name="starter_title">Start with a habit</string>
     <string name="starter_body">Tap one to add it. You can change everything later.</string>
     <string name="create_own_habit">Create your own</string>
+    <string name="skip_reason_forgot">I forgot</string>
+    <string name="skip_reason_no_time">No time</string>
+    <string name="skip_reason_travel">Travelling</string>
+    <string name="skip_reason_sick">I was sick</string>
+    <string name="skip_reason_intentional">Skipped on purpose</string>
+    <string name="skip_reason_other">Other</string>
+    <string name="milestone_streak_title">%1$d-day streak</string>
+    <string name="milestone_streak_desc">Keep one habit going for %1$d days in a row.</string>
+    <string name="milestone_completions_title">%1$d check-ins</string>
+    <string name="milestone_completions_desc">Complete habits %1$d times in total.</string>
+    <string name="milestone_focus_title">%1$d hours of focus</string>
+    <string name="milestone_focus_desc">Finish %1$d hours of focus sessions in total.</string>
+    <string name="milestone_goal_title">%1$d goals reached</string>
+    <string name="milestone_goal_desc">Complete %1$d goals.</string>
 </resources>

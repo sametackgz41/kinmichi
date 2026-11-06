@@ -63,7 +63,7 @@ fun SkipReasonDialog(
                             onClick = {
                                 selectedReason = if (selectedReason == reason) null else reason
                             },
-                            label = { Text("${reason.icon} ${reason.defaultLabel}") },
+                            label = { Text("${reason.icon} ${stringResource(reason.labelRes)}") },
                         )
                     }
                 }
