@@ -17,6 +17,7 @@ import app.tsuzuku.data.local.TsuzukuDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class HabitReminderReceiver : BroadcastReceiver() {
@@ -29,11 +30,25 @@ class HabitReminderReceiver : BroadcastReceiver() {
                 val dao = TsuzukuDatabase.getInstance(context).habitDao()
                 when (intent.action) {
                     ACTION_COMPLETE -> {
-                        RoomHabitRepository(dao).toggleHabit(habitId)
+                        val repository = RoomHabitRepository(dao)
+                        val today = repository.observeToday().first().firstOrNull { it.habit.id == habitId }
+                        // Never undo: the button means "done", even if the app was used in between.
+                        if (today != null && !today.isComplete) {
+                            if (today.habit.type == app.tsuzuku.model.HabitType.Check) {
+                                repository.toggleHabit(habitId)
+                            } else {
+                                repository.addProgress(habitId, (today.habit.target - today.progress).coerceAtLeast(0.0))
+                            }
+                        }
                         context.getSystemService(NotificationManager::class.java).cancel(habitId.hashCode())
+                        app.tsuzuku.widget.TsuzukuWidgets.updateAll(context)
                     }
                     ACTION_REMIND -> {
                         val habit = dao.getHabit(habitId) ?: return@launch
+                        HabitReminderScheduler(context, dao).schedule(habit)
+                        val doneToday = RoomHabitRepository(dao).observeToday().first()
+                            .firstOrNull { it.habit.id == habitId }?.isComplete == true
+                        if (doneToday) return@launch
                         HabitNotifications.show(
                             context,
                             habitId,
@@ -41,7 +56,6 @@ class HabitReminderReceiver : BroadcastReceiver() {
                             habit.emoji,
                             habit.reminderRepeatMinutes,
                         )
-                        HabitReminderScheduler(context, dao).schedule(habit)
                     }
                 }
             } finally {
@@ -64,6 +78,7 @@ class ReminderBootReceiver : BroadcastReceiver() {
         CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
             try {
                 HabitReminderScheduler(context, TsuzukuDatabase.getInstance(context).habitDao()).rescheduleAll()
+                WeeklySummary.schedule(context)
             } finally {
                 pendingResult.finish()
             }

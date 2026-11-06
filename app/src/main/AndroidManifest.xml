@@ -71,6 +71,9 @@
             android:name=".notifications.HabitReminderSnoozeReceiver"
             android:exported="false" />
         <receiver
+            android:name=".notifications.WeeklySummaryReceiver"
+            android:exported="false" />
+        <receiver
             android:name=".notifications.ReminderBootReceiver"
             android:enabled="true"
             android:exported="true">

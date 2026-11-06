@@ -75,6 +75,7 @@ fun CloudAccountScreen(
     val syncState by repository.syncState.collectAsStateWithLifecycle()
     var initialAccountHandled by rememberSaveable { mutableStateOf(false) }
     var showSignOutChoice by rememberSaveable { mutableStateOf(false) }
+    var showDeleteAccount by rememberSaveable { mutableStateOf(false) }
 
     LaunchedEffect(initialSetup, account) {
         val signedIn = account as? CloudAccountState.SignedIn
@@ -195,6 +196,11 @@ fun CloudAccountScreen(
                             modifier = Modifier.fillMaxWidth(),
                             enabled = syncState !is CloudSyncState.Working,
                         ) { Text(stringResource(R.string.sign_out_google)) }
+                        TextButton(
+                            onClick = { showDeleteAccount = true },
+                            modifier = Modifier.fillMaxWidth(),
+                            enabled = syncState !is CloudSyncState.Working,
+                        ) { Text(stringResource(R.string.delete_account), color = MaterialTheme.colorScheme.error) }
                     }
                 }
             }
@@ -301,6 +307,21 @@ fun CloudAccountScreen(
         )
     }
 
+    if (showDeleteAccount) AlertDialog(
+        onDismissRequest = { showDeleteAccount = false },
+        title = { Text(stringResource(R.string.delete_account_title)) },
+        text = { Text(stringResource(R.string.delete_account_message)) },
+        confirmButton = {
+            TextButton(onClick = {
+                showDeleteAccount = false
+                scope.launch { if (repository.deleteAccount()) onDataRestored() }
+            }) { Text(stringResource(R.string.delete_account_confirm), color = MaterialTheme.colorScheme.error) }
+        },
+        dismissButton = {
+            TextButton(onClick = { showDeleteAccount = false }) { Text(stringResource(R.string.cancel)) }
+        },
+    )
+
     if (showSignOutChoice) AlertDialog(
         onDismissRequest = { showSignOutChoice = false },
         title = { Text(stringResource(R.string.sign_out_google)) },
@@ -392,5 +413,6 @@ private fun operationLabel(operation: CloudOperation): String = stringResource(
         CloudOperation.Download -> R.string.cloud_downloading
         CloudOperation.Synchronize -> R.string.cloud_synchronizing
         CloudOperation.SignOut -> R.string.google_signing_out
+        CloudOperation.DeleteAccount -> R.string.deleting_account
     },
 )

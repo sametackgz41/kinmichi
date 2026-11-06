@@ -1,5 +1,6 @@
 package app.tsuzuku.ui.screens
 
+import androidx.compose.runtime.remember
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import android.Manifest
 import android.content.pm.PackageManager
@@ -241,6 +242,17 @@ fun ProfileScreen(
                     stringResource(R.string.daily_summary_setting_description),
                     checked = settings.showDailySummary,
                     onCheckedChange = onSetShowDailySummary,
+                )
+                var weeklySummaryOn by remember { mutableStateOf(app.tsuzuku.notifications.WeeklySummary.isEnabled(context)) }
+                SwitchSettingRow(
+                    Icons.Rounded.Notifications,
+                    stringResource(R.string.weekly_summary_setting),
+                    stringResource(R.string.weekly_summary_setting_description),
+                    checked = weeklySummaryOn,
+                    onCheckedChange = {
+                        weeklySummaryOn = it
+                        app.tsuzuku.notifications.WeeklySummary.setEnabled(context, it)
+                    },
                 )
             }
         }

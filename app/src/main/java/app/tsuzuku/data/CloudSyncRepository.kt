@@ -53,7 +53,7 @@ sealed interface CloudSyncState {
     data class Error(val message: String) : CloudSyncState
 }
 
-enum class CloudOperation { SignIn, Upload, Download, Synchronize, SignOut }
+enum class CloudOperation { SignIn, Upload, Download, Synchronize, SignOut, DeleteAccount }
 
 /**
  * Keeps Room as the source of truth and stores versioned, chunked snapshots in Firestore.
@@ -161,6 +161,41 @@ class CloudSyncRepository(
             mutableSyncState.value = CloudSyncState.Idle
         }.onFailure { error ->
             mutableSyncState.value = CloudSyncState.Error(error.safeMessage())
+        }
+    }
+
+    /**
+     * Permanently deletes the user's cloud copy, their Firebase account and the data on this
+     * device (required by Google Play for apps that let people create an account).
+     * Returns false when Firebase asks for a fresh sign-in before deleting the account.
+     */
+    suspend fun deleteAccount(): Boolean {
+        val user = auth?.currentUser ?: return false
+        val database = firestore ?: return false
+        mutableSyncState.value = CloudSyncState.Working(CloudOperation.DeleteAccount)
+        return runCatching {
+            val root = userRoot(database, user.uid)
+            root.collection(COLLECTION_GENERATIONS).get().await().documents.forEach { generation ->
+                deleteGeneration(database, user.uid, generation.id)
+            }
+            root.collection(COLLECTION_SYNC).get().await().documents.forEach { it.reference.delete().await() }
+            root.delete().await()
+            user.delete().await()
+            credentialManager.clearCredentialState(ClearCredentialStateRequest())
+            backupRepository.clearLocalData()
+            settingsRepository.clearCloudSyncBaseline()
+            settingsRepository.setCloudSyncEnabled(false)
+            mutableSyncState.value = CloudSyncState.Idle
+            true
+        }.getOrElse { error ->
+            mutableSyncState.value = CloudSyncState.Error(
+                if (error is com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException) {
+                    context.getString(app.tsuzuku.R.string.delete_account_reauth)
+                } else {
+                    error.safeMessage()
+                },
+            )
+            false
         }
     }
 

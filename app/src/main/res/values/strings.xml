@@ -999,4 +999,19 @@
     <string name="milestone_focus_desc">Finish %1$d hours of focus sessions in total.</string>
     <string name="milestone_goal_title">%1$d goals reached</string>
     <string name="milestone_goal_desc">Complete %1$d goals.</string>
+    <string name="show_advanced">More options</string>
+    <string name="hide_advanced">Fewer options</string>
+    <string name="unit_times">times</string>
+    <string name="skip_keeps_streak">Skipped days don\'t count, so your streak stays intact.</string>
+    <string name="weekly_summary_title">Your week: %1$d%%</string>
+    <string name="weekly_summary_body">%1$d of %2$d check-ins done. Strongest habit: %3$s.</string>
+    <string name="weekly_summary_body_empty">No habits were scheduled this week. A fresh start is one tap away.</string>
+    <string name="weekly_summary_setting">Weekly summary</string>
+    <string name="weekly_summary_setting_description">A short recap every Sunday evening</string>
+    <string name="delete_account">Delete account and data</string>
+    <string name="delete_account_title">Delete your account?</string>
+    <string name="delete_account_message">This permanently deletes your Tsuzuku cloud copy, your account and all habits on this device. It cannot be undone. Export a backup first if you want to keep anything.</string>
+    <string name="delete_account_confirm">Delete permanently</string>
+    <string name="delete_account_reauth">For your security, sign in again and then delete your account.</string>
+    <string name="deleting_account">Deleting your account…</string>
 </resources>

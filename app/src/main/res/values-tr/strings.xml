@@ -998,4 +998,19 @@
     <string name="milestone_focus_desc">Toplam %1$d saat odak seansı tamamla.</string>
     <string name="milestone_goal_title">%1$d hedef</string>
     <string name="milestone_goal_desc">%1$d hedef tamamla.</string>
+    <string name="show_advanced">Daha fazla seçenek</string>
+    <string name="hide_advanced">Daha az seçenek</string>
+    <string name="unit_times">kez</string>
+    <string name="skip_keeps_streak">Atlanan günler sayılmaz, serin bozulmaz.</string>
+    <string name="weekly_summary_title">Haftan: %%%1$d</string>
+    <string name="weekly_summary_body">%2$d hedeften %1$d tamamlandı. En güçlü alışkanlığın: %3$s.</string>
+    <string name="weekly_summary_body_empty">Bu hafta planlanmış alışkanlık yoktu. Yeni bir başlangıç bir dokunuş uzakta.</string>
+    <string name="weekly_summary_setting">Haftalık özet</string>
+    <string name="weekly_summary_setting_description">Her pazar akşamı kısa bir değerlendirme</string>
+    <string name="delete_account">Hesabı ve verileri sil</string>
+    <string name="delete_account_title">Hesabın silinsin mi?</string>
+    <string name="delete_account_message">Bu işlem buluttaki Tsuzuku kopyanı, hesabını ve bu cihazdaki bütün alışkanlıkları kalıcı olarak siler. Geri alınamaz. Saklamak istediğin bir şey varsa önce yedek al.</string>
+    <string name="delete_account_confirm">Kalıcı olarak sil</string>
+    <string name="delete_account_reauth">Güvenliğin için tekrar giriş yap, sonra hesabını sil.</string>
+    <string name="deleting_account">Hesabın siliniyor…</string>
 </resources>

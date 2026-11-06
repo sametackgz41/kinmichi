@@ -100,6 +100,7 @@ class TsuzukuApplication : Application() {
         if (settingsRepository.settings.value.geminiApiKey.isNotBlank()) settingsRepository.setGeminiApiKey("")
         applicationScope.launch {
             reminderScheduler.rescheduleAll()
+            app.tsuzuku.notifications.WeeklySummary.schedule(this@TsuzukuApplication)
             TsuzukuWidgetProvider.requestUpdate(this@TsuzukuApplication)
             cloudSyncRepository.synchronize()
         }
