@@ -142,6 +142,7 @@ fun HabitDetailScreen(
                     }
                 }
             }
+            item { HabitYearCard(habit, records) }
             item {
                 Column {
                     Column(Modifier.fillMaxWidth().padding(17.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {

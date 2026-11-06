@@ -149,6 +149,18 @@ data class HabitHistorySnapshot(
         }.toList()
     }
 
+    /** How one day looks on a habit's year heatmap. */
+    fun heatDay(habit: Habit, date: LocalDate): HeatDay {
+        val record = recordsByDateAndHabit[date]?.get(habit.id)
+        return when {
+            record?.status == HabitDayStatus.Skipped -> HeatDay.Skipped
+            isComplete(habit, date) -> HeatDay.Done
+            record == null && !habit.isScheduledOn(date) -> HeatDay.Off
+            record == null || habit.direction == HabitDirection.Quit || habit.target <= 0.0 -> HeatDay.Partial(0f)
+            else -> HeatDay.Partial((record.progress / habit.target).toFloat().coerceIn(0f, 0.99f))
+        }
+    }
+
     /** Streak for a daily habit as of [today], with this week's rest day applied. */
     fun streak(habit: Habit, today: LocalDate): StreakResult =
         if (habit.goalPeriod != GoalPeriod.Daily) {
@@ -196,4 +208,14 @@ private fun LocalDate.periodKey(period: GoalPeriod): String = when (period) {
     GoalPeriod.Daily -> toString()
     GoalPeriod.Weekly -> minusDays((dayOfWeek.value - 1).toLong()).toString()
     GoalPeriod.Monthly -> "%04d-%02d".format(year, monthValue)
+}
+
+sealed interface HeatDay {
+    /** Not scheduled and nothing logged. */
+    data object Off : HeatDay
+    data object Skipped : HeatDay
+    data object Done : HeatDay
+
+    /** Scheduled; [fraction] of the target reached (0 = nothing). */
+    data class Partial(val fraction: Float) : HeatDay
 }

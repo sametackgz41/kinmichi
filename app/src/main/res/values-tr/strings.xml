@@ -1030,4 +1030,13 @@
     </plurals>
     <string name="rest_day_used">bu haftaki dinlenme hakkı kullanıldı</string>
     <string name="rest_day_rule">Bir gün unuttun mu? Haftada bir kaçırılan gün serini bozmaz.</string>
+    <string name="year_heatmap_title">Son 12 ay</string>
+    <string name="heat_day_off">Planlı değil</string>
+    <string name="heat_day_done">Tamamlandı</string>
+    <string name="heat_day_missed">Yapılmadı</string>
+    <string name="heat_day_partial">Hedefin %1$s kadarı</string>
+    <plurals name="year_heatmap_summary">
+        <item quantity="one">Son bir yılda %d gün tamamlandı</item>
+        <item quantity="other">Son bir yılda %d gün tamamlandı</item>
+    </plurals>
 </resources>

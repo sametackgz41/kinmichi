@@ -1031,4 +1031,13 @@
     </plurals>
     <string name="rest_day_used">this week\'s rest day is used</string>
     <string name="rest_day_rule">Forgot a day? One missed day a week won\'t break your streak.</string>
+    <string name="year_heatmap_title">Last 12 months</string>
+    <string name="heat_day_off">Not scheduled</string>
+    <string name="heat_day_done">Done</string>
+    <string name="heat_day_missed">Not done</string>
+    <string name="heat_day_partial">%1$s of the goal</string>
+    <plurals name="year_heatmap_summary">
+        <item quantity="one">%d day done in the last year</item>
+        <item quantity="other">%d days done in the last year</item>
+    </plurals>
 </resources>

@@ -231,6 +231,42 @@ class PreviewGalleryTest {
         captureScreen("settings_$suffix")
     }
 
+    // ---- habit detail: year heatmap --------------------------------------------------------
+
+    @Test fun detailTrLight() = renderDetail("tr", false)
+    @Test fun detailTrDark() = renderDetail("tr", true)
+    @Test fun detailEnLight() = renderDetail("en", false)
+    @Test fun detailEnDark() = renderDetail("en", true)
+
+    private fun renderDetail(lang: String, dark: Boolean) {
+        setVariant(lang, dark)
+        val today = LocalDate.now()
+        val water = sampleToday(lang)[1].habit.copy(createdOn = today.minusDays(400))
+        // A believable year: a slow start, a strong summer, a few skips and partial days.
+        val records = (0L..364L).mapNotNull { back ->
+            val date = today.minusDays(back)
+            val seed = ((back * 37 + 11) % 100).toInt()
+            val chance = if (back > 240) 45 else 82
+            when {
+                back == 0L -> HabitHistoryRecord(water.id, date, 5.0, HabitDayStatus.Pending)
+                seed % 29 == 0 -> HabitHistoryRecord(water.id, date, 0.0, HabitDayStatus.Skipped)
+                seed < chance -> HabitHistoryRecord(water.id, date, 8.0, HabitDayStatus.Completed)
+                seed < chance + 10 -> HabitHistoryRecord(water.id, date, (2 + seed % 5).toDouble(), HabitDayStatus.Pending)
+                else -> null
+            }
+        }
+        compose.setContent {
+            TsuzukuTheme(darkTheme = dark) {
+                app.tsuzuku.ui.screens.HabitDetailScreen(
+                    habit = water, records = records,
+                    onBack = {}, onEdit = {}, onSaveNote = {}, onArchive = {}, onDuplicate = {}, onDelete = {},
+                )
+            }
+        }
+        compose.mainClock.advanceTimeBy(1500)
+        captureScreen("detail_${lang}_${if (dark) "dark" else "light"}")
+    }
+
     // ---- animations: frame strips, stitched into GIFs by the gallery script ------------------
 
     @Test fun animationsTrLight() = renderAnimations("tr", false)
