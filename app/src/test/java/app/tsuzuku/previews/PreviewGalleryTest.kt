@@ -150,14 +150,17 @@ class PreviewGalleryTest {
     @Test fun todayEnLight() = renderToday("en", false)
     @Test fun todayEnDark() = renderToday("en", true)
 
-    @Test fun palettesTr() {
-        setVariant("tr", false)
+    @Test fun palettesTr() = renderPalettes("tr")
+    @Test fun palettesEn() = renderPalettes("en")
+
+    private fun renderPalettes(lang: String) {
+        setVariant(lang, false)
         val palette = mutableStateOf(app.tsuzuku.data.preferences.PalettePreference.Washi)
         val dark = mutableStateOf(false)
-        val habits = sampleToday("tr")
+        val habits = sampleToday(lang)
         compose.setContent {
             TsuzukuTheme(darkTheme = dark.value, palette = palette.value) {
-                Shell(title = "Bugün", route = "today", profile = "Samet") { modifier ->
+                Shell(title = if (lang == "tr") "Bugün" else "Today", route = "today", profile = "Samet") { modifier ->
                     Box(modifier) {
                         TodayScreen(
                             habits = habits, profileName = "Samet", showDailySummary = true,
@@ -182,9 +185,24 @@ class PreviewGalleryTest {
                 palette.value = choice
                 dark.value = night
                 compose.mainClock.advanceTimeBy(1_000)
-                captureScreen("palette_${choice.name.lowercase()}_${if (night) "dark" else "light"}")
+                captureScreen("palette_${choice.name.lowercase()}_${if (night) "dark" else "light"}" + if (lang == "tr") "" else "_en")
             }
         }
+    }
+
+    @Test fun whatsNewTr() = renderWhatsNew("tr")
+    @Test fun whatsNewEn() = renderWhatsNew("en")
+
+    private fun renderWhatsNew(lang: String) {
+        setVariant(lang, false)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false) {
+                androidx.compose.material3.Surface(color = androidx.compose.material3.MaterialTheme.colorScheme.surfaceContainerHigh) {
+                    app.tsuzuku.ui.screens.WhatsNewList(Modifier.padding(24.dp))
+                }
+            }
+        }
+        captureScreen("whats_new_${lang}_light")
     }
 
     @Test fun palettePickerTr() {

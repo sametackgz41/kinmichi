@@ -1,5 +1,13 @@
 # Değişiklik günlüğü
 
+## 2.6.0 — Açık kaynak
+
+- Güncelleme kontrolü: günde bir kez GitHub'a bakar, yeni sürüm varsa Bugün ekranında haber verir (Ayarlar'dan kapatılabilir)
+- "Yenilikler" penceresi: güncellemeden sonraki ilk açılışta o sürümün öne çıkanları
+- Ayarlar › Hata raporları › GitHub'da bildir: sürüm, telefon modeli ve son hata kaydıyla doldurulmuş bir sorun kaydı açar
+- Ayarlar'da GitHub proje bağlantısı
+- Yenilenen İngilizce README ve yeni Türkçe README, gizlilik sayfası (PRIVACY.md), katkı ve çeviri rehberi (CONTRIBUTING.md), hata ve fikir şablonları
+
 ## 2.5.0 — Devam etmek
 
 **Verim**

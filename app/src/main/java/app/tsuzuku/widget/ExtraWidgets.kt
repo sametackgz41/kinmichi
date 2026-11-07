@@ -103,7 +103,7 @@ internal fun StreakContent(top: TodayHabit?, comebacks: Int, locked: Boolean) {
             Text(
                 context.resources.getQuantityString(R.plurals.comebacks_this_month, comebacks, comebacks),
                 style = TextStyle(color = GlanceTheme.colors.tertiary, fontSize = 12.sp, fontWeight = FontWeight.Medium),
-                maxLines = 1,
+                maxLines = 2,
             )
         }
     }

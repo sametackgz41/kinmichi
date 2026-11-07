@@ -31,6 +31,8 @@ import androidx.compose.material.icons.rounded.CalendarMonth
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.DarkMode
 import androidx.compose.material.icons.rounded.Palette
+import androidx.compose.material.icons.rounded.SystemUpdate
+import androidx.compose.material.icons.rounded.Code
 import androidx.compose.material.icons.rounded.Contrast
 import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.Language
@@ -284,6 +286,27 @@ fun ProfileScreen(
                     onCheckedChange = {
                         streakGuardOn = it
                         app.tsuzuku.notifications.StreakGuard.setEnabled(context, it)
+                    },
+                )
+                var updateCheckOn by remember { mutableStateOf(app.tsuzuku.update.UpdateChecker.isEnabled(context)) }
+                SwitchSettingRow(
+                    Icons.Rounded.SystemUpdate,
+                    stringResource(R.string.update_check_setting),
+                    stringResource(R.string.update_check_setting_description),
+                    updateCheckOn,
+                    onCheckedChange = {
+                        updateCheckOn = it
+                        app.tsuzuku.update.UpdateChecker.setEnabled(context, it)
+                    },
+                )
+                ValueSettingRow(
+                    Icons.Rounded.Code,
+                    stringResource(R.string.github_project),
+                    stringResource(R.string.github_project_description, app.tsuzuku.BuildConfig.VERSION_NAME),
+                    onClick = {
+                        runCatching {
+                            context.startActivity(android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(app.tsuzuku.update.GITHUB_URL)))
+                        }
                     },
                 )
                 var weeklySummaryOn by remember { mutableStateOf(app.tsuzuku.notifications.WeeklySummary.isEnabled(context)) }

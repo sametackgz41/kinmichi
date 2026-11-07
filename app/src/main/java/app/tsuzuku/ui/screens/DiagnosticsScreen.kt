@@ -84,6 +84,24 @@ fun DiagnosticsScreen(store: DiagnosticStore, onBack: () -> Unit) {
                 Text(stringResource(R.string.export_diagnostic), modifier = Modifier.padding(start = 8.dp))
             }
         }
+        item {
+            androidx.compose.material3.OutlinedButton(
+                onClick = {
+                    val url = app.tsuzuku.update.githubIssueUrl(store.report())
+                    runCatching { context.startActivity(android.content.Intent(android.content.Intent.ACTION_VIEW, url)) }
+                },
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Icon(Icons.Rounded.BugReport, contentDescription = null)
+                Text(stringResource(R.string.report_on_github), modifier = Modifier.padding(start = 8.dp))
+            }
+            Text(
+                stringResource(R.string.report_on_github_note),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(top = 6.dp),
+            )
+        }
         if (hasCrash) {
             item {
                 FilledTonalButton(

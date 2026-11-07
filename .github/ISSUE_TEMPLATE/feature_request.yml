@@ -1,0 +1,20 @@
+name: Feature idea
+description: Something that would help you keep going
+labels: [idea]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's the problem?
+      description: What gets in your way today? (Türkçe de yazabilirsin.)
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Your idea
+      description: How would you like it to work?
+  - type: textarea
+    id: else
+    attributes:
+      label: Anything else

@@ -1137,4 +1137,25 @@
         <item quantity="one">gündür devam</item>
         <item quantity="other">gündür devam</item>
     </plurals>
+    <string name="report_on_github">GitHub\'da bildir</string>
+    <string name="report_on_github_note">Tarayıcıda sürüm, telefon modeli ve son hata kaydıyla doldurulmuş bir sorun kaydı açar. Gönder\'e basana kadar hiçbir şey gitmez; sorun kayıtları herkese açıktır.</string>
+    <string name="update_check_setting">Güncellemeleri denetle</string>
+    <string name="update_check_setting_description">Günde bir kez GitHub\'da yeni sürüm olup olmadığına bakar</string>
+    <string name="github_project">GitHub\'da Tsuzuku</string>
+    <string name="github_project_description">Sürüm %1$s · kaynak kodu, sürümler ve geri bildirim</string>
+    <string name="update_available_title">Tsuzuku %1$s çıktı</string>
+    <string name="update_available_body">GitHub\'dan ya da Obtainium\'dan alabilirsin.</string>
+    <string name="update_later">Sonra</string>
+    <string name="update_open">Aç</string>
+    <string name="whats_new_title">%1$s sürümünde yenilikler</string>
+    <string name="whats_new_ok">Tamam</string>
+    <string-array name="whats_new_items">
+        <item>Kötü gün sürümü|Alışkanlığa yine de sayılan en küçük adımı yaz. Kaçırılan bir günden sonra Bugün ekranı onu tek dokunuşla önerir.</item>
+        <item>Eğer-o zaman planı|Alışkanlığı gününün bir anına bağla: \"Eğer yemeği bitirirsem, 10 sayfa okurum.\"</item>
+        <item>Kintsugi|Aradan sonra geri döndüğün gün sayılır ve altınla çizilir.</item>
+        <item>Health Connect|Alışkanlığı adım, mesafe, kalori, egzersiz ya da uykuya bağla, kendiliğinden dolsun.</item>
+        <item>Akıllı hatırlatma ve seri uyarısı|Daha iyi hatırlatma saatleri; akşam yalnızca seri tehlikedeyse tek bir not.</item>
+        <item>Paletler ve widget\'lar|Beş palet, gece için saf siyah; yeni seri, hızlı ızgara ve ruh hali widget\'ları.</item>
+        <item>Geri bildirim|Ayarlar › Hata raporları › GitHub\'da bildir. Yeni sürüm çıkınca Tsuzuku haber de verir.</item>
+    </string-array>
 </resources>

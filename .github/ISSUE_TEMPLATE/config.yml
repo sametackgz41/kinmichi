@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Translate Tsuzuku
+    url: https://github.com/sametackgz41/tsuzuku/blob/main/CONTRIBUTING.md#translating
+    about: How to add or improve a language

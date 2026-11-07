@@ -185,6 +185,19 @@ fun TsuzukuApp(
     val smartReminderPrefs = remember { app.tsuzuku.data.SmartReminderPrefs(smartReminderContext) }
     val smartReminderScope = androidx.compose.runtime.rememberCoroutineScope()
     var reminderSuggestion by remember { androidx.compose.runtime.mutableStateOf<app.tsuzuku.model.ReminderSuggestion?>(null) }
+    var availableUpdate by remember { androidx.compose.runtime.mutableStateOf<app.tsuzuku.update.AvailableUpdate?>(null) }
+    androidx.compose.runtime.LaunchedEffect(Unit) {
+        availableUpdate = app.tsuzuku.update.UpdateChecker.check(smartReminderContext)
+    }
+    var showWhatsNew by remember {
+        androidx.compose.runtime.mutableStateOf(app.tsuzuku.update.WhatsNew.shouldShow(smartReminderContext, existingUser = settings.onboardingCompleted))
+    }
+    if (showWhatsNew) {
+        app.tsuzuku.ui.screens.WhatsNewDialog(onDismiss = {
+            app.tsuzuku.update.WhatsNew.markSeen(smartReminderContext)
+            showWhatsNew = false
+        })
+    }
     androidx.compose.runtime.LaunchedEffect(habits.map { it.habit.id to it.habit.reminderMinutes }) {
         val today = java.time.LocalDate.now()
         reminderSuggestion = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Default) {
@@ -294,6 +307,16 @@ fun TsuzukuApp(
                     },
                     onTinyVersion = todayViewModel::completeTinyVersion,
                     reminderSuggestion = reminderSuggestion,
+                    availableUpdate = availableUpdate,
+                    onOpenUpdate = { update ->
+                        runCatching {
+                            smartReminderContext.startActivity(android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(update.pageUrl)))
+                        }
+                    },
+                    onDismissUpdate = { update ->
+                        app.tsuzuku.update.UpdateChecker.dismiss(smartReminderContext, update.version)
+                        availableUpdate = null
+                    },
                     onAcceptReminder = { suggestion ->
                         smartReminderPrefs.snooze(suggestion.habit.id, java.time.LocalDate.now())
                         reminderSuggestion = null

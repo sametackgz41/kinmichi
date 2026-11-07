@@ -1138,4 +1138,25 @@
         <item quantity="one">days running</item>
         <item quantity="other">days running</item>
     </plurals>
+    <string name="report_on_github">Report on GitHub</string>
+    <string name="report_on_github_note">Opens a pre-filled issue in your browser with the version, phone model and the last error log. Nothing is sent until you press Submit, and issues are public.</string>
+    <string name="update_check_setting">Check for updates</string>
+    <string name="update_check_setting_description">Once a day, ask GitHub whether a newer version is out</string>
+    <string name="github_project">Tsuzuku on GitHub</string>
+    <string name="github_project_description">Version %1$s · source code, releases and feedback</string>
+    <string name="update_available_title">Tsuzuku %1$s is out</string>
+    <string name="update_available_body">Get it from GitHub or Obtainium.</string>
+    <string name="update_later">Later</string>
+    <string name="update_open">Open</string>
+    <string name="whats_new_title">What\'s new in %1$s</string>
+    <string name="whats_new_ok">Got it</string>
+    <string-array name="whats_new_items">
+        <item>Bad-day version|Give a habit a smallest step that still counts. After a missed day, Today offers it in one tap.</item>
+        <item>If–then plans|Tie a habit to a moment: \"If I finish dinner, I read 10 pages.\"</item>
+        <item>Kintsugi|The day you come back after a break is counted and drawn in gold.</item>
+        <item>Health Connect|Link a habit to steps, distance, calories, exercise or sleep and it fills itself.</item>
+        <item>Smart reminders and streak alert|Better reminder times, and one evening note only when a streak is at risk.</item>
+        <item>Palettes and widgets|Five palettes, pure black at night, new streak, quick grid and mood widgets.</item>
+        <item>Feedback|Settings › Error reports › Report on GitHub. Tsuzuku also tells you when a new version is out.</item>
+    </string-array>
 </resources>

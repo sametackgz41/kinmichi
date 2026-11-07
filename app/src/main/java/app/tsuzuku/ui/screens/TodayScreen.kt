@@ -134,6 +134,9 @@ fun TodayScreen(
     comebackHabitIds: Set<Long> = emptySet(),
     comebacksThisMonth: Int = 0,
     reminderSuggestion: app.tsuzuku.model.ReminderSuggestion? = null,
+    availableUpdate: app.tsuzuku.update.AvailableUpdate? = null,
+    onOpenUpdate: (app.tsuzuku.update.AvailableUpdate) -> Unit = {},
+    onDismissUpdate: (app.tsuzuku.update.AvailableUpdate) -> Unit = {},
     onAcceptReminder: (app.tsuzuku.model.ReminderSuggestion) -> Unit = {},
     onDismissReminder: (app.tsuzuku.model.ReminderSuggestion) -> Unit = {},
     onTinyVersion: (Long) -> Unit = {},
@@ -184,6 +187,16 @@ fun TodayScreen(
                         )
                     }
                 }
+            }
+        }
+        if (availableUpdate != null) {
+            item(key = "update-${availableUpdate.version}") {
+                UpdateCard(
+                    update = availableUpdate,
+                    onOpen = { onOpenUpdate(availableUpdate) },
+                    onDismiss = { onDismissUpdate(availableUpdate) },
+                    modifier = Modifier.animateItem(),
+                )
             }
         }
         if (weekProgress.isNotEmpty()) {
@@ -493,6 +506,31 @@ private fun SmartReminderCard(
                 TextButton(onClick = onDismiss) { Text(stringResource(R.string.smart_reminder_keep)) }
                 TextButton(onClick = onAccept) { Text(stringResource(R.string.smart_reminder_move, clock(suggestion.toMinutes))) }
             }
+        }
+    }
+}
+
+/** A newer Tsuzuku is on GitHub. */
+@Composable
+private fun UpdateCard(
+    update: app.tsuzuku.update.AvailableUpdate,
+    onOpen: () -> Unit,
+    onDismiss: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Surface(
+        color = MaterialTheme.colorScheme.secondaryContainer,
+        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+        shape = MaterialTheme.shapes.medium,
+        modifier = modifier.fillMaxWidth(),
+    ) {
+        Row(Modifier.padding(start = 16.dp, top = 6.dp, end = 4.dp, bottom = 6.dp), verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f).padding(vertical = 8.dp)) {
+                Text(stringResource(R.string.update_available_title, update.version), style = MaterialTheme.typography.titleMedium)
+                Text(stringResource(R.string.update_available_body), style = MaterialTheme.typography.bodyMedium)
+            }
+            TextButton(onClick = onDismiss) { Text(stringResource(R.string.update_later)) }
+            TextButton(onClick = onOpen) { Text(stringResource(R.string.update_open)) }
         }
     }
 }

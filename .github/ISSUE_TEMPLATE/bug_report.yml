@@ -1,0 +1,39 @@
+name: Bug report
+description: Something doesn't work as it should
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Tip: **Settings › Error reports › Report on GitHub** in the app fills in the details below for you.
+        Hata raporunu Türkçe de yazabilirsin.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Tsuzuku version
+      placeholder: "2.6.0"
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Phone and Android version
+      placeholder: "Pixel 8, Android 16"
+  - type: textarea
+    id: log
+    attributes:
+      label: Error log
+      description: From Settings › Error reports, if there is one.
+      render: text
+  - type: textarea
+    id: media
+    attributes:
+      label: Screenshots or a screen recording
+      description: Drag files here.

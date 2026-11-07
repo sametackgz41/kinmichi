@@ -17,8 +17,8 @@ android {
         applicationId = "app.tsuzuku"
         minSdk = 30
         targetSdk = 36
-        versionCode = 27
-        versionName = "2.5.0"
+        versionCode = 28
+        versionName = "2.6.0"
     }
 
     buildTypes {
