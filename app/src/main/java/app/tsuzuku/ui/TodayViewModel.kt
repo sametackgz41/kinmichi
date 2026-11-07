@@ -68,6 +68,10 @@ class TodayViewModel(
         viewModelScope.launch { repository.toggleHabit(id); onDataChanged() }
     }
 
+    fun completeTinyVersion(id: Long) {
+        viewModelScope.launch { repository.completeTinyVersion(id); onDataChanged() }
+    }
+
     fun incrementHabit(id: Long) {
         viewModelScope.launch { repository.incrementHabit(id); onDataChanged() }
     }

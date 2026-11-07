@@ -49,6 +49,15 @@ interface HabitRepository {
     suspend fun applyVacation(startDate: LocalDate, endDate: LocalDate)
     suspend fun clearVacation(startDate: LocalDate, endDate: LocalDate)
     suspend fun syncHealthSteps(steps: Long)
+    /** Health metrics some active habit is linked to. */
+    suspend fun healthMetricsInUse(): Set<HealthMetric> = emptySet()
+    /** Replaces today's health reading for every habit linked to [metric]; [valueFor] converts to the habit's unit. */
+    suspend fun syncHealth(metric: HealthMetric, valueFor: (unit: String) -> Double) {}
+    /** Marks today done with the habit's bad-day version (its minimum, or a plain completion). */
+    suspend fun completeTinyVersion(id: Long)
+    /** Minute of the day each habit was usually done on, over the last [days] days. */
+    suspend fun completionMinutes(days: Int): Map<Long, List<Int>> = emptyMap()
+    suspend fun setReminderMinutes(id: Long, minutes: Int) {}
     suspend fun skipHabit(id: Long, reason: String?)
     suspend fun skipHabitOnDate(id: Long, date: LocalDate, reason: String?)
     fun observeHabitLevels(habitId: Long): Flow<List<HabitLevel>>
@@ -182,6 +191,39 @@ class RoomHabitRepository(
         dao.deleteLatestProgress(id, date.toString())
     }
 
+    override suspend fun completionMinutes(days: Int): Map<Long, List<Int>> {
+        val zone = ZoneId.systemDefault()
+        return dao.completionTimes(today().minusDays(days.toLong()).toString())
+            .groupBy({ it.habitId }) { Instant.ofEpochMilli(it.at).atZone(zone).toLocalTime().let { time -> time.hour * 60 + time.minute } }
+    }
+
+    override suspend fun setReminderMinutes(id: Long, minutes: Int) {
+        dao.updateReminderMinutes(id, minutes.coerceIn(0, 24 * 60 - 1), now())
+    }
+
+    override suspend fun completeTinyVersion(id: Long) {
+        val habit = dao.getHabit(id) ?: return
+        val date = today()
+        if (!prerequisiteComplete(habit, date)) return
+        val localDate = date.toString()
+        val current = dao.getEntries(id, localDate)
+        if (current.any { it.status == HabitEntryEntity.STATUS_COMPLETED }) return
+        val progress = current.filter(HabitEntryEntity::isProgress).sumOf(HabitEntryEntity::amount)
+        val timestamp = now()
+        if (habit.type != HabitType.Check.name && habit.minimumTarget > 0.0) {
+            if (progress >= habit.minimumTarget) return
+            dao.insertEntry(
+                HabitEntryEntity(habitId = id, localDate = localDate, amount = habit.minimumTarget - progress, note = HabitEntryEntity.NOTE_TINY, createdAt = timestamp, updatedAt = timestamp),
+            )
+        } else {
+            dao.replaceDayWithEntry(
+                habitId = id,
+                localDate = localDate,
+                entry = HabitEntryEntity(habitId = id, localDate = localDate, amount = habit.target, status = HabitEntryEntity.STATUS_COMPLETED, note = HabitEntryEntity.NOTE_TINY, createdAt = timestamp, updatedAt = timestamp),
+            )
+        }
+    }
+
     override suspend fun addProgress(id: Long, amount: Double) {
         if (amount <= 0.0) return
         val habit = dao.getHabit(id) ?: return
@@ -225,6 +267,7 @@ class RoomHabitRepository(
                 difficulty = draft.difficulty.coerceIn(1, 3),
                 contextLabel = draft.contextLabel.trim().take(40),
                 intention = draft.intention.trim().take(240),
+                tinyVersion = draft.tinyVersion.trim().take(60),
                 activeStartEpochDay = draft.activeStartEpochDay,
                 activeEndEpochDay = draft.activeEndEpochDay,
                 repeatIntervalDays = draft.repeatIntervalDays.coerceIn(1, 365),
@@ -264,6 +307,7 @@ class RoomHabitRepository(
                 difficulty = draft.difficulty.coerceIn(1, 3),
                 contextLabel = draft.contextLabel.trim().take(40),
                 intention = draft.intention.trim().take(240),
+                tinyVersion = draft.tinyVersion.trim().take(60),
                 activeStartEpochDay = draft.activeStartEpochDay,
                 activeEndEpochDay = draft.activeEndEpochDay,
                 repeatIntervalDays = draft.repeatIntervalDays.coerceIn(1, 365),
@@ -357,13 +401,22 @@ class RoomHabitRepository(
         if (!endDate.isBefore(startDate)) dao.clearSkippedEntries(startDate.toString(), endDate.toString())
     }
 
-    override suspend fun syncHealthSteps(steps: Long) {
+    override suspend fun syncHealthSteps(steps: Long) = syncHealth(HealthMetric.Steps) { steps.toDouble() }
+
+    override suspend fun healthMetricsInUse(): Set<HealthMetric> =
+        dao.getActiveHabits().mapNotNull { habit -> HealthMetric.entries.firstOrNull { it.name == habit.healthMetric } }
+            .filter { it != HealthMetric.None }
+            .toSet()
+
+    override suspend fun syncHealth(metric: HealthMetric, valueFor: (unit: String) -> Double) {
         val date = today().toString()
-        dao.getActiveHabits().filter { it.healthMetric == HealthMetric.Steps.name }.forEach { habit ->
+        dao.getActiveHabits().filter { it.healthMetric == metric.name }.forEach { habit ->
+            // Only the health reading is replaced; anything logged by hand stays.
             dao.clearHealthEntries(habit.id, date)
-            if (steps > 0) {
+            val value = valueFor(habit.unit)
+            if (value > 0) {
                 val timestamp = now()
-                dao.insertEntry(HabitEntryEntity(habitId = habit.id, localDate = date, amount = steps.toDouble(), status = HabitEntryEntity.STATUS_HEALTH, createdAt = timestamp, updatedAt = timestamp))
+                dao.insertEntry(HabitEntryEntity(habitId = habit.id, localDate = date, amount = value, status = HabitEntryEntity.STATUS_HEALTH, createdAt = timestamp, updatedAt = timestamp))
             }
         }
     }
@@ -482,6 +535,7 @@ private fun HabitEntity.toDomain() = Habit(
     pausedUntilEpochDay = pausedUntilEpochDay,
     tags = tags,
     currentLevel = currentLevel,
+    tinyVersion = tinyVersion,
 )
 
 private fun HabitLevelEntity.toDomain() = HabitLevel(

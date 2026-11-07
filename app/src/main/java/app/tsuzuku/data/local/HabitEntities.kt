@@ -40,6 +40,7 @@ data class HabitEntity(
     val pausedUntilEpochDay: Long? = null,
     val tags: String = "",
     val currentLevel: Int = 1,
+    val tinyVersion: String = "",
 )
 
 @Entity(
@@ -74,6 +75,9 @@ data class HabitEntryEntity(
         const val STATUS_COMPLETED = "COMPLETED"
         const val STATUS_FAILED = "FAILED"
         const val STATUS_SKIPPED = "SKIPPED"
+
+        /** Note on a completion that was the habit's bad-day (tiny) version. */
+        const val NOTE_TINY = "TINY"
     }
 }
 

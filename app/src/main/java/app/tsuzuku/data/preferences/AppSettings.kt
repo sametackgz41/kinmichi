@@ -72,6 +72,7 @@ data class AppSettings(
     val darkThemeColor: ThemeColorPreference = ThemeColorPreference.Matcha,
     val palette: PalettePreference = PalettePreference.Washi,
     val pureBlack: Boolean = false,
+    val widgetOpacity: Int = 100,
     val language: LanguagePreference = LanguagePreference.System,
     val weekStart: WeekStartPreference = WeekStartPreference.Monday,
     val showDailySummary: Boolean = true,
@@ -121,6 +122,7 @@ class SettingsRepository(context: Context) {
     fun setDarkThemeColor(value: ThemeColorPreference) = update(KEY_DARK_THEME_COLOR, value.name)
     fun setPalette(value: PalettePreference) = update(KEY_PALETTE, value.name)
     fun setPureBlack(value: Boolean) = update(KEY_PURE_BLACK, value)
+    fun setWidgetOpacity(value: Int) = update(KEY_WIDGET_OPACITY, value.coerceIn(20, 100))
     fun setLanguage(value: LanguagePreference) = update(KEY_LANGUAGE, value.name)
     fun setWeekStart(value: WeekStartPreference) = update(KEY_WEEK_START, value.name)
     fun setShowDailySummary(value: Boolean) = update(KEY_DAILY_SUMMARY, value)
@@ -214,6 +216,11 @@ class SettingsRepository(context: Context) {
         refresh()
     }
 
+    private fun update(key: String, value: Int) {
+        preferences.edit().putInt(key, value).apply()
+        refresh()
+    }
+
     private fun refresh() {
         mutableSettings.value = preferences.toSettings()
     }
@@ -225,6 +232,7 @@ class SettingsRepository(context: Context) {
         darkThemeColor = ThemeColorPreference.fromStored(getString(KEY_DARK_THEME_COLOR, null)),
         palette = PalettePreference.fromStored(getString(KEY_PALETTE, null)),
         pureBlack = getBoolean(KEY_PURE_BLACK, false),
+        widgetOpacity = getInt(KEY_WIDGET_OPACITY, 100),
         language = LanguagePreference.fromStored(getString(KEY_LANGUAGE, null)),
         weekStart = WeekStartPreference.fromStored(getString(KEY_WEEK_START, null)),
         showDailySummary = getBoolean(KEY_DAILY_SUMMARY, true),
@@ -259,6 +267,7 @@ class SettingsRepository(context: Context) {
         private const val KEY_THEME = "theme"
         private const val KEY_PALETTE = "palette"
         private const val KEY_PURE_BLACK = "pure_black"
+        private const val KEY_WIDGET_OPACITY = "widget_opacity"
         private const val KEY_LIGHT_THEME_COLOR = "light_theme_color"
         private const val KEY_DARK_THEME_COLOR = "dark_theme_color"
         private const val KEY_WEEK_START = "week_start"

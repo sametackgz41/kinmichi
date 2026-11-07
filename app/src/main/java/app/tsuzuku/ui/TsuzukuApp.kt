@@ -43,6 +43,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
+import kotlinx.coroutines.launch
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -127,6 +128,7 @@ fun TsuzukuApp(
     onSetTheme: (ThemePreference) -> Unit,
     onSetPalette: (app.tsuzuku.data.preferences.PalettePreference) -> Unit = {},
     onSetPureBlack: (Boolean) -> Unit = {},
+    onSetWidgetOpacity: (Int) -> Unit = {},
     onSetLanguage: (LanguagePreference) -> Unit,
     onSetWeekStart: (WeekStartPreference) -> Unit,
     onSetShowDailySummary: (Boolean) -> Unit,
@@ -179,6 +181,20 @@ fun TsuzukuApp(
     // Only state shared by several destinations lives here; screen-specific state is collected
     // inside its own destination so a check-off on Today does not recompose unrelated screens.
     val habits by todayViewModel.habits.collectAsStateWithLifecycle()
+    val smartReminderContext = androidx.compose.ui.platform.LocalContext.current
+    val smartReminderPrefs = remember { app.tsuzuku.data.SmartReminderPrefs(smartReminderContext) }
+    val smartReminderScope = androidx.compose.runtime.rememberCoroutineScope()
+    var reminderSuggestion by remember { androidx.compose.runtime.mutableStateOf<app.tsuzuku.model.ReminderSuggestion?>(null) }
+    androidx.compose.runtime.LaunchedEffect(habits.map { it.habit.id to it.habit.reminderMinutes }) {
+        val today = java.time.LocalDate.now()
+        reminderSuggestion = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Default) {
+            val minutes = repository.completionMinutes(app.tsuzuku.model.SMART_REMINDER_WINDOW_DAYS)
+            habits.asSequence()
+                .filterNot { smartReminderPrefs.isSnoozed(it.habit.id, today) }
+                .mapNotNull { app.tsuzuku.model.reminderSuggestion(it.habit, minutes[it.habit.id].orEmpty()) }
+                .firstOrNull()
+        }
+    }
     val history by todayViewModel.history.collectAsStateWithLifecycle()
     val timer by todayViewModel.timer.collectAsStateWithLifecycle()
     val goals by goalViewModel.goals.collectAsStateWithLifecycle()
@@ -272,6 +288,28 @@ fun TsuzukuApp(
                         adviceVersion++
                     },
                     onQuickMood = { mood -> reviewViewModel.quickMood(mood, dailyReviewToday) },
+                    comebackHabitIds = remember(history, habits) {
+                        val today = java.time.LocalDate.now()
+                        habits.filter { !it.isComplete && history.missedYesterday(it.habit, today) }.map { it.habit.id }.toSet()
+                    },
+                    onTinyVersion = todayViewModel::completeTinyVersion,
+                    reminderSuggestion = reminderSuggestion,
+                    onAcceptReminder = { suggestion ->
+                        smartReminderPrefs.snooze(suggestion.habit.id, java.time.LocalDate.now())
+                        reminderSuggestion = null
+                        smartReminderScope.launch {
+                            repository.setReminderMinutes(suggestion.habit.id, suggestion.toMinutes)
+                            reminderScheduler.schedule(suggestion.habit.id, suggestion.habit.scheduleDaysMask, suggestion.toMinutes)
+                        }
+                    },
+                    onDismissReminder = { suggestion ->
+                        smartReminderPrefs.snooze(suggestion.habit.id, java.time.LocalDate.now())
+                        reminderSuggestion = null
+                    },
+                    comebacksThisMonth = remember(history) {
+                        val today = java.time.LocalDate.now()
+                        history.comebackCount(today.withDayOfMonth(1), today)
+                    },
                     weekProgress = remember(history, settings.weekStart) {
                         val today = java.time.LocalDate.now()
                         val first = if (settings.weekStart == WeekStartPreference.Sunday) java.time.DayOfWeek.SUNDAY else java.time.DayOfWeek.MONDAY
@@ -514,6 +552,7 @@ fun TsuzukuApp(
                     onSetTheme = onSetTheme,
                     onSetPalette = onSetPalette,
                     onSetPureBlack = onSetPureBlack,
+                    onSetWidgetOpacity = onSetWidgetOpacity,
                     onSetLanguage = onSetLanguage,
                     onSetWeekStart = onSetWeekStart,
                     onSetShowDailySummary = onSetShowDailySummary,

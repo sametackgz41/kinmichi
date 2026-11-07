@@ -495,5 +495,9 @@ class PreviewGalleryTest {
         val days = thisWeek(sampleHistory(lang), firstDay = if (lang == "tr") java.time.DayOfWeek.MONDAY else java.time.DayOfWeek.SUNDAY)
         renderWidget("widget_week_$suffix", 320, 150) { TsuzukuGlanceTheme { WeekContent(days, bestStreak = 12, locked = false) } }
         renderWidget("widget_today_locked_$suffix", 300, 140) { TsuzukuGlanceTheme { TodayContent(emptyList(), loaded = true, locked = true, scrollable = false) } }
+        val longest = today.maxBy { it.streakDays }
+        renderWidget("widget_streak_$suffix", 160, 170) { TsuzukuGlanceTheme { app.tsuzuku.widget.StreakContent(longest, comebacks = 2, locked = false) } }
+        renderWidget("widget_quick_$suffix", 170, 170) { TsuzukuGlanceTheme { app.tsuzuku.widget.QuickGridContent(today.filter { it.habit.type != app.tsuzuku.model.HabitType.Duration }.sortedBy { it.isComplete }.take(4), locked = false) } }
+        renderWidget("widget_mood_$suffix", 340, 80) { TsuzukuGlanceTheme { app.tsuzuku.widget.MoodContent(selected = 4) } }
     }
 }

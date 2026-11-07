@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -96,6 +97,7 @@ fun ProfileScreen(
     onSetTheme: (ThemePreference) -> Unit,
     onSetPalette: (app.tsuzuku.data.preferences.PalettePreference) -> Unit = {},
     onSetPureBlack: (Boolean) -> Unit = {},
+    onSetWidgetOpacity: (Int) -> Unit = {},
     onSetLanguage: (LanguagePreference) -> Unit,
     onSetWeekStart: (WeekStartPreference) -> Unit,
     onSetShowDailySummary: (Boolean) -> Unit,
@@ -242,6 +244,7 @@ fun ProfileScreen(
                     settings.pureBlack,
                     onSetPureBlack,
                 )
+                WidgetOpacityRow(settings.widgetOpacity, onSetWidgetOpacity)
                 ValueSettingRow(
                     Icons.Rounded.Language,
                     stringResource(R.string.language_label),
@@ -270,6 +273,17 @@ fun ProfileScreen(
                     onCheckedChange = {
                         moodReminderOn = it
                         app.tsuzuku.notifications.MoodReminder.setEnabled(context, it)
+                    },
+                )
+                var streakGuardOn by remember { mutableStateOf(app.tsuzuku.notifications.StreakGuard.isEnabled(context)) }
+                SwitchSettingRow(
+                    Icons.Rounded.Notifications,
+                    stringResource(R.string.streak_guard_setting),
+                    stringResource(R.string.streak_guard_setting_description),
+                    streakGuardOn,
+                    onCheckedChange = {
+                        streakGuardOn = it
+                        app.tsuzuku.notifications.StreakGuard.setEnabled(context, it)
                     },
                 )
                 var weeklySummaryOn by remember { mutableStateOf(app.tsuzuku.notifications.WeeklySummary.isEnabled(context)) }
@@ -535,3 +549,31 @@ private fun weekStartLabel(value: WeekStartPreference): String = stringResource(
         WeekStartPreference.Sunday -> R.string.sunday
     },
 )
+
+/** Home screen widget see-through level, applied when the slider is released. */
+@Composable
+private fun WidgetOpacityRow(value: Int, onChange: (Int) -> Unit) {
+    var draft by remember(value) { mutableStateOf(value.toFloat()) }
+    Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 10.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(Icons.Rounded.Widgets, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
+            Spacer(Modifier.width(16.dp))
+            Column(Modifier.weight(1f)) {
+                Text(stringResource(R.string.widget_opacity_label), style = MaterialTheme.typography.bodyLarge)
+                Text(
+                    stringResource(R.string.widget_opacity_value, draft.toInt()),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+        }
+        androidx.compose.material3.Slider(
+            value = draft,
+            onValueChange = { draft = it },
+            onValueChangeFinished = { onChange(draft.toInt()) },
+            valueRange = 20f..100f,
+            steps = 15,
+            modifier = Modifier.padding(start = 40.dp),
+        )
+    }
+}

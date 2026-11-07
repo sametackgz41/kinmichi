@@ -1,5 +1,7 @@
 package app.tsuzuku
 
+import kotlinx.coroutines.launch
+import androidx.lifecycle.lifecycleScope
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -114,6 +116,7 @@ class MainActivity : FragmentActivity() {
                         onSetTheme = settingsRepository::setTheme,
                         onSetPalette = { settingsRepository.setPalette(it); app.tsuzuku.widget.TsuzukuWidgets.requestUpdate(this@MainActivity) },
                         onSetPureBlack = { settingsRepository.setPureBlack(it); app.tsuzuku.widget.TsuzukuWidgets.requestUpdate(this@MainActivity) },
+                        onSetWidgetOpacity = { settingsRepository.setWidgetOpacity(it); app.tsuzuku.widget.TsuzukuWidgets.requestUpdate(this@MainActivity) },
                         onSetLanguage = { language ->
                             settingsRepository.setLanguage(language)
                             recreate()
@@ -174,6 +177,13 @@ class MainActivity : FragmentActivity() {
             System.currentTimeMillis() - backgroundedAt >= settings.lockDelayMinutes * 60_000L
         ) isUnlocked = false
         backgroundedAt = 0L
+        // Fresh Health Connect totals every time the app comes to the front.
+        if (settings.healthSyncEnabled) {
+            lifecycleScope.launch {
+                app.tsuzuku.health.HealthSync.syncToday(this@MainActivity, tsuzukuApplication.habitRepository)
+                app.tsuzuku.widget.TsuzukuWidgets.requestUpdate(this@MainActivity)
+            }
+        }
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

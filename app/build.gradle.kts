@@ -24,8 +24,8 @@ android {
         applicationId = "app.tsuzuku"
         minSdk = 26
         targetSdk = 36
-        versionCode = 26
-        versionName = "2.4.0"
+        versionCode = 27
+        versionName = "2.5.0"
 
         buildConfigField("boolean", "FIREBASE_CONFIGURED", hasFirebaseConfig.toString())
 
@@ -109,6 +109,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.10.2")
     // Sends today's habits to the Wear OS companion and receives taps from its tile.
     implementation("com.google.android.gms:play-services-wearable:19.0.0")
+    implementation("androidx.health.connect:connect-client:1.1.0")
 
     val roomVersion = "2.8.4"
     implementation("androidx.room:room-runtime:$roomVersion")

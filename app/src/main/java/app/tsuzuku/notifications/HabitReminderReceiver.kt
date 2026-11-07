@@ -55,6 +55,7 @@ class HabitReminderReceiver : BroadcastReceiver() {
                             habit.name,
                             habit.emoji,
                             habit.reminderRepeatMinutes,
+                            plan = habit.intention,
                         )
                     }
                 }
@@ -80,6 +81,7 @@ class ReminderBootReceiver : BroadcastReceiver() {
                 HabitReminderScheduler(context, TsuzukuDatabase.getInstance(context).habitDao()).rescheduleAll()
                 WeeklySummary.schedule(context)
                 MoodReminder.schedule(context)
+                StreakGuard.schedule(context)
             } finally {
                 pendingResult.finish()
             }
@@ -103,7 +105,7 @@ object HabitNotifications {
         )
     }
 
-    fun show(context: Context, habitId: Long, name: String, emoji: String, repeatMinutes: Int? = null) {
+    fun show(context: Context, habitId: Long, name: String, emoji: String, repeatMinutes: Int? = null, plan: String = "") {
         if (Build.VERSION.SDK_INT >= 33 && context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) return
         val openIntent = PendingIntent.getActivity(
             context,
@@ -123,7 +125,7 @@ object HabitNotifications {
         val builder = Notification.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle("$emoji $name")
-            .setContentText(context.getString(R.string.reminder_notification_text))
+            .setContentText(plan.ifBlank { context.getString(R.string.reminder_notification_text) })
             .setContentIntent(openIntent)
             .setAutoCancel(true)
             .setCategory(Notification.CATEGORY_REMINDER)

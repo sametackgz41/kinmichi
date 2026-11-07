@@ -1,10 +1,26 @@
 # Değişiklik günlüğü
 
-## 2.5.0 — hazırlanıyor
+## 2.5.0 — Devam etmek
 
+**Verim**
+- Health Connect: sayılı ve süreli alışkanlıklar adım, mesafe, kalori, egzersiz ya da uykuya bağlanabilir; uygulama her açıldığında bugünkü değer kendiliğinden dolar
+- Akıllı hatırlatma: bir alışkanlığı genelde yaptığın saatle hatırlatma saati 45 dakikadan fazla ayrıysa, hatırlatmayı o saatin hemen öncesine taşımayı öneren kart
+- Seri uyarısı: akşam 20:00'de, yalnızca 3 günü geçmiş bir seri bozulmak üzereyse tek bir bildirim; bildirimden "Küçük sürümü yaptım"
+- Kötü gün sürümü: her alışkanlığa "yine de sayılan en küçük adım" yazılabilir; dün kaçırılan bir alışkanlık için Bugün ekranında "İki kez kaçırma" kartı ve tek dokunuşla küçük sürüm
+- Eğer-o zaman planı: alışkanlığa bağlı plan cümlesi Bugün ekranında ve hatırlatma bildiriminde görünür
+
+**Kintsugi**
+- Seri koptuktan sonra yeniden başladığın günler "geri dönüş" sayılır; alışkanlık ayrıntısındaki ısı haritasında altın dikişle gösterilir ve geri dönüş sayısı yazılır
+- Bugün kartında bu ayki geri dönüşler altın renkte
+
+**Görünüm**
 - Renk paletleri: Washi, Sumi, Matcha, Sakura ve Umi; her biri açık ve koyu sürümüyle, ya da duvar kâğıdı renkleri
 - Görsel palet seçici: her kartta paletin açık ve koyu tarafı; dokununca anında uygulanır
 - Saf siyah gece: koyu modda zemin tam siyah (OLED ekranlarda pil dostu)
+
+**Widget'lar**
+- Yeni: Seri (en uzun seri ve geri dönüşler), Hızlı ızgara (dört alışkanlık, tek dokunuş), Ruh hali (beş yüz, tek dokunuş)
+- Ayarlar › Widget opaklığı: %20 ile %100 arası
 - Widget'lar seçilen paleti ve saf siyah ayarını izler
 
 ## 2.4.0 — Washi

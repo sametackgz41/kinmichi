@@ -202,7 +202,7 @@ internal object BackupCodec {
         put("goalPeriod", item.goalPeriod); put("periodTarget", item.periodTarget); put("routineName", item.routineName)
         putNullable("prerequisiteHabitId", item.prerequisiteHabitId); put("healthMetric", item.healthMetric)
         put("minimumTarget", item.minimumTarget); putNullable("maximumTarget", item.maximumTarget); put("difficulty", item.difficulty)
-        put("contextLabel", item.contextLabel); put("intention", item.intention)
+        put("contextLabel", item.contextLabel); put("intention", item.intention); put("tinyVersion", item.tinyVersion)
         putNullable("activeStartEpochDay", item.activeStartEpochDay); putNullable("activeEndEpochDay", item.activeEndEpochDay)
         put("repeatIntervalDays", item.repeatIntervalDays); putNullable("pausedUntilEpochDay", item.pausedUntilEpochDay)
         put("tags", item.tags); put("currentLevel", item.currentLevel)
@@ -218,7 +218,7 @@ internal object BackupCodec {
         routineName = o.optString("routineName", ""), prerequisiteHabitId = o.optionalLong("prerequisiteHabitId"),
         healthMetric = o.optString("healthMetric", "None"),
         minimumTarget = o.optDouble("minimumTarget", 0.0), maximumTarget = o.optionalDouble("maximumTarget"),
-        difficulty = o.optInt("difficulty", 2), contextLabel = o.optString("contextLabel", ""), intention = o.optString("intention", ""),
+        difficulty = o.optInt("difficulty", 2), contextLabel = o.optString("contextLabel", ""), intention = o.optString("intention", ""), tinyVersion = o.optString("tinyVersion", ""),
         activeStartEpochDay = o.optionalLong("activeStartEpochDay"), activeEndEpochDay = o.optionalLong("activeEndEpochDay"),
         repeatIntervalDays = o.optInt("repeatIntervalDays", 1), pausedUntilEpochDay = o.optionalLong("pausedUntilEpochDay"),
         tags = o.optString("tags", ""),

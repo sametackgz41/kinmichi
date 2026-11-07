@@ -132,6 +132,56 @@ data class HabitHistorySnapshot(
         }
     }
 
+    /**
+     * True when [habit] was due yesterday and nothing kept its streak alive (no completion,
+     * minimum or skip). Used for the "never miss twice" nudge.
+     */
+    fun missedYesterday(habit: Habit, today: LocalDate): Boolean {
+        if (habit.direction == HabitDirection.Quit || habit.goalPeriod != GoalPeriod.Daily) return false
+        val yesterday = today.minusDays(1)
+        if (yesterday.isBefore(habit.createdOn) || !habit.isScheduledOn(yesterday)) return false
+        val record = recordsByDateAndHabit[yesterday]?.get(habit.id)
+        if (record?.status == HabitDayStatus.Skipped) return false
+        return !preservesStreak(habit, yesterday)
+    }
+
+    /** First day each habit was ever done; a miss before that is a slow start, not a break. */
+    private val firstDoneByHabit: Map<Long, LocalDate> by lazy {
+        val byId = habits.associateBy(Habit::id)
+        records.filter { record -> byId[record.habitId]?.let { preservesStreak(it, record.date) } == true }
+            .groupBy(HabitHistoryRecord::habitId)
+            .mapValues { (_, list) -> list.minOf(HabitHistoryRecord::date) }
+    }
+
+    /**
+     * A kintsugi day: [habit] was done on [date] after its previous due day had been missed.
+     * The break is mended in gold instead of hidden.
+     */
+    fun isComeback(habit: Habit, date: LocalDate): Boolean {
+        if (habit.direction == HabitDirection.Quit || habit.goalPeriod != GoalPeriod.Daily) return false
+        if (!preservesStreak(habit, date)) return false
+        val firstDone = firstDoneByHabit[habit.id] ?: return false
+        var day = date.minusDays(1)
+        repeat(31) {
+            if (day.isBefore(firstDone) || day.isBefore(habit.createdOn)) return false
+            val skipped = recordsByDateAndHabit[day]?.get(habit.id)?.status == HabitDayStatus.Skipped
+            if (habit.isScheduledOn(day) && !skipped) return !preservesStreak(habit, day)
+            day = day.minusDays(1)
+        }
+        return false
+    }
+
+    /** Comebacks across every habit between [from] and [to], inclusive. */
+    fun comebackCount(from: LocalDate, to: LocalDate): Int {
+        var count = 0
+        var day = from
+        while (!day.isAfter(to)) {
+            habits.forEach { if (isComeback(it, day)) count++ }
+            day = day.plusDays(1)
+        }
+        return count
+    }
+
     /** An explicit failure, as opposed to a day that was simply not logged. */
     private fun isBroken(habit: Habit, date: LocalDate): Boolean {
         val record = recordsByDateAndHabit[date]?.get(habit.id) ?: return false

@@ -104,6 +104,8 @@ internal class HabitEditorState(existing: Habit?) {
     var difficulty by mutableStateOf(existing?.difficulty ?: 2)
     var contextLabel by mutableStateOf(existing?.contextLabel.orEmpty())
     var intention by mutableStateOf(existing?.intention.orEmpty())
+    var tinyVersion by mutableStateOf(existing?.tinyVersion.orEmpty())
+    var healthMetric by mutableStateOf(existing?.healthMetric ?: HealthMetric.None)
     var activeStartEpochDay by mutableStateOf(existing?.activeStartEpochDay)
     var activeEndEpochDay by mutableStateOf(existing?.activeEndEpochDay)
     var pausedUntilEpochDay by mutableStateOf(existing?.pausedUntilEpochDay)
@@ -168,7 +170,7 @@ internal class HabitEditorState(existing: Habit?) {
             periodTarget = if (goalPeriod == GoalPeriod.Daily) 1 else periodTarget,
             routineName = routineName,
             prerequisiteHabitId = prerequisiteId.takeIf { it > 0L },
-            healthMetric = HealthMetric.None,
+            healthMetric = if (check) HealthMetric.None else healthMetric,
             reminderMinutes = if (reminderEnabled) reminderTime.toReminderMinutesOrNull() else null,
             reminderRepeatMinutes = if (reminderEnabled && repeatEnabled) repeatMinutes.toIntOrNull() else null,
             generalNote = generalNote,
@@ -177,6 +179,7 @@ internal class HabitEditorState(existing: Habit?) {
             difficulty = difficulty,
             contextLabel = contextLabel,
             intention = intention,
+            tinyVersion = tinyVersion,
             activeStartEpochDay = activeStartEpochDay,
             activeEndEpochDay = activeEndEpochDay,
             repeatIntervalDays = repeatIntervalText.toIntOrNull()?.coerceIn(1, 365) ?: 1,
@@ -190,7 +193,7 @@ internal class HabitEditorState(existing: Habit?) {
         minimumTargetText, maximumTargetText, difficulty, contextLabel, intention,
         activeStartEpochDay, activeEndEpochDay, pausedUntilEpochDay, repeatIntervalText, tags,
         selectedDays, goalPeriod.name, periodTargetText, routineName, prerequisiteId,
-        reminderEnabled, reminderTime, repeatEnabled, repeatMinutes,
+        reminderEnabled, reminderTime, repeatEnabled, repeatMinutes, tinyVersion, healthMetric.name,
     )
 
     private fun restore(values: List<Any?>) {
@@ -209,6 +212,8 @@ internal class HabitEditorState(existing: Habit?) {
         goalPeriod = GoalPeriod.valueOf(next()); periodTargetText = next(); routineName = next()
         prerequisiteId = next(); reminderEnabled = next(); reminderTime = next()
         repeatEnabled = next(); repeatMinutes = next()
+        if (i < values.size) tinyVersion = next()
+        if (i < values.size) healthMetric = HealthMetric.valueOf(next())
     }
 
     companion object {
@@ -508,6 +513,9 @@ private fun AdvancedSection(state: HabitEditorState, otherHabits: List<Habit>, c
                 )
             }
         }
+        if (state.type != HabitType.Check && state.direction == HabitDirection.Build) {
+            HealthMetricPicker(state.healthMetric) { state.healthMetric = it }
+        }
         EditorLabel(R.string.goal_period)
         Row(horizontalArrangement = Arrangement.spacedBy(7.dp)) {
             GoalPeriod.entries.forEach { option ->
@@ -556,8 +564,21 @@ private fun AdvancedSection(state: HabitEditorState, otherHabits: List<Habit>, c
             modifier = Modifier.fillMaxWidth(),
             label = { Text(stringResource(R.string.intention_sentence)) },
             placeholder = { Text(stringResource(R.string.intention_example)) },
+            supportingText = { Text(stringResource(R.string.intention_help)) },
             minLines = 2,
         )
+        if (state.direction == HabitDirection.Build) {
+            Spacer(Modifier.height(6.dp))
+            OutlinedTextField(
+                value = state.tinyVersion,
+                onValueChange = { state.tinyVersion = it.take(60) },
+                modifier = Modifier.fillMaxWidth(),
+                label = { Text(stringResource(R.string.tiny_version_label)) },
+                placeholder = { Text(stringResource(R.string.tiny_version_example)) },
+                supportingText = { Text(stringResource(R.string.tiny_version_help)) },
+                singleLine = true,
+            )
+        }
         if (state.reminderEnabled) {
             Row(Modifier.fillMaxWidth().padding(top = 12.dp), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
@@ -661,3 +682,71 @@ internal fun String.toReminderMinutesOrNull(): Int? {
 
 private fun formatEditorAmount(value: Double): String =
     if (value % 1.0 == 0.0) value.toInt().toString() else value.toString()
+
+/**
+ * "Fill from health data": links a count or duration habit to a Health Connect metric and asks
+ * for the read permission when one is picked.
+ */
+@Composable
+private fun HealthMetricPicker(selected: HealthMetric, onSelect: (HealthMetric) -> Unit) {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val available = remember { app.tsuzuku.health.HealthSync.isAvailable(context) }
+    var pending by remember { mutableStateOf<HealthMetric?>(null) }
+    val permissionLauncher = androidx.activity.compose.rememberLauncherForActivityResult(
+        androidx.health.connect.client.PermissionController.createRequestPermissionResultContract(),
+    ) { granted ->
+        val metric = pending ?: return@rememberLauncherForActivityResult
+        pending = null
+        if (app.tsuzuku.health.HealthSync.permissionFor(metric) in granted) onSelect(metric)
+    }
+    EditorLabel(R.string.health_fill_label)
+    if (!available) {
+        Text(
+            stringResource(R.string.health_unavailable),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        return
+    }
+    Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(7.dp)) {
+        HealthMetric.entries.forEach { metric ->
+            FilterChip(
+                selected = selected == metric,
+                onClick = {
+                    val permission = app.tsuzuku.health.HealthSync.permissionFor(metric)
+                    if (permission == null) {
+                        onSelect(metric)
+                    } else {
+                        pending = metric
+                        permissionLauncher.launch(setOf(permission))
+                    }
+                },
+                label = { Text(stringResource(healthMetricLabel(metric))) },
+            )
+        }
+    }
+    if (selected != HealthMetric.None) {
+        Text(
+            stringResource(R.string.health_fill_help, stringResource(healthMetricUnitHint(selected))),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(top = 4.dp),
+        )
+    }
+}
+
+private fun healthMetricLabel(metric: HealthMetric): Int = when (metric) {
+    HealthMetric.None -> R.string.health_none
+    HealthMetric.Steps -> R.string.health_steps
+    HealthMetric.Distance -> R.string.health_distance
+    HealthMetric.Calories -> R.string.health_calories
+    HealthMetric.ExerciseDuration -> R.string.health_exercise
+    HealthMetric.SleepDuration -> R.string.health_sleep
+}
+
+private fun healthMetricUnitHint(metric: HealthMetric): Int = when (metric) {
+    HealthMetric.None, HealthMetric.Steps -> R.string.health_unit_steps
+    HealthMetric.Distance -> R.string.health_unit_distance
+    HealthMetric.Calories -> R.string.health_unit_calories
+    HealthMetric.ExerciseDuration, HealthMetric.SleepDuration -> R.string.health_unit_time
+}

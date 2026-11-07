@@ -50,12 +50,20 @@ fun tsuzukuWidgetBackground(): androidx.glance.unit.ColorProvider {
     val context = androidx.glance.LocalContext.current
     val settings = (context.applicationContext as? TsuzukuApplication)?.settingsRepository?.settings?.value
     val palette = settings?.palette ?: PalettePreference.Washi
+    val alpha = ((settings?.widgetOpacity ?: 100) / 100f).coerceIn(0.2f, 1f)
     return if (palette == PalettePreference.Dynamic && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-        GlanceTheme.colors.widgetBackground
+        if (alpha >= 1f) {
+            GlanceTheme.colors.widgetBackground
+        } else {
+            androidx.glance.color.ColorProvider(
+                day = GlanceTheme.colors.widgetBackground.getColor(context).copy(alpha = alpha),
+                night = GlanceTheme.colors.widgetBackground.getColor(context).copy(alpha = alpha),
+            )
+        }
     } else {
         androidx.glance.color.ColorProvider(
-            day = paletteScheme(palette, false).surfaceContainerLow,
-            night = paletteScheme(palette, true, settings?.pureBlack == true).surfaceContainerLow,
+            day = paletteScheme(palette, false).surfaceContainerLow.copy(alpha = alpha),
+            night = paletteScheme(palette, true, settings?.pureBlack == true).surfaceContainerLow.copy(alpha = alpha),
         )
     }
 }
@@ -74,6 +82,9 @@ object TsuzukuWidgets {
         runCatching { TodayWidget().updateAll(context) }
         runCatching { HabitWidget().updateAll(context) }
         runCatching { WeekWidget().updateAll(context) }
+        runCatching { StreakWidget().updateAll(context) }
+        runCatching { QuickGridWidget().updateAll(context) }
+        runCatching { MoodWidget().updateAll(context) }
     }
 }
 

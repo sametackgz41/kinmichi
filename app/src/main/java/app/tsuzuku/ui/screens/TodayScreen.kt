@@ -131,6 +131,12 @@ fun TodayScreen(
     onDismissAdvice: (app.tsuzuku.model.TargetAdvice) -> Unit = {},
     onQuickMood: (Int) -> Unit = {},
     weekProgress: List<WeekDayProgress> = emptyList(),
+    comebackHabitIds: Set<Long> = emptySet(),
+    comebacksThisMonth: Int = 0,
+    reminderSuggestion: app.tsuzuku.model.ReminderSuggestion? = null,
+    onAcceptReminder: (app.tsuzuku.model.ReminderSuggestion) -> Unit = {},
+    onDismissReminder: (app.tsuzuku.model.ReminderSuggestion) -> Unit = {},
+    onTinyVersion: (Long) -> Unit = {},
 ) {
     val active = habits.filterNot(TodayHabit::isComplete)
     val completed = habits.filter(TodayHabit::isComplete)
@@ -206,6 +212,7 @@ fun TodayScreen(
                                     completed = completed.size,
                                     total = habits.size,
                                     streakDays = habits.maxOfOrNull { it.streakDays } ?: 0,
+                                    comebacks = comebacksThisMonth,
                                     modifier = Modifier.animateItem(),
                                 )
                             }
@@ -218,6 +225,26 @@ fun TodayScreen(
                                     advice = targetAdvice,
                                     onAccept = { onAcceptAdvice(targetAdvice) },
                                     onDismiss = { onDismissAdvice(targetAdvice) },
+                                    modifier = Modifier.animateItem(),
+                                )
+                            }
+                        }
+                        if (reminderSuggestion != null) {
+                            item(key = "smart-reminder-${reminderSuggestion.habit.id}") {
+                                SmartReminderCard(
+                                    suggestion = reminderSuggestion,
+                                    onAccept = { onAcceptReminder(reminderSuggestion) },
+                                    onDismiss = { onDismissReminder(reminderSuggestion) },
+                                    modifier = Modifier.animateItem(),
+                                )
+                            }
+                        }
+                        habits.firstOrNull { !it.isComplete && it.habit.id in comebackHabitIds }?.let { comeback ->
+                            item(key = "never-miss-twice-${comeback.habit.id}") {
+                                NeverMissTwiceCard(
+                                    item = comeback,
+                                    enabled = !vacationActive,
+                                    onTiny = { onTinyVersion(comeback.habit.id) },
                                     modifier = Modifier.animateItem(),
                                 )
                             }
@@ -388,6 +415,85 @@ fun TodayScreen(
                 selectedCarryTask = null
             },
         )
+    }
+}
+
+/**
+ * "Never miss twice": yesterday slipped, so today offers the habit's bad-day version, the
+ * smallest step that still keeps the streak going.
+ */
+@Composable
+private fun NeverMissTwiceCard(item: TodayHabit, enabled: Boolean, onTiny: () -> Unit, modifier: Modifier = Modifier) {
+    val habit = item.habit
+    val step = when {
+        habit.tinyVersion.isNotBlank() -> habit.tinyVersion
+        habit.type != app.tsuzuku.model.HabitType.Check && habit.minimumTarget > 0.0 ->
+            "${formatHabitAmount(habit.minimumTarget)} ${habit.unit}".trim()
+        else -> stringResource(R.string.never_miss_twice_small_step)
+    }
+    Surface(
+        color = MaterialTheme.colorScheme.tertiaryContainer,
+        contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+        shape = MaterialTheme.shapes.medium,
+        modifier = modifier.fillMaxWidth(),
+    ) {
+        Row(Modifier.padding(start = 16.dp, top = 14.dp, end = 12.dp, bottom = 14.dp), verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text(stringResource(R.string.never_miss_twice_title), style = MaterialTheme.typography.titleMedium)
+                Spacer(Modifier.height(2.dp))
+                Text(
+                    stringResource(R.string.never_miss_twice_body, "${habit.emoji} ${habit.name}".trim(), step),
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
+            Spacer(Modifier.width(10.dp))
+            androidx.compose.material3.Button(
+                onClick = onTiny,
+                enabled = enabled,
+                shapes = androidx.compose.material3.ButtonDefaults.shapes(),
+                colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.tertiary,
+                    contentColor = MaterialTheme.colorScheme.onTertiary,
+                ),
+            ) { Text(stringResource(R.string.tiny_version_done), maxLines = 2) }
+        }
+    }
+}
+
+/** "You usually do this at 07:40; move the reminder there?" */
+@Composable
+private fun SmartReminderCard(
+    suggestion: app.tsuzuku.model.ReminderSuggestion,
+    onAccept: () -> Unit,
+    onDismiss: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val habit = suggestion.habit
+    fun clock(minutes: Int) = "%02d:%02d".format(minutes / 60, minutes % 60)
+    Surface(
+        color = MaterialTheme.colorScheme.primaryContainer,
+        contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+        shape = MaterialTheme.shapes.medium,
+        modifier = modifier.fillMaxWidth(),
+    ) {
+        Column(Modifier.padding(start = 16.dp, top = 14.dp, end = 8.dp, bottom = 6.dp)) {
+            Text(stringResource(R.string.smart_reminder_title), style = MaterialTheme.typography.titleMedium)
+            Spacer(Modifier.height(2.dp))
+            Text(
+                stringResource(
+                    R.string.smart_reminder_body,
+                    "${habit.emoji} ${habit.name}".trim(),
+                    clock(suggestion.toMinutes + 10),
+                    clock(suggestion.fromMinutes),
+                    clock(suggestion.toMinutes),
+                ),
+                style = MaterialTheme.typography.bodyMedium,
+            )
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                TextButton(onClick = onDismiss) { Text(stringResource(R.string.smart_reminder_keep)) }
+                TextButton(onClick = onAccept) { Text(stringResource(R.string.smart_reminder_move, clock(suggestion.toMinutes))) }
+            }
+        }
     }
 }
 

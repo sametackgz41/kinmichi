@@ -255,6 +255,7 @@ private fun habitContextLine(todayHabit: TodayHabit, timerRunning: Boolean, time
         )
         habit.goalPeriod != GoalPeriod.Daily -> stringResource(R.string.period_progress, todayHabit.periodProgress, habit.periodTarget)
         todayHabit.isComplete -> stringResource(R.string.habit_completed)
+        habit.intention.isNotBlank() -> habit.intention
         else -> when (habit.scheduleDaysMask) {
             127 -> stringResource(R.string.every_day)
             31 -> stringResource(R.string.weekdays)
@@ -447,7 +448,7 @@ private fun RingButton(
  * and a thin ink bar underneath. Rolls the count and gives a small lift when the day is done.
  */
 @Composable
-internal fun TodayProgressHeader(completed: Int, total: Int, modifier: Modifier = Modifier, streakDays: Int = 0) {
+internal fun TodayProgressHeader(completed: Int, total: Int, modifier: Modifier = Modifier, streakDays: Int = 0, comebacks: Int = 0) {
     val fraction = if (total == 0) 0f else completed.toFloat() / total
     val animatedFraction by animateFloatAsState(
         fraction,
@@ -516,6 +517,13 @@ internal fun TodayProgressHeader(completed: Int, total: Int, modifier: Modifier 
                     if (streakDays > 1) {
                         Text(
                             pluralStringResource(R.plurals.streak_days, streakDays, streakDays),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                    if (comebacks > 0) {
+                        Text(
+                            pluralStringResource(R.plurals.comebacks_this_month, comebacks, comebacks),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.tertiary,
                         )

@@ -67,6 +67,8 @@ data class Habit(
     val pausedUntilEpochDay: Long? = null,
     val tags: String = "",
     val currentLevel: Int = 1,
+    /** What still counts on a bad day, e.g. "1 page"; keeps the streak alive. */
+    val tinyVersion: String = "",
 )
 
 data class HabitLevel(
@@ -172,6 +174,8 @@ data class HabitDraft(
     val pausedUntilEpochDay: Long? = null,
     val tags: String = "",
     val currentLevel: Int = 1,
+    /** What still counts on a bad day, e.g. "1 page"; keeps the streak alive. */
+    val tinyVersion: String = "",
 )
 
 data class WeeklyReview(

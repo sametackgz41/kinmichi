@@ -86,6 +86,7 @@ internal fun HabitYearCard(
         }
     }
     val doneCount = days.count { it.second == HeatDay.Done }
+    val comebacks = remember(history, habit, days) { days.filter { it.second == HeatDay.Done && history.isComeback(habit, it.first) }.map { it.first }.toSet() }
     var selected by remember(habit.id) { mutableStateOf<LocalDate?>(null) }
 
     Card(
@@ -98,6 +99,7 @@ internal fun HabitYearCard(
                 YearStat(streak.current.toString(), stringResource(R.string.current_streak))
                 YearStat(maxOf(stat?.bestStreak ?: 0, streak.best).toString(), stringResource(R.string.best_streak))
                 YearStat("${((stat?.completionRate ?: 0f) * 100).toInt()}%", stringResource(R.string.completion_rate))
+                YearStat(comebacks.size.toString(), stringResource(R.string.comebacks_label), gold = true)
             }
             Spacer(Modifier.height(16.dp))
             Text(
@@ -108,6 +110,7 @@ internal fun HabitYearCard(
             Spacer(Modifier.height(8.dp))
             YearGrid(
                 days = days,
+                comebacks = comebacks,
                 gridStart = gridStart,
                 accent = Color(habit.colorArgb),
                 selected = selected,
@@ -136,9 +139,9 @@ internal fun HabitYearCard(
 }
 
 @Composable
-private fun YearStat(value: String, label: String) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.width(96.dp)) {
-        Text(value, style = MaterialTheme.typography.headlineSmall, color = MaterialTheme.colorScheme.primary)
+private fun YearStat(value: String, label: String, gold: Boolean = false) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.width(76.dp)) {
+        Text(value, style = MaterialTheme.typography.headlineSmall, color = if (gold) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.primary)
         Text(
             label,
             style = MaterialTheme.typography.labelSmall,
@@ -151,6 +154,7 @@ private fun YearStat(value: String, label: String) {
 @Composable
 private fun YearGrid(
     days: List<Pair<LocalDate, HeatDay?>>,
+    comebacks: Set<LocalDate> = emptySet(),
     gridStart: LocalDate,
     accent: Color,
     selected: LocalDate?,
@@ -168,6 +172,7 @@ private fun YearGrid(
     val off = MaterialTheme.colorScheme.surfaceContainer
     val outline = MaterialTheme.colorScheme.outline
     val highlight = MaterialTheme.colorScheme.onSurface
+    val gold = MaterialTheme.colorScheme.tertiary
     val density = LocalDensity.current
     val cellPx = with(density) { CELL.toPx() }
     val stepPx = with(density) { (CELL + GAP).toPx() }
@@ -221,6 +226,10 @@ private fun YearGrid(
                         is HeatDay.Partial -> if (day.fraction <= 0f) empty else lerp(empty, accent, 0.25f + day.fraction * 0.5f)
                     }
                     drawRoundRect(color.copy(alpha = color.alpha * appear), topLeft, size, corner)
+                    if (date in comebacks) {
+                        // Kintsugi: the day the chain was mended gets a gold seam.
+                        drawRoundRect(gold.copy(alpha = appear), topLeft, size, corner, style = Stroke(width = cellPx * 0.22f))
+                    }
                     if (day == HeatDay.Skipped) {
                         drawCircle(outline.copy(alpha = appear), radius = cellPx * 0.14f, center = topLeft + Offset(cellPx / 2, cellPx / 2))
                     }

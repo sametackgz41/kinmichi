@@ -60,6 +60,13 @@ interface HabitDao {
     @Query("DELETE FROM habit_entries WHERE habitId = :habitId AND localDate = :localDate")
     suspend fun clearEntries(habitId: Long, localDate: String)
 
+    /** Latest logging time per habit and day since [fromDate]; roughly when the habit got done. */
+    @Query("SELECT habitId, localDate, MAX(updatedAt) AS at FROM habit_entries WHERE localDate >= :fromDate AND status IN ('COMPLETED', 'PROGRESS') GROUP BY habitId, localDate")
+    suspend fun completionTimes(fromDate: String): List<CompletionTime>
+
+    @Query("UPDATE habits SET reminderMinutes = :minutes, updatedAt = :updatedAt WHERE id = :id")
+    suspend fun updateReminderMinutes(id: Long, minutes: Int, updatedAt: Long)
+
     @Query("DELETE FROM habit_entries WHERE habitId = :habitId AND localDate = :localDate AND status = 'HEALTH'")
     suspend fun clearHealthEntries(habitId: Long, localDate: String)
 
@@ -122,3 +129,5 @@ interface HabitDao {
     )
 }
 
+/** One row of [HabitDao.completionTimes]. */
+data class CompletionTime(val habitId: Long, val localDate: String, val at: Long)
