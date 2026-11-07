@@ -286,6 +286,22 @@ class PreviewGalleryTest {
     @Test fun welcomeSignedInTr() = renderWelcome("tr", false, signedIn = true)
     @Test fun welcomeAlreadySignedInTr() = renderWelcome("tr", false, signedIn = true, chooseStep = true)
 
+    // Reminder time: hour and minute boxes on the page.
+    @Test fun timePickerTr() {
+        setVariant("tr", false)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false) {
+                androidx.compose.material3.Surface(color = androidx.compose.material3.MaterialTheme.colorScheme.background) {
+                    androidx.compose.foundation.layout.Column(androidx.compose.ui.Modifier.fillMaxSize().padding(20.dp)) {
+                        app.tsuzuku.ui.screens.ReminderTimePicker(minutes = 7 * 60 + 30, onChange = {})
+                    }
+                }
+            }
+        }
+        compose.mainClock.advanceTimeBy(800)
+        captureScreen("timepicker_tr_light")
+    }
+
     // Settings: three looks.
     @Test fun settingsMinimalTr() = renderSettingsLayout(app.tsuzuku.ui.screens.SettingsLayout.Minimal, false)
     @Test fun settingsCardsTr() = renderSettingsLayout(app.tsuzuku.ui.screens.SettingsLayout.Cards, false)

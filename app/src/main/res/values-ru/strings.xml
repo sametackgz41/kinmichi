@@ -53,7 +53,6 @@
     <string name="reminder_label">Напоминание</string>
     <string name="reminder_description">Получайте уведомление в выбранное время.</string>
     <string name="reminder_time">Время напоминания</string>
-    <string name="reminder_time_error">Введите время в формате 09:00.</string>
     <string name="reminder_channel_name">Напоминания о привычках</string>
     <string name="reminder_channel_description">Уведомления о запланированных привычках</string>
     <string name="reminder_notification_text">Время сделать небольшой шаг сегодня.</string>

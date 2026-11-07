@@ -50,7 +50,6 @@ days_label|Dias
 reminder_label|Lembrete
 reminder_description|Receba um aviso no horário que você escolher.
 reminder_time|Horário do lembrete
-reminder_time_error|Digite o horário como 09:00.
 reminder_channel_name|Lembretes de hábitos
 reminder_channel_description|Avisos dos hábitos programados
 reminder_notification_text|Hora de dar um pequeno passo hoje.

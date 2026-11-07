@@ -53,7 +53,6 @@
     <string name="reminder_label">リマインダー</string>
     <string name="reminder_description">選んだ時刻に通知します。</string>
     <string name="reminder_time">通知の時刻</string>
-    <string name="reminder_time_error">時刻は 09:00 の形式で入力してください。</string>
     <string name="reminder_channel_name">習慣のリマインダー</string>
     <string name="reminder_channel_description">予定した習慣のお知らせ</string>
     <string name="reminder_notification_text">今日の小さな一歩の時間です。</string>

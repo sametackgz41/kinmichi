@@ -50,7 +50,6 @@ days_label|Tage
 reminder_label|Erinnerung
 reminder_description|Zur gewählten Uhrzeit benachrichtigt werden.
 reminder_time|Uhrzeit der Erinnerung
-reminder_time_error|Gib die Uhrzeit als 09:00 ein.
 reminder_channel_name|Gewohnheits-Erinnerungen
 reminder_channel_description|Benachrichtigungen für geplante Gewohnheiten
 reminder_notification_text|Zeit für einen kleinen Schritt heute.

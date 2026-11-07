@@ -50,7 +50,6 @@ days_label|Дни
 reminder_label|Напоминание
 reminder_description|Получайте уведомление в выбранное время.
 reminder_time|Время напоминания
-reminder_time_error|Введите время в формате 09:00.
 reminder_channel_name|Напоминания о привычках
 reminder_channel_description|Уведомления о запланированных привычках
 reminder_notification_text|Время сделать небольшой шаг сегодня.

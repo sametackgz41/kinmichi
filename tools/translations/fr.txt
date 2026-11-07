@@ -50,7 +50,6 @@ days_label|Jours
 reminder_label|Rappel
 reminder_description|Reçois une notification à l'heure choisie.
 reminder_time|Heure du rappel
-reminder_time_error|Saisis l'heure au format 09:00.
 reminder_channel_name|Rappels d'habitudes
 reminder_channel_description|Notifications pour les habitudes prévues
 reminder_notification_text|C'est le moment de faire un petit pas aujourd'hui.

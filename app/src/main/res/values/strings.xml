@@ -105,7 +105,6 @@
     <string name="reminder_description">Get notified at the time you choose.</string>
     <string name="reminder_time">Reminder time</string>
     <string name="reminder_future_note">The reminder is sent only on days when the habit is scheduled.</string>
-    <string name="reminder_time_error">Enter the time as 09:00.</string>
     <string name="reminder_channel_name">Habit reminders</string>
     <string name="reminder_channel_description">Notifications for scheduled habits</string>
     <string name="reminder_notification_text">Time to take a small step for today.</string>

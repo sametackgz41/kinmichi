@@ -50,7 +50,6 @@ days_label|曜日
 reminder_label|リマインダー
 reminder_description|選んだ時刻に通知します。
 reminder_time|通知の時刻
-reminder_time_error|時刻は 09:00 の形式で入力してください。
 reminder_channel_name|習慣のリマインダー
 reminder_channel_description|予定した習慣のお知らせ
 reminder_notification_text|今日の小さな一歩の時間です。

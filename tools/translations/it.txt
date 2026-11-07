@@ -50,7 +50,6 @@ days_label|Giorni
 reminder_label|Promemoria
 reminder_description|Ricevi una notifica all'ora che scegli.
 reminder_time|Ora del promemoria
-reminder_time_error|Inserisci l'ora come 09:00.
 reminder_channel_name|Promemoria abitudini
 reminder_channel_description|Notifiche per le abitudini programmate
 reminder_notification_text|È il momento di fare un piccolo passo per oggi.

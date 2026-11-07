@@ -50,7 +50,6 @@ days_label|요일
 reminder_label|알림
 reminder_description|선택한 시간에 알림을 받아요.
 reminder_time|알림 시간
-reminder_time_error|09:00 형식으로 시간을 입력하세요.
 reminder_channel_name|습관 알림
 reminder_channel_description|예정된 습관 알림
 reminder_notification_text|오늘의 작은 한 걸음을 내디딜 시간이에요.

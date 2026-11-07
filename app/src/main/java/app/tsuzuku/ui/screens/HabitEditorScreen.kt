@@ -616,16 +616,10 @@ private fun ReminderSection(state: HabitEditorState) {
         enter = fadeIn(tween(200)) + expandVertically(tween(240), expandFrom = Alignment.Top),
         exit = fadeOut(tween(150)) + shrinkVertically(tween(200), shrinkTowards = Alignment.Top),
     ) {
-        val invalid = state.reminderTime.toReminderMinutesOrNull() == null
-        OutlinedTextField(
-            value = state.reminderTime,
-            onValueChange = { state.reminderTime = it.take(5) },
-            modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
-            label = { Text(stringResource(R.string.reminder_time)) },
-            singleLine = true,
-            isError = invalid,
-            shape = RoundedCornerShape(16.dp),
-            supportingText = { if (invalid) Text(stringResource(R.string.reminder_time_error)) },
+        ReminderTimePicker(
+            minutes = state.reminderTime.toReminderMinutesOrNull() ?: (9 * 60),
+            onChange = { state.reminderTime = "%02d:%02d".format(it / 60, it % 60) },
+            modifier = Modifier.padding(top = 12.dp),
         )
     }
 }
