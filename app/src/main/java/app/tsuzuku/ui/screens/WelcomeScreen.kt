@@ -303,7 +303,7 @@ private fun androidx.compose.foundation.layout.ColumnScope.NameStep(
 
 /** What an account adds, in three short lines with the app's own soft icon discs. */
 @Composable
-private fun BenefitList() {
+internal fun BenefitList() {
     val rows = listOf(
         Icons.Rounded.CloudDone to R.string.welcome_benefit_backup,
         Icons.Rounded.Devices to R.string.welcome_benefit_devices,
@@ -401,7 +401,7 @@ private fun OrDivider(label: String) {
  * centred. The guest button is outlined only, so the account buttons read as the main choice.
  */
 @Composable
-private fun ProviderButton(
+internal fun ProviderButton(
     label: String,
     @androidx.annotation.DrawableRes icon: Int,
     tintIcon: Boolean,

@@ -257,7 +257,7 @@ last_cloud_sync|Letzte Synchronisierung: %1$s
 cloud_choice_required|Wähle, welche Kopie gilt, bevor die automatische Synchronisierung startet.
 sync_now|Jetzt synchronisieren
 choose_sync_source|Quelle wählen
-sign_out_google|Von Google abmelden
+sign_out_google|Abmelden
 cloud_download_complete|Cloud-Daten auf diesem Gerät wiederhergestellt
 cloud_upload_complete|Gerätedaten in der Google-Cloud gespeichert
 cloud_already_current|Gerät und Cloud sind auf dem gleichen Stand
@@ -841,3 +841,13 @@ welcome_benefit_backup|Gesichert und zieht mit aufs neue Handy um
 welcome_benefit_devices|Auf Handy, Widget und Uhr
 welcome_benefit_private|Kein Passwort, keine Werbung, kein Tracking
 welcome_preview_label|So begrüßt dich „Heute“
+account_title|Konto und Sicherung
+account_signed_out_title|Nicht angemeldet
+account_signed_out_body|Melde dich an, um deine Gewohnheiten zu sichern und aufs neue Handy mitzunehmen.
+account_via_google|Mit Google verbunden
+account_via_github|Mit GitHub verbunden
+account_choose_source_short|Quelle wählen
+account_auto_sync_short|Automatisch synchronisieren
+account_safe_title|Deine Gewohnheiten sind sicher
+account_not_synced_title|Noch nicht synchronisiert
+account_delete_short|Konto löschen

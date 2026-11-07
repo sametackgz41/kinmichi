@@ -253,7 +253,7 @@
     <string name="cloud_choice_required">Wähle, welche Kopie gilt, bevor die automatische Synchronisierung startet.</string>
     <string name="sync_now">Jetzt synchronisieren</string>
     <string name="choose_sync_source">Quelle wählen</string>
-    <string name="sign_out_google">Von Google abmelden</string>
+    <string name="sign_out_google">Abmelden</string>
     <string name="cloud_download_complete">Cloud-Daten auf diesem Gerät wiederhergestellt</string>
     <string name="cloud_upload_complete">Gerätedaten in der Google-Cloud gespeichert</string>
     <string name="cloud_already_current">Gerät und Cloud sind auf dem gleichen Stand</string>
@@ -821,6 +821,16 @@
     <string name="welcome_benefit_devices">Auf Handy, Widget und Uhr</string>
     <string name="welcome_benefit_private">Kein Passwort, keine Werbung, kein Tracking</string>
     <string name="welcome_preview_label">So begrüßt dich „Heute“</string>
+    <string name="account_title">Konto und Sicherung</string>
+    <string name="account_signed_out_title">Nicht angemeldet</string>
+    <string name="account_signed_out_body">Melde dich an, um deine Gewohnheiten zu sichern und aufs neue Handy mitzunehmen.</string>
+    <string name="account_via_google">Mit Google verbunden</string>
+    <string name="account_via_github">Mit GitHub verbunden</string>
+    <string name="account_choose_source_short">Quelle wählen</string>
+    <string name="account_auto_sync_short">Automatisch synchronisieren</string>
+    <string name="account_safe_title">Deine Gewohnheiten sind sicher</string>
+    <string name="account_not_synced_title">Noch nicht synchronisiert</string>
+    <string name="account_delete_short">Konto löschen</string>
     <plurals name="streak_days">
         <item quantity="one">%d Tag in Folge</item>
         <item quantity="other">%d Tage in Folge</item>

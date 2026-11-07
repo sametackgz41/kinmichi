@@ -432,7 +432,7 @@
     <string name="cloud_choice_required">Choose which copy to use before automatic sync starts.</string>
     <string name="sync_now">Sync now</string>
     <string name="choose_sync_source">Choose sync source</string>
-    <string name="sign_out_google">Sign out of Google</string>
+    <string name="sign_out_google">Sign out</string>
     <string name="cloud_download_complete">Cloud data restored on this device</string>
     <string name="cloud_upload_complete">Device data saved to Google cloud</string>
     <string name="cloud_already_current">Device and cloud are already up to date</string>
@@ -1221,4 +1221,14 @@
     <string name="welcome_benefit_devices">On your phone, widgets and watch</string>
     <string name="welcome_benefit_private">No password, no ads, no tracking</string>
     <string name="welcome_preview_label">How Today will greet you</string>
+    <string name="account_title">Account and backup</string>
+    <string name="account_signed_out_title">Not signed in</string>
+    <string name="account_signed_out_body">Sign in to back up your habits and take them to a new phone.</string>
+    <string name="account_via_google">Connected with Google</string>
+    <string name="account_via_github">Connected with GitHub</string>
+    <string name="account_choose_source_short">Choose source</string>
+    <string name="account_auto_sync_short">Sync automatically</string>
+    <string name="account_safe_title">Your habits are safe</string>
+    <string name="account_not_synced_title">Not synced yet</string>
+    <string name="account_delete_short">Delete account</string>
 </resources>

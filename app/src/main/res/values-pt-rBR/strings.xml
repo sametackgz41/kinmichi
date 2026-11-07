@@ -253,7 +253,7 @@
     <string name="cloud_choice_required">Escolha qual cópia usar antes de começar a sincronização automática.</string>
     <string name="sync_now">Sincronizar agora</string>
     <string name="choose_sync_source">Escolher a origem</string>
-    <string name="sign_out_google">Sair do Google</string>
+    <string name="sign_out_google">Sair</string>
     <string name="cloud_download_complete">Dados da nuvem restaurados neste aparelho</string>
     <string name="cloud_upload_complete">Dados do aparelho salvos na nuvem do Google</string>
     <string name="cloud_already_current">Aparelho e nuvem já estão em dia</string>
@@ -821,6 +821,16 @@
     <string name="welcome_benefit_devices">No celular, nos widgets e no relógio</string>
     <string name="welcome_benefit_private">Sem senha, sem anúncios, sem rastreamento</string>
     <string name="welcome_preview_label">Assim Hoje vai te receber</string>
+    <string name="account_title">Conta e backup</string>
+    <string name="account_signed_out_title">Você não entrou</string>
+    <string name="account_signed_out_body">Entre para fazer backup dos seus hábitos e levá-los para um celular novo.</string>
+    <string name="account_via_google">Conectado com o Google</string>
+    <string name="account_via_github">Conectado com o GitHub</string>
+    <string name="account_choose_source_short">Escolher origem</string>
+    <string name="account_auto_sync_short">Sincronizar automaticamente</string>
+    <string name="account_safe_title">Seus hábitos estão seguros</string>
+    <string name="account_not_synced_title">Ainda não sincronizado</string>
+    <string name="account_delete_short">Excluir conta</string>
     <plurals name="streak_days">
         <item quantity="one">Sequência de %d dia</item>
         <item quantity="other">Sequência de %d dias</item>

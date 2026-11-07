@@ -257,7 +257,7 @@ last_cloud_sync|Última sincronización: %1$s
 cloud_choice_required|Elige qué copia usar antes de que empiece la sincronización automática.
 sync_now|Sincronizar ahora
 choose_sync_source|Elegir origen de la sincronización
-sign_out_google|Cerrar sesión de Google
+sign_out_google|Cerrar sesión
 cloud_download_complete|Datos de la nube restaurados en este dispositivo
 cloud_upload_complete|Datos del dispositivo guardados en la nube de Google
 cloud_already_current|El dispositivo y la nube ya están al día
@@ -841,3 +841,13 @@ welcome_benefit_backup|Con copia de seguridad, y te sigue a un teléfono nuevo
 welcome_benefit_devices|En tu teléfono, widgets y reloj
 welcome_benefit_private|Sin contraseña, sin anuncios, sin rastreo
 welcome_preview_label|Así te saludará Hoy
+account_title|Cuenta y copia de seguridad
+account_signed_out_title|Sin iniciar sesión
+account_signed_out_body|Inicia sesión para guardar tus hábitos y llevarlos a un teléfono nuevo.
+account_via_google|Conectado con Google
+account_via_github|Conectado con GitHub
+account_choose_source_short|Elegir origen
+account_auto_sync_short|Sincronizar automáticamente
+account_safe_title|Tus hábitos están a salvo
+account_not_synced_title|Aún sin sincronizar
+account_delete_short|Eliminar cuenta

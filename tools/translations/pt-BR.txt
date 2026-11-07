@@ -257,7 +257,7 @@ last_cloud_sync|Última sincronização: %1$s
 cloud_choice_required|Escolha qual cópia usar antes de começar a sincronização automática.
 sync_now|Sincronizar agora
 choose_sync_source|Escolher a origem
-sign_out_google|Sair do Google
+sign_out_google|Sair
 cloud_download_complete|Dados da nuvem restaurados neste aparelho
 cloud_upload_complete|Dados do aparelho salvos na nuvem do Google
 cloud_already_current|Aparelho e nuvem já estão em dia
@@ -841,3 +841,13 @@ welcome_benefit_backup|Com backup, e vai junto para um celular novo
 welcome_benefit_devices|No celular, nos widgets e no relógio
 welcome_benefit_private|Sem senha, sem anúncios, sem rastreamento
 welcome_preview_label|Assim Hoje vai te receber
+account_title|Conta e backup
+account_signed_out_title|Você não entrou
+account_signed_out_body|Entre para fazer backup dos seus hábitos e levá-los para um celular novo.
+account_via_google|Conectado com o Google
+account_via_github|Conectado com o GitHub
+account_choose_source_short|Escolher origem
+account_auto_sync_short|Sincronizar automaticamente
+account_safe_title|Seus hábitos estão seguros
+account_not_synced_title|Ainda não sincronizado
+account_delete_short|Excluir conta

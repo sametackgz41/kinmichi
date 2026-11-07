@@ -257,7 +257,7 @@ last_cloud_sync|最終同期: %1$s
 cloud_choice_required|自動同期を始める前に、使うデータを選んでください。
 sync_now|今すぐ同期
 choose_sync_source|同期元を選ぶ
-sign_out_google|Google からログアウト
+sign_out_google|ログアウト
 cloud_download_complete|クラウドのデータをこの端末に復元しました
 cloud_upload_complete|端末のデータを Google クラウドに保存しました
 cloud_already_current|端末とクラウドはすでに最新です
@@ -835,3 +835,13 @@ welcome_benefit_backup|バックアップされ、機種変更にも引き継げ
 welcome_benefit_devices|スマホ、ウィジェット、ウォッチで
 welcome_benefit_private|パスワード・広告・トラッキングなし
 welcome_preview_label|「今日」画面のあいさつ
+account_title|アカウントとバックアップ
+account_signed_out_title|ログインしていません
+account_signed_out_body|ログインして習慣をバックアップし、新しいスマホに引き継ぎましょう。
+account_via_google|Google で接続中
+account_via_github|GitHub で接続中
+account_choose_source_short|同期元を選ぶ
+account_auto_sync_short|自動で同期
+account_safe_title|習慣は安全に保存されています
+account_not_synced_title|まだ同期していません
+account_delete_short|アカウント削除

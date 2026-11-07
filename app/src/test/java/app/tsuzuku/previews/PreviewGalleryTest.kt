@@ -275,6 +275,39 @@ class PreviewGalleryTest {
     @Test fun welcomeSignedInTr() = renderWelcome("tr", false, signedIn = true)
     @Test fun welcomeAlreadySignedInTr() = renderWelcome("tr", false, signedIn = true, chooseStep = true)
 
+    // Account page: three signed-in layouts to choose from, plus signed out.
+    @Test fun accountCardsTr() = renderAccount(app.tsuzuku.ui.screens.AccountLayout.Cards, false)
+    @Test fun accountListTr() = renderAccount(app.tsuzuku.ui.screens.AccountLayout.List, false)
+    @Test fun accountHeroTr() = renderAccount(app.tsuzuku.ui.screens.AccountLayout.Hero, false)
+    @Test fun accountCardsTrDark() = renderAccount(app.tsuzuku.ui.screens.AccountLayout.Cards, true)
+    @Test fun accountListTrDark() = renderAccount(app.tsuzuku.ui.screens.AccountLayout.List, true)
+    @Test fun accountHeroTrDark() = renderAccount(app.tsuzuku.ui.screens.AccountLayout.Hero, true)
+    @Test fun accountSignedOutTr() = renderAccount(app.tsuzuku.ui.screens.AccountLayout.Cards, false, signedIn = false)
+
+    private fun renderAccount(layout: app.tsuzuku.ui.screens.AccountLayout, dark: Boolean, signedIn: Boolean = true) {
+        setVariant("tr", dark)
+        val account = if (signedIn) {
+            app.tsuzuku.data.CloudAccountState.SignedIn("Abdulsamet Açıkgöz", "samet@example.com", null)
+        } else {
+            app.tsuzuku.data.CloudAccountState.SignedOut
+        }
+        compose.setContent {
+            TsuzukuTheme(darkTheme = dark) {
+                app.tsuzuku.ui.screens.AccountContent(
+                    account = account,
+                    syncState = app.tsuzuku.data.CloudSyncState.Idle,
+                    cloudSyncEnabled = true,
+                    lastCloudSyncAt = java.time.LocalDate.now().atTime(18, 21).atZone(java.time.ZoneId.systemDefault()).toInstant().toEpochMilli(),
+                    onBack = {}, onSignIn = { _, _ -> }, onSetCloudSyncEnabled = {}, onSyncNow = {}, onChooseSource = {},
+                    onSignOut = {}, onDelete = {}, onDismissStatus = {},
+                    layout = layout,
+                )
+            }
+        }
+        compose.mainClock.advanceTimeBy(1_000)
+        captureScreen("account_${if (signedIn) layout.name.lowercase() else "signedout"}_tr_${if (dark) "dark" else "light"}")
+    }
+
     private fun renderWelcome(lang: String, dark: Boolean, signedIn: Boolean = false, nameStep: Boolean = false, name: String = "", chooseStep: Boolean = false) {
         setVariant(lang, dark)
         val account = if (signedIn) {

@@ -34,7 +34,13 @@ sealed interface CloudAccountState {
         val displayName: String,
         val email: String,
         val photoUrl: String?,
+        val provider: String = PROVIDER_GOOGLE,
     ) : CloudAccountState
+
+    companion object {
+        const val PROVIDER_GOOGLE = "google"
+        const val PROVIDER_GITHUB = "github"
+    }
 }
 
 sealed interface CloudSyncState {
@@ -105,6 +111,7 @@ class CloudSyncRepository(
                 displayName = user.displayName.orEmpty().ifBlank { result.additionalUserInfo?.username.orEmpty() },
                 email = user.email.orEmpty(),
                 photoUrl = user.photoUrl?.toString(),
+                provider = CloudAccountState.PROVIDER_GITHUB,
             )
             mutableAccount.value = signedIn
             mutableSyncState.value = CloudSyncState.Idle
@@ -419,6 +426,11 @@ class CloudSyncRepository(
                 displayName = user.displayName.orEmpty(),
                 email = user.email.orEmpty(),
                 photoUrl = user.photoUrl?.toString(),
+                provider = if (user.providerData.any { it.providerId == "github.com" }) {
+                    CloudAccountState.PROVIDER_GITHUB
+                } else {
+                    CloudAccountState.PROVIDER_GOOGLE
+                },
             )
         }
     }

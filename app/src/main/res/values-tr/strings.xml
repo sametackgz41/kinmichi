@@ -432,7 +432,7 @@
     <string name="cloud_choice_required">Otomatik eşitleme başlamadan önce hangi kopyanın kullanılacağını seç.</string>
     <string name="sync_now">Şimdi eşitle</string>
     <string name="choose_sync_source">Eşitleme kaynağını seç</string>
-    <string name="sign_out_google">Google hesabından çık</string>
+    <string name="sign_out_google">Çıkış yap</string>
     <string name="cloud_download_complete">Bulut verileri bu cihaza getirildi</string>
     <string name="cloud_upload_complete">Cihaz verileri Google bulutuna kaydedildi</string>
     <string name="cloud_already_current">Cihaz ve bulut zaten güncel</string>
@@ -1220,4 +1220,14 @@
     <string name="welcome_benefit_devices">Telefonunda, widget\'ta ve saatinde</string>
     <string name="welcome_benefit_private">Şifre yok, reklam yok, takip yok</string>
     <string name="welcome_preview_label">Bugün ekranı seni böyle karşılayacak</string>
+    <string name="account_title">Hesap ve yedekleme</string>
+    <string name="account_signed_out_title">Henüz giriş yapılmadı</string>
+    <string name="account_signed_out_body">Alışkanlıklarını yedeklemek ve yeni telefonuna taşımak için giriş yap.</string>
+    <string name="account_via_google">Google ile bağlı</string>
+    <string name="account_via_github">GitHub ile bağlı</string>
+    <string name="account_choose_source_short">Kaynağı seç</string>
+    <string name="account_auto_sync_short">Otomatik eşitle</string>
+    <string name="account_safe_title">Alışkanlıkların güvende</string>
+    <string name="account_not_synced_title">Henüz eşitlenmedi</string>
+    <string name="account_delete_short">Hesabı sil</string>
 </resources>

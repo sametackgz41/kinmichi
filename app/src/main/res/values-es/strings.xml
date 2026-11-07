@@ -253,7 +253,7 @@
     <string name="cloud_choice_required">Elige qué copia usar antes de que empiece la sincronización automática.</string>
     <string name="sync_now">Sincronizar ahora</string>
     <string name="choose_sync_source">Elegir origen de la sincronización</string>
-    <string name="sign_out_google">Cerrar sesión de Google</string>
+    <string name="sign_out_google">Cerrar sesión</string>
     <string name="cloud_download_complete">Datos de la nube restaurados en este dispositivo</string>
     <string name="cloud_upload_complete">Datos del dispositivo guardados en la nube de Google</string>
     <string name="cloud_already_current">El dispositivo y la nube ya están al día</string>
@@ -821,6 +821,16 @@
     <string name="welcome_benefit_devices">En tu teléfono, widgets y reloj</string>
     <string name="welcome_benefit_private">Sin contraseña, sin anuncios, sin rastreo</string>
     <string name="welcome_preview_label">Así te saludará Hoy</string>
+    <string name="account_title">Cuenta y copia de seguridad</string>
+    <string name="account_signed_out_title">Sin iniciar sesión</string>
+    <string name="account_signed_out_body">Inicia sesión para guardar tus hábitos y llevarlos a un teléfono nuevo.</string>
+    <string name="account_via_google">Conectado con Google</string>
+    <string name="account_via_github">Conectado con GitHub</string>
+    <string name="account_choose_source_short">Elegir origen</string>
+    <string name="account_auto_sync_short">Sincronizar automáticamente</string>
+    <string name="account_safe_title">Tus hábitos están a salvo</string>
+    <string name="account_not_synced_title">Aún sin sincronizar</string>
+    <string name="account_delete_short">Eliminar cuenta</string>
     <plurals name="streak_days">
         <item quantity="one">Racha de %d día</item>
         <item quantity="other">Racha de %d días</item>
