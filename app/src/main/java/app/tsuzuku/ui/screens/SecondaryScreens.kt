@@ -109,6 +109,7 @@ fun ProfileScreen(
     onOpenCloudAccount: () -> Unit,
     onOpenAppearance: () -> Unit = {},
     onOpenLanguage: () -> Unit = {},
+    onOpenWidgets: () -> Unit = {},
     onOpenPlanning: () -> Unit,
     onOpenSecurity: () -> Unit,
     onOpenBackup: () -> Unit,
@@ -127,8 +128,6 @@ fun ProfileScreen(
         ActivityResultContracts.RequestPermission(),
     ) { granted -> if (granted) postTestNotification() }
     var activeDialog by rememberSaveable { mutableStateOf<String?>(null) }
-    var showWidgets by rememberSaveable { mutableStateOf(false) }
-    if (showWidgets) WidgetPickerSheet(onDismiss = { showWidgets = false })
     var nameDraft by rememberSaveable(settings.profileName) { mutableStateOf(settings.profileName) }
 
     LazyColumn(
@@ -364,7 +363,7 @@ fun ProfileScreen(
                     Icons.Rounded.Widgets,
                     stringResource(R.string.home_widget),
                     stringResource(R.string.home_widget_description),
-                    onClick = { showWidgets = true },
+                    onClick = onOpenWidgets,
                 )
                 ValueSettingRow(
                     Icons.Rounded.AutoAwesome,

@@ -854,6 +854,7 @@
     <string name="language_search">Buscar idioma</string>
     <string name="language_current">Actual</string>
     <string name="language_all">Todos los idiomas</string>
+    <string name="widgets_add_to_home_long">Añadir a la pantalla de inicio</string>
     <plurals name="streak_days">
         <item quantity="one">Racha de %d día</item>
         <item quantity="other">Racha de %d días</item>

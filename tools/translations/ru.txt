@@ -886,3 +886,4 @@ language_system_desc|Как язык телефона
 language_search|Поиск языка
 language_current|Текущий
 language_all|Все языки
+widgets_add_to_home_long|Добавить на главный экран

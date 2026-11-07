@@ -1253,4 +1253,5 @@
     <string name="language_search">Dil ara</string>
     <string name="language_current">Şu anki</string>
     <string name="language_all">Tüm diller</string>
+    <string name="widgets_add_to_home_long">Ana ekrana ekle</string>
 </resources>

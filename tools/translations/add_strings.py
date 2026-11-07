@@ -54,7 +54,7 @@ def main() -> None:
             put_txt(ROOT / "tools" / "translations" / f"{lang}.txt", name, texts[lang])
     for lang, folder in TXT_LANGS.items():
         subprocess.run([sys.executable, str(Path(__file__).parent / "build_strings.py"), lang, folder], check=True)
-    print(f"{len(data)} strings updated in 6 languages")
+    print(f"{len(data)} strings updated in {2 + len(TXT_LANGS)} languages")
 
 
 if __name__ == "__main__":

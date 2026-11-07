@@ -854,6 +854,7 @@
     <string name="language_search">Sprache suchen</string>
     <string name="language_current">Aktuell</string>
     <string name="language_all">Alle Sprachen</string>
+    <string name="widgets_add_to_home_long">Zum Startbildschirm hinzufügen</string>
     <plurals name="streak_days">
         <item quantity="one">%d Tag in Folge</item>
         <item quantity="other">%d Tage in Folge</item>

@@ -103,13 +103,13 @@ class PreviewGalleryTest {
     // ---- sample data -------------------------------------------------------------------------
 
     private val sampleNames = mapOf(
-        "Read a book" to listOf("Leer un libro", "Ein Buch lesen", "Ler um livro", "読書"),
-        "Drink water" to listOf("Beber agua", "Wasser trinken", "Beber água", "水を飲む"),
-        "Meditate" to listOf("Meditar", "Meditieren", "Meditar", "瞑想"),
-        "Run" to listOf("Correr", "Laufen", "Correr", "ランニング"),
-        "Evening walk" to listOf("Paseo nocturno", "Abendspaziergang", "Caminhada à noite", "夜の散歩"),
-        "glasses" to listOf("vasos", "Gläser", "copos", "杯"),
-        "min" to listOf("min", "Min.", "min", "分"),
+        "Read a book" to listOf("Leer un libro", "Ein Buch lesen", "Ler um livro", "読書", "Lire un livre", "Leggere un libro", "Читать книгу", "독서"),
+        "Drink water" to listOf("Beber agua", "Wasser trinken", "Beber água", "水を飲む", "Boire de l'eau", "Bere acqua", "Пить воду", "물 마시기"),
+        "Meditate" to listOf("Meditar", "Meditieren", "Meditar", "瞑想", "Méditer", "Meditare", "Медитация", "명상"),
+        "Run" to listOf("Correr", "Laufen", "Correr", "ランニング", "Courir", "Correre", "Бег", "달리기"),
+        "Evening walk" to listOf("Paseo nocturno", "Abendspaziergang", "Caminhada à noite", "夜の散歩", "Promenade du soir", "Passeggiata serale", "Вечерняя прогулка", "저녁 산책"),
+        "glasses" to listOf("vasos", "Gläser", "copos", "杯", "verres", "bicchieri", "стаканов", "잔"),
+        "min" to listOf("min", "Min.", "min", "分", "min", "min", "мин", "분"),
     )
 
     private fun loc(lang: String, tr: String, en: String): String = when (lang) {
@@ -118,6 +118,10 @@ class PreviewGalleryTest {
         "de" -> sampleNames[en]?.get(1) ?: en
         "pt" -> sampleNames[en]?.get(2) ?: en
         "ja" -> sampleNames[en]?.get(3) ?: en
+        "fr" -> sampleNames[en]?.get(4) ?: en
+        "it" -> sampleNames[en]?.get(5) ?: en
+        "ru" -> sampleNames[en]?.get(6) ?: en
+        "ko" -> sampleNames[en]?.get(7) ?: en
         else -> en
     }
 
@@ -280,6 +284,31 @@ class PreviewGalleryTest {
     @Test fun welcomeGuestNameFilledTrDark() = renderWelcome("tr", true, nameStep = true, name = "Samet")
     @Test fun welcomeSignedInTr() = renderWelcome("tr", false, signedIn = true)
     @Test fun welcomeAlreadySignedInTr() = renderWelcome("tr", false, signedIn = true, chooseStep = true)
+
+    // Widget page: three layouts.
+    @Test fun widgetPageListTr() = renderWidgetPage(app.tsuzuku.ui.screens.WidgetsLayout.List, false)
+    @Test fun widgetPageCarouselTr() = renderWidgetPage(app.tsuzuku.ui.screens.WidgetsLayout.Carousel, false)
+    @Test fun widgetPageHomeTr() = renderWidgetPage(app.tsuzuku.ui.screens.WidgetsLayout.HomeScreen, false)
+    @Test fun widgetPageListTrDark() = renderWidgetPage(app.tsuzuku.ui.screens.WidgetsLayout.List, true)
+    @Test fun widgetPageCarouselTrDark() = renderWidgetPage(app.tsuzuku.ui.screens.WidgetsLayout.Carousel, true)
+    @Test fun widgetPageCarouselStreakTr() = renderWidgetPage(app.tsuzuku.ui.screens.WidgetsLayout.Carousel, false, page = 2)
+    @Test fun widgetPageCarouselWeekTrDark() = renderWidgetPage(app.tsuzuku.ui.screens.WidgetsLayout.Carousel, true, page = 3)
+    @Test fun widgetPageCarouselAllTr1() = renderWidgetPage(app.tsuzuku.ui.screens.WidgetsLayout.Carousel, false, page = 1)
+    @Test fun widgetPageCarouselAllTr3() = renderWidgetPage(app.tsuzuku.ui.screens.WidgetsLayout.Carousel, false, page = 3)
+    @Test fun widgetPageCarouselAllTr4() = renderWidgetPage(app.tsuzuku.ui.screens.WidgetsLayout.Carousel, false, page = 4)
+    @Test fun widgetPageCarouselAllTr5() = renderWidgetPage(app.tsuzuku.ui.screens.WidgetsLayout.Carousel, false, page = 5)
+    @Test fun widgetPageHomeTrDark() = renderWidgetPage(app.tsuzuku.ui.screens.WidgetsLayout.HomeScreen, true)
+
+    private fun renderWidgetPage(layout: app.tsuzuku.ui.screens.WidgetsLayout, dark: Boolean, page: Int = 0) {
+        setVariant("tr", dark)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = dark) {
+                app.tsuzuku.ui.screens.WidgetsScreen(onBack = {}, layout = layout, canPinOverride = true, initialPage = page)
+            }
+        }
+        compose.mainClock.advanceTimeBy(1_000)
+        captureScreen("widgetpage_${layout.name.lowercase()}_tr_${if (dark) "dark" else "light"}" + if (page > 0) "_p$page" else "")
+    }
 
     // Language page: three layouts with flags.
     @Test fun languageListTr() = renderLanguage(app.tsuzuku.ui.screens.LanguageLayout.List, false)
@@ -688,6 +717,22 @@ class PreviewGalleryTest {
     @Test fun widgetsTrDark() = renderWidgets("tr", true)
     @Test fun widgetsEnLight() = renderWidgets("en", false)
     @Test fun widgetsEnDark() = renderWidgets("en", true)
+    @Test fun widgetsEsLight() = renderWidgets("es", false)
+    @Test fun widgetsEsDark() = renderWidgets("es", true)
+    @Test fun widgetsDeLight() = renderWidgets("de", false)
+    @Test fun widgetsDeDark() = renderWidgets("de", true)
+    @Test fun widgetsPtLight() = renderWidgets("pt", false)
+    @Test fun widgetsPtDark() = renderWidgets("pt", true)
+    @Test fun widgetsJaLight() = renderWidgets("ja", false)
+    @Test fun widgetsJaDark() = renderWidgets("ja", true)
+    @Test fun widgetsFrLight() = renderWidgets("fr", false)
+    @Test fun widgetsFrDark() = renderWidgets("fr", true)
+    @Test fun widgetsItLight() = renderWidgets("it", false)
+    @Test fun widgetsItDark() = renderWidgets("it", true)
+    @Test fun widgetsRuLight() = renderWidgets("ru", false)
+    @Test fun widgetsRuDark() = renderWidgets("ru", true)
+    @Test fun widgetsKoLight() = renderWidgets("ko", false)
+    @Test fun widgetsKoDark() = renderWidgets("ko", true)
 
     private fun renderWidgets(lang: String, dark: Boolean) {
         setVariant(lang, dark)

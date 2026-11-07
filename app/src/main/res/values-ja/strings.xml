@@ -854,6 +854,7 @@
     <string name="language_search">言語を検索</string>
     <string name="language_current">現在</string>
     <string name="language_all">すべての言語</string>
+    <string name="widgets_add_to_home_long">ホーム画面に追加</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

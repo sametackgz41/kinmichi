@@ -854,6 +854,7 @@
     <string name="language_search">언어 검색</string>
     <string name="language_current">현재</string>
     <string name="language_all">모든 언어</string>
+    <string name="widgets_add_to_home_long">홈 화면에 추가</string>
     <plurals name="streak_days">
         <item quantity="one">%d일 연속</item>
         <item quantity="other">%d일 연속</item>

@@ -874,3 +874,4 @@ language_system_desc|Folgt der Sprache deines Handys
 language_search|Sprache suchen
 language_current|Aktuell
 language_all|Alle Sprachen
+widgets_add_to_home_long|Zum Startbildschirm hinzufügen

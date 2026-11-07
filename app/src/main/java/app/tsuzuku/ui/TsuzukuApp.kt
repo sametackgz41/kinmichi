@@ -626,6 +626,7 @@ fun TsuzukuApp(
                     onOpenCloudAccount = { navController.navigate("cloud-account") },
                     onOpenAppearance = { navController.navigate("appearance") },
                     onOpenLanguage = { navController.navigate("language") },
+                    onOpenWidgets = { navController.navigate("widgets") },
                     onOpenPlanning = { navController.navigate("planning") },
                     onOpenSecurity = { navController.navigate("security") },
                     onOpenBackup = { navController.navigate("backup") },
@@ -752,6 +753,9 @@ fun TsuzukuApp(
                     onCreate = categoryViewModel::create,
                     onDelete = categoryViewModel::delete,
                 )
+            }
+            composable("widgets") {
+                app.tsuzuku.ui.screens.WidgetsScreen(onBack = navController::popBackStack)
             }
             composable("language") {
                 app.tsuzuku.ui.screens.LanguageScreen(

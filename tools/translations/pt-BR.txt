@@ -874,3 +874,4 @@ language_system_desc|Segue o idioma do celular
 language_search|Buscar idioma
 language_current|Atual
 language_all|Todos os idiomas
+widgets_add_to_home_long|Adicionar à tela inicial

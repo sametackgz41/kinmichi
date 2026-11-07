@@ -868,3 +868,4 @@ language_system_desc|スマホの言語に合わせる
 language_search|言語を検索
 language_current|現在
 language_all|すべての言語
+widgets_add_to_home_long|ホーム画面に追加

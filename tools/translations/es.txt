@@ -874,3 +874,4 @@ language_system_desc|Sigue el idioma del teléfono
 language_search|Buscar idioma
 language_current|Actual
 language_all|Todos los idiomas
+widgets_add_to_home_long|Añadir a la pantalla de inicio

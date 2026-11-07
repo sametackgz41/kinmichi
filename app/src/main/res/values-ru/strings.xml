@@ -854,6 +854,7 @@
     <string name="language_search">Поиск языка</string>
     <string name="language_current">Текущий</string>
     <string name="language_all">Все языки</string>
+    <string name="widgets_add_to_home_long">Добавить на главный экран</string>
     <plurals name="streak_days">
         <item quantity="one">Серия %d день</item>
         <item quantity="few">Серия %d дня</item>
