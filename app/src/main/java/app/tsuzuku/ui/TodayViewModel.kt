@@ -107,6 +107,13 @@ class TodayViewModel(
         }
     }
 
+    fun setWeeklyGoal(id: Long, timesPerWeek: Int) {
+        viewModelScope.launch {
+            repository.setWeeklyGoal(id, timesPerWeek)
+            onDataChanged()
+        }
+    }
+
     fun setHabitTarget(id: Long, target: Double) {
         viewModelScope.launch {
             repository.setHabitTarget(id, target)

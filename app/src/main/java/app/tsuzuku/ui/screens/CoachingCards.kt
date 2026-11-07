@@ -94,10 +94,13 @@ internal fun TargetAdviceCard(
             }
             Spacer(Modifier.height(6.dp))
             Text(
-                if (advice.kind == TargetAdvice.Kind.Lower) {
-                    stringResource(R.string.advice_lower, advice.hits, advice.days, "$newAmount $unit".trim())
-                } else {
-                    stringResource(R.string.advice_raise, "$newAmount $unit".trim())
+                when (advice.kind) {
+                    TargetAdvice.Kind.Lower -> stringResource(R.string.advice_lower, advice.hits, advice.days, "$newAmount $unit".trim())
+                    TargetAdvice.Kind.Raise -> stringResource(R.string.advice_raise, "$newAmount $unit".trim())
+                    TargetAdvice.Kind.Grow -> stringResource(R.string.advice_grow, "$newAmount $unit".trim())
+                    TargetAdvice.Kind.Weekly -> stringResource(R.string.advice_weekly, advice.hits, advice.days, advice.newTarget.toInt())
+                    TargetAdvice.Kind.FewerPerWeek -> stringResource(R.string.advice_fewer_per_week, advice.newTarget.toInt())
+                    TargetAdvice.Kind.MorePerWeek -> stringResource(R.string.advice_more_per_week, advice.newTarget.toInt())
                 },
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onTertiaryContainer,
@@ -108,7 +111,13 @@ internal fun TargetAdviceCard(
                     Text(stringResource(R.string.advice_not_now), color = MaterialTheme.colorScheme.onTertiaryContainer)
                 }
                 Button(onClick = onAccept, shapes = androidx.compose.material3.ButtonDefaults.shapes(), modifier = Modifier.padding(bottom = 6.dp)) {
-                    Text(stringResource(R.string.advice_accept, "$newAmount $unit".trim()))
+                    Text(
+                        if (advice.changesFrequency) {
+                            stringResource(R.string.advice_accept_per_week, advice.newTarget.toInt())
+                        } else {
+                            stringResource(R.string.advice_accept, "$newAmount $unit".trim())
+                        },
+                    )
                 }
             }
         }

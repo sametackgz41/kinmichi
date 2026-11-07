@@ -32,6 +32,46 @@ class CoachingTest {
     // ---- target advice ---------------------------------------------------------------------
 
     @Test
+    fun suggestsGrowingAfterThreeStrongWeeks() {
+        val water = habit()
+        val advice = targetAdvice(history(water, List(21) { 8.0 }), water, today)
+        assertEquals(TargetAdvice.Kind.Grow, advice?.kind)
+        assertEquals(10.0, advice!!.newTarget, 0.0)
+    }
+
+    /** Done on two days in each of the last three full weeks (Oct 12 – Nov 1). */
+    private fun twicePerWeek(): List<Double?> = List(25) { i -> if (i in setOf(5, 7, 12, 14, 19, 21)) 1.0 else 0.0 }
+
+    @Test
+    fun suggestsAWeeklyGoalForARarelyDoneDailyHabit() {
+        val stretch = habit(type = HabitType.Check, target = 1.0)
+        val advice = frequencyAdvice(history(stretch, twicePerWeek()), stretch, today)
+        assertEquals(TargetAdvice.Kind.Weekly, advice?.kind)
+        assertEquals(2, advice!!.newTarget.toInt())
+        assertTrue(advice.changesFrequency)
+    }
+
+    @Test
+    fun adjustsAWeeklyGoalUpAndDown() {
+        val met = habit(type = HabitType.Check, target = 1.0).copy(goalPeriod = GoalPeriod.Weekly, periodTarget = 2)
+        val up = frequencyAdvice(history(met, twicePerWeek()), met, today)
+        assertEquals(TargetAdvice.Kind.MorePerWeek, up?.kind)
+        assertEquals(3, up!!.newTarget.toInt())
+
+        val tooHigh = met.copy(periodTarget = 5)
+        val down = frequencyAdvice(history(tooHigh, twicePerWeek()), tooHigh, today)
+        assertEquals(TargetAdvice.Kind.FewerPerWeek, down?.kind)
+        assertEquals(2, down!!.newTarget.toInt())
+    }
+
+    @Test
+    fun noFrequencyAdviceForAHabitDoneMostDays() {
+        val stretch = habit(type = HabitType.Check, target = 1.0)
+        assertNull(frequencyAdvice(history(stretch, List(25) { 1.0 }), stretch, today))
+    }
+
+
+    @Test
     fun suggestsTheAmountActuallyReached() {
         val h = habit()
         val amounts = listOf(5.0, 4.0, 6.0, 5.0, 8.0, 5.0, 3.0, 5.0, 6.0, 4.0, 5.0, 0.0, 5.0, 4.0)

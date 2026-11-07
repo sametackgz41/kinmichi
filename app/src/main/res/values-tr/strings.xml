@@ -1177,4 +1177,9 @@
     <string name="tour_art_tiny">1 sayfa oku</string>
     <string name="tour_art_if">Eğer yemeği bitirirsem,</string>
     <string name="tour_art_then">10 sayfa okurum.</string>
+    <string name="advice_grow">Üç haftadır neredeyse her gün hedefini tutturuyorsun. Çıtayı biraz yükseltip %1$s yapalım mı?</string>
+    <string name="advice_weekly">Son günlerde %2$d günün %1$d gününde yaptın. Her gün yerine haftada %3$d kez yapalım mı? Böylece kaçan bir gün hiçbir şeyi bozmaz.</string>
+    <string name="advice_fewer_per_week">Son haftalarda bu hedefin altında kaldın. Şimdilik haftada %1$d kez hedefleyip adım adım büyütelim mi?</string>
+    <string name="advice_more_per_week">Üç haftadır üst üste bu hedefi tutturuyorsun. Haftada %1$d kez için hazır mısın?</string>
+    <string name="advice_accept_per_week">Haftada %1$d</string>
 </resources>

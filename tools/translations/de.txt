@@ -797,3 +797,8 @@ tour_art_habit_detail|heute nicht
 tour_art_tiny|1 Seite lesen
 tour_art_if|Wenn ich zu Abend gegessen habe,
 tour_art_then|lese ich 10 Seiten.
+advice_grow|Du hast dein Ziel drei Wochen lang fast täglich erreicht. Die Latte etwas höher legen, auf %1$s?
+advice_weekly|Zuletzt hast du das an %1$d von %2$d Tagen geschafft. Statt täglich %3$d-mal pro Woche? Dann bricht ein verpasster Tag nichts mehr.
+advice_fewer_per_week|Deine letzten Wochen lagen unter diesem Ziel. Vorerst %1$d-mal pro Woche anpeilen und steigern?
+advice_more_per_week|Drei Wochen in Folge hast du dieses Ziel erreicht. Bereit für %1$d-mal pro Woche?
+advice_accept_per_week|%1$d× pro Woche

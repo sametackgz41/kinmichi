@@ -18,7 +18,15 @@ data class TargetAdvice(
     /** Scheduled, not skipped days in the window. */
     val days: Int,
 ) {
-    enum class Kind { Lower, Raise }
+    /**
+     * Lower / Raise: an amount target, down to what is managed or back up toward the original.
+     * Grow: an amount target that has been met nearly every day for three weeks.
+     * Weekly: a daily check habit rarely done; [newTarget] is the suggested times per week.
+     * FewerPerWeek / MorePerWeek: a weekly goal adjusted; [newTarget] is times per week.
+     */
+    enum class Kind { Lower, Raise, Grow, Weekly, FewerPerWeek, MorePerWeek }
+
+    val changesFrequency: Boolean get() = kind == Kind.Weekly || kind == Kind.FewerPerWeek || kind == Kind.MorePerWeek
 }
 
 internal const val ADVICE_WINDOW_DAYS = 14
@@ -65,5 +73,62 @@ fun targetAdvice(
         val suggestion = minOf(originalTarget, habit.target + increment)
         return TargetAdvice(habit, TargetAdvice.Kind.Raise, suggestion, hits, window.size)
     }
+    if (originalTarget == null) growAdvice(history, habit, today)?.let { return it }
     return null
+}
+
+private const val GROW_WINDOW_DAYS = 21
+private const val GROW_FROM = 0.95
+
+/** Three weeks of hitting the target almost every day: time to raise the bar a little. */
+private fun growAdvice(history: HabitHistorySnapshot, habit: Habit, today: LocalDate): TargetAdvice? {
+    val window = (1..GROW_WINDOW_DAYS).map { today.minusDays(it.toLong()) }
+        .filter { !it.isBefore(habit.createdOn) && habit.isScheduledOn(it) && history.progressOn(habit, it) != null }
+    if (window.size < 18) return null
+    val hits = window.count { history.isDone(habit, it) }
+    if (hits.toDouble() / window.size < GROW_FROM) return null
+    val step = habit.step.takeIf { it > 0.0 } ?: 1.0
+    val increment = maxOf(step, ceil(habit.target * 0.15 / step) * step)
+    return TargetAdvice(habit, TargetAdvice.Kind.Grow, habit.target + increment, hits, window.size)
+}
+
+/**
+ * Frequency coaching for check habits, from the last three full weeks:
+ * a daily habit done on fewer than 40% of its days becomes "X times a week", and a weekly goal
+ * moves up after three weeks all met, or down when the weeks average well below it.
+ */
+fun frequencyAdvice(history: HabitHistorySnapshot, habit: Habit, today: LocalDate): TargetAdvice? {
+    if (habit.type != HabitType.Check || habit.direction != HabitDirection.Build) return null
+    val thisWeek = today.with(java.time.temporal.TemporalAdjusters.previousOrSame(java.time.DayOfWeek.MONDAY))
+    val weeks = (1..3).map { thisWeek.minusWeeks(it.toLong()) }
+    if (weeks.last().isBefore(habit.createdOn.minusDays(0)) && habit.createdOn != LocalDate.MIN) return null
+    val perWeek = weeks.map { start ->
+        (0L until 7L).map { start.plusDays(it) }.count { history.isDone(habit, it) }
+    }
+    return when (habit.goalPeriod) {
+        GoalPeriod.Daily -> {
+            val daysPerWeek = Integer.bitCount(habit.scheduleDaysMask and 127)
+            if (daysPerWeek < 5 || habit.repeatIntervalDays != 1) return null
+            val due = weeks.flatMap { start -> (0L until 7L).map { start.plusDays(it) } }
+                .filter { habit.isScheduledOn(it) && history.progressOn(habit, it) != null }
+            if (due.size < 15) return null
+            val done = perWeek.sum()
+            if (done.toDouble() / due.size >= 0.4 || done < 3) return null
+            val times = Math.round(done / 3.0).toInt().coerceIn(1, daysPerWeek - 1)
+            TargetAdvice(habit, TargetAdvice.Kind.Weekly, times.toDouble(), done, due.size)
+        }
+        GoalPeriod.Weekly -> {
+            val goal = habit.periodTarget
+            when {
+                goal < 7 && perWeek.all { it >= goal } ->
+                    TargetAdvice(habit, TargetAdvice.Kind.MorePerWeek, (goal + 1).toDouble(), perWeek.sum(), goal * 3)
+                goal > 1 && perWeek.average() < goal * 0.6 -> {
+                    val lower = Math.round(perWeek.average()).toInt().coerceIn(1, goal - 1)
+                    TargetAdvice(habit, TargetAdvice.Kind.FewerPerWeek, lower.toDouble(), perWeek.sum(), goal * 3)
+                }
+                else -> null
+            }
+        }
+        GoalPeriod.Monthly -> null
+    }
 }

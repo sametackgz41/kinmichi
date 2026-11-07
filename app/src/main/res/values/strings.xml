@@ -1178,4 +1178,9 @@
     <string name="tour_art_tiny">Read 1 page</string>
     <string name="tour_art_if">If I finish dinner,</string>
     <string name="tour_art_then">I read 10 pages.</string>
+    <string name="advice_grow">You\'ve hit your target nearly every day for three weeks. Raise the bar a little, to %1$s?</string>
+    <string name="advice_weekly">You did this on %1$d of %2$d days lately. Make it %3$d times a week instead of every day? Then a missed day no longer breaks anything.</string>
+    <string name="advice_fewer_per_week">Your weeks lately fell short of this goal. Aim for %1$d times a week for now and build up?</string>
+    <string name="advice_more_per_week">Three weeks in a row you\'ve met this goal. Ready for %1$d times a week?</string>
+    <string name="advice_accept_per_week">%1$d× a week</string>
 </resources>

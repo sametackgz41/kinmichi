@@ -774,6 +774,11 @@
     <string name="tour_art_tiny">1 Seite lesen</string>
     <string name="tour_art_if">Wenn ich zu Abend gegessen habe,</string>
     <string name="tour_art_then">lese ich 10 Seiten.</string>
+    <string name="advice_grow">Du hast dein Ziel drei Wochen lang fast täglich erreicht. Die Latte etwas höher legen, auf %1$s?</string>
+    <string name="advice_weekly">Zuletzt hast du das an %1$d von %2$d Tagen geschafft. Statt täglich %3$d-mal pro Woche? Dann bricht ein verpasster Tag nichts mehr.</string>
+    <string name="advice_fewer_per_week">Deine letzten Wochen lagen unter diesem Ziel. Vorerst %1$d-mal pro Woche anpeilen und steigern?</string>
+    <string name="advice_more_per_week">Drei Wochen in Folge hast du dieses Ziel erreicht. Bereit für %1$d-mal pro Woche?</string>
+    <string name="advice_accept_per_week">%1$d× pro Woche</string>
     <plurals name="streak_days">
         <item quantity="one">%d Tag in Folge</item>
         <item quantity="other">%d Tage in Folge</item>

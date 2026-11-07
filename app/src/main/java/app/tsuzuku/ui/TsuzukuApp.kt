@@ -293,7 +293,11 @@ fun TsuzukuApp(
                     targetAdvice = targetAdvice,
                     onAcceptAdvice = { advice ->
                         coaching.accepted(advice, java.time.LocalDate.now())
-                        todayViewModel.setHabitTarget(advice.habit.id, advice.newTarget)
+                        if (advice.changesFrequency) {
+                            todayViewModel.setWeeklyGoal(advice.habit.id, advice.newTarget.toInt())
+                        } else {
+                            todayViewModel.setHabitTarget(advice.habit.id, advice.newTarget)
+                        }
                         adviceVersion++
                     },
                     onDismissAdvice = { advice ->

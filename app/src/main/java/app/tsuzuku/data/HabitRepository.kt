@@ -40,6 +40,8 @@ interface HabitRepository {
     suspend fun updateHabit(id: Long, draft: HabitDraft)
     suspend fun updateHabitNote(id: Long, note: String)
     suspend fun setHabitTarget(id: Long, target: Double)
+    /** Switches to (or adjusts) a weekly goal of [timesPerWeek], on any day of the week. */
+    suspend fun setWeeklyGoal(id: Long, timesPerWeek: Int) {}
     suspend fun archiveHabit(id: Long)
     suspend fun deleteHabit(id: Long)
     suspend fun duplicateHabit(id: Long): Long?
@@ -328,6 +330,19 @@ class RoomHabitRepository(
             current.copy(
                 target = target,
                 minimumTarget = current.minimumTarget.coerceAtMost(target),
+                updatedAt = now(),
+            ),
+        )
+    }
+
+    override suspend fun setWeeklyGoal(id: Long, timesPerWeek: Int) {
+        val current = dao.getHabit(id) ?: return
+        dao.insertHabit(
+            current.copy(
+                goalPeriod = GoalPeriod.Weekly.name,
+                periodTarget = timesPerWeek.coerceIn(1, 7),
+                scheduleDaysMask = 127,
+                repeatIntervalDays = 1,
                 updatedAt = now(),
             ),
         )

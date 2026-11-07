@@ -774,6 +774,11 @@
     <string name="tour_art_tiny">1 ページ読む</string>
     <string name="tour_art_if">夕食を食べ終えたら、</string>
     <string name="tour_art_then">10 ページ読む。</string>
+    <string name="advice_grow">3 週間ほぼ毎日目標を達成しています。少しだけ上げて %1$s にしませんか？</string>
+    <string name="advice_weekly">最近は %2$d 日中 %1$d 日できています。毎日ではなく週 %3$d 回にしませんか？ 休んだ日があっても何も途切れません。</string>
+    <string name="advice_fewer_per_week">ここ数週間はこの目標に届いていません。まずは週 %1$d 回を目指して、少しずつ増やしませんか？</string>
+    <string name="advice_more_per_week">3 週連続でこの目標を達成しています。週 %1$d 回にしてみませんか？</string>
+    <string name="advice_accept_per_week">週 %1$d 回</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

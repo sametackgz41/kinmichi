@@ -4,6 +4,7 @@ import android.content.Context
 import app.tsuzuku.model.ADVICE_WINDOW_DAYS
 import app.tsuzuku.model.HabitHistorySnapshot
 import app.tsuzuku.model.TargetAdvice
+import app.tsuzuku.model.frequencyAdvice
 import app.tsuzuku.model.targetAdvice
 import java.time.LocalDate
 
@@ -23,7 +24,7 @@ class CoachingPrefs(context: Context) {
     fun pickAdvice(history: HabitHistorySnapshot, today: LocalDate): TargetAdvice? =
         history.habits.asSequence()
             .filter { today.toEpochDay() > snoozedUntil(it.id) }
-            .mapNotNull { targetAdvice(history, it, today, originalTarget(it.id)) }
+            .mapNotNull { targetAdvice(history, it, today, originalTarget(it.id)) ?: frequencyAdvice(history, it, today) }
             .firstOrNull()
 
     /**
