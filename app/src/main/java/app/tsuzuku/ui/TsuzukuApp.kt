@@ -761,6 +761,7 @@ fun TsuzukuApp(
                         reminderScheduler.rescheduleAll()
                         TsuzukuWidgetProvider.requestUpdate(context.applicationContext)
                     },
+                    onSignedInName = onSetProfileName,
                 )
             }
             composable("planning") {

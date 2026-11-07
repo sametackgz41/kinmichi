@@ -92,7 +92,12 @@ fun WelcomeScreen(
     // After signing in here, move on to the name step with the account's first name filled in.
     LaunchedEffect(signedIn) {
         if (signedIn != null) {
-            if (!nameEdited) name = preferredGoogleName(signedIn.displayName)
+            val accountName = preferredGoogleName(signedIn.displayName)
+            // A fresh sign-in here wins over a name left from a guest session; the field stays editable.
+            if (accountName.isNotBlank() && (!signedInAtStart || !nameEdited)) {
+                name = accountName
+                nameEdited = false
+            }
             if (!signedInAtStart) askName = true
         }
     }

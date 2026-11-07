@@ -77,6 +77,7 @@ fun CloudAccountScreen(
     onDataRestored: suspend () -> Unit,
     initialSetup: Boolean = false,
     onInitialSetupComplete: (String?) -> Unit = {},
+    onSignedInName: (String) -> Unit = {},
 ) {
     val account by repository.account.collectAsStateWithLifecycle()
     val syncState by repository.syncState.collectAsStateWithLifecycle()
@@ -92,7 +93,10 @@ fun CloudAccountScreen(
         onBack = onBack,
         onSignIn = { activity, provider ->
             val result = if (provider == SignInProvider.GitHub) repository.signInWithGitHub(activity) else repository.signIn(activity)
-            if (result != null) repository.prepareChoice()
+            if (result != null) {
+                preferredGoogleName(result.displayName).takeIf { it.isNotBlank() }?.let(onSignedInName)
+                repository.prepareChoice()
+            }
         },
         onSetCloudSyncEnabled = onSetCloudSyncEnabled,
         onSyncNow = { scope.launch { repository.synchronize() } },
