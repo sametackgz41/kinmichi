@@ -22,6 +22,8 @@ import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.glance.ExperimentalGlanceApi
@@ -209,6 +211,20 @@ class PreviewGalleryTest {
             }
         }
         captureScreen("whats_new_${lang}_light")
+    }
+
+    @Test fun tourTr() = renderTour("tr")
+    @Test fun tourEn() = renderTour("en")
+
+    private fun renderTour(lang: String) {
+        setVariant(lang, false)
+        compose.setContent { TsuzukuTheme(darkTheme = false) { app.tsuzuku.ui.screens.OnboardingScreen(onComplete = {}) } }
+        val next = compose.activity.getString(app.tsuzuku.R.string.continue_label)
+        repeat(5) { page ->
+            compose.mainClock.advanceTimeBy(1_000)
+            captureScreen("tour_${page + 1}_${lang}_light")
+            if (page < 4) compose.onNodeWithText(next).performClick()
+        }
     }
 
     @Test fun palettePickerTr() {

@@ -1163,4 +1163,19 @@
     <string name="language_german">Deutsch</string>
     <string name="language_portuguese">Português (Brasil)</string>
     <string name="language_japanese">日本語</string>
+    <string name="tour_welcome_title">The golden path</string>
+    <string name="tour_welcome_body">Kinmichi is Japanese for \'golden path\': the road you walk a little every day. Small steps, one at a time, and today\'s always shines.</string>
+    <string name="tour_bad_day_title">A small step still counts</string>
+    <string name="tour_bad_day_body">Give every habit a bad-day version, like one page instead of thirty minutes. On a hard day, doing just that keeps your streak alive.</string>
+    <string name="tour_kintsugi_title">Breaks are mended in gold</string>
+    <string name="tour_kintsugi_body">Missing a day happens. Never miss twice: after a slip, Today offers the small version. The day you come back is counted and drawn in gold.</string>
+    <string name="tour_if_then_title">Tie it to your day</string>
+    <string name="tour_if_then_body">Write when a habit happens: \'If I finish dinner, I read 10 pages.\' Plans like this are one of the best-proven ways to keep a habit.</string>
+    <string name="tour_privacy_title">Yours, on your phone</string>
+    <string name="tour_privacy_body">No ads, no tracking, works offline. Your data stays on this device unless you choose Google sync. Lock it with a PIN or your fingerprint.</string>
+    <string name="tour_art_habit">Read 30 minutes</string>
+    <string name="tour_art_habit_detail">not today</string>
+    <string name="tour_art_tiny">Read 1 page</string>
+    <string name="tour_art_if">If I finish dinner,</string>
+    <string name="tour_art_then">I read 10 pages.</string>
 </resources>

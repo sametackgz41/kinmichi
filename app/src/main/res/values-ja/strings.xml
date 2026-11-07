@@ -759,6 +759,21 @@
     <string name="language_german">Deutsch</string>
     <string name="language_portuguese">Português (Brasil)</string>
     <string name="language_japanese">日本語</string>
+    <string name="tour_welcome_title">金の道</string>
+    <string name="tour_welcome_body">Kinmichi（金道）は「金の道」という意味です。毎日少しずつ歩く道。小さな一歩をひとつずつ。今日の一歩はいつも輝きます。</string>
+    <string name="tour_bad_day_title">小さな一歩も数に入る</string>
+    <string name="tour_bad_day_body">どの習慣にも「調子の悪い日の版」を。30 分ではなく 1 ページ、のように。つらい日はそれだけで連続記録が続きます。</string>
+    <string name="tour_kintsugi_title">途切れたところは金で継ぐ</string>
+    <string name="tour_kintsugi_body">休んでしまう日もあります。大切なのは 2 回続けて休まないこと。休んだ翌日、「今日」が小さい版を提案します。戻ってきた日は数えられ、金色で描かれます。</string>
+    <string name="tour_if_then_title">一日に結びつける</string>
+    <string name="tour_if_then_body">習慣をいつするかを書きましょう: 「夕食を食べ終えたら、10 ページ読む。」こうした計画は、習慣を続けるための最も実証された方法のひとつです。</string>
+    <string name="tour_privacy_title">あなたのスマホの中に</string>
+    <string name="tour_privacy_body">広告なし、追跡なし、オフラインで動きます。Google 同期を選ばない限り、データはこの端末に残ります。PIN や指紋でロックできます。</string>
+    <string name="tour_art_habit">30 分読書</string>
+    <string name="tour_art_habit_detail">今日はできなかった</string>
+    <string name="tour_art_tiny">1 ページ読む</string>
+    <string name="tour_art_if">夕食を食べ終えたら、</string>
+    <string name="tour_art_then">10 ページ読む。</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

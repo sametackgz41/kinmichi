@@ -782,3 +782,18 @@ language_spanish|Español
 language_german|Deutsch
 language_portuguese|Português (Brasil)
 language_japanese|日本語
+tour_welcome_title|Der goldene Weg
+tour_welcome_body|Kinmichi ist Japanisch für „goldener Weg“: der Weg, den du jeden Tag ein Stück gehst. Kleine Schritte, einer nach dem anderen, und der heutige leuchtet immer.
+tour_bad_day_title|Auch ein kleiner Schritt zählt
+tour_bad_day_body|Gib jeder Gewohnheit eine Version für schlechte Tage, etwa eine Seite statt dreißig Minuten. An einem schweren Tag hält schon das deine Serie am Leben.
+tour_kintsugi_title|Brüche werden mit Gold repariert
+tour_kintsugi_body|Einen Tag zu verpassen passiert. Wichtig ist, nie zweimal auszulassen: nach einem Ausrutscher bietet „Heute“ die kleine Version an. Der Tag deines Comebacks wird gezählt und in Gold gezeichnet.
+tour_if_then_title|Verbinde es mit deinem Tag
+tour_if_then_body|Schreib auf, wann eine Gewohnheit stattfindet: „Wenn ich zu Abend gegessen habe, lese ich 10 Seiten.“ Solche Pläne gehören zu den am besten belegten Wegen, eine Gewohnheit zu halten.
+tour_privacy_title|Deins, auf deinem Handy
+tour_privacy_body|Keine Werbung, kein Tracking, funktioniert offline. Deine Daten bleiben auf diesem Gerät, außer du wählst die Google-Synchronisierung. Sperre es mit PIN oder Fingerabdruck.
+tour_art_habit|30 Minuten lesen
+tour_art_habit_detail|heute nicht
+tour_art_tiny|1 Seite lesen
+tour_art_if|Wenn ich zu Abend gegessen habe,
+tour_art_then|lese ich 10 Seiten.

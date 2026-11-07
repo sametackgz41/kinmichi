@@ -782,3 +782,18 @@ language_spanish|Español
 language_german|Deutsch
 language_portuguese|Português (Brasil)
 language_japanese|日本語
+tour_welcome_title|El camino dorado
+tour_welcome_body|Kinmichi significa 'camino dorado' en japonés: el camino que recorres un poco cada día. Pasos pequeños, uno a uno, y el de hoy siempre brilla.
+tour_bad_day_title|Un paso pequeño también cuenta
+tour_bad_day_body|Dale a cada hábito una versión para días malos, como una página en vez de treinta minutos. En un día difícil, hacer solo eso mantiene tu racha.
+tour_kintsugi_title|Lo roto se repara en oro
+tour_kintsugi_body|Fallar un día pasa. Lo importante es no fallar dos veces: tras un tropiezo, Hoy te ofrece la versión pequeña. El día que vuelves se cuenta y se dibuja en oro.
+tour_if_then_title|Únelo a tu día
+tour_if_then_body|Escribe cuándo ocurre un hábito: 'Si termino de cenar, leo 10 páginas.' Los planes así son una de las formas más probadas de mantener un hábito.
+tour_privacy_title|Tuyo, en tu móvil
+tour_privacy_body|Sin anuncios, sin rastreo, funciona sin conexión. Tus datos se quedan en este dispositivo salvo que elijas sincronizar con Google. Bloquéalo con un PIN o tu huella.
+tour_art_habit|Leer 30 minutos
+tour_art_habit_detail|hoy no
+tour_art_tiny|Leer 1 página
+tour_art_if|Si termino de cenar,
+tour_art_then|leo 10 páginas.

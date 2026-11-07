@@ -1162,4 +1162,19 @@
     <string name="language_german">Deutsch</string>
     <string name="language_portuguese">Português (Brasil)</string>
     <string name="language_japanese">日本語</string>
+    <string name="tour_welcome_title">Altın yol</string>
+    <string name="tour_welcome_body">Kinmichi Japonca \'altın yol\' demek: her gün biraz yürüdüğün yol. Adım adım ilerlersin, bugünün adımı hep parlar.</string>
+    <string name="tour_bad_day_title">Küçük bir adım da sayılır</string>
+    <string name="tour_bad_day_body">Her alışkanlığa bir kötü gün sürümü ver: otuz dakika yerine bir sayfa gibi. Zor bir günde sadece onu yapmak serini korur.</string>
+    <string name="tour_kintsugi_title">Kopan yer altınla onarılır</string>
+    <string name="tour_kintsugi_body">Bir gün kaçırmak olur. Önemli olan iki kez kaçırmamak: kaçırdığın günün ertesinde Bugün ekranı küçük sürümü önerir. Geri döndüğün gün sayılır ve altınla çizilir.</string>
+    <string name="tour_if_then_title">Gününe bağla</string>
+    <string name="tour_if_then_body">Alışkanlığın ne zaman olacağını yaz: \'Eğer yemeği bitirirsem, 10 sayfa okurum.\' Böyle planlar, alışkanlığı sürdürmenin en iyi kanıtlanmış yollarından biri.</string>
+    <string name="tour_privacy_title">Senin, senin telefonunda</string>
+    <string name="tour_privacy_body">Reklam yok, takip yok, internetsiz çalışır. Google eşitlemeyi açmadıkça verilerin bu cihazda kalır. PIN ya da parmak iziyle kilitleyebilirsin.</string>
+    <string name="tour_art_habit">30 dakika oku</string>
+    <string name="tour_art_habit_detail">bugün olmadı</string>
+    <string name="tour_art_tiny">1 sayfa oku</string>
+    <string name="tour_art_if">Eğer yemeği bitirirsem,</string>
+    <string name="tour_art_then">10 sayfa okurum.</string>
 </resources>
