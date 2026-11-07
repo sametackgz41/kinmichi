@@ -16,7 +16,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'%3E%3Crect width='108' height='108' rx='24' fill='%23F5F0E6'/%3E%3Ccircle cx='34.8' cy='74.8' r='4' fill='%232E4A7D'/%3E%3Ccircle cx='38.8' cy='65.3' r='4.4' fill='%232E4A7D'/%3E%3Ccircle cx='48.3' cy='59.6' r='4.8' fill='%232E4A7D'/%3E%3Ccircle cx='59.7' cy='54.6' r='5.2' fill='%232E4A7D'/%3E%3Ccircle cx='69.2' cy='47.4' r='5.6' fill='%232E4A7D'/%3E%3Ccircle cx='73.2' cy='34.8' r='7.4' fill='%23B8902E'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root {
   --paper: #F5F0E6;
@@ -82,14 +82,19 @@ header.top .wrap { display: flex; align-items: center; gap: 14px; height: 64px; 
 nav.links { margin-left: auto; display: flex; align-items: center; gap: 20px; }
 nav.links a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 15px; }
 nav.links a:hover { color: var(--ink); }
-.lang-switch {
-  display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; background: var(--card);
+.lang-switch { position: relative; display: inline-flex; align-items: center; }
+.lang-switch svg { position: absolute; left: 12px; width: 16px; height: 16px; color: var(--muted); pointer-events: none; }
+.lang-switch select {
+  appearance: none; -webkit-appearance: none; border: 1px solid var(--line); border-radius: 999px;
+  background: var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23888' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;
+  color: var(--ink); font: 600 14px Inter, sans-serif; min-height: 40px; padding: 0 32px 0 36px; cursor: pointer;
 }
-.lang-switch button {
-  border: 0; background: transparent; color: var(--muted); font: 600 13px Inter, sans-serif;
-  min-width: 44px; min-height: 36px; cursor: pointer; padding: 0 10px;
-}
-.lang-switch button[aria-pressed="true"] { background: var(--indigo); color: var(--on-indigo); }
+.lang-switch select:focus-visible { outline: 2px solid var(--indigo); outline-offset: 2px; }
+html:lang(ja) h1, html:lang(ja) h2, html:lang(ja) h3, html:lang(ja) .faq summary, html:lang(ja) .promise strong,
+html:lang(ja) .plan-card .if, html:lang(ja) .plan-card .then { font-family: Newsreader, "Noto Serif JP", serif; }
+html:lang(ja) .hero h1 em { font-style: normal; }
+html:lang(ja) body { line-break: strict; }
+html:lang(ja) h1, html:lang(ja) h2, html:lang(ja) h3 { word-break: auto-phrase; }
 @media (max-width: 700px) { nav.links a.optional { display: none; } }
 
 /* buttons */
@@ -111,19 +116,8 @@ nav.links a:hover { color: var(--ink); }
 .hero p.lead { font-size: 20px; color: var(--muted); margin-top: 22px; max-width: 34ch; }
 .hero .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 .hero .note { margin-top: 16px; font-size: 14px; color: var(--muted); }
-.phones { position: relative; display: flex; justify-content: center; min-height: 520px; }
-.phone {
-  width: min(280px, 72vw); border-radius: 34px; border: 6px solid var(--card);
-  outline: 1px solid var(--line);
-  box-shadow: 0 40px 70px -30px var(--shadow); background: var(--card); display: block;
-}
-.phone.back { position: absolute; left: 50%; top: 40px; transform: translateX(8%) rotate(5deg); width: min(240px, 60vw); }
-.phone.front { position: relative; transform: translateX(-18%) rotate(-3deg); }
 @media (max-width: 860px) {
   .hero .wrap { grid-template-columns: 1fr; }
-  .phones { min-height: 0; }
-  .phone.back { display: none; }
-  .phone.front { transform: none; }
 }
 
 /* sections */
@@ -173,12 +167,48 @@ section.alt { background: var(--card); border-top: 1px solid var(--line); border
 .item p { color: var(--muted); font-size: 15px; margin-top: 4px; }
 @media (max-width: 760px) { .grid-list { grid-template-columns: 1fr; } }
 
-/* gallery */
-.gallery { display: flex; gap: 20px; overflow-x: auto; padding: 8px 4px 22px; scroll-snap-type: x mandatory; }
-.gallery figure { margin: 0; flex: 0 0 auto; width: 230px; scroll-snap-align: start; }
-.gallery img { width: 100%; border-radius: 26px; border: 1px solid var(--line); display: block; box-shadow: 0 24px 40px -28px var(--shadow); }
-.gallery figcaption { margin-top: 12px; font-size: 14px; color: var(--muted); }
-.gallery figcaption b { color: var(--ink); display: block; font-weight: 600; font-size: 15px; }
+/* phone "peek": a slim device top whose screen fades into the page */
+.peek {
+  position: relative; justify-self: center; width: min(340px, 82vw);
+  padding: 10px 10px 0; border-radius: 46px 46px 0 0;
+  background: var(--card); border: 1px solid var(--line); border-bottom: 0;
+  box-shadow: 0 30px 60px -38px var(--shadow);
+  -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+}
+.peek img { display: block; width: 100%; height: auto; border-radius: 36px 36px 0 0; }
+.hero-peek { margin-top: 8px; }
+
+/* bento of focused crops */
+.bento { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.tile { margin: 0; border: 1px solid var(--line); border-radius: 24px; background: var(--paper); overflow: hidden; display: flex; flex-direction: column; }
+.tile.wide { grid-column: span 2; }
+.tile .shot { background: var(--sunk); padding: 18px 18px 0; flex: 1; display: flex; align-items: flex-end; justify-content: center; }
+.tile .shot img { width: 100%; max-width: 420px; height: auto; display: block; border-radius: 18px 18px 0 0; box-shadow: 0 16px 32px -24px var(--shadow); }
+.tile.wide .shot img { max-width: 560px; }
+.tile figcaption { padding: 14px 18px 18px; font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); }
+.tile figcaption b { display: block; color: var(--ink); font-weight: 600; font-size: 16px; margin-bottom: 2px; }
+@media (max-width: 900px) {
+  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tile.wide { grid-column: span 2; grid-row: auto; }
+}
+@media (max-width: 560px) {
+  .bento { grid-template-columns: 1fr; }
+  .tile.wide { grid-column: auto; }
+}
+
+/* palette picker */
+.pal-picker, .mode-picker { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.pal-picker button, .mode-picker button {
+  display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 13px;
+  border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  font: 500 15px Inter, sans-serif; cursor: pointer;
+}
+.pal-picker i { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
+.pal-picker button[aria-pressed="true"], .mode-picker button[aria-pressed="true"] { border-color: var(--indigo); box-shadow: inset 0 0 0 1.5px var(--indigo); }
+.mode-picker { margin-top: 12px; }
+#pal-shot { transition: opacity .18s ease; }
+
 
 .wide-img { width: 100%; border-radius: 24px; border: 1px solid var(--line); display: block; }
 .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center; }
@@ -230,10 +260,17 @@ footer .brand { font-size: 18px; }
       <a class="optional" href="#different" data-i18n="nav_why">Why it's different</a>
       <a class="optional" href="#install" data-i18n="nav_install">Install</a>
       <a class="optional" href="https://github.com/sametackgz41/kinmichi">GitHub</a>
-      <span class="lang-switch" role="group" aria-label="Language">
-        <button type="button" data-lang="en" aria-pressed="true">EN</button>
-        <button type="button" data-lang="tr" aria-pressed="false">TR</button>
-      </span>
+      <label class="lang-switch">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>
+        <select id="lang" aria-label="Language">
+          <option value="en" lang="en">English</option>
+          <option value="tr" lang="tr">Türkçe</option>
+          <option value="es" lang="es">Español</option>
+          <option value="de" lang="de">Deutsch</option>
+          <option value="pt" lang="pt-BR">Português</option>
+          <option value="ja" lang="ja">日本語</option>
+        </select>
+      </label>
     </nav>
   </div>
 </header>
@@ -251,9 +288,11 @@ footer .brand { font-size: 18px; }
         </div>
         <p class="note" data-i18n="hero_note">Free and open source · No ads · No tracking · Works offline</p>
       </div>
-      <div class="phones">
-        <img class="phone back" src="screenshots/today_en_dark.webp" alt="" width="540" height="1171" loading="lazy">
-        <img class="phone front" src="screenshots/today_en_light.webp" alt="The Today screen: the week as small enso circles, the day's count, and habit cards" width="540" height="1171">
+      <div class="peek hero-peek">
+        <picture>
+          <source data-img="hero_dark" srcset="img/en/hero_dark.webp" media="(prefers-color-scheme: dark)">
+          <img data-img="hero_light" data-i18n-alt="alt_hero" src="img/en/hero_light.webp" alt="The Today screen: the week as small enso circles, the day's count, and habit cards" width="900" height="1336">
+        </picture>
       </div>
     </div>
   </section>
@@ -326,32 +365,57 @@ footer .brand { font-size: 18px; }
         <h2 data-i18n="inside_title">A look inside</h2>
         <p data-i18n="inside_lead">Today, your progress, a year of every habit, and a one-screen editor.</p>
       </div>
-      <div class="gallery" tabindex="0" aria-label="Screenshots">
-        <figure><img src="screenshots/today_en_light.webp" alt="Today screen" width="540" height="1171" loading="lazy"><figcaption><b data-i18n="g_today_t">Today</b><span data-i18n="g_today">The week as small circles, then one tap per habit.</span></figcaption></figure>
-        <figure><img src="screenshots/detail_en_light.webp" alt="Habit detail with a 12-month heatmap" width="540" height="1171" loading="lazy"><figcaption><b data-i18n="g_detail_t">A year at a glance</b><span data-i18n="g_detail">Streaks, comebacks in gold and twelve months of days.</span></figcaption></figure>
-        <figure><img src="screenshots/progress_en_light.webp" alt="Progress statistics" width="540" height="1171" loading="lazy"><figcaption><b data-i18n="g_progress_t">Progress</b><span data-i18n="g_progress">Completion, records, and which habits line up with your better days.</span></figcaption></figure>
-        <figure><img src="screenshots/editor_en_light.webp" alt="Habit editor" width="540" height="1171" loading="lazy"><figcaption><b data-i18n="g_editor_t">One-screen editor</b><span data-i18n="g_editor">Check, count or time; reminders, plans and a bad-day version.</span></figcaption></figure>
-        <figure><img src="screenshots/today_en_dark.webp" alt="Today screen at night" width="540" height="1171" loading="lazy"><figcaption><b data-i18n="g_night_t">At night</b><span data-i18n="g_night">Indigo ink instead of paper, or pure black.</span></figcaption></figure>
+      <div class="bento">
+        <figure class="tile wide">
+          <div class="shot"><img data-img="g_heatmap" data-i18n-alt="alt_heat" src="img/en/g_heatmap.webp" alt="A habit's last twelve months, with comebacks outlined in gold" width="760" height="633" loading="lazy"></div>
+          <figcaption><b data-i18n="g_detail_t">A year at a glance</b><span data-i18n="g_detail">Streaks, comebacks in gold and twelve months of days.</span></figcaption>
+        </figure>
+        <figure class="tile">
+          <div class="shot"><img data-img="g_today" data-i18n-alt="alt_today" src="img/en/g_today.webp" alt="Habit rows with one-tap buttons" width="760" height="758" loading="lazy"></div>
+          <figcaption><b data-i18n="g_today_t">Today</b><span data-i18n="g_today">The week as small circles, then one tap per habit.</span></figcaption>
+        </figure>
+        <figure class="tile">
+          <div class="shot"><img data-img="g_rate" data-i18n-alt="alt_rate" src="img/en/g_rate.webp" alt="Completion rate card" width="760" height="452" loading="lazy"></div>
+          <figcaption><b data-i18n="g_progress_t">Progress</b><span data-i18n="g_progress">Completion, records, and which habits line up with your better days.</span></figcaption>
+        </figure>
+        <figure class="tile">
+          <div class="shot"><img data-img="g_breakdown" data-i18n-alt="alt_break" src="img/en/g_breakdown.webp" alt="Per-habit breakdown with streaks" width="760" height="580" loading="lazy"></div>
+          <figcaption><b data-i18n="g_break_t">Every habit, honestly</b><span data-i18n="g_break">How each one is going over the last 7, 30 or 90 days.</span></figcaption>
+        </figure>
+        <figure class="tile">
+          <div class="shot"><img data-img="g_editor" data-i18n-alt="alt_editor" src="img/en/g_editor.webp" alt="Habit editor: icon, colour and tracking type" width="760" height="547" loading="lazy"></div>
+          <figcaption><b data-i18n="g_editor_t">One-screen editor</b><span data-i18n="g_editor">Check, count or time; reminders, plans and a bad-day version.</span></figcaption>
+        </figure>
       </div>
     </div>
   </section>
 
   <section>
-    <div class="wrap">
-      <div class="section-head">
+    <div class="wrap split">
+      <div>
         <h2 data-i18n="pal_title">Five palettes, one calm look</h2>
-        <p data-i18n="pal_lead">Each with a light and a dark side, or your wallpaper colours. Editorial serif type, and pure black at night if you like it.</p>
-        <div class="chips palette-chips" aria-hidden="true">
-          <span><i style="background:#2E4A7D"></i>Washi</span><span><i style="background:#B83A24"></i>Sumi</span><span><i style="background:#4E6B2E"></i>Matcha</span><span><i style="background:#A2445E"></i>Sakura</span><span><i style="background:#1F6680"></i>Umi</span>
+        <p class="muted" style="margin-top:14px;font-size:18px" data-i18n="pal_lead">Each with a light and a dark side, or your wallpaper colours. Editorial serif type, and pure black at night if you like it.</p>
+        <div class="pal-picker" role="group" aria-label="Palette">
+          <button type="button" data-pal="washi" aria-pressed="true"><i style="background:#2E4A7D"></i>Washi</button>
+          <button type="button" data-pal="sumi" aria-pressed="false"><i style="background:#B83A24"></i>Sumi</button>
+          <button type="button" data-pal="matcha" aria-pressed="false"><i style="background:#4E6B2E"></i>Matcha</button>
+          <button type="button" data-pal="sakura" aria-pressed="false"><i style="background:#A2445E"></i>Sakura</button>
+          <button type="button" data-pal="umi" aria-pressed="false"><i style="background:#1F6680"></i>Umi</button>
+        </div>
+        <div class="mode-picker" role="group" aria-label="Light or dark">
+          <button type="button" data-mode="light" aria-pressed="true" data-i18n="mode_light">Light</button>
+          <button type="button" data-mode="dark" aria-pressed="false" data-i18n="mode_dark">Dark</button>
         </div>
       </div>
-      <img class="wide-img" src="screenshots/palettes_en.webp" alt="The Today screen in five colour palettes, light and dark" loading="lazy">
+      <div class="peek pal-peek">
+        <img id="pal-shot" src="img/en/pal_washi_light.webp" alt="The Today screen in the Washi palette, light" width="900" height="1336" loading="lazy">
+      </div>
     </div>
   </section>
 
   <section class="alt">
     <div class="wrap split">
-      <img class="wide-img" src="screenshots/widgets_en_light.webp" alt="Today, streak, quick grid and mood widgets" loading="lazy">
+      <img class="wide-img" data-i18n-alt="alt_widgets" src="screenshots/widgets_en_light.webp" alt="Today, streak, quick grid and mood widgets" loading="lazy">
       <div>
         <h2 data-i18n="w_title">On your home screen and wrist</h2>
         <p class="muted" style="margin-top:14px;font-size:18px" data-i18n="w_lead">Six widgets: Today, a single habit, this week, your streak, a quick grid of four habits and a one-tap mood. A Wear OS tile and watch app mark habits from your wrist.</p>
@@ -415,85 +479,77 @@ footer .brand { font-size: 18px; }
   </div>
 </footer>
 
+<script src="i18n.js"></script>
 <script>
 (function () {
-  var TR = {
-    nav_why: 'Farkı', nav_install: 'Kurulum',
-    eyebrow: '金道 · altın yol',
-    hero_title: 'Devam et. Kopan yeri <em>altınla onar.</em>',
-    hero_lead: 'Kusursuz seriye değil, kaçırdığın günün ertesine odaklanan sakin bir Android alışkanlık uygulaması.',
-    download: "Android için indir", with_obtainium: "Obtainium ile kur",
-    hero_note: 'Ücretsiz ve açık kaynak · Reklam yok · Takip yok · İnternetsiz çalışır',
-    diff_title: 'Ertesi gün için tasarlandı',
-    diff_lead: 'Çoğu alışkanlık uygulaması seri koptuğunda seni cezalandırır. Kinmichi geri dönmene yardım eder.',
-    art_habit: '30 dakika oku', art_not_today: 'bugün olmadı', art_tiny: '1 sayfa oku', art_bad_day: 'kötü gün sürümü',
-    idea1_title: 'Küçük bir adım da sayılır',
-    idea1_body: 'Her alışkanlığa bir kötü gün sürümü ver: otuz dakika yerine bir sayfa gibi. Zor bir günde seriyi o korur.',
-    art_days: 'bir gün kaçtı · <b>geri dönüş, altınla</b>',
-    idea2_title: 'İki kez kaçırma',
-    idea2_body: 'Kaçırdığın günün ertesinde Bugün ekranı küçük sürümü tek dokunuşla önerir. Geri döndüğün gün sayılır ve altınla çizilir.',
-    art_if: 'Eğer yemeği bitirirsem,', art_then: '10 sayfa okurum.',
-    idea3_title: 'Gününe bağla',
-    idea3_body: 'Alışkanlığın ne zaman olacağını yaz. Eğer-o zaman planları, alışkanlığı sürdürmenin en iyi kanıtlanmış yollarından biri.',
-    effort_title: 'Daha az uğraş, daha çok gün',
-    effort_lead: 'Hatırlamayı uygulama yapar, sen sadece alışkanlığı yaparsın.',
-    f_health: 'Bir alışkanlığı adım, mesafe, kalori, egzersiz ya da uykuya bağla; uygulamayı her açtığında kendiliğinden dolsun.',
-    f_reminders_t: 'Akıllı hatırlatma',
-    f_reminders: 'Genelde 07:40\'ta koşuyorsun ama hatırlatma 21:00\'de mi çalıyor? Kinmichi fark eder ve daha iyi bir saat önerir.',
-    f_alert_t: 'Sessiz bir seri uyarısı',
-    f_alert: 'Akşam tek bir not, sadece üç gün ya da daha uzun bir seri bozulmak üzereyse. Başka hiçbir şey.',
-    f_goals_t: 'Uyum sağlayan hedefler',
-    f_goals: 'Hedefi nadiren mi tutturuyorsun? Gerçekte yaptığından başla. Her gün mü tutturuyorsun? Çıtayı yükselt. Her gün çok mu? Haftada üç yap.',
-    inside_title: 'İçeriden bir bakış',
-    inside_lead: 'Bugün ekranı, ilerlemen, her alışkanlığın bir yılı ve tek ekranlık düzenleyici.',
-    g_today_t: 'Bugün', g_today: 'Hafta küçük çemberler olarak, sonra her alışkanlığa tek dokunuş.',
-    g_detail_t: 'Bir yıl tek bakışta', g_detail: 'Seriler, altın renkli geri dönüşler ve on iki ayın günleri.',
-    g_progress_t: 'İlerleme', g_progress: 'Tamamlama, rekorlar ve hangi alışkanlıkların daha iyi günlerinle örtüştüğü.',
-    g_editor_t: 'Tek ekran düzenleyici', g_editor: 'İşaretle, say ya da süre tut; hatırlatma, plan ve kötü gün sürümü.',
-    g_night_t: 'Gece', g_night: 'Kâğıt yerine çivit mürekkebi, ya da saf siyah.',
-    pal_title: 'Beş palet, tek sakin görünüm',
-    pal_lead: 'Her birinin açık ve koyu tarafı var, ya da duvar kâğıdı renkleri. Serif başlıklar, istersen gece saf siyah.',
-    w_title: 'Ana ekranında ve bileğinde',
-    w_lead: 'Altı widget: Bugün, tek alışkanlık, bu hafta, seri, dört alışkanlıklı hızlı ızgara ve tek dokunuşla ruh hali. Wear OS kutucuğu ve saat uygulamasıyla bileğinden işaretle.',
-    p_title: 'Senin, senin telefonunda',
-    p_lead: 'Her şey cihazda durur. Google eşitlemeyi sadece istersen aç; uygulamayı PIN ya da parmak iziyle kilitle.',
-    p1_t: 'Reklam yok', p1: 'Ne şimdi ne sonra. Satılacak bir şey yok.',
-    p2_t: 'Takip yok', p2: 'Analitik yok, seni izleyen üçüncü taraf yazılım yok.',
-    p3_t: 'Açık kaynak', p3: 'MIT lisanslı. Her satırını GitHub\'da oku. <a href="https://github.com/sametackgz41/kinmichi/blob/main/PRIVACY.md">Gizlilik ayrıntıları</a>.',
-    i_title: 'Kurulum',
-    i_lead: 'Kinmichi Play Store\'da değil, GitHub\'da yayınlanıyor. Obtainium onu senin için güncel tutar.',
-    i1: 'Android telefonuna <a href="https://github.com/ImranR98/Obtainium">Obtainium</a>\'u kur.',
-    i2: 'Uygulamayı şu adresle ekle: <code>https://github.com/sametackgz41/kinmichi</code>',
-    i3: 'Telefon uygulamasını seçmesi için APK filtresine <code>^(kinmichi|tsuzuku)-[0-9]</code> yaz ve kur. Güncellemeler kendiliğinden gelir.',
-    i_hand: 'Elle mi kurmak istersin? APK\'yı <a href="https://github.com/sametackgz41/kinmichi/releases/latest">son sürümden</a> indir. Yeni sürüm çıkınca uygulama da haber verir.',
-    faq_title: 'Sorular',
-    q1: 'Gerçekten ücretsiz mi?', a1: 'Evet. Reklam yok, abonelik yok, ücretli sürüm yok. Kinmichi MIT lisansıyla açık kaynak.',
-    q2: 'Neden Play Store\'da değil?', a2: 'GitHub\'da kalmak uygulamayı bağımsız ve hızlı güncellenebilir tutuyor. Obtainium onu bir mağaza kadar kolay kurar ve günceller.',
-    q3: 'Verilerim nerede?', a3: 'Telefonunda, yerel bir veritabanında. Yedekler senin kaydettiğin dosyalar. Google eşitleme isteğe bağlı ve giriş yapana kadar kapalı.',
-    q4: 'iPhone sürümü var mı?', a4: 'Henüz yok. Kinmichi şimdilik sadece Android\'de, isteğe bağlı bir Wear OS saat uygulamasıyla.',
-    q5: 'Nasıl yardım edebilirim?', a5: '<a href="https://github.com/sametackgz41/kinmichi/issues/new/choose">GitHub\'da</a> bir hata bildir ya da fikrini paylaş, veya <a href="https://github.com/sametackgz41/kinmichi/blob/main/CONTRIBUTING.md#translating">kendi diline çevir</a>.',
-    ft_source: 'GitHub\'da kaynak kodu', ft_report: 'Sorun bildir', ft_privacy: 'Gizlilik', ft_license: 'MIT lisansı · eski adı Tsuzuku'
-  };
-  var EN = {};
+  var DICTS = window.KINMICHI_I18N || {};
+  var LANGS = ['en', 'tr', 'es', 'de', 'pt', 'ja'];
+  var HTML_LANG = { pt: 'pt-BR' };
+  var EN = { doc_title: document.title, alt_pal: 'The Today screen in the {pal} palette, {mode}' };
   document.querySelectorAll('[data-i18n]').forEach(function (el) { EN[el.dataset.i18n] = el.textContent; });
   document.querySelectorAll('[data-i18n-html]').forEach(function (el) { EN[el.dataset.i18nHtml] = el.innerHTML; });
+  document.querySelectorAll('[data-i18n-alt]').forEach(function (el) { EN[el.dataset.i18nAlt] = el.alt; });
+  var lang = 'en';
+  var select = document.getElementById('lang');
 
-  function apply(lang) {
-    var dict = lang === 'tr' ? TR : EN;
-    document.documentElement.lang = lang;
-    document.querySelectorAll('[data-i18n]').forEach(function (el) { var v = dict[el.dataset.i18n]; if (v) el.textContent = v; });
-    document.querySelectorAll('[data-i18n-html]').forEach(function (el) { var v = dict[el.dataset.i18nHtml]; if (v) el.innerHTML = v; });
-    document.querySelectorAll('.lang-switch button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === lang)); });
-    try { localStorage.setItem('kinmichi-lang', lang); } catch (e) {}
+  function t(key) { var d = DICTS[lang] || {}; return d[key] || EN[key]; }
+
+  function apply(next) {
+    lang = LANGS.indexOf(next) >= 0 ? next : 'en';
+    document.documentElement.lang = HTML_LANG[lang] || lang;
+    document.title = t('doc_title');
+    document.querySelectorAll('[data-i18n]').forEach(function (el) { el.textContent = t(el.dataset.i18n); });
+    document.querySelectorAll('[data-i18n-html]').forEach(function (el) { el.innerHTML = t(el.dataset.i18nHtml); });
+    document.querySelectorAll('[data-i18n-alt]').forEach(function (el) { el.alt = t(el.dataset.i18nAlt); });
+    // App screenshots in the same language as the page.
+    document.querySelectorAll('[data-img]').forEach(function (el) {
+      var url = 'img/' + lang + '/' + el.dataset.img + '.webp';
+      if (el.tagName === 'SOURCE') el.srcset = url; else el.src = url;
+    });
+    select.value = lang;
+    showPalette(true);
   }
 
-  var saved = null;
-  try { saved = localStorage.getItem('kinmichi-lang'); } catch (e) {}
-  var initial = saved || ((navigator.language || '').toLowerCase().indexOf('tr') === 0 ? 'tr' : 'en');
-  if (initial === 'tr') apply('tr');
-  document.querySelectorAll('.lang-switch button').forEach(function (b) {
-    b.addEventListener('click', function () { apply(b.dataset.lang); });
+  // Saved choice first, then the browser's preferred languages, then English.
+  function detect() {
+    var saved = null;
+    try { saved = localStorage.getItem('kinmichi-lang'); } catch (e) {}
+    if (LANGS.indexOf(saved) >= 0) return saved;
+    var prefs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'en'];
+    for (var i = 0; i < prefs.length; i++) {
+      var code = String(prefs[i]).toLowerCase().split('-')[0];
+      if (LANGS.indexOf(code) >= 0) return code;
+    }
+    return 'en';
+  }
+
+  select.addEventListener('change', function () {
+    try { localStorage.setItem('kinmichi-lang', select.value); } catch (e) {}
+    apply(select.value);
   });
+
+  // Palette picker: one phone, recoloured on tap.
+  var pal = 'washi';
+  var mode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  var shot = document.getElementById('pal-shot');
+  function palUrl(p, m) { return 'img/' + lang + '/pal_' + p + '_' + m + '.webp'; }
+  // Warm the cache so switching palettes feels instant.
+  function warm() { ['washi', 'sumi', 'matcha', 'sakura', 'umi'].forEach(function (p) { ['light', 'dark'].forEach(function (m) { var i = new Image(); i.src = palUrl(p, m); }); }); }
+  function showPalette(langChanged) {
+    shot.style.opacity = '0.35';
+    var next = new Image();
+    next.onload = function () { shot.src = next.src; shot.style.opacity = '1'; };
+    next.src = palUrl(pal, mode);
+    var palName = pal.charAt(0).toUpperCase() + pal.slice(1);
+    shot.alt = t('alt_pal').replace('{pal}', palName).replace('{mode}', t(mode === 'dark' ? 'mode_dark' : 'mode_light'));
+    if (langChanged) warm();
+    document.querySelectorAll('.pal-picker button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.pal === pal)); });
+    document.querySelectorAll('.mode-picker button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.mode === mode)); });
+  }
+  document.querySelectorAll('.pal-picker button').forEach(function (b) { b.addEventListener('click', function () { pal = b.dataset.pal; showPalette(); }); });
+  document.querySelectorAll('.mode-picker button').forEach(function (b) { b.addEventListener('click', function () { mode = b.dataset.mode; showPalette(); }); });
+  // Pick the language last: it also sets the palette picture.
+  apply(detect());
 
   // Show the current version on the download button; quietly skip if GitHub can't be reached.
   fetch('https://api.github.com/repos/sametackgz41/kinmichi/releases/latest')
