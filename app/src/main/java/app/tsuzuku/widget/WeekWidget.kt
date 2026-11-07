@@ -123,7 +123,7 @@ internal fun WeekContent(days: List<DayScore>, bestStreak: Int, locked: Boolean,
             }
             if (!locked && weekPercent != null) {
                 Text(
-                    "%$weekPercent".takeIf { locale.language == "tr" } ?: "$weekPercent%",
+                    java.text.NumberFormat.getPercentInstance(locale).format(weekPercent / 100.0),
                     style = TextStyle(color = GlanceTheme.colors.primary, fontSize = 26.sp, fontWeight = FontWeight.Bold, fontFamily = androidx.glance.text.FontFamily.Serif),
                 )
             }

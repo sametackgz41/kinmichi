@@ -102,11 +102,30 @@ class PreviewGalleryTest {
 
     // ---- sample data -------------------------------------------------------------------------
 
+    private val sampleNames = mapOf(
+        "Read a book" to listOf("Leer un libro", "Ein Buch lesen", "Ler um livro", "読書"),
+        "Drink water" to listOf("Beber agua", "Wasser trinken", "Beber água", "水を飲む"),
+        "Meditate" to listOf("Meditar", "Meditieren", "Meditar", "瞑想"),
+        "Run" to listOf("Correr", "Laufen", "Correr", "ランニング"),
+        "Evening walk" to listOf("Paseo nocturno", "Abendspaziergang", "Caminhada à noite", "夜の散歩"),
+        "glasses" to listOf("vasos", "Gläser", "copos", "杯"),
+        "min" to listOf("min", "Min.", "min", "分"),
+    )
+
+    private fun loc(lang: String, tr: String, en: String): String = when (lang) {
+        "tr" -> tr
+        "es" -> sampleNames[en]?.get(0) ?: en
+        "de" -> sampleNames[en]?.get(1) ?: en
+        "pt" -> sampleNames[en]?.get(2) ?: en
+        "ja" -> sampleNames[en]?.get(3) ?: en
+        else -> en
+    }
+
     private fun habit(id: Long, tr: String, en: String, lang: String, emoji: String, color: Long, type: HabitType,
                       target: Double = 1.0, unitTr: String = "", unitEn: String = "", direction: HabitDirection = HabitDirection.Build) =
         Habit(
-            id = id, name = if (lang == "tr") tr else en, emoji = emoji, colorArgb = color, type = type,
-            direction = direction, target = target, unit = if (lang == "tr") unitTr else unitEn, step = 1.0,
+            id = id, name = loc(lang, tr, en), emoji = emoji, colorArgb = color, type = type,
+            direction = direction, target = target, unit = loc(lang, unitTr, unitEn), step = 1.0,
             scheduleDaysMask = 127, goalPeriod = GoalPeriod.Daily, sortOrder = id.toInt(),
         )
 
@@ -152,11 +171,30 @@ class PreviewGalleryTest {
     @Test fun todayTrDark() = renderToday("tr", true)
     @Test fun todayEnLight() = renderToday("en", false)
     @Test fun todayEnDark() = renderToday("en", true)
-    @Test fun todayEsLight() = renderToday("es", false)
-    @Test fun todayDeLight() = renderToday("de", false)
-    @Test fun todayPtLight() = renderToday("pt", false)
-    @Test fun todayJaLight() = renderToday("ja", false)
-    @Test fun editorDeLight() = renderEditorAndSettings("de", false)
+    @Test fun siteEsLightToday() = renderToday("es", false)
+    @Test fun siteEsDarkToday() = renderToday("es", true)
+    @Test fun siteEsDetail() = renderDetail("es", false)
+    @Test fun siteEsProgress() = renderProgress("es", false)
+    @Test fun siteEsEditor() = renderEditorAndSettings("es", false)
+    @Test fun palettesEs() = renderPalettes("es")
+    @Test fun siteDeLightToday() = renderToday("de", false)
+    @Test fun siteDeDarkToday() = renderToday("de", true)
+    @Test fun siteDeDetail() = renderDetail("de", false)
+    @Test fun siteDeProgress() = renderProgress("de", false)
+    @Test fun siteDeEditor() = renderEditorAndSettings("de", false)
+    @Test fun palettesDe() = renderPalettes("de")
+    @Test fun sitePtLightToday() = renderToday("pt", false)
+    @Test fun sitePtDarkToday() = renderToday("pt", true)
+    @Test fun sitePtDetail() = renderDetail("pt", false)
+    @Test fun sitePtProgress() = renderProgress("pt", false)
+    @Test fun sitePtEditor() = renderEditorAndSettings("pt", false)
+    @Test fun palettesPt() = renderPalettes("pt")
+    @Test fun siteJaLightToday() = renderToday("ja", false)
+    @Test fun siteJaDarkToday() = renderToday("ja", true)
+    @Test fun siteJaDetail() = renderDetail("ja", false)
+    @Test fun siteJaProgress() = renderProgress("ja", false)
+    @Test fun siteJaEditor() = renderEditorAndSettings("ja", false)
+    @Test fun palettesJa() = renderPalettes("ja")
 
     @Test fun palettesTr() = renderPalettes("tr")
     @Test fun palettesEn() = renderPalettes("en")
@@ -168,7 +206,7 @@ class PreviewGalleryTest {
         val habits = sampleToday(lang)
         compose.setContent {
             TsuzukuTheme(darkTheme = dark.value, palette = palette.value) {
-                Shell(title = if (lang == "tr") "Bugün" else "Today", route = "today", profile = "Samet") { modifier ->
+                Shell(title = androidx.compose.ui.res.stringResource(app.tsuzuku.R.string.today), route = "today", profile = "Samet") { modifier ->
                     Box(modifier) {
                         TodayScreen(
                             habits = habits, profileName = "Samet", showDailySummary = true,
@@ -193,7 +231,7 @@ class PreviewGalleryTest {
                 palette.value = choice
                 dark.value = night
                 compose.mainClock.advanceTimeBy(1_000)
-                captureScreen("palette_${choice.name.lowercase()}_${if (night) "dark" else "light"}" + if (lang == "tr") "" else "_en")
+                captureScreen("palette_${choice.name.lowercase()}_${if (night) "dark" else "light"}" + if (lang == "tr") "" else "_$lang")
             }
         }
     }
@@ -258,7 +296,7 @@ class PreviewGalleryTest {
         val state = mutableStateOf(sampleToday(lang))
         compose.setContent {
             TsuzukuTheme(darkTheme = dark) {
-                Shell(title = if (lang == "tr") "Bugün" else "Today", route = "today", profile = "Samet") { modifier ->
+                Shell(title = androidx.compose.ui.res.stringResource(app.tsuzuku.R.string.today), route = "today", profile = "Samet") { modifier ->
                     Box(modifier) {
                         TodayScreen(
                             habits = state.value, profileName = "Samet", showDailySummary = true,
@@ -292,7 +330,7 @@ class PreviewGalleryTest {
         val history = sampleHistory(lang)
         compose.setContent {
             TsuzukuTheme(darkTheme = dark) {
-                Shell(title = if (lang == "tr") "İlerleme" else "Progress", route = "progress", profile = "Samet") { modifier ->
+                Shell(title = androidx.compose.ui.res.stringResource(app.tsuzuku.R.string.progress_tab), route = "progress", profile = "Samet") { modifier ->
                     Box(modifier) { StatisticsScreen(history = history, libraryItems = emptyList()) }
                 }
             }
@@ -314,7 +352,7 @@ class PreviewGalleryTest {
                 if (screen.value == "editor") {
                     app.tsuzuku.ui.screens.HabitEditorScreen(onBack = {}, onSave = {})
                 } else {
-                    Shell(title = if (lang == "tr") "Ayarlar" else "Settings", route = "settings", profile = "Samet") { modifier ->
+                    Shell(title = androidx.compose.ui.res.stringResource(app.tsuzuku.R.string.settings_label), route = "settings", profile = "Samet") { modifier ->
                         Box(modifier) {
                             app.tsuzuku.ui.screens.ProfileScreen(
                                 settings = app.tsuzuku.data.preferences.AppSettings(profileName = "Samet"),

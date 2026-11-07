@@ -179,7 +179,7 @@ fun StatisticsScreen(
                         ) {
                             Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
                                 Text(stringResource(R.string.completion_rate), style = MaterialTheme.typography.titleMedium)
-                                Text("%${(filteredRate * 100).toInt()}", style = MaterialTheme.typography.displaySmall, fontWeight = FontWeight.Bold)
+                                Text(percentText(filteredRate), style = MaterialTheme.typography.displaySmall, fontWeight = FontWeight.Bold)
                                 Text(
                                     stringResource(R.string.completed_scheduled, filteredCompleted, filteredScheduled),
                                     color = MaterialTheme.colorScheme.onPrimaryContainer,
@@ -192,7 +192,7 @@ fun StatisticsScreen(
                                     stroke = androidx.compose.ui.graphics.drawscope.Stroke(width = with(androidx.compose.ui.platform.LocalDensity.current) { 10.dp.toPx() }, cap = androidx.compose.ui.graphics.StrokeCap.Round),
                                     trackStroke = androidx.compose.ui.graphics.drawscope.Stroke(width = with(androidx.compose.ui.platform.LocalDensity.current) { 10.dp.toPx() }, cap = androidx.compose.ui.graphics.StrokeCap.Round),
                                 )
-                                Text("%${(filteredRate * 100).toInt()}", fontWeight = FontWeight.Bold)
+                                Text(percentText(filteredRate), fontWeight = FontWeight.Bold)
                             }
                         }
                     }
@@ -274,7 +274,7 @@ fun StatisticsScreen(
                                     ) {
                                         Column {
                                             Text(stringResource(R.string.weekly_completion_rate), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                            Text("%${(summary.habitCompletionRate * 100).toInt()}", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+                                            Text(percentText(summary.habitCompletionRate), style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
                                         }
                                         summary.changeRatePercentage?.let { change ->
                                             Surface(
@@ -372,7 +372,7 @@ fun StatisticsScreen(
                                         ) {
                                             Column {
                                                 Text(stringResource(R.string.monthly_success_rate), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                                Text("%${(summary.habitCompletionRate * 100).toInt()}", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+                                                Text(percentText(summary.habitCompletionRate), style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
                                             }
                                             Column(horizontalAlignment = Alignment.End) {
                                                 Text(stringResource(R.string.focus_hours_minutes, summary.focusDurationMinutes / 60, summary.focusDurationMinutes % 60), style = MaterialTheme.typography.bodyMedium)
@@ -707,7 +707,7 @@ private fun HabitStatisticCard(stat: HabitPeriodStat) {
                         )
                     }
                 }
-                Text("%${(stat.completionRate * 100).toInt()}", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                Text(percentText(stat.completionRate), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
             }
             androidx.compose.material3.LinearWavyProgressIndicator(progress = { stat.completionRate }, modifier = Modifier.fillMaxWidth())
             Text(
@@ -735,4 +735,11 @@ private fun milestoneDescription(milestone: app.tsuzuku.model.PersonalMilestone)
     "focus" -> stringResource(R.string.milestone_focus_desc, milestone.targetValue)
     "goal" -> stringResource(R.string.milestone_goal_desc, milestone.targetValue)
     else -> milestone.description
+}
+
+/** A completion rate (0..1) as a percent in the app's language: "72%", "%72" in Turkish, "72 %" in German. */
+@Composable
+private fun percentText(rate: Number): String {
+    val locale = androidx.compose.ui.platform.LocalConfiguration.current.locales[0]
+    return java.text.NumberFormat.getPercentInstance(locale).apply { maximumFractionDigits = 0 }.format(rate.toDouble())
 }
