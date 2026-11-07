@@ -814,3 +814,4 @@ welcome_signed_in|Sesión iniciada como %1$s
 welcome_private_note|Todo se queda en tu teléfono salvo que actives la sincronización.
 replay_intro|Ver la introducción otra vez
 replay_intro_description|El recorrido y la bienvenida que ve alguien nuevo. Tus datos no cambian.
+all_time|Desde siempre

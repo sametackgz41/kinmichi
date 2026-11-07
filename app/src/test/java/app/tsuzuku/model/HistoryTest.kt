@@ -122,6 +122,16 @@ class HistoryTest {
         assertFalse(snapshot.isComeback(habit, monday.plusDays(4)))
     }
 
+    @Test
+    fun allTimeStartsAtTheFirstHabitOrRecord() {
+        val today = java.time.LocalDate.of(2026, 11, 7)
+        val habit = sampleHabit().copy(createdOn = today.minusDays(99))
+        val early = HabitHistoryRecord(habitId = 7, date = today.minusDays(149), progress = 1.0, status = HabitDayStatus.Completed)
+        org.junit.Assert.assertEquals(100, HabitHistorySnapshot(listOf(habit), emptyList()).allTimeDays(today))
+        org.junit.Assert.assertEquals(150, HabitHistorySnapshot(listOf(habit), listOf(early)).allTimeDays(today))
+        org.junit.Assert.assertEquals(1, HabitHistorySnapshot(emptyList(), emptyList()).allTimeDays(today))
+    }
+
     private fun sampleHabit(mask: Int = 127) = Habit(
         id = 7,
         name = "Test",

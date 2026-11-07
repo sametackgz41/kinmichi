@@ -808,3 +808,4 @@ welcome_signed_in|%1$s でログイン中
 welcome_private_note|同期をオンにしない限り、すべてスマホの中に残ります。
 replay_intro|紹介をもう一度見る
 replay_intro_description|新しく使う人が見る紹介と最初の画面です。データはそのままです。
+all_time|全期間

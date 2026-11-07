@@ -794,6 +794,7 @@
     <string name="welcome_private_note">Todo se queda en tu teléfono salvo que actives la sincronización.</string>
     <string name="replay_intro">Ver la introducción otra vez</string>
     <string name="replay_intro_description">El recorrido y la bienvenida que ve alguien nuevo. Tus datos no cambian.</string>
+    <string name="all_time">Desde siempre</string>
     <plurals name="streak_days">
         <item quantity="one">Racha de %d día</item>
         <item quantity="other">Racha de %d días</item>

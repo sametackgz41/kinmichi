@@ -1193,4 +1193,5 @@
     <string name="welcome_private_note">Eşitlemeyi açmadığın sürece her şey telefonunda kalır.</string>
     <string name="replay_intro">Tanıtımı yeniden göster</string>
     <string name="replay_intro_description">Yeni bir kullanıcının gördüğü tanıtım ve karşılama ekranı. Verilerin olduğu gibi kalır.</string>
+    <string name="all_time">Tüm zamanlar</string>
 </resources>

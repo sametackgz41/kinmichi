@@ -115,7 +115,8 @@ fun StatisticsScreen(
     var selectedTag by rememberSaveable { mutableStateOf("") }
     var libraryCategory by rememberSaveable { mutableStateOf("") }
 
-    val stats = remember(history, days) { history.statistics(days) }
+    // 0 means all time: from the first habit or record to today.
+    val stats = remember(history, days) { history.statistics(if (days == ALL_TIME) history.allTimeDays() else days) }
     val availableTags = remember(stats) { stats.habits.flatMap { it.habit.tags.split(',') }.map(String::trim).filter(String::isNotBlank).distinct().sorted() }
     val visibleHabitStats = remember(stats, selectedTag) { if (selectedTag.isBlank()) stats.habits else stats.habits.filter { stat -> stat.habit.tags.split(',').any { it.trim().equals(selectedTag, true) } } }
     val filteredScheduled = visibleHabitStats.sumOf(HabitPeriodStat::scheduledCount)
@@ -160,12 +161,17 @@ fun StatisticsScreen(
                     item { MoodInsightsCard(moodInsights) }
                 }
                 item {
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        listOf(7, 30, 90).forEach { option ->
+                    Row(
+                        Modifier.horizontalScroll(androidx.compose.foundation.rememberScrollState()),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        listOf(7, 30, 90, ALL_TIME).forEach { option ->
                             FilterChip(
                                 selected = days == option,
                                 onClick = { days = option },
-                                label = { Text(stringResource(R.string.last_days, option)) },
+                                label = {
+                                    Text(if (option == ALL_TIME) stringResource(R.string.all_time) else stringResource(R.string.last_days, option))
+                                },
                             )
                         }
                     }
@@ -743,3 +749,6 @@ private fun percentText(rate: Number): String {
     val locale = androidx.compose.ui.platform.LocalConfiguration.current.locales[0]
     return java.text.NumberFormat.getPercentInstance(locale).apply { maximumFractionDigits = 0 }.format(rate.toDouble())
 }
+
+/** Range chip value for "all time" on the Progress screen. */
+private const val ALL_TIME = 0

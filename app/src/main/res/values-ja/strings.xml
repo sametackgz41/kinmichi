@@ -794,6 +794,7 @@
     <string name="welcome_private_note">同期をオンにしない限り、すべてスマホの中に残ります。</string>
     <string name="replay_intro">紹介をもう一度見る</string>
     <string name="replay_intro_description">新しく使う人が見る紹介と最初の画面です。データはそのままです。</string>
+    <string name="all_time">全期間</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

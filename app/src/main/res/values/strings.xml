@@ -1194,4 +1194,5 @@
     <string name="welcome_private_note">Everything stays on your phone unless you turn on sync.</string>
     <string name="replay_intro">Show the intro again</string>
     <string name="replay_intro_description">The tour and welcome screen a new user sees. Your data stays as it is.</string>
+    <string name="all_time">All time</string>
 </resources>

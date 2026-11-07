@@ -70,6 +70,14 @@ data class HabitHistorySnapshot(
         )
     }
 
+    /** Days from the first habit (or first record, if earlier) to [endDate], for the "all time" range. */
+    fun allTimeDays(endDate: LocalDate = LocalDate.now()): Int {
+        val firstHabit = habits.map(Habit::createdOn).filter { it != LocalDate.MIN }.minOrNull()
+        val firstRecord = records.minOfOrNull(HabitHistoryRecord::date)
+        val start = listOfNotNull(firstHabit, firstRecord).minOrNull() ?: endDate
+        return (java.time.temporal.ChronoUnit.DAYS.between(start, endDate) + 1).toInt().coerceIn(1, 3650)
+    }
+
     fun statistics(days: Int, endDate: LocalDate = LocalDate.now()): PeriodStatistics {
         val safeDays = days.coerceAtLeast(1)
         val startDate = endDate.minusDays((safeDays - 1).toLong())

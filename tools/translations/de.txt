@@ -814,3 +814,4 @@ welcome_signed_in|Angemeldet als %1$s
 welcome_private_note|Alles bleibt auf deinem Handy, solange du die Synchronisierung nicht einschaltest.
 replay_intro|Einführung erneut zeigen
 replay_intro_description|Die Tour und der Willkommensbildschirm für neue Nutzer. Deine Daten bleiben unverändert.
+all_time|Gesamt

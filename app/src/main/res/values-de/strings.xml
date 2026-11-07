@@ -794,6 +794,7 @@
     <string name="welcome_private_note">Alles bleibt auf deinem Handy, solange du die Synchronisierung nicht einschaltest.</string>
     <string name="replay_intro">Einführung erneut zeigen</string>
     <string name="replay_intro_description">Die Tour und der Willkommensbildschirm für neue Nutzer. Deine Daten bleiben unverändert.</string>
+    <string name="all_time">Gesamt</string>
     <plurals name="streak_days">
         <item quantity="one">%d Tag in Folge</item>
         <item quantity="other">%d Tage in Folge</item>
