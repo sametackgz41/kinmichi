@@ -170,7 +170,10 @@ class MainActivity : FragmentActivity() {
     }
 
     private fun routeFor(intent: Intent?): String? = when (intent?.action) {
-        ACTION_ADD_HABIT -> "habit/new"
+        ACTION_ADD_HABIT -> {
+            app.tsuzuku.ui.NewHabitTemplate.offer(intent)
+            "habit/new"
+        }
         ACTION_PROGRESS -> "progress"
         else -> null
     }

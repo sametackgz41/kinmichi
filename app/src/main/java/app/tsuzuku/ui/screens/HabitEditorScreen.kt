@@ -268,7 +268,8 @@ fun HabitEditorScreen(
     customCategories: List<CategoryEntity> = emptyList(),
     onBack: () -> Unit,
     onSave: (HabitDraft) -> Unit,
-) = HabitEditorContent(existing, availableHabits, customCategories, onBack, onSave)
+    template: Habit? = null,
+) = HabitEditorContent(existing, availableHabits, customCategories, onBack, onSave, template = template)
 
 @Composable
 internal fun HabitEditorContent(
@@ -280,8 +281,11 @@ internal fun HabitEditorContent(
     layout: EditorLayout = EditorLayout.Steps,
     initialStep: Int = 0,
     openGroup: AdvancedGroup? = null,
+    template: Habit? = null,
 ) {
-    val state = rememberSaveable(existing?.id, saver = HabitEditorState.saver(existing)) { HabitEditorState(existing) }
+    // A template only fills in a new habit's starting values; it is still saved as new.
+    val start = existing ?: template
+    val state = rememberSaveable(existing?.id, saver = HabitEditorState.saver(start)) { HabitEditorState(start) }
     val others = availableHabits.filterNot { it.id == existing?.id }
     // Steps only for a new habit; editing shows everything on one page.
     val effective = if (layout == EditorLayout.Steps && existing != null) EditorLayout.Cards else layout

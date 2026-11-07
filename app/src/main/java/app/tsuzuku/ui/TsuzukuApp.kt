@@ -808,7 +808,9 @@ fun TsuzukuApp(
                 )
             }
             composable("habit/new") {
+                val template = remember { NewHabitTemplate.take() }
                 HabitEditorScreen(
+                    template = template,
                     availableHabits = history.habits,
                     customCategories = categories,
                     onBack = navController::popBackStack,
