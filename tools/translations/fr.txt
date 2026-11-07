@@ -794,10 +794,6 @@ advice_weekly|Tu l'as fait %1$d jours sur %2$d dernièrement. Passer à %3$d foi
 advice_fewer_per_week|Tes dernières semaines sont restées sous cet objectif. Viser %1$d fois par semaine pour l'instant et monter ensuite ?
 advice_more_per_week|Trois semaines d'affilée, tu as atteint cet objectif. Prêt pour %1$d fois par semaine ?
 advice_accept_per_week|%1$d× par semaine
-whats_new_items[0]|Nouveau nom : Kinmichi|« Le chemin doré » en japonais. Tes habitudes et données continuent comme avant.
-whats_new_items[1]|Six langues|L'espagnol, l'allemand, le portugais et le japonais rejoignent l'anglais et le turc.
-whats_new_items[2]|Des objectifs qui s'adaptent|Monte la barre après trois bonnes semaines, ou transforme une habitude quotidienne rarement faite en quelques fois par semaine.
-whats_new_items[3]|Nouvelle visite et nouvelle icône|Des pas sur un chemin doré, aujourd'hui en or.
 widgets_sheet_title|Widgets
 widgets_sheet_subtitle|Choisis-en un et ajoute-le à l'écran d'accueil d'un toucher.
 widgets_sheet_manual|Ton lanceur ne peut pas ajouter de widgets d'ici. Appuie longuement sur un espace vide de l'écran d'accueil, touche Widgets et cherche Kinmichi.
@@ -895,3 +891,7 @@ editor_step_when_title|Quand a-t-elle lieu ?
 editor_step_when_body|Choisis les jours, et un rappel si tu veux.
 editor_step_more_title|Affiner (facultatif)
 editor_step_more_body|Tout ceci peut attendre. Enregistre quand tu veux.
+whats_new_items[0]|Les widgets refonctionnent|Les widgets vides s'affichent enfin, et leurs cases se cochent dès que tu touches.
+whats_new_items[1]|Un nouvel accueil|Commence avec Google, GitHub ou en invité. Sans mot de passe.
+whats_new_items[2]|Dix langues|Le français, l'italien, le russe et le coréen arrivent, avec drapeaux et recherche.
+whats_new_items[3]|Des habitudes plus simples|Ajoute une habitude pas à pas, dis comment ça s'est passé et vois tes progrès depuis le début.

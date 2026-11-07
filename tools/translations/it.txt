@@ -794,10 +794,6 @@ advice_weekly|Ultimamente l'hai fatto %1$d giorni su %2$d. Farlo %3$d volte a se
 advice_fewer_per_week|Le ultime settimane sono rimaste sotto questo obiettivo. Puntare a %1$d volte a settimana per ora e crescere?
 advice_more_per_week|Tre settimane di fila hai raggiunto l'obiettivo. Pronto per %1$d volte a settimana?
 advice_accept_per_week|%1$d× a settimana
-whats_new_items[0]|Nuovo nome: Kinmichi|«La via dorata» in giapponese. Abitudini e dati continuano come prima.
-whats_new_items[1]|Sei lingue|Spagnolo, tedesco, portoghese e giapponese si aggiungono a inglese e turco.
-whats_new_items[2]|Obiettivi che si adattano|Alza l'asticella dopo tre settimane forti, o trasforma un'abitudine quotidiana poco fatta in qualche volta a settimana.
-whats_new_items[3]|Nuovo tour e nuova icona|Passi lungo una via dorata, oggi in oro.
 widgets_sheet_title|Widget
 widgets_sheet_subtitle|Scegline uno e aggiungilo alla Home con un tocco.
 widgets_sheet_manual|Il tuo launcher non può aggiungere widget da qui. Tieni premuto uno spazio vuoto della Home, tocca Widget e cerca Kinmichi.
@@ -895,3 +891,7 @@ editor_step_when_title|Quando avviene?
 editor_step_when_body|Scegli i giorni e, se vuoi, un promemoria.
 editor_step_more_title|Rifinitura (facoltativa)
 editor_step_more_body|Tutto qui può aspettare. Salva quando vuoi.
+whats_new_items[0]|I widget funzionano di nuovo|I widget vuoti ora si riempiono e le caselle si spuntano subito.
+whats_new_items[1]|Un nuovo benvenuto|Inizia con Google, GitHub o come ospite. Niente password.
+whats_new_items[2]|Dieci lingue|Arrivano francese, italiano, russo e coreano, con bandiere e ricerca.
+whats_new_items[3]|Abitudini più facili|Aggiungi un'abitudine passo passo, di' com'è andata e guarda i progressi da sempre.

@@ -1148,10 +1148,10 @@
     <string name="whats_new_title">%1$s sürümünde yenilikler</string>
     <string name="whats_new_ok">Tamam</string>
     <string-array name="whats_new_items">
-        <item>Yeni ad: Kinmichi|Japonca \'altın yol\' demek. Alışkanlıkların ve verilerin olduğu gibi devam eder.</item>
-        <item>Altı dil|İngilizce ve Türkçeye İspanyolca, Almanca, Portekizce ve Japonca katıldı.</item>
-        <item>Uyum sağlayan hedefler|Üç güçlü haftadan sonra çıtayı yükselt, ya da nadiren yaptığın her günkü alışkanlığı haftada birkaç kez yap.</item>
-        <item>Yeni tur ve simge|Altın bir yolda adımlar, bugünkü altın.</item>
+        <item>Widget\'lar yeniden çalışıyor|Bembeyaz kalan widget\'lar artık doluyor; kutucuklar dokunduğun an işaretleniyor.</item>
+        <item>Yeni karşılama|Google, GitHub ya da misafir olarak başla. İkisinde de şifre yok.</item>
+        <item>On dil|Fransızca, İtalyanca, Rusça ve Korece geldi; dil seçiminde bayraklar ve arama var.</item>
+        <item>Daha kolay alışkanlık|Adım adım ekle, bitirince nasıl geçtiğini söyle, tüm zamanlar ilerlemeni gör.</item>
     </string-array>
     <string name="language_spanish">Español</string>
     <string name="language_german">Deutsch</string>

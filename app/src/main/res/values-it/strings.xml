@@ -909,9 +909,9 @@
         <item>Dom</item>
     </string-array>
     <string-array name="whats_new_items">
-        <item>Nuovo nome: Kinmichi|«La via dorata» in giapponese. Abitudini e dati continuano come prima.</item>
-        <item>Sei lingue|Spagnolo, tedesco, portoghese e giapponese si aggiungono a inglese e turco.</item>
-        <item>Obiettivi che si adattano|Alza l\'asticella dopo tre settimane forti, o trasforma un\'abitudine quotidiana poco fatta in qualche volta a settimana.</item>
-        <item>Nuovo tour e nuova icona|Passi lungo una via dorata, oggi in oro.</item>
+        <item>I widget funzionano di nuovo|I widget vuoti ora si riempiono e le caselle si spuntano subito.</item>
+        <item>Un nuovo benvenuto|Inizia con Google, GitHub o come ospite. Niente password.</item>
+        <item>Dieci lingue|Arrivano francese, italiano, russo e coreano, con bandiere e ricerca.</item>
+        <item>Abitudini più facili|Aggiungi un\'abitudine passo passo, di\' com\'è andata e guarda i progressi da sempre.</item>
     </string-array>
 </resources>

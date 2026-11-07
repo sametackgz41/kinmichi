@@ -1,5 +1,31 @@
 # Değişiklik günlüğü
 
+## 2.8.0 — Daha kolay, daha çok dil
+
+**Düzeltmeler**
+- Widget'lar yeniden çalışıyor: yayın sürümünde arka plan iş sistemi (WorkManager) çalışamadığı için tüm cihazlarda bembeyaz kalıyorlardı
+- Widget'lara dokununca titreme bitti; Android 12+ cihazlarda kutucuklar dokunduğun an işaretleniyor
+- İlerleme ekranında yüzdeler her dilin kendi biçiminde (72%, %72, 72 %)
+
+**Giriş ve hesap**
+- Yeni karşılama: önce tanıtım, sonra Google, GitHub ya da misafir olarak başla; ad adımında Bugün ekranının selamını canlı önizleme
+- GitHub ile giriş
+- Yenilenen "Hesap ve yedekleme" sayfası; çıkış yapınca karşılama ekranına dönülüyor, giriş yapınca hesaptaki ad kullanılıyor
+- Ayarlar › Tanıtımı yeniden göster
+
+**Yeni özellikler**
+- Tamamlayınca "Nasıl geçti?": üç yüzle tek dokunuş; alışkanlık sayfasında özet, İlerleme'de "En keyif aldıkların"
+- İlerleme'de "Tüm zamanlar"
+- Dört yeni dil: Fransızca, İtalyanca, Rusça, Korece (toplam 10)
+
+**Arayüz**
+- Tema ve renk paleti tek sayfada: her paletin açık ve koyu yarısı
+- Bayraklı ve aramalı dil sayfası
+- Widget sayfası: altı widget telefon görünümünde, tek dokunuşla ana ekrana ekleme; widget menüsünde de gerçek önizlemeler
+- Yeni alışkanlık adım adım; ince ayarlar dört küçük grupta yumuşak açılıyor; hatırlatma saati büyük saat ve dakika kutuları
+- Ayarlar'da kısayol kutuları ve kartlar; İlerleme ve alışkanlık detayı aynı görünümde
+- Hızlı ayarlar kutucuğunda Kinmichi logosu
+
 ## 2.7.0 — Kinmichi
 
 - Yeni ad: Kinmichi (金道, "altın yol"). Tsuzuku adını taşıyan çok sayıda alışkanlık uygulaması olduğu için uygulama kendine özgü bir ad aldı. Kurulum ve veriler aynen devam eder

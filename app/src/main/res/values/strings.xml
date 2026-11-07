@@ -1149,10 +1149,10 @@
     <string name="whats_new_title">What\'s new in %1$s</string>
     <string name="whats_new_ok">Got it</string>
     <string-array name="whats_new_items">
-        <item>New name: Kinmichi|Japanese for \'the golden path\'. Your habits and data carry on as before.</item>
-        <item>Six languages|Spanish, German, Portuguese and Japanese join English and Turkish.</item>
-        <item>Goals that adapt|Raise the bar after three strong weeks, or turn a rarely done daily habit into a few times a week.</item>
-        <item>A new tour and icon|Steps along a golden path, today in gold.</item>
+        <item>Widgets work again|Blank widgets now fill in, and their check boxes tick the moment you tap them.</item>
+        <item>A new welcome|Start with Google, GitHub or as a guest. No password either way.</item>
+        <item>Ten languages|French, Italian, Russian and Korean join in, with flags and search in the language picker.</item>
+        <item>Easier habits|Add a habit step by step, say how it went after you finish, and see your all-time progress.</item>
     </string-array>
     <string name="language_spanish">Español</string>
     <string name="language_german">Deutsch</string>

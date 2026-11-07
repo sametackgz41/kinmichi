@@ -909,9 +909,9 @@
         <item>Dim</item>
     </string-array>
     <string-array name="whats_new_items">
-        <item>Nouveau nom : Kinmichi|« Le chemin doré » en japonais. Tes habitudes et données continuent comme avant.</item>
-        <item>Six langues|L\'espagnol, l\'allemand, le portugais et le japonais rejoignent l\'anglais et le turc.</item>
-        <item>Des objectifs qui s\'adaptent|Monte la barre après trois bonnes semaines, ou transforme une habitude quotidienne rarement faite en quelques fois par semaine.</item>
-        <item>Nouvelle visite et nouvelle icône|Des pas sur un chemin doré, aujourd\'hui en or.</item>
+        <item>Les widgets refonctionnent|Les widgets vides s\'affichent enfin, et leurs cases se cochent dès que tu touches.</item>
+        <item>Un nouvel accueil|Commence avec Google, GitHub ou en invité. Sans mot de passe.</item>
+        <item>Dix langues|Le français, l\'italien, le russe et le coréen arrivent, avec drapeaux et recherche.</item>
+        <item>Des habitudes plus simples|Ajoute une habitude pas à pas, dis comment ça s\'est passé et vois tes progrès depuis le début.</item>
     </string-array>
 </resources>

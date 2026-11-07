@@ -909,9 +909,9 @@
         <item>So</item>
     </string-array>
     <string-array name="whats_new_items">
-        <item>Neuer Name: Kinmichi|Japanisch für „goldener Weg“. Deine Gewohnheiten und Daten bleiben, wie sie sind.</item>
-        <item>Sechs Sprachen|Spanisch, Deutsch, Portugiesisch und Japanisch kommen zu Englisch und Türkisch hinzu.</item>
-        <item>Ziele, die sich anpassen|Nach drei starken Wochen die Latte höher legen oder eine selten geschaffte tägliche Gewohnheit auf ein paar Mal pro Woche setzen.</item>
-        <item>Neue Einführung und neues Symbol|Schritte auf einem goldenen Weg, der heutige in Gold.</item>
+        <item>Widgets funktionieren wieder|Leere Widgets füllen sich jetzt, und Kästchen haken sofort ab.</item>
+        <item>Ein neuer Empfang|Starte mit Google, GitHub oder als Gast. Ganz ohne Passwort.</item>
+        <item>Zehn Sprachen|Französisch, Italienisch, Russisch und Koreanisch kommen dazu, mit Flaggen und Suche.</item>
+        <item>Gewohnheiten leichter|Schritt für Schritt anlegen, sagen wie es war und den Gesamtfortschritt sehen.</item>
     </string-array>
 </resources>

@@ -909,9 +909,9 @@
         <item>Dom</item>
     </string-array>
     <string-array name="whats_new_items">
-        <item>Novo nome: Kinmichi|Quer dizer \'caminho dourado\' em japonês. Seus hábitos e dados continuam como antes.</item>
-        <item>Seis idiomas|Espanhol, alemão, português e japonês se juntam ao inglês e ao turco.</item>
-        <item>Metas que se adaptam|Suba a meta depois de três semanas fortes, ou transforme um hábito diário pouco feito em algumas vezes por semana.</item>
-        <item>Novo tour e ícone|Passos num caminho dourado, o de hoje em ouro.</item>
+        <item>Widgets funcionando de novo|Widgets em branco agora carregam e as caixas marcam na hora.</item>
+        <item>Novas boas-vindas|Comece com Google, GitHub ou como convidado. Sem senha.</item>
+        <item>Dez idiomas|Chegam francês, italiano, russo e coreano, com bandeiras e busca no seletor.</item>
+        <item>Hábitos mais fáceis|Adicione passo a passo, diga como foi e veja seu progresso de todo o período.</item>
     </string-array>
 </resources>

@@ -794,10 +794,6 @@ advice_weekly|최근 %2$d일 중 %1$d일 했어요. 매일 대신 주 %3$d회로
 advice_fewer_per_week|최근 몇 주는 목표에 못 미쳤어요. 지금은 주 %1$d회를 목표로 하고 늘려 갈까요?
 advice_more_per_week|3주 연속 목표를 달성했어요. 주 %1$d회에 도전해 볼까요?
 advice_accept_per_week|주 %1$d회
-whats_new_items[0]|새 이름: Kinmichi|일본어로 ‘황금빛 길’. 습관과 데이터는 그대로 이어져요.
-whats_new_items[1]|여섯 개 언어|영어와 튀르키예어에 스페인어, 독일어, 포르투갈어, 일본어가 더해졌어요.
-whats_new_items[2]|맞춰 가는 목표|3주 동안 잘했다면 목표를 올리고, 잘 안 되는 매일 습관은 주 몇 회로 바꿔요.
-whats_new_items[3]|새 소개와 아이콘|황금빛 길 위의 걸음, 오늘은 금색으로.
 widgets_sheet_title|위젯
 widgets_sheet_subtitle|하나를 골라 탭 한 번으로 홈 화면에 추가하세요.
 widgets_sheet_manual|현재 런처에서는 여기서 위젯을 추가할 수 없어요. 홈 화면 빈 곳을 길게 누르고 위젯에서 Kinmichi를 찾으세요.
@@ -895,3 +891,7 @@ editor_step_when_title|언제 하나요?
 editor_step_when_body|요일을 고르고 원하면 알림을 추가하세요.
 editor_step_more_title|세부 설정 (선택)
 editor_step_more_body|여기는 나중에 해도 돼요. 준비되면 저장하세요.
+whats_new_items[0]|위젯이 다시 작동해요|하얗던 위젯이 제대로 보이고, 체크박스는 탭하는 순간 체크돼요.
+whats_new_items[1]|새로운 시작 화면|Google, GitHub 또는 게스트로 시작하세요. 비밀번호는 필요 없어요.
+whats_new_items[2]|10개 언어|프랑스어, 이탈리아어, 러시아어, 한국어가 추가되고 국기와 검색으로 고를 수 있어요.
+whats_new_items[3]|더 쉬운 습관|단계별로 추가하고, 마친 뒤 어땠는지 남기고, 전체 기간 진행도 확인하세요.
