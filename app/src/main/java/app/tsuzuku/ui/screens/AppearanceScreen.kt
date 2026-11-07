@@ -170,8 +170,9 @@ private fun ModeSegments(theme: ThemePreference, onSetTheme: (ThemePreference) -
                 selected = theme == value,
                 onClick = { onSetTheme(value) },
                 shape = SegmentedButtonDefaults.itemShape(index, options.size),
-                icon = { SegmentedButtonDefaults.Icon(theme == value) { Icon(icon, null, Modifier.size(18.dp)) } },
-                label = { Text(stringResource(label), maxLines = 1) },
+                // Icons only: the labels were too long to fit; the name is still read out by TalkBack.
+                icon = {},
+                label = { Icon(icon, contentDescription = stringResource(label), modifier = Modifier.size(22.dp)) },
             )
         }
     }
