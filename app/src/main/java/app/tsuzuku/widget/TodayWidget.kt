@@ -130,12 +130,15 @@ internal fun TodayContent(
         }
         if (compact) return@Column
         Spacer(GlanceModifier.height(8.dp))
-        if (scrollable) {
+        val rows = ((size.height.value - 76f) / 50f).toInt().coerceAtLeast(1)
+        // Taps inside a scrolling list go through a hidden trampoline activity, which is slower and
+        // briefly pauses the launcher. Only scroll when the habits don't fit; otherwise use a plain
+        // column so a tap reaches the app directly.
+        if (scrollable && habits.size > rows) {
             LazyColumn(modifier = GlanceModifier.fillMaxWidth().defaultWeight()) {
                 items(habits, itemId = { it.habit.id }) { item -> HabitLine(item) }
             }
         } else {
-            val rows = ((size.height.value - 76f) / 50f).toInt().coerceAtLeast(1)
             Column(modifier = GlanceModifier.fillMaxWidth()) {
                 habits.take(rows).forEach { item -> HabitLine(item) }
             }

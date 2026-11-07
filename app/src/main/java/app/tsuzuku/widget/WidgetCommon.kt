@@ -77,14 +77,15 @@ object TsuzukuWidgets {
         scope.launch { updateAll(appContext) }
     }
 
-    suspend fun updateAll(context: Context) {
-        app.tsuzuku.tile.TodayTileService.requestRefresh(context)
+    /** Refreshes every widget kind; the habit widgets first, since those are what a tap changes. */
+    suspend fun updateAll(context: Context, includeMood: Boolean = true) {
         runCatching { TodayWidget().updateAll(context) }
         runCatching { HabitWidget().updateAll(context) }
-        runCatching { WeekWidget().updateAll(context) }
-        runCatching { StreakWidget().updateAll(context) }
         runCatching { QuickGridWidget().updateAll(context) }
-        runCatching { MoodWidget().updateAll(context) }
+        runCatching { StreakWidget().updateAll(context) }
+        runCatching { WeekWidget().updateAll(context) }
+        if (includeMood) runCatching { MoodWidget().updateAll(context) }
+        app.tsuzuku.tile.TodayTileService.requestRefresh(context)
     }
 }
 
@@ -95,7 +96,7 @@ class ToggleHabitAction : ActionCallback {
     override suspend fun onAction(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
         val id = parameters[HabitIdKey] ?: return
         context.tsuzuku().habitRepository.toggleHabit(id)
-        TsuzukuWidgets.updateAll(context)
+        TsuzukuWidgets.updateAll(context, includeMood = false)
     }
 }
 
@@ -104,7 +105,7 @@ class IncrementHabitAction : ActionCallback {
     override suspend fun onAction(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
         val id = parameters[HabitIdKey] ?: return
         context.tsuzuku().habitRepository.incrementHabit(id)
-        TsuzukuWidgets.updateAll(context)
+        TsuzukuWidgets.updateAll(context, includeMood = false)
     }
 }
 
