@@ -64,7 +64,7 @@ class MainActivity : FragmentActivity() {
                     window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
                 }
             }
-            TsuzukuTheme(darkTheme = darkTheme) {
+            TsuzukuTheme(darkTheme = darkTheme, dynamicColor = settings.palette == app.tsuzuku.data.preferences.PalettePreference.Dynamic) {
                 if (settings.appLockEnabled && !isUnlocked) {
                     AppLockScreen(
                         biometricEnabled = settings.biometricUnlockEnabled,
@@ -112,6 +112,7 @@ class MainActivity : FragmentActivity() {
                         settings = settings,
                         onSetProfileName = settingsRepository::setProfileName,
                         onSetTheme = settingsRepository::setTheme,
+                        onSetPalette = { settingsRepository.setPalette(it); app.tsuzuku.widget.TsuzukuWidgets.requestUpdate(this@MainActivity) },
                         onSetLanguage = { language ->
                             settingsRepository.setLanguage(language)
                             recreate()

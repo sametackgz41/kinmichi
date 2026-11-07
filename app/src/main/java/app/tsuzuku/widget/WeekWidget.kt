@@ -94,7 +94,7 @@ internal fun WeekContent(days: List<DayScore>, bestStreak: Int, locked: Boolean,
     val density = context.resources.displayMetrics.density
     val locale = context.resources.configuration.locales[0] ?: Locale.getDefault()
     val primary = GlanceTheme.colors.primary.getColor(context).toArgb()
-    val track = GlanceTheme.colors.secondaryContainer.getColor(context).toArgb()
+    val track = GlanceTheme.colors.surfaceVariant.getColor(context).toArgb()
     val scored = days.mapNotNull(DayScore::fraction)
     val weekPercent = if (scored.isEmpty()) null else (scored.average() * 100).toInt()
     val size = LocalSize.current
@@ -103,7 +103,7 @@ internal fun WeekContent(days: List<DayScore>, bestStreak: Int, locked: Boolean,
         modifier = GlanceModifier
             .fillMaxSize()
             .appWidgetBackground()
-            .background(GlanceTheme.colors.widgetBackground)
+            .background(tsuzukuWidgetBackground())
             .cornerRadius(24.dp)
             .clickable(actionStartActivity<MainActivity>())
             .padding(horizontal = 14.dp, vertical = 12.dp),
@@ -112,7 +112,7 @@ internal fun WeekContent(days: List<DayScore>, bestStreak: Int, locked: Boolean,
             Column(modifier = GlanceModifier.defaultWeight()) {
                 Text(
                     context.getString(R.string.widget_week_title),
-                    style = TextStyle(color = GlanceTheme.colors.onSurface, fontSize = 17.sp, fontWeight = FontWeight.Medium),
+                    style = TextStyle(color = GlanceTheme.colors.onSurface, fontSize = 19.sp, fontWeight = FontWeight.Medium, fontFamily = androidx.glance.text.FontFamily.Serif),
                 )
                 if (!locked && bestStreak > 0) {
                     Text(
@@ -124,7 +124,7 @@ internal fun WeekContent(days: List<DayScore>, bestStreak: Int, locked: Boolean,
             if (!locked && weekPercent != null) {
                 Text(
                     "%$weekPercent".takeIf { locale.language == "tr" } ?: "$weekPercent%",
-                    style = TextStyle(color = GlanceTheme.colors.primary, fontSize = 22.sp, fontWeight = FontWeight.Bold),
+                    style = TextStyle(color = GlanceTheme.colors.primary, fontSize = 26.sp, fontWeight = FontWeight.Bold, fontFamily = androidx.glance.text.FontFamily.Serif),
                 )
             }
         }

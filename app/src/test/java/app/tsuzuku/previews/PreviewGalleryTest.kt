@@ -150,6 +150,16 @@ class PreviewGalleryTest {
     @Test fun todayEnLight() = renderToday("en", false)
     @Test fun todayEnDark() = renderToday("en", true)
 
+    private fun sampleWeek(): List<app.tsuzuku.ui.screens.WeekDayProgress> {
+        val today = java.time.LocalDate.now()
+        val start = today.with(java.time.temporal.TemporalAdjusters.previousOrSame(java.time.DayOfWeek.MONDAY))
+        val fractions = listOf(1f, 0.75f, 0.5f, 1f, 0.25f, 0.66f, 0.8f)
+        return (0 until 7).map { i ->
+            val date = start.plusDays(i.toLong())
+            app.tsuzuku.ui.screens.WeekDayProgress(date, if (date.isAfter(today)) null else fractions[i])
+        }
+    }
+
     private fun renderToday(lang: String, dark: Boolean) {
         setVariant(lang, dark)
         val state = mutableStateOf(sampleToday(lang))
@@ -163,6 +173,7 @@ class PreviewGalleryTest {
                             onDecrementHabit = {}, onToggleTimer = {}, onOpenHabit = {}, onReorderHabits = {},
                             onOpenGoals = {}, onSearch = {},
                             todayHiddenSections = app.tsuzuku.data.preferences.DEFAULT_TODAY_HIDDEN_SECTIONS,
+                            weekProgress = sampleWeek(),
                         )
                     }
                 }

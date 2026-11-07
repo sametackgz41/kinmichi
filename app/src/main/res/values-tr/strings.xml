@@ -1071,4 +1071,7 @@
     <string name="share_card_weeks">Son %1$d hafta</string>
     <string name="share_card_text">%1$s: Tsuzuku ile %2$d günlük seri 🔥</string>
     <string name="share_card_text_done">%1$s: Tsuzuku ile %2$d gün tamamlandı</string>
+    <string name="palette_label">Renk paleti</string>
+    <string name="palette_washi">Washi</string>
+    <string name="palette_dynamic">Duvar kâğıdı renkleri</string>
 </resources>

@@ -93,7 +93,7 @@ internal fun HabitContent(item: TodayHabit?, locked: Boolean) {
         modifier = GlanceModifier
             .fillMaxSize()
             .appWidgetBackground()
-            .background(GlanceTheme.colors.widgetBackground)
+            .background(tsuzukuWidgetBackground())
             .cornerRadius(24.dp)
             .clickable(tapAction)
             .padding(12.dp),

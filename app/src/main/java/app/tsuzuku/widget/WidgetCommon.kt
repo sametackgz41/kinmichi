@@ -14,8 +14,9 @@ import androidx.glance.appwidget.action.ActionCallback
 import androidx.glance.appwidget.updateAll
 import androidx.glance.material3.ColorProviders
 import app.tsuzuku.TsuzukuApplication
-import app.tsuzuku.ui.theme.FallbackDark
-import app.tsuzuku.ui.theme.FallbackLight
+import app.tsuzuku.data.preferences.PalettePreference
+import app.tsuzuku.ui.theme.WashiDark
+import app.tsuzuku.ui.theme.WashiLight
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -24,13 +25,30 @@ import kotlinx.coroutines.launch
 /** Habit id passed from a widget tap to its action callback. */
 val HabitIdKey = ActionParameters.Key<Long>("habit_id")
 
-/** Material You on Android 12+, the app's neutral fallback scheme below that. */
+/** The app's palette: Washi by default, the wallpaper colours when the user picked those. */
 @Composable
 fun TsuzukuGlanceTheme(content: @Composable () -> Unit) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+    val context = androidx.glance.LocalContext.current
+    val palette = (context.applicationContext as? TsuzukuApplication)?.settingsRepository?.settings?.value?.palette
+    if (palette == PalettePreference.Dynamic && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         GlanceTheme(content = content)
     } else {
-        GlanceTheme(colors = ColorProviders(light = FallbackLight, dark = FallbackDark), content = content)
+        GlanceTheme(colors = ColorProviders(light = WashiLight, dark = WashiDark), content = content)
+    }
+}
+
+/**
+ * Widget card colour: warm paper (or indigo ink at night) for Washi, the launcher's own widget
+ * background for the wallpaper palette.
+ */
+@Composable
+fun tsuzukuWidgetBackground(): androidx.glance.unit.ColorProvider {
+    val context = androidx.glance.LocalContext.current
+    val palette = (context.applicationContext as? TsuzukuApplication)?.settingsRepository?.settings?.value?.palette
+    return if (palette == PalettePreference.Dynamic && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        GlanceTheme.colors.widgetBackground
+    } else {
+        androidx.glance.color.ColorProvider(day = WashiLight.surfaceContainerLow, night = WashiDark.surfaceContainerLow)
     }
 }
 

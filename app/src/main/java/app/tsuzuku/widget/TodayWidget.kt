@@ -113,7 +113,7 @@ internal fun TodayContent(
         modifier = GlanceModifier
             .fillMaxSize()
             .appWidgetBackground()
-            .background(GlanceTheme.colors.widgetBackground)
+            .background(tsuzukuWidgetBackground())
             .cornerRadius(24.dp)
             .padding(start = 14.dp, end = 10.dp, top = 12.dp, bottom = 6.dp),
     ) {
@@ -150,7 +150,7 @@ private fun Header(habits: List<TodayHabit>, locked: Boolean, today: LocalDate) 
     val ring = ringBitmap(
         sizePx = (ringSize.value * density).toInt(),
         fraction = if (locked || total == 0) 0f else completed.toFloat() / total,
-        trackColor = GlanceTheme.colors.secondaryContainer.getColor(context).toArgb(),
+        trackColor = GlanceTheme.colors.surfaceVariant.getColor(context).toArgb(),
         progressColor = primary,
         strokePx = 5f * density,
         fillColor = if (!locked && total > 0 && left == 0) primary else null,
@@ -178,7 +178,7 @@ private fun Header(habits: List<TodayHabit>, locked: Boolean, today: LocalDate) 
                 } else {
                     Text(
                         "$completed/$total",
-                        style = TextStyle(color = GlanceTheme.colors.onSurface, fontSize = 13.sp, fontWeight = FontWeight.Bold),
+                        style = TextStyle(color = GlanceTheme.colors.onSurface, fontSize = 15.sp, fontWeight = FontWeight.Bold, fontFamily = androidx.glance.text.FontFamily.Serif),
                     )
                 }
             }
@@ -187,7 +187,7 @@ private fun Header(habits: List<TodayHabit>, locked: Boolean, today: LocalDate) 
         Column(modifier = GlanceModifier.defaultWeight()) {
             Text(
                 context.getString(R.string.today),
-                style = TextStyle(color = GlanceTheme.colors.onSurface, fontSize = 17.sp, fontWeight = FontWeight.Medium),
+                style = TextStyle(color = GlanceTheme.colors.onSurface, fontSize = 19.sp, fontWeight = FontWeight.Medium, fontFamily = androidx.glance.text.FontFamily.Serif),
                 maxLines = 1,
             )
             Text(
@@ -292,7 +292,7 @@ private fun ActionButton(item: TodayHabit, accent: Int, params: androidx.glance.
     val done = item.isComplete
     val sizeDp = 40
     val px = (sizeDp * density).toInt()
-    val track = GlanceTheme.colors.secondaryContainer.getColor(context).toArgb()
+    val track = GlanceTheme.colors.surfaceVariant.getColor(context).toArgb()
     val action: Action? = when {
         item.isBlocked -> null
         habit.type == HabitType.Check -> actionRunCallback<ToggleHabitAction>(params)

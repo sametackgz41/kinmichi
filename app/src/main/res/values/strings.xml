@@ -1072,4 +1072,7 @@
     <string name="share_card_weeks">Last %1$d weeks</string>
     <string name="share_card_text">%1$s: a %2$d-day streak with Tsuzuku 🔥</string>
     <string name="share_card_text_done">%1$s: %2$d days done with Tsuzuku</string>
+    <string name="palette_label">Colour palette</string>
+    <string name="palette_washi">Washi</string>
+    <string name="palette_dynamic">Wallpaper colours</string>
 </resources>

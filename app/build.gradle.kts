@@ -24,8 +24,8 @@ android {
         applicationId = "app.tsuzuku"
         minSdk = 26
         targetSdk = 36
-        versionCode = 25
-        versionName = "2.3.2"
+        versionCode = 26
+        versionName = "2.4.0"
 
         buildConfigField("boolean", "FIREBASE_CONFIGURED", hasFirebaseConfig.toString())
 

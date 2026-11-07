@@ -29,6 +29,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -106,8 +107,12 @@ internal fun HabitRow(
     var menuExpanded by remember { mutableStateOf(false) }
 
     val container by animateColorAsState(
-        if (done) MaterialTheme.colorScheme.surfaceContainerLow else MaterialTheme.colorScheme.surfaceContainer,
+        if (done) Color.Transparent else MaterialTheme.colorScheme.surfaceContainerLowest,
         label = "habit-row-container",
+    )
+    val outline by animateColorAsState(
+        if (done) MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f) else MaterialTheme.colorScheme.outlineVariant,
+        label = "habit-row-outline",
     )
     val contentAlpha by animateFloatAsState(if (done) 0.62f else 1f, tween(300), label = "habit-row-alpha")
 
@@ -117,10 +122,11 @@ internal fun HabitRow(
 
     Surface(
         color = container,
-        shape = MaterialTheme.shapes.large,
+        shape = MaterialTheme.shapes.medium,
+        border = androidx.compose.foundation.BorderStroke(1.dp, outline),
         modifier = modifier
             .fillMaxWidth()
-            .clip(MaterialTheme.shapes.large)
+            .clip(MaterialTheme.shapes.medium)
             .combinedClickable(
                 onClick = onOpen,
                 onLongClick = { menuExpanded = true },
@@ -142,9 +148,9 @@ internal fun HabitRow(
         ) {
             Box(
                 Modifier
-                    .size(44.dp)
+                    .size(42.dp)
                     .alpha(contentAlpha)
-                    .background(accent.copy(alpha = 0.16f), CircleShape),
+                    .background(accent.copy(alpha = 0.16f), androidx.compose.foundation.shape.RoundedCornerShape(14.dp)),
                 contentAlignment = Alignment.Center,
             ) {
                 Text(habit.emoji, fontSize = 22.sp)
@@ -164,7 +170,11 @@ internal fun HabitRow(
                     }
                     Text(
                         habitContextLine(todayHabit, timerRunning, timerElapsedSeconds),
-                        style = MaterialTheme.typography.bodySmall,
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            fontFamily = app.tsuzuku.ui.theme.SerifDisplay,
+                            fontStyle = androidx.compose.ui.text.font.FontStyle.Italic,
+                            fontWeight = androidx.compose.ui.text.font.FontWeight.Normal,
+                        ),
                         color = when {
                             todayHabit.isBlocked || todayHabit.badHabitLimitExceeded -> MaterialTheme.colorScheme.error
                             else -> MaterialTheme.colorScheme.onSurfaceVariant
@@ -433,18 +443,17 @@ private fun RingButton(
 }
 
 /**
- * Compact daily progress: an animated ring, a counter that rolls to the new value and a
- * short celebration line when everything is done.
+ * Washi day card: the day's count set large in the serif, the longest running streak beside it
+ * and a thin ink bar underneath. Rolls the count and gives a small lift when the day is done.
  */
 @Composable
-internal fun TodayProgressHeader(completed: Int, total: Int, modifier: Modifier = Modifier) {
+internal fun TodayProgressHeader(completed: Int, total: Int, modifier: Modifier = Modifier, streakDays: Int = 0) {
     val fraction = if (total == 0) 0f else completed.toFloat() / total
     val animatedFraction by animateFloatAsState(
         fraction,
         spring(dampingRatio = Spring.DampingRatioNoBouncy, stiffness = Spring.StiffnessMediumLow),
         label = "day-progress",
     )
-    val percent by animateIntAsState((fraction * 100).toInt(), tween(600), label = "day-percent")
     val allDone = total > 0 && completed == total
     val celebrate = remember { Animatable(1f) }
     val haptic = LocalHapticFeedback.current
@@ -454,43 +463,19 @@ internal fun TodayProgressHeader(completed: Int, total: Int, modifier: Modifier 
         if (allDone && !wasAllDone) haptic.performHapticFeedback(HapticFeedbackType.LongPress)
         wasAllDone = allDone
         if (allDone) {
-            celebrate.animateTo(1.12f, spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessMedium))
+            celebrate.animateTo(1.06f, spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessMedium))
             celebrate.animateTo(1f, spring(dampingRatio = Spring.DampingRatioMediumBouncy))
         }
     }
+    val countDescription = stringResource(R.string.habits_done_of, completed, total)
     Surface(
-        color = MaterialTheme.colorScheme.primaryContainer,
-        shape = MaterialTheme.shapes.extraLarge,
-        modifier = modifier.fillMaxWidth(),
+        color = MaterialTheme.colorScheme.surfaceContainerLow,
+        shape = MaterialTheme.shapes.large,
+        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+        modifier = modifier.fillMaxWidth().semantics(mergeDescendants = true) { contentDescription = countDescription },
     ) {
-        Row(Modifier.padding(18.dp), verticalAlignment = Alignment.CenterVertically) {
-            Box(Modifier.size(64.dp).scale(celebrate.value), contentAlignment = Alignment.Center) {
-                androidx.compose.material3.CircularWavyProgressIndicator(
-                    progress = { animatedFraction },
-                    modifier = Modifier.size(64.dp),
-                    color = MaterialTheme.colorScheme.primary,
-                    trackColor = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.12f),
-                )
-                Text(
-                    "$percent%",
-                    style = MaterialTheme.typography.labelLarge,
-                    fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer,
-                )
-            }
-            Spacer(Modifier.width(16.dp))
-            Column {
-                AnimatedContent(
-                    targetState = allDone,
-                    transitionSpec = { (fadeIn() + slideInVertically { it / 2 }) togetherWith fadeOut() },
-                    label = "day-title",
-                ) { finished ->
-                    Text(
-                        stringResource(if (finished) R.string.today_all_done else R.string.daily_progress),
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer,
-                    )
-                }
+        Column(Modifier.padding(horizontal = 20.dp, vertical = 18.dp)) {
+            Row(verticalAlignment = Alignment.Bottom) {
                 AnimatedContent(
                     targetState = completed,
                     transitionSpec = {
@@ -501,12 +486,109 @@ internal fun TodayProgressHeader(completed: Int, total: Int, modifier: Modifier 
                         }
                     },
                     label = "day-count",
+                    modifier = Modifier.scale(celebrate.value),
                 ) { count ->
                     Text(
-                        stringResource(R.string.habits_done_of, count, total),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f),
+                        count.toString(),
+                        style = MaterialTheme.typography.displayMedium,
+                        color = if (allDone) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
                     )
+                }
+                Text(
+                    " / $total",
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(bottom = 6.dp),
+                )
+                Spacer(Modifier.weight(1f))
+                Column(horizontalAlignment = Alignment.End, modifier = Modifier.padding(bottom = 6.dp)) {
+                    AnimatedContent(
+                        targetState = allDone,
+                        transitionSpec = { (fadeIn() + slideInVertically { it / 2 }) togetherWith fadeOut() },
+                        label = "day-title",
+                    ) { finished ->
+                        Text(
+                            stringResource(if (finished) R.string.today_all_done else R.string.daily_progress),
+                            style = MaterialTheme.typography.titleSmall,
+                            color = if (finished) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                    if (streakDays > 1) {
+                        Text(
+                            pluralStringResource(R.plurals.streak_days, streakDays, streakDays),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.tertiary,
+                        )
+                    }
+                }
+            }
+            Spacer(Modifier.height(14.dp))
+            Box(
+                Modifier
+                    .fillMaxWidth()
+                    .height(8.dp)
+                    .clip(CircleShape)
+                    .background(MaterialTheme.colorScheme.surfaceVariant),
+            ) {
+                Box(
+                    Modifier
+                        .fillMaxWidth(animatedFraction)
+                        .height(8.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.primary),
+                )
+            }
+        }
+    }
+}
+
+/** One day of the week strip: null progress means the day is still ahead. */
+data class WeekDayProgress(val date: java.time.LocalDate, val fraction: Float?)
+
+/**
+ * The week as a row of small enso circles: each one drawn as far as that day got,
+ * today's label in bold. A finished day closes its circle.
+ */
+@Composable
+internal fun WeekEnsoStrip(days: List<WeekDayProgress>, modifier: Modifier = Modifier) {
+    val locale = androidx.compose.ui.platform.LocalConfiguration.current.locales[0]
+    val today = remember { java.time.LocalDate.now() }
+    val track = MaterialTheme.colorScheme.outlineVariant
+    val ink = MaterialTheme.colorScheme.primary
+    val todayInk = MaterialTheme.colorScheme.onSurface
+    Row(modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+        days.forEach { day ->
+            val isToday = day.date == today
+            val label = day.date.dayOfWeek.getDisplayName(java.time.format.TextStyle.SHORT, locale)
+            val fraction by animateFloatAsState(day.fraction ?: 0f, tween(500), label = "enso-${day.date}")
+            val description = if (day.fraction == null) label else "$label, ${((day.fraction) * 100).toInt()}%"
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.width(40.dp).semantics(mergeDescendants = true) { contentDescription = description },
+            ) {
+                Text(
+                    label,
+                    style = MaterialTheme.typography.labelSmall,
+                    fontWeight = if (isToday) androidx.compose.ui.text.font.FontWeight.Bold else null,
+                    color = if (isToday) todayInk else MaterialTheme.colorScheme.onSurfaceVariant,
+                    maxLines = 1,
+                )
+                Spacer(Modifier.height(6.dp))
+                androidx.compose.foundation.Canvas(Modifier.size(32.dp)) {
+                    val stroke = 3.5.dp.toPx()
+                    val inset = stroke / 2 + 1.dp.toPx()
+                    val arcSize = androidx.compose.ui.geometry.Size(size.width - inset * 2, size.height - inset * 2)
+                    val topLeft = androidx.compose.ui.geometry.Offset(inset, inset)
+                    drawArc(track, 0f, 360f, false, topLeft, arcSize, style = androidx.compose.ui.graphics.drawscope.Stroke(stroke * 0.6f))
+                    if (fraction > 0f) {
+                        // A brush enso leaves a small gap until the day is complete.
+                        val sweep = if (fraction >= 1f) 360f else 330f * fraction
+                        drawArc(
+                            if (isToday) ink else ink.copy(alpha = 0.75f),
+                            -100f, sweep, false, topLeft, arcSize,
+                            style = androidx.compose.ui.graphics.drawscope.Stroke(stroke, cap = androidx.compose.ui.graphics.StrokeCap.Round),
+                        )
+                    }
                 }
             }
         }

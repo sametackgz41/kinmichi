@@ -130,6 +130,7 @@ fun TodayScreen(
     onAcceptAdvice: (app.tsuzuku.model.TargetAdvice) -> Unit = {},
     onDismissAdvice: (app.tsuzuku.model.TargetAdvice) -> Unit = {},
     onQuickMood: (Int) -> Unit = {},
+    weekProgress: List<WeekDayProgress> = emptyList(),
 ) {
     val active = habits.filterNot(TodayHabit::isComplete)
     val completed = habits.filter(TodayHabit::isComplete)
@@ -179,6 +180,11 @@ fun TodayScreen(
                 }
             }
         }
+        if (weekProgress.isNotEmpty()) {
+            item(key = "week-enso") {
+                WeekEnsoStrip(weekProgress, Modifier.padding(top = 4.dp, bottom = 8.dp))
+            }
+        }
         if (vacationActive) {
             item {
                 Surface(
@@ -196,7 +202,12 @@ fun TodayScreen(
                     "summary" -> {
                         if (showDailySummary && habits.isNotEmpty()) {
                             item(key = "section-summary") {
-                                TodayProgressHeader(completed = completed.size, total = habits.size, modifier = Modifier.animateItem())
+                                TodayProgressHeader(
+                                    completed = completed.size,
+                                    total = habits.size,
+                                    streakDays = habits.maxOfOrNull { it.streakDays } ?: 0,
+                                    modifier = Modifier.animateItem(),
+                                )
                             }
                         }
                     }
@@ -393,12 +404,12 @@ private fun GreetingBlock(profileName: String) {
         else -> R.string.good_evening
     }
     Column(modifier = Modifier.padding(top = 6.dp, bottom = 4.dp)) {
+        Text(formattedDate, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Spacer(Modifier.height(4.dp))
         Text(
             if (profileName.isBlank()) stringResource(greeting) else stringResource(R.string.personal_greeting, stringResource(greeting), profileName),
-            style = MaterialTheme.typography.headlineMedium,
+            style = MaterialTheme.typography.headlineLarge,
         )
-        Spacer(Modifier.height(5.dp))
-        Text(formattedDate, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
 
@@ -427,7 +438,7 @@ private fun TodaySectionHeader(
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.secondary, modifier = Modifier.size(20.dp))
             Spacer(Modifier.width(8.dp))
-            Text(title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+            Text(title, style = MaterialTheme.typography.titleLarge)
         }
         if (actionText != null && onAction != null) {
             TextButton(onClick = onAction) {

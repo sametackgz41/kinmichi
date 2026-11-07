@@ -32,6 +32,16 @@ enum class ThemeColorPreference {
     }
 }
 
+/** Colour palette: Tsuzuku's own Washi look, or the wallpaper colours (Material You). */
+enum class PalettePreference {
+    Washi,
+    Dynamic;
+
+    companion object {
+        fun fromStored(value: String?): PalettePreference = entries.firstOrNull { it.name == value } ?: Washi
+    }
+}
+
 enum class LanguagePreference(val languageTag: String?) {
     System(null),
     Turkish("tr"),
@@ -56,6 +66,7 @@ data class AppSettings(
     val theme: ThemePreference = ThemePreference.System,
     val lightThemeColor: ThemeColorPreference = ThemeColorPreference.Matcha,
     val darkThemeColor: ThemeColorPreference = ThemeColorPreference.Matcha,
+    val palette: PalettePreference = PalettePreference.Washi,
     val language: LanguagePreference = LanguagePreference.System,
     val weekStart: WeekStartPreference = WeekStartPreference.Monday,
     val showDailySummary: Boolean = true,
@@ -103,6 +114,7 @@ class SettingsRepository(context: Context) {
     fun setTheme(value: ThemePreference) = update(KEY_THEME, value.name)
     fun setLightThemeColor(value: ThemeColorPreference) = update(KEY_LIGHT_THEME_COLOR, value.name)
     fun setDarkThemeColor(value: ThemeColorPreference) = update(KEY_DARK_THEME_COLOR, value.name)
+    fun setPalette(value: PalettePreference) = update(KEY_PALETTE, value.name)
     fun setLanguage(value: LanguagePreference) = update(KEY_LANGUAGE, value.name)
     fun setWeekStart(value: WeekStartPreference) = update(KEY_WEEK_START, value.name)
     fun setShowDailySummary(value: Boolean) = update(KEY_DAILY_SUMMARY, value)
@@ -205,6 +217,7 @@ class SettingsRepository(context: Context) {
         theme = ThemePreference.fromStored(getString(KEY_THEME, null)),
         lightThemeColor = ThemeColorPreference.fromStored(getString(KEY_LIGHT_THEME_COLOR, null)),
         darkThemeColor = ThemeColorPreference.fromStored(getString(KEY_DARK_THEME_COLOR, null)),
+        palette = PalettePreference.fromStored(getString(KEY_PALETTE, null)),
         language = LanguagePreference.fromStored(getString(KEY_LANGUAGE, null)),
         weekStart = WeekStartPreference.fromStored(getString(KEY_WEEK_START, null)),
         showDailySummary = getBoolean(KEY_DAILY_SUMMARY, true),
@@ -237,6 +250,7 @@ class SettingsRepository(context: Context) {
 
         private const val KEY_PROFILE_NAME = "profile_name"
         private const val KEY_THEME = "theme"
+        private const val KEY_PALETTE = "palette"
         private const val KEY_LIGHT_THEME_COLOR = "light_theme_color"
         private const val KEY_DARK_THEME_COLOR = "dark_theme_color"
         private const val KEY_WEEK_START = "week_start"

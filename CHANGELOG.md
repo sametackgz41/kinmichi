@@ -1,5 +1,14 @@
 # Değişiklik günlüğü
 
+## 2.4.0 — Washi
+
+- Yeni görünüm: sıcak kâğıt zemin, çivit mavisi vurgu, matcha yeşili ve altın; gece için çivit mürekkebi tonları
+- Başlıklar ve büyük rakamlar Newsreader serif yazı tipiyle
+- Bugün ekranında haftanın her günü için küçük ensō halkaları, büyük rakamlı ilerleme kartı ve en uzun seri
+- Alışkanlık satırları kâğıt kartlar; durum satırı italik serif
+- Widget'lar Washi renklerinde, rakamlar serif
+- Ayarlar › Renk paleti: Washi ya da duvar kâğıdı renkleri (Material You)
+
 ## 2.3.2 — Akıcılık
 
 - İstatistik, seri, rekor ve bugün listesi hesapları artık arka planda yapılıyor; dokunma ve sekme geçişlerinde ekran donmuyor

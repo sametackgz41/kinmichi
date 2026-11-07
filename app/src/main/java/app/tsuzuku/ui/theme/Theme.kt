@@ -15,7 +15,13 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.ExperimentalTextApi
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontVariation
 import androidx.compose.ui.text.font.FontWeight
+import app.tsuzuku.R
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
@@ -67,17 +73,65 @@ internal val FallbackDark = darkColorScheme(
     surfaceDim = Color(0xFF111318), surfaceBright = Color(0xFF37393E),
 )
 
+/**
+ * Washi: Tsuzuku's own look. Warm paper, ink text, indigo (aizome) as the main colour,
+ * matcha green as the second and kintsugi gold for comebacks.
+ */
+internal val WashiLight = lightColorScheme(
+    primary = Color(0xFF2E4A7D), onPrimary = Color(0xFFFFFFFF),
+    primaryContainer = Color(0xFFD9E1EF), onPrimaryContainer = Color(0xFF1B2F52),
+    secondary = Color(0xFF56693F), onSecondary = Color(0xFFFFFFFF),
+    secondaryContainer = Color(0xFFE0E7D2), onSecondaryContainer = Color(0xFF2B3820),
+    tertiary = Color(0xFF8A6A1F), onTertiary = Color(0xFFFFFFFF),
+    tertiaryContainer = Color(0xFFF2E3BC), onTertiaryContainer = Color(0xFF4A380A),
+    error = Color(0xFFB3261E), onError = Color(0xFFFFFFFF),
+    errorContainer = Color(0xFFF9DEDC), onErrorContainer = Color(0xFF8C1D18),
+    background = Color(0xFFF5F0E6), onBackground = Color(0xFF1F1D1A),
+    surface = Color(0xFFF5F0E6), onSurface = Color(0xFF1F1D1A),
+    surfaceVariant = Color(0xFFE9E1D2), onSurfaceVariant = Color(0xFF5E584E),
+    outline = Color(0xFF8C8476), outlineVariant = Color(0xFFDCD3C3),
+    inverseSurface = Color(0xFF33302B), inverseOnSurface = Color(0xFFF5F0E6),
+    inversePrimary = Color(0xFFA9BDE6),
+    surfaceContainerLowest = Color(0xFFFFFDF9), surfaceContainerLow = Color(0xFFFBF8F2),
+    surfaceContainer = Color(0xFFF3EDE2), surfaceContainerHigh = Color(0xFFEDE6D9),
+    surfaceContainerHighest = Color(0xFFE7DFD0),
+    surfaceDim = Color(0xFFE2D9C9), surfaceBright = Color(0xFFFBF8F2),
+)
+
+/** Washi at night: indigo ink instead of paper, the same accents lifted for contrast. */
+internal val WashiDark = darkColorScheme(
+    primary = Color(0xFFA9BDE6), onPrimary = Color(0xFF10274D),
+    primaryContainer = Color(0xFF2B4170), onPrimaryContainer = Color(0xFFD9E1EF),
+    secondary = Color(0xFFB6C79C), onSecondary = Color(0xFF22301A),
+    secondaryContainer = Color(0xFF3A4A2C), onSecondaryContainer = Color(0xFFDDE5CF),
+    tertiary = Color(0xFFE0C178), onTertiary = Color(0xFF3D2E05),
+    tertiaryContainer = Color(0xFF5C4712), onTertiaryContainer = Color(0xFFF2E3BC),
+    error = Color(0xFFF2B8B5), onError = Color(0xFF601410),
+    errorContainer = Color(0xFF8C1D18), onErrorContainer = Color(0xFFF9DEDC),
+    background = Color(0xFF15171C), onBackground = Color(0xFFECE6DA),
+    surface = Color(0xFF15171C), onSurface = Color(0xFFECE6DA),
+    surfaceVariant = Color(0xFF2C2F36), onSurfaceVariant = Color(0xFFBDB6AA),
+    outline = Color(0xFF878176), outlineVariant = Color(0xFF3A3D44),
+    inverseSurface = Color(0xFFECE6DA), inverseOnSurface = Color(0xFF2A2C31),
+    inversePrimary = Color(0xFF2E4A7D),
+    surfaceContainerLowest = Color(0xFF101216), surfaceContainerLow = Color(0xFF1A1C21),
+    surfaceContainer = Color(0xFF1F2127), surfaceContainerHigh = Color(0xFF282A31),
+    surfaceContainerHighest = Color(0xFF32353B),
+    surfaceDim = Color(0xFF15171C), surfaceBright = Color(0xFF3A3D44),
+)
+
 @Composable
 fun TsuzukuTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     val context = LocalContext.current
     val colorScheme = when {
-        Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ->
+        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ->
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        darkTheme -> FallbackDark
-        else -> FallbackLight
+        darkTheme -> WashiDark
+        else -> WashiLight
     }
     val view = LocalView.current
 
@@ -109,16 +163,36 @@ internal val ExpressiveShapes = Shapes(
     extraLarge = RoundedCornerShape(36.dp),
 )
 
-/** The standard type scale with emphasised headings; body text stays as is for readability. */
+/** Newsreader, an open-licensed editorial serif, for headings and big numbers. */
+@OptIn(ExperimentalTextApi::class)
+val SerifDisplay: FontFamily = FontFamily(
+    listOf(500, 600, 700).flatMap { weight ->
+        listOf(
+            Font(
+                R.font.newsreader, FontWeight(weight), FontStyle.Normal,
+                variationSettings = FontVariation.Settings(FontVariation.weight(weight), FontVariation.Setting("opsz", 36f)),
+            ),
+            Font(
+                R.font.newsreader_italic, FontWeight(weight), FontStyle.Italic,
+                variationSettings = FontVariation.Settings(FontVariation.weight(weight), FontVariation.Setting("opsz", 16f)),
+            ),
+        )
+    } + Font(
+        R.font.newsreader_italic, FontWeight.Normal, FontStyle.Italic,
+        variationSettings = FontVariation.Settings(FontVariation.weight(400), FontVariation.Setting("opsz", 16f)),
+    ),
+)
+
+/** Serif headings over the standard sans body text, which stays as is for readability. */
 internal val ExpressiveTypography = Typography().let { t ->
     t.copy(
-        displayLarge = t.displayLarge.copy(fontWeight = FontWeight.SemiBold),
-        displayMedium = t.displayMedium.copy(fontWeight = FontWeight.SemiBold),
-        displaySmall = t.displaySmall.copy(fontWeight = FontWeight.SemiBold),
-        headlineLarge = t.headlineLarge.copy(fontWeight = FontWeight.SemiBold),
-        headlineMedium = t.headlineMedium.copy(fontWeight = FontWeight.SemiBold),
-        headlineSmall = t.headlineSmall.copy(fontWeight = FontWeight.SemiBold),
-        titleLarge = t.titleLarge.copy(fontWeight = FontWeight.SemiBold),
+        displayLarge = t.displayLarge.copy(fontFamily = SerifDisplay, fontWeight = FontWeight.SemiBold),
+        displayMedium = t.displayMedium.copy(fontFamily = SerifDisplay, fontWeight = FontWeight.SemiBold),
+        displaySmall = t.displaySmall.copy(fontFamily = SerifDisplay, fontWeight = FontWeight.SemiBold),
+        headlineLarge = t.headlineLarge.copy(fontFamily = SerifDisplay, fontWeight = FontWeight.SemiBold),
+        headlineMedium = t.headlineMedium.copy(fontFamily = SerifDisplay, fontWeight = FontWeight.SemiBold),
+        headlineSmall = t.headlineSmall.copy(fontFamily = SerifDisplay, fontWeight = FontWeight.SemiBold),
+        titleLarge = t.titleLarge.copy(fontFamily = SerifDisplay, fontWeight = FontWeight.SemiBold),
         titleMedium = t.titleMedium.copy(fontWeight = FontWeight.SemiBold),
     )
 }

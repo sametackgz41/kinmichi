@@ -29,6 +29,7 @@ import androidx.compose.material.icons.rounded.Backup
 import androidx.compose.material.icons.rounded.CalendarMonth
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.DarkMode
+import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.Language
 import androidx.compose.material.icons.rounded.LightMode
@@ -82,6 +83,7 @@ import app.tsuzuku.notifications.HabitNotifications
 
 private const val DIALOG_NAME = "name"
 private const val DIALOG_THEME = "theme"
+private const val DIALOG_PALETTE = "palette"
 private const val DIALOG_LANGUAGE = "language"
 private const val DIALOG_WEEK_START = "week_start"
 
@@ -91,6 +93,7 @@ fun ProfileScreen(
     cloudAccount: CloudAccountState,
     onSetProfileName: (String) -> Unit,
     onSetTheme: (ThemePreference) -> Unit,
+    onSetPalette: (app.tsuzuku.data.preferences.PalettePreference) -> Unit = {},
     onSetLanguage: (LanguagePreference) -> Unit,
     onSetWeekStart: (WeekStartPreference) -> Unit,
     onSetShowDailySummary: (Boolean) -> Unit,
@@ -225,6 +228,12 @@ fun ProfileScreen(
                     onClick = { activeDialog = DIALOG_THEME },
                 )
                 ValueSettingRow(
+                    Icons.Rounded.Palette,
+                    stringResource(R.string.palette_label),
+                    paletteLabel(settings.palette),
+                    onClick = { activeDialog = DIALOG_PALETTE },
+                )
+                ValueSettingRow(
                     Icons.Rounded.Language,
                     stringResource(R.string.language_label),
                     languageLabel(settings.language),
@@ -348,6 +357,17 @@ fun ProfileScreen(
             label = { themeLabel(it) },
             onSelect = {
                 onSetTheme(it)
+                activeDialog = null
+            },
+            onDismiss = { activeDialog = null },
+        )
+        DIALOG_PALETTE -> ChoiceDialog(
+            title = stringResource(R.string.palette_label),
+            choices = app.tsuzuku.data.preferences.PalettePreference.entries,
+            selected = settings.palette,
+            label = { paletteLabel(it) },
+            onSelect = {
+                onSetPalette(it)
                 activeDialog = null
             },
             onDismiss = { activeDialog = null },
@@ -485,6 +505,14 @@ private fun <T> ChoiceDialog(
         dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } },
     )
 }
+
+@Composable
+private fun paletteLabel(value: app.tsuzuku.data.preferences.PalettePreference): String = stringResource(
+    when (value) {
+        app.tsuzuku.data.preferences.PalettePreference.Washi -> R.string.palette_washi
+        app.tsuzuku.data.preferences.PalettePreference.Dynamic -> R.string.palette_dynamic
+    },
+)
 
 @Composable
 private fun themeLabel(value: ThemePreference): String = stringResource(

@@ -125,6 +125,7 @@ fun TsuzukuApp(
     settings: AppSettings,
     onSetProfileName: (String) -> Unit,
     onSetTheme: (ThemePreference) -> Unit,
+    onSetPalette: (app.tsuzuku.data.preferences.PalettePreference) -> Unit = {},
     onSetLanguage: (LanguagePreference) -> Unit,
     onSetWeekStart: (WeekStartPreference) -> Unit,
     onSetShowDailySummary: (Boolean) -> Unit,
@@ -270,6 +271,19 @@ fun TsuzukuApp(
                         adviceVersion++
                     },
                     onQuickMood = { mood -> reviewViewModel.quickMood(mood, dailyReviewToday) },
+                    weekProgress = remember(history, settings.weekStart) {
+                        val today = java.time.LocalDate.now()
+                        val first = if (settings.weekStart == WeekStartPreference.Sunday) java.time.DayOfWeek.SUNDAY else java.time.DayOfWeek.MONDAY
+                        val start = today.with(java.time.temporal.TemporalAdjusters.previousOrSame(first))
+                        (0L until 7L).map { offset ->
+                            val date = start.plusDays(offset)
+                            val summary = history.daySummary(date)
+                            app.tsuzuku.ui.screens.WeekDayProgress(
+                                date,
+                                if (date.isAfter(today) || summary.scheduledCount == 0) null else summary.progressFraction,
+                            )
+                        }
+                    },
                     vacationActive = settings.vacationStartEpochDay?.let { start ->
                         settings.vacationEndEpochDay?.let { end -> java.time.LocalDate.now().toEpochDay() in start..end }
                     } == true,
@@ -497,6 +511,7 @@ fun TsuzukuApp(
                     cloudAccount = cloudAccount,
                     onSetProfileName = onSetProfileName,
                     onSetTheme = onSetTheme,
+                    onSetPalette = onSetPalette,
                     onSetLanguage = onSetLanguage,
                     onSetWeekStart = onSetWeekStart,
                     onSetShowDailySummary = onSetShowDailySummary,
