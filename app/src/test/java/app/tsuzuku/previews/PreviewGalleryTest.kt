@@ -173,10 +173,6 @@ class PreviewGalleryTest {
     }
 
     @Test fun todayTrLight() = renderToday("tr", false)
-    @Test fun todayFrLight() = renderToday("fr", false)
-    @Test fun todayItLight() = renderToday("it", false)
-    @Test fun todayRuLight() = renderToday("ru", false)
-    @Test fun todayKoLight() = renderToday("ko", false)
     @Test fun welcomeFrLight() = renderWelcome("fr", false)
     @Test fun welcomeRuLight() = renderWelcome("ru", false)
     @Test fun todayTrDark() = renderToday("tr", true)
@@ -206,6 +202,51 @@ class PreviewGalleryTest {
     @Test fun siteJaProgress() = renderProgress("ja", false)
     @Test fun siteJaEditor() = renderEditorAndSettings("ja", false)
     @Test fun palettesJa() = renderPalettes("ja")
+    @Test fun siteFrLightToday() = renderToday("fr", false)
+    @Test fun siteFrDarkToday() = renderToday("fr", true)
+    @Test fun siteFrDetail() = renderDetail("fr", false)
+    @Test fun siteFrProgress() = renderProgress("fr", false)
+    @Test fun siteFrEditor() = renderEditorAndSettings("fr", false)
+    @Test fun palettesFr() = renderPalettes("fr")
+    @Test fun siteItLightToday() = renderToday("it", false)
+    @Test fun siteItDarkToday() = renderToday("it", true)
+    @Test fun siteItDetail() = renderDetail("it", false)
+    @Test fun siteItProgress() = renderProgress("it", false)
+    @Test fun siteItEditor() = renderEditorAndSettings("it", false)
+    @Test fun palettesIt() = renderPalettes("it")
+    @Test fun siteRuLightToday() = renderToday("ru", false)
+    @Test fun siteRuDarkToday() = renderToday("ru", true)
+    @Test fun siteRuDetail() = renderDetail("ru", false)
+    @Test fun siteRuProgress() = renderProgress("ru", false)
+    @Test fun siteRuEditor() = renderEditorAndSettings("ru", false)
+    @Test fun palettesRu() = renderPalettes("ru")
+    @Test fun siteKoLightToday() = renderToday("ko", false)
+    @Test fun siteKoDarkToday() = renderToday("ko", true)
+    @Test fun siteKoDetail() = renderDetail("ko", false)
+    @Test fun siteKoProgress() = renderProgress("ko", false)
+    @Test fun siteKoEditor() = renderEditorAndSettings("ko", false)
+    @Test fun palettesKo() = renderPalettes("ko")
+    @Test fun siteWidgetPageTr() = renderSiteWidgetPage("tr")
+    @Test fun siteWidgetPageEn() = renderSiteWidgetPage("en")
+    @Test fun siteWidgetPageEs() = renderSiteWidgetPage("es")
+    @Test fun siteWidgetPageDe() = renderSiteWidgetPage("de")
+    @Test fun siteWidgetPagePt() = renderSiteWidgetPage("pt")
+    @Test fun siteWidgetPageJa() = renderSiteWidgetPage("ja")
+    @Test fun siteWidgetPageFr() = renderSiteWidgetPage("fr")
+    @Test fun siteWidgetPageIt() = renderSiteWidgetPage("it")
+    @Test fun siteWidgetPageRu() = renderSiteWidgetPage("ru")
+    @Test fun siteWidgetPageKo() = renderSiteWidgetPage("ko")
+
+    private fun renderSiteWidgetPage(lang: String) {
+        setVariant(lang, false)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false) {
+                app.tsuzuku.ui.screens.WidgetsScreen(onBack = {}, layout = app.tsuzuku.ui.screens.WidgetsLayout.Carousel, canPinOverride = true)
+            }
+        }
+        compose.mainClock.advanceTimeBy(1_000)
+        captureScreen("site_widgets_$lang")
+    }
 
     @Test fun palettesTr() = renderPalettes("tr")
     @Test fun palettesEn() = renderPalettes("en")

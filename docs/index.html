@@ -16,7 +16,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'%3E%3Crect width='108' height='108' rx='24' fill='%23F5F0E6'/%3E%3Ccircle cx='34.8' cy='74.8' r='4' fill='%232E4A7D'/%3E%3Ccircle cx='38.8' cy='65.3' r='4.4' fill='%232E4A7D'/%3E%3Ccircle cx='48.3' cy='59.6' r='4.8' fill='%232E4A7D'/%3E%3Ccircle cx='59.7' cy='54.6' r='5.2' fill='%232E4A7D'/%3E%3Ccircle cx='69.2' cy='47.4' r='5.6' fill='%232E4A7D'/%3E%3Ccircle cx='73.2' cy='34.8' r='7.4' fill='%23B8902E'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&family=Noto+Serif+JP:wght@500;600&family=Noto+Serif+KR:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root {
   --paper: #F5F0E6;
@@ -92,6 +92,9 @@ nav.links a:hover { color: var(--ink); }
 .lang-switch select:focus-visible { outline: 2px solid var(--indigo); outline-offset: 2px; }
 html:lang(ja) h1, html:lang(ja) h2, html:lang(ja) h3, html:lang(ja) .faq summary, html:lang(ja) .promise strong,
 html:lang(ja) .plan-card .if, html:lang(ja) .plan-card .then { font-family: Newsreader, "Noto Serif JP", serif; }
+html:lang(ko) h1, html:lang(ko) h2, html:lang(ko) h3, html:lang(ko) .faq summary, html:lang(ko) .promise strong,
+html:lang(ko) .plan-card .if, html:lang(ko) .plan-card .then { font-family: Newsreader, "Noto Serif KR", serif; }
+html:lang(ko) h1, html:lang(ko) h2, html:lang(ko) h3 { word-break: keep-all; }
 html:lang(ja) .hero h1 em { font-style: normal; }
 html:lang(ja) body { line-break: strict; }
 html:lang(ja) h1, html:lang(ja) h2, html:lang(ja) h3 { word-break: auto-phrase; }
@@ -207,6 +210,11 @@ section.alt { background: var(--card); border-top: 1px solid var(--line); border
 .pal-picker i { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
 .pal-picker button[aria-pressed="true"], .mode-picker button[aria-pressed="true"] { border-color: var(--indigo); box-shadow: inset 0 0 0 1.5px var(--indigo); }
 .mode-picker { margin-top: 12px; }
+.widget-shot { display: flex; justify-content: center; }
+.widget-shot img {
+  width: min(360px, 84vw); height: auto; display: block;
+  -webkit-mask-image: linear-gradient(#000 68%, transparent 96%); mask-image: linear-gradient(#000 68%, transparent 96%);
+}
 #pal-shot { transition: opacity .18s ease; }
 
 
@@ -268,7 +276,11 @@ footer .brand { font-size: 18px; }
           <option value="es" lang="es">Español</option>
           <option value="de" lang="de">Deutsch</option>
           <option value="pt" lang="pt-BR">Português</option>
+          <option value="fr" lang="fr">Français</option>
+          <option value="it" lang="it">Italiano</option>
+          <option value="ru" lang="ru">Русский</option>
           <option value="ja" lang="ja">日本語</option>
+          <option value="ko" lang="ko">한국어</option>
         </select>
       </label>
     </nav>
@@ -355,6 +367,14 @@ footer .brand { font-size: 18px; }
           <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 18 10 12l4 4 6-8"/><path d="M15 8h5v5"/></svg></span>
           <div><h3 data-i18n="f_goals_t">Goals that adapt</h3><p data-i18n="f_goals">Rarely hitting a target? Start from what you really do. Hitting it every day? Raise the bar. Daily too much? Make it three times a week.</p></div>
         </div>
+        <div class="item">
+          <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5c1.8 2 5.2 2 7 0"/><path d="M9 9.5h.01M15 9.5h.01"/></svg></span>
+          <div><h3 data-i18n="f_feel_t">How did it go?</h3><p data-i18n="f_feel">After a habit, one tap on a face. Over time you see which habits you enjoy and which feel hard.</p></div>
+        </div>
+        <div class="item">
+          <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></span>
+          <div><h3 data-i18n="f_signin_t">Start your way</h3><p data-i18n="f_signin">Continue with Google or GitHub to back up and move to a new phone, or start as a guest. No password either way.</p></div>
+        </div>
       </div>
     </div>
   </section>
@@ -363,7 +383,7 @@ footer .brand { font-size: 18px; }
     <div class="wrap">
       <div class="section-head">
         <h2 data-i18n="inside_title">A look inside</h2>
-        <p data-i18n="inside_lead">Today, your progress, a year of every habit, and a one-screen editor.</p>
+        <p data-i18n="inside_lead">Today, your progress, a year of every habit, and adding a habit step by step.</p>
       </div>
       <div class="bento">
         <figure class="tile wide">
@@ -380,11 +400,11 @@ footer .brand { font-size: 18px; }
         </figure>
         <figure class="tile">
           <div class="shot"><img data-img="g_breakdown" data-i18n-alt="alt_break" src="img/en/g_breakdown.webp" alt="Per-habit breakdown with streaks" width="760" height="580" loading="lazy"></div>
-          <figcaption><b data-i18n="g_break_t">Every habit, honestly</b><span data-i18n="g_break">How each one is going over the last 7, 30 or 90 days.</span></figcaption>
+          <figcaption><b data-i18n="g_break_t">Every habit, honestly</b><span data-i18n="g_break">How each one is going over the last 7, 30 or 90 days, or all time.</span></figcaption>
         </figure>
         <figure class="tile">
-          <div class="shot"><img data-img="g_editor" data-i18n-alt="alt_editor" src="img/en/g_editor.webp" alt="Habit editor: icon, colour and tracking type" width="760" height="547" loading="lazy"></div>
-          <figcaption><b data-i18n="g_editor_t">One-screen editor</b><span data-i18n="g_editor">Check, count or time; reminders, plans and a bad-day version.</span></figcaption>
+          <div class="shot"><img data-img="g_editor" data-i18n-alt="alt_editor" src="img/en/g_editor.webp" alt="Adding a habit: name, icon and colour" width="760" height="883" loading="lazy"></div>
+          <figcaption><b data-i18n="g_editor_t">A habit in four steps</b><span data-i18n="g_editor">What, how you count it, when, then fine-tune only if you like.</span></figcaption>
         </figure>
       </div>
     </div>
@@ -415,10 +435,10 @@ footer .brand { font-size: 18px; }
 
   <section class="alt">
     <div class="wrap split">
-      <img class="wide-img" data-i18n-alt="alt_widgets" src="screenshots/widgets_en_light.webp" alt="Today, streak, quick grid and mood widgets" loading="lazy">
+      <div class="widget-shot"><img data-img="widgets" data-i18n-alt="alt_widgets" src="img/en/widgets.webp" alt="The Today widget on a phone's home screen" width="760" height="942" loading="lazy"></div>
       <div>
         <h2 data-i18n="w_title">On your home screen and wrist</h2>
-        <p class="muted" style="margin-top:14px;font-size:18px" data-i18n="w_lead">Six widgets: Today, a single habit, this week, your streak, a quick grid of four habits and a one-tap mood. A Wear OS tile and watch app mark habits from your wrist.</p>
+        <p class="muted" style="margin-top:14px;font-size:18px" data-i18n="w_lead">Six widgets: Today, a single habit, this week, your streak, a quick grid of four habits and a one-tap mood. Add them straight from Settings; on Android 12 and up their boxes tick the moment you tap. A Wear OS tile and watch app mark habits from your wrist.</p>
         <div class="chips" aria-label="Languages">
           <span>English</span><span>Türkçe</span><span>Español</span><span>Deutsch</span><span>Français</span><span>Italiano</span><span>Português</span><span>Русский</span><span>日本語</span><span>한국어</span>
         </div>
@@ -430,7 +450,7 @@ footer .brand { font-size: 18px; }
     <div class="wrap">
       <div class="section-head">
         <h2 data-i18n="p_title">Yours, on your phone</h2>
-        <p data-i18n="p_lead">Everything lives on the device. Sync with Google only if you want it, and lock the app with a PIN or your fingerprint.</p>
+        <p data-i18n="p_lead">Everything lives on the device. Sign in with Google or GitHub only if you want backup and sync, and lock the app with a PIN or your fingerprint.</p>
       </div>
       <div class="promise">
         <div><strong data-i18n="p1_t">No ads</strong><p data-i18n="p1">Not now, not later. There is nothing to sell.</p></div>
@@ -461,7 +481,7 @@ footer .brand { font-size: 18px; }
       <div class="faq">
         <details><summary data-i18n="q1">Is it really free?</summary><p data-i18n="a1">Yes. No ads, no subscription, no paid tier. Kinmichi is open source under the MIT licence.</p></details>
         <details><summary data-i18n="q2">Why not on the Play Store?</summary><p data-i18n="a2">Staying on GitHub keeps the app independent and quick to update. Obtainium installs and updates it as smoothly as a store would.</p></details>
-        <details><summary data-i18n="q3">Where is my data?</summary><p data-i18n="a3">On your phone, in a local database. Backups are files you save yourself. Google sync is optional and off until you sign in.</p></details>
+        <details><summary data-i18n="q3">Where is my data?</summary><p data-i18n="a3">On your phone, in a local database. Backups are files you save yourself. Sync with Google or GitHub is optional and off until you sign in.</p></details>
         <details><summary data-i18n="q4">Is there an iPhone version?</summary><p data-i18n="a4">Not yet. Kinmichi is Android only for now, with an optional Wear OS watch app.</p></details>
         <details><summary data-i18n="q5">How can I help?</summary><p data-i18n-html="a5">Report a bug or share an idea in <a href="https://github.com/sametackgz41/kinmichi/issues/new/choose">GitHub issues</a>, or <a href="https://github.com/sametackgz41/kinmichi/blob/main/CONTRIBUTING.md#translating">translate it into your language</a>.</p></details>
       </div>
@@ -483,7 +503,7 @@ footer .brand { font-size: 18px; }
 <script>
 (function () {
   var DICTS = window.KINMICHI_I18N || {};
-  var LANGS = ['en', 'tr', 'es', 'de', 'pt', 'ja'];
+  var LANGS = ['en', 'tr', 'es', 'de', 'fr', 'it', 'pt', 'ru', 'ja', 'ko'];
   var HTML_LANG = { pt: 'pt-BR' };
   var EN = { doc_title: document.title, alt_pal: 'The Today screen in the {pal} palette, {mode}' };
   document.querySelectorAll('[data-i18n]').forEach(function (el) { EN[el.dataset.i18n] = el.textContent; });
