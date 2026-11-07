@@ -56,7 +56,7 @@
         <service
             android:name=".tile.TodayTileService"
             android:exported="true"
-            android:icon="@drawable/ic_widget_check"
+            android:icon="@drawable/ic_notification"
             android:label="@string/tile_today_label"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
