@@ -194,6 +194,8 @@ class CloudSyncRepository(
             if (removeLocalData) backupRepository.clearLocalData()
             settingsRepository.clearCloudSyncBaseline()
             mutableSyncState.value = CloudSyncState.Idle
+            // Back to the welcome screen: sign in again, with another account, or as a guest.
+            settingsRepository.resetInitialGoogleSetup()
         }.onFailure { error ->
             mutableSyncState.value = CloudSyncState.Error(error.safeMessage())
         }
@@ -221,6 +223,7 @@ class CloudSyncRepository(
             settingsRepository.clearCloudSyncBaseline()
             settingsRepository.setCloudSyncEnabled(false)
             mutableSyncState.value = CloudSyncState.Idle
+            settingsRepository.resetInitialGoogleSetup()
             true
         }.getOrElse { error ->
             mutableSyncState.value = CloudSyncState.Error(

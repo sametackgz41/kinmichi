@@ -86,12 +86,14 @@ fun WelcomeScreen(
     val signedIn = account as? CloudAccountState.SignedIn
     val working = syncState is CloudSyncState.Working
     if (!working) pending = null
+    // Already signed in when the screen opened (e.g. replaying the intro): don't skip ahead.
+    val signedInAtStart = androidx.compose.runtime.remember { account is CloudAccountState.SignedIn }
 
-    // After signing in, move on to the name step with the account's first name filled in.
+    // After signing in here, move on to the name step with the account's first name filled in.
     LaunchedEffect(signedIn) {
         if (signedIn != null) {
             if (!nameEdited) name = preferredGoogleName(signedIn.displayName)
-            askName = true
+            if (!signedInAtStart) askName = true
         }
     }
     androidx.activity.compose.BackHandler(enabled = askName && signedIn == null) { askName = false }
@@ -126,6 +128,11 @@ fun WelcomeScreen(
                     )
                 } else {
                     ChooseStep(
+                        signedIn = signedIn,
+                        onContinueSignedIn = {
+                            if (!nameEdited && signedIn != null) name = preferredGoogleName(signedIn.displayName)
+                            askName = true
+                        },
                         showAccounts = account !is CloudAccountState.Unavailable,
                         pending = pending,
                         enabled = activity != null && !working,
@@ -144,6 +151,8 @@ fun WelcomeScreen(
 
 @Composable
 private fun androidx.compose.foundation.layout.ColumnScope.ChooseStep(
+    signedIn: CloudAccountState.SignedIn?,
+    onContinueSignedIn: () -> Unit,
     showAccounts: Boolean,
     pending: SignInProvider?,
     enabled: Boolean,
@@ -171,6 +180,17 @@ private fun androidx.compose.foundation.layout.ColumnScope.ChooseStep(
     Spacer(Modifier.height(24.dp))
     BenefitList()
     Spacer(Modifier.height(28.dp))
+    if (signedIn != null) {
+        SignedInRow(signedIn)
+        Spacer(Modifier.height(12.dp))
+        Button(
+            onClick = onContinueSignedIn,
+            shapes = ButtonDefaults.shapes(),
+            modifier = Modifier.fillMaxWidth().height(56.dp),
+        ) { Text(stringResource(R.string.continue_label)) }
+        Spacer(Modifier.weight(1f).height(20.dp))
+        return
+    }
     if (showAccounts) {
         ProviderButton(
             label = stringResource(R.string.sign_in_with_google),

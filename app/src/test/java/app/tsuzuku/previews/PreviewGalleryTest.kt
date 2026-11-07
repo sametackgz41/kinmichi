@@ -273,8 +273,9 @@ class PreviewGalleryTest {
     @Test fun welcomeGuestNameFilledTr() = renderWelcome("tr", false, nameStep = true, name = "Samet")
     @Test fun welcomeGuestNameFilledTrDark() = renderWelcome("tr", true, nameStep = true, name = "Samet")
     @Test fun welcomeSignedInTr() = renderWelcome("tr", false, signedIn = true)
+    @Test fun welcomeAlreadySignedInTr() = renderWelcome("tr", false, signedIn = true, chooseStep = true)
 
-    private fun renderWelcome(lang: String, dark: Boolean, signedIn: Boolean = false, nameStep: Boolean = false, name: String = "") {
+    private fun renderWelcome(lang: String, dark: Boolean, signedIn: Boolean = false, nameStep: Boolean = false, name: String = "", chooseStep: Boolean = false) {
         setVariant(lang, dark)
         val account = if (signedIn) {
             app.tsuzuku.data.CloudAccountState.SignedIn("Samet Example", "samet@example.com", null)
@@ -289,12 +290,12 @@ class PreviewGalleryTest {
                     initialName = name,
                     onSignIn = { _, _ -> },
                     onFinish = { _, _ -> },
-                    startOnName = nameStep,
+                    startOnName = nameStep || (signedIn && !chooseStep),
                 )
             }
         }
         compose.mainClock.advanceTimeBy(1_000)
-        captureScreen("welcome_${lang}_${if (dark) "dark" else "light"}" + (if (signedIn) "_signedin" else "") + (if (nameStep) "_name" else "") + (if (name.isNotEmpty()) "_filled" else ""))
+        captureScreen("welcome_${lang}_${if (dark) "dark" else "light"}" + (if (signedIn) "_signedin" else "") + (if (nameStep) "_name" else "") + (if (name.isNotEmpty()) "_filled" else "") + (if (chooseStep) "_choose" else ""))
     }
 
     private fun renderTour(lang: String, dark: Boolean = false) {

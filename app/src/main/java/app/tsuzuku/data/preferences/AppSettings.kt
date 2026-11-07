@@ -133,6 +133,8 @@ class SettingsRepository(context: Context) {
     fun setProtectScreen(value: Boolean) = update(KEY_PROTECT_SCREEN, value)
     fun completeOnboarding() = update(KEY_ONBOARDING_COMPLETED, true)
     fun completeInitialGoogleSetup() = update(KEY_INITIAL_GOOGLE_SETUP_COMPLETED, true)
+    /** Shows the welcome (sign-in) screen again, e.g. after signing out. */
+    fun resetInitialGoogleSetup() = update(KEY_INITIAL_GOOGLE_SETUP_COMPLETED, false)
     fun setCloudSyncEnabled(value: Boolean) = update(KEY_CLOUD_SYNC_ENABLED, value)
     fun setTodaySectionOrder(value: String) = update(KEY_TODAY_SECTION_ORDER, value)
     fun setTodayHiddenSections(value: String) = update(KEY_TODAY_HIDDEN_SECTIONS, value)
