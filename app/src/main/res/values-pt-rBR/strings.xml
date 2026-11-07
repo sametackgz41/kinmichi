@@ -831,6 +831,11 @@
     <string name="account_safe_title">Seus hábitos estão seguros</string>
     <string name="account_not_synced_title">Ainda não sincronizado</string>
     <string name="account_delete_short">Excluir conta</string>
+    <string name="appearance_follow_system">Seguir o sistema</string>
+    <string name="appearance_follow_system_desc">Como seu celular: claro de dia, escuro à noite</string>
+    <string name="appearance_desc">Tema, paleta e preto puro</string>
+    <string name="appearance_theme_palette">Tema e paleta</string>
+    <string name="appearance_grid_hint">Toque na metade clara ou escura de uma paleta para usá-la assim.</string>
     <plurals name="streak_days">
         <item quantity="one">Sequência de %d dia</item>
         <item quantity="other">Sequência de %d dias</item>

@@ -1231,4 +1231,9 @@
     <string name="account_safe_title">Your habits are safe</string>
     <string name="account_not_synced_title">Not synced yet</string>
     <string name="account_delete_short">Delete account</string>
+    <string name="appearance_follow_system">Follow the system</string>
+    <string name="appearance_follow_system_desc">Light by day, dark at night, like your phone</string>
+    <string name="appearance_desc">Theme, palette and pure black</string>
+    <string name="appearance_theme_palette">Theme and palette</string>
+    <string name="appearance_grid_hint">Tap the light or dark half of a palette to use it that way.</string>
 </resources>

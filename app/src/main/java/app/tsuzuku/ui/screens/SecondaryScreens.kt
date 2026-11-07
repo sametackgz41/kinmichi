@@ -107,6 +107,7 @@ fun ProfileScreen(
     onSetShowDailySummary: (Boolean) -> Unit,
     onSetProtectScreen: (Boolean) -> Unit,
     onOpenCloudAccount: () -> Unit,
+    onOpenAppearance: () -> Unit = {},
     onOpenPlanning: () -> Unit,
     onOpenSecurity: () -> Unit,
     onOpenBackup: () -> Unit,
@@ -232,23 +233,10 @@ fun ProfileScreen(
         item {
             SettingsCard {
                 ValueSettingRow(
-                    Icons.Rounded.DarkMode,
-                    stringResource(R.string.theme_mode_label),
-                    themeLabel(settings.theme),
-                    onClick = { activeDialog = DIALOG_THEME },
-                )
-                ValueSettingRow(
                     Icons.Rounded.Palette,
-                    stringResource(R.string.palette_label),
-                    paletteName(settings.palette),
-                    onClick = { activeDialog = DIALOG_PALETTE },
-                )
-                SwitchSettingRow(
-                    Icons.Rounded.Contrast,
-                    stringResource(R.string.pure_black_label),
-                    stringResource(R.string.pure_black_desc),
-                    settings.pureBlack,
-                    onSetPureBlack,
+                    stringResource(R.string.appearance_theme_palette),
+                    "${themeLabel(settings.theme)} · ${paletteName(settings.palette)}",
+                    onClick = onOpenAppearance,
                 )
                 WidgetOpacityRow(settings.widgetOpacity, onSetWidgetOpacity)
                 ValueSettingRow(

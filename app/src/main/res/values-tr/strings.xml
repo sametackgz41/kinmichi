@@ -1230,4 +1230,9 @@
     <string name="account_safe_title">Alışkanlıkların güvende</string>
     <string name="account_not_synced_title">Henüz eşitlenmedi</string>
     <string name="account_delete_short">Hesabı sil</string>
+    <string name="appearance_follow_system">Sistemi takip et</string>
+    <string name="appearance_follow_system_desc">Telefonun gibi: gündüz açık, gece koyu</string>
+    <string name="appearance_desc">Tema, renk paleti ve saf siyah</string>
+    <string name="appearance_theme_palette">Tema ve renk paleti</string>
+    <string name="appearance_grid_hint">Bir paletin açık ya da koyu yarısına dokun, o şekilde kullan.</string>
 </resources>

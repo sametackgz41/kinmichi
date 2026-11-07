@@ -831,6 +831,11 @@
     <string name="account_safe_title">習慣は安全に保存されています</string>
     <string name="account_not_synced_title">まだ同期していません</string>
     <string name="account_delete_short">アカウント削除</string>
+    <string name="appearance_follow_system">システムに合わせる</string>
+    <string name="appearance_follow_system_desc">スマホに合わせて昼はライト、夜はダーク</string>
+    <string name="appearance_desc">テーマ、パレット、真っ黒</string>
+    <string name="appearance_theme_palette">テーマとパレット</string>
+    <string name="appearance_grid_hint">パレットのライト側かダーク側をタップして選びます。</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

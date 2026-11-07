@@ -831,6 +831,11 @@
     <string name="account_safe_title">Deine Gewohnheiten sind sicher</string>
     <string name="account_not_synced_title">Noch nicht synchronisiert</string>
     <string name="account_delete_short">Konto löschen</string>
+    <string name="appearance_follow_system">System folgen</string>
+    <string name="appearance_follow_system_desc">Wie dein Handy: tagsüber hell, nachts dunkel</string>
+    <string name="appearance_desc">Design, Palette und reines Schwarz</string>
+    <string name="appearance_theme_palette">Design und Palette</string>
+    <string name="appearance_grid_hint">Tippe auf die helle oder dunkle Hälfte einer Palette, um sie so zu nutzen.</string>
     <plurals name="streak_days">
         <item quantity="one">%d Tag in Folge</item>
         <item quantity="other">%d Tage in Folge</item>

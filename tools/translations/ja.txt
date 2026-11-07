@@ -845,3 +845,8 @@ account_auto_sync_short|自動で同期
 account_safe_title|習慣は安全に保存されています
 account_not_synced_title|まだ同期していません
 account_delete_short|アカウント削除
+appearance_follow_system|システムに合わせる
+appearance_follow_system_desc|スマホに合わせて昼はライト、夜はダーク
+appearance_desc|テーマ、パレット、真っ黒
+appearance_theme_palette|テーマとパレット
+appearance_grid_hint|パレットのライト側かダーク側をタップして選びます。

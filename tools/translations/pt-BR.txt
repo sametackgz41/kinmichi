@@ -851,3 +851,8 @@ account_auto_sync_short|Sincronizar automaticamente
 account_safe_title|Seus hábitos estão seguros
 account_not_synced_title|Ainda não sincronizado
 account_delete_short|Excluir conta
+appearance_follow_system|Seguir o sistema
+appearance_follow_system_desc|Como seu celular: claro de dia, escuro à noite
+appearance_desc|Tema, paleta e preto puro
+appearance_theme_palette|Tema e paleta
+appearance_grid_hint|Toque na metade clara ou escura de uma paleta para usá-la assim.

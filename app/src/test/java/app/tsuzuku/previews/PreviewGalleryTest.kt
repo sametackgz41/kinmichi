@@ -275,6 +275,32 @@ class PreviewGalleryTest {
     @Test fun welcomeSignedInTr() = renderWelcome("tr", false, signedIn = true)
     @Test fun welcomeAlreadySignedInTr() = renderWelcome("tr", false, signedIn = true, chooseStep = true)
 
+    // Appearance: three layouts for theme + palette together.
+    @Test fun appearancePreviewTr() = renderAppearance(app.tsuzuku.ui.screens.AppearanceLayout.Preview, false)
+    @Test fun appearanceCardsTr() = renderAppearance(app.tsuzuku.ui.screens.AppearanceLayout.Cards, false)
+    @Test fun appearanceGridTr() = renderAppearance(app.tsuzuku.ui.screens.AppearanceLayout.Grid, false)
+    @Test fun appearancePreviewTrDark() = renderAppearance(app.tsuzuku.ui.screens.AppearanceLayout.Preview, true)
+    @Test fun appearanceCardsTrDark() = renderAppearance(app.tsuzuku.ui.screens.AppearanceLayout.Cards, true)
+    @Test fun appearanceGridTrDark() = renderAppearance(app.tsuzuku.ui.screens.AppearanceLayout.Grid, true)
+
+    private fun renderAppearance(layout: app.tsuzuku.ui.screens.AppearanceLayout, dark: Boolean) {
+        setVariant("tr", dark)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = dark) {
+                app.tsuzuku.ui.screens.AppearanceScreen(
+                    theme = if (dark) app.tsuzuku.data.preferences.ThemePreference.Dark else app.tsuzuku.data.preferences.ThemePreference.Light,
+                    palette = app.tsuzuku.data.preferences.PalettePreference.Washi,
+                    pureBlack = false,
+                    systemDark = dark,
+                    onBack = {}, onSetTheme = {}, onSetPalette = {}, onSetPureBlack = {},
+                    layout = layout,
+                )
+            }
+        }
+        compose.mainClock.advanceTimeBy(1_000)
+        captureScreen("appearance_${layout.name.lowercase()}_tr_${if (dark) "dark" else "light"}")
+    }
+
     // Account page: three signed-in layouts to choose from, plus signed out.
     @Test fun accountCardsTr() = renderAccount(app.tsuzuku.ui.screens.AccountLayout.Cards, false)
     @Test fun accountListTr() = renderAccount(app.tsuzuku.ui.screens.AccountLayout.List, false)

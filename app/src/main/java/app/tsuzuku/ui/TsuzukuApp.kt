@@ -624,6 +624,7 @@ fun TsuzukuApp(
                     onSetShowDailySummary = onSetShowDailySummary,
                     onSetProtectScreen = onSetProtectScreen,
                     onOpenCloudAccount = { navController.navigate("cloud-account") },
+                    onOpenAppearance = { navController.navigate("appearance") },
                     onOpenPlanning = { navController.navigate("planning") },
                     onOpenSecurity = { navController.navigate("security") },
                     onOpenBackup = { navController.navigate("backup") },
@@ -749,6 +750,18 @@ fun TsuzukuApp(
                     onBack = navController::popBackStack,
                     onCreate = categoryViewModel::create,
                     onDelete = categoryViewModel::delete,
+                )
+            }
+            composable("appearance") {
+                app.tsuzuku.ui.screens.AppearanceScreen(
+                    theme = settings.theme,
+                    palette = settings.palette,
+                    pureBlack = settings.pureBlack,
+                    systemDark = androidx.compose.foundation.isSystemInDarkTheme(),
+                    onBack = navController::popBackStack,
+                    onSetTheme = onSetTheme,
+                    onSetPalette = onSetPalette,
+                    onSetPureBlack = onSetPureBlack,
                 )
             }
             composable("cloud-account") {
