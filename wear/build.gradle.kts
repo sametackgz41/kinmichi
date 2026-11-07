@@ -38,6 +38,10 @@ android {
     buildFeatures {
         compose = true
     }
+
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+    }
 }
 
 dependencies {
@@ -55,4 +59,22 @@ dependencies {
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.json:json:20251224")
+    // JVM screenshot rendering of the watch screens (no emulator needed)
+    testImplementation("org.robolectric:robolectric:4.14.1")
+    testImplementation(platform("androidx.compose:compose-bom:2026.06.00"))
+    testImplementation("androidx.compose.ui:ui-test-junit4")
+    // Debug only: lets the preview test inflate the tile like a watch would.
+    debugImplementation("androidx.wear.tiles:tiles-renderer:1.6.2")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
+}
+
+// Watch previews render on request only:
+//   ./gradlew :wear:testDebugUnitTest -Ppreviews --tests "*WatchPreviewTest*"
+tasks.withType<Test>().configureEach {
+    if (!project.hasProperty("previews")) {
+        exclude("**/WatchPreviewTest*")
+    }
+    systemProperty("previews.dir", rootProject.layout.projectDirectory.dir("previews/images").asFile.absolutePath)
+    maxHeapSize = "2g"
+    jvmArgs("-Duser.language=en", "-Duser.country=US", "--add-opens=java.base/java.nio=ALL-UNNAMED")
 }

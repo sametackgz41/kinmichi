@@ -38,8 +38,14 @@ private fun WatchToday() {
     val context = LocalContext.current
     val today by WatchStore.flow(context).collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
-    val listState = rememberTransformingLazyColumnState()
     LaunchedEffect(Unit) { PhoneLink.refresh(context.applicationContext) }
+    WatchTodayContent(today) { id -> scope.launch { PhoneLink.toggle(context.applicationContext, id) } }
+}
+
+/** The list itself, without the Data Layer, so previews can render it. */
+@Composable
+internal fun WatchTodayContent(today: WatchToday, onToggle: (Long) -> Unit) {
+    val listState = rememberTransformingLazyColumnState()
     AppScaffold {
         ScreenScaffold(scrollState = listState) { padding ->
             TransformingLazyColumn(state = listState, contentPadding = padding) {
@@ -66,7 +72,7 @@ private fun WatchToday() {
                     items(today.habits, key = { it.id }) { habit ->
                         CheckboxButton(
                             checked = habit.done,
-                            onCheckedChange = { scope.launch { PhoneLink.toggle(context.applicationContext, habit.id) } },
+                            onCheckedChange = { onToggle(habit.id) },
                             modifier = Modifier.fillMaxWidth(),
                             icon = { Text(habit.emoji) },
                             secondaryLabel = if (habit.detail.isNotEmpty()) {
