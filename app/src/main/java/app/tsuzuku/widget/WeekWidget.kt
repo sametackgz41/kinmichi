@@ -1,5 +1,7 @@
 package app.tsuzuku.widget
 
+import androidx.compose.runtime.remember
+import kotlinx.coroutines.flow.first
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -69,9 +71,13 @@ class WeekWidget : GlanceAppWidget() {
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         val app = context.applicationContext as TsuzukuApplication
+        val historyFlow = app.habitRepository.observeHistory()
+        val todayFlow = app.habitRepository.observeToday()
+        val initialHistory = historyFlow.first()
+        val initialToday = todayFlow.first()
         provideContent {
-            val history by app.habitRepository.observeHistory().collectAsState(initial = null)
-            val today by app.habitRepository.observeToday().collectAsState(initial = null)
+            val history by remember { historyFlow }.collectAsState(initial = initialHistory)
+            val today by remember { todayFlow }.collectAsState(initial = initialToday)
             val locked = app.settingsRepository.settings.value.appLockEnabled
             TsuzukuGlanceTheme {
                 WeekContent(

@@ -1,5 +1,6 @@
 package app.tsuzuku.widget
 
+import androidx.compose.runtime.remember
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -56,9 +57,13 @@ class StreakWidget : GlanceAppWidget() {
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         val app = context.applicationContext as TsuzukuApplication
+        val todayFlow = app.habitRepository.observeToday()
+        val historyFlow = app.habitRepository.observeHistory()
+        val initialToday = todayFlow.first()
+        val initialHistory = historyFlow.first()
         provideContent {
-            val habits by app.habitRepository.observeToday().collectAsState(initial = emptyList())
-            val history by app.habitRepository.observeHistory().collectAsState(initial = null)
+            val habits by remember { todayFlow }.collectAsState(initial = initialToday)
+            val history by remember { historyFlow }.collectAsState(initial = initialHistory)
             val top = habits.maxByOrNull { it.streakDays }
             val today = LocalDate.now()
             val comebacks = history?.comebackCount(today.withDayOfMonth(1), today) ?: 0
@@ -118,8 +123,10 @@ class QuickGridWidget : GlanceAppWidget() {
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         val app = context.applicationContext as TsuzukuApplication
+        val todayFlow = app.habitRepository.observeToday()
+        val initialToday = todayFlow.first()
         provideContent {
-            val habits by app.habitRepository.observeToday().collectAsState(initial = emptyList())
+            val habits by remember { todayFlow }.collectAsState(initial = initialToday)
             val tiles = habits.filter { it.habit.type != HabitType.Duration }.sortedBy { it.isComplete }.take(4)
             TsuzukuGlanceTheme { QuickGridContent(tiles, locked = app.settingsRepository.settings.value.appLockEnabled) }
         }
@@ -210,8 +217,10 @@ class MoodWidget : GlanceAppWidget() {
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         val app = context.applicationContext as TsuzukuApplication
+        val reviewFlow = app.reviewRepository.observeDailyReview(LocalDate.now().toEpochDay())
+        val initialReview = reviewFlow.first()
         provideContent {
-            val review by app.reviewRepository.observeDailyReview(LocalDate.now().toEpochDay()).collectAsState(initial = null)
+            val review by remember { reviewFlow }.collectAsState(initial = initialReview)
             TsuzukuGlanceTheme { MoodContent(selected = review?.mood) }
         }
     }

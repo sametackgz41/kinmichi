@@ -1,5 +1,7 @@
 package app.tsuzuku.widget
 
+import androidx.compose.runtime.remember
+import kotlinx.coroutines.flow.first
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -69,8 +71,11 @@ class TodayWidget : GlanceAppWidget() {
         val app = context.applicationContext as TsuzukuApplication
         val widgetId = GlanceAppWidgetManager(context).getAppWidgetId(id)
         val selected = WidgetSettings(context).selectedHabitIds(widgetId)
+        // Load before drawing so a fresh session never shows an empty first frame (that flickered).
+        val todayFlow = app.habitRepository.observeToday()
+        val initial = todayFlow.first()
         provideContent {
-            val habits by app.habitRepository.observeToday().collectAsState(initial = null)
+            val habits by remember { todayFlow }.collectAsState(initial = initial)
             val locked = app.settingsRepository.settings.value.appLockEnabled
             val visible = habits.orEmpty()
                 .let { all -> if (selected.isEmpty()) all else all.filter { it.habit.id in selected } }

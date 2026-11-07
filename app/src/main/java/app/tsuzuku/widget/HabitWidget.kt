@@ -1,5 +1,7 @@
 package app.tsuzuku.widget
 
+import androidx.compose.runtime.remember
+import kotlinx.coroutines.flow.first
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -59,8 +61,10 @@ class HabitWidget : GlanceAppWidget() {
         val app = context.applicationContext as TsuzukuApplication
         val widgetId = GlanceAppWidgetManager(context).getAppWidgetId(id)
         val chosen = WidgetSettings(context).selectedHabitIds(widgetId).firstOrNull()
+        val todayFlow = app.habitRepository.observeToday()
+        val initial = todayFlow.first()
         provideContent {
-            val habits by app.habitRepository.observeToday().collectAsState(initial = null)
+            val habits by remember { todayFlow }.collectAsState(initial = initial)
             val locked = app.settingsRepository.settings.value.appLockEnabled
             val item = habits?.let { list -> list.firstOrNull { it.habit.id == chosen } ?: list.firstOrNull() }
             TsuzukuGlanceTheme { HabitContent(item, locked) }
