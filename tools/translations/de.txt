@@ -875,3 +875,24 @@ language_search|Sprache suchen
 language_current|Aktuell
 language_all|Alle Sprachen
 widgets_add_to_home_long|Zum Startbildschirm hinzufügen
+editor_section_what|Gewohnheit
+editor_section_how|Wie du sie erfasst
+editor_section_when|Wann
+editor_more_title|Weitere Optionen
+editor_group_goal|Ziel und Grenzen
+editor_group_goal_desc|Aufbauen oder lassen, Wochenziel, Schwierigkeit, Gesundheit
+editor_group_plan|Plan und kleiner Schritt
+editor_group_plan_desc|Wenn-dann-Plan, Version für schlechte Tage, Routine
+editor_group_schedule|Zeitplan
+editor_group_schedule_desc|Alle paar Tage, Start und Ende, Pause
+editor_group_tags|Tags
+editor_group_tags_desc|Für Suche und Fortschritt gruppieren
+editor_fine_tune|Feinschliff
+editor_step_what_title|Was möchtest du tun?
+editor_step_what_body|Gib ihr einen Namen, ein Symbol und eine Farbe.
+editor_step_how_title|Wie zählst du sie?
+editor_step_how_body|Ein Haken, eine Zahl wie Gläser Wasser oder Zeit.
+editor_step_when_title|Wann passiert sie?
+editor_step_when_body|Wähle die Tage und, wenn du magst, eine Erinnerung.
+editor_step_more_title|Feinschliff (optional)
+editor_step_more_body|Das alles kann warten. Speichere, wenn du bereit bist.

@@ -855,6 +855,27 @@
     <string name="language_current">現在</string>
     <string name="language_all">すべての言語</string>
     <string name="widgets_add_to_home_long">ホーム画面に追加</string>
+    <string name="editor_section_what">習慣</string>
+    <string name="editor_section_how">記録のしかた</string>
+    <string name="editor_section_when">いつ</string>
+    <string name="editor_more_title">その他のオプション</string>
+    <string name="editor_group_goal">目標と上限</string>
+    <string name="editor_group_goal_desc">続ける・やめる、週の目標、難易度、健康データ</string>
+    <string name="editor_group_plan">プランと小さな一歩</string>
+    <string name="editor_group_plan_desc">もし〜なら、調子の悪い日の版、ルーティン</string>
+    <string name="editor_group_schedule">スケジュール</string>
+    <string name="editor_group_schedule_desc">数日おき、開始・終了日、一時停止</string>
+    <string name="editor_group_tags">タグ</string>
+    <string name="editor_group_tags_desc">検索と進捗のためにまとめる</string>
+    <string name="editor_fine_tune">細かく設定</string>
+    <string name="editor_step_what_title">何をしたいですか？</string>
+    <string name="editor_step_what_body">名前、アイコン、色を決めましょう。</string>
+    <string name="editor_step_how_title">どう数えますか？</string>
+    <string name="editor_step_how_body">チェック、水の杯数のような回数、または時間。</string>
+    <string name="editor_step_when_title">いつしますか？</string>
+    <string name="editor_step_when_body">曜日と、必要ならリマインダーを選びます。</string>
+    <string name="editor_step_more_title">細かい設定（任意）</string>
+    <string name="editor_step_more_body">ここは後回しでOK。準備ができたら保存しましょう。</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

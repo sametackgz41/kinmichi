@@ -24,6 +24,7 @@ import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.glance.ExperimentalGlanceApi
@@ -284,6 +285,36 @@ class PreviewGalleryTest {
     @Test fun welcomeGuestNameFilledTrDark() = renderWelcome("tr", true, nameStep = true, name = "Samet")
     @Test fun welcomeSignedInTr() = renderWelcome("tr", false, signedIn = true)
     @Test fun welcomeAlreadySignedInTr() = renderWelcome("tr", false, signedIn = true, chooseStep = true)
+
+    // Habit editor: three layouts (new habit), plus an open "more" group.
+    @Test fun editorCardsTr() = renderEditorLayout(app.tsuzuku.ui.screens.EditorLayout.Cards, false)
+    @Test fun editorStepsTr() = renderEditorLayout(app.tsuzuku.ui.screens.EditorLayout.Steps, false)
+    @Test fun editorCardsTrDark() = renderEditorLayout(app.tsuzuku.ui.screens.EditorLayout.Cards, true)
+    @Test fun editorStepsTr2() = renderEditorLayout(app.tsuzuku.ui.screens.EditorLayout.Steps, false, step = 2)
+    @Test fun editorCardsMoreTr() = renderEditorLayout(app.tsuzuku.ui.screens.EditorLayout.Cards, false, open = app.tsuzuku.ui.screens.AdvancedGroup.Goal, scrolled = true)
+
+    private fun renderEditorLayout(
+        layout: app.tsuzuku.ui.screens.EditorLayout,
+        dark: Boolean,
+        step: Int = 0,
+        open: app.tsuzuku.ui.screens.AdvancedGroup? = null,
+        scrolled: Boolean = false,
+    ) {
+        setVariant("tr", dark)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = dark) {
+                app.tsuzuku.ui.screens.HabitEditorContent(
+                    existing = null, onBack = {}, onSave = {}, layout = layout, initialStep = step, openGroup = open,
+                )
+            }
+        }
+        compose.mainClock.advanceTimeBy(1_000)
+        if (scrolled) {
+            compose.onNodeWithText(compose.activity.getString(app.tsuzuku.R.string.editor_group_goal)).performScrollTo()
+            compose.mainClock.advanceTimeBy(1_000)
+        }
+        captureScreen("editorlayout_${layout.name.lowercase()}_tr_${if (dark) "dark" else "light"}" + (if (step > 0) "_s$step" else "") + (if (open != null) "_open" else ""))
+    }
 
     // Widget page: three layouts.
     @Test fun widgetPageListTr() = renderWidgetPage(app.tsuzuku.ui.screens.WidgetsLayout.List, false)

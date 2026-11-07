@@ -1255,4 +1255,25 @@
     <string name="language_current">Current</string>
     <string name="language_all">All languages</string>
     <string name="widgets_add_to_home_long">Add to home screen</string>
+    <string name="editor_section_what">Habit</string>
+    <string name="editor_section_how">How you track it</string>
+    <string name="editor_section_when">When</string>
+    <string name="editor_more_title">More options</string>
+    <string name="editor_group_goal">Goal and limits</string>
+    <string name="editor_group_goal_desc">Build or quit, weekly goal, difficulty, health data</string>
+    <string name="editor_group_plan">Plan and small step</string>
+    <string name="editor_group_plan_desc">If–then plan, bad-day version, routine</string>
+    <string name="editor_group_schedule">Schedule</string>
+    <string name="editor_group_schedule_desc">Every few days, start and end dates, pause</string>
+    <string name="editor_group_tags">Tags</string>
+    <string name="editor_group_tags_desc">Group habits for search and progress</string>
+    <string name="editor_fine_tune">Fine-tune</string>
+    <string name="editor_step_what_title">What do you want to do?</string>
+    <string name="editor_step_what_body">Give it a name, an icon and a colour.</string>
+    <string name="editor_step_how_title">How will you count it?</string>
+    <string name="editor_step_how_body">A simple check, a count like glasses of water, or time.</string>
+    <string name="editor_step_when_title">When does it happen?</string>
+    <string name="editor_step_when_body">Pick the days, and a reminder if you like.</string>
+    <string name="editor_step_more_title">Fine-tune (optional)</string>
+    <string name="editor_step_more_body">Everything here can wait. Save whenever you\'re ready.</string>
 </resources>

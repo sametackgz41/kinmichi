@@ -875,3 +875,24 @@ language_search|Rechercher une langue
 language_current|Actuelle
 language_all|Toutes les langues
 widgets_add_to_home_long|Ajouter à l'écran d'accueil
+editor_section_what|Habitude
+editor_section_how|Comment la suivre
+editor_section_when|Quand
+editor_more_title|Plus d'options
+editor_group_goal|Objectif et limites
+editor_group_goal_desc|Créer ou arrêter, objectif hebdo, difficulté, santé
+editor_group_plan|Plan et petit pas
+editor_group_plan_desc|Plan si-alors, version jour difficile, routine
+editor_group_schedule|Programme
+editor_group_schedule_desc|Tous les quelques jours, dates, pause
+editor_group_tags|Étiquettes
+editor_group_tags_desc|Regrouper pour la recherche et les progrès
+editor_fine_tune|Affiner
+editor_step_what_title|Que veux-tu faire ?
+editor_step_what_body|Donne-lui un nom, une icône et une couleur.
+editor_step_how_title|Comment la compter ?
+editor_step_how_body|Une simple coche, un nombre comme des verres d'eau, ou du temps.
+editor_step_when_title|Quand a-t-elle lieu ?
+editor_step_when_body|Choisis les jours, et un rappel si tu veux.
+editor_step_more_title|Affiner (facultatif)
+editor_step_more_body|Tout ceci peut attendre. Enregistre quand tu veux.

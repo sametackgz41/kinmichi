@@ -875,3 +875,24 @@ language_search|Buscar idioma
 language_current|Actual
 language_all|Todos los idiomas
 widgets_add_to_home_long|Añadir a la pantalla de inicio
+editor_section_what|Hábito
+editor_section_how|Cómo se registra
+editor_section_when|Cuándo
+editor_more_title|Más opciones
+editor_group_goal|Objetivo y límites
+editor_group_goal_desc|Crear o dejar, meta semanal, dificultad, salud
+editor_group_plan|Plan y paso pequeño
+editor_group_plan_desc|Plan si-entonces, versión de día malo, rutina
+editor_group_schedule|Calendario
+editor_group_schedule_desc|Cada pocos días, fechas, pausa
+editor_group_tags|Etiquetas
+editor_group_tags_desc|Agrupa para buscar y ver el progreso
+editor_fine_tune|Ajustar
+editor_step_what_title|¿Qué quieres hacer?
+editor_step_what_body|Ponle nombre, icono y color.
+editor_step_how_title|¿Cómo lo contarás?
+editor_step_how_body|Una marca, una cuenta como vasos de agua o tiempo.
+editor_step_when_title|¿Cuándo lo harás?
+editor_step_when_body|Elige los días y, si quieres, un recordatorio.
+editor_step_more_title|Ajustes (opcional)
+editor_step_more_body|Todo esto puede esperar. Guarda cuando quieras.

@@ -887,3 +887,24 @@ language_search|Поиск языка
 language_current|Текущий
 language_all|Все языки
 widgets_add_to_home_long|Добавить на главный экран
+editor_section_what|Привычка
+editor_section_how|Как отслеживать
+editor_section_when|Когда
+editor_more_title|Дополнительно
+editor_group_goal|Цель и пределы
+editor_group_goal_desc|Завести или бросить, цель на неделю, сложность, здоровье
+editor_group_plan|План и маленький шаг
+editor_group_plan_desc|План «если — то», вариант для тяжёлого дня, ритуал
+editor_group_schedule|Расписание
+editor_group_schedule_desc|Раз в несколько дней, даты, пауза
+editor_group_tags|Теги
+editor_group_tags_desc|Группировка для поиска и прогресса
+editor_fine_tune|Тонкая настройка
+editor_step_what_title|Что вы хотите делать?
+editor_step_what_body|Дайте название, значок и цвет.
+editor_step_how_title|Как будете считать?
+editor_step_how_body|Отметка, количество вроде стаканов воды или время.
+editor_step_when_title|Когда это происходит?
+editor_step_when_body|Выберите дни и, если хотите, напоминание.
+editor_step_more_title|Тонкая настройка (необязательно)
+editor_step_more_body|Всё это может подождать. Сохраните, когда будете готовы.

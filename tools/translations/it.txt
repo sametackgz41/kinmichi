@@ -875,3 +875,24 @@ language_search|Cerca lingua
 language_current|Attuale
 language_all|Tutte le lingue
 widgets_add_to_home_long|Aggiungi alla schermata Home
+editor_section_what|Abitudine
+editor_section_how|Come monitorarla
+editor_section_when|Quando
+editor_more_title|Altre opzioni
+editor_group_goal|Obiettivo e limiti
+editor_group_goal_desc|Creare o smettere, obiettivo settimanale, difficoltà, salute
+editor_group_plan|Piano e piccolo passo
+editor_group_plan_desc|Piano se-allora, versione per i giorni no, routine
+editor_group_schedule|Programma
+editor_group_schedule_desc|Ogni pochi giorni, date, pausa
+editor_group_tags|Tag
+editor_group_tags_desc|Raggruppa per ricerca e progressi
+editor_fine_tune|Rifinisci
+editor_step_what_title|Cosa vuoi fare?
+editor_step_what_body|Dalle un nome, un'icona e un colore.
+editor_step_how_title|Come la conterai?
+editor_step_how_body|Una spunta, un conteggio come bicchieri d'acqua o il tempo.
+editor_step_when_title|Quando avviene?
+editor_step_when_body|Scegli i giorni e, se vuoi, un promemoria.
+editor_step_more_title|Rifinitura (facoltativa)
+editor_step_more_body|Tutto qui può aspettare. Salva quando vuoi.

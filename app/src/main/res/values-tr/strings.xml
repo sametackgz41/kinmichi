@@ -1254,4 +1254,25 @@
     <string name="language_current">Şu anki</string>
     <string name="language_all">Tüm diller</string>
     <string name="widgets_add_to_home_long">Ana ekrana ekle</string>
+    <string name="editor_section_what">Alışkanlık</string>
+    <string name="editor_section_how">Nasıl takip edilir</string>
+    <string name="editor_section_when">Ne zaman</string>
+    <string name="editor_more_title">Daha fazla seçenek</string>
+    <string name="editor_group_goal">Hedef ve sınırlar</string>
+    <string name="editor_group_goal_desc">Edin ya da bırak, haftalık hedef, zorluk, sağlık verisi</string>
+    <string name="editor_group_plan">Plan ve küçük adım</string>
+    <string name="editor_group_plan_desc">Eğer-o zaman planı, kötü gün sürümü, rutin</string>
+    <string name="editor_group_schedule">Program</string>
+    <string name="editor_group_schedule_desc">Birkaç günde bir, başlangıç ve bitiş, duraklat</string>
+    <string name="editor_group_tags">Etiketler</string>
+    <string name="editor_group_tags_desc">Arama ve ilerleme için grupla</string>
+    <string name="editor_fine_tune">İnce ayar</string>
+    <string name="editor_step_what_title">Ne yapmak istiyorsun?</string>
+    <string name="editor_step_what_body">Bir ad, simge ve renk ver.</string>
+    <string name="editor_step_how_title">Nasıl sayacaksın?</string>
+    <string name="editor_step_how_body">Basit bir işaret, bardak su gibi bir sayı ya da süre.</string>
+    <string name="editor_step_when_title">Ne zaman yapacaksın?</string>
+    <string name="editor_step_when_body">Günleri seç, istersen bir hatırlatma ekle.</string>
+    <string name="editor_step_more_title">İnce ayar (isteğe bağlı)</string>
+    <string name="editor_step_more_body">Buradakilerin hepsi bekleyebilir. Hazır olunca kaydet.</string>
 </resources>
