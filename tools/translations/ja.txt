@@ -803,7 +803,7 @@ welcome_body|「今日」画面が毎朝お名前であいさつします。設�
 welcome_name_hint|お名前
 welcome_sync_title|バックアップと同期
 welcome_optional|任意
-welcome_sync_body|Google でログインすると、機種変更しても習慣を引き継げます。あとで設定からオン・オフできます。
+welcome_sync_body|機種変更しても習慣を引き継げます。パスワード不要です。
 welcome_signed_in|%1$s でログイン中
 welcome_private_note|同期をオンにしない限り、すべてスマホの中に残ります。
 replay_intro|紹介をもう一度見る
@@ -821,3 +821,17 @@ most_enjoyed_title|いちばん楽しめている習慣
 most_enjoyed_share|😊 %2$d回中%1$d回
 feeling_setting|どうだったか聞く
 feeling_setting_description|「今日」で習慣を完了したら、顔をワンタップ
+sign_in_with_github|GitHub で続ける
+welcome_sync_divider|バックアップと同期・任意
+welcome_continue_without|アカウントなしで続ける
+sign_in_use_other_provider|このメールは Google でログイン済みです。「Google で続ける」を使ってください。
+welcome_hello_title|Kinmichi へようこそ
+welcome_hello_body|ログインして習慣を守るか、ゲストとして始めましょう。
+welcome_or|または
+continue_as_guest|ゲストとして続ける
+welcome_accounts_note|ゲストの場合、データはこのスマホにだけ保存されます。あとで設定からログインできます。
+welcome_synced_note|習慣はアカウントにバックアップされます。
+welcome_benefit_backup|バックアップされ、機種変更にも引き継げる
+welcome_benefit_devices|スマホ、ウィジェット、ウォッチで
+welcome_benefit_private|パスワード・広告・トラッキングなし
+welcome_preview_label|「今日」画面のあいさつ

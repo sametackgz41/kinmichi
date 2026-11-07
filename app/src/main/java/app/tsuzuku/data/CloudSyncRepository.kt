@@ -14,6 +14,7 @@ import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.OAuthProvider
 import com.google.firebase.firestore.Blob
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -81,6 +82,40 @@ class CloudSyncRepository(
         } else {
             auth?.addAuthStateListener { updateAccount(it) }
             auth?.let(::updateAccount)
+        }
+    }
+
+    /**
+     * Signs in with GitHub through Firebase (a browser tab opens and returns to the app). Needs the
+     * GitHub provider switched on in the Firebase console with a GitHub OAuth app's client ID and secret.
+     */
+    suspend fun signInWithGitHub(activity: Activity): CloudAccountState.SignedIn? {
+        val firebaseAuth = auth
+        if (!configured || firebaseAuth == null) {
+            mutableSyncState.value = CloudSyncState.Error("Firebase configuration is missing")
+            return null
+        }
+        mutableSyncState.value = CloudSyncState.Working(CloudOperation.SignIn)
+        return try {
+            val provider = OAuthProvider.newBuilder("github.com").setScopes(listOf("read:user", "user:email")).build()
+            val result = firebaseAuth.pendingAuthResult?.await()
+                ?: firebaseAuth.startActivityForSignInWithProvider(activity, provider).await()
+            val user = requireNotNull(result.user)
+            val signedIn = CloudAccountState.SignedIn(
+                displayName = user.displayName.orEmpty().ifBlank { result.additionalUserInfo?.username.orEmpty() },
+                email = user.email.orEmpty(),
+                photoUrl = user.photoUrl?.toString(),
+            )
+            mutableAccount.value = signedIn
+            mutableSyncState.value = CloudSyncState.Idle
+            signedIn
+        } catch (error: com.google.firebase.auth.FirebaseAuthUserCollisionException) {
+            // Firebase keeps one account per e-mail: this address already signed in with Google.
+            mutableSyncState.value = CloudSyncState.Error(context.getString(app.tsuzuku.R.string.sign_in_use_other_provider))
+            null
+        } catch (error: Exception) {
+            mutableSyncState.value = CloudSyncState.Error(error.safeMessage())
+            null
         }
     }
 

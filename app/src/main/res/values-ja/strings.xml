@@ -789,7 +789,7 @@
     <string name="welcome_name_hint">お名前</string>
     <string name="welcome_sync_title">バックアップと同期</string>
     <string name="welcome_optional">任意</string>
-    <string name="welcome_sync_body">Google でログインすると、機種変更しても習慣を引き継げます。あとで設定からオン・オフできます。</string>
+    <string name="welcome_sync_body">機種変更しても習慣を引き継げます。パスワード不要です。</string>
     <string name="welcome_signed_in">%1$s でログイン中</string>
     <string name="welcome_private_note">同期をオンにしない限り、すべてスマホの中に残ります。</string>
     <string name="replay_intro">紹介をもう一度見る</string>
@@ -807,6 +807,20 @@
     <string name="most_enjoyed_share">😊 %2$d回中%1$d回</string>
     <string name="feeling_setting">どうだったか聞く</string>
     <string name="feeling_setting_description">「今日」で習慣を完了したら、顔をワンタップ</string>
+    <string name="sign_in_with_github">GitHub で続ける</string>
+    <string name="welcome_sync_divider">バックアップと同期・任意</string>
+    <string name="welcome_continue_without">アカウントなしで続ける</string>
+    <string name="sign_in_use_other_provider">このメールは Google でログイン済みです。「Google で続ける」を使ってください。</string>
+    <string name="welcome_hello_title">Kinmichi へようこそ</string>
+    <string name="welcome_hello_body">ログインして習慣を守るか、ゲストとして始めましょう。</string>
+    <string name="welcome_or">または</string>
+    <string name="continue_as_guest">ゲストとして続ける</string>
+    <string name="welcome_accounts_note">ゲストの場合、データはこのスマホにだけ保存されます。あとで設定からログインできます。</string>
+    <string name="welcome_synced_note">習慣はアカウントにバックアップされます。</string>
+    <string name="welcome_benefit_backup">バックアップされ、機種変更にも引き継げる</string>
+    <string name="welcome_benefit_devices">スマホ、ウィジェット、ウォッチで</string>
+    <string name="welcome_benefit_private">パスワード・広告・トラッキングなし</string>
+    <string name="welcome_preview_label">「今日」画面のあいさつ</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

@@ -809,7 +809,7 @@ welcome_body|Hoje cumprimenta você pelo nome toda manhã. Você pode mudar quan
 welcome_name_hint|Seu nome
 welcome_sync_title|Backup e sincronização
 welcome_optional|Opcional
-welcome_sync_body|Entre com o Google e seus hábitos vão junto para um celular novo. Você pode ligar ou desligar depois em Configurações.
+welcome_sync_body|Seus hábitos vão junto para um celular novo. Sem senha, nada para lembrar.
 welcome_signed_in|Conectado como %1$s
 welcome_private_note|Tudo fica no seu celular, a menos que você ative a sincronização.
 replay_intro|Ver a introdução de novo
@@ -827,3 +827,17 @@ most_enjoyed_title|O que você mais curte
 most_enjoyed_share|😊 %1$d de %2$d
 feeling_setting|Perguntar como foi
 feeling_setting_description|Ao concluir um hábito em Hoje, um toque em um rosto
+sign_in_with_github|Continuar com GitHub
+welcome_sync_divider|Backup e sincronização · opcional
+welcome_continue_without|Continuar sem conta
+sign_in_use_other_provider|Este e-mail já entrou com o Google. Use Continuar com Google.
+welcome_hello_title|Boas-vindas ao Kinmichi
+welcome_hello_body|Entre para manter seus hábitos seguros ou comece como convidado.
+welcome_or|ou
+continue_as_guest|Continuar como convidado
+welcome_accounts_note|Como convidado, tudo fica neste celular. Você pode entrar depois em Configurações.
+welcome_synced_note|Seus hábitos serão salvos na sua conta.
+welcome_benefit_backup|Com backup, e vai junto para um celular novo
+welcome_benefit_devices|No celular, nos widgets e no relógio
+welcome_benefit_private|Sem senha, sem anúncios, sem rastreamento
+welcome_preview_label|Assim Hoje vai te receber

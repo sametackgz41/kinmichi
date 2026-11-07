@@ -809,7 +809,7 @@ welcome_body|„Heute“ begrüßt dich jeden Morgen mit deinem Namen. Du kannst
 welcome_name_hint|Dein Name
 welcome_sync_title|Sichern und synchronisieren
 welcome_optional|Optional
-welcome_sync_body|Melde dich mit Google an, dann ziehen deine Gewohnheiten mit aufs neue Handy um. Du kannst es später in den Einstellungen ein- oder ausschalten.
+welcome_sync_body|Deine Gewohnheiten ziehen mit aufs neue Handy um. Kein Passwort, nichts zu merken.
 welcome_signed_in|Angemeldet als %1$s
 welcome_private_note|Alles bleibt auf deinem Handy, solange du die Synchronisierung nicht einschaltest.
 replay_intro|Einführung erneut zeigen
@@ -827,3 +827,17 @@ most_enjoyed_title|Was dir am meisten Freude macht
 most_enjoyed_share|😊 %1$d von %2$d
 feeling_setting|Fragen, wie es war
 feeling_setting_description|Nach dem Abhaken auf „Heute“ ein Tipp auf ein Gesicht
+sign_in_with_github|Weiter mit GitHub
+welcome_sync_divider|Sichern und synchronisieren · optional
+welcome_continue_without|Ohne Konto weiter
+sign_in_use_other_provider|Diese E-Mail ist schon mit Google angemeldet. Nutze „Weiter mit Google“.
+welcome_hello_title|Willkommen bei Kinmichi
+welcome_hello_body|Melde dich an, um deine Gewohnheiten zu sichern, oder starte als Gast.
+welcome_or|oder
+continue_as_guest|Als Gast fortfahren
+welcome_accounts_note|Als Gast bleibt alles auf diesem Handy. Du kannst dich später in den Einstellungen anmelden.
+welcome_synced_note|Deine Gewohnheiten werden in deinem Konto gesichert.
+welcome_benefit_backup|Gesichert und zieht mit aufs neue Handy um
+welcome_benefit_devices|Auf Handy, Widget und Uhr
+welcome_benefit_private|Kein Passwort, keine Werbung, kein Tracking
+welcome_preview_label|So begrüßt dich „Heute“

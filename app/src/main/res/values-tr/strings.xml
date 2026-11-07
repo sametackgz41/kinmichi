@@ -1188,7 +1188,7 @@
     <string name="welcome_name_hint">Adın</string>
     <string name="welcome_sync_title">Yedekle ve eşitle</string>
     <string name="welcome_optional">İsteğe bağlı</string>
-    <string name="welcome_sync_body">Google ile giriş yaparsan alışkanlıkların yeni telefonuna da seninle gelir. Daha sonra Ayarlar\'dan açıp kapatabilirsin.</string>
+    <string name="welcome_sync_body">Alışkanlıkların yeni telefonuna da seninle gelir. Şifre yok, hatırlanacak bir şey yok.</string>
     <string name="welcome_signed_in">%1$s ile giriş yapıldı</string>
     <string name="welcome_private_note">Eşitlemeyi açmadığın sürece her şey telefonunda kalır.</string>
     <string name="replay_intro">Tanıtımı yeniden göster</string>
@@ -1206,4 +1206,18 @@
     <string name="most_enjoyed_share">😊 %2$d\'de %1$d</string>
     <string name="feeling_setting">Nasıl geçtiğini sor</string>
     <string name="feeling_setting_description">Bugün ekranında bir alışkanlığı tamamlayınca, tek dokunuşla bir yüz seç</string>
+    <string name="sign_in_with_github">GitHub ile devam et</string>
+    <string name="welcome_sync_divider">Yedekle ve eşitle · isteğe bağlı</string>
+    <string name="welcome_continue_without">Hesapsız devam et</string>
+    <string name="sign_in_use_other_provider">Bu e-posta daha önce Google ile giriş yapmış. Google ile devam et\'i kullan.</string>
+    <string name="welcome_hello_title">Kinmichi\'ye hoş geldin</string>
+    <string name="welcome_hello_body">Alışkanlıklarını güvende tutmak için giriş yap ya da misafir olarak başla.</string>
+    <string name="welcome_or">ya da</string>
+    <string name="continue_as_guest">Misafir olarak devam et</string>
+    <string name="welcome_accounts_note">Misafir olarak her şey bu telefonda kalır. Daha sonra Ayarlar\'dan giriş yapabilirsin.</string>
+    <string name="welcome_synced_note">Alışkanlıkların hesabına yedeklenecek.</string>
+    <string name="welcome_benefit_backup">Yedeklenir, yeni telefonuna da taşınır</string>
+    <string name="welcome_benefit_devices">Telefonunda, widget\'ta ve saatinde</string>
+    <string name="welcome_benefit_private">Şifre yok, reklam yok, takip yok</string>
+    <string name="welcome_preview_label">Bugün ekranı seni böyle karşılayacak</string>
 </resources>

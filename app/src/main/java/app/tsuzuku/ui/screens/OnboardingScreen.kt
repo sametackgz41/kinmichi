@@ -167,10 +167,10 @@ private fun StepDots(count: Int, current: Int) {
 
 /** The app icon at a larger size: steps climbing a gentle curve, today in gold. */
 @Composable
-private fun GoldenPathArt() {
+internal fun GoldenPathArt(artSize: androidx.compose.ui.unit.Dp = 200.dp) {
     val ink = MaterialTheme.colorScheme.primary
     val gold = MaterialTheme.colorScheme.tertiary
-    Canvas(Modifier.size(200.dp)) {
+    Canvas(Modifier.size(artSize)) {
         val p0 = Offset(0.22f, 0.82f)
         val p1 = Offset(0.22f, 0.50f)
         val p2 = Offset(0.78f, 0.62f)

@@ -86,7 +86,9 @@ class MainActivity : FragmentActivity() {
                         account = account,
                         syncState = syncState,
                         initialName = settings.profileName,
-                        onSignIn = { activity -> cloud.signIn(activity) },
+                        onSignIn = { activity, provider ->
+                            if (provider == app.tsuzuku.ui.screens.SignInProvider.GitHub) cloud.signInWithGitHub(activity) else cloud.signIn(activity)
+                        },
                         onFinish = { name, _ ->
                             if (name.isNotBlank()) settingsRepository.setProfileName(name)
                             cloud.clearStatus()
@@ -105,7 +107,9 @@ class MainActivity : FragmentActivity() {
                         account = account,
                         syncState = syncState,
                         initialName = settings.profileName,
-                        onSignIn = { activity -> cloud.signIn(activity) },
+                        onSignIn = { activity, provider ->
+                            if (provider == app.tsuzuku.ui.screens.SignInProvider.GitHub) cloud.signInWithGitHub(activity) else cloud.signIn(activity)
+                        },
                         onFinish = { name, signedIn ->
                             if (name.isNotBlank()) settingsRepository.setProfileName(name)
                             cloud.clearStatus()
