@@ -8,7 +8,7 @@ Most habit apps punish you when a streak breaks. Kinmichi is built around the mo
 a smaller version of the habit for bad days, a nudge never to miss twice, and comebacks that are
 mended in gold instead of hidden. Free, open source, no ads, no tracking, works offline.
 
-[Türkçe](README.tr.md)
+[Website](https://sametackgz41.github.io/kinmichi/) · [Türkçe](README.tr.md)
 
 <p>
   <img src="docs/screenshots/today_en_light.webp" width="240" alt="Today screen: week of enso circles, the day's count and habit cards">
@@ -21,11 +21,11 @@ mended in gold instead of hidden. Free, open source, no ads, no tracking, works 
 Kinmichi is distributed here on GitHub, not on the Play Store.
 
 - **With [Obtainium](https://github.com/ImranR98/Obtainium) (recommended):** add
-  `https://github.com/sametackgz41/tsuzuku` as an app. Set the APK filter to `^tsuzuku-[0-9]`
+  `https://github.com/sametackgz41/tsuzuku` as an app. Set the APK filter to `^(kinmichi|tsuzuku)-[0-9]`
   so it picks the phone app, not the watch app. Obtainium then installs every update for you.
-- **By hand:** download `tsuzuku-x.y.z.apk` from the [latest release](https://github.com/sametackgz41/tsuzuku/releases/latest)
+- **By hand:** download `kinmichi-x.y.z.apk` from the [latest release](https://github.com/sametackgz41/tsuzuku/releases/latest)
   and open it. Android will ask you to allow installs from your browser or file manager once.
-- **Wear OS (optional):** `tsuzuku-wear-x.y.z.apk` from the same release, installed on the watch.
+- **Wear OS (optional):** `kinmichi-wear-x.y.z.apk` from the same release, installed on the watch.
 
 Updates install over the previous version; your data stays.
 

@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kinmichi — a calm habit tracker for Android</title>
+<meta name="description" content="Kinmichi is a free, open-source habit tracker for Android. A bad-day version for every habit, a nudge never to miss twice, and comebacks mended in gold. No ads, no tracking, works offline.">
+<meta property="og:title" content="Kinmichi — the golden path">
+<meta property="og:description" content="A calm, open-source habit tracker for Android that helps you keep going.">
+<meta property="og:image" content="screenshots/today_en_light.webp">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'%3E%3Crect width='108' height='108' rx='24' fill='%23F5F0E6'/%3E%3Ccircle cx='34.8' cy='74.8' r='4' fill='%232E4A7D'/%3E%3Ccircle cx='38.8' cy='65.3' r='4.4' fill='%232E4A7D'/%3E%3Ccircle cx='48.3' cy='59.6' r='4.8' fill='%232E4A7D'/%3E%3Ccircle cx='59.7' cy='54.6' r='5.2' fill='%232E4A7D'/%3E%3Ccircle cx='69.2' cy='47.4' r='5.6' fill='%232E4A7D'/%3E%3Ccircle cx='73.2' cy='34.8' r='7.4' fill='%23B8902E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F5F0E6;
+  --card: #FBF8F2;
+  --line: #DCD3C3;
+  --ink: #1F1D1A;
+  --muted: #5E584E;
+  --indigo: #2E4A7D;
+  --indigo-soft: #D9E1EF;
+  --gold: #8A6A1F;
+  --gold-bright: #B8902E;
+  --on-indigo: #FFFFFF;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #15171C;
+    --card: #1F2127;
+    --line: #3A3D44;
+    --ink: #ECE6DA;
+    --muted: #BDB6AA;
+    --indigo: #A9BDE6;
+    --indigo-soft: #2B4170;
+    --gold: #E0C178;
+    --gold-bright: #E0C178;
+    --on-indigo: #10274D;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 17px/1.6 Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--indigo); }
+a:hover { text-decoration-thickness: 2px; }
+h1, h2, h3 { font-family: Newsreader, Georgia, serif; font-weight: 600; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(40px, 7vw, 68px); letter-spacing: -0.01em; }
+h2 { font-size: clamp(30px, 4.5vw, 44px); }
+h3 { font-size: 23px; }
+p { margin: 0; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+.muted { color: var(--muted); }
+.serif-italic { font-family: Newsreader, Georgia, serif; font-style: italic; }
+
+header.top {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+header.top .wrap { display: flex; align-items: center; gap: 16px; height: 64px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-family: Newsreader, serif; font-weight: 600; font-size: 22px; }
+.brand svg { width: 34px; height: 34px; }
+nav.links { margin-left: auto; display: flex; gap: 22px; }
+nav.links a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 15px; }
+nav.links a:hover { color: var(--ink); }
+@media (max-width: 640px) { nav.links a.optional { display: none; } }
+
+.button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 52px; padding: 0 26px; border-radius: 999px;
+  font-weight: 600; font-size: 16px; text-decoration: none; transition: transform .15s ease;
+}
+.button:hover { transform: translateY(-1px); }
+.button.primary { background: var(--indigo); color: var(--on-indigo); }
+.button.secondary { border: 1.5px solid var(--line); color: var(--ink); background: var(--card); }
+
+.hero { padding: 72px 0 40px; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 48px; align-items: center; }
+.hero .eyebrow { font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 18px; }
+.hero h1 em { font-style: italic; color: var(--gold-bright); font-weight: 500; }
+.hero p.lead { font-size: 20px; color: var(--muted); margin-top: 22px; max-width: 34ch; }
+.hero .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.hero .note { margin-top: 16px; font-size: 14px; color: var(--muted); }
+.phones { position: relative; display: flex; justify-content: center; }
+.phone {
+  width: min(290px, 70vw); border-radius: 36px; border: 1px solid var(--line);
+  box-shadow: 0 30px 60px -30px rgba(31, 29, 26, .35); background: var(--card); display: block;
+}
+.phone.back { position: absolute; right: 2%; top: 48px; width: min(250px, 58vw); opacity: .95; transform: rotate(4deg); z-index: 0; }
+.phone.front { position: relative; z-index: 1; transform: rotate(-3deg); margin-right: 18%; }
+@media (max-width: 860px) {
+  .hero .wrap { grid-template-columns: 1fr; }
+  .phone.back { display: none; }
+  .phone.front { margin-right: 0; transform: none; }
+}
+
+section { padding: 72px 0; }
+section.alt { background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.section-head { max-width: 640px; margin-bottom: 40px; }
+.section-head p { margin-top: 14px; color: var(--muted); font-size: 18px; }
+
+.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.trio figure { margin: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 24px; overflow: hidden; }
+section.alt .trio figure { background: var(--paper); }
+.trio img { width: 100%; display: block; aspect-ratio: 9 / 13; object-fit: cover; object-position: top; }
+.trio figcaption { padding: 18px 20px 22px; }
+.trio figcaption p { margin-top: 6px; color: var(--muted); font-size: 15px; }
+@media (max-width: 860px) { .trio { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; } }
+
+.grid-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.item { display: flex; gap: 16px; padding: 22px; border-radius: 20px; border: 1px solid var(--line); background: var(--card); }
+.item .dot { flex: none; width: 44px; height: 44px; border-radius: 14px; background: var(--indigo-soft); color: var(--indigo); display: flex; align-items: center; justify-content: center; }
+.item .dot svg { width: 22px; height: 22px; }
+.item p { color: var(--muted); font-size: 15px; margin-top: 4px; }
+@media (max-width: 760px) { .grid-list { grid-template-columns: 1fr; } }
+
+.wide-img { width: 100%; border-radius: 24px; border: 1px solid var(--line); display: block; }
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+@media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
+
+.langs { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.langs span { padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font-size: 15px; }
+
+.steps-list { counter-reset: s; display: grid; gap: 14px; padding: 0; margin: 0; list-style: none; max-width: 680px; }
+.steps-list li { counter-increment: s; display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; border-radius: 18px; background: var(--card); border: 1px solid var(--line); }
+.steps-list li::before {
+  content: counter(s); flex: none; width: 34px; height: 34px; border-radius: 50%;
+  background: var(--indigo); color: var(--on-indigo); font-weight: 600; display: flex; align-items: center; justify-content: center;
+}
+code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em; background: var(--indigo-soft); padding: 2px 7px; border-radius: 6px; overflow-wrap: anywhere; }
+.steps-list li > div { min-width: 0; }
+
+.promise { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 8px; }
+.promise div { padding: 22px; border-radius: 20px; border: 1px solid var(--line); background: var(--paper); }
+.promise strong { font-family: Newsreader, serif; font-size: 22px; display: block; margin-bottom: 4px; }
+.promise p { color: var(--muted); font-size: 15px; }
+@media (max-width: 760px) { .promise { grid-template-columns: 1fr; } }
+
+footer { padding: 40px 0 56px; color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; }
+footer .brand { font-size: 18px; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">
+      <svg viewBox="0 0 108 108" aria-hidden="true"><rect width="108" height="108" rx="26" fill="#F5F0E6"/><circle cx="34.8" cy="74.8" r="4" fill="#2E4A7D"/><circle cx="38.8" cy="65.3" r="4.4" fill="#2E4A7D"/><circle cx="48.3" cy="59.6" r="4.8" fill="#2E4A7D"/><circle cx="59.7" cy="54.6" r="5.2" fill="#2E4A7D"/><circle cx="69.2" cy="47.4" r="5.6" fill="#2E4A7D"/><circle cx="73.2" cy="34.8" r="7.4" fill="#B8902E"/></svg>
+      Kinmichi
+    </a>
+    <nav class="links" aria-label="Sections">
+      <a class="optional" href="#different">Why it's different</a>
+      <a class="optional" href="#install">Install</a>
+      <a href="https://github.com/sametackgz41/kinmichi">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">金道 · the golden path</p>
+        <h1>Keep going. Mend the breaks <em>in gold.</em></h1>
+        <p class="lead">A calm habit tracker for Android, built around the day after you slip, not the perfect streak.</p>
+        <div class="actions">
+          <a class="button primary" href="https://github.com/sametackgz41/kinmichi/releases/latest">Download for Android</a>
+          <a class="button secondary" href="#install">Install with Obtainium</a>
+        </div>
+        <p class="note">Free and open source · No ads · No tracking · Works offline</p>
+      </div>
+      <div class="phones">
+        <img class="phone back" src="screenshots/today_en_dark.webp" alt="" width="540" height="1171" loading="lazy">
+        <img class="phone front" src="screenshots/today_en_light.webp" alt="The Today screen: the week as small enso circles, the day's count, and habit cards" width="540" height="1171">
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="different">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Built for the day after</h2>
+        <p>Most habit apps punish you when a streak breaks. Kinmichi helps you come back.</p>
+      </div>
+      <div class="trio">
+        <figure>
+          <img src="screenshots/tour_bad_day_en.webp" alt="A habit and its smaller bad-day version, which still gets the check" loading="lazy">
+          <figcaption><h3>A small step still counts</h3><p>Give every habit a bad-day version, like one page instead of thirty minutes. On a hard day, that keeps the streak alive.</p></figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/tour_kintsugi_en.webp" alt="A row of days with one gap; the day after is outlined in gold" loading="lazy">
+          <figcaption><h3>Never miss twice</h3><p>After a missed day, Today offers the small version in one tap. The day you come back is counted and drawn in gold.</p></figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/tour_if_then_en.webp" alt="An if-then plan: If I finish dinner, I read 10 pages" loading="lazy">
+          <figcaption><h3>Tie it to your day</h3><p>Write <span class="serif-italic">when</span> a habit happens. If-then plans are one of the best-proven ways to make a habit stick.</p></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Less effort, more days done</h2>
+        <p>The app does the remembering, so you only do the habit.</p>
+      </div>
+      <div class="grid-list">
+        <div class="item">
+          <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span>
+          <div><h3>Health Connect</h3><p>Link a habit to steps, distance, calories, exercise or sleep, and it fills itself every time you open the app.</p></div>
+        </div>
+        <div class="item">
+          <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M5 3 2 6M19 3l3 3"/></svg></span>
+          <div><h3>Smart reminders</h3><p>Usually run at 07:40 but the reminder rings at 21:00? Kinmichi notices and suggests a better time.</p></div>
+        </div>
+        <div class="item">
+          <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3c2 4 6 5 6 10a6 6 0 0 1-12 0c0-3 2-4 2-7 2 1 3 3 4 4 0-3-1-5 0-7z"/></svg></span>
+          <div><h3>A quiet streak alert</h3><p>One evening note, only when a streak of three days or more is about to break. Nothing else.</p></div>
+        </div>
+        <div class="item">
+          <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 18 10 12l4 4 6-8"/><path d="M15 8h5v5"/></svg></span>
+          <div><h3>Goals that adapt</h3><p>Rarely hitting a target? Start from what you really do. Hitting it every day? Raise the bar. Daily too much? Make it three times a week.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap split">
+      <div>
+        <h2>Five palettes, one calm look</h2>
+        <p class="muted" style="margin-top:14px;font-size:18px">Washi, Sumi, Matcha, Sakura and Umi, each with a light and a dark side, or your wallpaper colours. Editorial serif type, and pure black at night if you like it.</p>
+      </div>
+      <img class="wide-img" src="screenshots/palettes_en.webp" alt="The Today screen in five colour palettes, light and dark" loading="lazy">
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap split">
+      <img class="wide-img" src="screenshots/widgets_en_light.webp" alt="Today, streak, quick grid and mood widgets" loading="lazy">
+      <div>
+        <h2>On your home screen and wrist</h2>
+        <p class="muted" style="margin-top:14px;font-size:18px">Six widgets: Today, a single habit, this week, your streak, a quick grid of four habits and a one-tap mood. A Wear OS tile and watch app mark habits from your wrist.</p>
+        <div class="langs" aria-label="Languages">
+          <span>English</span><span>Türkçe</span><span>Español</span><span>Deutsch</span><span>Português</span><span>日本語</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Yours, on your phone</h2>
+        <p>Everything lives on the device. Sync with Google only if you want it, and lock the app with a PIN or your fingerprint.</p>
+      </div>
+      <div class="promise">
+        <div><strong>No ads</strong><p>Not now, not later. There is nothing to sell.</p></div>
+        <div><strong>No tracking</strong><p>No analytics, no third-party SDKs watching you.</p></div>
+        <div><strong>Open source</strong><p>MIT licensed. Read every line on GitHub. <a href="https://github.com/sametackgz41/kinmichi/blob/main/PRIVACY.md">Privacy details</a>.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Install</h2>
+        <p>Kinmichi is distributed on GitHub, not the Play Store. Obtainium keeps it up to date for you.</p>
+      </div>
+      <ol class="steps-list">
+        <li><div>Install <a href="https://github.com/ImranR98/Obtainium">Obtainium</a> on your Android phone.</div></li>
+        <li><div>Add the app with this address: <code>https://github.com/sametackgz41/kinmichi</code></div></li>
+        <li><div>Set the APK filter to <code>^(kinmichi|tsuzuku)-[0-9]</code> so it picks the phone app, then install. Updates arrive automatically.</div></li>
+      </ol>
+      <p class="muted" style="margin-top:22px">Prefer doing it by hand? Download the APK from the <a href="https://github.com/sametackgz41/kinmichi/releases/latest">latest release</a>. The app also tells you when a new version is out.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="brand">Kinmichi</span>
+    <a href="https://github.com/sametackgz41/kinmichi">Source on GitHub</a>
+    <a href="https://github.com/sametackgz41/kinmichi/issues/new/choose">Report a problem</a>
+    <a href="https://github.com/sametackgz41/kinmichi/blob/main/README.tr.md">Türkçe</a>
+    <span>MIT licence · formerly Tsuzuku</span>
+  </div>
+</footer>
+
+</body>
+</html>

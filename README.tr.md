@@ -8,7 +8,7 @@ odaklanır: kötü günler için alışkanlığın küçük bir sürümü, iki k
 saklanmak yerine altınla onarılan geri dönüşler. Ücretsiz, açık kaynak, reklamsız, takipsiz,
 internetsiz çalışır.
 
-[English](README.md)
+[Web sitesi](https://sametackgz41.github.io/kinmichi/) · [English](README.md)
 
 <p>
   <img src="docs/screenshots/today_en_light.webp" width="240" alt="Bugün ekranı">
@@ -22,10 +22,10 @@ Kinmichi Play Store'da değil, burada GitHub'da yayınlanıyor.
 
 - **[Obtainium](https://github.com/ImranR98/Obtainium) ile (önerilen):** uygulama olarak
   `https://github.com/sametackgz41/tsuzuku` adresini ekle. Saat uygulaması yerine telefon
-  uygulamasını seçmesi için APK filtresine `^tsuzuku-[0-9]` yaz. Sonraki her güncellemeyi Obtainium kurar.
-- **Elle:** [son sürümden](https://github.com/sametackgz41/tsuzuku/releases/latest) `tsuzuku-x.y.z.apk`
+  uygulamasını seçmesi için APK filtresine `^(kinmichi|tsuzuku)-[0-9]` yaz. Sonraki her güncellemeyi Obtainium kurar.
+- **Elle:** [son sürümden](https://github.com/sametackgz41/tsuzuku/releases/latest) `kinmichi-x.y.z.apk`
   dosyasını indirip aç. Android bir kereliğine tarayıcıdan ya da dosya yöneticisinden kurulum izni ister.
-- **Wear OS (isteğe bağlı):** aynı sürümdeki `tsuzuku-wear-x.y.z.apk`, saate kurulur.
+- **Wear OS (isteğe bağlı):** aynı sürümdeki `kinmichi-wear-x.y.z.apk`, saate kurulur.
 
 Güncellemeler eski sürümün üstüne kurulur, verilerin yerinde kalır.
 
