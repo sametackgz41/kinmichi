@@ -2,6 +2,8 @@
 // data-i18n (text), data-i18n-html (markup) or data-i18n-alt (image alt) attribute.
 window.KINMICHI_I18N = {
   tr: {
+    theme_to_dark: "Koyu temaya geç",
+    theme_to_light: "Açık temaya geç",
     doc_title: "Kinmichi — sakin bir Android alışkanlık uygulaması",
     alt_pal: "{pal} paletinde Bugün ekranı, {mode}",
     nav_why: "Farkı",
@@ -96,6 +98,8 @@ window.KINMICHI_I18N = {
     ft_license: "MIT lisansı · eski adı Tsuzuku"
   },
   es: {
+    theme_to_dark: "Cambiar a tema oscuro",
+    theme_to_light: "Cambiar a tema claro",
     doc_title: "Kinmichi — un registro de hábitos tranquilo para Android",
     alt_pal: "La pantalla Hoy con la paleta {pal}, modo {mode}",
     nav_why: "Por qué es distinto",
@@ -190,6 +194,8 @@ window.KINMICHI_I18N = {
     ft_license: "Licencia MIT · antes Tsuzuku"
   },
   de: {
+    theme_to_dark: "Zum dunklen Design wechseln",
+    theme_to_light: "Zum hellen Design wechseln",
     doc_title: "Kinmichi — ein ruhiger Gewohnheitstracker für Android",
     alt_pal: "Der Heute-Bildschirm in der Palette {pal}, {mode}",
     nav_why: "Was anders ist",
@@ -284,6 +290,8 @@ window.KINMICHI_I18N = {
     ft_license: "MIT-Lizenz · früher Tsuzuku"
   },
   fr: {
+    theme_to_dark: "Passer au thème sombre",
+    theme_to_light: "Passer au thème clair",
     doc_title: "Kinmichi — un suivi d'habitudes apaisé pour Android",
     alt_pal: "L'écran Aujourd'hui avec la palette {pal}, mode {mode}",
     nav_why: "Ce qui change",
@@ -378,6 +386,8 @@ window.KINMICHI_I18N = {
     ft_license: "Licence MIT · anciennement Tsuzuku"
   },
   it: {
+    theme_to_dark: "Passa al tema scuro",
+    theme_to_light: "Passa al tema chiaro",
     doc_title: "Kinmichi — un tracker di abitudini calmo per Android",
     alt_pal: "La schermata Oggi con la tavolozza {pal}, modalità {mode}",
     nav_why: "Cosa cambia",
@@ -472,6 +482,8 @@ window.KINMICHI_I18N = {
     ft_license: "Licenza MIT · prima Tsuzuku"
   },
   pt: {
+    theme_to_dark: "Mudar para o tema escuro",
+    theme_to_light: "Mudar para o tema claro",
     doc_title: "Kinmichi — um app de hábitos tranquilo para Android",
     alt_pal: "A tela Hoje na paleta {pal}, modo {mode}",
     nav_why: "O que muda",
@@ -566,6 +578,8 @@ window.KINMICHI_I18N = {
     ft_license: "Licença MIT · antes Tsuzuku"
   },
   ru: {
+    theme_to_dark: "Включить тёмную тему",
+    theme_to_light: "Включить светлую тему",
     doc_title: "Kinmichi — спокойный трекер привычек для Android",
     alt_pal: "Экран «Сегодня» в палитре {pal}, тема: {mode}",
     nav_why: "Чем отличается",
@@ -660,6 +674,8 @@ window.KINMICHI_I18N = {
     ft_license: "Лицензия MIT · ранее Tsuzuku"
   },
   ja: {
+    theme_to_dark: "ダークテーマに切り替え",
+    theme_to_light: "ライトテーマに切り替え",
     doc_title: "Kinmichi — Android のための穏やかな習慣トラッカー",
     alt_pal: "{pal} パレットの「今日」画面（{mode}）",
     nav_why: "ここが違う",
@@ -754,6 +770,8 @@ window.KINMICHI_I18N = {
     ft_license: "MIT ライセンス · 旧名 Tsuzuku"
   },
   ko: {
+    theme_to_dark: "어두운 테마로 전환",
+    theme_to_light: "밝은 테마로 전환",
     doc_title: "Kinmichi — Android를 위한 차분한 습관 트래커",
     alt_pal: "{pal} 팔레트의 오늘 화면 ({mode})",
     nav_why: "무엇이 다른가요",
