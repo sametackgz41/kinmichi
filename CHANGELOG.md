@@ -1,5 +1,12 @@
 # Değişiklik günlüğü
 
+## 2.5.0 — hazırlanıyor
+
+- Renk paletleri: Washi, Sumi, Matcha, Sakura ve Umi; her biri açık ve koyu sürümüyle, ya da duvar kâğıdı renkleri
+- Görsel palet seçici: her kartta paletin açık ve koyu tarafı; dokununca anında uygulanır
+- Saf siyah gece: koyu modda zemin tam siyah (OLED ekranlarda pil dostu)
+- Widget'lar seçilen paleti ve saf siyah ayarını izler
+
 ## 2.4.0 — Washi
 
 - Yeni görünüm: sıcak kâğıt zemin, çivit mavisi vurgu, matcha yeşili ve altın; gece için çivit mürekkebi tonları

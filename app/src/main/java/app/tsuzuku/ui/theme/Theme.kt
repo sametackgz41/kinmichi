@@ -123,15 +123,19 @@ internal val WashiDark = darkColorScheme(
 @Composable
 fun TsuzukuTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = false,
+    palette: app.tsuzuku.data.preferences.PalettePreference = app.tsuzuku.data.preferences.PalettePreference.Washi,
+    pureBlack: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     val context = LocalContext.current
     val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ->
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        darkTheme -> WashiDark
-        else -> WashiLight
+        palette == app.tsuzuku.data.preferences.PalettePreference.Dynamic && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ->
+            if (darkTheme) {
+                dynamicDarkColorScheme(context).let { if (pureBlack) it.withPureBlack() else it }
+            } else {
+                dynamicLightColorScheme(context)
+            }
+        else -> paletteScheme(palette, darkTheme, pureBlack)
     }
     val view = LocalView.current
 

@@ -15,8 +15,7 @@ import androidx.glance.appwidget.updateAll
 import androidx.glance.material3.ColorProviders
 import app.tsuzuku.TsuzukuApplication
 import app.tsuzuku.data.preferences.PalettePreference
-import app.tsuzuku.ui.theme.WashiDark
-import app.tsuzuku.ui.theme.WashiLight
+import app.tsuzuku.ui.theme.paletteScheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -29,11 +28,16 @@ val HabitIdKey = ActionParameters.Key<Long>("habit_id")
 @Composable
 fun TsuzukuGlanceTheme(content: @Composable () -> Unit) {
     val context = androidx.glance.LocalContext.current
-    val palette = (context.applicationContext as? TsuzukuApplication)?.settingsRepository?.settings?.value?.palette
+    val settings = (context.applicationContext as? TsuzukuApplication)?.settingsRepository?.settings?.value
+    val palette = settings?.palette ?: PalettePreference.Washi
     if (palette == PalettePreference.Dynamic && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         GlanceTheme(content = content)
     } else {
-        GlanceTheme(colors = ColorProviders(light = WashiLight, dark = WashiDark), content = content)
+        val pureBlack = settings?.pureBlack == true
+        GlanceTheme(
+            colors = ColorProviders(light = paletteScheme(palette, false), dark = paletteScheme(palette, true, pureBlack)),
+            content = content,
+        )
     }
 }
 
@@ -44,11 +48,15 @@ fun TsuzukuGlanceTheme(content: @Composable () -> Unit) {
 @Composable
 fun tsuzukuWidgetBackground(): androidx.glance.unit.ColorProvider {
     val context = androidx.glance.LocalContext.current
-    val palette = (context.applicationContext as? TsuzukuApplication)?.settingsRepository?.settings?.value?.palette
+    val settings = (context.applicationContext as? TsuzukuApplication)?.settingsRepository?.settings?.value
+    val palette = settings?.palette ?: PalettePreference.Washi
     return if (palette == PalettePreference.Dynamic && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         GlanceTheme.colors.widgetBackground
     } else {
-        androidx.glance.color.ColorProvider(day = WashiLight.surfaceContainerLow, night = WashiDark.surfaceContainerLow)
+        androidx.glance.color.ColorProvider(
+            day = paletteScheme(palette, false).surfaceContainerLow,
+            night = paletteScheme(palette, true, settings?.pureBlack == true).surfaceContainerLow,
+        )
     }
 }
 

@@ -150,6 +150,59 @@ class PreviewGalleryTest {
     @Test fun todayEnLight() = renderToday("en", false)
     @Test fun todayEnDark() = renderToday("en", true)
 
+    @Test fun palettesTr() {
+        setVariant("tr", false)
+        val palette = mutableStateOf(app.tsuzuku.data.preferences.PalettePreference.Washi)
+        val dark = mutableStateOf(false)
+        val habits = sampleToday("tr")
+        compose.setContent {
+            TsuzukuTheme(darkTheme = dark.value, palette = palette.value) {
+                Shell(title = "Bugün", route = "today", profile = "Samet") { modifier ->
+                    Box(modifier) {
+                        TodayScreen(
+                            habits = habits, profileName = "Samet", showDailySummary = true,
+                            timer = HabitTimerState(), onAddHabit = {}, onToggleHabit = {}, onIncrementHabit = {},
+                            onDecrementHabit = {}, onToggleTimer = {}, onOpenHabit = {}, onReorderHabits = {},
+                            onOpenGoals = {}, onSearch = {},
+                            todayHiddenSections = app.tsuzuku.data.preferences.DEFAULT_TODAY_HIDDEN_SECTIONS,
+                            weekProgress = sampleWeek(),
+                        )
+                    }
+                }
+            }
+        }
+        listOf(
+            app.tsuzuku.data.preferences.PalettePreference.Washi,
+            app.tsuzuku.data.preferences.PalettePreference.Sumi,
+            app.tsuzuku.data.preferences.PalettePreference.Matcha,
+            app.tsuzuku.data.preferences.PalettePreference.Sakura,
+            app.tsuzuku.data.preferences.PalettePreference.Umi,
+        ).forEach { choice ->
+            listOf(false, true).forEach { night ->
+                palette.value = choice
+                dark.value = night
+                compose.mainClock.advanceTimeBy(1_000)
+                captureScreen("palette_${choice.name.lowercase()}_${if (night) "dark" else "light"}")
+            }
+        }
+    }
+
+    @Test fun palettePickerTr() {
+        setVariant("tr", false)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false, palette = app.tsuzuku.data.preferences.PalettePreference.Sumi) {
+                androidx.compose.material3.Surface(color = androidx.compose.material3.MaterialTheme.colorScheme.surfaceContainerHigh) {
+                    app.tsuzuku.ui.screens.PalettePickerGrid(
+                        selected = app.tsuzuku.data.preferences.PalettePreference.Sumi,
+                        onSelect = {},
+                        modifier = Modifier.padding(16.dp),
+                    )
+                }
+            }
+        }
+        captureScreen("palette_picker_tr_light")
+    }
+
     private fun sampleWeek(): List<app.tsuzuku.ui.screens.WeekDayProgress> {
         val today = java.time.LocalDate.now()
         val start = today.with(java.time.temporal.TemporalAdjusters.previousOrSame(java.time.DayOfWeek.MONDAY))

@@ -1075,4 +1075,18 @@
     <string name="palette_label">Colour palette</string>
     <string name="palette_washi">Washi</string>
     <string name="palette_dynamic">Wallpaper colours</string>
+    <string name="palette_sumi">Sumi</string>
+    <string name="palette_matcha">Matcha</string>
+    <string name="palette_sakura">Sakura</string>
+    <string name="palette_umi">Umi</string>
+    <string name="pure_black_label">Pure black at night</string>
+    <string name="pure_black_desc">Dark mode uses true black, easier on OLED batteries</string>
+    <string name="palette_washi_desc">Paper and indigo</string>
+    <string name="palette_sumi_desc">Ink and vermilion</string>
+    <string name="palette_matcha_desc">Green tea, calm</string>
+    <string name="palette_sakura_desc">Cherry blossom, warm</string>
+    <string name="palette_umi_desc">Sea, cool and focused</string>
+    <string name="palette_dynamic_desc">From your wallpaper</string>
+    <string name="palette_mode_light">Light</string>
+    <string name="palette_mode_dark">Dark</string>
 </resources>

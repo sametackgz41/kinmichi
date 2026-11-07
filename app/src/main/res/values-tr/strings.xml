@@ -1074,4 +1074,18 @@
     <string name="palette_label">Renk paleti</string>
     <string name="palette_washi">Washi</string>
     <string name="palette_dynamic">Duvar kâğıdı renkleri</string>
+    <string name="palette_sumi">Sumi</string>
+    <string name="palette_matcha">Matcha</string>
+    <string name="palette_sakura">Sakura</string>
+    <string name="palette_umi">Umi</string>
+    <string name="pure_black_label">Saf siyah gece</string>
+    <string name="pure_black_desc">Koyu modda zemin tam siyah; OLED ekranda pil dostu</string>
+    <string name="palette_washi_desc">Kâğıt ve çivit</string>
+    <string name="palette_sumi_desc">Mürekkep ve shu kırmızısı</string>
+    <string name="palette_matcha_desc">Yeşil çay, sakin</string>
+    <string name="palette_sakura_desc">Kiraz çiçeği, sıcak</string>
+    <string name="palette_umi_desc">Deniz, serin ve odaklı</string>
+    <string name="palette_dynamic_desc">Duvar kâğıdından</string>
+    <string name="palette_mode_light">Açık</string>
+    <string name="palette_mode_dark">Koyu</string>
 </resources>
