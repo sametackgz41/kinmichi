@@ -286,6 +286,35 @@ class PreviewGalleryTest {
     @Test fun welcomeSignedInTr() = renderWelcome("tr", false, signedIn = true)
     @Test fun welcomeAlreadySignedInTr() = renderWelcome("tr", false, signedIn = true, chooseStep = true)
 
+    // Settings: three looks.
+    @Test fun settingsMinimalTr() = renderSettingsLayout(app.tsuzuku.ui.screens.SettingsLayout.Minimal, false)
+    @Test fun settingsCardsTr() = renderSettingsLayout(app.tsuzuku.ui.screens.SettingsLayout.Cards, false)
+    @Test fun settingsTilesTr() = renderSettingsLayout(app.tsuzuku.ui.screens.SettingsLayout.Tiles, false)
+    @Test fun settingsCardsTrDark() = renderSettingsLayout(app.tsuzuku.ui.screens.SettingsLayout.Cards, true)
+    @Test fun settingsTilesTrDark() = renderSettingsLayout(app.tsuzuku.ui.screens.SettingsLayout.Tiles, true)
+
+    private fun renderSettingsLayout(layout: app.tsuzuku.ui.screens.SettingsLayout, dark: Boolean) {
+        setVariant("tr", dark)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = dark) {
+                Shell(title = androidx.compose.ui.res.stringResource(app.tsuzuku.R.string.settings_label), route = "settings", profile = "Samet") { modifier ->
+                    Box(modifier) {
+                        app.tsuzuku.ui.screens.ProfileScreen(
+                            settings = app.tsuzuku.data.preferences.AppSettings(profileName = "Samet"),
+                            cloudAccount = app.tsuzuku.data.CloudAccountState.SignedOut,
+                            onSetProfileName = {}, onSetTheme = {}, onSetLanguage = {}, onSetWeekStart = {},
+                            onSetShowDailySummary = {}, onSetProtectScreen = {}, onOpenCloudAccount = {},
+                            onOpenPlanning = {}, onOpenSecurity = {}, onOpenBackup = {}, onOpenDiagnostics = {},
+                            onOpenCategories = {}, layout = layout,
+                        )
+                    }
+                }
+            }
+        }
+        compose.mainClock.advanceTimeBy(800)
+        captureScreen("settingslayout_${layout.name.lowercase()}_tr_${if (dark) "dark" else "light"}")
+    }
+
     // Habit editor: three layouts (new habit), plus an open "more" group.
     @Test fun editorCardsTr() = renderEditorLayout(app.tsuzuku.ui.screens.EditorLayout.Cards, false)
     @Test fun editorStepsTr() = renderEditorLayout(app.tsuzuku.ui.screens.EditorLayout.Steps, false)

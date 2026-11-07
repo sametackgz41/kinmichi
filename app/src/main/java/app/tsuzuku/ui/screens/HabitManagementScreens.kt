@@ -1,5 +1,10 @@
 package app.tsuzuku.ui.screens
 
+import androidx.compose.material.icons.rounded.Repeat
+import androidx.compose.material.icons.rounded.Notifications
+import androidx.compose.material.icons.rounded.CalendarMonth
+import androidx.compose.ui.draw.clip
+import androidx.compose.foundation.background
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -133,13 +138,17 @@ fun HabitDetailScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             item {
+                val accent = androidx.compose.ui.graphics.Color(habit.colorArgb.toInt())
                 Column {
                     Row(
-                        Modifier.fillMaxWidth().padding(20.dp),
+                        Modifier.fillMaxWidth().clip(RoundedCornerShape(28.dp)).background(accent.copy(alpha = 0.12f)).padding(20.dp),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(14.dp),
+                        horizontalArrangement = Arrangement.spacedBy(16.dp),
                     ) {
-                        Text(habit.emoji, style = MaterialTheme.typography.displaySmall)
+                        Box(
+                            Modifier.size(60.dp).clip(androidx.compose.foundation.shape.CircleShape).background(accent.copy(alpha = 0.22f)),
+                            contentAlignment = Alignment.Center,
+                        ) { Text(habit.emoji, style = MaterialTheme.typography.headlineMedium) }
                         Column(Modifier.weight(1f)) {
                             Text(habit.name, style = MaterialTheme.typography.headlineSmall)
                             Text(
@@ -153,16 +162,18 @@ fun HabitDetailScreen(
             item { HabitYearCard(habit, records) }
             if (feelingSummary.total > 0) item { FeelingSummaryCard(feelingSummary) }
             item {
-                Column {
-                    Column(Modifier.fillMaxWidth().padding(17.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        DetailLine(stringResource(R.string.days_label), scheduleSummaryForDetail(habit.scheduleDaysMask))
-                        DetailLine(
-                            stringResource(R.string.reminder_label),
-                            habit.reminderMinutes?.let(::clockText) ?: stringResource(R.string.off_label),
-                        )
-                        habit.reminderRepeatMinutes?.let {
-                            DetailLine(stringResource(R.string.repeat_reminder), stringResource(R.string.minutes_value, it))
-                        }
+                Column(
+                    Modifier.fillMaxWidth().clip(RoundedCornerShape(24.dp)).background(MaterialTheme.colorScheme.surfaceContainerLow)
+                        .padding(horizontal = 16.dp, vertical = 6.dp),
+                ) {
+                    DetailIconLine(Icons.Rounded.CalendarMonth, stringResource(R.string.days_label), scheduleSummaryForDetail(habit.scheduleDaysMask))
+                    DetailIconLine(
+                        Icons.Rounded.Notifications,
+                        stringResource(R.string.reminder_label),
+                        habit.reminderMinutes?.let(::clockText) ?: stringResource(R.string.off_label),
+                    )
+                    habit.reminderRepeatMinutes?.let {
+                        DetailIconLine(Icons.Rounded.Repeat, stringResource(R.string.repeat_reminder), stringResource(R.string.minutes_value, it))
                     }
                 }
             }
@@ -192,8 +203,8 @@ fun HabitDetailScreen(
             } else {
                 items(linkedGoals, key = { it.first.id }) { (goal, link) ->
                     Card(
-                        shape = RoundedCornerShape(10.dp),
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
+                        shape = RoundedCornerShape(20.dp),
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
                     ) {
                         Row(
                             modifier = Modifier.fillMaxWidth().padding(12.dp),
@@ -615,8 +626,8 @@ fun HabitLevelsDialog(
             ) {
                 itemsIndexed(items) { index, item ->
                     Card(
-                        shape = RoundedCornerShape(10.dp),
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
+                        shape = RoundedCornerShape(20.dp),
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
                     ) {
                         Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                             Row(
@@ -792,3 +803,16 @@ private fun habitStatusLabel(status: HabitDayStatus): String = stringResource(wh
 })
 
 internal fun formatLibraryAmount(value: Double): String = formatHabitAmount(value)
+
+/** A schedule fact with a small icon disc, in the habit details card. */
+@Composable
+private fun DetailIconLine(icon: androidx.compose.ui.graphics.vector.ImageVector, label: String, value: String) {
+    Row(Modifier.fillMaxWidth().padding(vertical = 10.dp), verticalAlignment = Alignment.CenterVertically) {
+        Box(
+            Modifier.size(34.dp).clip(RoundedCornerShape(11.dp)).background(MaterialTheme.colorScheme.secondaryContainer),
+            contentAlignment = Alignment.Center,
+        ) { Icon(icon, null, tint = MaterialTheme.colorScheme.onSecondaryContainer, modifier = Modifier.size(18.dp)) }
+        Text(label, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f).padding(horizontal = 12.dp))
+        Text(value, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+}

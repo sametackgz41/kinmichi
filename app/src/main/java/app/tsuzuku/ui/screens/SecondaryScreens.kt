@@ -1,5 +1,9 @@
 package app.tsuzuku.ui.screens
 
+import androidx.compose.material.icons.rounded.Opacity
+import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
+import androidx.compose.ui.draw.clip
+import androidx.compose.foundation.background
 import androidx.compose.runtime.remember
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import android.Manifest
@@ -110,6 +114,7 @@ fun ProfileScreen(
     onOpenAppearance: () -> Unit = {},
     onOpenLanguage: () -> Unit = {},
     onOpenWidgets: () -> Unit = {},
+    layout: SettingsLayout = SettingsLayout.Tiles,
     onOpenPlanning: () -> Unit,
     onOpenSecurity: () -> Unit,
     onOpenBackup: () -> Unit,
@@ -130,6 +135,7 @@ fun ProfileScreen(
     var activeDialog by rememberSaveable { mutableStateOf<String?>(null) }
     var nameDraft by rememberSaveable(settings.profileName) { mutableStateOf(settings.profileName) }
 
+    androidx.compose.runtime.CompositionLocalProvider(LocalSettingsLayout provides layout) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp, 4.dp, 16.dp, 24.dp),
@@ -146,7 +152,12 @@ fun ProfileScreen(
             }
         }
         item {
-            Column {
+            Column(
+                if (layout == SettingsLayout.Minimal) Modifier else Modifier
+                    .clip(androidx.compose.foundation.shape.RoundedCornerShape(28.dp))
+                    .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.55f))
+                    .padding(horizontal = 16.dp),
+            ) {
                 Row(
                     Modifier.fillMaxWidth().padding(vertical = 14.dp),
                     verticalAlignment = Alignment.CenterVertically,
@@ -184,7 +195,19 @@ fun ProfileScreen(
                         }
                     }
                 }
-                HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+                if (layout == SettingsLayout.Minimal) HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+            }
+        }
+        if (layout == SettingsLayout.Tiles) {
+            item {
+                SettingsTiles(
+                    listOf(
+                        Triple(Icons.Rounded.Sync, stringResource(R.string.account_title), onOpenCloudAccount),
+                        Triple(Icons.Rounded.Palette, stringResource(R.string.appearance_theme_palette), onOpenAppearance),
+                        Triple(Icons.Rounded.Language, stringResource(R.string.language_label), onOpenLanguage),
+                        Triple(Icons.Rounded.Widgets, stringResource(R.string.widgets_sheet_title), onOpenWidgets),
+                    ),
+                )
             }
         }
         item { SectionLabel(stringResource(R.string.account_label)) }
@@ -192,7 +215,7 @@ fun ProfileScreen(
             SettingsCard {
                 ValueSettingRow(
                     icon = Icons.Rounded.Sync,
-                    title = stringResource(R.string.google_account_label),
+                    title = stringResource(R.string.account_title),
                     value = when (cloudAccount) {
                         CloudAccountState.Unavailable -> stringResource(R.string.firebase_setup_required)
                         CloudAccountState.SignedOut -> stringResource(R.string.google_not_connected)
@@ -384,6 +407,7 @@ fun ProfileScreen(
             )
         }
     }
+    }
 
     when (activeDialog) {
         DIALOG_NAME -> AlertDialog(
@@ -447,20 +471,70 @@ fun ProfileScreen(
     }
 }
 
+/** Three looks for the settings page, drawn side by side in previews. */
+enum class SettingsLayout { Minimal, Cards, Tiles }
+
+private val LocalSettingsLayout = androidx.compose.runtime.staticCompositionLocalOf { SettingsLayout.Cards }
+
 @Composable
 private fun SettingsCard(content: @Composable () -> Unit) {
-    Column(Modifier.fillMaxWidth()) { content() }
+    if (LocalSettingsLayout.current == SettingsLayout.Minimal) {
+        Column(Modifier.fillMaxWidth()) { content() }
+    } else {
+        Column(
+            Modifier.fillMaxWidth().clip(androidx.compose.foundation.shape.RoundedCornerShape(24.dp))
+                .background(MaterialTheme.colorScheme.surfaceContainerLow),
+        ) { content() }
+    }
 }
 
 @Composable
 private fun SectionLabel(text: String) {
-    Text(
-        text.uppercase(LocalConfiguration.current.locales[0]),
-        style = MaterialTheme.typography.labelSmall,
-        color = MaterialTheme.colorScheme.secondary,
-        modifier = Modifier.padding(top = 14.dp, bottom = 2.dp),
-        letterSpacing = androidx.compose.ui.unit.TextUnit.Unspecified,
-    )
+    if (LocalSettingsLayout.current == SettingsLayout.Minimal) {
+        Text(
+            text.uppercase(LocalConfiguration.current.locales[0]),
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.secondary,
+            modifier = Modifier.padding(top = 14.dp, bottom = 2.dp),
+        )
+    } else {
+        Text(
+            text,
+            style = MaterialTheme.typography.labelLarge,
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.padding(start = 8.dp, top = 10.dp),
+        )
+    }
+}
+
+/** Big shortcuts to the pages people open most, two per row. */
+@Composable
+private fun SettingsTiles(tiles: List<Triple<ImageVector, String, () -> Unit>>) {
+    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        tiles.chunked(2).forEach { row ->
+            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                row.forEach { (icon, label, onClick) ->
+                    Surface(
+                        onClick = onClick,
+                        shape = androidx.compose.foundation.shape.RoundedCornerShape(24.dp),
+                        color = MaterialTheme.colorScheme.surfaceContainerLow,
+                        modifier = Modifier.weight(1f),
+                    ) {
+                        Column(Modifier.padding(16.dp)) {
+                            Box(
+                                Modifier.size(40.dp).clip(androidx.compose.foundation.shape.RoundedCornerShape(12.dp))
+                                    .background(MaterialTheme.colorScheme.secondaryContainer),
+                                contentAlignment = Alignment.Center,
+                            ) { Icon(icon, null, tint = MaterialTheme.colorScheme.onSecondaryContainer, modifier = Modifier.size(22.dp)) }
+                            Spacer(Modifier.height(12.dp))
+                            Text(label, style = MaterialTheme.typography.titleSmall, maxLines = 2)
+                        }
+                    }
+                }
+                if (row.size == 1) Spacer(Modifier.weight(1f))
+            }
+        }
+    }
 }
 
 @Composable
@@ -475,19 +549,26 @@ private fun ValueSettingRow(
     } else {
         Modifier.fillMaxWidth().clickable(onClick = onClick)
     }
+    val carded = LocalSettingsLayout.current != SettingsLayout.Minimal
     Column(modifier) {
         Row(
-            Modifier.padding(vertical = 14.dp),
+            Modifier.padding(vertical = 14.dp, horizontal = if (carded) 16.dp else 0.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             SettingIcon(icon)
             Column(Modifier.padding(start = 14.dp).weight(1f)) {
-                Text(title, style = MaterialTheme.typography.titleMedium)
+                Text(title, style = if (carded) MaterialTheme.typography.bodyLarge else MaterialTheme.typography.titleMedium)
                 Text(value, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
-            if (onClick != null) Text("→", color = MaterialTheme.colorScheme.secondary)
+            if (onClick != null) {
+                Icon(
+                    Icons.AutoMirrored.Rounded.KeyboardArrowRight,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
         }
-        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+        HorizontalDivider(Modifier.padding(start = if (carded) 66.dp else 0.dp), color = MaterialTheme.colorScheme.outlineVariant)
     }
 }
 
@@ -499,31 +580,35 @@ private fun SwitchSettingRow(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
 ) {
+    val carded = LocalSettingsLayout.current != SettingsLayout.Minimal
     Column(Modifier.fillMaxWidth().clickable { onCheckedChange(!checked) }) {
         Row(
-            Modifier.fillMaxWidth().padding(vertical = 13.dp),
+            Modifier.fillMaxWidth().padding(vertical = 13.dp, horizontal = if (carded) 16.dp else 0.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             SettingIcon(icon)
             Column(Modifier.padding(start = 14.dp).weight(1f)) {
-                Text(title, style = MaterialTheme.typography.titleMedium)
+                Text(title, style = if (carded) MaterialTheme.typography.bodyLarge else MaterialTheme.typography.titleMedium)
                 Text(description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
             Switch(checked = checked, onCheckedChange = null)
         }
-        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+        HorizontalDivider(Modifier.padding(start = if (carded) 66.dp else 0.dp), color = MaterialTheme.colorScheme.outlineVariant)
     }
 }
 
 
 @Composable
 private fun SettingIcon(icon: ImageVector) {
-    Icon(
-        icon,
-        contentDescription = null,
-        tint = MaterialTheme.colorScheme.secondary,
-        modifier = Modifier.size(22.dp),
-    )
+    if (LocalSettingsLayout.current == SettingsLayout.Minimal) {
+        Icon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.secondary, modifier = Modifier.size(22.dp))
+    } else {
+        Box(
+            Modifier.size(36.dp).clip(androidx.compose.foundation.shape.RoundedCornerShape(12.dp))
+                .background(MaterialTheme.colorScheme.secondaryContainer),
+            contentAlignment = Alignment.Center,
+        ) { Icon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.onSecondaryContainer, modifier = Modifier.size(20.dp)) }
+    }
 }
 
 @Composable
@@ -595,10 +680,11 @@ private fun weekStartLabel(value: WeekStartPreference): String = stringResource(
 @Composable
 private fun WidgetOpacityRow(value: Int, onChange: (Int) -> Unit) {
     var draft by remember(value) { mutableStateOf(value.toFloat()) }
-    Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 10.dp)) {
+    val carded = LocalSettingsLayout.current != SettingsLayout.Minimal
+    Column(Modifier.fillMaxWidth().padding(horizontal = if (carded) 16.dp else 0.dp, vertical = 10.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(Icons.Rounded.Widgets, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
-            Spacer(Modifier.width(16.dp))
+            SettingIcon(Icons.Rounded.Opacity)
+            Spacer(Modifier.width(14.dp))
             Column(Modifier.weight(1f)) {
                 Text(stringResource(R.string.widget_opacity_label), style = MaterialTheme.typography.bodyLarge)
                 Text(
@@ -614,7 +700,7 @@ private fun WidgetOpacityRow(value: Int, onChange: (Int) -> Unit) {
             onValueChangeFinished = { onChange(draft.toInt()) },
             valueRange = 20f..100f,
             steps = 15,
-            modifier = Modifier.padding(start = 40.dp),
+            modifier = Modifier.padding(start = 50.dp),
         )
     }
 }

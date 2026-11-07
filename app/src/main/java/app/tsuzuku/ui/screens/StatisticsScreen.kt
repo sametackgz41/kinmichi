@@ -1,5 +1,6 @@
 package app.tsuzuku.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.annotation.StringRes
 import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
@@ -182,7 +183,7 @@ fun StatisticsScreen(
                     }
                 }
                 item {
-                    Surface(color = MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(10.dp)) {
+                    Surface(color = MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(28.dp)) {
                         Row(
                             modifier = Modifier.fillMaxWidth().padding(22.dp),
                             horizontalArrangement = Arrangement.SpaceBetween,
@@ -692,15 +693,21 @@ private fun ReviewNoteCard(
 
 @Composable
 private fun StatisticMiniCard(value: String, label: String, modifier: Modifier = Modifier) {
-    Column(modifier.padding(vertical = 12.dp), horizontalAlignment = Alignment.Start) {
+    Column(
+        modifier.clip(RoundedCornerShape(20.dp)).background(MaterialTheme.colorScheme.surfaceContainerLow).padding(horizontal = 14.dp, vertical = 12.dp),
+        horizontalAlignment = Alignment.Start,
+    ) {
         Text(value, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
-        Text(label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text(label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1)
     }
 }
 
 @Composable
 private fun HabitStatisticCard(stat: HabitPeriodStat) {
-    Card(shape = RoundedCornerShape(8.dp)) {
+    Card(
+        shape = RoundedCornerShape(24.dp),
+        colors = androidx.compose.material3.CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
+    ) {
         Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
