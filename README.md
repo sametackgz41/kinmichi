@@ -21,9 +21,9 @@ mended in gold instead of hidden. Free, open source, no ads, no tracking, works 
 Kinmichi is distributed here on GitHub, not on the Play Store.
 
 - **With [Obtainium](https://github.com/ImranR98/Obtainium) (recommended):** add
-  `https://github.com/sametackgz41/tsuzuku` as an app. Set the APK filter to `^(kinmichi|tsuzuku)-[0-9]`
+  `https://github.com/sametackgz41/kinmichi` as an app. Set the APK filter to `^(kinmichi|tsuzuku)-[0-9]`
   so it picks the phone app, not the watch app. Obtainium then installs every update for you.
-- **By hand:** download `kinmichi-x.y.z.apk` from the [latest release](https://github.com/sametackgz41/tsuzuku/releases/latest)
+- **By hand:** download `kinmichi-x.y.z.apk` from the [latest release](https://github.com/sametackgz41/kinmichi/releases/latest)
   and open it. Android will ask you to allow installs from your browser or file manager once.
 - **Wear OS (optional):** `kinmichi-wear-x.y.z.apk` from the same release, installed on the watch.
 
@@ -73,7 +73,7 @@ English and Turkish. [Translations are welcome](CONTRIBUTING.md#translating).
 
 ## Feedback
 
-Found a bug or have an idea? [Open an issue](https://github.com/sametackgz41/tsuzuku/issues/new/choose).
+Found a bug or have an idea? [Open an issue](https://github.com/sametackgz41/kinmichi/issues/new/choose).
 The app can also do it for you: **Settings › Error reports › Report on GitHub** fills in the
 version and the last error log.
 
@@ -113,7 +113,7 @@ python previews/build_gallery.py   # writes previews/site/ (open index.html)
 | `wear/` | Wear OS app and tile |
 | `previews/` | JVM screenshot gallery |
 
-Release notes: [CHANGELOG.md](CHANGELOG.md) (in Turkish) and each [release](https://github.com/sametackgz41/tsuzuku/releases).
+Release notes: [CHANGELOG.md](CHANGELOG.md) (in Turkish) and each [release](https://github.com/sametackgz41/kinmichi/releases).
 
 ## License
 

@@ -5,7 +5,7 @@ ones: telling us what broke, suggesting what would help you keep going, and tran
 
 ## Reporting a bug
 
-Use **[New issue › Bug report](https://github.com/sametackgz41/tsuzuku/issues/new?template=bug_report.yml)**.
+Use **[New issue › Bug report](https://github.com/sametackgz41/kinmichi/issues/new?template=bug_report.yml)**.
 The fastest way is from the app: **Settings › Error reports › Report on GitHub**. It fills in
 the version, Android version, phone model and the last error log for you.
 
@@ -14,7 +14,7 @@ recording helps a lot.
 
 ## Suggesting a feature
 
-Use **[New issue › Feature idea](https://github.com/sametackgz41/tsuzuku/issues/new?template=feature_request.yml)**.
+Use **[New issue › Feature idea](https://github.com/sametackgz41/kinmichi/issues/new?template=feature_request.yml)**.
 Describe the problem you want solved before the solution you have in mind; there may be a
 simpler way that fits the app.
 

@@ -813,12 +813,9 @@
         <item>Dom</item>
     </string-array>
     <string-array name="whats_new_items">
-        <item>Versión para días malos|Dale a un hábito el paso más pequeño que aún cuenta. Tras un día perdido, Hoy te lo ofrece con un toque.</item>
-        <item>Planes «si… entonces»|Une un hábito a un momento: \"Si termino de cenar, leo 10 páginas.\"</item>
-        <item>Kintsugi|El día que vuelves tras una pausa se cuenta y se dibuja en oro.</item>
-        <item>Health Connect|Vincula un hábito a pasos, distancia, calorías, ejercicio o sueño y se rellena solo.</item>
-        <item>Recordatorios inteligentes y aviso de racha|Mejores horas de recordatorio y un solo aviso por la noche cuando una racha está en riesgo.</item>
-        <item>Paletas y widgets|Cinco paletas, negro puro por la noche y nuevos widgets de racha, cuadrícula rápida y ánimo.</item>
-        <item>Comentarios|Ajustes › Informes de errores › Informar en GitHub. Kinmichi también te avisa cuando sale una versión nueva.</item>
+        <item>Nuevo nombre: Kinmichi|Significa \'camino dorado\' en japonés. Tus hábitos y datos siguen como siempre.</item>
+        <item>Seis idiomas|Español, alemán, portugués y japonés se suman al inglés y al turco.</item>
+        <item>Metas que se adaptan|Sube el listón tras tres semanas fuertes, o convierte un hábito diario que casi no haces en unas veces por semana.</item>
+        <item>Nuevo recorrido e icono|Pasos por un camino dorado, el de hoy en oro.</item>
     </string-array>
 </resources>

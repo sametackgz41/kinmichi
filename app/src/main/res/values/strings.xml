@@ -1151,13 +1151,10 @@
     <string name="whats_new_title">What\'s new in %1$s</string>
     <string name="whats_new_ok">Got it</string>
     <string-array name="whats_new_items">
-        <item>Bad-day version|Give a habit a smallest step that still counts. After a missed day, Today offers it in one tap.</item>
-        <item>If–then plans|Tie a habit to a moment: \"If I finish dinner, I read 10 pages.\"</item>
-        <item>Kintsugi|The day you come back after a break is counted and drawn in gold.</item>
-        <item>Health Connect|Link a habit to steps, distance, calories, exercise or sleep and it fills itself.</item>
-        <item>Smart reminders and streak alert|Better reminder times, and one evening note only when a streak is at risk.</item>
-        <item>Palettes and widgets|Five palettes, pure black at night, new streak, quick grid and mood widgets.</item>
-        <item>Feedback|Settings › Error reports › Report on GitHub. Kinmichi also tells you when a new version is out.</item>
+        <item>New name: Kinmichi|Japanese for \'the golden path\'. Your habits and data carry on as before.</item>
+        <item>Six languages|Spanish, German, Portuguese and Japanese join English and Turkish.</item>
+        <item>Goals that adapt|Raise the bar after three strong weeks, or turn a rarely done daily habit into a few times a week.</item>
+        <item>A new tour and icon|Steps along a golden path, today in gold.</item>
     </string-array>
     <string name="language_spanish">Español</string>
     <string name="language_german">Deutsch</string>

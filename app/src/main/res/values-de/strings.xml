@@ -813,12 +813,9 @@
         <item>So</item>
     </string-array>
     <string-array name="whats_new_items">
-        <item>Version für schlechte Tage|Gib einer Gewohnheit den kleinsten Schritt, der noch zählt. Nach einem verpassten Tag bietet „Heute“ ihn mit einem Tipp an.</item>
-        <item>Wenn-dann-Pläne|Verbinde eine Gewohnheit mit einem Moment: \"Wenn ich zu Abend gegessen habe, lese ich 10 Seiten.\"</item>
-        <item>Kintsugi|Der Tag, an dem du nach einer Pause zurückkommst, wird gezählt und in Gold gezeichnet.</item>
-        <item>Health Connect|Verknüpfe eine Gewohnheit mit Schritten, Strecke, Kalorien, Training oder Schlaf, und sie füllt sich selbst.</item>
-        <item>Kluge Erinnerungen und Serien-Hinweis|Bessere Erinnerungszeiten und abends nur ein Hinweis, wenn eine Serie in Gefahr ist.</item>
-        <item>Paletten und Widgets|Fünf Paletten, reines Schwarz bei Nacht, neue Widgets für Serie, Schnellraster und Stimmung.</item>
-        <item>Feedback|Einstellungen › Fehlerberichte › Auf GitHub melden. Kinmichi sagt dir auch, wenn eine neue Version da ist.</item>
+        <item>Neuer Name: Kinmichi|Japanisch für „goldener Weg“. Deine Gewohnheiten und Daten bleiben, wie sie sind.</item>
+        <item>Sechs Sprachen|Spanisch, Deutsch, Portugiesisch und Japanisch kommen zu Englisch und Türkisch hinzu.</item>
+        <item>Ziele, die sich anpassen|Nach drei starken Wochen die Latte höher legen oder eine selten geschaffte tägliche Gewohnheit auf ein paar Mal pro Woche setzen.</item>
+        <item>Neue Einführung und neues Symbol|Schritte auf einem goldenen Weg, der heutige in Gold.</item>
     </string-array>
 </resources>

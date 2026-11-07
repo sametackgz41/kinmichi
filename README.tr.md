@@ -21,9 +21,9 @@ internetsiz çalışır.
 Kinmichi Play Store'da değil, burada GitHub'da yayınlanıyor.
 
 - **[Obtainium](https://github.com/ImranR98/Obtainium) ile (önerilen):** uygulama olarak
-  `https://github.com/sametackgz41/tsuzuku` adresini ekle. Saat uygulaması yerine telefon
+  `https://github.com/sametackgz41/kinmichi` adresini ekle. Saat uygulaması yerine telefon
   uygulamasını seçmesi için APK filtresine `^(kinmichi|tsuzuku)-[0-9]` yaz. Sonraki her güncellemeyi Obtainium kurar.
-- **Elle:** [son sürümden](https://github.com/sametackgz41/tsuzuku/releases/latest) `kinmichi-x.y.z.apk`
+- **Elle:** [son sürümden](https://github.com/sametackgz41/kinmichi/releases/latest) `kinmichi-x.y.z.apk`
   dosyasını indirip aç. Android bir kereliğine tarayıcıdan ya da dosya yöneticisinden kurulum izni ister.
 - **Wear OS (isteğe bağlı):** aynı sürümdeki `kinmichi-wear-x.y.z.apk`, saate kurulur.
 
@@ -73,7 +73,7 @@ Türkçe ve İngilizce. [Çeviri katkısı memnuniyetle](CONTRIBUTING.md#transla
 
 ## Geri bildirim
 
-Bir hata mı buldun ya da bir fikrin mi var? [Bir sorun kaydı aç](https://github.com/sametackgz41/tsuzuku/issues/new/choose).
+Bir hata mı buldun ya da bir fikrin mi var? [Bir sorun kaydı aç](https://github.com/sametackgz41/kinmichi/issues/new/choose).
 Uygulama da bunu senin için yapabilir: **Ayarlar › Hata raporları › GitHub'da bildir**, sürümü ve
 son hata kaydını otomatik doldurur.
 

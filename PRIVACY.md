@@ -48,4 +48,4 @@ Submit on GitHub, and the issue is public. Remove anything you don't want to sha
 
 ## Questions
 
-Open an issue: <https://github.com/sametackgz41/tsuzuku/issues>
+Open an issue: <https://github.com/sametackgz41/kinmichi/issues>

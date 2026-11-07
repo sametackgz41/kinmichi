@@ -765,13 +765,6 @@ update_later|あとで
 update_open|開く
 whats_new_title|%1$s の新機能
 whats_new_ok|OK
-whats_new_items[0]|調子の悪い日の版|それでも数に入るいちばん小さな一歩を習慣に設定できます。休んだ翌日、「今日」がワンタップで提案します。
-whats_new_items[1]|イフゼンプラン|習慣を一日の瞬間に結びつけます: 「夕食を食べ終えたら、10 ページ読む。」
-whats_new_items[2]|金継ぎ|休んだあとに再開した日が数えられ、金色で描かれます。
-whats_new_items[3]|Health Connect|習慣を歩数、距離、カロリー、運動、睡眠とつなぐと、自動で記録されます。
-whats_new_items[4]|賢いリマインダーと連続記録のお知らせ|よりよいリマインダーの時刻と、連続記録が危ないときだけの夜のお知らせ。
-whats_new_items[5]|パレットとウィジェット|5 つのパレット、夜の純粋な黒、連続記録・クイックグリッド・気分の新しいウィジェット。
-whats_new_items[6]|フィードバック|設定 › エラーレポート › GitHub で報告。新しいバージョンが出たら Kinmichi がお知らせします。
 language_spanish|Español
 language_german|Deutsch
 language_portuguese|Português (Brasil)
@@ -796,3 +789,7 @@ advice_weekly|最近は %2$d 日中 %1$d 日できています。毎日ではな
 advice_fewer_per_week|ここ数週間はこの目標に届いていません。まずは週 %1$d 回を目指して、少しずつ増やしませんか？
 advice_more_per_week|3 週連続でこの目標を達成しています。週 %1$d 回にしてみませんか？
 advice_accept_per_week|週 %1$d 回
+whats_new_items[0]|新しい名前: Kinmichi|日本語で「金の道」。習慣とデータはこれまでどおり続きます。
+whats_new_items[1]|6 つの言語|英語とトルコ語に、スペイン語、ドイツ語、ポルトガル語、日本語が加わりました。
+whats_new_items[2]|変化する目標|3 週間好調なら目標を上げ、あまりできない毎日の習慣は週に数回へ。
+whats_new_items[3]|新しいツアーとアイコン|金の道を進む足あと。今日の一歩は金色。

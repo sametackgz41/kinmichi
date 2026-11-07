@@ -1150,13 +1150,10 @@
     <string name="whats_new_title">%1$s sürümünde yenilikler</string>
     <string name="whats_new_ok">Tamam</string>
     <string-array name="whats_new_items">
-        <item>Kötü gün sürümü|Alışkanlığa yine de sayılan en küçük adımı yaz. Kaçırılan bir günden sonra Bugün ekranı onu tek dokunuşla önerir.</item>
-        <item>Eğer-o zaman planı|Alışkanlığı gününün bir anına bağla: \"Eğer yemeği bitirirsem, 10 sayfa okurum.\"</item>
-        <item>Kintsugi|Aradan sonra geri döndüğün gün sayılır ve altınla çizilir.</item>
-        <item>Health Connect|Alışkanlığı adım, mesafe, kalori, egzersiz ya da uykuya bağla, kendiliğinden dolsun.</item>
-        <item>Akıllı hatırlatma ve seri uyarısı|Daha iyi hatırlatma saatleri; akşam yalnızca seri tehlikedeyse tek bir not.</item>
-        <item>Paletler ve widget\'lar|Beş palet, gece için saf siyah; yeni seri, hızlı ızgara ve ruh hali widget\'ları.</item>
-        <item>Geri bildirim|Ayarlar › Hata raporları › GitHub\'da bildir. Yeni sürüm çıkınca Kinmichi haber de verir.</item>
+        <item>Yeni ad: Kinmichi|Japonca \'altın yol\' demek. Alışkanlıkların ve verilerin olduğu gibi devam eder.</item>
+        <item>Altı dil|İngilizce ve Türkçeye İspanyolca, Almanca, Portekizce ve Japonca katıldı.</item>
+        <item>Uyum sağlayan hedefler|Üç güçlü haftadan sonra çıtayı yükselt, ya da nadiren yaptığın her günkü alışkanlığı haftada birkaç kez yap.</item>
+        <item>Yeni tur ve simge|Altın bir yolda adımlar, bugünkü altın.</item>
     </string-array>
     <string name="language_spanish">Español</string>
     <string name="language_german">Deutsch</string>

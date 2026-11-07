@@ -10,7 +10,7 @@ import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
 
-const val GITHUB_REPO = "sametackgz41/tsuzuku"
+const val GITHUB_REPO = "sametackgz41/kinmichi"
 const val GITHUB_URL = "https://github.com/$GITHUB_REPO"
 
 /** A newer release on GitHub. */
