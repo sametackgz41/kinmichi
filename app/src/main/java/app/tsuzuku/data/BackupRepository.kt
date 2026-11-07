@@ -89,7 +89,7 @@ class BackupRepository(private val dao: BackupDao, private val context: Context?
             pageNumber++
             page = document.startPage(PdfDocument.PageInfo.Builder(595, 842, pageNumber).create())
             y = 52f
-            page!!.canvas.drawText("Tsuzuku", 42f, y, titlePaint)
+            page!!.canvas.drawText("Kinmichi", 42f, y, titlePaint)
             y += 28f
         }
         fun line(text: String) {

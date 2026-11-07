@@ -77,7 +77,7 @@ object UpdateChecker {
             connection.connectTimeout = 8_000
             connection.readTimeout = 8_000
             connection.setRequestProperty("Accept", "application/vnd.github+json")
-            connection.setRequestProperty("User-Agent", "Tsuzuku-Android")
+            connection.setRequestProperty("User-Agent", "Kinmichi-Android")
             try {
                 if (connection.responseCode != 200) return@runCatching null
                 val json = JSONObject(connection.inputStream.bufferedReader().use { it.readText() })

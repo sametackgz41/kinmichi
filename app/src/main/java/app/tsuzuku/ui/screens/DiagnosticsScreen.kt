@@ -79,7 +79,7 @@ fun DiagnosticsScreen(store: DiagnosticStore, onBack: () -> Unit) {
             }
         }
         item {
-            Button(onClick = { exporter.launch("Tsuzuku-diagnostic.txt") }, modifier = Modifier.fillMaxWidth()) {
+            Button(onClick = { exporter.launch("Kinmichi-diagnostic.txt") }, modifier = Modifier.fillMaxWidth()) {
                 Icon(Icons.Rounded.UploadFile, contentDescription = null)
                 Text(stringResource(R.string.export_diagnostic), modifier = Modifier.padding(start = 8.dp))
             }

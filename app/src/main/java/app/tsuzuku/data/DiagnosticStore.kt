@@ -27,7 +27,7 @@ class DiagnosticStore(private val context: Context) {
     fun clearCrash() = runCatching { crashFile.delete() }.isSuccess
 
     fun report(): String = buildString {
-        appendLine("Tsuzuku diagnostic report")
+        appendLine("Kinmichi diagnostic report")
         appendLine("Generated: ${Instant.now()}")
         appendLine("App: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})")
         appendLine("Android: ${Build.VERSION.RELEASE} / API ${Build.VERSION.SDK_INT}")

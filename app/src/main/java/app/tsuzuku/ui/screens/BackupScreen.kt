@@ -162,7 +162,7 @@ fun BackupScreen(
                             val json = repository.exportJson()
                             withContext(Dispatchers.IO) { exportCache.writeText(json) }
                         }.onSuccess {
-                            exportLauncher.launch("Tsuzuku-${LocalDate.now()}.json")
+                            exportLauncher.launch("Kinmichi-${LocalDate.now()}.json")
                         }.onFailure { exportCache.delete(); fail() }
                     }
                 },
@@ -185,7 +185,7 @@ fun BackupScreen(
                     busy = true
                     scope.launch {
                         runCatching { withContext(Dispatchers.IO) { csvCache.writeText(repository.exportCsv()) } }
-                            .onSuccess { csvLauncher.launch("Tsuzuku-${LocalDate.now()}.csv") }
+                            .onSuccess { csvLauncher.launch("Kinmichi-${LocalDate.now()}.csv") }
                             .onFailure { csvCache.delete(); fail() }
                     }
                 },
@@ -200,7 +200,7 @@ fun BackupScreen(
                     busy = true
                     scope.launch {
                         runCatching { withContext(Dispatchers.IO) { pdfCache.outputStream().use { repository.exportPdf(it) } } }
-                            .onSuccess { pdfLauncher.launch("Tsuzuku-${LocalDate.now()}.pdf") }
+                            .onSuccess { pdfLauncher.launch("Kinmichi-${LocalDate.now()}.pdf") }
                             .onFailure { pdfCache.delete(); fail() }
                     }
                 },

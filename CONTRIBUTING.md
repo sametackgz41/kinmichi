@@ -1,6 +1,6 @@
-# Contributing to Tsuzuku
+# Contributing to Kinmichi
 
-Thanks for helping. Tsuzuku is a small project, so the easiest contributions are the most useful
+Thanks for helping. Kinmichi is a small project, so the easiest contributions are the most useful
 ones: telling us what broke, suggesting what would help you keep going, and translating.
 
 ## Reporting a bug

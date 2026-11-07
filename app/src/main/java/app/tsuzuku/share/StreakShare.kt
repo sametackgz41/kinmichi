@@ -61,7 +61,7 @@ fun renderStreakCard(context: Context, data: StreakCardData): Bitmap {
 
     // Brand chip.
     val brand = text(30f, 0.9f, bold).apply { letterSpacing = 0.2f }
-    val brandText = "TSUZUKU"
+    val brandText = "KINMICHI"
     val chip = RectF(pad, 88f, pad + brand.measureText(brandText) + 56f, 148f)
     canvas.drawRoundRect(chip, 30f, 30f, Paint(Paint.ANTI_ALIAS_FLAG).apply { color = white(0.14f) })
     canvas.drawText(brandText, chip.left + 28f, chip.centerY() + 11f, brand)

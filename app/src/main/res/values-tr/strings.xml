@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Tsuzuku</string>
+    <string name="app_name">Kinmichi</string>
     <string name="today">Bugün</string>
     <string name="library">Kütüphane</string>
     <string name="statistics">İstatistik</string>
@@ -340,7 +340,7 @@
 
     <string name="app_lock_enabled">Uygulama kilidi açık</string>
     <string name="app_lock_disabled">Uygulama kilidi kapalı</string>
-    <string name="app_lock_description">Tsuzuku açılırken belirlediğin 4 haneli PIN sorulur.</string>
+    <string name="app_lock_description">Kinmichi açılırken belirlediğin 4 haneli PIN sorulur.</string>
     <string name="app_lock_status_on">4 haneli PIN ile korunuyor</string>
     <string name="app_lock_status_off">Kapalı</string>
     <string name="new_pin">Yeni PIN</string>
@@ -357,11 +357,11 @@
     <string name="biometric_unlock">Biyometrik kilit açma</string>
     <string name="biometric_unlock_description">Parmak izi veya cihazındaki desteklenen biyometriyi kullan</string>
     <string name="biometric_unavailable">Bu cihazda kullanılabilir biyometri ayarlanmamış.</string>
-    <string name="app_locked">Tsuzuku kilitli</string>
+    <string name="app_locked">Kinmichi kilitli</string>
     <string name="enter_pin_to_continue">Devam etmek için PIN’ini gir.</string>
     <string name="unlock">Kilidi aç</string>
     <string name="use_biometrics">Biyometriyi kullan</string>
-    <string name="biometric_prompt_title">Tsuzuku’nun kilidini aç</string>
+    <string name="biometric_prompt_title">Kinmichi’nin kilidini aç</string>
     <string name="biometric_prompt_subtitle">Kimliğini biyometriyle doğrula</string>
     <string name="use_pin_instead">PIN kullan</string>
 
@@ -381,12 +381,12 @@
     <string name="restore_summary">Bu yedek %1$d alışkanlık, %2$d geçmiş kaydı, %3$d içerik ve %4$d hedef içeriyor. Mevcut uygulama verileri bunlarla değiştirilecek.</string>
     <string name="restore_label">Geri yükle</string>
 
-    <string name="widget_brand" translatable="false">Tsuzuku</string>
+    <string name="widget_brand" translatable="false">Kinmichi</string>
     <string name="widget_description">Bugünün alışkanlıklarını ana ekrandan işaretle</string>
     <string name="widget_empty_progress">Bugün için hazır</string>
     <string name="widget_progress_value">%1$d / %2$d tamamlandı · %%%3$d</string>
     <string name="widget_habit_line">%1$s  %2$s  %3$s</string>
-    <string name="widget_locked">Tsuzuku kilitli</string>
+    <string name="widget_locked">Kinmichi kilitli</string>
     <string name="configure_widget">Widget’ı düzenle</string>
     <string name="configure_widget_description">Gösterilecek alışkanlıkları seç.</string>
     <string name="widget_palette">Hazır renk paleti</string>
@@ -404,7 +404,7 @@
     <string name="crash_report_available">Kaydedilmiş bir hata raporu var</string>
     <string name="no_crash_reports">Kaydedilmiş hata yok</string>
     <string name="diagnostic_privacy_note">Rapor yalnızca uygulama sürümü, cihaz bilgisi ve son teknik hata izini içerir; notların ve alışkanlık içeriklerin eklenmez.</string>
-    <string name="app_version_value">Tsuzuku %1$s · yapı %2$d</string>
+    <string name="app_version_value">Kinmichi %1$s · yapı %2$d</string>
     <string name="export_diagnostic">Tanı raporunu dışa aktar</string>
     <string name="clear_error_report">Hata raporunu temizle</string>
     <string name="diagnostic_export_success">Tanı raporu kaydedildi.</string>
@@ -412,7 +412,7 @@
 
     <string name="skip_label">Atla</string>
     <string name="onboarding_welcome_title">Küçük adımlar, kalıcı ilerleme</string>
-    <string name="onboarding_welcome_body">Tsuzuku alışkanlıklarını kendi hedefin, programın ve hatırlatmalarınla takip eder.</string>
+    <string name="onboarding_welcome_body">Kinmichi alışkanlıklarını kendi hedefin, programın ve hatırlatmalarınla takip eder.</string>
     <string name="onboarding_library_title">Okudukların ve izlediklerin bir arada</string>
     <string name="onboarding_library_body">Kitap, manga, film, dizi ve anime ilerlemeni sezonları ve notlarıyla sakla.</string>
     <string name="onboarding_goals_title">Uzun vadeli hedeflerini görünür kıl</string>
@@ -420,7 +420,7 @@
     <string name="onboarding_privacy_title">Kişisel alanın senin kontrolünde</string>
     <string name="onboarding_privacy_body">Verilerin bu cihazda tutulur. İstersen PIN, biyometri, ekran koruması ve yerel yedek kullanabilirsin.</string>
     <string name="profile_name_optional">Profil adı (isteğe bağlı)</string>
-    <string name="start_using_tsuzuku">Tsuzuku’yu kullanmaya başla</string>
+    <string name="start_using_tsuzuku">Kinmichi’yi kullanmaya başla</string>
 
     <string name="cloud_account_subtitle">Google girişi ve kişisel bulut eşitleme</string>
     <string name="cloud_data_note">Alışkanlıkların, içeriklerin ve hedeflerin bu cihazda çalışmaya devam eder; ayrıca kişisel Google bulut eşitlemenle korunur.</string>
@@ -632,7 +632,7 @@
     <string name="ask_suggestion_struggling_habit">Hangi alışkanlığım aksıyor?</string>
     <string name="ask_suggestion_postponed_tasks">Ertelenen görevlerimde durum ne?</string>
     <string name="ask_suggestion_30_day_progress">Son 30 günlük genel gelişimim</string>
-    <string name="ask_tsuzuku_title">Tsuzuku\'ya Sor</string>
+    <string name="ask_tsuzuku_title">Kinmichi\'ye Sor</string>
     <string name="ask_tsuzuku_subtitle">Çok turlu, veriye dayalı sakin içgörüler</string>
     <string name="close_action">Kapat</string>
     <string name="ask_empty_title">Nasıl yardımcı olabilirim?</string>
@@ -640,7 +640,7 @@
     <string name="ask_data_used">Kullanılan Veriler:</string>
     <string name="ask_follow_ups">Takip Edebileceğin Sorular:</string>
     <string name="copy_action">Kopyala</string>
-    <string name="ask_thinking">Tsuzuku verilerini ve bağlamı inceliyor...</string>
+    <string name="ask_thinking">Kinmichi verilerini ve bağlamı inceliyor...</string>
     <string name="ask_input_placeholder">Bir soru veya takip sorusu sor...</string>
     <string name="send_action">Gönder</string>
     <string name="favorite_label">Favori</string>
@@ -754,7 +754,7 @@
     <string name="recommendations">Öneriler</string>
     <string name="personal_patterns_title">Kişisel Davranış Kalıpların</string>
     <string name="intelligence_intro">Verilerin tamamen cihazında offline olarak incelenir. Asla yargılamadan, sana en uygun çalışma ve alışkanlık ritmini fark ettirir.</string>
-    <string name="ask_tsuzuku_cta">🌱 Tsuzuku\'ya Sor</string>
+    <string name="ask_tsuzuku_cta">🌱 Kinmichi\'ye Sor</string>
     <string name="ask_tsuzuku_cta_desc">Verilerinle sohbet et, ritmini keşfet</string>
     <string name="ai_plan_assistant_cta">✨ AI Plan Asistanı</string>
     <string name="ai_plan_assistant_cta_desc">Kişisel gün taslağı oluştur ve onayla</string>
@@ -766,7 +766,7 @@
     <string name="metrics_used">Kullanılan Sayısal Metrikler:</string>
     <string name="confidence_explanation">Güven Derecesi: %1$s. Bu analiz tamamen cihazındaki yerel kayıtlar taranarak hesaplanmıştır.</string>
     <string name="got_it">Anladım</string>
-    <string name="no_change_without_approval">Tsuzuku hiçbir değişikliği senin onayın olmadan yapmaz.</string>
+    <string name="no_change_without_approval">Kinmichi hiçbir değişikliği senin onayın olmadan yapmaz.</string>
     <string name="approve_and_apply">Onayla ve Uygula</string>
     <string name="dismiss_action">Vazgeç</string>
     <string name="why_question">Neden?</string>
@@ -795,7 +795,7 @@
     <string name="substeps_label">Alt Adımlar:</string>
     <string name="add_substep_placeholder">Yeni alt adım ekle...</string>
     <string name="add_selected_to_plan">Seçilenleri Plana Ekle (%1$s)</string>
-    <string name="get_ai_coach_review">Tsuzuku AI Koç Değerlendirmesi Al</string>
+    <string name="get_ai_coach_review">Kinmichi AI Koç Değerlendirmesi Al</string>
     <string name="projects_title">Projeler</string>
     <string name="postpone_awareness">Erteleme Farkındalığı (%1$s kez ertelendi)</string>
     <string name="postpone_awareness_hint">Bu görev gizli bir direnç yaratıyor olabilir. Yukarıdaki checklist alanından görevi 5 dakikalık alt adımlara bölmeyi deneyebilirsin.</string>
@@ -824,7 +824,7 @@
     <string name="start_new_project">Yeni Proje Başlat</string>
     <string name="edit_project">Projeyi Düzenle</string>
     <string name="project_title">Proje Başlığı</string>
-    <string name="project_title_example">Örn: Tsuzuku 2.0 veya Tez Çalışması</string>
+    <string name="project_title_example">Örn: Kinmichi 2.0 veya Tez Çalışması</string>
     <string name="project_description">Açıklama / Kapsam</string>
     <string name="project_description_hint">Bu projenin temel amacı nedir?</string>
     <string name="choose_icon_short">Simge Seç</string>
@@ -848,7 +848,7 @@
     <string name="projects_settings_desc">Hedef ve görevleri birbirine bağlayan kilometre taşları</string>
     <string name="personal_records_milestones">Kişisel Rekorlar ve Dönüm Noktaları</string>
     <string name="personal_records_desc">Kazanılan rozetler, en uzun seriler ve kilometre taşları</string>
-    <string name="intelligence_offline_title">Tsuzuku Intelligence (Çevrimdışı)</string>
+    <string name="intelligence_offline_title">Kinmichi Intelligence (Çevrimdışı)</string>
     <string name="intelligence_offline_desc">Alışkanlık ve planlama örüntülerinizi cihazınızda yerel olarak analiz eder. Sıfır veri aktarımı, tam gizlilik.</string>
     <string name="gemini_cloud_active">Gemini Bulut AI (Aktif)</string>
     <string name="skip_habit_title">Alışkanlığı Atla</string>
@@ -1009,19 +1009,19 @@
     <string name="weekly_summary_setting_description">Her pazar akşamı kısa bir değerlendirme</string>
     <string name="delete_account">Hesabı ve verileri sil</string>
     <string name="delete_account_title">Hesabın silinsin mi?</string>
-    <string name="delete_account_message">Bu işlem buluttaki Tsuzuku kopyanı, hesabını ve bu cihazdaki bütün alışkanlıkları kalıcı olarak siler. Geri alınamaz. Saklamak istediğin bir şey varsa önce yedek al.</string>
+    <string name="delete_account_message">Bu işlem buluttaki Kinmichi kopyanı, hesabını ve bu cihazdaki bütün alışkanlıkları kalıcı olarak siler. Geri alınamaz. Saklamak istediğin bir şey varsa önce yedek al.</string>
     <string name="delete_account_confirm">Kalıcı olarak sil</string>
     <string name="delete_account_reauth">Güvenliğin için tekrar giriş yap, sonra hesabını sil.</string>
     <string name="deleting_account">Hesabın siliniyor…</string>
     <string name="widget_mark_done">%1$s tamamlandı olarak işaretle</string>
     <string name="widget_mark_not_done">%1$s tamamlanmadı olarak işaretle</string>
-    <string name="notifications_blocked">Tsuzuku için bildirimler kapalı, bu hatırlatıcı gelmeyecek.</string>
+    <string name="notifications_blocked">Kinmichi için bildirimler kapalı, bu hatırlatıcı gelmeyecek.</string>
     <string name="open_notification_settings">Aç</string>
     <string name="shortcut_add_habit">Yeni alışkanlık</string>
     <string name="shortcut_add_habit_long">Yeni alışkanlık ekle</string>
     <string name="shortcut_progress">İlerleme</string>
     <string name="shortcut_progress_long">İlerlemeni gör</string>
-    <string name="tile_today_label">Tsuzuku</string>
+    <string name="tile_today_label">Kinmichi</string>
     <string name="tile_no_habits">Bugün alışkanlık yok</string>
     <string name="tile_all_done">Bugün hepsi tamam</string>
     <plurals name="tile_habits_left">
@@ -1069,8 +1069,8 @@
     <string name="share_card_done">gün tamamlandı</string>
     <string name="share_card_rate">Son 30 gün</string>
     <string name="share_card_weeks">Son %1$d hafta</string>
-    <string name="share_card_text">%1$s: Tsuzuku ile %2$d günlük seri 🔥</string>
-    <string name="share_card_text_done">%1$s: Tsuzuku ile %2$d gün tamamlandı</string>
+    <string name="share_card_text">%1$s: Kinmichi ile %2$d günlük seri 🔥</string>
+    <string name="share_card_text_done">%1$s: Kinmichi ile %2$d gün tamamlandı</string>
     <string name="palette_label">Renk paleti</string>
     <string name="palette_washi">Washi</string>
     <string name="palette_dynamic">Duvar kâğıdı renkleri</string>
@@ -1113,7 +1113,7 @@
     <string name="smart_reminder_move">%1$s yap</string>
     <string name="health_fill_label">Sağlık verisinden doldur</string>
     <string name="health_unavailable">Health Connect bu telefonda yok.</string>
-    <string name="health_fill_help">Tsuzuku her açıldığında güncellenir. Birim: %1$s.</string>
+    <string name="health_fill_help">Kinmichi her açıldığında güncellenir. Birim: %1$s.</string>
     <string name="health_none">Kapalı</string>
     <string name="health_steps">Adım</string>
     <string name="health_distance">Mesafe</string>
@@ -1141,9 +1141,9 @@
     <string name="report_on_github_note">Tarayıcıda sürüm, telefon modeli ve son hata kaydıyla doldurulmuş bir sorun kaydı açar. Gönder\'e basana kadar hiçbir şey gitmez; sorun kayıtları herkese açıktır.</string>
     <string name="update_check_setting">Güncellemeleri denetle</string>
     <string name="update_check_setting_description">Günde bir kez GitHub\'da yeni sürüm olup olmadığına bakar</string>
-    <string name="github_project">GitHub\'da Tsuzuku</string>
+    <string name="github_project">GitHub\'da Kinmichi</string>
     <string name="github_project_description">Sürüm %1$s · kaynak kodu, sürümler ve geri bildirim</string>
-    <string name="update_available_title">Tsuzuku %1$s çıktı</string>
+    <string name="update_available_title">Kinmichi %1$s çıktı</string>
     <string name="update_available_body">GitHub\'dan ya da Obtainium\'dan alabilirsin.</string>
     <string name="update_later">Sonra</string>
     <string name="update_open">Aç</string>
@@ -1156,6 +1156,6 @@
         <item>Health Connect|Alışkanlığı adım, mesafe, kalori, egzersiz ya da uykuya bağla, kendiliğinden dolsun.</item>
         <item>Akıllı hatırlatma ve seri uyarısı|Daha iyi hatırlatma saatleri; akşam yalnızca seri tehlikedeyse tek bir not.</item>
         <item>Paletler ve widget\'lar|Beş palet, gece için saf siyah; yeni seri, hızlı ızgara ve ruh hali widget\'ları.</item>
-        <item>Geri bildirim|Ayarlar › Hata raporları › GitHub\'da bildir. Yeni sürüm çıkınca Tsuzuku haber de verir.</item>
+        <item>Geri bildirim|Ayarlar › Hata raporları › GitHub\'da bildir. Yeni sürüm çıkınca Kinmichi haber de verir.</item>
     </string-array>
 </resources>

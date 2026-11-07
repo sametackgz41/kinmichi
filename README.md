@@ -1,8 +1,10 @@
-# Tsuzuku
+# Kinmichi
 
-**A calm habit tracker for Android that helps you keep going.** *Tsuzuku* (続く) means "to continue".
+**A calm habit tracker for Android that helps you keep going.** *Kinmichi* (金道) is Japanese for
+"the golden path": the road you walk a little every day, with the breaks mended in gold.
+(Formerly called Tsuzuku.)
 
-Most habit apps punish you when a streak breaks. Tsuzuku is built around the moment after:
+Most habit apps punish you when a streak breaks. Kinmichi is built around the moment after:
 a smaller version of the habit for bad days, a nudge never to miss twice, and comebacks that are
 mended in gold instead of hidden. Free, open source, no ads, no tracking, works offline.
 
@@ -16,7 +18,7 @@ mended in gold instead of hidden. Free, open source, no ads, no tracking, works 
 
 ## Install
 
-Tsuzuku is distributed here on GitHub, not on the Play Store.
+Kinmichi is distributed here on GitHub, not on the Play Store.
 
 - **With [Obtainium](https://github.com/ImranR98/Obtainium) (recommended):** add
   `https://github.com/sametackgz41/tsuzuku` as an app. Set the APK filter to `^tsuzuku-[0-9]`
@@ -38,7 +40,7 @@ Updates install over the previous version; your data stays.
 
 **Less effort**
 - **Health Connect** — link a habit to steps, distance, calories, exercise or sleep and it fills itself.
-- **Smart reminders** — if you usually do a habit at 07:40 but the reminder rings at 21:00, Tsuzuku suggests moving it.
+- **Smart reminders** — if you usually do a habit at 07:40 but the reminder rings at 21:00, Kinmichi suggests moving it.
 - **Streak alert** — one evening note, only when a streak of 3+ days is about to break.
 - **Coaching** — suggests a smaller target when one is rarely reached, then steps it back up.
 

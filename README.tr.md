@@ -1,8 +1,9 @@
-# Tsuzuku
+# Kinmichi
 
-**Devam etmene yardım eden sakin bir alışkanlık uygulaması.** *Tsuzuku* (続く) Japonca "devam etmek" demek.
+**Devam etmene yardım eden sakin bir alışkanlık uygulaması.** *Kinmichi* (金道) Japonca "altın yol"
+demek: her gün biraz yürüdüğün, kopan yerleri altınla onarılmış yol. (Eski adı Tsuzuku.)
 
-Çoğu alışkanlık uygulaması seri koptuğunda seni cezalandırır. Tsuzuku ise o andan sonrasına
+Çoğu alışkanlık uygulaması seri koptuğunda seni cezalandırır. Kinmichi ise o andan sonrasına
 odaklanır: kötü günler için alışkanlığın küçük bir sürümü, iki kez kaçırmamak için bir dürtme ve
 saklanmak yerine altınla onarılan geri dönüşler. Ücretsiz, açık kaynak, reklamsız, takipsiz,
 internetsiz çalışır.
@@ -17,7 +18,7 @@ internetsiz çalışır.
 
 ## Kurulum
 
-Tsuzuku Play Store'da değil, burada GitHub'da yayınlanıyor.
+Kinmichi Play Store'da değil, burada GitHub'da yayınlanıyor.
 
 - **[Obtainium](https://github.com/ImranR98/Obtainium) ile (önerilen):** uygulama olarak
   `https://github.com/sametackgz41/tsuzuku` adresini ekle. Saat uygulaması yerine telefon

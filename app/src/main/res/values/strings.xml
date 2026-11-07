@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Tsuzuku</string>
+    <string name="app_name">Kinmichi</string>
     <string name="today">Today</string>
     <string name="library">Library</string>
     <string name="statistics">Statistics</string>
@@ -340,7 +340,7 @@
 
     <string name="app_lock_enabled">App lock is on</string>
     <string name="app_lock_disabled">App lock is off</string>
-    <string name="app_lock_description">Tsuzuku asks for your chosen 4-digit PIN when it opens.</string>
+    <string name="app_lock_description">Kinmichi asks for your chosen 4-digit PIN when it opens.</string>
     <string name="app_lock_status_on">Protected with a 4-digit PIN</string>
     <string name="app_lock_status_off">Off</string>
     <string name="new_pin">New PIN</string>
@@ -357,11 +357,11 @@
     <string name="biometric_unlock">Biometric unlock</string>
     <string name="biometric_unlock_description">Use fingerprint or another supported biometric on this device</string>
     <string name="biometric_unavailable">No supported biometric is configured on this device.</string>
-    <string name="app_locked">Tsuzuku is locked</string>
+    <string name="app_locked">Kinmichi is locked</string>
     <string name="enter_pin_to_continue">Enter your PIN to continue.</string>
     <string name="unlock">Unlock</string>
     <string name="use_biometrics">Use biometrics</string>
-    <string name="biometric_prompt_title">Unlock Tsuzuku</string>
+    <string name="biometric_prompt_title">Unlock Kinmichi</string>
     <string name="biometric_prompt_subtitle">Verify your identity with biometrics</string>
     <string name="use_pin_instead">Use PIN</string>
 
@@ -381,12 +381,12 @@
     <string name="restore_summary">This backup contains %1$d habits, %2$d history records, %3$d content items and %4$d goals. Current app data will be replaced.</string>
     <string name="restore_label">Restore</string>
 
-    <string name="widget_brand" translatable="false">Tsuzuku</string>
+    <string name="widget_brand" translatable="false">Kinmichi</string>
     <string name="widget_description">Check off today\'s habits from your home screen</string>
     <string name="widget_empty_progress">Ready for today</string>
     <string name="widget_progress_value">%1$d / %2$d complete · %3$d%%</string>
     <string name="widget_habit_line">%1$s  %2$s  %3$s</string>
-    <string name="widget_locked">Tsuzuku is locked</string>
+    <string name="widget_locked">Kinmichi is locked</string>
     <string name="configure_widget">Configure widget</string>
     <string name="configure_widget_description">Choose which habits to show.</string>
     <string name="widget_palette">Preset color palette</string>
@@ -404,7 +404,7 @@
     <string name="crash_report_available">A captured error report is available</string>
     <string name="no_crash_reports">No captured errors</string>
     <string name="diagnostic_privacy_note">The report contains only app version, device information and the last technical stack trace; notes and habit content are excluded.</string>
-    <string name="app_version_value">Tsuzuku %1$s · build %2$d</string>
+    <string name="app_version_value">Kinmichi %1$s · build %2$d</string>
     <string name="export_diagnostic">Export diagnostic report</string>
     <string name="clear_error_report">Clear error report</string>
     <string name="diagnostic_export_success">Diagnostic report saved.</string>
@@ -412,7 +412,7 @@
 
     <string name="skip_label">Skip</string>
     <string name="onboarding_welcome_title">Small steps, lasting progress</string>
-    <string name="onboarding_welcome_body">Tsuzuku tracks habits with your own goals, schedule and reminders.</string>
+    <string name="onboarding_welcome_body">Kinmichi tracks habits with your own goals, schedule and reminders.</string>
     <string name="onboarding_library_title">Keep what you read and watch together</string>
     <string name="onboarding_library_body">Track books, manga, films, series and anime with seasons and notes.</string>
     <string name="onboarding_goals_title">Make long-term goals visible</string>
@@ -420,7 +420,7 @@
     <string name="onboarding_privacy_title">Your personal space stays under your control</string>
     <string name="onboarding_privacy_body">Data is stored on this device. You can use PIN, biometrics, screen protection and local backups.</string>
     <string name="profile_name_optional">Profile name (optional)</string>
-    <string name="start_using_tsuzuku">Start using Tsuzuku</string>
+    <string name="start_using_tsuzuku">Start using Kinmichi</string>
 
     <string name="cloud_account_subtitle">Google sign-in and personal cloud sync</string>
     <string name="cloud_data_note">Your habits, content and goals stay on this device and are also protected by your personal Google cloud sync.</string>
@@ -632,7 +632,7 @@
     <string name="ask_suggestion_struggling_habit">Which habit is slipping?</string>
     <string name="ask_suggestion_postponed_tasks">What\'s going on with my postponed tasks?</string>
     <string name="ask_suggestion_30_day_progress">My overall progress over the last 30 days</string>
-    <string name="ask_tsuzuku_title">Ask Tsuzuku</string>
+    <string name="ask_tsuzuku_title">Ask Kinmichi</string>
     <string name="ask_tsuzuku_subtitle">Multi-turn, data-driven, calm insights</string>
     <string name="close_action">Close</string>
     <string name="ask_empty_title">How can I help?</string>
@@ -640,7 +640,7 @@
     <string name="ask_data_used">Data used:</string>
     <string name="ask_follow_ups">Questions you could follow up with:</string>
     <string name="copy_action">Copy</string>
-    <string name="ask_thinking">Tsuzuku is reviewing your data and context…</string>
+    <string name="ask_thinking">Kinmichi is reviewing your data and context…</string>
     <string name="ask_input_placeholder">Ask a question or a follow-up…</string>
     <string name="send_action">Send</string>
     <string name="favorite_label">Favorite</string>
@@ -754,7 +754,7 @@
     <string name="recommendations">Recommendations</string>
     <string name="personal_patterns_title">Your personal behaviour patterns</string>
     <string name="intelligence_intro">Your data is analysed entirely offline on your device. Without judgement, it helps you notice the work and habit rhythm that suits you best.</string>
-    <string name="ask_tsuzuku_cta">🌱 Ask Tsuzuku</string>
+    <string name="ask_tsuzuku_cta">🌱 Ask Kinmichi</string>
     <string name="ask_tsuzuku_cta_desc">Chat with your data, discover your rhythm</string>
     <string name="ai_plan_assistant_cta">✨ AI Plan Assistant</string>
     <string name="ai_plan_assistant_cta_desc">Create and approve a personal day draft</string>
@@ -766,7 +766,7 @@
     <string name="metrics_used">Numerical metrics used:</string>
     <string name="confidence_explanation">Confidence: %1$s. This analysis was computed entirely from the local records on your device.</string>
     <string name="got_it">Got it</string>
-    <string name="no_change_without_approval">Tsuzuku never makes any change without your approval.</string>
+    <string name="no_change_without_approval">Kinmichi never makes any change without your approval.</string>
     <string name="approve_and_apply">Approve and apply</string>
     <string name="dismiss_action">Not now</string>
     <string name="why_question">Why?</string>
@@ -795,7 +795,7 @@
     <string name="substeps_label">Sub-steps:</string>
     <string name="add_substep_placeholder">Add a new sub-step…</string>
     <string name="add_selected_to_plan">Add selected to plan (%1$s)</string>
-    <string name="get_ai_coach_review">Get a Tsuzuku AI coach review</string>
+    <string name="get_ai_coach_review">Get a Kinmichi AI coach review</string>
     <string name="projects_title">Projects</string>
     <string name="postpone_awareness">Postponement awareness (postponed %1$s times)</string>
     <string name="postpone_awareness_hint">This task may be creating hidden resistance. Try splitting it into 5-minute sub-steps using the checklist above.</string>
@@ -824,7 +824,7 @@
     <string name="start_new_project">Start a new project</string>
     <string name="edit_project">Edit project</string>
     <string name="project_title">Project title</string>
-    <string name="project_title_example">e.g. Tsuzuku 2.0 or Thesis work</string>
+    <string name="project_title_example">e.g. Kinmichi 2.0 or Thesis work</string>
     <string name="project_description">Description / Scope</string>
     <string name="project_description_hint">What is the core aim of this project?</string>
     <string name="choose_icon_short">Choose icon</string>
@@ -848,7 +848,7 @@
     <string name="projects_settings_desc">Milestones that connect goals and tasks</string>
     <string name="personal_records_milestones">Personal records and milestones</string>
     <string name="personal_records_desc">Earned badges, longest streaks and milestones</string>
-    <string name="intelligence_offline_title">Tsuzuku Intelligence (Offline)</string>
+    <string name="intelligence_offline_title">Kinmichi Intelligence (Offline)</string>
     <string name="intelligence_offline_desc">Analyses your habit and planning patterns locally on your device. Zero data transfer, full privacy.</string>
     <string name="gemini_cloud_active">Gemini Cloud AI (Active)</string>
     <string name="skip_habit_title">Skip habit</string>
@@ -957,7 +957,7 @@
     <string name="heatmap_less">Less</string>
     <string name="bad_habit_warning">⚡ Warning: ≥ %1$s %2$s</string>
     <string name="level_target_value">Target: %1$s %2$s</string>
-    <string name="tsuzuku_intelligence" translatable="false">Tsuzuku Intelligence</string>
+    <string name="tsuzuku_intelligence" translatable="false">Kinmichi Intelligence</string>
     <string name="test_notification_body">This is how your reminders will look.</string>
     <string name="progress_tab">Progress</string>
     <string name="today_all_done">All done for today 🎉</string>
@@ -1010,19 +1010,19 @@
     <string name="weekly_summary_setting_description">A short recap every Sunday evening</string>
     <string name="delete_account">Delete account and data</string>
     <string name="delete_account_title">Delete your account?</string>
-    <string name="delete_account_message">This permanently deletes your Tsuzuku cloud copy, your account and all habits on this device. It cannot be undone. Export a backup first if you want to keep anything.</string>
+    <string name="delete_account_message">This permanently deletes your Kinmichi cloud copy, your account and all habits on this device. It cannot be undone. Export a backup first if you want to keep anything.</string>
     <string name="delete_account_confirm">Delete permanently</string>
     <string name="delete_account_reauth">For your security, sign in again and then delete your account.</string>
     <string name="deleting_account">Deleting your account…</string>
     <string name="widget_mark_done">Mark %1$s done</string>
     <string name="widget_mark_not_done">Mark %1$s not done</string>
-    <string name="notifications_blocked">Notifications are off for Tsuzuku, so this reminder won\'t appear.</string>
+    <string name="notifications_blocked">Notifications are off for Kinmichi, so this reminder won\'t appear.</string>
     <string name="open_notification_settings">Turn on</string>
     <string name="shortcut_add_habit">New habit</string>
     <string name="shortcut_add_habit_long">Add a new habit</string>
     <string name="shortcut_progress">Progress</string>
     <string name="shortcut_progress_long">See your progress</string>
-    <string name="tile_today_label">Tsuzuku</string>
+    <string name="tile_today_label">Kinmichi</string>
     <string name="tile_no_habits">No habits today</string>
     <string name="tile_all_done">All done today</string>
     <plurals name="tile_habits_left">
@@ -1049,7 +1049,7 @@
     <string name="mood_logged">Today: %1$s</string>
     <string name="mood_add_note">Add a note</string>
     <string name="mood_edit_note">Edit note</string>
-    <string name="mood_notification_body">One tap. Over time Tsuzuku shows which habits line up with your better days.</string>
+    <string name="mood_notification_body">One tap. Over time Kinmichi shows which habits line up with your better days.</string>
     <string name="mood_quick_rough">😕 Rough</string>
     <string name="mood_quick_okay">😐 Okay</string>
     <string name="mood_quick_good">🙂 Good</string>
@@ -1070,8 +1070,8 @@
     <string name="share_card_done">days done</string>
     <string name="share_card_rate">Last 30 days</string>
     <string name="share_card_weeks">Last %1$d weeks</string>
-    <string name="share_card_text">%1$s: a %2$d-day streak with Tsuzuku 🔥</string>
-    <string name="share_card_text_done">%1$s: %2$d days done with Tsuzuku</string>
+    <string name="share_card_text">%1$s: a %2$d-day streak with Kinmichi 🔥</string>
+    <string name="share_card_text_done">%1$s: %2$d days done with Kinmichi</string>
     <string name="palette_label">Colour palette</string>
     <string name="palette_washi">Washi</string>
     <string name="palette_dynamic">Wallpaper colours</string>
@@ -1114,7 +1114,7 @@
     <string name="smart_reminder_move">Move to %1$s</string>
     <string name="health_fill_label">Fill from health data</string>
     <string name="health_unavailable">Health Connect isn\'t available on this phone.</string>
-    <string name="health_fill_help">Updates every time you open Tsuzuku. Unit: %1$s.</string>
+    <string name="health_fill_help">Updates every time you open Kinmichi. Unit: %1$s.</string>
     <string name="health_none">Off</string>
     <string name="health_steps">Steps</string>
     <string name="health_distance">Distance</string>
@@ -1142,9 +1142,9 @@
     <string name="report_on_github_note">Opens a pre-filled issue in your browser with the version, phone model and the last error log. Nothing is sent until you press Submit, and issues are public.</string>
     <string name="update_check_setting">Check for updates</string>
     <string name="update_check_setting_description">Once a day, ask GitHub whether a newer version is out</string>
-    <string name="github_project">Tsuzuku on GitHub</string>
+    <string name="github_project">Kinmichi on GitHub</string>
     <string name="github_project_description">Version %1$s · source code, releases and feedback</string>
-    <string name="update_available_title">Tsuzuku %1$s is out</string>
+    <string name="update_available_title">Kinmichi %1$s is out</string>
     <string name="update_available_body">Get it from GitHub or Obtainium.</string>
     <string name="update_later">Later</string>
     <string name="update_open">Open</string>
@@ -1157,6 +1157,6 @@
         <item>Health Connect|Link a habit to steps, distance, calories, exercise or sleep and it fills itself.</item>
         <item>Smart reminders and streak alert|Better reminder times, and one evening note only when a streak is at risk.</item>
         <item>Palettes and widgets|Five palettes, pure black at night, new streak, quick grid and mood widgets.</item>
-        <item>Feedback|Settings › Error reports › Report on GitHub. Tsuzuku also tells you when a new version is out.</item>
+        <item>Feedback|Settings › Error reports › Report on GitHub. Kinmichi also tells you when a new version is out.</item>
     </string-array>
 </resources>
