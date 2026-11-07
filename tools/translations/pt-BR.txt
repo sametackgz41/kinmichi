@@ -856,3 +856,21 @@ appearance_follow_system_desc|Como seu celular: claro de dia, escuro à noite
 appearance_desc|Tema, paleta e preto puro
 appearance_theme_palette|Tema e paleta
 appearance_grid_hint|Toque na metade clara ou escura de uma paleta para usá-la assim.
+lang_name_tr|Turco
+lang_name_en|Inglês
+lang_name_es|Espanhol
+lang_name_de|Alemão
+lang_name_fr|Francês
+lang_name_it|Italiano
+lang_name_pt|Português
+lang_name_ru|Russo
+lang_name_ja|Japonês
+lang_name_ko|Coreano
+language_french|Français
+language_italian|Italiano
+language_russian|Русский
+language_korean|한국어
+language_system_desc|Segue o idioma do celular
+language_search|Buscar idioma
+language_current|Atual
+language_all|Todos os idiomas

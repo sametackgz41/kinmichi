@@ -856,3 +856,21 @@ appearance_follow_system_desc|Wie dein Handy: tagsüber hell, nachts dunkel
 appearance_desc|Design, Palette und reines Schwarz
 appearance_theme_palette|Design und Palette
 appearance_grid_hint|Tippe auf die helle oder dunkle Hälfte einer Palette, um sie so zu nutzen.
+lang_name_tr|Türkisch
+lang_name_en|Englisch
+lang_name_es|Spanisch
+lang_name_de|Deutsch
+lang_name_fr|Französisch
+lang_name_it|Italienisch
+lang_name_pt|Portugiesisch
+lang_name_ru|Russisch
+lang_name_ja|Japanisch
+lang_name_ko|Koreanisch
+language_french|Français
+language_italian|Italiano
+language_russian|Русский
+language_korean|한국어
+language_system_desc|Folgt der Sprache deines Handys
+language_search|Sprache suchen
+language_current|Aktuell
+language_all|Alle Sprachen

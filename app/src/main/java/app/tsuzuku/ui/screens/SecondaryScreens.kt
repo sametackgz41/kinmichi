@@ -108,6 +108,7 @@ fun ProfileScreen(
     onSetProtectScreen: (Boolean) -> Unit,
     onOpenCloudAccount: () -> Unit,
     onOpenAppearance: () -> Unit = {},
+    onOpenLanguage: () -> Unit = {},
     onOpenPlanning: () -> Unit,
     onOpenSecurity: () -> Unit,
     onOpenBackup: () -> Unit,
@@ -243,7 +244,7 @@ fun ProfileScreen(
                     Icons.Rounded.Language,
                     stringResource(R.string.language_label),
                     languageLabel(settings.language),
-                    onClick = { activeDialog = DIALOG_LANGUAGE },
+                    onClick = onOpenLanguage,
                 )
                 ValueSettingRow(
                     Icons.Rounded.CalendarMonth,
@@ -567,7 +568,7 @@ private fun themeLabel(value: ThemePreference): String = stringResource(
 
 
 @Composable
-private fun languageLabel(value: LanguagePreference): String = stringResource(
+internal fun languageLabel(value: LanguagePreference): String = stringResource(
     when (value) {
         LanguagePreference.System -> R.string.language_system
         LanguagePreference.Turkish -> R.string.language_turkish
@@ -576,6 +577,10 @@ private fun languageLabel(value: LanguagePreference): String = stringResource(
         LanguagePreference.German -> R.string.language_german
         LanguagePreference.Portuguese -> R.string.language_portuguese
         LanguagePreference.Japanese -> R.string.language_japanese
+        LanguagePreference.French -> R.string.language_french
+        LanguagePreference.Italian -> R.string.language_italian
+        LanguagePreference.Russian -> R.string.language_russian
+        LanguagePreference.Korean -> R.string.language_korean
     },
 )
 

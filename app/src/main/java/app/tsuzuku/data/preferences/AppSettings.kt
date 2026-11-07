@@ -53,7 +53,11 @@ enum class LanguagePreference(val languageTag: String?) {
     Spanish("es"),
     German("de"),
     Portuguese("pt-BR"),
-    Japanese("ja");
+    Japanese("ja"),
+    French("fr"),
+    Italian("it"),
+    Russian("ru"),
+    Korean("ko");
 
     companion object {
         fun fromStored(value: String?): LanguagePreference = entries.firstOrNull { it.name == value } ?: System

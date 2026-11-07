@@ -1235,4 +1235,22 @@
     <string name="appearance_desc">Tema, renk paleti ve saf siyah</string>
     <string name="appearance_theme_palette">Tema ve renk paleti</string>
     <string name="appearance_grid_hint">Bir paletin açık ya da koyu yarısına dokun, o şekilde kullan.</string>
+    <string name="lang_name_tr">Türkçe</string>
+    <string name="lang_name_en">İngilizce</string>
+    <string name="lang_name_es">İspanyolca</string>
+    <string name="lang_name_de">Almanca</string>
+    <string name="lang_name_fr">Fransızca</string>
+    <string name="lang_name_it">İtalyanca</string>
+    <string name="lang_name_pt">Portekizce</string>
+    <string name="lang_name_ru">Rusça</string>
+    <string name="lang_name_ja">Japonca</string>
+    <string name="lang_name_ko">Korece</string>
+    <string name="language_french">Français</string>
+    <string name="language_italian">Italiano</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_korean">한국어</string>
+    <string name="language_system_desc">Telefonunun diliyle aynı</string>
+    <string name="language_search">Dil ara</string>
+    <string name="language_current">Şu anki</string>
+    <string name="language_all">Tüm diller</string>
 </resources>

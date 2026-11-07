@@ -10,7 +10,7 @@ android {
     compileSdk = 36
 
     androidResources {
-        localeFilters += listOf("en", "tr", "es", "de", "pt-rBR", "ja")
+        localeFilters += listOf("en", "tr", "es", "de", "pt-rBR", "ja", "fr", "it", "ru", "ko")
     }
 
     defaultConfig {

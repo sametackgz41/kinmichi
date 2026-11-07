@@ -12,7 +12,7 @@ if (hasFirebaseConfig) {
 android {
     androidResources {
         // Ship only the languages the app is fully translated into.
-        localeFilters += listOf("en", "tr", "es", "de", "pt-rBR", "ja")
+        localeFilters += listOf("en", "tr", "es", "de", "pt-rBR", "ja", "fr", "it", "ru", "ko")
     }
     testOptions {
         unitTests.isIncludeAndroidResources = true

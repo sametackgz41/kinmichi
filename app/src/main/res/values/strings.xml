@@ -1236,4 +1236,22 @@
     <string name="appearance_desc">Theme, palette and pure black</string>
     <string name="appearance_theme_palette">Theme and palette</string>
     <string name="appearance_grid_hint">Tap the light or dark half of a palette to use it that way.</string>
+    <string name="lang_name_tr">Turkish</string>
+    <string name="lang_name_en">English</string>
+    <string name="lang_name_es">Spanish</string>
+    <string name="lang_name_de">German</string>
+    <string name="lang_name_fr">French</string>
+    <string name="lang_name_it">Italian</string>
+    <string name="lang_name_pt">Portuguese</string>
+    <string name="lang_name_ru">Russian</string>
+    <string name="lang_name_ja">Japanese</string>
+    <string name="lang_name_ko">Korean</string>
+    <string name="language_french">Français</string>
+    <string name="language_italian">Italiano</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_korean">한국어</string>
+    <string name="language_system_desc">Follows your phone\'s language</string>
+    <string name="language_search">Search languages</string>
+    <string name="language_current">Current</string>
+    <string name="language_all">All languages</string>
 </resources>

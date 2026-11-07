@@ -16,7 +16,7 @@ RES = ROOT / "app" / "src" / "main" / "res"
 sys.path.insert(0, str(Path(__file__).parent))
 from build_strings import escape  # noqa: E402
 
-TXT_LANGS = {"es": "values-es", "de": "values-de", "pt-BR": "values-pt-rBR", "ja": "values-ja"}
+TXT_LANGS = {"es": "values-es", "de": "values-de", "pt-BR": "values-pt-rBR", "ja": "values-ja", "fr": "values-fr", "it": "values-it", "ru": "values-ru", "ko": "values-ko"}
 
 
 def put_xml(path: Path, name: str, text: str) -> None:

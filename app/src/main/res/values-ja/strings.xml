@@ -836,6 +836,24 @@
     <string name="appearance_desc">テーマ、パレット、真っ黒</string>
     <string name="appearance_theme_palette">テーマとパレット</string>
     <string name="appearance_grid_hint">パレットのライト側かダーク側をタップして選びます。</string>
+    <string name="lang_name_tr">トルコ語</string>
+    <string name="lang_name_en">英語</string>
+    <string name="lang_name_es">スペイン語</string>
+    <string name="lang_name_de">ドイツ語</string>
+    <string name="lang_name_fr">フランス語</string>
+    <string name="lang_name_it">イタリア語</string>
+    <string name="lang_name_pt">ポルトガル語</string>
+    <string name="lang_name_ru">ロシア語</string>
+    <string name="lang_name_ja">日本語</string>
+    <string name="lang_name_ko">韓国語</string>
+    <string name="language_french">Français</string>
+    <string name="language_italian">Italiano</string>
+    <string name="language_russian">Русский</string>
+    <string name="language_korean">한국어</string>
+    <string name="language_system_desc">スマホの言語に合わせる</string>
+    <string name="language_search">言語を検索</string>
+    <string name="language_current">現在</string>
+    <string name="language_all">すべての言語</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

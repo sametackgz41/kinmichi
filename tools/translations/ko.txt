@@ -1,0 +1,876 @@
+app_name|Kinmichi
+today|오늘
+library|라이브러리
+statistics|통계
+calendar|캘린더
+good_morning|좋은 아침이에요
+good_afternoon|좋은 오후예요
+good_evening|좋은 저녁이에요
+daily_progress|오늘의 진행
+current_streak|현재 연속 기록
+add_habit|습관 추가
+habit_completed|완료
+increase_progress|진행 늘리기
+decrease_progress|진행 줄이기
+complete_habit|습관 완료
+progress_template|%1$s / %2$s %3$s
+weekdays|평일
+weekends|주말
+selected_days|선택한 요일
+new_habit|새 습관
+back|뒤로
+continue_label|계속
+save_habit|습관 저장
+goal_period|목표 기간
+daily|매일
+weekly|매주
+monthly|매월
+times_per_week|주당 횟수 (1–7)
+times_per_month|월당 횟수 (1–31)
+routine_name|루틴 이름
+after_habit_optional|다른 습관 다음에 하기 (선택)
+none_label|없음
+blocked_by_habit|먼저 %1$s 완료하기
+period_progress|이번 기간 %1$d / %2$d
+goal_step|목표
+habit_name|습관 이름
+intent_label|목적
+build_habit|습관 만들기
+quit_habit|습관 끊기
+icon_label|아이콘 또는 이모지
+color_label|강조 색상
+tracking_type|기록 방식
+type_check|체크
+type_count|횟수
+type_duration|시간
+target_label|목표
+unit_label|단위
+quick_increment|빠른 증가량
+days_label|요일
+reminder_label|알림
+reminder_description|선택한 시간에 알림을 받아요.
+reminder_time|알림 시간
+reminder_time_error|09:00 형식으로 시간을 입력하세요.
+reminder_channel_name|습관 알림
+reminder_channel_description|예정된 습관 알림
+reminder_notification_text|오늘의 작은 한 걸음을 내디딜 시간이에요.
+test_notification|알림 테스트
+test_notification_description|지금 샘플 알림 보내기
+start_timer|타이머 시작
+stop_timer|멈추고 저장
+edit_habit|습관 편집
+manage_habit|습관 관리
+habit_details|습관 정보
+loading_habit|습관 불러오는 중…
+habit_note_hint|이 습관에 대한 메모
+archive_habit|습관 보관
+delete_habit|습관 삭제
+delete_habit_confirmation|%1$s와 모든 기록을 영구적으로 삭제할까요?
+delete_label|삭제
+reorder_habits|습관 순서 변경
+reorder_habits_description|화살표로 오늘 화면의 순서를 정하세요.
+move_up|위로
+move_down|아래로
+repeat_reminder|다시 알림
+repeat_reminder_description|알림에서 한 번 더 알림 받기 허용
+repeat_minutes|반복 간격 (분)
+minutes_value|%1$d분
+remind_again_minutes|%1$d분 후 다시 알림
+off_label|꺼짐
+weekday_abbreviations[0]|월
+weekday_abbreviations[1]|화
+weekday_abbreviations[2]|수
+weekday_abbreviations[3]|목
+weekday_abbreviations[4]|금
+weekday_abbreviations[5]|토
+weekday_abbreviations[6]|일
+pending_label|대기 중
+google_not_connected|Google 계정이 연결되지 않음
+settings_label|설정
+theme_label|테마
+language_label|언어
+data_privacy_label|데이터 및 개인정보
+planning_and_review|계획과 돌아보기
+planning_and_review_description|루틴, 휴식, 주간 메모, 자동 단계
+vacation_mode|휴식 / 휴가 모드
+vacation_mode_description|제외된 날은 완료율과 연속 기록을 낮추지 않아요.
+end_vacation|휴식 끝내기
+invalid_vacation_dates|올바른 시작일과 종료일을 입력하세요.
+vacation_activated|휴식일이 통계에서 제외됐어요.
+vacation_ended|휴식 모드가 끝났어요.
+vacation_today_message|오늘은 휴식 모드예요. 습관은 일시정지되고 연속 기록은 보호돼요.
+weekly_review|주간 돌아보기
+weekly_review_description|한 주를 돌아보고 나만의 메모를 남기세요.
+weekly_review_stats|%2$d개 중 %1$d개 완료 · %3$d%%
+weekly_note|이번 주 메모
+save_weekly_review|돌아보기 저장
+weekly_review_saved|주간 돌아보기를 저장했어요.
+backup_restore|백업 및 복원
+app_lock|앱 잠금
+all_categories|전체
+content_progress_value|%1$s / %2$s %3$s
+status_completed|완료
+unit_minutes|분
+current_progress|현재
+general_note|메모
+save_note|메모 저장
+add_label|추가
+cancel|취소
+previous_month|이전 달
+next_month|다음 달
+selected_day|선택한 날
+calendar_goal_fraction|%1$d / %2$d 완료
+past_edit_hint|이 버튼으로 선택한 날을 수정하세요.
+no_habits_for_day|이날 예정된 습관이 없어요.
+last_days|최근 %1$d일
+completion_rate|완료율
+completed_scheduled|%1$d / %2$d 완료
+active_days|활동한 날
+best_streak|최장 연속 기록
+habit_breakdown|습관별 현황
+no_statistics_yet|습관을 추가하면 통계가 시작돼요.
+streak_pair|현재 연속: %1$d일 · 최고: %2$d일
+personal_greeting|%1$s, %2$s님
+personal_profile|개인 프로필
+local_profile_description|이 기기 속 나만의 공간
+edit_profile_name|프로필 이름 편집
+profile_name|프로필 이름
+save_label|저장
+account_label|계정
+google_account_label|Google 계정
+appearance_label|화면 및 사용
+theme_mode_label|화면 모드
+theme_system|시스템 설정 따르기
+theme_light|라이트
+theme_dark|다크
+language_system|시스템 언어
+language_turkish|튀르키예어
+language_english|영어
+week_start_label|주 시작 요일
+monday|월요일
+sunday|일요일
+daily_summary_setting|오늘의 요약
+daily_summary_setting_description|오늘 화면에 요약 카드 표시
+screen_protection|화면 보호
+screen_protection_description|스크린샷과 최근 앱 미리보기 차단
+local_data_note|습관, 콘텐츠, 설정은 현재 이 기기에만 저장돼요.
+goals|목표
+goals_subtitle|장기적인 진행 상황을 한곳에서
+open_goals|목표 열기
+add_goal|목표 추가
+new_goal|새 목표
+edit_goal|목표 편집
+save_goal|목표 저장
+goal_details|목표 정보
+goal_title|목표 이름
+goal_description|설명 (선택)
+due_date_optional|마감일 (선택)
+due_date_value|마감: %1$s
+goal_progress_value|%1$s / %2$s %3$s
+active_goals|진행 중인 목표
+completed_goals|달성한 목표
+active_goal_count|진행 중 %1$d개
+completed_goal_count|달성 %1$d개
+no_goals|아직 목표가 없어요
+no_goals_description|읽고, 보고, 모으고, 이루고 싶은 것을 정해 보세요.
+complete_goal|목표 달성
+mark_goal_active|다시 진행 중으로
+archive_goal|목표 보관
+delete_goal|목표 삭제
+delete_goal_confirmation|%1$s 목표를 영구적으로 삭제할까요?
+app_lock_enabled|앱 잠금 켜짐
+app_lock_disabled|앱 잠금 꺼짐
+app_lock_description|Kinmichi를 열 때 4자리 PIN을 물어봐요.
+app_lock_status_on|4자리 PIN으로 보호됨
+app_lock_status_off|꺼짐
+new_pin|새 PIN
+current_pin|현재 PIN
+confirm_pin|PIN 확인
+pin_code|4자리 PIN
+enable_app_lock|앱 잠금 켜기
+disable_app_lock|앱 잠금 끄기
+disable_label|끄기
+change_pin|PIN 변경
+pin_setup_error|PIN은 4자리이며 서로 일치해야 해요.
+pin_change_error|현재 PIN이 틀렸거나 새 PIN이 일치하지 않아요.
+incorrect_pin|PIN이 틀렸어요. 다시 시도하세요.
+biometric_unlock|생체 인식 잠금 해제
+biometric_unlock_description|지문 또는 이 기기에서 지원하는 생체 인식 사용
+biometric_unavailable|이 기기에 설정된 생체 인식이 없어요.
+app_locked|Kinmichi가 잠겨 있어요
+enter_pin_to_continue|계속하려면 PIN을 입력하세요.
+unlock|잠금 해제
+use_biometrics|생체 인식 사용
+biometric_prompt_title|Kinmichi 잠금 해제
+biometric_prompt_subtitle|생체 인식으로 본인 확인
+use_pin_instead|PIN 사용
+local_backup_available|이 기기에 백업 파일 저장
+local_backup_title|데이터는 내가 관리해요
+local_backup_description|습관, 기록, 라이브러리, 목표를 JSON 파일 하나로 저장해요.
+create_backup|백업 만들기
+restore_backup|백업에서 복원
+export_csv|상세 CSV 내보내기
+export_pdf|PDF 보고서 내보내기
+report_export_success|보고서를 저장했어요.
+backup_security_note|보안을 위해 PIN과 생체 인식 설정은 백업에서 제외돼요.
+backup_export_success|백업 파일을 만들었어요.
+backup_restore_success|백업에서 데이터를 복원했어요.
+backup_operation_failed|파일이 올바르지 않거나 작업을 완료하지 못했어요.
+confirm_restore|현재 데이터를 바꿀까요?
+restore_summary|이 백업에는 습관 %1$d개, 기록 %2$d개, 콘텐츠 %3$d개, 목표 %4$d개가 있어요. 현재 앱 데이터가 대체돼요.
+restore_label|복원
+widget_description|홈 화면에서 오늘의 습관을 체크하세요
+widget_locked|Kinmichi가 잠겨 있어요
+configure_widget|위젯 설정
+configure_widget_description|표시할 습관을 고르세요.
+save_widget|위젯 저장
+home_widget|홈 화면 위젯
+home_widget_description|탭해서 위젯을 보고 홈 화면에 추가하세요
+error_reports|오류 보고서
+error_reports_description|마지막 앱 오류 보기 및 내보내기
+crash_report_available|오류 보고서가 있어요
+no_crash_reports|기록된 오류 없음
+diagnostic_privacy_note|보고서에는 앱 버전, 기기 정보, 마지막 기술 로그만 포함되며 메모와 습관 내용은 제외돼요.
+app_version_value|Kinmichi %1$s · 빌드 %2$d
+export_diagnostic|진단 보고서 내보내기
+clear_error_report|오류 보고서 지우기
+diagnostic_export_success|진단 보고서를 저장했어요.
+diagnostic_export_failed|진단 보고서를 저장하지 못했어요.
+skip_label|건너뛰기
+onboarding_welcome_title|작은 걸음, 오래가는 변화
+onboarding_welcome_body|Kinmichi는 나만의 목표, 일정, 알림으로 습관을 기록해요.
+onboarding_library_title|읽고 본 것을 한곳에
+onboarding_library_body|책, 만화, 영화, 시리즈, 애니를 시즌과 메모와 함께 기록하세요.
+onboarding_goals_title|장기 목표를 눈에 보이게
+onboarding_goals_body|단위, 목표값, 선택적인 마감일을 직접 정하세요.
+onboarding_privacy_title|나만의 공간은 내가 지켜요
+onboarding_privacy_body|데이터는 이 기기에 저장돼요. PIN, 생체 인식, 화면 보호, 로컬 백업을 쓸 수 있어요.
+start_using_tsuzuku|Kinmichi 시작하기
+cloud_account_subtitle|Google 로그인과 개인 클라우드 동기화
+cloud_data_note|습관, 콘텐츠, 목표는 이 기기에 저장되고 Google 클라우드 동기화로도 보호돼요.
+google_sign_in_description|로그인하면 습관, 기록, 라이브러리, 목표를 Google 계정에 보관해요.
+sign_in_with_google|Google로 계속하기
+skip_google_for_now|나중에 하기
+automatic_cloud_sync|자동 클라우드 동기화
+automatic_cloud_sync_description|앱을 열거나 백그라운드로 보낼 때 안전한 변경 사항을 동기화해요.
+last_cloud_sync|마지막 동기화: %1$s
+cloud_choice_required|자동 동기화 전에 사용할 사본을 고르세요.
+sync_now|지금 동기화
+choose_sync_source|동기화 원본 선택
+sign_out_google|로그아웃
+cloud_download_complete|클라우드 데이터를 이 기기에 복원했어요
+cloud_upload_complete|기기 데이터를 Google 클라우드에 저장했어요
+cloud_already_current|기기와 클라우드가 이미 최신이에요
+cloud_sync_error|클라우드 동기화를 완료하지 못했어요
+ok_label|확인
+cloud_conflict_title|양쪽 모두 변경됐어요
+cloud_conflict_description|유지할 사본을 고르세요. 다른 사본은 대체돼요.
+cloud_choice_description|기본 데이터로 쓸 사본을 고르세요.
+this_device|이 기기
+google_cloud|Google 클라우드
+no_cloud_backup|이 계정에는 아직 클라우드 백업이 없어요.
+use_device_data|기기 데이터 사용
+use_cloud_data|클라우드 데이터 사용
+firebase_setup_required|Firebase 연결이 필요해요
+firebase_setup_description|앱 코드는 준비됐지만 이 빌드에는 아직 Firebase 프로젝트가 없어요.
+firebase_setup_step_one|1. Firebase에 app.tsuzuku 패키지를 등록하세요.
+firebase_setup_step_two|2. Google 인증을 켜고 Firestore를 만드세요.
+firebase_setup_step_three|3. google-services.json을 app 폴더에 넣고 다시 빌드하세요.
+cloud_summary|%1$s: 습관 %2$d · 기록 %3$d · 콘텐츠 %4$d · 목표 %5$d
+synced_data|동기화된 데이터
+google_signing_in|Google 로그인 여는 중…
+cloud_uploading|기기 데이터를 클라우드에 저장하는 중…
+cloud_downloading|클라우드 데이터를 복원하는 중…
+cloud_synchronizing|기기와 클라우드 변경 사항 확인 중…
+google_signing_out|로그아웃하는 중…
+choose_vacation_dates|휴식 날짜 선택
+choose_dates|날짜 선택
+no_vacation_dates_selected|선택한 기간 없음
+confirm_label|확인
+live_preview|실시간 미리보기
+plan|계획
+plan_subtitle|일회성 할 일, 우선순위, 하루의 모양
+plan_empty|목록이 비어 있어요
+plan_empty_detail|습관으로 만들지 않고 할 일을 추가하세요.
+upcoming|예정
+inbox|받은 편지함
+new_task|새 할 일
+add_task|할 일 추가
+task_identity|무엇을 해야 하나요?
+task_title|할 일 제목
+schedule|일정
+tomorrow|내일
+priority|우선순위
+estimated_minutes|예상 시간 (분)
+save_task|할 일 저장
+move_tomorrow|내일로 미루기
+minute_count|%1$d분
+priority_value|우선순위 %1$d
+task_details|할 일 정보
+checklist|체크리스트
+new_checklist_item|새 단계
+carried_count|%1$d번 미뤄짐
+add|추가
+minimum_target|최소
+maximum_target|하루 한도
+difficulty|난이도
+easy|쉬움
+medium|보통
+hard|어려움
+intention_sentence|만약–그러면 계획
+intention_example|저녁을 다 먹으면 10쪽을 읽는다.
+flexible_schedule|유연한 일정
+repeat_every_days|… 일마다 반복
+repeat_interval_help|1은 선택한 요일, 2는 이틀에 한 번이에요.
+start_date_optional|시작일 (선택)
+end_date_optional|종료일 (선택)
+pause_until_optional|일시정지 종료일 (선택)
+clear_label|지우기
+time_block_optional|시간대 (선택)
+start_time|시작
+end_time|종료
+repeat_task|할 일 반복
+every_day|매일
+weekdays_only|평일
+every_week|매주
+every_month|매월
+task_templates|할 일 템플릿
+save_as_template|템플릿으로 저장
+overdue|기한 지남
+overdue_cleanup|기한 지난 할 일 %1$d개 · 내일로 미루거나 완료하세요
+selected_count|%1$d개 선택됨
+move_all_tomorrow|내일로 미루기
+move_to_inbox|받은 편지함으로 이동
+complete_selected|완료
+delete_selected|삭제
+drag_to_reorder|끌어서 순서 변경
+day_end_cleanup|하루 마무리 정리
+day_end_cleanup_detail|기한 지난 할 일 %1$d개를 어떻게 할지 정하세요.
+duplicate_task|할 일 복제
+swipe_complete|완료
+swipe_tomorrow|내일
+tags_label|태그
+tags_help|쉼표로 태그를 구분하세요: 공부, 집, 중요
+search_everything|전체 검색
+search_hint_all|제목, 메모 또는 태그
+result_count|결과 %1$d개
+all_label|전체
+habits|습관
+save_search|이 검색 저장
+name_saved_search|저장할 검색 이름
+filter_name|필터 이름
+saved_filter_summary|%1$s · %2$s
+delete_saved_search|저장한 검색 삭제
+add_tags_selected|선택 항목에 태그 추가
+categories_and_tags|카테고리 및 태그
+categories_description|습관, 할 일, 라이브러리에 쓸 나만의 카테고리를 만드세요.
+category_name|카테고리 이름
+emoji_label|아이콘 또는 이모지
+create_category|카테고리 만들기
+your_categories|내 카테고리
+no_custom_categories|아직 만든 카테고리가 없어요.
+actual_minutes|실제 시간 (분)
+actual_minutes_help|비워 두면 기록한 시간을 지워요.
+actual_minute_count|실제 %1$d분
+recent_timeline|최근 타임라인
+lock_after_background|앱을 나가면 잠금
+immediately|즉시
+lock_delay_minutes|%1$d분
+duplicate_habit|습관 복제
+delete_category|카테고리 삭제
+delete_category_confirmation|“%1$s”을(를) 삭제할까요? 태그된 항목에서 빠지지만 항목은 삭제되지 않아요.
+edit_task|할 일 편집
+failed_label|실패
+skipped_label|건너뜀
+sign_out_data_choice|기기의 사본은 어떻게 할까요? 클라우드 백업은 삭제되지 않아요.
+keep_on_device|이 기기에 유지
+remove_from_device|기기에서 삭제
+choose_date|날짜 선택
+focus|집중
+focus_mode|집중 모드
+start_focus|집중 시작
+pomodoro|뽀모도로 (25분)
+stopwatch|스톱워치
+custom_timer|사용자 지정 타이머
+focus_target|집중 대상
+free_focus|자유 집중
+focus_minutes_today|오늘 %1$d분 집중
+focus_sessions_count|세션 %1$d회
+start_routine|루틴 시작
+routine_step|%2$d단계 중 %1$d단계
+customize_sections|오늘 화면 사용자 지정
+section_plan|오늘의 할 일
+section_goals|목표 진행
+section_routines|루틴
+linked_goals|연결된 목표
+linked_habits|연결된 습관
+linked_tasks|연결된 할 일
+contribution_mode|기여 방식
+contribution_value|기여량
+link_goal|목표 연결
+link_habit|습관 연결
+link_task|할 일 연결
+unlink|연결 해제
+mood_tired|피곤함
+mood_neutral|보통
+mood_good|좋음
+mood_great|최고
+daily_review_title|오늘 하루는 어땠나요?
+daily_review_subtitle|몇 초의 차분한 멈춤이 내일을 준비하게 해 줘요.
+mood_label|기분
+energy_level|⚡ 에너지
+productivity_feeling|🎯 생산성 체감
+stress_level|🌊 스트레스
+daily_note_gratitude|오늘의 메모 / 감사
+daily_note_placeholder|오늘의 생각, 깨달음, 메모…
+remaining_tasks_count|남은 할 일 (%1$s)
+carry_unfinished_hint|끝내지 못한 일은 내일로 미룰 수 있어요:
+move_to_tomorrow|내일로 미루기
+complete_day_and_save|하루 마치고 저장
+resume_action|계속
+pause_action|일시정지
+finish_and_save|마치고 저장
+focus_today|오늘의 집중
+sessions_today|오늘의 세션
+focus_target_task|할 일: %1$s
+task_label|할 일
+focus_target_habit|습관: %1$s %2$s
+habit_label|습관
+focus_target_goal|목표: %1$s
+no_linked_habits|아직 연결된 습관이 없어요.
+contribution_by_habit_amount|습관 양만큼 기여
+contribution_plus|+%1$s 기여
+no_linked_tasks|아직 연결된 할 일이 없어요.
+contribution_plus_points|+%1$s점 기여
+no_more_habits_to_link|연결할 다른 습관이 없어요.
+select_habit|습관 선택:
+habit_amount|습관 양
+fixed_value|고정값
+no_more_tasks_to_link|연결할 다른 할 일이 없어요.
+select_task|할 일 선택:
+bad_habit_limit_desc|이 습관의 목적은 소비를 줄이거나 끊는 거예요. 한도에 가까워지거나(80%) 넘으면 차분한 표시로 알려 줘요.
+ideal_target_upper|이상적인 목표 / 상한
+ideal_lower_limit|이상적인 하한
+maximum_limit|최대 한도
+bad_habit_clean_day|✓ 완료: 오늘은 이 나쁜 습관을 완전히 멀리했어요 (깨끗한 날).
+no_linked_goals|아직 연결된 목표가 없어요.
+growth_levels|성장 단계
+add_level|단계 추가
+edit_action|편집
+growth_levels_hint|이 습관의 단계를 정하세요 (예: 1단계 1km, 2단계 3km, 3단계 5km).
+configure_stages|단계 설정
+active_level|현재 단계
+completed_check|✓ 완료
+switch_to_level|이 단계로 전환
+level_up_to|다음 단계: %1$s (%2$s %3$s)
+top_level_reached|축하해요! 이 습관의 최고 단계에 도달했어요.
+no_more_active_goals_to_link|연결할 다른 진행 중 목표가 없어요.
+select_goal|목표 선택:
+link_library_content|라이브러리 콘텐츠 연결
+no_more_content_to_link|연결할 다른 콘텐츠가 없어요.
+select_content|콘텐츠 선택:
+progress_multiplier_label|진행 배수 (기본값: 1)
+link_action|연결
+level_up_title|단계 올리기
+level_up_message|%1$s 단계로 올라가요. 하루 목표가 %2$s %3$s(으)로 바뀌어요.\n\n지난 기록, 통계, 연속 기록은 그대로 유지돼요.
+level_up_confirm|단계 올리기
+level_beginner|초급
+level_intermediate|중급
+level_advanced|고급
+edit_growth_levels|성장 단계 편집
+level_number|%1$s단계
+level_title|단계 이름
+target_with_unit|목표 (%1$s)
+reward_note|보상 / 메모
+level_number_next|%1$s단계
+add_new_level|새 단계 추가
+overall_activity|전체 활동
+heatmap_more|많음
+heatmap_habits_completed|완료한 습관: %1$s
+heatmap_tasks|할 일: %1$s
+heatmap_focus_minutes|집중 시간: %1$s분
+heatmap_review_done|저녁 돌아보기: ✓
+heatmap_review_missing|저녁 돌아보기: —
+postpone_awareness|미루기 알림 (%1$s번 미룸)
+postpone_awareness_hint|이 할 일이 보이지 않는 저항을 만들고 있을지도 몰라요. 위 체크리스트로 5분짜리 단계로 나눠 보세요.
+no_active_goals_to_link|연결할 진행 중 목표가 없어요.
+routine_label|루틴
+routine_steps|루틴 단계
+must_complete_first|먼저 %1$s을(를) 완료해야 해요
+locked_label|잠김
+routine_completed_title|루틴 완료!
+routine_completed_body|이 루틴의 모든 단계를 마쳤어요.
+back_to_today|오늘로 돌아가기
+personal_records_milestones|개인 기록과 이정표
+personal_records_desc|획득한 배지, 최장 연속 기록, 이정표
+skip_habit_title|습관 건너뛰기
+skip_habit_message|이번에 “%1$s”을(를) 건너뛰는 이유를 남길 수 있어요. 유연함이 있어야 꾸준함도 자라요.
+custom_reason|직접 입력한 이유
+custom_reason_example|예: 프로젝트 마감
+save_and_skip|저장하고 건너뛰기
+skip_without_reason|이유 없이 건너뛰기
+carry_count_title|이 할 일을 %1$s번 미뤘어요
+carry_split_hint|처음 5분 안에 시작할 수 있는 작은 단계로 나눠서 마음의 저항을 깨 보세요:
+carry_intro|계속 미뤄지는 일은 보통 너무 크거나 지금은 의미를 잃은 경우예요. 자신을 몰아붙이지 말고 한 걸음을 고르세요:
+carry_step_1|1. 첫 작은 걸음 (5분)
+carry_step_1_example|예: 초안 파일 열기 / 1쪽 읽기
+carry_step_2|2. 두 번째 단계 (선택)
+carry_step_2_example|예: 제목 정하기
+carry_step_3|3. 세 번째 단계 (선택)
+carry_step_3_example|예: 첫 초안 완성
+add_steps_and_start|단계 추가하고 시작
+do_today|오늘 하기
+do_today_desc|오늘의 우선순위로 정하고 처음 5분을 시작하세요.
+move_tomorrow_desc|오늘 일정에서 빼고 내일 새로 시작하세요.
+postpone_next_week|다음 주로 미루기
+postpone_next_week_desc|지금이 아니라면 7일 뒤로 미루세요.
+split_smaller|더 작게 나누기
+split_smaller_desc|하위 할 일이나 체크리스트 단계를 추가하세요.
+cancel_or_delete_task|할 일 취소 / 삭제
+cancel_or_delete_task_desc|더 이상 필요 없다면 죄책감 없이 놓아 주세요.
+stats_tab_general|일반
+stats_tab_heatmap|히트맵
+stats_tab_reviews|돌아보기
+stats_tab_records|기록
+stats_tab_skips|건너뜀
+yearly|연간
+previous_week|지난주
+next_week|다음 주
+weekly_completion_rate|주간 완료율
+most_successful|🌟 가장 잘한 것
+could_improve|🌱 더 나아질 수 있는 것
+task_focus_balance|할 일과 집중의 균형
+completed_tasks_of|완료한 할 일: %1$s / %2$s
+postponed_count|미룸: %1$s
+focus_duration_minutes|집중 시간: %1$s분
+goal_steps_count|목표 단계: %1$s
+weekly_reflection_note|주간 회고와 메모
+monthly_success_rate|월간 성공률
+focus_hours_minutes|집중: %1$s시간 %2$s분
+completed_tasks_value|완료한 할 일: %1$s
+habit_ranking|습관 순위
+monthly_reflection|월간 회고와 돌아보기
+previous_year|작년
+next_year|내년
+yearly_summary_milestones|연간 요약과 이정표
+total_habits_label|전체 습관:
+total_focus_label|전체 집중:
+completed_goals_label|달성한 목표:
+finished_books_content_label|완료한 책과 콘텐츠:
+longest_chain_label|최장 연속:
+days_value|%1$s일
+yearly_review_vision|한 해 돌아보기와 앞으로의 계획
+personal_records|개인 기록
+longest_chain|최장 연속
+days_value_records|%1$s일
+most_productive_day|가장 생산적인 날
+total_focus|전체 집중
+deep_work|몰입 작업
+goals_achieved|달성한 목표
+milestones_and_badges|이정표와 배지
+habit_skip_analysis|건너뛴 습관 분석
+habit_skip_analysis_desc|습관을 총 %1$s번 건너뛰었어요. 이유를 알아차리면 목표를 더 유연하고 지속 가능하게 만들 수 있어요.
+earned_label|획득 ✨
+reflection_placeholder|생각, 배운 점, 메모를 적어 보세요…
+limit_exceeded|⚠️ 한도 초과! (%1$s / %2$s %3$s)
+open_details|자세히 보기
+skip_with_reason|건너뛰기 (이유 남기기)
+undo_skip|건너뛰기 취소
+carried_times|↩ %1$s번 미룸
+resolve_action|정리하기
+smart_carry_assistant|스마트 미루기 도우미
+carry_banner_message|할 일 %1$s개가 3일 넘게 미뤄졌어요. 탭해서 정리하세요.
+daily_review_completed|오늘의 돌아보기 완료
+do_evening_review|저녁 돌아보기 하기
+completed_of_total|%1$s / %2$s 완료
+daily_summary_section|오늘의 요약
+todays_plan_section|오늘의 계획
+goal_progress_section|목표 진행
+focus_info_section|집중 정보
+routines_label|루틴
+sections_config_hint|섹션 순서를 바꾸고 표시할 항목을 고르세요.
+saved_check|✓ 저장됨
+vs_last_week|지난주 대비 %1$s%%
+mood_hard|힘듦
+heatmap_less|적음
+level_target_value|목표: %1$s %2$s
+test_notification_body|알림은 이렇게 보여요.
+progress_tab|진행
+today_all_done|오늘은 모두 완료했어요 🎉
+habits_done_of|%2$d개 중 %1$d개 완료
+more_actions|더보기
+streak_days#one|%d일 연속
+streak_days#other|%d일 연속
+widget_today_name|오늘
+widget_habit_name|습관 하나
+widget_week_name|이번 주
+widget_habit_description|진행 링과 연속 기록이 있는 습관 하나
+widget_week_description|이번 주, 하루에 링 하나
+widget_week_title|이번 주
+widget_no_habits|오늘은 습관이 없어요
+widget_pick_one|표시할 습관을 고르세요.
+template_water|물 마시기
+unit_glasses|잔
+template_read|읽기
+template_walk|걷기
+template_stretch|아침 스트레칭
+template_wake_early|일찍 일어나기
+template_no_phone_bed|침대에서 휴대폰 안 보기
+starter_title|습관 하나로 시작하세요
+starter_body|탭하면 추가돼요. 나중에 모두 바꿀 수 있어요.
+create_own_habit|직접 만들기
+skip_reason_forgot|잊어버렸어요
+skip_reason_no_time|시간이 없어요
+skip_reason_travel|여행 중
+skip_reason_sick|아팠어요
+skip_reason_intentional|일부러 건너뜀
+skip_reason_other|기타
+milestone_streak_title|%1$d일 연속
+milestone_streak_desc|습관 하나를 %1$d일 연속으로 이어 가세요.
+milestone_completions_title|체크 %1$d회
+milestone_completions_desc|습관을 총 %1$d번 완료하세요.
+milestone_focus_title|집중 %1$d시간
+milestone_focus_desc|집중 세션을 총 %1$d시간 채우세요.
+milestone_goal_title|목표 %1$d개 달성
+milestone_goal_desc|목표 %1$d개를 달성하세요.
+show_advanced|옵션 더보기
+hide_advanced|옵션 접기
+unit_times|회
+skip_keeps_streak|건너뛴 날은 계산하지 않으니 연속 기록이 유지돼요.
+weekly_summary_title|이번 주: %1$d%%
+weekly_summary_body|%2$d회 중 %1$d회 완료. 가장 꾸준한 습관: %3$s.
+weekly_summary_body_empty|이번 주에는 예정된 습관이 없었어요. 새 출발은 탭 한 번이면 돼요.
+weekly_summary_setting|주간 요약
+weekly_summary_setting_description|매주 일요일 저녁 짧은 요약
+delete_account|계정과 데이터 삭제
+delete_account_title|계정을 삭제할까요?
+delete_account_message|Kinmichi 클라우드 사본, 계정, 이 기기의 모든 습관이 영구적으로 삭제돼요. 되돌릴 수 없어요. 남기고 싶은 것이 있다면 먼저 백업을 내보내세요.
+delete_account_confirm|영구 삭제
+delete_account_reauth|보안을 위해 다시 로그인한 뒤 계정을 삭제하세요.
+deleting_account|계정 삭제 중…
+widget_mark_done|%1$s 완료로 표시
+widget_mark_not_done|%1$s 미완료로 표시
+notifications_blocked|Kinmichi 알림이 꺼져 있어서 이 알림이 표시되지 않아요.
+open_notification_settings|켜기
+shortcut_add_habit|새 습관
+shortcut_add_habit_long|새 습관 추가
+shortcut_progress|진행
+shortcut_progress_long|진행 상황 보기
+tile_today_label|Kinmichi
+tile_no_habits|오늘은 습관이 없어요
+tile_all_done|오늘은 모두 완료
+tile_habits_left#one|습관 %d개 남음
+tile_habits_left#other|습관 %d개 남음
+rest_day_used|이번 주 쉬는 날을 사용했어요
+rest_day_rule|하루 잊었나요? 일주일에 하루는 빠져도 연속 기록이 끊기지 않아요.
+year_heatmap_title|최근 12개월
+heat_day_off|예정 없음
+heat_day_done|완료
+heat_day_missed|미완료
+heat_day_partial|목표의 %1$s
+year_heatmap_summary#one|지난 1년간 %d일 완료
+year_heatmap_summary#other|지난 1년간 %d일 완료
+widget_tap_to_complete|탭해서 완료
+advice_lower|최근 %2$d일 중 %1$d일 목표를 달성했어요. 보통 %3$s 정도 하니까 거기서 시작해 늘려 볼까요?
+advice_raise|2주 동안 거의 매일 목표를 달성했어요. %1$s(으)로 올려 볼까요?
+advice_accept|%1$s(으)로 설정
+advice_not_now|나중에
+mood_question|오늘 하루는 어땠나요?
+mood_logged|오늘: %1$s
+mood_add_note|메모 추가
+mood_edit_note|메모 편집
+mood_notification_body|탭 한 번이면 돼요. 시간이 지나면 어떤 습관이 좋은 날과 함께하는지 보여 드려요.
+mood_quick_rough|😕 힘듦
+mood_quick_okay|😐 보통
+mood_quick_good|🙂 좋음
+mood_insights_title|습관과 기분
+mood_insights_none|아직 뚜렷한 패턴이 없어요. 하루의 기분을 계속 기록해 보세요.
+mood_insights_footnote|이 휴대폰에만 있는 내 기록 기준이에요. 기분은 1–5점이며, 패턴일 뿐 증거는 아니에요.
+mood_insight_better|%1$s 한 날은 기분이 더 좋아요
+mood_insight_worse|%1$s 한 날은 더 힘들어요
+mood_insight_detail|했을 때 평균 기분 %1$s, 안 했을 때 %2$s
+mood_reminder_setting|저녁 기분 체크
+mood_reminder_setting_description|오늘 기분을 기록하지 않았다면 21:00에
+mood_insights_collecting#one|%d일 더 기분을 기록하면 어떤 습관이 좋은 날과 함께하는지 보여요.
+mood_insights_collecting#other|%d일 더 기분을 기록하면 어떤 습관이 좋은 날과 함께하는지 보여요.
+share_streak|연속 기록 공유
+share_card_streak|일 연속
+share_card_done|일 완료
+share_card_rate|최근 30일
+share_card_weeks|최근 %1$d주
+share_card_text|%1$s: Kinmichi로 %2$d일 연속 🔥
+share_card_text_done|%1$s: Kinmichi로 %2$d일 완료
+palette_label|색상 팔레트
+palette_washi|Washi
+palette_dynamic|배경화면 색상
+palette_sumi|Sumi
+palette_matcha|Matcha
+palette_sakura|Sakura
+palette_umi|Umi
+pure_black_label|밤에는 완전한 검정
+pure_black_desc|다크 모드에서 진짜 검정을 써서 OLED 배터리를 아껴요
+palette_washi_desc|종이와 남색
+palette_sumi_desc|먹과 주홍
+palette_matcha_desc|녹차처럼 차분하게
+palette_sakura_desc|벚꽃처럼 따뜻하게
+palette_umi_desc|바다처럼 시원하고 집중되게
+palette_dynamic_desc|배경화면에서 가져옴
+intention_help|습관을 하루의 특정 순간과 연결하세요. 오늘 화면과 알림에 표시돼요.
+tiny_version_label|힘든 날 버전
+tiny_version_example|예: 1쪽, 5분 걷기
+tiny_version_help|그래도 인정되는 가장 작은 한 걸음. 하면 연속 기록이 이어져요.
+never_miss_twice_title|두 번 연속 빠지지 않기
+never_miss_twice_body|어제는 %1$s을(를) 못 했어요. 오늘은 %2$s만으로도 이어 갈 수 있어요.
+never_miss_twice_small_step|작은 한 걸음
+tiny_version_done|작은 버전 완료
+comebacks_label|복귀
+comebacks_this_month#one|이번 달 복귀 %d번
+comebacks_this_month#other|이번 달 복귀 %d번
+streak_guard_title|%1$s: %2$d일 연속
+streak_guard_body|오늘 아직 안 했어요. 작은 한 걸음으로도 이어 갈 수 있어요.
+streak_guard_body_tiny|오늘 아직 안 했어요. %1$s만 해도 이어져요.
+streak_guard_setting|연속 기록 알림
+streak_guard_setting_description|3일 이상 연속 기록이 끊기려 할 때만 20:00에 한 번
+smart_reminder_title|더 나은 알림 시간
+smart_reminder_body|보통 %2$s쯤 %1$s을(를) 하는데 알림은 %3$s에 울려요. %4$s(으)로 옮길까요?
+smart_reminder_keep|그대로 두기
+smart_reminder_move|%1$s(으)로 옮기기
+health_fill_label|건강 데이터로 채우기
+health_unavailable|이 휴대폰에서는 Health Connect를 쓸 수 없어요.
+health_fill_help|Kinmichi를 열 때마다 업데이트돼요. 단위: %1$s.
+health_none|끄기
+health_steps|걸음 수
+health_distance|거리
+health_calories|칼로리
+health_exercise|운동
+health_sleep|수면
+health_unit_steps|걸음
+health_unit_distance|km 또는 m
+health_unit_calories|kcal
+health_unit_time|분 또는 시간
+widget_streak_name|연속 기록
+widget_streak_description|가장 긴 진행 중 연속 기록과 이번 달 복귀
+widget_streak_empty|아직 연속 기록이 없어요. 오늘 시작하기 좋은 날이에요.
+widget_quick_name|빠른 그리드
+widget_quick_description|습관 네 개, 각각 탭 한 번
+widget_mood_name|기분
+widget_mood_description|탭 한 번으로 오늘 기분 기록
+widget_opacity_label|위젯 불투명도
+widget_opacity_value|%1$d%%
+widget_streak_days#one|일 연속
+widget_streak_days#other|일 연속
+report_on_github|GitHub에 보고
+report_on_github_note|버전, 휴대폰 모델, 마지막 오류 로그가 채워진 이슈를 브라우저에서 열어요. 제출을 누르기 전에는 아무것도 보내지 않으며, 이슈는 공개돼요.
+update_check_setting|업데이트 확인
+update_check_setting_description|하루에 한 번 GitHub에 새 버전이 있는지 확인
+github_project|GitHub의 Kinmichi
+github_project_description|버전 %1$s · 소스 코드, 릴리스, 피드백
+update_available_title|Kinmichi %1$s 출시
+update_available_body|GitHub나 Obtainium에서 받으세요.
+update_later|나중에
+update_open|열기
+whats_new_title|%1$s의 새로운 기능
+whats_new_ok|확인
+language_spanish|Español
+language_german|Deutsch
+language_portuguese|Português (Brasil)
+language_japanese|日本語
+tour_welcome_title|황금빛 길
+tour_welcome_body|Kinmichi는 일본어로 ‘황금빛 길’이라는 뜻이에요. 매일 조금씩 걷는 길. 한 번에 한 걸음, 그리고 오늘의 걸음은 언제나 빛나요.
+tour_bad_day_title|작은 한 걸음도 인정돼요
+tour_bad_day_body|모든 습관에 힘든 날 버전을 만드세요. 30분 대신 한 쪽처럼요. 힘든 날에는 그것만으로 연속 기록이 이어져요.
+tour_kintsugi_title|깨진 곳은 금으로 이어요
+tour_kintsugi_body|하루쯤 빠질 수 있어요. 대신 두 번 연속은 피하세요. 놓친 다음 날 오늘 화면이 작은 버전을 제안하고, 돌아온 날은 금색으로 기록돼요.
+tour_if_then_title|하루와 연결하세요
+tour_if_then_body|습관을 언제 할지 적으세요. ‘저녁을 다 먹으면 10쪽을 읽는다.’ 이런 계획은 습관을 지키는 가장 검증된 방법 중 하나예요.
+tour_privacy_title|내 것, 내 휴대폰에
+tour_privacy_body|광고도 추적도 없고 오프라인에서도 작동해요. Google 동기화를 켜지 않으면 데이터는 이 기기에만 있어요. PIN이나 지문으로 잠글 수 있어요.
+tour_art_habit|30분 읽기
+tour_art_habit_detail|오늘은 못 함
+tour_art_tiny|1쪽 읽기
+tour_art_if|저녁을 다 먹으면,
+tour_art_then|10쪽을 읽는다.
+advice_grow|3주 동안 거의 매일 목표를 달성했어요. 조금 올려서 %1$s 어때요?
+advice_weekly|최근 %2$d일 중 %1$d일 했어요. 매일 대신 주 %3$d회로 바꿀까요? 그러면 하루 빠져도 끊기지 않아요.
+advice_fewer_per_week|최근 몇 주는 목표에 못 미쳤어요. 지금은 주 %1$d회를 목표로 하고 늘려 갈까요?
+advice_more_per_week|3주 연속 목표를 달성했어요. 주 %1$d회에 도전해 볼까요?
+advice_accept_per_week|주 %1$d회
+whats_new_items[0]|새 이름: Kinmichi|일본어로 ‘황금빛 길’. 습관과 데이터는 그대로 이어져요.
+whats_new_items[1]|여섯 개 언어|영어와 튀르키예어에 스페인어, 독일어, 포르투갈어, 일본어가 더해졌어요.
+whats_new_items[2]|맞춰 가는 목표|3주 동안 잘했다면 목표를 올리고, 잘 안 되는 매일 습관은 주 몇 회로 바꿔요.
+whats_new_items[3]|새 소개와 아이콘|황금빛 길 위의 걸음, 오늘은 금색으로.
+widgets_sheet_title|위젯
+widgets_sheet_subtitle|하나를 골라 탭 한 번으로 홈 화면에 추가하세요.
+widgets_sheet_manual|현재 런처에서는 여기서 위젯을 추가할 수 없어요. 홈 화면 빈 곳을 길게 누르고 위젯에서 Kinmichi를 찾으세요.
+add_to_home|추가
+welcome_eyebrow|마지막 단계
+welcome_title|어떻게 불러 드릴까요?
+welcome_body|오늘 화면이 매일 아침 이름으로 인사해요. 설정에서 언제든 바꿀 수 있어요.
+welcome_name_hint|이름
+welcome_sync_title|백업 및 동기화
+welcome_optional|선택
+welcome_sync_body|새 휴대폰으로 바꿔도 습관이 함께 가요. 비밀번호도, 외울 것도 없어요.
+welcome_signed_in|%1$s(으)로 로그인됨
+welcome_private_note|동기화를 켜지 않으면 모든 것이 휴대폰에만 있어요.
+replay_intro|소개 다시 보기
+replay_intro_description|새 사용자가 보는 소개와 환영 화면이에요. 데이터는 그대로예요.
+all_time|전체 기간
+feeling_question|%1$s 어땠나요?
+feeling_hard|힘들었어요
+feeling_okay|그럭저럭
+feeling_good|좋았어요
+close_label|닫기
+feeling_card_title|이 습관의 느낌
+feeling_usually|보통 %1$s %2$s
+feeling_card_footer|완료 후 남긴 답변 기준, 최근 90일.
+most_enjoyed_title|가장 즐기는 습관
+most_enjoyed_share|😊 %2$d번 중 %1$d번
+feeling_setting|어땠는지 묻기
+feeling_setting_description|오늘 화면에서 습관을 완료하면 얼굴을 한 번 탭
+sign_in_with_github|GitHub로 계속하기
+welcome_sync_divider|백업 및 동기화 · 선택
+welcome_continue_without|계정 없이 계속하기
+sign_in_use_other_provider|이 이메일은 이미 Google로 로그인했어요. Google로 계속하기를 사용하세요.
+welcome_hello_title|Kinmichi에 오신 걸 환영해요
+welcome_hello_body|로그인해서 습관을 안전하게 지키거나 게스트로 시작하세요.
+welcome_or|또는
+continue_as_guest|게스트로 계속하기
+welcome_accounts_note|게스트로 쓰면 모든 것이 이 휴대폰에 있어요. 나중에 설정에서 로그인할 수 있어요.
+welcome_synced_note|습관이 계정에 백업돼요.
+welcome_benefit_backup|백업되고 새 휴대폰으로 함께 가요
+welcome_benefit_devices|휴대폰, 위젯, 워치에서
+welcome_benefit_private|비밀번호, 광고, 추적 없음
+welcome_preview_label|오늘 화면의 인사
+account_title|계정 및 백업
+account_signed_out_title|로그인하지 않음
+account_signed_out_body|로그인하면 습관을 백업하고 새 휴대폰으로 옮길 수 있어요.
+account_via_google|Google로 연결됨
+account_via_github|GitHub로 연결됨
+account_choose_source_short|원본 선택
+account_auto_sync_short|자동 동기화
+account_safe_title|습관이 안전하게 보관돼요
+account_not_synced_title|아직 동기화하지 않음
+account_delete_short|계정 삭제
+appearance_follow_system|시스템 따르기
+appearance_follow_system_desc|휴대폰처럼 낮에는 라이트, 밤에는 다크
+appearance_desc|테마, 팔레트, 완전한 검정
+appearance_theme_palette|테마와 팔레트
+appearance_grid_hint|팔레트의 라이트 또는 다크 절반을 탭해 그렇게 쓰세요.
+lang_name_tr|튀르키예어
+lang_name_en|영어
+lang_name_es|스페인어
+lang_name_de|독일어
+lang_name_fr|프랑스어
+lang_name_it|이탈리아어
+lang_name_pt|포르투갈어
+lang_name_ru|러시아어
+lang_name_ja|일본어
+lang_name_ko|한국어
+language_french|Français
+language_italian|Italiano
+language_russian|Русский
+language_korean|한국어
+language_system_desc|휴대폰 언어를 따름
+language_search|언어 검색
+language_current|현재
+language_all|모든 언어

@@ -1,0 +1,888 @@
+app_name|Kinmichi
+today|Сегодня
+library|Библиотека
+statistics|Статистика
+calendar|Календарь
+good_morning|Доброе утро
+good_afternoon|Добрый день
+good_evening|Добрый вечер
+daily_progress|Прогресс за день
+current_streak|Текущая серия
+add_habit|Добавить привычку
+habit_completed|Выполнено
+increase_progress|Увеличить прогресс
+decrease_progress|Уменьшить прогресс
+complete_habit|Отметить привычку
+progress_template|%1$s / %2$s %3$s
+weekdays|По будням
+weekends|По выходным
+selected_days|Выбранные дни
+new_habit|Новая привычка
+back|Назад
+continue_label|Продолжить
+save_habit|Сохранить привычку
+goal_period|Период цели
+daily|Ежедневно
+weekly|Еженедельно
+monthly|Ежемесячно
+times_per_week|Раз в неделю (1–7)
+times_per_month|Раз в месяц (1–31)
+routine_name|Название ритуала
+after_habit_optional|После другой привычки (необязательно)
+none_label|Нет
+blocked_by_habit|Сначала выполните «%1$s»
+period_progress|%1$d / %2$d за этот период
+goal_step|Цель
+habit_name|Название привычки
+intent_label|Намерение
+build_habit|Завести привычку
+quit_habit|Бросить привычку
+icon_label|Значок или эмодзи
+color_label|Цвет акцента
+tracking_type|Тип отслеживания
+type_check|Отметка
+type_count|Счётчик
+type_duration|Длительность
+target_label|Цель
+unit_label|Единица
+quick_increment|Быстрый шаг
+days_label|Дни
+reminder_label|Напоминание
+reminder_description|Получайте уведомление в выбранное время.
+reminder_time|Время напоминания
+reminder_time_error|Введите время в формате 09:00.
+reminder_channel_name|Напоминания о привычках
+reminder_channel_description|Уведомления о запланированных привычках
+reminder_notification_text|Время сделать небольшой шаг сегодня.
+test_notification|Проверить уведомления
+test_notification_description|Отправить пробное напоминание сейчас
+start_timer|Запустить таймер
+stop_timer|Остановить и сохранить
+edit_habit|Изменить привычку
+manage_habit|Управление привычкой
+habit_details|О привычке
+loading_habit|Загрузка привычки…
+habit_note_hint|Ваша общая заметка об этой привычке
+archive_habit|Архивировать привычку
+delete_habit|Удалить привычку
+delete_habit_confirmation|Навсегда удалить «%1$s» и всю историю?
+delete_label|Удалить
+reorder_habits|Порядок привычек
+reorder_habits_description|Стрелками задайте порядок на экране «Сегодня».
+move_up|Выше
+move_down|Ниже
+repeat_reminder|Напомнить снова
+repeat_reminder_description|Разрешить повторное напоминание из уведомления
+repeat_minutes|Интервал повтора (минуты)
+minutes_value|%1$d мин
+remind_again_minutes|Напомнить через %1$d мин
+off_label|Выкл.
+weekday_abbreviations[0]|Пн
+weekday_abbreviations[1]|Вт
+weekday_abbreviations[2]|Ср
+weekday_abbreviations[3]|Чт
+weekday_abbreviations[4]|Пт
+weekday_abbreviations[5]|Сб
+weekday_abbreviations[6]|Вс
+pending_label|Ожидает
+google_not_connected|Аккаунт Google не подключён
+settings_label|Настройки
+theme_label|Тема
+language_label|Язык
+data_privacy_label|Данные и конфиденциальность
+planning_and_review|Планирование и обзор
+planning_and_review_description|Ритуалы, перерывы, заметки недели и автоматические шаги
+vacation_mode|Режим перерыва / отпуска
+vacation_mode_description|Исключённые дни не снижают процент выполнения и серии.
+end_vacation|Завершить перерыв
+invalid_vacation_dates|Введите корректные даты начала и конца.
+vacation_activated|Дни перерыва исключены из статистики.
+vacation_ended|Режим перерыва завершён.
+vacation_today_message|Сегодня включён режим перерыва. Привычки на паузе, серии защищены.
+weekly_review|Обзор недели
+weekly_review_description|Подведите итоги недели и оставьте личную заметку.
+weekly_review_stats|Выполнено %1$d из %2$d · %3$d%%
+weekly_note|Заметка недели
+save_weekly_review|Сохранить обзор
+weekly_review_saved|Обзор недели сохранён.
+backup_restore|Резервная копия и восстановление
+app_lock|Блокировка приложения
+all_categories|Все
+content_progress_value|%1$s / %2$s %3$s
+status_completed|Выполнено
+unit_minutes|мин
+current_progress|Сейчас
+general_note|Общая заметка
+save_note|Сохранить заметку
+add_label|Добавить
+cancel|Отмена
+previous_month|Предыдущий месяц
+next_month|Следующий месяц
+selected_day|Выбранный день
+calendar_goal_fraction|Выполнено %1$d / %2$d
+past_edit_hint|Измените выбранный день этими кнопками.
+no_habits_for_day|На этот день нет запланированных привычек.
+last_days|Последние %1$d дн.
+completion_rate|Процент выполнения
+completed_scheduled|Выполнено %1$d / %2$d
+active_days|Активные дни
+best_streak|Лучшая серия
+habit_breakdown|По привычкам
+no_statistics_yet|Добавьте привычку, чтобы появилась статистика.
+streak_pair|Текущая серия: %1$d дн. · Лучшая: %2$d дн.
+personal_greeting|%1$s, %2$s
+personal_profile|Личный профиль
+local_profile_description|Ваше личное пространство на этом устройстве
+edit_profile_name|Изменить имя профиля
+profile_name|Имя профиля
+save_label|Сохранить
+account_label|Аккаунт
+google_account_label|Аккаунт Google
+appearance_label|Внешний вид и использование
+theme_mode_label|Режим оформления
+theme_system|Как в системе
+theme_light|Светлая
+theme_dark|Тёмная
+language_system|Язык системы
+language_turkish|Турецкий
+language_english|Английский
+week_start_label|Начало недели
+monday|Понедельник
+sunday|Воскресенье
+daily_summary_setting|Итоги дня
+daily_summary_setting_description|Показывать карточку итогов на экране «Сегодня»
+screen_protection|Защита экрана
+screen_protection_description|Запретить скриншоты и превью в недавних приложениях
+local_data_note|Ваши привычки, материалы и настройки сейчас хранятся только на этом устройстве.
+goals|Цели
+goals_subtitle|Долгосрочный прогресс в одном месте
+open_goals|Открыть цели
+add_goal|Добавить цель
+new_goal|Новая цель
+edit_goal|Изменить цель
+save_goal|Сохранить цель
+goal_details|О цели
+goal_title|Название цели
+goal_description|Описание (необязательно)
+due_date_optional|Срок (необязательно)
+due_date_value|Срок: %1$s
+goal_progress_value|%1$s / %2$s %3$s
+active_goals|Активные цели
+completed_goals|Достигнутые цели
+active_goal_count|Активных целей: %1$d
+completed_goal_count|Достигнуто: %1$d
+no_goals|Целей пока нет
+no_goals_description|Задайте, что хотите прочитать, посмотреть, накопить или достичь.
+complete_goal|Цель достигнута
+mark_goal_active|Снова сделать активной
+archive_goal|Архивировать цель
+delete_goal|Удалить цель
+delete_goal_confirmation|Навсегда удалить цель «%1$s»?
+app_lock_enabled|Блокировка включена
+app_lock_disabled|Блокировка выключена
+app_lock_description|При открытии Kinmichi запросит ваш 4-значный PIN.
+app_lock_status_on|Защищено 4-значным PIN
+app_lock_status_off|Выкл.
+new_pin|Новый PIN
+current_pin|Текущий PIN
+confirm_pin|Повторите PIN
+pin_code|4-значный PIN
+enable_app_lock|Включить блокировку
+disable_app_lock|Выключить блокировку
+disable_label|Выключить
+change_pin|Сменить PIN
+pin_setup_error|PIN должны совпадать и состоять из 4 цифр.
+pin_change_error|Текущий PIN неверен или новые PIN не совпадают.
+incorrect_pin|Неверный PIN. Попробуйте ещё раз.
+biometric_unlock|Биометрическая разблокировка
+biometric_unlock_description|Отпечаток пальца или другая поддерживаемая биометрия
+biometric_unavailable|На устройстве не настроена поддерживаемая биометрия.
+app_locked|Kinmichi заблокирован
+enter_pin_to_continue|Введите PIN, чтобы продолжить.
+unlock|Разблокировать
+use_biometrics|Использовать биометрию
+biometric_prompt_title|Разблокировать Kinmichi
+biometric_prompt_subtitle|Подтвердите личность с помощью биометрии
+use_pin_instead|Использовать PIN
+local_backup_available|Сохранить резервную копию на устройстве
+local_backup_title|Ваши данные под вашим контролем
+local_backup_description|Сохраните привычки, историю, библиотеку и цели в один JSON-файл.
+create_backup|Создать резервную копию
+restore_backup|Восстановить из копии
+export_csv|Экспорт подробного CSV
+export_pdf|Экспорт отчёта PDF
+report_export_success|Отчёт сохранён.
+backup_security_note|PIN и биометрия не попадают в резервные копии ради безопасности.
+backup_export_success|Резервная копия создана.
+backup_restore_success|Данные восстановлены из копии.
+backup_operation_failed|Файл повреждён или операцию не удалось выполнить.
+confirm_restore|Заменить текущие данные?
+restore_summary|В копии: привычек — %1$d, записей истории — %2$d, материалов — %3$d, целей — %4$d. Текущие данные будут заменены.
+restore_label|Восстановить
+widget_description|Отмечайте сегодняшние привычки прямо с главного экрана
+widget_locked|Kinmichi заблокирован
+configure_widget|Настроить виджет
+configure_widget_description|Выберите привычки для показа.
+save_widget|Сохранить виджет
+home_widget|Виджет главного экрана
+home_widget_description|Нажмите, чтобы увидеть виджеты и добавить один на главный экран
+error_reports|Отчёты об ошибках
+error_reports_description|Просмотр и экспорт последней ошибки приложения
+crash_report_available|Есть отчёт об ошибке
+no_crash_reports|Ошибок не зафиксировано
+diagnostic_privacy_note|В отчёте только версия приложения, сведения об устройстве и последняя техническая трассировка; заметки и содержимое привычек не включаются.
+app_version_value|Kinmichi %1$s · сборка %2$d
+export_diagnostic|Экспорт диагностического отчёта
+clear_error_report|Очистить отчёт
+diagnostic_export_success|Диагностический отчёт сохранён.
+diagnostic_export_failed|Не удалось сохранить диагностический отчёт.
+skip_label|Пропустить
+onboarding_welcome_title|Маленькие шаги, стойкий прогресс
+onboarding_welcome_body|Kinmichi отслеживает привычки по вашим целям, расписанию и напоминаниям.
+onboarding_library_title|Всё, что вы читаете и смотрите, — вместе
+onboarding_library_body|Книги, манга, фильмы, сериалы и аниме с сезонами и заметками.
+onboarding_goals_title|Сделайте долгие цели видимыми
+onboarding_goals_body|Выберите свою единицу, целевое значение и, если нужно, срок.
+onboarding_privacy_title|Ваше личное пространство под вашим контролем
+onboarding_privacy_body|Данные хранятся на этом устройстве. Доступны PIN, биометрия, защита экрана и локальные копии.
+start_using_tsuzuku|Начать пользоваться Kinmichi
+cloud_account_subtitle|Вход через Google и личная облачная синхронизация
+cloud_data_note|Ваши привычки, материалы и цели хранятся на устройстве и дополнительно защищены облачной синхронизацией Google.
+google_sign_in_description|Войдите, чтобы хранить привычки, историю, библиотеку и цели в аккаунте Google.
+sign_in_with_google|Продолжить с Google
+skip_google_for_now|Пока пропустить
+automatic_cloud_sync|Автоматическая синхронизация
+automatic_cloud_sync_description|Синхронизировать безопасные изменения при открытии приложения или уходе в фон.
+last_cloud_sync|Последняя синхронизация: %1$s
+cloud_choice_required|Перед автосинхронизацией выберите, какую копию использовать.
+sync_now|Синхронизировать
+choose_sync_source|Выбрать источник
+sign_out_google|Выйти
+cloud_download_complete|Данные из облака восстановлены на устройстве
+cloud_upload_complete|Данные устройства сохранены в облаке Google
+cloud_already_current|Устройство и облако уже синхронизированы
+cloud_sync_error|Не удалось выполнить синхронизацию
+ok_label|ОК
+cloud_conflict_title|Изменения с обеих сторон
+cloud_conflict_description|Выберите, какую копию оставить. Другая будет заменена.
+cloud_choice_description|Выберите копию, которая станет основной.
+this_device|Это устройство
+google_cloud|Облако Google
+no_cloud_backup|Для этого аккаунта ещё нет облачной копии.
+use_device_data|Данные устройства
+use_cloud_data|Данные из облака
+firebase_setup_required|Нужно подключение к Firebase
+firebase_setup_description|Код приложения готов, но у этой сборки пока нет проекта Firebase.
+firebase_setup_step_one|1. Зарегистрируйте пакет app.tsuzuku в Firebase.
+firebase_setup_step_two|2. Включите Google Authentication и создайте Firestore.
+firebase_setup_step_three|3. Положите google-services.json в папку app и пересоберите.
+cloud_summary|%1$s: привычек %2$d · истории %3$d · материалов %4$d · целей %5$d
+synced_data|Синхронизировано
+google_signing_in|Открываем вход Google…
+cloud_uploading|Сохраняем данные в облако…
+cloud_downloading|Восстанавливаем данные из облака…
+cloud_synchronizing|Проверяем изменения на устройстве и в облаке…
+google_signing_out|Выходим…
+choose_vacation_dates|Выберите даты перерыва
+choose_dates|Выбрать даты
+no_vacation_dates_selected|Период не выбран
+confirm_label|Подтвердить
+live_preview|ПРЕДПРОСМОТР
+plan|План
+plan_subtitle|Разовые задачи, приоритеты и форма вашего дня
+plan_empty|Список пуст
+plan_empty_detail|Добавьте задачу, не превращая её в привычку.
+upcoming|Скоро
+inbox|Входящие
+new_task|Новая задача
+add_task|Добавить задачу
+task_identity|Что нужно сделать?
+task_title|Название задачи
+schedule|Расписание
+tomorrow|Завтра
+priority|Приоритет
+estimated_minutes|Ожидаемое время (минуты)
+save_task|Сохранить задачу
+move_tomorrow|Перенести на завтра
+minute_count|%1$d мин
+priority_value|Приоритет %1$d
+task_details|О задаче
+checklist|Чек-лист
+new_checklist_item|Новый шаг
+carried_count|Переносилась %1$d раз
+add|Добавить
+minimum_target|Минимум
+maximum_target|Дневной лимит
+difficulty|Сложность
+easy|Легко
+medium|Средне
+hard|Сложно
+intention_sentence|План «если — то»
+intention_example|Если я закончу ужинать, то прочитаю 10 страниц.
+flexible_schedule|Гибкое расписание
+repeat_every_days|Повторять каждые … дн.
+repeat_interval_help|1 — по выбранным дням; 2 — через день.
+start_date_optional|Дата начала (необязательно)
+end_date_optional|Дата окончания (необязательно)
+pause_until_optional|Пауза до (необязательно)
+clear_label|Очистить
+time_block_optional|Временной блок (необязательно)
+start_time|Начало
+end_time|Конец
+repeat_task|Повторять задачу
+every_day|Каждый день
+weekdays_only|По будням
+every_week|Каждую неделю
+every_month|Каждый месяц
+task_templates|ШАБЛОНЫ ЗАДАЧ
+save_as_template|Сохранить как шаблон
+overdue|Просрочено
+overdue_cleanup|Просрочено задач: %1$d · перенесите на завтра или выполните
+selected_count|Выбрано: %1$d
+move_all_tomorrow|Перенести на завтра
+move_to_inbox|Во входящие
+complete_selected|Выполнить
+delete_selected|Удалить
+drag_to_reorder|Перетащите, чтобы изменить порядок
+day_end_cleanup|Уборка в конце дня
+day_end_cleanup_detail|Решите, что делать с просроченными задачами: %1$d.
+duplicate_task|Дублировать задачу
+swipe_complete|Выполнить
+swipe_tomorrow|Завтра
+tags_label|Теги
+tags_help|Разделяйте теги запятыми: учёба, дом, важное
+search_everything|Искать везде
+search_hint_all|Название, заметка или тег
+result_count|Результатов: %1$d
+all_label|Все
+habits|Привычки
+save_search|Сохранить поиск
+name_saved_search|Назовите поиск
+filter_name|Название фильтра
+saved_filter_summary|%1$s · %2$s
+delete_saved_search|Удалить сохранённый поиск
+add_tags_selected|Добавить теги к выбранным
+categories_and_tags|Категории и теги
+categories_description|Создавайте свои категории для привычек, задач и библиотеки.
+category_name|Название категории
+emoji_label|Значок или эмодзи
+create_category|Создать категорию
+your_categories|Ваши категории
+no_custom_categories|Вы ещё не создали свою категорию.
+actual_minutes|Фактическое время (минуты)
+actual_minutes_help|Оставьте пустым, чтобы стереть записанное время.
+actual_minute_count|Фактически %1$d мин
+recent_timeline|Недавняя хронология
+lock_after_background|Блокировать после выхода из приложения
+immediately|Сразу
+lock_delay_minutes|%1$d мин
+duplicate_habit|Дублировать привычку
+delete_category|Удалить категорию
+delete_category_confirmation|Удалить «%1$s»? Она будет снята с записей, сами записи останутся.
+edit_task|Изменить задачу
+failed_label|Не выполнено
+skipped_label|Пропущено
+sign_out_data_choice|Что сделать с локальной копией? Облачная копия не будет удалена.
+keep_on_device|Оставить на устройстве
+remove_from_device|Удалить с устройства
+choose_date|Выбрать дату
+focus|Фокус
+focus_mode|Режим фокуса
+start_focus|Начать фокус
+pomodoro|Помодоро (25 мин)
+stopwatch|Секундомер
+custom_timer|Свой таймер
+focus_target|Цель фокуса
+free_focus|Свободный фокус
+focus_minutes_today|Сегодня %1$d мин фокуса
+focus_sessions_count|Сессий: %1$d
+start_routine|Начать ритуал
+routine_step|Шаг %1$d из %2$d
+customize_sections|Настроить «Сегодня»
+section_plan|Задачи на сегодня
+section_goals|Прогресс целей
+section_routines|Ритуалы
+linked_goals|Связанные цели
+linked_habits|Связанные привычки
+linked_tasks|Связанные задачи
+contribution_mode|Тип вклада
+contribution_value|Размер вклада
+link_goal|Связать цель
+link_habit|Связать привычку
+link_task|Связать задачу
+unlink|Отвязать
+mood_tired|Устал
+mood_neutral|Нормально
+mood_good|Хорошо
+mood_great|Отлично
+daily_review_title|Как прошёл день?
+daily_review_subtitle|Спокойная пауза в несколько секунд настраивает на завтра.
+mood_label|Настроение
+energy_level|⚡ Уровень энергии
+productivity_feeling|🎯 Ощущение продуктивности
+stress_level|🌊 Уровень стресса
+daily_note_gratitude|Заметка дня / Благодарность
+daily_note_placeholder|Мысль, вывод или заметка о сегодняшнем дне…
+remaining_tasks_count|Осталось задач (%1$s)
+carry_unfinished_hint|Незавершённое можно перенести на завтра:
+move_to_tomorrow|Перенести на завтра
+complete_day_and_save|Завершить день и сохранить
+resume_action|Продолжить
+pause_action|Пауза
+finish_and_save|Завершить и сохранить
+focus_today|Фокус сегодня
+sessions_today|Сессии сегодня
+focus_target_task|Задача: %1$s
+task_label|Задача
+focus_target_habit|Привычка: %1$s %2$s
+habit_label|Привычка
+focus_target_goal|Цель: %1$s
+no_linked_habits|Связанных привычек пока нет.
+contribution_by_habit_amount|Вклад — объём привычки
+contribution_plus|Вклад +%1$s
+no_linked_tasks|Связанных задач пока нет.
+contribution_plus_points|Вклад +%1$s очк.
+no_more_habits_to_link|Других привычек для связи нет.
+select_habit|Выберите привычку:
+habit_amount|Объём привычки
+fixed_value|Фиксированное значение
+no_more_tasks_to_link|Других задач для связи нет.
+select_task|Выберите задачу:
+bad_habit_limit_desc|Цель этой привычки — ограничить или исключить потребление. Приближение к лимиту (80%) и его превышение отмечаются спокойными индикаторами.
+ideal_target_upper|Идеальная цель / Верхний предел
+ideal_lower_limit|Идеальный нижний предел
+maximum_limit|Максимальный предел
+bad_habit_clean_day|✓ Выполнено: сегодня вы полностью держались от этой привычки (чистый день).
+no_linked_goals|Связанных целей пока нет.
+growth_levels|Уровни роста
+add_level|Добавить уровень
+edit_action|Изменить
+growth_levels_hint|Задайте постепенные уровни для этой привычки (например, уровень 1: 1 км, уровень 2: 3 км, уровень 3: 5 км).
+configure_stages|Настроить этапы
+active_level|Текущий уровень
+completed_check|✓ Выполнено
+switch_to_level|Перейти на этот уровень
+level_up_to|Следующий уровень: %1$s (%2$s %3$s)
+top_level_reached|Поздравляем! Вы на самом высоком уровне этой привычки.
+no_more_active_goals_to_link|Других активных целей для связи нет.
+select_goal|Выберите цель:
+link_library_content|Связать материал из библиотеки
+no_more_content_to_link|Других материалов для связи нет.
+select_content|Выберите материал:
+progress_multiplier_label|Множитель прогресса (по умолчанию 1)
+link_action|Связать
+level_up_title|Новый уровень
+level_up_message|Вы переходите на уровень «%1$s». Дневная цель станет %2$s %3$s.\n\nПрошлые записи, статистика и серии сохранятся.
+level_up_confirm|Повысить уровень
+level_beginner|Начальный
+level_intermediate|Средний
+level_advanced|Продвинутый
+edit_growth_levels|Изменить уровни
+level_number|Уровень %1$s
+level_title|Название уровня
+target_with_unit|Цель (%1$s)
+reward_note|Награда / Заметка
+level_number_next|Уровень %1$s
+add_new_level|Добавить уровень
+overall_activity|Общая активность
+heatmap_more|Больше
+heatmap_habits_completed|Выполнено привычек: %1$s
+heatmap_tasks|Задачи: %1$s
+heatmap_focus_minutes|Фокус: %1$s мин
+heatmap_review_done|Вечерний обзор: ✓
+heatmap_review_missing|Вечерний обзор: —
+postpone_awareness|Внимание к переносам (перенесено %1$s раз)
+postpone_awareness_hint|Возможно, задача вызывает скрытое сопротивление. Разбейте её на шаги по 5 минут в чек-листе выше.
+no_active_goals_to_link|Нет активных целей для связи.
+routine_label|Ритуал
+routine_steps|Шаги ритуала
+must_complete_first|Сначала нужно выполнить «%1$s»
+locked_label|Заблокировано
+routine_completed_title|Ритуал выполнен!
+routine_completed_body|Вы прошли все шаги этого ритуала.
+back_to_today|К экрану «Сегодня»
+personal_records_milestones|Личные рекорды и вехи
+personal_records_desc|Полученные значки, самые длинные серии и вехи
+skip_habit_title|Пропустить привычку
+skip_habit_message|Можно указать, почему вы пропускаете «%1$s» в этот раз. Дисциплина крепнет вместе с гибкостью.
+custom_reason|Своя причина
+custom_reason_example|например, дедлайн по проекту
+save_and_skip|Сохранить и пропустить
+skip_without_reason|Пропустить без причины
+carry_count_title|Вы переносили эту задачу %1$s раз
+carry_split_hint|Сломайте сопротивление: разбейте задачу на маленькие шаги, которые можно начать за первые 5 минут:
+carry_intro|То, что постоянно откладывается, обычно либо слишком велико, либо пока потеряло смысл. Выберите шаг, не ругая себя:
+carry_step_1|1. Первый маленький шаг (5 мин)
+carry_step_1_example|например, открыть черновик / прочитать 1 страницу
+carry_step_2|2. Второй шаг (необязательно)
+carry_step_2_example|например, определиться с заголовками
+carry_step_3|3. Третий шаг (необязательно)
+carry_step_3_example|например, закончить первый черновик
+add_steps_and_start|Добавить шаги и начать
+do_today|Сделать сегодня
+do_today_desc|Сделать главным на сегодня и начать с первых 5 минут.
+move_tomorrow_desc|Убрать из сегодняшнего плана и начать завтра с чистого листа.
+postpone_next_week|Перенести на следующую неделю
+postpone_next_week_desc|Если сейчас не время, сдвиньте на 7 дней.
+split_smaller|Разбить на части
+split_smaller_desc|Добавить подзадачи или шаги.
+cancel_or_delete_task|Отменить / удалить задачу
+cancel_or_delete_task_desc|Если она больше не нужна, отпустите её без чувства вины.
+stats_tab_general|Общее
+stats_tab_heatmap|Тепловая карта
+stats_tab_reviews|Обзоры
+stats_tab_records|Рекорды
+stats_tab_skips|Пропуски
+yearly|Годовой
+previous_week|Предыдущая неделя
+next_week|Следующая неделя
+weekly_completion_rate|Выполнение за неделю
+most_successful|🌟 Лучше всего
+could_improve|🌱 Можно улучшить
+task_focus_balance|Баланс задач и фокуса
+completed_tasks_of|Выполнено задач: %1$s / %2$s
+postponed_count|Перенесено: %1$s
+focus_duration_minutes|Фокус: %1$s мин
+goal_steps_count|Шаги к целям: %1$s
+weekly_reflection_note|Размышления и заметка недели
+monthly_success_rate|Успешность за месяц
+focus_hours_minutes|Фокус: %1$s ч %2$s мин
+completed_tasks_value|Выполнено задач: %1$s
+habit_ranking|Рейтинг привычек
+monthly_reflection|Размышления и обзор месяца
+previous_year|Предыдущий год
+next_year|Следующий год
+yearly_summary_milestones|Итоги года и вехи
+total_habits_label|Всего привычек:
+total_focus_label|Всего фокуса:
+completed_goals_label|Достигнуто целей:
+finished_books_content_label|Прочитано и просмотрено:
+longest_chain_label|Самая длинная цепочка:
+days_value|%1$s дн.
+yearly_review_vision|Обзор года и взгляд вперёд
+personal_records|Личные рекорды
+longest_chain|Самая длинная цепочка
+days_value_records|%1$s дн.
+most_productive_day|Самый продуктивный день
+total_focus|Всего фокуса
+deep_work|Глубокая работа
+goals_achieved|Достигнутые цели
+milestones_and_badges|Вехи и значки
+habit_skip_analysis|Анализ пропусков
+habit_skip_analysis_desc|Всего привычки пропускались %1$s раз. Понимание причин помогает сделать цели гибче и устойчивее.
+earned_label|Получено ✨
+reflection_placeholder|Запишите мысли, выводы и заметки…
+limit_exceeded|⚠️ Лимит превышен! (%1$s / %2$s %3$s)
+open_details|Подробнее
+skip_with_reason|Пропустить (указать причину)
+undo_skip|Отменить пропуск
+carried_times|↩ Перенесено %1$s раз
+resolve_action|Разобрать
+smart_carry_assistant|Помощник по переносам
+carry_banner_message|Задач, перенесённых 3+ дня: %1$s. Нажмите, чтобы разобрать.
+daily_review_completed|Обзор дня готов
+do_evening_review|Пройдите вечерний обзор
+completed_of_total|Выполнено %1$s / %2$s
+daily_summary_section|Итоги дня
+todays_plan_section|План на сегодня
+goal_progress_section|Прогресс целей
+focus_info_section|Фокус
+routines_label|Ритуалы
+sections_config_hint|Меняйте порядок разделов и выбирайте, какие показывать.
+saved_check|✓ Сохранено
+vs_last_week|%1$s%% к прошлой неделе
+mood_hard|Тяжело
+heatmap_less|Меньше
+level_target_value|Цель: %1$s %2$s
+test_notification_body|Так будут выглядеть ваши напоминания.
+progress_tab|Прогресс
+today_all_done|На сегодня всё сделано 🎉
+habits_done_of|Сделано %1$d из %2$d
+more_actions|Ещё
+streak_days#one|Серия %d день
+streak_days#few|Серия %d дня
+streak_days#many|Серия %d дней
+streak_days#other|Серия %d дня
+widget_today_name|Сегодня
+widget_habit_name|Одна привычка
+widget_week_name|Эта неделя
+widget_habit_description|Одна привычка с кольцом прогресса и серией
+widget_week_description|Эта неделя, по кольцу на день
+widget_week_title|Эта неделя
+widget_no_habits|На сегодня привычек нет
+widget_pick_one|Выберите привычку для показа.
+template_water|Пить воду
+unit_glasses|стаканов
+template_read|Читать
+template_walk|Гулять
+template_stretch|Утренняя растяжка
+template_wake_early|Вставать рано
+template_no_phone_bed|Без телефона в кровати
+starter_title|Начните с привычки
+starter_body|Нажмите, чтобы добавить. Всё можно изменить позже.
+create_own_habit|Создать свою
+skip_reason_forgot|Забыл
+skip_reason_no_time|Нет времени
+skip_reason_travel|В поездке
+skip_reason_sick|Болел
+skip_reason_intentional|Пропущено намеренно
+skip_reason_other|Другое
+milestone_streak_title|Серия %1$d дн.
+milestone_streak_desc|Держите одну привычку %1$d дней подряд.
+milestone_completions_title|%1$d отметок
+milestone_completions_desc|Выполните привычки %1$d раз в сумме.
+milestone_focus_title|%1$d ч фокуса
+milestone_focus_desc|Наберите %1$d ч фокус-сессий в сумме.
+milestone_goal_title|Достигнуто целей: %1$d
+milestone_goal_desc|Достигните %1$d целей.
+show_advanced|Больше настроек
+hide_advanced|Меньше настроек
+unit_times|раз
+skip_keeps_streak|Пропущенные дни не считаются, поэтому серия не прерывается.
+weekly_summary_title|Ваша неделя: %1$d%%
+weekly_summary_body|Выполнено %1$d из %2$d. Самая крепкая привычка: %3$s.
+weekly_summary_body_empty|На этой неделе не было запланированных привычек. Новый старт — в одно касание.
+weekly_summary_setting|Итоги недели
+weekly_summary_setting_description|Короткие итоги каждое воскресенье вечером
+delete_account|Удалить аккаунт и данные
+delete_account_title|Удалить аккаунт?
+delete_account_message|Это навсегда удалит облачную копию Kinmichi, ваш аккаунт и все привычки на этом устройстве. Отменить нельзя. Если хотите что-то сохранить, сначала экспортируйте резервную копию.
+delete_account_confirm|Удалить навсегда
+delete_account_reauth|Ради безопасности войдите снова, а затем удалите аккаунт.
+deleting_account|Удаляем аккаунт…
+widget_mark_done|Отметить «%1$s» как выполненную
+widget_mark_not_done|Снять отметку с «%1$s»
+notifications_blocked|Уведомления Kinmichi выключены, поэтому напоминание не появится.
+open_notification_settings|Включить
+shortcut_add_habit|Новая привычка
+shortcut_add_habit_long|Добавить новую привычку
+shortcut_progress|Прогресс
+shortcut_progress_long|Посмотреть прогресс
+tile_today_label|Kinmichi
+tile_no_habits|Сегодня привычек нет
+tile_all_done|На сегодня всё сделано
+tile_habits_left#one|Осталась %d привычка
+tile_habits_left#few|Осталось %d привычки
+tile_habits_left#many|Осталось %d привычек
+tile_habits_left#other|Осталось %d привычки
+rest_day_used|день отдыха на этой неделе использован
+rest_day_rule|Забыли день? Один пропуск в неделю не прерывает серию.
+year_heatmap_title|Последние 12 месяцев
+heat_day_off|Не запланировано
+heat_day_done|Выполнено
+heat_day_missed|Не выполнено
+heat_day_partial|%1$s от цели
+year_heatmap_summary#one|%d день выполнен за последний год
+year_heatmap_summary#few|%d дня выполнено за последний год
+year_heatmap_summary#many|%d дней выполнено за последний год
+year_heatmap_summary#other|%d дня выполнено за последний год
+widget_tap_to_complete|Нажмите, чтобы отметить
+advice_lower|Цель достигнута в %1$d из последних %2$d дней. Обычно у вас выходит около %3$s — начать с этого и наращивать?
+advice_raise|Вы достигаете цели почти каждый день уже две недели. Готовы перейти на %1$s?
+advice_accept|Установить %1$s
+advice_not_now|Не сейчас
+mood_question|Как прошёл день?
+mood_logged|Сегодня: %1$s
+mood_add_note|Добавить заметку
+mood_edit_note|Изменить заметку
+mood_notification_body|Одно касание. Со временем Kinmichi покажет, какие привычки совпадают с вашими лучшими днями.
+mood_quick_rough|😕 Тяжело
+mood_quick_okay|😐 Нормально
+mood_quick_good|🙂 Хорошо
+mood_insights_title|Привычки и настроение
+mood_insights_none|Пока явной закономерности нет. Продолжайте отмечать, как проходят дни.
+mood_insights_footnote|По вашим записям, только на этом телефоне. Настроение по шкале 1–5; это закономерности, а не доказательства.
+mood_insight_better|Дни с «%1$s» ощущаются лучше
+mood_insight_worse|Дни с «%1$s» даются тяжелее
+mood_insight_detail|Среднее настроение %1$s с ней, %2$s без неё
+mood_reminder_setting|Вечерняя отметка настроения
+mood_reminder_setting_description|В 21:00, если вы ещё не отметили день
+mood_insights_collecting#one|Отмечайте настроение ещё %d день, чтобы увидеть связь привычек с лучшими днями.
+mood_insights_collecting#few|Отмечайте настроение ещё %d дня, чтобы увидеть связь привычек с лучшими днями.
+mood_insights_collecting#many|Отмечайте настроение ещё %d дней, чтобы увидеть связь привычек с лучшими днями.
+mood_insights_collecting#other|Отмечайте настроение ещё %d дня, чтобы увидеть связь привычек с лучшими днями.
+share_streak|Поделиться серией
+share_card_streak|дн. подряд
+share_card_done|дн. выполнено
+share_card_rate|Последние 30 дней
+share_card_weeks|Последние %1$d нед.
+share_card_text|%1$s: серия %2$d дн. с Kinmichi 🔥
+share_card_text_done|%1$s: выполнено %2$d дн. с Kinmichi
+palette_label|Цветовая палитра
+palette_washi|Washi
+palette_dynamic|Цвета обоев
+palette_sumi|Sumi
+palette_matcha|Matcha
+palette_sakura|Sakura
+palette_umi|Umi
+pure_black_label|Чистый чёрный ночью
+pure_black_desc|Тёмная тема с настоящим чёрным бережёт батарею OLED
+palette_washi_desc|Бумага и индиго
+palette_sumi_desc|Тушь и киноварь
+palette_matcha_desc|Зелёный чай, спокойно
+palette_sakura_desc|Цветение сакуры, тепло
+palette_umi_desc|Море, свежо и сосредоточенно
+palette_dynamic_desc|По вашим обоям
+intention_help|Привяжите привычку к моменту дня. Показывается на экране «Сегодня» и в напоминании.
+tiny_version_label|Вариант для тяжёлого дня
+tiny_version_example|например, 1 страница, 5 минут прогулки
+tiny_version_help|Самый маленький шаг, который всё равно засчитывается. Он сохраняет серию.
+never_miss_twice_title|Не пропускать дважды
+never_miss_twice_body|Вчера «%1$s» не получилось. Сегодня хватит и %2$s, чтобы продолжить.
+never_miss_twice_small_step|маленького шага
+tiny_version_done|Сделан маленький вариант
+comebacks_label|Возвращения
+comebacks_this_month#one|%d возвращение в этом месяце
+comebacks_this_month#few|%d возвращения в этом месяце
+comebacks_this_month#many|%d возвращений в этом месяце
+comebacks_this_month#other|%d возвращения в этом месяце
+streak_guard_title|%1$s: серия %2$d дн.
+streak_guard_body|Сегодня ещё не сделано. Даже маленький шаг сохранит серию.
+streak_guard_body_tiny|Сегодня ещё не сделано. Даже «%1$s» сохранит серию.
+streak_guard_setting|Сигнал о серии
+streak_guard_setting_description|Одно уведомление в 20:00, только если серия от 3 дней вот-вот прервётся
+smart_reminder_title|Время напоминания получше
+smart_reminder_body|Обычно вы делаете «%1$s» около %2$s, а напоминание звучит в %3$s. Перенести на %4$s?
+smart_reminder_keep|Оставить
+smart_reminder_move|Перенести на %1$s
+health_fill_label|Заполнять из данных о здоровье
+health_unavailable|Health Connect недоступен на этом телефоне.
+health_fill_help|Обновляется при каждом открытии Kinmichi. Единица: %1$s.
+health_none|Выкл.
+health_steps|Шаги
+health_distance|Расстояние
+health_calories|Калории
+health_exercise|Тренировки
+health_sleep|Сон
+health_unit_steps|шагов
+health_unit_distance|км или м
+health_unit_calories|ккал
+health_unit_time|минуты или часы
+widget_streak_name|Серия
+widget_streak_description|Самая длинная текущая серия и возвращения за месяц
+widget_streak_empty|Серии пока нет. Сегодня хороший день, чтобы начать.
+widget_quick_name|Быстрая сетка
+widget_quick_description|Четыре привычки, по касанию на каждую
+widget_mood_name|Настроение
+widget_mood_description|Отметьте настроение одним касанием
+widget_opacity_label|Прозрачность виджетов
+widget_opacity_value|%1$d%%
+widget_streak_days#one|день подряд
+widget_streak_days#few|дня подряд
+widget_streak_days#many|дней подряд
+widget_streak_days#other|дня подряд
+report_on_github|Сообщить на GitHub
+report_on_github_note|Откроет в браузере заполненный отчёт с версией, моделью телефона и последним журналом ошибки. Ничего не отправляется, пока вы не нажмёте «Отправить»; отчёты публичны.
+update_check_setting|Проверять обновления
+update_check_setting_description|Раз в день спрашивать GitHub о новой версии
+github_project|Kinmichi на GitHub
+github_project_description|Версия %1$s · исходный код, выпуски и отзывы
+update_available_title|Вышел Kinmichi %1$s
+update_available_body|Скачайте с GitHub или через Obtainium.
+update_later|Позже
+update_open|Открыть
+whats_new_title|Что нового в %1$s
+whats_new_ok|Понятно
+language_spanish|Español
+language_german|Deutsch
+language_portuguese|Português (Brasil)
+language_japanese|日本語
+tour_welcome_title|Золотой путь
+tour_welcome_body|Kinmichi по-японски значит «золотой путь»: дорога, по которой вы проходите немного каждый день. Маленькие шаги, по одному, и сегодняшний всегда сияет.
+tour_bad_day_title|Маленький шаг тоже считается
+tour_bad_day_body|Дайте каждой привычке вариант для тяжёлого дня, например одну страницу вместо тридцати минут. В трудный день этого хватит, чтобы серия жила.
+tour_kintsugi_title|Трещины чинятся золотом
+tour_kintsugi_body|Пропуски случаются. Главное — не пропускать дважды: после срыва «Сегодня» предложит маленький вариант. День возвращения засчитывается и рисуется золотом.
+tour_if_then_title|Привяжите к своему дню
+tour_if_then_body|Запишите, когда случается привычка: «Если я закончу ужинать, то прочитаю 10 страниц». Такие планы — один из самых проверенных способов закрепить привычку.
+tour_privacy_title|Ваше, на вашем телефоне
+tour_privacy_body|Без рекламы и слежки, работает офлайн. Данные остаются на устройстве, если вы не включите синхронизацию с Google. Защитите их PIN-кодом или отпечатком.
+tour_art_habit|Читать 30 минут
+tour_art_habit_detail|не сегодня
+tour_art_tiny|Прочитать 1 страницу
+tour_art_if|Если я закончу ужинать,
+tour_art_then|то прочитаю 10 страниц.
+advice_grow|Вы достигаете цели почти каждый день уже три недели. Чуть поднять планку, до %1$s?
+advice_weekly|В последнее время вы делали это %1$d дней из %2$d. Сделать цель %3$d раз в неделю вместо ежедневной? Тогда пропуск ничего не сломает.
+advice_fewer_per_week|Последние недели не дотягивали до цели. Пока ставить %1$d раз в неделю и наращивать?
+advice_more_per_week|Три недели подряд цель выполнена. Готовы к %1$d разам в неделю?
+advice_accept_per_week|%1$d× в неделю
+whats_new_items[0]|Новое имя: Kinmichi|По-японски «золотой путь». Ваши привычки и данные остаются как были.
+whats_new_items[1]|Шесть языков|К английскому и турецкому добавились испанский, немецкий, португальский и японский.
+whats_new_items[2]|Цели, которые подстраиваются|Поднимите планку после трёх удачных недель или сделайте редкую ежедневную привычку несколькими разами в неделю.
+whats_new_items[3]|Новое знакомство и значок|Шаги по золотому пути, сегодняшний — золотой.
+widgets_sheet_title|Виджеты
+widgets_sheet_subtitle|Выберите и добавьте на главный экран одним касанием.
+widgets_sheet_manual|Ваш лаунчер не позволяет добавлять виджеты отсюда. Удерживайте пустое место на главном экране, нажмите «Виджеты» и найдите Kinmichi.
+add_to_home|Добавить
+welcome_eyebrow|Последний шаг
+welcome_title|Как к вам обращаться?
+welcome_body|Экран «Сегодня» будет приветствовать вас по имени каждое утро. Изменить его можно в любой момент в настройках.
+welcome_name_hint|Ваше имя
+welcome_sync_title|Резервная копия и синхронизация
+welcome_optional|Необязательно
+welcome_sync_body|Привычки переедут вместе с вами на новый телефон. Без пароля и запоминания.
+welcome_signed_in|Вход выполнен: %1$s
+welcome_private_note|Пока синхронизация выключена, всё хранится на телефоне.
+replay_intro|Показать знакомство снова
+replay_intro_description|Знакомство и приветствие, которые видит новый пользователь. Ваши данные не изменятся.
+all_time|За всё время
+feeling_question|Как прошло «%1$s»?
+feeling_hard|Тяжело
+feeling_okay|Нормально
+feeling_good|Хорошо
+close_label|Закрыть
+feeling_card_title|Как ощущается
+feeling_usually|Обычно %1$s %2$s
+feeling_card_footer|По вашим ответам после выполнения, за 90 дней.
+most_enjoyed_title|Что нравится больше всего
+most_enjoyed_share|😊 %1$d из %2$d
+feeling_setting|Спрашивать, как прошло
+feeling_setting_description|После отметки привычки на экране «Сегодня» — одно касание по лицу
+sign_in_with_github|Продолжить с GitHub
+welcome_sync_divider|Резервная копия и синхронизация · необязательно
+welcome_continue_without|Продолжить без аккаунта
+sign_in_use_other_provider|С этим адресом уже входили через Google. Используйте «Продолжить с Google».
+welcome_hello_title|Добро пожаловать в Kinmichi
+welcome_hello_body|Войдите, чтобы сохранить привычки, или начните как гость.
+welcome_or|или
+continue_as_guest|Продолжить как гость
+welcome_accounts_note|В гостевом режиме всё хранится на этом телефоне. Войти можно позже в настройках.
+welcome_synced_note|Привычки будут сохраняться в вашем аккаунте.
+welcome_benefit_backup|Резервная копия и переезд на новый телефон
+welcome_benefit_devices|На телефоне, в виджетах и на часах
+welcome_benefit_private|Без пароля, рекламы и слежки
+welcome_preview_label|Так вас встретит «Сегодня»
+account_title|Аккаунт и резервная копия
+account_signed_out_title|Вход не выполнен
+account_signed_out_body|Войдите, чтобы сохранять привычки и перенести их на новый телефон.
+account_via_google|Подключено через Google
+account_via_github|Подключено через GitHub
+account_choose_source_short|Выбрать источник
+account_auto_sync_short|Синхронизировать автоматически
+account_safe_title|Ваши привычки в безопасности
+account_not_synced_title|Ещё не синхронизировано
+account_delete_short|Удалить аккаунт
+appearance_follow_system|Как в системе
+appearance_follow_system_desc|Днём светлая, ночью тёмная, как на телефоне
+appearance_desc|Тема, палитра и чистый чёрный
+appearance_theme_palette|Тема и палитра
+appearance_grid_hint|Нажмите на светлую или тёмную половину палитры, чтобы выбрать её.
+lang_name_tr|Турецкий
+lang_name_en|Английский
+lang_name_es|Испанский
+lang_name_de|Немецкий
+lang_name_fr|Французский
+lang_name_it|Итальянский
+lang_name_pt|Португальский
+lang_name_ru|Русский
+lang_name_ja|Японский
+lang_name_ko|Корейский
+language_french|Français
+language_italian|Italiano
+language_russian|Русский
+language_korean|한국어
+language_system_desc|Как язык телефона
+language_search|Поиск языка
+language_current|Текущий
+language_all|Все языки

@@ -1,0 +1,876 @@
+app_name|Kinmichi
+today|Aujourd'hui
+library|Bibliothèque
+statistics|Statistiques
+calendar|Calendrier
+good_morning|Bonjour
+good_afternoon|Bon après-midi
+good_evening|Bonsoir
+daily_progress|Progrès du jour
+current_streak|Série en cours
+add_habit|Ajouter une habitude
+habit_completed|Terminé
+increase_progress|Augmenter la progression
+decrease_progress|Diminuer la progression
+complete_habit|Terminer l'habitude
+progress_template|%1$s / %2$s %3$s
+weekdays|En semaine
+weekends|Le week-end
+selected_days|Jours choisis
+new_habit|Nouvelle habitude
+back|Retour
+continue_label|Continuer
+save_habit|Enregistrer l'habitude
+goal_period|Période de l'objectif
+daily|Quotidien
+weekly|Hebdomadaire
+monthly|Mensuel
+times_per_week|Fois par semaine (1–7)
+times_per_month|Fois par mois (1–31)
+routine_name|Nom de la routine
+after_habit_optional|Faire après une autre habitude (facultatif)
+none_label|Aucune
+blocked_by_habit|Termine d'abord %1$s
+period_progress|%1$d / %2$d sur cette période
+goal_step|Objectif
+habit_name|Nom de l'habitude
+intent_label|Intention
+build_habit|Créer une habitude
+quit_habit|Arrêter une habitude
+icon_label|Icône ou emoji
+color_label|Couleur d'accent
+tracking_type|Type de suivi
+type_check|Cocher
+type_count|Compter
+type_duration|Durée
+target_label|Objectif
+unit_label|Unité
+quick_increment|Pas rapide
+days_label|Jours
+reminder_label|Rappel
+reminder_description|Reçois une notification à l'heure choisie.
+reminder_time|Heure du rappel
+reminder_time_error|Saisis l'heure au format 09:00.
+reminder_channel_name|Rappels d'habitudes
+reminder_channel_description|Notifications pour les habitudes prévues
+reminder_notification_text|C'est le moment de faire un petit pas aujourd'hui.
+test_notification|Tester les notifications
+test_notification_description|Envoyer un rappel d'essai maintenant
+start_timer|Démarrer le minuteur
+stop_timer|Arrêter et enregistrer
+edit_habit|Modifier l'habitude
+manage_habit|Gérer l'habitude
+habit_details|Détails de l'habitude
+loading_habit|Chargement de l'habitude…
+habit_note_hint|Ta note générale sur cette habitude
+archive_habit|Archiver l'habitude
+delete_habit|Supprimer l'habitude
+delete_habit_confirmation|Supprimer définitivement %1$s et tout son historique ?
+delete_label|Supprimer
+reorder_habits|Réorganiser les habitudes
+reorder_habits_description|Utilise les flèches pour choisir l'ordre affiché dans Aujourd'hui.
+move_up|Monter
+move_down|Descendre
+repeat_reminder|Rappeler à nouveau
+repeat_reminder_description|Permettre un autre rappel depuis la notification
+repeat_minutes|Délai de répétition (minutes)
+minutes_value|%1$d minutes
+remind_again_minutes|Rappeler dans %1$d min
+off_label|Désactivé
+weekday_abbreviations[0]|Lun
+weekday_abbreviations[1]|Mar
+weekday_abbreviations[2]|Mer
+weekday_abbreviations[3]|Jeu
+weekday_abbreviations[4]|Ven
+weekday_abbreviations[5]|Sam
+weekday_abbreviations[6]|Dim
+pending_label|En attente
+google_not_connected|Compte Google non connecté
+settings_label|Réglages
+theme_label|Thème
+language_label|Langue
+data_privacy_label|Données et confidentialité
+planning_and_review|Planification et bilan
+planning_and_review_description|Routines, pauses, notes de la semaine et étapes automatiques
+vacation_mode|Mode pause / vacances
+vacation_mode_description|Les jours exclus ne font baisser ni ton taux de réussite ni tes séries.
+end_vacation|Terminer la pause
+invalid_vacation_dates|Saisis une date de début et de fin valides.
+vacation_activated|Les jours de pause ont été exclus des statistiques.
+vacation_ended|Mode pause terminé.
+vacation_today_message|Le mode pause est actif aujourd'hui. Les habitudes sont en pause et tes séries sont protégées.
+weekly_review|Bilan de la semaine
+weekly_review_description|Fais le point sur ta semaine et laisse une note privée.
+weekly_review_stats|%1$d sur %2$d terminées · %3$d %%
+weekly_note|Note de la semaine
+save_weekly_review|Enregistrer le bilan
+weekly_review_saved|Bilan de la semaine enregistré.
+backup_restore|Sauvegarde et restauration
+app_lock|Verrouillage de l'app
+all_categories|Toutes
+content_progress_value|%1$s / %2$s %3$s
+status_completed|Terminé
+unit_minutes|min
+current_progress|Actuel
+general_note|Note générale
+save_note|Enregistrer la note
+add_label|Ajouter
+cancel|Annuler
+previous_month|Mois précédent
+next_month|Mois suivant
+selected_day|Jour choisi
+calendar_goal_fraction|%1$d / %2$d terminées
+past_edit_hint|Utilise ces commandes pour ajuster le jour choisi.
+no_habits_for_day|Aucune habitude n'est prévue ce jour-là.
+last_days|%1$d derniers jours
+completion_rate|Taux de réussite
+completed_scheduled|%1$d / %2$d terminées
+active_days|Jours actifs
+best_streak|Meilleure série
+habit_breakdown|Détail par habitude
+no_statistics_yet|Ajoute une habitude pour commencer tes statistiques.
+streak_pair|Série actuelle : %1$d jours · Meilleure : %2$d jours
+personal_greeting|%1$s, %2$s
+personal_profile|Profil personnel
+local_profile_description|Ton espace personnel sur cet appareil
+edit_profile_name|Modifier le nom du profil
+profile_name|Nom du profil
+save_label|Enregistrer
+account_label|Compte
+google_account_label|Compte Google
+appearance_label|Apparence et utilisation
+theme_mode_label|Mode d'affichage
+theme_system|Suivre le système
+theme_light|Clair
+theme_dark|Sombre
+language_system|Langue du système
+language_turkish|Turc
+language_english|Anglais
+week_start_label|Début de la semaine
+monday|Lundi
+sunday|Dimanche
+daily_summary_setting|Résumé du jour
+daily_summary_setting_description|Afficher la carte de résumé dans Aujourd'hui
+screen_protection|Protection de l'écran
+screen_protection_description|Bloquer les captures d'écran et l'aperçu des apps récentes
+local_data_note|Tes habitudes, contenus et préférences sont pour l'instant stockés uniquement sur cet appareil.
+goals|Objectifs
+goals_subtitle|Suis tes progrès à long terme au même endroit
+open_goals|Ouvrir les objectifs
+add_goal|Ajouter un objectif
+new_goal|Nouvel objectif
+edit_goal|Modifier l'objectif
+save_goal|Enregistrer l'objectif
+goal_details|Détails de l'objectif
+goal_title|Nom de l'objectif
+goal_description|Description (facultatif)
+due_date_optional|Échéance (facultatif)
+due_date_value|Échéance : %1$s
+goal_progress_value|%1$s / %2$s %3$s
+active_goals|Objectifs actifs
+completed_goals|Objectifs atteints
+active_goal_count|%1$d objectifs actifs
+completed_goal_count|%1$d atteints
+no_goals|Pas encore d'objectif
+no_goals_description|Définis quelque chose à lire, regarder, économiser ou accomplir.
+complete_goal|Atteindre l'objectif
+mark_goal_active|Réactiver
+archive_goal|Archiver l'objectif
+delete_goal|Supprimer l'objectif
+delete_goal_confirmation|Supprimer définitivement l'objectif %1$s ?
+app_lock_enabled|Le verrouillage est activé
+app_lock_disabled|Le verrouillage est désactivé
+app_lock_description|Kinmichi demande ton code à 4 chiffres à l'ouverture.
+app_lock_status_on|Protégé par un code à 4 chiffres
+app_lock_status_off|Désactivé
+new_pin|Nouveau code
+current_pin|Code actuel
+confirm_pin|Confirmer le code
+pin_code|Code à 4 chiffres
+enable_app_lock|Activer le verrouillage
+disable_app_lock|Désactiver le verrouillage
+disable_label|Désactiver
+change_pin|Changer le code
+pin_setup_error|Les codes doivent correspondre et contenir 4 chiffres.
+pin_change_error|Le code actuel est faux ou les nouveaux codes ne correspondent pas.
+incorrect_pin|Code incorrect. Réessaie.
+biometric_unlock|Déverrouillage biométrique
+biometric_unlock_description|Utiliser l'empreinte ou une autre biométrie prise en charge
+biometric_unavailable|Aucune biométrie prise en charge n'est configurée sur cet appareil.
+app_locked|Kinmichi est verrouillé
+enter_pin_to_continue|Saisis ton code pour continuer.
+unlock|Déverrouiller
+use_biometrics|Utiliser la biométrie
+biometric_prompt_title|Déverrouiller Kinmichi
+biometric_prompt_subtitle|Confirme ton identité par biométrie
+use_pin_instead|Utiliser le code
+local_backup_available|Enregistrer une sauvegarde sur cet appareil
+local_backup_title|Tes données restent sous ton contrôle
+local_backup_description|Enregistre habitudes, historique, bibliothèque et objectifs dans un fichier JSON.
+create_backup|Créer une sauvegarde
+restore_backup|Restaurer une sauvegarde
+export_csv|Exporter un CSV détaillé
+export_pdf|Exporter un rapport PDF
+report_export_success|Rapport enregistré.
+backup_security_note|Le code et la biométrie ne sont pas inclus dans les sauvegardes, par sécurité.
+backup_export_success|Fichier de sauvegarde créé.
+backup_restore_success|Données restaurées depuis la sauvegarde.
+backup_operation_failed|Le fichier est invalide ou l'opération n'a pas pu aboutir.
+confirm_restore|Remplacer les données actuelles ?
+restore_summary|Cette sauvegarde contient %1$d habitudes, %2$d entrées d'historique, %3$d contenus et %4$d objectifs. Les données actuelles seront remplacées.
+restore_label|Restaurer
+widget_description|Coche les habitudes du jour depuis l'écran d'accueil
+widget_locked|Kinmichi est verrouillé
+configure_widget|Configurer le widget
+configure_widget_description|Choisis les habitudes à afficher.
+save_widget|Enregistrer le widget
+home_widget|Widget d'écran d'accueil
+home_widget_description|Touche pour voir les widgets et en ajouter un à l'écran d'accueil
+error_reports|Rapports d'erreur
+error_reports_description|Voir et exporter la dernière erreur de l'app
+crash_report_available|Un rapport d'erreur est disponible
+no_crash_reports|Aucune erreur enregistrée
+diagnostic_privacy_note|Le rapport contient seulement la version de l'app, les infos de l'appareil et la dernière trace technique ; les notes et le contenu des habitudes sont exclus.
+app_version_value|Kinmichi %1$s · build %2$d
+export_diagnostic|Exporter le rapport de diagnostic
+clear_error_report|Effacer le rapport d'erreur
+diagnostic_export_success|Rapport de diagnostic enregistré.
+diagnostic_export_failed|Le rapport de diagnostic n'a pas pu être enregistré.
+skip_label|Passer
+onboarding_welcome_title|Petits pas, progrès durables
+onboarding_welcome_body|Kinmichi suit tes habitudes avec tes propres objectifs, horaires et rappels.
+onboarding_library_title|Garde ensemble ce que tu lis et regardes
+onboarding_library_body|Suis livres, mangas, films, séries et animés avec saisons et notes.
+onboarding_goals_title|Rends visibles tes objectifs à long terme
+onboarding_goals_body|Choisis ta propre unité, ta valeur cible et une échéance facultative.
+onboarding_privacy_title|Ton espace personnel reste sous ton contrôle
+onboarding_privacy_body|Les données sont stockées sur cet appareil. Tu peux utiliser un code, la biométrie, la protection de l'écran et des sauvegardes locales.
+start_using_tsuzuku|Commencer avec Kinmichi
+cloud_account_subtitle|Connexion Google et synchronisation cloud personnelle
+cloud_data_note|Tes habitudes, contenus et objectifs restent sur cet appareil et sont aussi protégés par ta synchronisation cloud Google.
+google_sign_in_description|Connecte-toi pour garder tes habitudes, ton historique, ta bibliothèque et tes objectifs avec ton compte Google.
+sign_in_with_google|Continuer avec Google
+skip_google_for_now|Plus tard
+automatic_cloud_sync|Synchronisation cloud automatique
+automatic_cloud_sync_description|Synchronise les changements sûrs quand l'app s'ouvre ou passe en arrière-plan.
+last_cloud_sync|Dernière synchro : %1$s
+cloud_choice_required|Choisis quelle copie utiliser avant que la synchro automatique commence.
+sync_now|Synchroniser
+choose_sync_source|Choisir la source de synchro
+sign_out_google|Se déconnecter
+cloud_download_complete|Données cloud restaurées sur cet appareil
+cloud_upload_complete|Données de l'appareil enregistrées dans le cloud Google
+cloud_already_current|L'appareil et le cloud sont déjà à jour
+cloud_sync_error|La synchro cloud n'a pas pu aboutir
+ok_label|OK
+cloud_conflict_title|Des changements des deux côtés
+cloud_conflict_description|Choisis la copie à garder. L'autre sera remplacée.
+cloud_choice_description|Choisis la copie qui deviendra tes données principales.
+this_device|Cet appareil
+google_cloud|Cloud Google
+no_cloud_backup|Il n'y a pas encore de sauvegarde cloud pour ce compte.
+use_device_data|Utiliser les données de l'appareil
+use_cloud_data|Utiliser les données du cloud
+firebase_setup_required|Connexion Firebase nécessaire
+firebase_setup_description|Le code de l'app est prêt, mais cette version n'a pas encore d'identité de projet Firebase.
+firebase_setup_step_one|1. Enregistre le paquet app.tsuzuku dans Firebase.
+firebase_setup_step_two|2. Active Google Authentication et crée Firestore.
+firebase_setup_step_three|3. Place google-services.json dans le dossier app et recompile.
+cloud_summary|%1$s : %2$d habitudes · %3$d historique · %4$d contenus · %5$d objectifs
+synced_data|Données synchronisées
+google_signing_in|Ouverture de la connexion Google…
+cloud_uploading|Enregistrement des données dans le cloud…
+cloud_downloading|Restauration des données cloud sur cet appareil…
+cloud_synchronizing|Vérification des changements de l'appareil et du cloud…
+google_signing_out|Déconnexion…
+choose_vacation_dates|Choisir les dates de pause
+choose_dates|Choisir les dates
+no_vacation_dates_selected|Aucune période choisie
+confirm_label|Confirmer
+live_preview|APERÇU EN DIRECT
+plan|Plan
+plan_subtitle|Tâches ponctuelles, priorités et forme de ta journée
+plan_empty|Cette liste est vide
+plan_empty_detail|Ajoute une tâche sans en faire une habitude.
+upcoming|À venir
+inbox|Boîte de réception
+new_task|Nouvelle tâche
+add_task|Ajouter une tâche
+task_identity|Que faut-il faire ?
+task_title|Titre de la tâche
+schedule|Planification
+tomorrow|Demain
+priority|Priorité
+estimated_minutes|Durée estimée (minutes)
+save_task|Enregistrer la tâche
+move_tomorrow|Reporter à demain
+minute_count|%1$d min
+priority_value|Priorité %1$d
+task_details|Détails de la tâche
+checklist|Liste de contrôle
+new_checklist_item|Nouvelle étape
+carried_count|Reportée %1$d fois
+add|Ajouter
+minimum_target|Minimum
+maximum_target|Limite quotidienne
+difficulty|Difficulté
+easy|Facile
+medium|Moyen
+hard|Difficile
+intention_sentence|Plan « si… alors »
+intention_example|Si je finis de dîner, je lis 10 pages.
+flexible_schedule|Horaire flexible
+repeat_every_days|Répéter tous les … jours
+repeat_interval_help|1 utilise les jours choisis ; 2 signifie un jour sur deux.
+start_date_optional|Date de début (facultatif)
+end_date_optional|Date de fin (facultatif)
+pause_until_optional|En pause jusqu'au (facultatif)
+clear_label|Effacer
+time_block_optional|Créneau (facultatif)
+start_time|Début
+end_time|Fin
+repeat_task|Répéter la tâche
+every_day|Tous les jours
+weekdays_only|En semaine
+every_week|Chaque semaine
+every_month|Chaque mois
+task_templates|MODÈLES DE TÂCHES
+save_as_template|Enregistrer comme modèle
+overdue|En retard
+overdue_cleanup|%1$d tâches en retard · reporte-les à demain ou termine-les
+selected_count|%1$d sélectionnées
+move_all_tomorrow|Reporter à demain
+move_to_inbox|Déplacer dans la boîte de réception
+complete_selected|Terminer
+delete_selected|Supprimer
+drag_to_reorder|Glisser pour réorganiser
+day_end_cleanup|Rangement de fin de journée
+day_end_cleanup_detail|Décide quoi faire des %1$d tâches en retard.
+duplicate_task|Dupliquer la tâche
+swipe_complete|Terminer
+swipe_tomorrow|Demain
+tags_label|Étiquettes
+tags_help|Sépare les étiquettes par des virgules : études, maison, important
+search_everything|Tout rechercher
+search_hint_all|Titre, note ou étiquette
+result_count|%1$d résultats
+all_label|Tout
+habits|Habitudes
+save_search|Enregistrer cette recherche
+name_saved_search|Nommer la recherche
+filter_name|Nom du filtre
+saved_filter_summary|%1$s · %2$s
+delete_saved_search|Supprimer la recherche enregistrée
+add_tags_selected|Ajouter des étiquettes à la sélection
+categories_and_tags|Catégories et étiquettes
+categories_description|Crée des catégories personnelles réutilisables pour habitudes, tâches et bibliothèque.
+category_name|Nom de la catégorie
+emoji_label|Icône ou emoji
+create_category|Créer la catégorie
+your_categories|Tes catégories
+no_custom_categories|Tu n'as pas encore créé de catégorie personnelle.
+actual_minutes|Temps réel (minutes)
+actual_minutes_help|Laisse vide pour effacer le temps enregistré.
+actual_minute_count|%1$d min réelles
+recent_timeline|Chronologie récente
+lock_after_background|Verrouiller après avoir quitté l'app
+immediately|Immédiatement
+lock_delay_minutes|%1$d min
+duplicate_habit|Dupliquer l'habitude
+delete_category|Supprimer la catégorie
+delete_category_confirmation|Supprimer « %1$s » ? Elle sera retirée des éléments étiquetés sans les supprimer.
+edit_task|Modifier la tâche
+failed_label|Échoué
+skipped_label|Sauté
+sign_out_data_choice|Que faire de la copie locale ? Ta sauvegarde cloud ne sera pas supprimée.
+keep_on_device|Garder sur cet appareil
+remove_from_device|Retirer de l'appareil
+choose_date|Choisir une date
+focus|Concentration
+focus_mode|Mode concentration
+start_focus|Commencer
+pomodoro|Pomodoro (25 min)
+stopwatch|Chronomètre
+custom_timer|Minuteur personnalisé
+focus_target|Objet de la concentration
+free_focus|Concentration libre
+focus_minutes_today|%1$d min de concentration aujourd'hui
+focus_sessions_count|%1$d séances
+start_routine|Lancer la routine
+routine_step|Étape %1$d sur %2$d
+customize_sections|Personnaliser Aujourd'hui
+section_plan|Tâches du jour
+section_goals|Progrès des objectifs
+section_routines|Routines
+linked_goals|Objectifs liés
+linked_habits|Habitudes liées
+linked_tasks|Tâches liées
+contribution_mode|Mode de contribution
+contribution_value|Montant de la contribution
+link_goal|Lier un objectif
+link_habit|Lier une habitude
+link_task|Lier une tâche
+unlink|Délier
+mood_tired|Fatigué
+mood_neutral|Neutre
+mood_good|Bien
+mood_great|Super
+daily_review_title|Comment s'est passée ta journée ?
+daily_review_subtitle|Une pause calme de quelques secondes prépare ton esprit pour demain.
+mood_label|Humeur
+energy_level|⚡ Niveau d'énergie
+productivity_feeling|🎯 Sentiment de productivité
+stress_level|🌊 Niveau de stress
+daily_note_gratitude|Note du jour / Gratitude
+daily_note_placeholder|Une pensée du jour, une leçon apprise ou une note…
+remaining_tasks_count|Tâches restantes (%1$s)
+carry_unfinished_hint|Tu peux reporter à demain ce qui n'est pas fini :
+move_to_tomorrow|Reporter à demain
+complete_day_and_save|Clore la journée et enregistrer
+resume_action|Reprendre
+pause_action|Pause
+finish_and_save|Terminer et enregistrer
+focus_today|Concentration du jour
+sessions_today|Séances du jour
+focus_target_task|Tâche : %1$s
+task_label|Tâche
+focus_target_habit|Habitude : %1$s %2$s
+habit_label|Habitude
+focus_target_goal|Objectif : %1$s
+no_linked_habits|Aucune habitude liée pour l'instant.
+contribution_by_habit_amount|Contribue de la quantité de l'habitude
+contribution_plus|Contribution +%1$s
+no_linked_tasks|Aucune tâche liée pour l'instant.
+contribution_plus_points|Contribution de +%1$s points
+no_more_habits_to_link|Aucune autre habitude à lier.
+select_habit|Choisis une habitude :
+habit_amount|Quantité de l'habitude
+fixed_value|Valeur fixe
+no_more_tasks_to_link|Aucune autre tâche à lier.
+select_task|Choisis une tâche :
+bad_habit_limit_desc|Le but de cette habitude est de limiter ou supprimer une consommation. L'approche (80 %) et le dépassement de la limite sont suivis avec des indicateurs discrets.
+ideal_target_upper|Cible idéale / Limite haute
+ideal_lower_limit|Limite basse idéale
+maximum_limit|Limite maximale
+bad_habit_clean_day|✓ Terminé : tu es resté loin de cette mauvaise habitude aujourd'hui (jour propre).
+no_linked_goals|Aucun objectif lié pour l'instant.
+growth_levels|Niveaux de progression
+add_level|Ajouter un niveau
+edit_action|Modifier
+growth_levels_hint|Définis des niveaux progressifs pour cette habitude (ex. Niveau 1 : 1 km, Niveau 2 : 3 km, Niveau 3 : 5 km).
+configure_stages|Configurer les étapes
+active_level|Niveau actif
+completed_check|✓ Terminé
+switch_to_level|Passer à ce niveau
+level_up_to|Niveau suivant : %1$s (%2$s %3$s)
+top_level_reached|Bravo ! Tu as atteint le plus haut niveau de cette habitude.
+no_more_active_goals_to_link|Aucun autre objectif actif à lier.
+select_goal|Choisis un objectif :
+link_library_content|Lier un contenu de la bibliothèque
+no_more_content_to_link|Aucun autre contenu à lier.
+select_content|Choisis un contenu :
+progress_multiplier_label|Multiplicateur de progression (par défaut : 1)
+link_action|Lier
+level_up_title|Niveau supérieur
+level_up_message|Tu vas passer au niveau %1$s. Ton objectif quotidien deviendra %2$s %3$s.\n\nTes anciens enregistrements, statistiques et séries sont conservés tels quels.
+level_up_confirm|Monter de niveau
+level_beginner|Débutant
+level_intermediate|Intermédiaire
+level_advanced|Avancé
+edit_growth_levels|Modifier les niveaux
+level_number|Niveau %1$s
+level_title|Nom du niveau
+target_with_unit|Objectif (%1$s)
+reward_note|Récompense / Note
+level_number_next|Niveau %1$s
+add_new_level|Ajouter un niveau
+overall_activity|Activité globale
+heatmap_more|Plus
+heatmap_habits_completed|Habitudes terminées : %1$s
+heatmap_tasks|Tâches : %1$s
+heatmap_focus_minutes|Concentration : %1$s min
+heatmap_review_done|Bilan du soir : ✓
+heatmap_review_missing|Bilan du soir : —
+postpone_awareness|Attention aux reports (reportée %1$s fois)
+postpone_awareness_hint|Cette tâche crée peut-être une résistance cachée. Essaie de la découper en sous-étapes de 5 minutes avec la liste ci-dessus.
+no_active_goals_to_link|Aucun objectif actif à lier.
+routine_label|Routine
+routine_steps|Étapes de la routine
+must_complete_first|%1$s doit être terminée d'abord
+locked_label|Verrouillé
+routine_completed_title|Routine terminée !
+routine_completed_body|Tu as terminé toutes les étapes de cette routine.
+back_to_today|Retour à Aujourd'hui
+personal_records_milestones|Records et étapes clés
+personal_records_desc|Badges gagnés, plus longues séries et étapes clés
+skip_habit_title|Sauter l'habitude
+skip_habit_message|Tu peux indiquer pourquoi tu sautes « %1$s » cette fois. La discipline se renforce avec de la souplesse.
+custom_reason|Raison personnalisée
+custom_reason_example|ex. Échéance d'un projet
+save_and_skip|Enregistrer et sauter
+skip_without_reason|Sauter sans raison
+carry_count_title|Tu as reporté cette tâche %1$s fois
+carry_split_hint|Brise la résistance en découpant la tâche en petites étapes faisables dans les 5 premières minutes :
+carry_intro|Une tâche toujours reportée est souvent trop grosse, ou a perdu son sens pour le moment. Choisis une étape sans être dur avec toi-même :
+carry_step_1|1. Premier petit pas (5 min)
+carry_step_1_example|ex. Ouvrir le brouillon / lire 1 page
+carry_step_2|2. Deuxième étape (facultatif)
+carry_step_2_example|ex. Choisir les titres
+carry_step_3|3. Troisième étape (facultatif)
+carry_step_3_example|ex. Finir le premier jet
+add_steps_and_start|Ajouter les étapes et commencer
+do_today|Le faire aujourd'hui
+do_today_desc|En faire la priorité du jour et commencer ses 5 premières minutes.
+move_tomorrow_desc|La retirer d'aujourd'hui et repartir à neuf demain.
+postpone_next_week|Reporter à la semaine prochaine
+postpone_next_week_desc|Si ce n'est pas le moment, décale-la de 7 jours.
+split_smaller|Découper en plus petits morceaux
+split_smaller_desc|Ajouter des sous-tâches ou des étapes.
+cancel_or_delete_task|Annuler / supprimer la tâche
+cancel_or_delete_task_desc|Si elle n'est plus utile, laisse-la partir sans culpabilité.
+stats_tab_general|Général
+stats_tab_heatmap|Carte de chaleur
+stats_tab_reviews|Bilans
+stats_tab_records|Records
+stats_tab_skips|Sautées
+yearly|Annuel
+previous_week|Semaine précédente
+next_week|Semaine suivante
+weekly_completion_rate|Taux de réussite de la semaine
+most_successful|🌟 Le plus réussi
+could_improve|🌱 À améliorer
+task_focus_balance|Équilibre tâches et concentration
+completed_tasks_of|Tâches terminées : %1$s / %2$s
+postponed_count|Reportées : %1$s
+focus_duration_minutes|Concentration : %1$s min
+goal_steps_count|Étapes d'objectifs : %1$s
+weekly_reflection_note|Réflexion et note de la semaine
+monthly_success_rate|Taux de réussite du mois
+focus_hours_minutes|Concentration : %1$s h %2$s min
+completed_tasks_value|Tâches terminées : %1$s
+habit_ranking|Classement des habitudes
+monthly_reflection|Réflexion et bilan du mois
+previous_year|Année précédente
+next_year|Année suivante
+yearly_summary_milestones|Résumé de l'année et étapes clés
+total_habits_label|Habitudes au total :
+total_focus_label|Concentration totale :
+completed_goals_label|Objectifs atteints :
+finished_books_content_label|Livres et contenus terminés :
+longest_chain_label|Plus longue chaîne :
+days_value|%1$s jours
+yearly_review_vision|Bilan de l'année et vision d'avenir
+personal_records|Records personnels
+longest_chain|Plus longue chaîne
+days_value_records|%1$s jours
+most_productive_day|Jour le plus productif
+total_focus|Concentration totale
+deep_work|Travail profond
+goals_achieved|Objectifs atteints
+milestones_and_badges|Étapes clés et badges
+habit_skip_analysis|Analyse des habitudes sautées
+habit_skip_analysis_desc|Les habitudes ont été sautées %1$s fois au total. Repérer les raisons t'aide à rendre tes objectifs plus souples et durables.
+earned_label|Obtenu ✨
+reflection_placeholder|Écris ici tes pensées, leçons et notes…
+limit_exceeded|⚠️ Limite dépassée ! (%1$s / %2$s %3$s)
+open_details|Ouvrir les détails
+skip_with_reason|Sauter (avec une raison)
+undo_skip|Annuler le saut
+carried_times|↩ Reportée %1$s fois
+resolve_action|Régler
+smart_carry_assistant|Assistant de reports
+carry_banner_message|%1$s tâches sont reportées depuis 3 jours ou plus. Touche pour les trier.
+daily_review_completed|Le bilan du jour est fait
+do_evening_review|Fais ton bilan du soir
+completed_of_total|%1$s / %2$s terminées
+daily_summary_section|Résumé du jour
+todays_plan_section|Plan du jour
+goal_progress_section|Progrès des objectifs
+focus_info_section|Concentration
+routines_label|Routines
+sections_config_hint|Réorganise les sections et choisis lesquelles afficher.
+saved_check|✓ Enregistré
+vs_last_week|%1$s %% par rapport à la semaine dernière
+mood_hard|Difficile
+heatmap_less|Moins
+level_target_value|Objectif : %1$s %2$s
+test_notification_body|Voici à quoi ressembleront tes rappels.
+progress_tab|Progrès
+today_all_done|Tout est fait pour aujourd'hui 🎉
+habits_done_of|%1$d sur %2$d faites
+more_actions|Plus
+streak_days#one|Série de %d jour
+streak_days#other|Série de %d jours
+widget_today_name|Aujourd'hui
+widget_habit_name|Une habitude
+widget_week_name|Cette semaine
+widget_habit_description|Une habitude avec son anneau de progression et sa série
+widget_week_description|Cette semaine, un anneau par jour
+widget_week_title|Cette semaine
+widget_no_habits|Aucune habitude aujourd'hui
+widget_pick_one|Choisis l'habitude à afficher.
+template_water|Boire de l'eau
+unit_glasses|verres
+template_read|Lire
+template_walk|Marcher
+template_stretch|Étirements du matin
+template_wake_early|Se lever tôt
+template_no_phone_bed|Pas de téléphone au lit
+starter_title|Commence par une habitude
+starter_body|Touche-en une pour l'ajouter. Tu pourras tout modifier ensuite.
+create_own_habit|Créer la tienne
+skip_reason_forgot|J'ai oublié
+skip_reason_no_time|Pas le temps
+skip_reason_travel|En voyage
+skip_reason_sick|J'étais malade
+skip_reason_intentional|Sauté exprès
+skip_reason_other|Autre
+milestone_streak_title|Série de %1$d jours
+milestone_streak_desc|Tiens une habitude %1$d jours d'affilée.
+milestone_completions_title|%1$d validations
+milestone_completions_desc|Termine des habitudes %1$d fois au total.
+milestone_focus_title|%1$d heures de concentration
+milestone_focus_desc|Cumule %1$d heures de séances de concentration.
+milestone_goal_title|%1$d objectifs atteints
+milestone_goal_desc|Atteins %1$d objectifs.
+show_advanced|Plus d'options
+hide_advanced|Moins d'options
+unit_times|fois
+skip_keeps_streak|Les jours sautés ne comptent pas : ta série reste intacte.
+weekly_summary_title|Ta semaine : %1$d %%
+weekly_summary_body|%1$d validations sur %2$d. Habitude la plus solide : %3$s.
+weekly_summary_body_empty|Aucune habitude n'était prévue cette semaine. Un nouveau départ est à un toucher.
+weekly_summary_setting|Résumé de la semaine
+weekly_summary_setting_description|Un court bilan chaque dimanche soir
+delete_account|Supprimer le compte et les données
+delete_account_title|Supprimer ton compte ?
+delete_account_message|Cela supprime définitivement ta copie cloud Kinmichi, ton compte et toutes les habitudes de cet appareil. C'est irréversible. Exporte d'abord une sauvegarde si tu veux garder quelque chose.
+delete_account_confirm|Supprimer définitivement
+delete_account_reauth|Par sécurité, reconnecte-toi puis supprime ton compte.
+deleting_account|Suppression du compte…
+widget_mark_done|Marquer %1$s comme fait
+widget_mark_not_done|Marquer %1$s comme non fait
+notifications_blocked|Les notifications de Kinmichi sont désactivées, ce rappel n'apparaîtra donc pas.
+open_notification_settings|Activer
+shortcut_add_habit|Nouvelle habitude
+shortcut_add_habit_long|Ajouter une nouvelle habitude
+shortcut_progress|Progrès
+shortcut_progress_long|Voir tes progrès
+tile_today_label|Kinmichi
+tile_no_habits|Aucune habitude aujourd'hui
+tile_all_done|Tout est fait aujourd'hui
+tile_habits_left#one|%d habitude restante
+tile_habits_left#other|%d habitudes restantes
+rest_day_used|le jour de repos de la semaine est utilisé
+rest_day_rule|Un jour oublié ? Un jour manqué par semaine ne casse pas ta série.
+year_heatmap_title|12 derniers mois
+heat_day_off|Non prévu
+heat_day_done|Fait
+heat_day_missed|Pas fait
+heat_day_partial|%1$s de l'objectif
+year_heatmap_summary#one|%d jour réussi sur la dernière année
+year_heatmap_summary#other|%d jours réussis sur la dernière année
+widget_tap_to_complete|Touche pour terminer
+advice_lower|Tu as atteint l'objectif %1$d jours sur les %2$d derniers. La plupart du temps tu arrives à environ %3$s : commencer par là et monter petit à petit ?
+advice_raise|Tu atteins ton objectif presque tous les jours depuis deux semaines. Prêt à passer à %1$s ?
+advice_accept|Passer à %1$s
+advice_not_now|Pas maintenant
+mood_question|Comment était ta journée ?
+mood_logged|Aujourd'hui : %1$s
+mood_add_note|Ajouter une note
+mood_edit_note|Modifier la note
+mood_notification_body|Un seul toucher. Avec le temps, Kinmichi montre quelles habitudes vont avec tes meilleurs jours.
+mood_quick_rough|😕 Difficile
+mood_quick_okay|😐 Correct
+mood_quick_good|🙂 Bien
+mood_insights_title|Habitudes et humeur
+mood_insights_none|Pas encore de tendance claire. Continue à noter tes journées.
+mood_insights_footnote|D'après tes propres notes, uniquement sur ce téléphone. L'humeur va de 1 à 5 ; ce sont des tendances, pas des preuves.
+mood_insight_better|Les jours avec %1$s semblent meilleurs
+mood_insight_worse|Les jours avec %1$s semblent plus durs
+mood_insight_detail|Humeur moyenne %1$s avec, %2$s sans
+mood_reminder_setting|Humeur du soir
+mood_reminder_setting_description|À 21:00 si tu n'as pas encore noté ta journée
+mood_insights_collecting#one|Note ton humeur encore %d jour pour voir quelles habitudes vont avec tes meilleurs jours.
+mood_insights_collecting#other|Note ton humeur encore %d jours pour voir quelles habitudes vont avec tes meilleurs jours.
+share_streak|Partager la série
+share_card_streak|jours de série
+share_card_done|jours réussis
+share_card_rate|30 derniers jours
+share_card_weeks|%1$d dernières semaines
+share_card_text|%1$s : une série de %2$d jours avec Kinmichi 🔥
+share_card_text_done|%1$s : %2$d jours réussis avec Kinmichi
+palette_label|Palette de couleurs
+palette_washi|Washi
+palette_dynamic|Couleurs du fond d'écran
+palette_sumi|Sumi
+palette_matcha|Matcha
+palette_sakura|Sakura
+palette_umi|Umi
+pure_black_label|Noir pur la nuit
+pure_black_desc|Le mode sombre utilise un vrai noir, plus doux pour les batteries OLED
+palette_washi_desc|Papier et indigo
+palette_sumi_desc|Encre et vermillon
+palette_matcha_desc|Thé vert, apaisant
+palette_sakura_desc|Fleur de cerisier, chaleureux
+palette_umi_desc|Mer, frais et concentré
+palette_dynamic_desc|D'après ton fond d'écran
+intention_help|Associe l'habitude à un moment de ta journée. Affiché dans Aujourd'hui et dans le rappel.
+tiny_version_label|Version jour difficile
+tiny_version_example|ex. 1 page, 5 minutes de marche
+tiny_version_help|Le plus petit pas qui compte quand même. Le faire garde la série en vie.
+never_miss_twice_title|Ne jamais manquer deux fois
+never_miss_twice_body|Hier, %1$s n'a pas eu lieu. Aujourd'hui, %2$s suffit pour continuer.
+never_miss_twice_small_step|un petit pas
+tiny_version_done|Petite version faite
+comebacks_label|Retours
+comebacks_this_month#one|%d retour ce mois-ci
+comebacks_this_month#other|%d retours ce mois-ci
+streak_guard_title|%1$s : une série de %2$d jours
+streak_guard_body|Pas encore fait aujourd'hui. Un petit pas suffit pour continuer.
+streak_guard_body_tiny|Pas encore fait aujourd'hui. Même %1$s suffit pour continuer.
+streak_guard_setting|Alerte de série
+streak_guard_setting_description|Une note à 20:00, seulement quand une série de 3 jours ou plus va se briser
+smart_reminder_title|Une meilleure heure de rappel
+smart_reminder_body|Tu fais d'habitude %1$s vers %2$s, mais le rappel sonne à %3$s. Le déplacer à %4$s ?
+smart_reminder_keep|Garder
+smart_reminder_move|Déplacer à %1$s
+health_fill_label|Remplir depuis les données santé
+health_unavailable|Health Connect n'est pas disponible sur ce téléphone.
+health_fill_help|Mis à jour à chaque ouverture de Kinmichi. Unité : %1$s.
+health_none|Désactivé
+health_steps|Pas
+health_distance|Distance
+health_calories|Calories
+health_exercise|Exercice
+health_sleep|Sommeil
+health_unit_steps|pas
+health_unit_distance|km ou m
+health_unit_calories|kcal
+health_unit_time|minutes ou heures
+widget_streak_name|Série
+widget_streak_description|Ta plus longue série en cours, avec les retours du mois
+widget_streak_empty|Pas encore de série. Aujourd'hui est un bon jour pour en commencer une.
+widget_quick_name|Grille rapide
+widget_quick_description|Quatre habitudes, un toucher chacune
+widget_mood_name|Humeur
+widget_mood_description|Note ton humeur du jour d'un toucher
+widget_opacity_label|Opacité du widget
+widget_opacity_value|%1$d %%
+widget_streak_days#one|jour d'affilée
+widget_streak_days#other|jours d'affilée
+report_on_github|Signaler sur GitHub
+report_on_github_note|Ouvre dans ton navigateur un ticket prérempli avec la version, le modèle du téléphone et le dernier journal d'erreur. Rien n'est envoyé avant que tu touches Envoyer, et les tickets sont publics.
+update_check_setting|Rechercher les mises à jour
+update_check_setting_description|Une fois par jour, demander à GitHub si une nouvelle version existe
+github_project|Kinmichi sur GitHub
+github_project_description|Version %1$s · code source, versions et retours
+update_available_title|Kinmichi %1$s est disponible
+update_available_body|Récupère-la sur GitHub ou Obtainium.
+update_later|Plus tard
+update_open|Ouvrir
+whats_new_title|Nouveautés de la version %1$s
+whats_new_ok|Compris
+language_spanish|Español
+language_german|Deutsch
+language_portuguese|Português (Brasil)
+language_japanese|日本語
+tour_welcome_title|Le chemin doré
+tour_welcome_body|Kinmichi signifie « chemin doré » en japonais : la route que tu parcours un peu chaque jour. De petits pas, un à la fois, et celui d'aujourd'hui brille toujours.
+tour_bad_day_title|Un petit pas compte aussi
+tour_bad_day_body|Donne à chaque habitude une version jour difficile, comme une page au lieu de trente minutes. Les jours durs, la faire suffit à garder ta série.
+tour_kintsugi_title|Les cassures se réparent à l'or
+tour_kintsugi_body|Manquer un jour arrive. Ne manque jamais deux fois : après un faux pas, Aujourd'hui propose la petite version. Le jour de ton retour est compté et dessiné en or.
+tour_if_then_title|Associe-la à ta journée
+tour_if_then_body|Écris quand l'habitude a lieu : « Si je finis de dîner, je lis 10 pages. » Ce genre de plan est l'un des moyens les mieux prouvés de tenir une habitude.
+tour_privacy_title|À toi, sur ton téléphone
+tour_privacy_body|Pas de publicité, pas de pistage, fonctionne hors ligne. Tes données restent sur cet appareil sauf si tu choisis la synchro Google. Verrouille-la avec un code ou ton empreinte.
+tour_art_habit|Lire 30 minutes
+tour_art_habit_detail|pas aujourd'hui
+tour_art_tiny|Lire 1 page
+tour_art_if|Si je finis de dîner,
+tour_art_then|je lis 10 pages.
+advice_grow|Tu atteins ton objectif presque tous les jours depuis trois semaines. Monter un peu la barre, à %1$s ?
+advice_weekly|Tu l'as fait %1$d jours sur %2$d dernièrement. Passer à %3$d fois par semaine plutôt que tous les jours ? Un jour manqué ne cassera plus rien.
+advice_fewer_per_week|Tes dernières semaines sont restées sous cet objectif. Viser %1$d fois par semaine pour l'instant et monter ensuite ?
+advice_more_per_week|Trois semaines d'affilée, tu as atteint cet objectif. Prêt pour %1$d fois par semaine ?
+advice_accept_per_week|%1$d× par semaine
+whats_new_items[0]|Nouveau nom : Kinmichi|« Le chemin doré » en japonais. Tes habitudes et données continuent comme avant.
+whats_new_items[1]|Six langues|L'espagnol, l'allemand, le portugais et le japonais rejoignent l'anglais et le turc.
+whats_new_items[2]|Des objectifs qui s'adaptent|Monte la barre après trois bonnes semaines, ou transforme une habitude quotidienne rarement faite en quelques fois par semaine.
+whats_new_items[3]|Nouvelle visite et nouvelle icône|Des pas sur un chemin doré, aujourd'hui en or.
+widgets_sheet_title|Widgets
+widgets_sheet_subtitle|Choisis-en un et ajoute-le à l'écran d'accueil d'un toucher.
+widgets_sheet_manual|Ton lanceur ne peut pas ajouter de widgets d'ici. Appuie longuement sur un espace vide de l'écran d'accueil, touche Widgets et cherche Kinmichi.
+add_to_home|Ajouter
+welcome_eyebrow|Une dernière étape
+welcome_title|Comment veux-tu qu'on t'appelle ?
+welcome_body|Aujourd'hui te salue par ton prénom chaque matin. Tu peux le changer à tout moment dans les Réglages.
+welcome_name_hint|Ton prénom
+welcome_sync_title|Sauvegarde et synchro
+welcome_optional|Facultatif
+welcome_sync_body|Tes habitudes te suivent sur un nouveau téléphone. Pas de mot de passe, rien à retenir.
+welcome_signed_in|Connecté en tant que %1$s
+welcome_private_note|Tout reste sur ton téléphone tant que tu n'actives pas la synchro.
+replay_intro|Revoir l'introduction
+replay_intro_description|La visite et l'écran d'accueil d'un nouvel utilisateur. Tes données restent inchangées.
+all_time|Depuis le début
+feeling_question|Comment s'est passé %1$s ?
+feeling_hard|Difficile
+feeling_okay|Correct
+feeling_good|Bien
+close_label|Fermer
+feeling_card_title|Ce que ça te fait
+feeling_usually|En général %1$s %2$s
+feeling_card_footer|D'après tes réponses après l'avoir terminée, sur 90 jours.
+most_enjoyed_title|Ce que tu préfères
+most_enjoyed_share|😊 %1$d sur %2$d
+feeling_setting|Demander comment ça s'est passé
+feeling_setting_description|Après avoir terminé une habitude dans Aujourd'hui, un toucher sur un visage
+sign_in_with_github|Continuer avec GitHub
+welcome_sync_divider|Sauvegarde et synchro · facultatif
+welcome_continue_without|Continuer sans compte
+sign_in_use_other_provider|Cette adresse s'est déjà connectée avec Google. Utilise plutôt Continuer avec Google.
+welcome_hello_title|Bienvenue dans Kinmichi
+welcome_hello_body|Connecte-toi pour protéger tes habitudes, ou commence en invité.
+welcome_or|ou
+continue_as_guest|Continuer en invité
+welcome_accounts_note|En invité, tout reste sur ce téléphone. Tu pourras te connecter plus tard dans les Réglages.
+welcome_synced_note|Tes habitudes seront sauvegardées sur ton compte.
+welcome_benefit_backup|Sauvegardé, et te suit sur un nouveau téléphone
+welcome_benefit_devices|Sur ton téléphone, tes widgets et ta montre
+welcome_benefit_private|Pas de mot de passe, pas de pub, pas de pistage
+welcome_preview_label|Comment Aujourd'hui te saluera
+account_title|Compte et sauvegarde
+account_signed_out_title|Non connecté
+account_signed_out_body|Connecte-toi pour sauvegarder tes habitudes et les emporter sur un nouveau téléphone.
+account_via_google|Connecté avec Google
+account_via_github|Connecté avec GitHub
+account_choose_source_short|Choisir la source
+account_auto_sync_short|Synchroniser automatiquement
+account_safe_title|Tes habitudes sont à l'abri
+account_not_synced_title|Pas encore synchronisé
+account_delete_short|Supprimer le compte
+appearance_follow_system|Suivre le système
+appearance_follow_system_desc|Clair le jour, sombre la nuit, comme ton téléphone
+appearance_desc|Thème, palette et noir pur
+appearance_theme_palette|Thème et palette
+appearance_grid_hint|Touche la moitié claire ou sombre d'une palette pour l'utiliser ainsi.
+lang_name_tr|Turc
+lang_name_en|Anglais
+lang_name_es|Espagnol
+lang_name_de|Allemand
+lang_name_fr|Français
+lang_name_it|Italien
+lang_name_pt|Portugais
+lang_name_ru|Russe
+lang_name_ja|Japonais
+lang_name_ko|Coréen
+language_french|Français
+language_italian|Italiano
+language_russian|Русский
+language_korean|한국어
+language_system_desc|Suit la langue de ton téléphone
+language_search|Rechercher une langue
+language_current|Actuelle
+language_all|Toutes les langues

@@ -80,7 +80,7 @@ class PreviewGalleryTest {
     private val outDir = File(System.getProperty("previews.dir") ?: "build/previews").apply { mkdirs() }
 
     private fun setVariant(lang: String, dark: Boolean) {
-        val region = when (lang) { "tr" -> "TR"; "es" -> "ES"; "de" -> "DE"; "pt" -> "BR"; "ja" -> "JP"; else -> "US" }
+        val region = when (lang) { "tr" -> "TR"; "es" -> "ES"; "de" -> "DE"; "pt" -> "BR"; "ja" -> "JP"; "fr" -> "FR"; "it" -> "IT"; "ru" -> "RU"; "ko" -> "KR"; else -> "US" }
         RuntimeEnvironment.setQualifiers("+$lang-r$region")
         RuntimeEnvironment.setQualifiers(if (dark) "+night" else "+notnight")
     }
@@ -168,6 +168,12 @@ class PreviewGalleryTest {
     }
 
     @Test fun todayTrLight() = renderToday("tr", false)
+    @Test fun todayFrLight() = renderToday("fr", false)
+    @Test fun todayItLight() = renderToday("it", false)
+    @Test fun todayRuLight() = renderToday("ru", false)
+    @Test fun todayKoLight() = renderToday("ko", false)
+    @Test fun welcomeFrLight() = renderWelcome("fr", false)
+    @Test fun welcomeRuLight() = renderWelcome("ru", false)
     @Test fun todayTrDark() = renderToday("tr", true)
     @Test fun todayEnLight() = renderToday("en", false)
     @Test fun todayEnDark() = renderToday("en", true)
@@ -274,6 +280,28 @@ class PreviewGalleryTest {
     @Test fun welcomeGuestNameFilledTrDark() = renderWelcome("tr", true, nameStep = true, name = "Samet")
     @Test fun welcomeSignedInTr() = renderWelcome("tr", false, signedIn = true)
     @Test fun welcomeAlreadySignedInTr() = renderWelcome("tr", false, signedIn = true, chooseStep = true)
+
+    // Language page: three layouts with flags.
+    @Test fun languageListTr() = renderLanguage(app.tsuzuku.ui.screens.LanguageLayout.List, false)
+    @Test fun languageGridTr() = renderLanguage(app.tsuzuku.ui.screens.LanguageLayout.Grid, false)
+    @Test fun languageSearchTr() = renderLanguage(app.tsuzuku.ui.screens.LanguageLayout.Search, false)
+    @Test fun languageListTrDark() = renderLanguage(app.tsuzuku.ui.screens.LanguageLayout.List, true)
+    @Test fun languageGridTrDark() = renderLanguage(app.tsuzuku.ui.screens.LanguageLayout.Grid, true)
+    @Test fun languageSearchTrDark() = renderLanguage(app.tsuzuku.ui.screens.LanguageLayout.Search, true)
+
+    private fun renderLanguage(layout: app.tsuzuku.ui.screens.LanguageLayout, dark: Boolean) {
+        setVariant("tr", dark)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = dark) {
+                app.tsuzuku.ui.screens.LanguageScreen(
+                    selected = app.tsuzuku.data.preferences.LanguagePreference.Turkish,
+                    onBack = {}, onSelect = {}, layout = layout,
+                )
+            }
+        }
+        compose.mainClock.advanceTimeBy(1_000)
+        captureScreen("language_${layout.name.lowercase()}_tr_${if (dark) "dark" else "light"}")
+    }
 
     // Appearance: three layouts for theme + palette together.
     @Test fun appearancePreviewTr() = renderAppearance(app.tsuzuku.ui.screens.AppearanceLayout.Preview, false)

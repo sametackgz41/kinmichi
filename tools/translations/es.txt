@@ -856,3 +856,21 @@ appearance_follow_system_desc|Como tu teléfono: claro de día, oscuro de noche
 appearance_desc|Tema, paleta y negro puro
 appearance_theme_palette|Tema y paleta
 appearance_grid_hint|Toca la mitad clara u oscura de una paleta para usarla así.
+lang_name_tr|Turco
+lang_name_en|Inglés
+lang_name_es|Español
+lang_name_de|Alemán
+lang_name_fr|Francés
+lang_name_it|Italiano
+lang_name_pt|Portugués
+lang_name_ru|Ruso
+lang_name_ja|Japonés
+lang_name_ko|Coreano
+language_french|Français
+language_italian|Italiano
+language_russian|Русский
+language_korean|한국어
+language_system_desc|Sigue el idioma del teléfono
+language_search|Buscar idioma
+language_current|Actual
+language_all|Todos los idiomas
