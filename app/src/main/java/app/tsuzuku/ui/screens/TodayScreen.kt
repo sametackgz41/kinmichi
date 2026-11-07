@@ -539,7 +539,7 @@ private fun UpdateCard(
 private fun GreetingBlock(profileName: String) {
     val locale = LocalConfiguration.current.locales[0]
     val formattedDate = remember(locale) {
-        LocalDate.now().format(DateTimeFormatter.ofPattern("d MMMM, EEEE", locale))
+        LocalDate.now().format(DateTimeFormatter.ofPattern(app.tsuzuku.model.dayAndWeekdayPattern(locale), locale))
             .replaceFirstChar { it.titlecase(locale) }
     }
     val greeting = when (LocalTime.now().hour) {

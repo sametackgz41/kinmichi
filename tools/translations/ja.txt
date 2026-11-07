@@ -1,0 +1,778 @@
+app_name|Kinmichi
+today|今日
+library|ライブラリ
+statistics|統計
+calendar|カレンダー
+good_morning|おはようございます
+good_afternoon|こんにちは
+good_evening|こんばんは
+daily_progress|今日の進み具合
+current_streak|現在の連続記録
+add_habit|習慣を追加
+habit_completed|完了
+increase_progress|進捗を増やす
+decrease_progress|進捗を減らす
+complete_habit|習慣を完了
+progress_template|%1$s / %2$s %3$s
+weekdays|平日
+weekends|週末
+selected_days|選んだ曜日
+new_habit|新しい習慣
+back|戻る
+continue_label|続ける
+save_habit|習慣を保存
+goal_period|目標の期間
+daily|毎日
+weekly|毎週
+monthly|毎月
+times_per_week|週あたりの回数（1〜7）
+times_per_month|月あたりの回数（1〜31）
+routine_name|ルーティン名
+after_habit_optional|別の習慣のあとに行う（任意）
+none_label|なし
+blocked_by_habit|先に「%1$s」を完了してください
+period_progress|この期間 %1$d / %2$d
+goal_step|目標
+habit_name|習慣の名前
+intent_label|目的
+build_habit|習慣をつくる
+quit_habit|習慣をやめる
+icon_label|アイコンまたは絵文字
+color_label|アクセントカラー
+tracking_type|記録の方法
+type_check|チェック
+type_count|回数
+type_duration|時間
+target_label|目標値
+unit_label|単位
+quick_increment|1回の増加量
+days_label|曜日
+reminder_label|リマインダー
+reminder_description|選んだ時刻に通知します。
+reminder_time|通知の時刻
+reminder_time_error|時刻は 09:00 の形式で入力してください。
+reminder_channel_name|習慣のリマインダー
+reminder_channel_description|予定した習慣のお知らせ
+reminder_notification_text|今日の小さな一歩の時間です。
+test_notification|通知をテスト
+test_notification_description|今すぐサンプルの通知を送る
+start_timer|タイマー開始
+stop_timer|止めて保存
+edit_habit|習慣を編集
+manage_habit|習慣を管理
+habit_details|習慣の詳細
+loading_habit|読み込み中…
+habit_note_hint|この習慣についてのメモ
+archive_habit|習慣をアーカイブ
+delete_habit|習慣を削除
+delete_habit_confirmation|「%1$s」とその記録をすべて完全に削除しますか？
+delete_label|削除
+reorder_habits|習慣の並べ替え
+reorder_habits_description|矢印で「今日」の表示順を決めます。
+move_up|上へ
+move_down|下へ
+repeat_reminder|もう一度通知
+repeat_reminder_description|通知からもう一度リマインドできるようにする
+repeat_minutes|再通知までの時間（分）
+minutes_value|%1$d 分
+remind_again_minutes|%1$d 分後に通知
+off_label|オフ
+weekday_abbreviations[0]|月
+weekday_abbreviations[1]|火
+weekday_abbreviations[2]|水
+weekday_abbreviations[3]|木
+weekday_abbreviations[4]|金
+weekday_abbreviations[5]|土
+weekday_abbreviations[6]|日
+pending_label|未完了
+google_not_connected|Google アカウント未接続
+settings_label|設定
+theme_label|テーマ
+language_label|言語
+data_privacy_label|データとプライバシー
+planning_and_review|計画とふりかえり
+planning_and_review_description|ルーティン、休み、週のメモ、自動のステップ
+vacation_mode|休憩・休暇モード
+vacation_mode_description|除外した日は達成率や連続記録に影響しません。
+end_vacation|休憩を終える
+invalid_vacation_dates|正しい開始日と終了日を入力してください。
+vacation_activated|休憩日を統計から除外しました。
+vacation_ended|休憩モードを終了しました。
+vacation_today_message|今日は休憩中です。習慣は一時停止し、連続記録は守られます。
+weekly_review|週のふりかえり
+weekly_review_description|一週間をふりかえって、自分だけのメモを残しましょう。
+weekly_review_stats|%2$d 件中 %1$d 件完了 · %%%3$d
+weekly_note|今週のメモ
+save_weekly_review|ふりかえりを保存
+weekly_review_saved|週のふりかえりを保存しました。
+backup_restore|バックアップと復元
+app_lock|アプリのロック
+all_categories|すべて
+content_progress_value|%1$s / %2$s %3$s
+status_completed|完了
+unit_minutes|分
+current_progress|現在
+general_note|メモ
+save_note|メモを保存
+add_label|追加
+cancel|キャンセル
+previous_month|前の月
+next_month|次の月
+selected_day|選んだ日
+calendar_goal_fraction|%1$d / %2$d 完了
+past_edit_hint|この操作で選んだ日の記録を調整できます。
+no_habits_for_day|この日に予定された習慣はありません。
+last_days|過去 %1$d 日
+completion_rate|達成率
+completed_scheduled|%1$d / %2$d 完了
+active_days|活動した日
+best_streak|最長の連続記録
+habit_breakdown|習慣ごとの内訳
+no_statistics_yet|習慣を追加すると統計が始まります。
+streak_pair|現在の連続: %1$d 日 · 最長: %2$d 日
+personal_greeting|%1$s、%2$s さん
+personal_profile|プロフィール
+local_profile_description|この端末にあるあなたの空間
+edit_profile_name|プロフィール名を編集
+profile_name|プロフィール名
+save_label|保存
+account_label|アカウント
+google_account_label|Google アカウント
+appearance_label|表示と使い方
+theme_mode_label|表示モード
+theme_system|システムに合わせる
+theme_light|ライト
+theme_dark|ダーク
+language_system|システムの言語
+language_turkish|トルコ語
+language_english|英語
+week_start_label|週の始まり
+monday|月曜日
+sunday|日曜日
+daily_summary_setting|今日の進み具合の概要
+daily_summary_setting_description|「今日」に概要カードを表示する
+screen_protection|画面の保護
+screen_protection_description|スクリーンショットと最近のアプリでのプレビューを防ぐ
+local_data_note|習慣、コンテンツ、設定は現在この端末にだけ保存されています。
+goals|目標
+goals_subtitle|長期の進み具合をひとつの場所で
+open_goals|目標を開く
+add_goal|目標を追加
+new_goal|新しい目標
+edit_goal|目標を編集
+save_goal|目標を保存
+goal_details|目標の詳細
+goal_title|目標の名前
+goal_description|説明（任意）
+due_date_optional|期限（任意）
+due_date_value|期限: %1$s
+goal_progress_value|%1$s / %2$s %3$s
+active_goals|進行中の目標
+completed_goals|達成した目標
+active_goal_count|進行中 %1$d 件
+completed_goal_count|達成 %1$d 件
+no_goals|まだ目標がありません
+no_goals_description|読みたいもの、観たいもの、貯めたいもの、達成したいことを決めましょう。
+complete_goal|目標を達成にする
+mark_goal_active|進行中に戻す
+archive_goal|目標をアーカイブ
+delete_goal|目標を削除
+delete_goal_confirmation|目標「%1$s」を完全に削除しますか？
+app_lock_enabled|ロックはオンです
+app_lock_disabled|ロックはオフです
+app_lock_description|Kinmichi を開くときに 4 桁の PIN を求めます。
+app_lock_status_on|4 桁の PIN で保護中
+app_lock_status_off|オフ
+new_pin|新しい PIN
+current_pin|現在の PIN
+confirm_pin|PIN の確認
+pin_code|4 桁の PIN
+enable_app_lock|ロックをオンにする
+disable_app_lock|ロックをオフにする
+disable_label|オフにする
+change_pin|PIN を変更
+pin_setup_error|PIN が一致し、4 桁である必要があります。
+pin_change_error|現在の PIN が違うか、新しい PIN が一致しません。
+incorrect_pin|PIN が違います。もう一度お試しください。
+biometric_unlock|生体認証で解除
+biometric_unlock_description|この端末の指紋などの生体認証を使う
+biometric_unavailable|この端末には対応する生体認証が設定されていません。
+app_locked|Kinmichi はロック中です
+enter_pin_to_continue|続けるには PIN を入力してください。
+unlock|解除
+use_biometrics|生体認証を使う
+biometric_prompt_title|Kinmichi のロックを解除
+biometric_prompt_subtitle|生体認証で本人確認をしてください
+use_pin_instead|PIN を使う
+local_backup_available|この端末にバックアップを保存
+local_backup_title|データはあなたの手もとに
+local_backup_description|習慣、記録、ライブラリ、目標をひとつの JSON ファイルに保存します。
+create_backup|バックアップを作成
+restore_backup|バックアップから復元
+export_csv|詳しい CSV を書き出す
+export_pdf|PDF レポートを書き出す
+report_export_success|レポートを保存しました。
+backup_security_note|安全のため、PIN と生体認証の設定はバックアップに含まれません。
+backup_export_success|バックアップを作成しました。
+backup_restore_success|バックアップから復元しました。
+backup_operation_failed|ファイルが正しくないか、処理を完了できませんでした。
+confirm_restore|現在のデータを置き換えますか？
+restore_summary|このバックアップには習慣 %1$d 件、記録 %2$d 件、コンテンツ %3$d 件、目標 %4$d 件が含まれます。現在のデータは置き換えられます。
+restore_label|復元
+widget_description|ホーム画面から今日の習慣にチェック
+widget_locked|Kinmichi はロック中です
+configure_widget|ウィジェットの設定
+configure_widget_description|表示する習慣を選んでください。
+save_widget|ウィジェットを保存
+home_widget|ホーム画面のウィジェット
+home_widget_description|ホーム画面のウィジェット一覧から追加。長押しで設定し直せます
+error_reports|エラーレポート
+error_reports_description|直近のエラーを表示・書き出し
+crash_report_available|エラーレポートがあります
+no_crash_reports|記録されたエラーはありません
+diagnostic_privacy_note|レポートにはアプリのバージョン、端末情報、直近の技術的な記録だけが含まれます。メモや習慣の内容は含まれません。
+app_version_value|Kinmichi %1$s · ビルド %2$d
+export_diagnostic|診断レポートを書き出す
+clear_error_report|エラーレポートを消去
+diagnostic_export_success|診断レポートを保存しました。
+diagnostic_export_failed|診断レポートを保存できませんでした。
+skip_label|スキップ
+onboarding_welcome_title|小さな一歩を、続く力に
+onboarding_welcome_body|Kinmichi は、あなた自身の目標・予定・リマインダーで習慣を記録します。
+onboarding_library_title|読んだもの・観たものをひとまとめに
+onboarding_library_body|本、マンガ、映画、ドラマ、アニメをシーズンやメモと一緒に記録できます。
+onboarding_goals_title|長期の目標を見える形に
+onboarding_goals_body|単位、目標値、任意の期限を自分で決められます。
+onboarding_privacy_title|あなたの空間は、あなたのもの
+onboarding_privacy_body|データはこの端末に保存されます。PIN、生体認証、画面の保護、ローカルバックアップを使えます。
+start_using_tsuzuku|Kinmichi をはじめる
+cloud_account_subtitle|Google ログインと個人用クラウド同期
+cloud_data_note|習慣、コンテンツ、目標はこの端末に残り、さらに個人用の Google 同期でも守られます。
+google_sign_in_description|ログインすると、習慣、記録、ライブラリ、目標を Google アカウントに保存できます。
+sign_in_with_google|Google で続ける
+skip_google_for_now|今はしない
+automatic_cloud_sync|自動クラウド同期
+automatic_cloud_sync_description|アプリを開いたときやバックグラウンドに移ったときに、安全な変更を同期します。
+last_cloud_sync|最終同期: %1$s
+cloud_choice_required|自動同期を始める前に、使うデータを選んでください。
+sync_now|今すぐ同期
+choose_sync_source|同期元を選ぶ
+sign_out_google|Google からログアウト
+cloud_download_complete|クラウドのデータをこの端末に復元しました
+cloud_upload_complete|端末のデータを Google クラウドに保存しました
+cloud_already_current|端末とクラウドはすでに最新です
+cloud_sync_error|同期を完了できませんでした
+ok_label|OK
+cloud_conflict_title|両方に変更があります
+cloud_conflict_description|残すデータを選んでください。もう一方は置き換えられます。
+cloud_choice_description|メインにするデータを選んでください。
+this_device|この端末
+google_cloud|Google クラウド
+no_cloud_backup|このアカウントにはまだクラウドのバックアップがありません。
+use_device_data|端末のデータを使う
+use_cloud_data|クラウドのデータを使う
+firebase_setup_required|Firebase との接続が必要です
+firebase_setup_description|アプリのコードは準備できていますが、このビルドにはまだ Firebase プロジェクトがありません。
+firebase_setup_step_one|1. Firebase にパッケージ app.tsuzuku を登録します。
+firebase_setup_step_two|2. Google Authentication を有効にし、Firestore を作成します。
+firebase_setup_step_three|3. google-services.json を app フォルダに置いて再ビルドします。
+cloud_summary|%1$s: 習慣 %2$d · 記録 %3$d · コンテンツ %4$d · 目標 %5$d
+synced_data|同期済みのデータ
+google_signing_in|Google ログインを開いています…
+cloud_uploading|端末のデータをクラウドに保存中…
+cloud_downloading|クラウドのデータを復元中…
+cloud_synchronizing|端末とクラウドの変更を確認中…
+google_signing_out|ログアウト中…
+choose_vacation_dates|休憩の日付を選ぶ
+choose_dates|日付を選ぶ
+no_vacation_dates_selected|期間が選ばれていません
+confirm_label|確定
+live_preview|ライブプレビュー
+plan|予定
+plan_subtitle|単発のタスク、優先度、一日のかたち
+plan_empty|リストは空です
+plan_empty_detail|習慣にしないタスクを追加しましょう。
+upcoming|これから
+inbox|受信箱
+new_task|新しいタスク
+add_task|タスクを追加
+task_identity|何をしますか？
+task_title|タスク名
+schedule|日程
+tomorrow|明日
+priority|優先度
+estimated_minutes|見積もり時間（分）
+save_task|タスクを保存
+move_tomorrow|明日に回す
+minute_count|%1$d 分
+priority_value|優先度 %1$d
+task_details|タスクの詳細
+checklist|チェックリスト
+new_checklist_item|新しいステップ
+carried_count|%1$d 回延期
+add|追加
+minimum_target|最低ライン
+maximum_target|1 日の上限
+difficulty|難しさ
+easy|やさしい
+medium|ふつう
+hard|むずかしい
+intention_sentence|イフゼンプラン
+intention_example|夕食を食べ終えたら、10 ページ読む。
+flexible_schedule|柔軟なスケジュール
+repeat_every_days|… 日ごとに繰り返す
+repeat_interval_help|1 は選んだ曜日、2 は 1 日おきです。
+start_date_optional|開始日（任意）
+end_date_optional|終了日（任意）
+pause_until_optional|一時停止の終了日（任意）
+clear_label|クリア
+time_block_optional|時間帯（任意）
+start_time|開始
+end_time|終了
+repeat_task|タスクを繰り返す
+every_day|毎日
+weekdays_only|平日
+every_week|毎週
+every_month|毎月
+task_templates|タスクのテンプレート
+save_as_template|テンプレートとして保存
+overdue|期限切れ
+overdue_cleanup|期限切れのタスク %1$d 件 · 明日に回すか完了しましょう
+selected_count|%1$d 件選択中
+move_all_tomorrow|明日に回す
+move_to_inbox|受信箱へ移動
+complete_selected|完了
+delete_selected|削除
+drag_to_reorder|ドラッグして並べ替え
+day_end_cleanup|一日の締めくくり
+day_end_cleanup_detail|期限切れのタスク %1$d 件をどうするか決めましょう。
+duplicate_task|タスクを複製
+swipe_complete|完了
+swipe_tomorrow|明日
+tags_label|タグ
+tags_help|タグはカンマで区切ります: 勉強, 家, 重要
+search_everything|すべてを検索
+search_hint_all|タイトル、メモ、タグ
+result_count|%1$d 件
+all_label|すべて
+habits|習慣
+save_search|この検索を保存
+name_saved_search|保存する検索の名前
+filter_name|フィルター名
+saved_filter_summary|%1$s · %2$s
+delete_saved_search|保存した検索を削除
+add_tags_selected|選んだ項目にタグを追加
+categories_and_tags|カテゴリとタグ
+categories_description|習慣、タスク、ライブラリで使える自分だけのカテゴリをつくれます。
+category_name|カテゴリ名
+emoji_label|アイコンまたは絵文字
+create_category|カテゴリを作成
+your_categories|あなたのカテゴリ
+no_custom_categories|まだカテゴリを作成していません。
+actual_minutes|実際の時間（分）
+actual_minutes_help|空欄にすると記録した時間を消去します。
+actual_minute_count|実績 %1$d 分
+recent_timeline|最近の記録
+lock_after_background|アプリを離れたらロック
+immediately|すぐに
+lock_delay_minutes|%1$d 分
+duplicate_habit|習慣を複製
+delete_category|カテゴリを削除
+delete_category_confirmation|「%1$s」を削除しますか？ タグ付けされた記録からは外れますが、記録自体は消えません。
+edit_task|タスクを編集
+failed_label|できなかった
+skipped_label|スキップ
+sign_out_data_choice|この端末のデータをどうしますか？ クラウドのバックアップは削除されません。
+keep_on_device|この端末に残す
+remove_from_device|端末から消す
+choose_date|日付を選ぶ
+focus|集中
+focus_mode|集中モード
+start_focus|集中をはじめる
+pomodoro|ポモドーロ（25 分）
+stopwatch|ストップウォッチ
+custom_timer|カスタムタイマー
+focus_target|集中する対象
+free_focus|自由に集中
+focus_minutes_today|今日の集中 %1$d 分
+focus_sessions_count|%1$d セッション
+start_routine|ルーティンをはじめる
+routine_step|ステップ %1$d / %2$d
+customize_sections|「今日」をカスタマイズ
+section_plan|今日のタスク
+section_goals|目標の進み具合
+section_routines|ルーティン
+linked_goals|つながった目標
+linked_habits|つながった習慣
+linked_tasks|つながったタスク
+contribution_mode|貢献のしかた
+contribution_value|貢献量
+link_goal|目標とつなぐ
+link_habit|習慣とつなぐ
+link_task|タスクとつなぐ
+unlink|つながりを外す
+mood_tired|疲れた
+mood_neutral|ふつう
+mood_good|よい
+mood_great|とてもよい
+daily_review_title|今日はどうでしたか？
+daily_review_subtitle|数秒の静かな間が、明日への準備になります。
+mood_label|気分
+energy_level|⚡ エネルギー
+productivity_feeling|🎯 はかどり感
+stress_level|🌊 ストレス
+daily_note_gratitude|今日のメモ・感謝
+daily_note_placeholder|今日の考え、気づき、メモなど…
+remaining_tasks_count|残りのタスク（%1$s）
+carry_unfinished_hint|今日終わらなかったことは明日に回せます:
+move_to_tomorrow|明日に回す
+complete_day_and_save|一日を締めくくって保存
+resume_action|再開
+pause_action|一時停止
+finish_and_save|終えて保存
+focus_today|今日の集中
+sessions_today|今日のセッション
+focus_target_task|タスク: %1$s
+task_label|タスク
+focus_target_habit|習慣: %1$s %2$s
+habit_label|習慣
+focus_target_goal|目標: %1$s
+no_linked_habits|つながった習慣はまだありません。
+contribution_by_habit_amount|習慣の量だけ貢献
+contribution_plus|+%1$s 貢献
+no_linked_tasks|つながったタスクはまだありません。
+contribution_plus_points|+%1$s ポイント貢献
+no_more_habits_to_link|つなげられる習慣がありません。
+select_habit|習慣を選ぶ:
+habit_amount|習慣の量
+fixed_value|固定値
+no_more_tasks_to_link|つなげられるタスクがありません。
+select_task|タスクを選ぶ:
+bad_habit_limit_desc|この習慣は、何かを減らす・やめることが目的です。上限への接近（80%）と超過は、落ち着いた表示でお知らせします。
+ideal_target_upper|理想の目標 / 上限
+ideal_lower_limit|理想の下限
+maximum_limit|上限
+bad_habit_clean_day|✓ 完了: 今日はこの悪い習慣から完全に離れられました（クリーンな日）。
+no_linked_goals|つながった目標はまだありません。
+growth_levels|成長レベル
+add_level|レベルを追加
+edit_action|編集
+growth_levels_hint|この習慣に段階的なレベルを設定しましょう（例: レベル1: 1 km、レベル2: 3 km、レベル3: 5 km）。
+configure_stages|段階を設定
+active_level|現在のレベル
+completed_check|✓ 完了
+switch_to_level|このレベルに切り替える
+level_up_to|レベルアップ: %1$s（%2$s %3$s）
+top_level_reached|おめでとうございます！ この習慣の最高レベルに到達しました。
+no_more_active_goals_to_link|つなげられる進行中の目標がありません。
+select_goal|目標を選ぶ:
+link_library_content|ライブラリのコンテンツとつなぐ
+no_more_content_to_link|つなげられるコンテンツがありません。
+select_content|コンテンツを選ぶ:
+progress_multiplier_label|進捗の倍率（標準: 1）
+link_action|つなぐ
+level_up_title|レベルアップ
+level_up_message|「%1$s」レベルに進みます。1 日の目標は %2$s %3$s になります。\n\nこれまでの記録、統計、連続記録はそのまま残ります。
+level_up_confirm|レベルアップ
+level_beginner|初級
+level_intermediate|中級
+level_advanced|上級
+edit_growth_levels|成長レベルを編集
+level_number|レベル %1$s
+level_title|レベル名
+target_with_unit|目標（%1$s）
+reward_note|ごほうび・メモ
+level_number_next|レベル %1$s
+add_new_level|新しいレベルを追加
+overall_activity|全体の活動
+heatmap_more|多い
+heatmap_habits_completed|完了した習慣: %1$s
+heatmap_tasks|タスク: %1$s
+heatmap_focus_minutes|集中時間: %1$s 分
+heatmap_review_done|夜のふりかえり: ✓
+heatmap_review_missing|夜のふりかえり: —
+postpone_awareness|先延ばしへの気づき（%1$s 回延期）
+postpone_awareness_hint|このタスクには見えない抵抗があるのかもしれません。上のチェックリストで 5 分のステップに分けてみましょう。
+no_active_goals_to_link|つなげられる進行中の目標がありません。
+routine_label|ルーティン
+routine_steps|ルーティンのステップ
+must_complete_first|先に「%1$s」を完了する必要があります
+locked_label|ロック中
+routine_completed_title|ルーティン完了！
+routine_completed_body|このルーティンのステップをすべて終えました。
+back_to_today|「今日」に戻る
+personal_records_milestones|自己ベストと節目
+personal_records_desc|獲得したバッジ、最長の連続記録、節目
+skip_habit_title|習慣をスキップ
+skip_habit_message|今回「%1$s」をスキップする理由を残せます。柔軟さが続ける力を強くします。
+custom_reason|自分で書く理由
+custom_reason_example|例: 締め切り前
+save_and_skip|保存してスキップ
+skip_without_reason|理由なしでスキップ
+carry_count_title|このタスクは %1$s 回延期されています
+carry_split_hint|最初の 5 分で始められる小さなステップに分けて、心の抵抗をほどきましょう:
+carry_intro|何度も延びる作業は、大きすぎるか、今は意味を失っていることが多いものです。自分を責めずに、ひとつ選びましょう:
+carry_step_1|1. 最初の小さなステップ（5 分）
+carry_step_1_example|例: 下書きを開く / 1 ページ読む
+carry_step_2|2. 次のステップ（任意）
+carry_step_2_example|例: 見出しを決める
+carry_step_3|3. その次のステップ（任意）
+carry_step_3_example|例: 初稿を仕上げる
+add_steps_and_start|ステップを追加してはじめる
+do_today|今日やる
+do_today_desc|今日の最優先にして、最初の 5 分をはじめましょう。
+move_tomorrow_desc|今日の予定から外して、明日あらためて始めましょう。
+postpone_next_week|来週に延期
+postpone_next_week_desc|今がそのときでなければ、7 日後に回しましょう。
+split_smaller|小さく分ける
+split_smaller_desc|サブタスクやチェックリストのステップを追加します。
+cancel_or_delete_task|タスクを取り消す・削除する
+cancel_or_delete_task_desc|もう必要なければ、気にせず手放しましょう。
+stats_tab_general|概要
+stats_tab_heatmap|ヒートマップ
+stats_tab_reviews|ふりかえり
+stats_tab_records|記録
+stats_tab_skips|スキップ
+yearly|年間
+previous_week|前の週
+next_week|次の週
+weekly_completion_rate|週の達成率
+most_successful|🌟 いちばん続いた
+could_improve|🌱 のびしろ
+task_focus_balance|タスクと集中のバランス
+completed_tasks_of|完了したタスク: %1$s / %2$s
+postponed_count|延期: %1$s
+focus_duration_minutes|集中時間: %1$s 分
+goal_steps_count|目標のステップ: %1$s
+weekly_reflection_note|週のふりかえりとメモ
+monthly_success_rate|月の達成率
+focus_hours_minutes|集中: %1$s 時間 %2$s 分
+completed_tasks_value|完了したタスク: %1$s
+habit_ranking|習慣ランキング
+monthly_reflection|月のふりかえり
+previous_year|前の年
+next_year|次の年
+yearly_summary_milestones|年間のまとめと節目
+total_habits_label|習慣の合計:
+total_focus_label|集中の合計:
+completed_goals_label|達成した目標:
+finished_books_content_label|読み終えた本・観終えた作品:
+longest_chain_label|最長の連続:
+days_value|%1$s 日
+yearly_review_vision|一年のふりかえりと未来
+personal_records|自己ベスト
+longest_chain|最長の連続
+days_value_records|%1$s 日
+most_productive_day|いちばんはかどった日
+total_focus|集中の合計
+deep_work|ディープワーク
+goals_achieved|達成した目標
+milestones_and_badges|節目とバッジ
+habit_skip_analysis|スキップの分析
+habit_skip_analysis_desc|習慣は合計 %1$s 回スキップされました。理由に気づくと、目標をより柔軟で続けやすいものにできます。
+earned_label|獲得 ✨
+reflection_placeholder|考え、学び、メモをここに…
+limit_exceeded|⚠️ 上限を超えました！（%1$s / %2$s %3$s）
+open_details|詳細を開く
+skip_with_reason|スキップ（理由を書く）
+undo_skip|スキップを取り消す
+carried_times|↩ %1$s 回延期
+resolve_action|整理する
+smart_carry_assistant|先延ばしアシスタント
+carry_banner_message|%1$s 件のタスクが 3 日以上延期されています。タップして整理しましょう。
+daily_review_completed|今日のふりかえりは完了です
+do_evening_review|夜のふりかえりをする
+completed_of_total|%1$s / %2$s 完了
+daily_summary_section|今日の概要
+todays_plan_section|今日の予定
+goal_progress_section|目標の進み具合
+focus_info_section|集中の情報
+routines_label|ルーティン
+sections_config_hint|セクションの順番と表示を選べます。
+saved_check|✓ 保存しました
+vs_last_week|先週比 %1$s%%
+mood_hard|つらい
+heatmap_less|少ない
+level_target_value|目標: %1$s %2$s
+test_notification_body|リマインダーはこのように表示されます。
+progress_tab|進み具合
+today_all_done|今日はすべて完了 🎉
+habits_done_of|%2$d 件中 %1$d 件完了
+more_actions|その他
+streak_days#other|%d 日連続
+widget_today_name|今日
+widget_habit_name|ひとつの習慣
+widget_week_name|今週
+widget_habit_description|ひとつの習慣の進捗リングと連続記録
+widget_week_description|今週を、1 日ひとつのリングで
+widget_week_title|今週
+widget_no_habits|今日の習慣はありません
+widget_pick_one|表示する習慣を選んでください。
+template_water|水を飲む
+unit_glasses|杯
+template_read|読書
+template_walk|散歩
+template_stretch|朝のストレッチ
+template_wake_early|早起き
+template_no_phone_bed|ベッドでスマホを見ない
+starter_title|習慣からはじめましょう
+starter_body|タップして追加。あとから何でも変えられます。
+create_own_habit|自分でつくる
+skip_reason_forgot|忘れていた
+skip_reason_no_time|時間がない
+skip_reason_travel|旅行中
+skip_reason_sick|体調不良
+skip_reason_intentional|あえてスキップ
+skip_reason_other|その他
+milestone_streak_title|%1$d 日連続
+milestone_streak_desc|ひとつの習慣を %1$d 日連続で続ける。
+milestone_completions_title|%1$d 回の記録
+milestone_completions_desc|習慣を合計 %1$d 回完了する。
+milestone_focus_title|集中 %1$d 時間
+milestone_focus_desc|集中セッションを合計 %1$d 時間行う。
+milestone_goal_title|目標 %1$d 件達成
+milestone_goal_desc|目標を %1$d 件達成する。
+show_advanced|詳細な設定
+hide_advanced|設定を閉じる
+unit_times|回
+skip_keeps_streak|スキップした日は数えないので、連続記録は途切れません。
+weekly_summary_title|今週: %1$d%%
+weekly_summary_body|%2$d 件中 %1$d 件の記録を達成。いちばん続いた習慣: %3$s。
+weekly_summary_body_empty|今週は予定された習慣がありませんでした。新しいスタートはワンタップで。
+weekly_summary_setting|週のまとめ
+weekly_summary_setting_description|毎週日曜の夜に短いまとめ
+delete_account|アカウントとデータを削除
+delete_account_title|アカウントを削除しますか？
+delete_account_message|Kinmichi のクラウドのデータ、アカウント、この端末のすべての習慣が完全に削除されます。元に戻せません。残したいものがあれば、先にバックアップを書き出してください。
+delete_account_confirm|完全に削除
+delete_account_reauth|安全のため、もう一度ログインしてからアカウントを削除してください。
+deleting_account|アカウントを削除しています…
+widget_mark_done|「%1$s」を完了にする
+widget_mark_not_done|「%1$s」を未完了にする
+notifications_blocked|Kinmichi の通知がオフのため、このリマインダーは表示されません。
+open_notification_settings|オンにする
+shortcut_add_habit|新しい習慣
+shortcut_add_habit_long|新しい習慣を追加
+shortcut_progress|進み具合
+shortcut_progress_long|進み具合を見る
+tile_today_label|Kinmichi
+tile_no_habits|今日の習慣はありません
+tile_all_done|今日はすべて完了
+tile_habits_left#other|残り %d 件
+rest_day_used|今週の休息日は使用済み
+rest_day_rule|1 日忘れても大丈夫。週に 1 日までなら連続記録は途切れません。
+year_heatmap_title|過去 12 か月
+heat_day_off|予定なし
+heat_day_done|完了
+heat_day_missed|未完了
+heat_day_partial|目標の %1$s
+year_heatmap_summary#other|この一年で %d 日完了
+widget_tap_to_complete|タップで完了
+advice_lower|過去 %2$d 日のうち、目標に届いたのは %1$d 日でした。たいていは %3$s ほどです。そこから始めて少しずつ上げませんか？
+advice_raise|2 週間ほぼ毎日目標を達成しています。%1$s に上げてみませんか？
+advice_accept|%1$s にする
+advice_not_now|今はしない
+mood_question|今日はどうでしたか？
+mood_logged|今日: %1$s
+mood_add_note|メモを追加
+mood_edit_note|メモを編集
+mood_notification_body|ワンタップで記録。続けると、どの習慣がよい日と重なるかを Kinmichi が教えてくれます。
+mood_quick_rough|😕 つらい
+mood_quick_okay|😐 まあまあ
+mood_quick_good|🙂 よい
+mood_insights_title|習慣と気分
+mood_insights_none|まだはっきりした傾向はありません。日々の気分を記録し続けましょう。
+mood_insights_footnote|あなた自身の記録から、このスマホの中だけで計算しています。気分は 1〜5 の 5 段階。あくまで傾向で、証明ではありません。
+mood_insight_better|「%1$s」をした日は気分がよい
+mood_insight_worse|「%1$s」をした日はつらく感じる
+mood_insight_detail|した日の平均 %1$s、しなかった日 %2$s
+mood_reminder_setting|夜の気分チェック
+mood_reminder_setting_description|今日の気分をまだ記録していなければ 21:00 に
+mood_insights_collecting#other|あと %d 日気分を記録すると、どの習慣がよい日と重なるかがわかります。
+share_streak|連続記録をシェア
+share_card_streak|日連続
+share_card_done|日達成
+share_card_rate|過去 30 日
+share_card_weeks|過去 %1$d 週
+share_card_text|%1$s: Kinmichi で %2$d 日連続 🔥
+share_card_text_done|%1$s: Kinmichi で %2$d 日達成
+palette_label|カラーパレット
+palette_washi|和紙
+palette_dynamic|壁紙の色
+palette_sumi|墨
+palette_matcha|抹茶
+palette_sakura|桜
+palette_umi|海
+pure_black_label|夜は純粋な黒
+pure_black_desc|ダークモードで真っ黒を使います。OLED 画面のバッテリーにやさしい
+palette_washi_desc|和紙と藍
+palette_sumi_desc|墨と朱
+palette_matcha_desc|抹茶、落ち着き
+palette_sakura_desc|桜、あたたかさ
+palette_umi_desc|海、涼しく集中
+palette_dynamic_desc|壁紙から
+intention_help|習慣を一日のある瞬間に結びつけます。「今日」とリマインダーに表示されます。
+tiny_version_label|調子の悪い日の版
+tiny_version_example|例: 1 ページ、5 分の散歩
+tiny_version_help|それでも数に入るいちばん小さな一歩。これをすれば連続記録が続きます。
+never_miss_twice_title|2 回続けて休まない
+never_miss_twice_body|昨日は「%1$s」ができませんでした。今日は %2$s だけで続けられます。
+never_miss_twice_small_step|小さな一歩
+tiny_version_done|小さい版をやった
+comebacks_label|再開
+comebacks_this_month#other|今月 %d 回の再開
+streak_guard_title|%1$s: %2$d 日連続
+streak_guard_body|今日はまだです。小さな一歩でも連続記録は続きます。
+streak_guard_body_tiny|今日はまだです。%1$s だけでも連続記録は続きます。
+streak_guard_setting|連続記録のお知らせ
+streak_guard_setting_description|3 日以上の連続記録が途切れそうなときだけ、20:00 に一度お知らせ
+smart_reminder_title|よりよいリマインダーの時刻
+smart_reminder_body|「%1$s」はたいてい %2$s ごろにしていますが、リマインダーは %3$s に鳴ります。%4$s に移しますか？
+smart_reminder_keep|このまま
+smart_reminder_move|%1$s に移す
+health_fill_label|ヘルスデータから入力
+health_unavailable|このスマホでは Health Connect を使えません。
+health_fill_help|Kinmichi を開くたびに更新されます。単位: %1$s。
+health_none|オフ
+health_steps|歩数
+health_distance|距離
+health_calories|カロリー
+health_exercise|運動
+health_sleep|睡眠
+health_unit_steps|歩
+health_unit_distance|km または m
+health_unit_calories|kcal
+health_unit_time|分 または 時間
+widget_streak_name|連続記録
+widget_streak_description|続いている最長の連続記録と、今月の再開
+widget_streak_empty|まだ連続記録はありません。始めるなら今日がいい日です。
+widget_quick_name|クイックグリッド
+widget_quick_description|4 つの習慣を、それぞれワンタップで
+widget_mood_name|気分
+widget_mood_description|今日の気分をワンタップで記録
+widget_opacity_label|ウィジェットの不透明度
+widget_opacity_value|%1$d%%
+widget_streak_days#other|日連続
+report_on_github|GitHub で報告
+report_on_github_note|バージョン、機種、直近のエラー記録を入れた Issue をブラウザで開きます。Submit を押すまで何も送信されません。Issue は公開されます。
+update_check_setting|アップデートを確認
+update_check_setting_description|1 日 1 回、新しいバージョンがあるか GitHub に確認します
+github_project|GitHub の Kinmichi
+github_project_description|バージョン %1$s · ソースコード、リリース、フィードバック
+update_available_title|Kinmichi %1$s が出ました
+update_available_body|GitHub または Obtainium から入手できます。
+update_later|あとで
+update_open|開く
+whats_new_title|%1$s の新機能
+whats_new_ok|OK
+whats_new_items[0]|調子の悪い日の版|それでも数に入るいちばん小さな一歩を習慣に設定できます。休んだ翌日、「今日」がワンタップで提案します。
+whats_new_items[1]|イフゼンプラン|習慣を一日の瞬間に結びつけます: 「夕食を食べ終えたら、10 ページ読む。」
+whats_new_items[2]|金継ぎ|休んだあとに再開した日が数えられ、金色で描かれます。
+whats_new_items[3]|Health Connect|習慣を歩数、距離、カロリー、運動、睡眠とつなぐと、自動で記録されます。
+whats_new_items[4]|賢いリマインダーと連続記録のお知らせ|よりよいリマインダーの時刻と、連続記録が危ないときだけの夜のお知らせ。
+whats_new_items[5]|パレットとウィジェット|5 つのパレット、夜の純粋な黒、連続記録・クイックグリッド・気分の新しいウィジェット。
+whats_new_items[6]|フィードバック|設定 › エラーレポート › GitHub で報告。新しいバージョンが出たら Kinmichi がお知らせします。
+language_spanish|Español
+language_german|Deutsch
+language_portuguese|Português (Brasil)
+language_japanese|日本語

@@ -81,7 +81,7 @@ fun CalendarScreen(
         .format(DateTimeFormatter.ofPattern("MMMM yyyy", locale))
         .replaceFirstChar { it.titlecase(locale) }
     val selectedTitle = selectedDate
-        .format(DateTimeFormatter.ofPattern("d MMMM, EEEE", locale))
+        .format(DateTimeFormatter.ofPattern(app.tsuzuku.model.dayAndWeekdayPattern(locale), locale))
         .replaceFirstChar { it.titlecase(locale) }
 
     if (showDaySheet) {

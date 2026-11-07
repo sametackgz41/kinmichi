@@ -49,7 +49,11 @@ enum class PalettePreference {
 enum class LanguagePreference(val languageTag: String?) {
     System(null),
     Turkish("tr"),
-    English("en");
+    English("en"),
+    Spanish("es"),
+    German("de"),
+    Portuguese("pt-BR"),
+    Japanese("ja");
 
     companion object {
         fun fromStored(value: String?): LanguagePreference = entries.firstOrNull { it.name == value } ?: System

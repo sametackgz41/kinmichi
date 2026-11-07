@@ -78,7 +78,8 @@ class PreviewGalleryTest {
     private val outDir = File(System.getProperty("previews.dir") ?: "build/previews").apply { mkdirs() }
 
     private fun setVariant(lang: String, dark: Boolean) {
-        RuntimeEnvironment.setQualifiers("+$lang-r${if (lang == "tr") "TR" else "US"}")
+        val region = when (lang) { "tr" -> "TR"; "es" -> "ES"; "de" -> "DE"; "pt" -> "BR"; "ja" -> "JP"; else -> "US" }
+        RuntimeEnvironment.setQualifiers("+$lang-r$region")
         RuntimeEnvironment.setQualifiers(if (dark) "+night" else "+notnight")
     }
 
@@ -149,6 +150,11 @@ class PreviewGalleryTest {
     @Test fun todayTrDark() = renderToday("tr", true)
     @Test fun todayEnLight() = renderToday("en", false)
     @Test fun todayEnDark() = renderToday("en", true)
+    @Test fun todayEsLight() = renderToday("es", false)
+    @Test fun todayDeLight() = renderToday("de", false)
+    @Test fun todayPtLight() = renderToday("pt", false)
+    @Test fun todayJaLight() = renderToday("ja", false)
+    @Test fun editorDeLight() = renderEditorAndSettings("de", false)
 
     @Test fun palettesTr() = renderPalettes("tr")
     @Test fun palettesEn() = renderPalettes("en")
