@@ -783,6 +783,17 @@
     <string name="widgets_sheet_subtitle">選んでワンタップでホーム画面に追加できます。</string>
     <string name="widgets_sheet_manual">お使いのホームアプリはここからの追加に対応していません。ホーム画面の空いている所を長押しし、「ウィジェット」から Kinmichi を探してください。</string>
     <string name="add_to_home">追加</string>
+    <string name="welcome_eyebrow">あと少し</string>
+    <string name="welcome_title">なんと呼べばいい？</string>
+    <string name="welcome_body">「今日」画面が毎朝お名前であいさつします。設定からいつでも変更できます。</string>
+    <string name="welcome_name_hint">お名前</string>
+    <string name="welcome_sync_title">バックアップと同期</string>
+    <string name="welcome_optional">任意</string>
+    <string name="welcome_sync_body">Google でログインすると、機種変更しても習慣を引き継げます。あとで設定からオン・オフできます。</string>
+    <string name="welcome_signed_in">%1$s でログイン中</string>
+    <string name="welcome_private_note">同期をオンにしない限り、すべてスマホの中に残ります。</string>
+    <string name="replay_intro">紹介をもう一度見る</string>
+    <string name="replay_intro_description">新しく使う人が見る紹介と最初の画面です。データはそのままです。</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

@@ -43,6 +43,7 @@ import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.Summarize
 import androidx.compose.material.icons.rounded.Sync
 import androidx.compose.material.icons.rounded.BugReport
+import androidx.compose.material.icons.rounded.AutoAwesome
 import androidx.compose.material.icons.rounded.Widgets
 import androidx.compose.material.icons.rounded.Insights
 import androidx.compose.material.icons.rounded.AccountTree
@@ -363,6 +364,12 @@ fun ProfileScreen(
                     stringResource(R.string.home_widget),
                     stringResource(R.string.home_widget_description),
                     onClick = { showWidgets = true },
+                )
+                ValueSettingRow(
+                    Icons.Rounded.AutoAwesome,
+                    stringResource(R.string.replay_intro),
+                    stringResource(R.string.replay_intro_description),
+                    onClick = { app.tsuzuku.ui.IntroReplay.start() },
                 )
             }
         }

@@ -803,3 +803,14 @@ widgets_sheet_title|Widgets
 widgets_sheet_subtitle|Escolha um e adicione à tela inicial com um toque.
 widgets_sheet_manual|Seu launcher não permite adicionar widgets daqui. Toque e segure um espaço vazio na tela inicial, toque em Widgets e procure Kinmichi.
 add_to_home|Adicionar
+welcome_eyebrow|Um último passo
+welcome_title|Como podemos te chamar?
+welcome_body|Hoje cumprimenta você pelo nome toda manhã. Você pode mudar quando quiser em Configurações.
+welcome_name_hint|Seu nome
+welcome_sync_title|Backup e sincronização
+welcome_optional|Opcional
+welcome_sync_body|Entre com o Google e seus hábitos vão junto para um celular novo. Você pode ligar ou desligar depois em Configurações.
+welcome_signed_in|Conectado como %1$s
+welcome_private_note|Tudo fica no seu celular, a menos que você ative a sincronização.
+replay_intro|Ver a introdução de novo
+replay_intro_description|O tour e a tela de boas-vindas que um novo usuário vê. Seus dados continuam iguais.

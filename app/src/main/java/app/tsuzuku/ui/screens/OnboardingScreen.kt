@@ -71,10 +71,9 @@ fun OnboardingScreen(onComplete: () -> Unit) {
     var step by rememberSaveable { mutableIntStateOf(0) }
     val pages = TourPage.entries
     val last = step == pages.lastIndex
-    Column(
+    androidx.compose.material3.Surface(color = MaterialTheme.colorScheme.background) { Column(
         Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
             .statusBarsPadding()
             .navigationBarsPadding()
             .padding(horizontal = 24.dp, vertical = 16.dp),
@@ -134,11 +133,11 @@ fun OnboardingScreen(onComplete: () -> Unit) {
             onClick = { if (last) onComplete() else step++ },
             shapes = ButtonDefaults.shapes(),
             modifier = Modifier.fillMaxWidth().height(56.dp),
-        ) { Text(stringResource(if (last) R.string.start_using_tsuzuku else R.string.continue_label)) }
+        ) { Text(stringResource(R.string.continue_label)) }
         Box(Modifier.fillMaxWidth().height(48.dp), contentAlignment = Alignment.Center) {
             if (step > 0) TextButton(onClick = { step-- }) { Text(stringResource(R.string.back)) }
         }
-    }
+    } }
 }
 
 /** Progress as the same small steps the icon is made of; the current one in gold. */

@@ -54,6 +54,7 @@ class MainActivity : FragmentActivity() {
         if (savedInstanceState == null) launchRoute = routeFor(intent)
         setContent {
             val settings by settingsRepository.settings.collectAsStateWithLifecycle()
+            val introReplay by app.tsuzuku.ui.IntroReplay.stage.collectAsStateWithLifecycle()
             val darkTheme = when (settings.theme) {
                 ThemePreference.System -> isSystemInDarkTheme()
                 ThemePreference.Light -> false
@@ -75,29 +76,43 @@ class MainActivity : FragmentActivity() {
                         onUnlocked = { isUnlocked = true },
                         onBiometric = { showBiometricPrompt() },
                     )
-                } else if (!settings.initialGoogleSetupCompleted) {
-                    CloudAccountScreen(
-                        repository = application.cloudSyncRepository,
-                        settings = settings,
-                        onBack = {},
-                        onSetCloudSyncEnabled = settingsRepository::setCloudSyncEnabled,
-                        onDataRestored = {
-                            application.reminderScheduler.rescheduleAll()
-                        },
-                        initialSetup = true,
-                        onInitialSetupComplete = { googleName ->
-                            settingsRepository.completeInitialGoogleSetup()
-                            if (googleName != null) {
-                                if (googleName.isNotBlank()) settingsRepository.setProfileName(googleName)
-                                settingsRepository.completeOnboarding()
-                                application.requestInitialCloudSetup()
-                            }
+                } else if (introReplay == app.tsuzuku.ui.IntroReplay.Stage.Tour) {
+                    OnboardingScreen { app.tsuzuku.ui.IntroReplay.next() }
+                } else if (introReplay == app.tsuzuku.ui.IntroReplay.Stage.Welcome) {
+                    val cloud = application.cloudSyncRepository
+                    val account by cloud.account.collectAsStateWithLifecycle()
+                    val syncState by cloud.syncState.collectAsStateWithLifecycle()
+                    app.tsuzuku.ui.screens.WelcomeScreen(
+                        account = account,
+                        syncState = syncState,
+                        initialName = settings.profileName,
+                        onSignIn = { activity -> cloud.signIn(activity) },
+                        onFinish = { name, _ ->
+                            if (name.isNotBlank()) settingsRepository.setProfileName(name)
+                            cloud.clearStatus()
+                            app.tsuzuku.ui.IntroReplay.next()
                         },
                     )
                 } else if (!settings.onboardingCompleted) {
                     OnboardingScreen {
                         settingsRepository.completeOnboarding()
                     }
+                } else if (!settings.initialGoogleSetupCompleted) {
+                    val cloud = application.cloudSyncRepository
+                    val account by cloud.account.collectAsStateWithLifecycle()
+                    val syncState by cloud.syncState.collectAsStateWithLifecycle()
+                    app.tsuzuku.ui.screens.WelcomeScreen(
+                        account = account,
+                        syncState = syncState,
+                        initialName = settings.profileName,
+                        onSignIn = { activity -> cloud.signIn(activity) },
+                        onFinish = { name, signedIn ->
+                            if (name.isNotBlank()) settingsRepository.setProfileName(name)
+                            cloud.clearStatus()
+                            settingsRepository.completeInitialGoogleSetup()
+                            if (signedIn) application.requestInitialCloudSetup()
+                        },
+                    )
                 } else {
                     TsuzukuApp(
                         repository = repository,

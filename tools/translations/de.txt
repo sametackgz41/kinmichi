@@ -803,3 +803,14 @@ widgets_sheet_title|Widgets
 widgets_sheet_subtitle|Wähl eins aus und füg es mit einem Tipp zum Startbildschirm hinzu.
 widgets_sheet_manual|Dein Launcher kann Widgets nicht von hier hinzufügen. Halte eine freie Stelle auf dem Startbildschirm gedrückt, tippe auf Widgets und such Kinmichi.
 add_to_home|Hinzufügen
+welcome_eyebrow|Ein letzter Schritt
+welcome_title|Wie sollen wir dich nennen?
+welcome_body|„Heute“ begrüßt dich jeden Morgen mit deinem Namen. Du kannst ihn jederzeit in den Einstellungen ändern.
+welcome_name_hint|Dein Name
+welcome_sync_title|Sichern und synchronisieren
+welcome_optional|Optional
+welcome_sync_body|Melde dich mit Google an, dann ziehen deine Gewohnheiten mit aufs neue Handy um. Du kannst es später in den Einstellungen ein- oder ausschalten.
+welcome_signed_in|Angemeldet als %1$s
+welcome_private_note|Alles bleibt auf deinem Handy, solange du die Synchronisierung nicht einschaltest.
+replay_intro|Einführung erneut zeigen
+replay_intro_description|Die Tour und der Willkommensbildschirm für neue Nutzer. Deine Daten bleiben unverändert.

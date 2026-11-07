@@ -251,16 +251,53 @@ class PreviewGalleryTest {
         captureScreen("whats_new_${lang}_light")
     }
 
+    // First run, as a new user sees it: the five-page tour, then the welcome screen.
     @Test fun tourTr() = renderTour("tr")
     @Test fun tourEn() = renderTour("en")
+    @Test fun tourEs() = renderTour("es")
+    @Test fun tourDe() = renderTour("de")
+    @Test fun tourPt() = renderTour("pt")
+    @Test fun tourJa() = renderTour("ja")
+    @Test fun tourEnDark() = renderTour("en", dark = true)
+    @Test fun welcomeTrLight() = renderWelcome("tr", false)
+    @Test fun welcomeTrDark() = renderWelcome("tr", true)
+    @Test fun welcomeEnLight() = renderWelcome("en", false)
+    @Test fun welcomeEnDark() = renderWelcome("en", true)
+    @Test fun welcomeEsLight() = renderWelcome("es", false)
+    @Test fun welcomeDeLight() = renderWelcome("de", false)
+    @Test fun welcomePtLight() = renderWelcome("pt", false)
+    @Test fun welcomeJaLight() = renderWelcome("ja", false)
+    @Test fun welcomeSignedInEn() = renderWelcome("en", false, signedIn = true)
 
-    private fun renderTour(lang: String) {
-        setVariant(lang, false)
-        compose.setContent { TsuzukuTheme(darkTheme = false) { app.tsuzuku.ui.screens.OnboardingScreen(onComplete = {}) } }
+    private fun renderWelcome(lang: String, dark: Boolean, signedIn: Boolean = false) {
+        setVariant(lang, dark)
+        val account = if (signedIn) {
+            app.tsuzuku.data.CloudAccountState.SignedIn("Samet Example", "samet@example.com", null)
+        } else {
+            app.tsuzuku.data.CloudAccountState.SignedOut
+        }
+        compose.setContent {
+            TsuzukuTheme(darkTheme = dark) {
+                app.tsuzuku.ui.screens.WelcomeScreen(
+                    account = account,
+                    syncState = app.tsuzuku.data.CloudSyncState.Idle,
+                    initialName = "",
+                    onSignIn = {},
+                    onFinish = { _, _ -> },
+                )
+            }
+        }
+        compose.mainClock.advanceTimeBy(1_000)
+        captureScreen("welcome_${lang}_${if (dark) "dark" else "light"}" + if (signedIn) "_signedin" else "")
+    }
+
+    private fun renderTour(lang: String, dark: Boolean = false) {
+        setVariant(lang, dark)
+        compose.setContent { TsuzukuTheme(darkTheme = dark) { app.tsuzuku.ui.screens.OnboardingScreen(onComplete = {}) } }
         val next = compose.activity.getString(app.tsuzuku.R.string.continue_label)
         repeat(5) { page ->
             compose.mainClock.advanceTimeBy(1_000)
-            captureScreen("tour_${page + 1}_${lang}_light")
+            captureScreen("tour_${page + 1}_${lang}_${if (dark) "dark" else "light"}")
             if (page < 4) compose.onNodeWithText(next).performClick()
         }
     }

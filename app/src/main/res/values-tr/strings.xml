@@ -1182,4 +1182,15 @@
     <string name="widgets_sheet_subtitle">Birini seç, tek dokunuşla ana ekranına ekle.</string>
     <string name="widgets_sheet_manual">Ana ekran uygulaman buradan eklemeyi desteklemiyor. Ana ekranda boş bir yere uzun bas, Widget\'lar\'a dokun ve Kinmichi\'yi bul.</string>
     <string name="add_to_home">Ekle</string>
+    <string name="welcome_eyebrow">Son bir adım</string>
+    <string name="welcome_title">Sana nasıl seslenelim?</string>
+    <string name="welcome_body">Bugün ekranı seni her sabah adınla karşılar. İstediğin zaman Ayarlar\'dan değiştirebilirsin.</string>
+    <string name="welcome_name_hint">Adın</string>
+    <string name="welcome_sync_title">Yedekle ve eşitle</string>
+    <string name="welcome_optional">İsteğe bağlı</string>
+    <string name="welcome_sync_body">Google ile giriş yaparsan alışkanlıkların yeni telefonuna da seninle gelir. Daha sonra Ayarlar\'dan açıp kapatabilirsin.</string>
+    <string name="welcome_signed_in">%1$s ile giriş yapıldı</string>
+    <string name="welcome_private_note">Eşitlemeyi açmadığın sürece her şey telefonunda kalır.</string>
+    <string name="replay_intro">Tanıtımı yeniden göster</string>
+    <string name="replay_intro_description">Yeni bir kullanıcının gördüğü tanıtım ve karşılama ekranı. Verilerin olduğu gibi kalır.</string>
 </resources>

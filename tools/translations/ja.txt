@@ -797,3 +797,14 @@ widgets_sheet_title|ウィジェット
 widgets_sheet_subtitle|選んでワンタップでホーム画面に追加できます。
 widgets_sheet_manual|お使いのホームアプリはここからの追加に対応していません。ホーム画面の空いている所を長押しし、「ウィジェット」から Kinmichi を探してください。
 add_to_home|追加
+welcome_eyebrow|あと少し
+welcome_title|なんと呼べばいい？
+welcome_body|「今日」画面が毎朝お名前であいさつします。設定からいつでも変更できます。
+welcome_name_hint|お名前
+welcome_sync_title|バックアップと同期
+welcome_optional|任意
+welcome_sync_body|Google でログインすると、機種変更しても習慣を引き継げます。あとで設定からオン・オフできます。
+welcome_signed_in|%1$s でログイン中
+welcome_private_note|同期をオンにしない限り、すべてスマホの中に残ります。
+replay_intro|紹介をもう一度見る
+replay_intro_description|新しく使う人が見る紹介と最初の画面です。データはそのままです。
