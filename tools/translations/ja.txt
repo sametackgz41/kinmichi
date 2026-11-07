@@ -225,7 +225,7 @@ configure_widget|ウィジェットの設定
 configure_widget_description|表示する習慣を選んでください。
 save_widget|ウィジェットを保存
 home_widget|ホーム画面のウィジェット
-home_widget_description|ホーム画面のウィジェット一覧から追加。長押しで設定し直せます
+home_widget_description|タップしてウィジェットを見て、ホーム画面に追加
 error_reports|エラーレポート
 error_reports_description|直近のエラーを表示・書き出し
 crash_report_available|エラーレポートがあります
@@ -793,3 +793,7 @@ whats_new_items[0]|新しい名前: Kinmichi|日本語で「金の道」。習�
 whats_new_items[1]|6 つの言語|英語とトルコ語に、スペイン語、ドイツ語、ポルトガル語、日本語が加わりました。
 whats_new_items[2]|変化する目標|3 週間好調なら目標を上げ、あまりできない毎日の習慣は週に数回へ。
 whats_new_items[3]|新しいツアーとアイコン|金の道を進む足あと。今日の一歩は金色。
+widgets_sheet_title|ウィジェット
+widgets_sheet_subtitle|選んでワンタップでホーム画面に追加できます。
+widgets_sheet_manual|お使いのホームアプリはここからの追加に対応していません。ホーム画面の空いている所を長押しし、「ウィジェット」から Kinmichi を探してください。
+add_to_home|追加

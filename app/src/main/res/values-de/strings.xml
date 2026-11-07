@@ -221,7 +221,7 @@
     <string name="configure_widget_description">Wähle, welche Gewohnheiten angezeigt werden.</string>
     <string name="save_widget">Widget speichern</string>
     <string name="home_widget">Startbildschirm-Widget</string>
-    <string name="home_widget_description">Über das Widget-Menü des Startbildschirms hinzufügen; lange drücken zum Neu-Einrichten</string>
+    <string name="home_widget_description">Tippe, um die Widgets zu sehen und eins hinzuzufügen</string>
     <string name="error_reports">Fehlerberichte</string>
     <string name="error_reports_description">Den letzten App-Fehler ansehen und exportieren</string>
     <string name="crash_report_available">Ein Fehlerbericht liegt vor</string>
@@ -779,6 +779,10 @@
     <string name="advice_fewer_per_week">Deine letzten Wochen lagen unter diesem Ziel. Vorerst %1$d-mal pro Woche anpeilen und steigern?</string>
     <string name="advice_more_per_week">Drei Wochen in Folge hast du dieses Ziel erreicht. Bereit für %1$d-mal pro Woche?</string>
     <string name="advice_accept_per_week">%1$d× pro Woche</string>
+    <string name="widgets_sheet_title">Widgets</string>
+    <string name="widgets_sheet_subtitle">Wähl eins aus und füg es mit einem Tipp zum Startbildschirm hinzu.</string>
+    <string name="widgets_sheet_manual">Dein Launcher kann Widgets nicht von hier hinzufügen. Halte eine freie Stelle auf dem Startbildschirm gedrückt, tippe auf Widgets und such Kinmichi.</string>
+    <string name="add_to_home">Hinzufügen</string>
     <plurals name="streak_days">
         <item quantity="one">%d Tag in Folge</item>
         <item quantity="other">%d Tage in Folge</item>

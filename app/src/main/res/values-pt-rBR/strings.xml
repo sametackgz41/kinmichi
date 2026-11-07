@@ -221,7 +221,7 @@
     <string name="configure_widget_description">Escolha quais hábitos mostrar.</string>
     <string name="save_widget">Salvar widget</string>
     <string name="home_widget">Widget da tela inicial</string>
-    <string name="home_widget_description">Adicione pelo menu de widgets; toque e segure para reconfigurar</string>
+    <string name="home_widget_description">Toque para ver os widgets e adicionar um à tela inicial</string>
     <string name="error_reports">Relatórios de erro</string>
     <string name="error_reports_description">Ver e exportar o último erro do app</string>
     <string name="crash_report_available">Há um relatório de erro salvo</string>
@@ -779,6 +779,10 @@
     <string name="advice_fewer_per_week">Suas últimas semanas ficaram abaixo desta meta. Mirar %1$d vezes por semana por enquanto e ir subindo?</string>
     <string name="advice_more_per_week">Três semanas seguidas batendo esta meta. Pronto para %1$d vezes por semana?</string>
     <string name="advice_accept_per_week">%1$d× por semana</string>
+    <string name="widgets_sheet_title">Widgets</string>
+    <string name="widgets_sheet_subtitle">Escolha um e adicione à tela inicial com um toque.</string>
+    <string name="widgets_sheet_manual">Seu launcher não permite adicionar widgets daqui. Toque e segure um espaço vazio na tela inicial, toque em Widgets e procure Kinmichi.</string>
+    <string name="add_to_home">Adicionar</string>
     <plurals name="streak_days">
         <item quantity="one">Sequência de %d dia</item>
         <item quantity="other">Sequência de %d dias</item>

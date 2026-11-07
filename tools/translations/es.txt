@@ -225,7 +225,7 @@ configure_widget|Configurar widget
 configure_widget_description|Elige qué hábitos mostrar.
 save_widget|Guardar widget
 home_widget|Widget de pantalla de inicio
-home_widget_description|Añádelo desde el menú de widgets; mantén pulsado para reconfigurarlo
+home_widget_description|Toca para ver los widgets y añadir uno a tu pantalla de inicio
 error_reports|Informes de errores
 error_reports_description|Ver y exportar el último error de la app
 crash_report_available|Hay un informe de error guardado
@@ -799,3 +799,7 @@ whats_new_items[0]|Nuevo nombre: Kinmichi|Significa 'camino dorado' en japonés.
 whats_new_items[1]|Seis idiomas|Español, alemán, portugués y japonés se suman al inglés y al turco.
 whats_new_items[2]|Metas que se adaptan|Sube el listón tras tres semanas fuertes, o convierte un hábito diario que casi no haces en unas veces por semana.
 whats_new_items[3]|Nuevo recorrido e icono|Pasos por un camino dorado, el de hoy en oro.
+widgets_sheet_title|Widgets
+widgets_sheet_subtitle|Elige uno y añádelo a tu pantalla de inicio con un toque.
+widgets_sheet_manual|Tu launcher no permite añadir widgets desde aquí. Mantén pulsado un espacio vacío de la pantalla de inicio, toca Widgets y busca Kinmichi.
+add_to_home|Añadir

@@ -397,8 +397,7 @@
     <string name="palette_light">Sade açık</string>
     <string name="palette_sage">Adaçayı</string>
     <string name="home_widget">Ana ekran widget’ı</string>
-    <string name="home_widget_description">Ana ekranın widget menüsünden ekle; uzun basarak yeniden düzenle</string>
-
+    <string name="home_widget_description">Dokun, widget\'ları gör ve ana ekranına ekle</string>
     <string name="error_reports">Hata raporları</string>
     <string name="error_reports_description">Son uygulama hatasını görüntüle ve dışa aktar</string>
     <string name="crash_report_available">Kaydedilmiş bir hata raporu var</string>
@@ -1179,4 +1178,8 @@
     <string name="advice_fewer_per_week">Son haftalarda bu hedefin altında kaldın. Şimdilik haftada %1$d kez hedefleyip adım adım büyütelim mi?</string>
     <string name="advice_more_per_week">Üç haftadır üst üste bu hedefi tutturuyorsun. Haftada %1$d kez için hazır mısın?</string>
     <string name="advice_accept_per_week">Haftada %1$d</string>
+    <string name="widgets_sheet_title">Widget\'lar</string>
+    <string name="widgets_sheet_subtitle">Birini seç, tek dokunuşla ana ekranına ekle.</string>
+    <string name="widgets_sheet_manual">Ana ekran uygulaman buradan eklemeyi desteklemiyor. Ana ekranda boş bir yere uzun bas, Widget\'lar\'a dokun ve Kinmichi\'yi bul.</string>
+    <string name="add_to_home">Ekle</string>
 </resources>

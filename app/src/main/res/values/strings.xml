@@ -397,8 +397,7 @@
     <string name="palette_light">Simple light</string>
     <string name="palette_sage">Sage</string>
     <string name="home_widget">Home screen widget</string>
-    <string name="home_widget_description">Add it from the home screen widget menu; long-press to reconfigure</string>
-
+    <string name="home_widget_description">Tap to see the widgets and add one to your home screen</string>
     <string name="error_reports">Error reports</string>
     <string name="error_reports_description">View and export the last app error</string>
     <string name="crash_report_available">A captured error report is available</string>
@@ -1180,4 +1179,8 @@
     <string name="advice_fewer_per_week">Your weeks lately fell short of this goal. Aim for %1$d times a week for now and build up?</string>
     <string name="advice_more_per_week">Three weeks in a row you\'ve met this goal. Ready for %1$d times a week?</string>
     <string name="advice_accept_per_week">%1$d× a week</string>
+    <string name="widgets_sheet_title">Widgets</string>
+    <string name="widgets_sheet_subtitle">Pick one and add it to your home screen in one tap.</string>
+    <string name="widgets_sheet_manual">Your launcher can\'t add widgets from here. Long-press an empty spot on the home screen, tap Widgets and find Kinmichi.</string>
+    <string name="add_to_home">Add</string>
 </resources>
