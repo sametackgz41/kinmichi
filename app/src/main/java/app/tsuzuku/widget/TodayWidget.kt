@@ -1,5 +1,7 @@
 package app.tsuzuku.widget
 
+import androidx.glance.semantics.semantics
+import androidx.glance.semantics.contentDescription
 import androidx.compose.runtime.remember
 import kotlinx.coroutines.flow.first
 import android.content.Context
@@ -321,6 +323,11 @@ private fun ActionButton(item: TodayHabit, accent: Int, params: androidx.glance.
         HabitType.Count -> context.getString(R.string.increase_progress)
         HabitType.Duration -> habit.name
     }
+    if (habit.type == HabitType.Check && !item.isBlocked && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+        // A real checkbox: the launcher ticks it the moment it's tapped, before the app answers.
+        NativeHabitCheck(done, accent, params, description, sizeDp)
+        return
+    }
     var modifier = GlanceModifier.size(sizeDp.dp)
     if (action != null) modifier = modifier.clickable(action)
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
@@ -333,5 +340,26 @@ private fun ActionButton(item: TodayHabit, accent: Int, params: androidx.glance.
                 modifier = GlanceModifier.size(if (done) 22.dp else 20.dp),
             )
         }
+    }
+}
+
+/**
+ * Android 12+ checkbox drawn by the launcher itself, so the tick appears instantly on tap; the
+ * app then saves it and refreshes the other widgets. Tinted with the habit's colour.
+ */
+@Composable
+internal fun NativeHabitCheck(done: Boolean, accent: Int, params: androidx.glance.action.ActionParameters, description: String, sizeDp: Int) {
+    Box(
+        modifier = GlanceModifier.size(sizeDp.dp).semantics { contentDescription = description },
+        contentAlignment = Alignment.Center,
+    ) {
+        androidx.glance.appwidget.CheckBox(
+            checked = done,
+            onCheckedChange = actionRunCallback<ToggleHabitAction>(params),
+            colors = androidx.glance.appwidget.CheckboxDefaults.colors(
+                checkedColor = FixedColor(androidx.compose.ui.graphics.Color(accent)),
+                uncheckedColor = GlanceTheme.colors.outline,
+            ),
+        )
     }
 }

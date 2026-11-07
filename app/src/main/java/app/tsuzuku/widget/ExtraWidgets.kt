@@ -202,6 +202,17 @@ private fun QuickTile(item: TodayHabit, modifier: GlanceModifier) {
                 style = TextStyle(color = if (done) GlanceTheme.colors.onPrimary else GlanceTheme.colors.onSurfaceVariant, fontSize = 11.sp),
             )
         }
+        if (item.habit.type == HabitType.Check && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+            // Ticks instantly in the launcher; the tile colour follows once the app has saved it.
+            androidx.glance.appwidget.CheckBox(
+                checked = done,
+                onCheckedChange = actionRunCallback<ToggleHabitAction>(params),
+                colors = androidx.glance.appwidget.CheckboxDefaults.colors(
+                    checkedColor = GlanceTheme.colors.onPrimary,
+                    uncheckedColor = GlanceTheme.colors.outline,
+                ),
+            )
+        }
     }
 }
 
