@@ -27,6 +27,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import app.tsuzuku.model.feelingSummary
+import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -221,7 +223,39 @@ fun TsuzukuApp(
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = backStackEntry?.destination?.route ?: "today"
 
+    // "How did it go?" after completing a habit on Today; hides itself after a few seconds.
+    var feelingPromptHabit by remember { mutableStateOf<app.tsuzuku.model.Habit?>(null) }
+    LaunchedEffect(feelingPromptHabit) {
+        if (feelingPromptHabit != null) {
+            kotlinx.coroutines.delay(9_000)
+            feelingPromptHabit = null
+        }
+    }
+    val askFeeling: (app.tsuzuku.model.Habit) -> Unit = { habit ->
+        if (app.tsuzuku.ui.screens.FeelingPromptSetting.isEnabled(context)) feelingPromptHabit = habit
+    }
+
     Scaffold(
+        snackbarHost = {
+            val habit = feelingPromptHabit
+            androidx.compose.animation.AnimatedVisibility(
+                visible = habit != null && currentRoute == "today",
+                enter = androidx.compose.animation.slideInVertically { it } + androidx.compose.animation.fadeIn(),
+                exit = androidx.compose.animation.slideOutVertically { it } + androidx.compose.animation.fadeOut(),
+            ) {
+                if (habit != null) {
+                    app.tsuzuku.ui.screens.FeelingPrompt(
+                        habit = habit,
+                        onPick = { feeling ->
+                            todayViewModel.setFeeling(habit.id, feeling)
+                            feelingPromptHabit = null
+                        },
+                        onDismiss = { feelingPromptHabit = null },
+                        modifier = Modifier.padding(horizontal = 16.dp),
+                    )
+                }
+            }
+        },
         topBar = {
             mainDestinations.firstOrNull { it.route == currentRoute }?.let { destination ->
                 MainTopBar(
@@ -367,11 +401,16 @@ fun TsuzukuApp(
                     onToggleHabit = { habitId ->
                         val h = habits.firstOrNull { it.habit.id == habitId }
                         todayViewModel.toggleHabit(habitId)
-                        if (h != null && !h.isComplete) connectionViewModel.onHabitProgressApplied(habitId, 1.0)
+                        if (h != null && !h.isComplete) {
+                            connectionViewModel.onHabitProgressApplied(habitId, 1.0)
+                            askFeeling(h.habit)
+                        }
                     },
                     onIncrementHabit = { habitId ->
+                        val h = habits.firstOrNull { it.habit.id == habitId }
                         todayViewModel.incrementHabit(habitId)
                         connectionViewModel.onHabitProgressApplied(habitId, 1.0)
+                        if (h != null && !h.isComplete && h.progress + h.habit.step >= h.habit.target) askFeeling(h.habit)
                     },
                     onDecrementHabit = todayViewModel::decrementHabit,
                     onToggleTimer = todayViewModel::toggleTimer,
@@ -782,6 +821,7 @@ fun TsuzukuApp(
                     HabitDetailScreen(
                         habit = habit,
                         records = history.records.filter { it.habitId == habitId },
+                        feelingSummary = history.feelingSummary(habitId, java.time.LocalDate.now().minusDays(89)),
                         onBack = navController::popBackStack,
                         onEdit = { navController.navigate("habit/$habitId/edit") },
                         onShare = {

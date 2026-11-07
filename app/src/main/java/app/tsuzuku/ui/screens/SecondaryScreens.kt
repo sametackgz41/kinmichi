@@ -44,6 +44,7 @@ import androidx.compose.material.icons.rounded.Summarize
 import androidx.compose.material.icons.rounded.Sync
 import androidx.compose.material.icons.rounded.BugReport
 import androidx.compose.material.icons.rounded.AutoAwesome
+import androidx.compose.material.icons.rounded.Mood
 import androidx.compose.material.icons.rounded.Widgets
 import androidx.compose.material.icons.rounded.Insights
 import androidx.compose.material.icons.rounded.AccountTree
@@ -268,6 +269,17 @@ fun ProfileScreen(
                     stringResource(R.string.daily_summary_setting_description),
                     checked = settings.showDailySummary,
                     onCheckedChange = onSetShowDailySummary,
+                )
+                var askFeelingOn by remember { mutableStateOf(FeelingPromptSetting.isEnabled(context)) }
+                SwitchSettingRow(
+                    Icons.Rounded.Mood,
+                    stringResource(R.string.feeling_setting),
+                    stringResource(R.string.feeling_setting_description),
+                    askFeelingOn,
+                    onCheckedChange = {
+                        askFeelingOn = it
+                        FeelingPromptSetting.setEnabled(context, it)
+                    },
                 )
                 var moodReminderOn by remember { mutableStateOf(app.tsuzuku.notifications.MoodReminder.isEnabled(context)) }
                 SwitchSettingRow(

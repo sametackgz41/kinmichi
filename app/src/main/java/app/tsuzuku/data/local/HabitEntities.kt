@@ -116,3 +116,23 @@ data class HabitLevelEntity(
     val createdAt: Long = System.currentTimeMillis(),
 )
 
+/** How doing a habit felt on a given day: 1 hard, 2 okay, 3 good. One per habit per day. */
+@Entity(
+    tableName = "habit_feelings",
+    primaryKeys = ["habitId", "localDate"],
+    foreignKeys = [
+        ForeignKey(
+            entity = HabitEntity::class,
+            parentColumns = ["id"],
+            childColumns = ["habitId"],
+            onDelete = ForeignKey.CASCADE,
+        ),
+    ],
+    indices = [Index(value = ["habitId"])],
+)
+data class HabitFeelingEntity(
+    val habitId: Long,
+    val localDate: String,
+    val feeling: Int,
+    val updatedAt: Long,
+)

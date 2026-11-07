@@ -1194,4 +1194,16 @@
     <string name="replay_intro">Tanıtımı yeniden göster</string>
     <string name="replay_intro_description">Yeni bir kullanıcının gördüğü tanıtım ve karşılama ekranı. Verilerin olduğu gibi kalır.</string>
     <string name="all_time">Tüm zamanlar</string>
+    <string name="feeling_question">%1$s nasıl geçti?</string>
+    <string name="feeling_hard">Zor geçti</string>
+    <string name="feeling_okay">İdare eder</string>
+    <string name="feeling_good">Keyifliydi</string>
+    <string name="close_label">Kapat</string>
+    <string name="feeling_card_title">Nasıl hissettiriyor</string>
+    <string name="feeling_usually">Genelde %1$s %2$s</string>
+    <string name="feeling_card_footer">Tamamladıktan sonraki cevaplarından, son 90 gün.</string>
+    <string name="most_enjoyed_title">En keyif aldıkların</string>
+    <string name="most_enjoyed_share">😊 %2$d\'de %1$d</string>
+    <string name="feeling_setting">Nasıl geçtiğini sor</string>
+    <string name="feeling_setting_description">Bugün ekranında bir alışkanlığı tamamlayınca, tek dokunuşla bir yüz seç</string>
 </resources>

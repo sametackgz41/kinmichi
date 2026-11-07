@@ -815,3 +815,15 @@ welcome_private_note|Todo se queda en tu teléfono salvo que actives la sincroni
 replay_intro|Ver la introducción otra vez
 replay_intro_description|El recorrido y la bienvenida que ve alguien nuevo. Tus datos no cambian.
 all_time|Desde siempre
+feeling_question|¿Qué tal %1$s?
+feeling_hard|Difícil
+feeling_okay|Normal
+feeling_good|Genial
+close_label|Cerrar
+feeling_card_title|Cómo se siente
+feeling_usually|Normalmente %1$s %2$s
+feeling_card_footer|Según tus respuestas al completarlo, últimos 90 días.
+most_enjoyed_title|Lo que más disfrutas
+most_enjoyed_share|😊 %1$d de %2$d
+feeling_setting|Preguntar qué tal fue
+feeling_setting_description|Al completar un hábito en Hoy, un toque en una cara

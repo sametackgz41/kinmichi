@@ -809,3 +809,15 @@ welcome_private_note|同期をオンにしない限り、すべてスマホの�
 replay_intro|紹介をもう一度見る
 replay_intro_description|新しく使う人が見る紹介と最初の画面です。データはそのままです。
 all_time|全期間
+feeling_question|%1$s はどうでしたか？
+feeling_hard|大変
+feeling_okay|まあまあ
+feeling_good|よかった
+close_label|閉じる
+feeling_card_title|どんな気分か
+feeling_usually|たいてい %1$s %2$s
+feeling_card_footer|完了後の回答より（直近90日）。
+most_enjoyed_title|いちばん楽しめている習慣
+most_enjoyed_share|😊 %2$d回中%1$d回
+feeling_setting|どうだったか聞く
+feeling_setting_description|「今日」で習慣を完了したら、顔をワンタップ

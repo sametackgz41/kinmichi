@@ -795,6 +795,18 @@
     <string name="replay_intro">紹介をもう一度見る</string>
     <string name="replay_intro_description">新しく使う人が見る紹介と最初の画面です。データはそのままです。</string>
     <string name="all_time">全期間</string>
+    <string name="feeling_question">%1$s はどうでしたか？</string>
+    <string name="feeling_hard">大変</string>
+    <string name="feeling_okay">まあまあ</string>
+    <string name="feeling_good">よかった</string>
+    <string name="close_label">閉じる</string>
+    <string name="feeling_card_title">どんな気分か</string>
+    <string name="feeling_usually">たいてい %1$s %2$s</string>
+    <string name="feeling_card_footer">完了後の回答より（直近90日）。</string>
+    <string name="most_enjoyed_title">いちばん楽しめている習慣</string>
+    <string name="most_enjoyed_share">😊 %2$d回中%1$d回</string>
+    <string name="feeling_setting">どうだったか聞く</string>
+    <string name="feeling_setting_description">「今日」で習慣を完了したら、顔をワンタップ</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

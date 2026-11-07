@@ -30,6 +30,8 @@ interface HabitRepository {
     fun observeToday(): Flow<List<TodayHabit>>
     fun observeHistory(): Flow<HabitHistorySnapshot>
     suspend fun toggleHabit(id: Long)
+    /** Saves how doing a habit felt on [date]; null clears it. */
+    suspend fun setFeeling(habitId: Long, date: LocalDate, feeling: app.tsuzuku.model.Feeling?)
     suspend fun incrementHabit(id: Long)
     suspend fun decrementHabit(id: Long)
     suspend fun toggleHabitOnDate(id: Long, date: LocalDate)
@@ -132,8 +134,25 @@ class RoomHabitRepository(
     override fun observeHistory(): Flow<HabitHistorySnapshot> = combine(
         dao.observeActiveHabits(),
         dao.observeAllEntries(),
-    ) { habits, entries ->
-        HabitHistorySnapshot(habits.map(HabitEntity::toDomain), entries.toHistoryRecords())
+        dao.observeFeelings(),
+    ) { habits, entries, feelings ->
+        HabitHistorySnapshot(
+            habits.map(HabitEntity::toDomain),
+            entries.toHistoryRecords(),
+            feelings.mapNotNull { item ->
+                val feeling = app.tsuzuku.model.Feeling.of(item.feeling) ?: return@mapNotNull null
+                val date = runCatching { LocalDate.parse(item.localDate) }.getOrNull() ?: return@mapNotNull null
+                app.tsuzuku.model.HabitFeeling(item.habitId, date, feeling)
+            },
+        )
+    }
+
+    override suspend fun setFeeling(habitId: Long, date: LocalDate, feeling: app.tsuzuku.model.Feeling?) {
+        if (feeling == null) {
+            dao.deleteFeeling(habitId, date.toString())
+        } else {
+            dao.upsertFeeling(app.tsuzuku.data.local.HabitFeelingEntity(habitId, date.toString(), feeling.value, now()))
+        }
     }
 
     override suspend fun toggleHabit(id: Long) = toggleHabitOnDate(id, today())

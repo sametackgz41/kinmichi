@@ -34,8 +34,9 @@ import androidx.sqlite.db.SupportSQLiteDatabase
         ProjectTaskLinkEntity::class,
         ProjectGoalLinkEntity::class,
         HabitLevelEntity::class,
+        HabitFeelingEntity::class,
     ],
-    version = 19,
+    version = 20,
     exportSchema = false,
 )
 abstract class TsuzukuDatabase : RoomDatabase() {
@@ -61,7 +62,7 @@ abstract class TsuzukuDatabase : RoomDatabase() {
                     context.applicationContext,
                     TsuzukuDatabase::class.java,
                     "tsuzuku.db",
-                ).addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9, MIGRATION_9_10, MIGRATION_10_11, MIGRATION_11_12, MIGRATION_12_13, MIGRATION_13_14, MIGRATION_14_15, MIGRATION_15_16, MIGRATION_16_17, MIGRATION_17_18, MIGRATION_18_19).build().also { instance = it }
+                ).addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9, MIGRATION_9_10, MIGRATION_10_11, MIGRATION_11_12, MIGRATION_12_13, MIGRATION_13_14, MIGRATION_14_15, MIGRATION_15_16, MIGRATION_16_17, MIGRATION_17_18, MIGRATION_18_19, MIGRATION_19_20).build().also { instance = it }
             }
 
         private val MIGRATION_1_2 = object : Migration(1, 2) {
@@ -241,6 +242,15 @@ abstract class TsuzukuDatabase : RoomDatabase() {
                 db.execSQL("CREATE INDEX IF NOT EXISTS `index_project_goal_links_projectId` ON `project_goal_links` (`projectId`)")
                 db.execSQL("CREATE INDEX IF NOT EXISTS `index_project_goal_links_goalId` ON `project_goal_links` (`goalId`)")
                 db.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS `index_project_goal_links_projectId_goalId` ON `project_goal_links` (`projectId`, `goalId`)")
+            }
+        }
+
+        private val MIGRATION_19_20 = object : Migration(19, 20) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    "CREATE TABLE IF NOT EXISTS `habit_feelings` (`habitId` INTEGER NOT NULL, `localDate` TEXT NOT NULL, `feeling` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, PRIMARY KEY(`habitId`, `localDate`), FOREIGN KEY(`habitId`) REFERENCES `habits`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE)",
+                )
+                db.execSQL("CREATE INDEX IF NOT EXISTS `index_habit_feelings_habitId` ON `habit_feelings` (`habitId`)")
             }
         }
 

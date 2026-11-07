@@ -82,6 +82,7 @@ class BackupCodecTest {
         projectGoalLinks = listOf(
             ProjectGoalLinkEntity(id = 1, projectId = 1, goalId = 1),
         ),
+        habitFeelings = listOf(app.tsuzuku.data.local.HabitFeelingEntity(habitId = 1, localDate = "2026-08-18", feeling = 3, updatedAt = 4)),
         habitLevels = listOf(
             HabitLevelEntity(
                 id = 1,

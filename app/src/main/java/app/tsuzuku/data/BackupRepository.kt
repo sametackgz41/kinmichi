@@ -11,6 +11,7 @@ import app.tsuzuku.data.local.DailyReviewEntity
 import app.tsuzuku.data.local.GoalEntity
 import app.tsuzuku.data.local.HabitEntity
 import app.tsuzuku.data.local.HabitEntryEntity
+import app.tsuzuku.data.local.HabitFeelingEntity
 import app.tsuzuku.data.local.HabitLevelEntity
 import app.tsuzuku.data.local.HabitGoalLinkEntity
 import app.tsuzuku.data.local.HabitLibraryLinkEntity
@@ -158,6 +159,7 @@ internal object BackupCodec {
         put("projectTaskLinks", snapshot.projectTaskLinks.toJson { projectTaskLinkToJson(it) })
         put("projectGoalLinks", snapshot.projectGoalLinks.toJson { projectGoalLinkToJson(it) })
         put("habitLevels", snapshot.habitLevels.toJson { habitLevelToJson(it) })
+        put("habitFeelings", snapshot.habitFeelings.toJson { habitFeelingToJson(it) })
     }.toString(2)
 
     fun decode(json: String): BackupSnapshot {
@@ -191,6 +193,7 @@ internal object BackupCodec {
             projectTaskLinks = root.optJSONArray("projectTaskLinks")?.mapObjects(::jsonToProjectTaskLink).orEmpty(),
             projectGoalLinks = root.optJSONArray("projectGoalLinks")?.mapObjects(::jsonToProjectGoalLink).orEmpty(),
             habitLevels = root.optJSONArray("habitLevels")?.mapObjects(::jsonToHabitLevel).orEmpty(),
+            habitFeelings = root.optJSONArray("habitFeelings")?.mapObjects(::jsonToHabitFeeling).orEmpty(),
         )
     }
 
@@ -487,6 +490,15 @@ internal object BackupCodec {
         id = o.getLong("id"), projectId = o.getLong("projectId"), goalId = o.getLong("goalId"),
     )
 
+    private fun habitFeelingToJson(item: HabitFeelingEntity) = JSONObject().apply {
+        put("habitId", item.habitId); put("localDate", item.localDate); put("feeling", item.feeling); put("updatedAt", item.updatedAt)
+    }
+
+    private fun jsonToHabitFeeling(o: JSONObject) = HabitFeelingEntity(
+        habitId = o.getLong("habitId"), localDate = o.getString("localDate"), feeling = o.getInt("feeling"),
+        updatedAt = o.optLong("updatedAt", System.currentTimeMillis()),
+    )
+
     private fun habitLevelToJson(item: HabitLevelEntity) = JSONObject().apply {
         put("id", item.id); put("habitId", item.habitId); put("levelNumber", item.levelNumber)
         put("name", item.name); put("target", item.target); put("minimumTarget", item.minimumTarget)
@@ -525,6 +537,7 @@ internal fun validateBackup(snapshot: BackupSnapshot) {
     val projectIds = snapshot.projects.mapTo(mutableSetOf()) { it.id }
     require(snapshot.habitEntries.all { it.habitId in habitIds }) { "History references a missing habit" }
     require(snapshot.habitLevels.all { it.habitId in habitIds }) { "Habit level references a missing habit" }
+    require(snapshot.habitFeelings.all { it.habitId in habitIds && it.feeling in 1..3 }) { "Invalid habit feeling data" }
     require(snapshot.habits.all { it.prerequisiteHabitId == null || (it.prerequisiteHabitId in habitIds && it.prerequisiteHabitId != it.id) }) { "Habit prerequisite is invalid" }
     require(snapshot.seasons.all { it.contentId in contentIds }) { "Season references missing content" }
     require(snapshot.contentNotes.all { it.contentId in contentIds }) { "Note references missing content" }

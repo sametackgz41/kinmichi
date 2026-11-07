@@ -68,6 +68,10 @@ class TodayViewModel(
         viewModelScope.launch { repository.toggleHabit(id); onDataChanged() }
     }
 
+    fun setFeeling(habitId: Long, feeling: app.tsuzuku.model.Feeling?) {
+        viewModelScope.launch { repository.setFeeling(habitId, java.time.LocalDate.now(), feeling) }
+    }
+
     fun completeTinyVersion(id: Long) {
         viewModelScope.launch { repository.completeTinyVersion(id); onDataChanged() }
     }

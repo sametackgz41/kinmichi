@@ -96,6 +96,7 @@ fun HabitDetailScreen(
     onSaveLevels: (List<HabitLevel>) -> Unit = {},
     onAdvanceLevel: (Int) -> Unit = {},
     onShare: (() -> Unit)? = null,
+    feelingSummary: app.tsuzuku.model.FeelingSummary = app.tsuzuku.model.FeelingSummary(),
 ) {
     var note by rememberSaveable(habit.id, habit.generalNote) { mutableStateOf(habit.generalNote) }
     var confirmDelete by rememberSaveable { mutableStateOf(false) }
@@ -150,6 +151,7 @@ fun HabitDetailScreen(
                 }
             }
             item { HabitYearCard(habit, records) }
+            if (feelingSummary.total > 0) item { FeelingSummaryCard(feelingSummary) }
             item {
                 Column {
                     Column(Modifier.fillMaxWidth().padding(17.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {

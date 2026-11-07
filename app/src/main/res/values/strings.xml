@@ -1195,4 +1195,16 @@
     <string name="replay_intro">Show the intro again</string>
     <string name="replay_intro_description">The tour and welcome screen a new user sees. Your data stays as it is.</string>
     <string name="all_time">All time</string>
+    <string name="feeling_question">How did %1$s go?</string>
+    <string name="feeling_hard">Hard</string>
+    <string name="feeling_okay">Okay</string>
+    <string name="feeling_good">Good</string>
+    <string name="close_label">Close</string>
+    <string name="feeling_card_title">How it feels</string>
+    <string name="feeling_usually">Usually %1$s %2$s</string>
+    <string name="feeling_card_footer">From your answers after completing it, last 90 days.</string>
+    <string name="most_enjoyed_title">What you enjoy most</string>
+    <string name="most_enjoyed_share">😊 %1$d of %2$d</string>
+    <string name="feeling_setting">Ask how it went</string>
+    <string name="feeling_setting_description">After you complete a habit on Today, one tap on a face</string>
 </resources>

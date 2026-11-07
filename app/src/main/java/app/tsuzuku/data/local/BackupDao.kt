@@ -32,6 +32,7 @@ data class BackupSnapshot(
     val projectTaskLinks: List<ProjectTaskLinkEntity> = emptyList(),
     val projectGoalLinks: List<ProjectGoalLinkEntity> = emptyList(),
     val habitLevels: List<HabitLevelEntity> = emptyList(),
+    val habitFeelings: List<HabitFeelingEntity> = emptyList(),
 )
 
 @Dao
@@ -75,6 +76,7 @@ interface BackupDao {
     @Query("SELECT * FROM project_task_links ORDER BY id") suspend fun getProjectTaskLinks(): List<ProjectTaskLinkEntity>
     @Query("SELECT * FROM project_goal_links ORDER BY id") suspend fun getProjectGoalLinks(): List<ProjectGoalLinkEntity>
     @Query("SELECT * FROM habit_levels ORDER BY id") suspend fun getHabitLevels(): List<HabitLevelEntity>
+    @Query("SELECT * FROM habit_feelings ORDER BY habitId, localDate") suspend fun getHabitFeelings(): List<HabitFeelingEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertHabits(items: List<HabitEntity>)
@@ -115,12 +117,16 @@ interface BackupDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE) suspend fun insertProjectTaskLinks(items: List<ProjectTaskLinkEntity>)
     @Insert(onConflict = OnConflictStrategy.REPLACE) suspend fun insertProjectGoalLinks(items: List<ProjectGoalLinkEntity>)
     @Insert(onConflict = OnConflictStrategy.REPLACE) suspend fun insertHabitLevels(items: List<HabitLevelEntity>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE) suspend fun insertHabitFeelings(items: List<HabitFeelingEntity>)
 
     @Query("DELETE FROM habit_entries")
     suspend fun clearHabitEntries()
 
     @Query("DELETE FROM habit_levels")
     suspend fun clearHabitLevels()
+
+    @Query("DELETE FROM habit_feelings")
+    suspend fun clearHabitFeelings()
 
     @Query("DELETE FROM habits")
     suspend fun clearHabits()
@@ -185,11 +191,13 @@ interface BackupDao {
         projectTaskLinks = getProjectTaskLinks(),
         projectGoalLinks = getProjectGoalLinks(),
         habitLevels = getHabitLevels(),
+        habitFeelings = getHabitFeelings(),
     )
 
     @Transaction
     suspend fun replaceAll(snapshot: BackupSnapshot) {
         clearHabitEntries()
+        clearHabitFeelings()
         clearHabitLevels()
         clearHabits()
         clearContentNotes()
@@ -216,6 +224,7 @@ interface BackupDao {
         clearProjects()
         insertHabits(snapshot.habits)
         insertHabitLevels(snapshot.habitLevels)
+        insertHabitFeelings(snapshot.habitFeelings)
         insertHabitEntries(snapshot.habitEntries)
         insertContents(snapshot.contents)
         insertSeasons(snapshot.seasons)

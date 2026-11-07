@@ -40,6 +40,7 @@ data class PeriodStatistics(
 data class HabitHistorySnapshot(
     val habits: List<Habit>,
     val records: List<HabitHistoryRecord>,
+    val feelings: List<HabitFeeling> = emptyList(),
 ) {
     private val recordsByDateAndHabit: Map<LocalDate, Map<Long, HabitHistoryRecord>> =
         records.groupBy(HabitHistoryRecord::date).mapValues { (_, dayRecords) ->

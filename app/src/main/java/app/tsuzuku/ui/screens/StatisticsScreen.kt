@@ -3,6 +3,7 @@ package app.tsuzuku.ui.screens
 import androidx.annotation.StringRes
 import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
+import app.tsuzuku.model.mostEnjoyed
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -116,6 +117,7 @@ fun StatisticsScreen(
     var libraryCategory by rememberSaveable { mutableStateOf("") }
 
     // 0 means all time: from the first habit or record to today.
+    val mostEnjoyed = remember(history) { history.mostEnjoyed(since = java.time.LocalDate.now().minusDays(89)) }
     val stats = remember(history, days) { history.statistics(if (days == ALL_TIME) history.allTimeDays() else days) }
     val availableTags = remember(stats) { stats.habits.flatMap { it.habit.tags.split(',') }.map(String::trim).filter(String::isNotBlank).distinct().sorted() }
     val visibleHabitStats = remember(stats, selectedTag) { if (selectedTag.isBlank()) stats.habits else stats.habits.filter { stat -> stat.habit.tags.split(',').any { it.trim().equals(selectedTag, true) } } }
@@ -159,6 +161,9 @@ fun StatisticsScreen(
                 }
                 if (moodInsights != null) {
                     item { MoodInsightsCard(moodInsights) }
+                }
+                if (mostEnjoyed.isNotEmpty()) {
+                    item { MostEnjoyedCard(mostEnjoyed) }
                 }
                 item {
                     Row(

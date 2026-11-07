@@ -815,3 +815,15 @@ welcome_private_note|Alles bleibt auf deinem Handy, solange du die Synchronisier
 replay_intro|Einführung erneut zeigen
 replay_intro_description|Die Tour und der Willkommensbildschirm für neue Nutzer. Deine Daten bleiben unverändert.
 all_time|Gesamt
+feeling_question|Wie war %1$s?
+feeling_hard|Schwer
+feeling_okay|Okay
+feeling_good|Gut
+close_label|Schließen
+feeling_card_title|Wie es sich anfühlt
+feeling_usually|Meistens %1$s %2$s
+feeling_card_footer|Aus deinen Antworten nach dem Abhaken, letzte 90 Tage.
+most_enjoyed_title|Was dir am meisten Freude macht
+most_enjoyed_share|😊 %1$d von %2$d
+feeling_setting|Fragen, wie es war
+feeling_setting_description|Nach dem Abhaken auf „Heute“ ein Tipp auf ein Gesicht

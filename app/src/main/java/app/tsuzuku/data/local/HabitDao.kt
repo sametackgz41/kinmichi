@@ -9,6 +9,15 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface HabitDao {
+    @Query("SELECT * FROM habit_feelings")
+    fun observeFeelings(): Flow<List<HabitFeelingEntity>>
+
+    @androidx.room.Upsert
+    suspend fun upsertFeeling(item: HabitFeelingEntity)
+
+    @Query("DELETE FROM habit_feelings WHERE habitId = :habitId AND localDate = :localDate")
+    suspend fun deleteFeeling(habitId: Long, localDate: String)
+
     @Query("SELECT * FROM habits WHERE isArchived = 0 ORDER BY sortOrder, createdAt")
     fun observeActiveHabits(): Flow<List<HabitEntity>>
 
