@@ -816,6 +816,7 @@ fun TsuzukuApp(
                     onBack = navController::popBackStack,
                     onSave = { draft ->
                         todayViewModel.addHabit(draft) { habitId ->
+                            app.tsuzuku.notifications.HabitAlarms.set(context, habitId, draft.alarm)
                             if (draft.reminderMinutes != null) {
                                 reminderScheduler.schedule(habitId, draft.scheduleDaysMask, draft.reminderMinutes)
                             }
@@ -908,6 +909,7 @@ fun TsuzukuApp(
                         onBack = navController::popBackStack,
                         onSave = { draft ->
                             todayViewModel.updateHabit(habitId, draft) {
+                                app.tsuzuku.notifications.HabitAlarms.set(context, habitId, draft.alarm)
                                 if (draft.reminderMinutes == null) {
                                     reminderScheduler.cancel(habitId)
                                 } else {

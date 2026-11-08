@@ -29,11 +29,12 @@ class HabitReminderScheduler(
             reminderMinutes = reminderMinutes,
             now = ZonedDateTime.now(),
         )
-        alarmManager.setAndAllowWhileIdle(
-            AlarmManager.RTC_WAKEUP,
-            triggerAt.toInstant().toEpochMilli(),
-            reminderPendingIntent(habitId),
-        )
+        val at = triggerAt.toInstant().toEpochMilli()
+        if (HabitAlarms.isOn(context, habitId)) {
+            HabitAlarms.scheduleExact(context, at, reminderPendingIntent(habitId))
+        } else {
+            alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, reminderPendingIntent(habitId))
+        }
     }
 
     suspend fun rescheduleAll() {
@@ -43,14 +44,16 @@ class HabitReminderScheduler(
     fun cancel(habitId: Long) {
         alarmManager.cancel(reminderPendingIntent(habitId))
         alarmManager.cancel(snoozePendingIntent(habitId))
+        HabitAlarms.stop(context, habitId)
     }
 
     fun snooze(habitId: Long, minutes: Int) {
-        alarmManager.setAndAllowWhileIdle(
-            AlarmManager.RTC_WAKEUP,
-            System.currentTimeMillis() + minutes.coerceIn(1, 720) * 60_000L,
-            snoozePendingIntent(habitId),
-        )
+        val at = System.currentTimeMillis() + minutes.coerceIn(1, 720) * 60_000L
+        if (HabitAlarms.isOn(context, habitId)) {
+            HabitAlarms.scheduleExact(context, at, snoozePendingIntent(habitId))
+        } else {
+            alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, snoozePendingIntent(habitId))
+        }
     }
 
     private fun reminderPendingIntent(habitId: Long): PendingIntent = PendingIntent.getBroadcast(

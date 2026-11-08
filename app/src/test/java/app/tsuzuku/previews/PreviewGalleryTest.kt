@@ -350,7 +350,18 @@ class PreviewGalleryTest {
     @Test fun settingsCardsTrDark() = renderSettingsLayout(app.tsuzuku.ui.screens.SettingsLayout.Cards, true)
     @Test fun settingsTilesTrDark() = renderSettingsLayout(app.tsuzuku.ui.screens.SettingsLayout.Tiles, true)
 
-    private fun renderSettingsLayout(layout: app.tsuzuku.ui.screens.SettingsLayout, dark: Boolean) {
+    @Test fun settingsHomeGridTr() = renderSettingsLayout(app.tsuzuku.ui.screens.SettingsLayout.Tiles, false, app.tsuzuku.ui.screens.SettingsHome.Grid)
+    @Test fun settingsHomeBentoTr() = renderSettingsLayout(app.tsuzuku.ui.screens.SettingsLayout.Tiles, false, app.tsuzuku.ui.screens.SettingsHome.Bento)
+    @Test fun settingsHomeGroupsTr() = renderSettingsLayout(app.tsuzuku.ui.screens.SettingsLayout.Tiles, false, app.tsuzuku.ui.screens.SettingsHome.Groups)
+    @Test fun settingsHomeBentoTrDark() = renderSettingsLayout(app.tsuzuku.ui.screens.SettingsLayout.Tiles, true, app.tsuzuku.ui.screens.SettingsHome.Bento)
+    @Test fun settingsPageNotificationsTr() = renderSettingsLayout(app.tsuzuku.ui.screens.SettingsLayout.Tiles, false, app.tsuzuku.ui.screens.SettingsHome.Grid, openTile = "Bildirimler")
+
+    private fun renderSettingsLayout(
+        layout: app.tsuzuku.ui.screens.SettingsLayout,
+        dark: Boolean,
+        home: app.tsuzuku.ui.screens.SettingsHome = app.tsuzuku.ui.screens.SettingsHome.Grid,
+        openTile: String? = null,
+    ) {
         setVariant("tr", dark)
         compose.setContent {
             TsuzukuTheme(darkTheme = dark) {
@@ -362,14 +373,21 @@ class PreviewGalleryTest {
                             onSetProfileName = {}, onSetTheme = {}, onSetLanguage = {}, onSetWeekStart = {},
                             onSetShowDailySummary = {}, onSetProtectScreen = {}, onOpenCloudAccount = {},
                             onOpenPlanning = {}, onOpenSecurity = {}, onOpenBackup = {}, onOpenDiagnostics = {},
-                            onOpenCategories = {}, layout = layout,
+                            onOpenCategories = {}, layout = layout, home = home,
                         )
                     }
                 }
             }
         }
         compose.mainClock.advanceTimeBy(800)
-        captureScreen("settingslayout_${layout.name.lowercase()}_tr_${if (dark) "dark" else "light"}")
+        if (openTile != null) {
+            compose.onNodeWithText(openTile).performClick()
+            compose.mainClock.advanceTimeBy(800)
+            captureScreen("settingspage_${openTile.lowercase()}_tr")
+            return
+        }
+        val name = if (layout == app.tsuzuku.ui.screens.SettingsLayout.Tiles) "settingshome_${home.name.lowercase()}" else "settingslayout_${layout.name.lowercase()}"
+        captureScreen("${name}_tr_${if (dark) "dark" else "light"}")
     }
 
     // Habit editor: three layouts (new habit), plus an open "more" group.

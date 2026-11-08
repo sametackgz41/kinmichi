@@ -895,3 +895,16 @@ whats_new_items[0]|Les widgets refonctionnent|Les widgets vides s'affichent enfi
 whats_new_items[1]|Un nouvel accueil|Commence avec Google, GitHub ou en invité. Sans mot de passe.
 whats_new_items[2]|Dix langues|Le français, l'italien, le russe et le coréen arrivent, avec drapeaux et recherche.
 whats_new_items[3]|Des habitudes plus simples|Ajoute une habitude pas à pas, dis comment ça s'est passé et vois tes progrès depuis le début.
+settings_general|Général
+settings_about|À propos
+settings_version|Version %1$s
+settings_records_short|Records
+alarm_setting|Sonner comme une alarme
+alarm_setting_description|À la minute près, avec ta sonnerie d'alarme et en plein écran jusqu'à ta réponse
+alarm_channel_name|Alarmes d'habitudes
+alarm_channel_description|Habitudes réglées pour sonner comme un réveil
+alarm_time_to_start|C'est l'heure de commencer
+alarm_start|Commencer
+alarm_snooze|Répéter dans %1$d min
+alarm_not_today|Pas aujourd'hui
+settings_group_more|Plus

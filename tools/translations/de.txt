@@ -895,3 +895,16 @@ whats_new_items[0]|Widgets funktionieren wieder|Leere Widgets füllen sich jetzt
 whats_new_items[1]|Ein neuer Empfang|Starte mit Google, GitHub oder als Gast. Ganz ohne Passwort.
 whats_new_items[2]|Zehn Sprachen|Französisch, Italienisch, Russisch und Koreanisch kommen dazu, mit Flaggen und Suche.
 whats_new_items[3]|Gewohnheiten leichter|Schritt für Schritt anlegen, sagen wie es war und den Gesamtfortschritt sehen.
+settings_general|Allgemein
+settings_about|Info
+settings_version|Version %1$s
+settings_records_short|Rekorde
+alarm_setting|Als Wecker klingeln
+alarm_setting_description|Pünktlich, mit deinem Weckton und als Vollbild, bis du reagierst
+alarm_channel_name|Gewohnheitswecker
+alarm_channel_description|Gewohnheiten, die wie ein Wecker klingeln sollen
+alarm_time_to_start|Zeit anzufangen
+alarm_start|Los geht's
+alarm_snooze|%1$d Min. schlummern
+alarm_not_today|Heute nicht
+settings_group_more|Mehr

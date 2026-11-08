@@ -176,6 +176,8 @@ data class HabitDraft(
     val currentLevel: Int = 1,
     /** What still counts on a bad day, e.g. "1 page"; keeps the streak alive. */
     val tinyVersion: String = "",
+    /** Ring like an alarm clock instead of a quiet notification (kept per device). */
+    val alarm: Boolean = false,
 )
 
 data class WeeklyReview(

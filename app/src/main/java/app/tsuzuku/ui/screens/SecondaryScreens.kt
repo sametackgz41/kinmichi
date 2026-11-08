@@ -20,6 +20,9 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.icons.rounded.Info
+import androidx.compose.material.icons.rounded.Tune
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -115,6 +118,7 @@ fun ProfileScreen(
     onOpenLanguage: () -> Unit = {},
     onOpenWidgets: () -> Unit = {},
     layout: SettingsLayout = SettingsLayout.Tiles,
+    home: SettingsHome = SettingsHome.Groups,
     onOpenPlanning: () -> Unit,
     onOpenSecurity: () -> Unit,
     onOpenBackup: () -> Unit,
@@ -135,12 +139,265 @@ fun ProfileScreen(
     var activeDialog by rememberSaveable { mutableStateOf<String?>(null) }
     var nameDraft by rememberSaveable(settings.profileName) { mutableStateOf(settings.profileName) }
 
-    androidx.compose.runtime.CompositionLocalProvider(LocalSettingsLayout provides layout) {
+    // The groups of rows, shared by the long list and by the tile home's pages.
+    val notificationRows: @Composable () -> Unit = {
+        ValueSettingRow(
+            icon = Icons.Rounded.Notifications,
+            title = stringResource(R.string.test_notification),
+            value = stringResource(R.string.test_notification_description),
+            onClick = {
+                if (
+                    Build.VERSION.SDK_INT >= 33 &&
+                    context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                } else {
+                    postTestNotification()
+                }
+            },
+        )
+        var askFeelingOn by remember { mutableStateOf(FeelingPromptSetting.isEnabled(context)) }
+        SwitchSettingRow(
+            Icons.Rounded.Mood,
+            stringResource(R.string.feeling_setting),
+            stringResource(R.string.feeling_setting_description),
+            askFeelingOn,
+            onCheckedChange = {
+                askFeelingOn = it
+                FeelingPromptSetting.setEnabled(context, it)
+            },
+        )
+        var moodReminderOn by remember { mutableStateOf(app.tsuzuku.notifications.MoodReminder.isEnabled(context)) }
+        SwitchSettingRow(
+            Icons.Rounded.Notifications,
+            stringResource(R.string.mood_reminder_setting),
+            stringResource(R.string.mood_reminder_setting_description),
+            moodReminderOn,
+            onCheckedChange = {
+                moodReminderOn = it
+                app.tsuzuku.notifications.MoodReminder.setEnabled(context, it)
+            },
+        )
+        var streakGuardOn by remember { mutableStateOf(app.tsuzuku.notifications.StreakGuard.isEnabled(context)) }
+        SwitchSettingRow(
+            Icons.Rounded.Notifications,
+            stringResource(R.string.streak_guard_setting),
+            stringResource(R.string.streak_guard_setting_description),
+            streakGuardOn,
+            onCheckedChange = {
+                streakGuardOn = it
+                app.tsuzuku.notifications.StreakGuard.setEnabled(context, it)
+            },
+        )
+        var weeklySummaryOn by remember { mutableStateOf(app.tsuzuku.notifications.WeeklySummary.isEnabled(context)) }
+        SwitchSettingRow(
+            Icons.Rounded.Notifications,
+            stringResource(R.string.weekly_summary_setting),
+            stringResource(R.string.weekly_summary_setting_description),
+            checked = weeklySummaryOn,
+            onCheckedChange = {
+                weeklySummaryOn = it
+                app.tsuzuku.notifications.WeeklySummary.setEnabled(context, it)
+            },
+        )
+    }
+    val generalRows: @Composable () -> Unit = {
+        ValueSettingRow(
+            Icons.Rounded.CalendarMonth,
+            stringResource(R.string.week_start_label),
+            weekStartLabel(settings.weekStart),
+            onClick = { activeDialog = DIALOG_WEEK_START },
+        )
+        SwitchSettingRow(
+            Icons.Rounded.Summarize,
+            stringResource(R.string.daily_summary_setting),
+            stringResource(R.string.daily_summary_setting_description),
+            checked = settings.showDailySummary,
+            onCheckedChange = onSetShowDailySummary,
+        )
+            WidgetOpacityRow(settings.widgetOpacity, onSetWidgetOpacity)
+        ValueSettingRow(
+            Icons.AutoMirrored.Rounded.Label,
+            stringResource(R.string.categories_and_tags),
+            stringResource(R.string.categories_description),
+            onClick = onOpenCategories,
+        )
+    }
+    val privacyRows: @Composable () -> Unit = {
+        SwitchSettingRow(
+            Icons.Rounded.Lock,
+            stringResource(R.string.screen_protection),
+            stringResource(R.string.screen_protection_description),
+            checked = settings.protectScreen,
+            onCheckedChange = onSetProtectScreen,
+        )
+        ValueSettingRow(
+            Icons.Rounded.Lock,
+            stringResource(R.string.app_lock),
+            stringResource(if (settings.appLockEnabled) R.string.app_lock_status_on else R.string.app_lock_status_off),
+            onClick = onOpenSecurity,
+        )
+        ValueSettingRow(
+            Icons.Rounded.Backup,
+            stringResource(R.string.backup_restore),
+            stringResource(R.string.local_backup_available),
+            onClick = onOpenBackup,
+        )
+        ValueSettingRow(
+            Icons.Rounded.BugReport,
+            stringResource(R.string.error_reports),
+            stringResource(R.string.error_reports_description),
+            onClick = onOpenDiagnostics,
+        )
+    }
+    val aboutRows: @Composable () -> Unit = {
+        ValueSettingRow(
+            Icons.Rounded.Code,
+            stringResource(R.string.github_project),
+            stringResource(R.string.github_project_description, app.tsuzuku.BuildConfig.VERSION_NAME),
+            onClick = {
+                runCatching {
+                    context.startActivity(android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(app.tsuzuku.update.GITHUB_URL)))
+                }
+            },
+        )
+        var updateCheckOn by remember { mutableStateOf(app.tsuzuku.update.UpdateChecker.isEnabled(context)) }
+        SwitchSettingRow(
+            Icons.Rounded.SystemUpdate,
+            stringResource(R.string.update_check_setting),
+            stringResource(R.string.update_check_setting_description),
+            updateCheckOn,
+            onCheckedChange = {
+                updateCheckOn = it
+                app.tsuzuku.update.UpdateChecker.setEnabled(context, it)
+            },
+        )
+        ValueSettingRow(
+            Icons.Rounded.AutoAwesome,
+            stringResource(R.string.replay_intro),
+            stringResource(R.string.replay_intro_description),
+            onClick = { app.tsuzuku.ui.IntroReplay.start() },
+        )
+    }
+    val profileCard: @Composable () -> Unit = {
+        Column(
+            if (layout == SettingsLayout.Minimal) Modifier else Modifier
+                .clip(androidx.compose.foundation.shape.RoundedCornerShape(28.dp))
+                .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.55f))
+                .padding(horizontal = 16.dp),
+        ) {
+            Row(
+                Modifier.fillMaxWidth().padding(vertical = 14.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(14.dp),
+            ) {
+                Surface(
+                    modifier = Modifier.size(62.dp),
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                ) {
+                    Icon(Icons.Rounded.Person, contentDescription = null, modifier = Modifier.padding(16.dp))
+                }
+                Column(Modifier.weight(1f)) {
+                    Text(
+                        when (cloudAccount) {
+                            is CloudAccountState.SignedIn -> cloudAccount.displayName.ifBlank { settings.profileName }
+                            else -> settings.profileName
+                        }.ifBlank { stringResource(R.string.personal_profile) },
+                        style = MaterialTheme.typography.titleLarge,
+                    )
+                    Text(
+                        when (cloudAccount) {
+                            is CloudAccountState.SignedIn -> cloudAccount.email
+                            else -> stringResource(R.string.local_profile_description)
+                        },
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+                if (cloudAccount !is CloudAccountState.SignedIn) {
+                    IconButton(onClick = {
+                        nameDraft = settings.profileName
+                        activeDialog = DIALOG_NAME
+                    }) {
+                        Icon(Icons.Rounded.Edit, contentDescription = stringResource(R.string.edit_profile_name))
+                    }
+                }
+            }
+            if (layout == SettingsLayout.Minimal) HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+        }
+    }
+    val dataNote: @Composable () -> Unit = {
+        Text(
+            stringResource(
+                if (cloudAccount is CloudAccountState.SignedIn) R.string.cloud_data_note else R.string.local_data_note,
+            ),
+            modifier = Modifier.padding(horizontal = 6.dp, vertical = 8.dp),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+    }
+
+    val accountStatus = when (cloudAccount) {
+        CloudAccountState.Unavailable -> stringResource(R.string.firebase_setup_required)
+        CloudAccountState.SignedOut -> stringResource(R.string.google_not_connected)
+        is CloudAccountState.SignedIn -> cloudAccount.email.ifBlank { cloudAccount.displayName }
+    }
+    // Tile home: which page is open inside settings (null = the tiles).
+    var page by rememberSaveable { mutableStateOf<SettingsPage?>(null) }
+    androidx.activity.compose.BackHandler(enabled = page != null) { page = null }
+    val categories = listOf(
+        SettingsCategory(Icons.Rounded.Sync, stringResource(R.string.account_title), accountStatus, onOpenCloudAccount),
+        SettingsCategory(Icons.Rounded.Palette, stringResource(R.string.appearance_theme_palette), "${themeLabel(settings.theme)} · ${paletteName(settings.palette)}", onOpenAppearance),
+        SettingsCategory(Icons.Rounded.Language, stringResource(R.string.language_label), languageLabel(settings.language), onOpenLanguage),
+        SettingsCategory(Icons.Rounded.Widgets, stringResource(R.string.widgets_sheet_title), null, onOpenWidgets),
+        SettingsCategory(Icons.Rounded.Notifications, stringResource(R.string.notifications_label), null) { page = SettingsPage.Notifications },
+        SettingsCategory(Icons.Rounded.Tune, stringResource(R.string.settings_general), weekStartLabel(settings.weekStart)) { page = SettingsPage.General },
+        SettingsCategory(Icons.Rounded.Insights, stringResource(R.string.planning_and_review), null, onOpenPlanning),
+        SettingsCategory(Icons.Rounded.Star, stringResource(R.string.settings_records_short), null, onOpenRecords),
+        SettingsCategory(Icons.Rounded.Lock, stringResource(R.string.data_privacy_label), stringResource(if (settings.appLockEnabled) R.string.app_lock_status_on else R.string.app_lock_status_off)) { page = SettingsPage.Privacy },
+        SettingsCategory(Icons.Rounded.Info, stringResource(R.string.settings_about), stringResource(R.string.settings_version, app.tsuzuku.BuildConfig.VERSION_NAME)) { page = SettingsPage.About },
+    )
+
+    val tiles = layout == SettingsLayout.Tiles
+    androidx.compose.runtime.CompositionLocalProvider(LocalSettingsLayout provides if (tiles) SettingsLayout.Cards else layout) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp, 4.dp, 16.dp, 24.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
+        val open = page
+        if (tiles && open != null) {
+            item {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    IconButton(onClick = { page = null }) {
+                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.back))
+                    }
+                    Text(
+                        stringResource(
+                            when (open) {
+                                SettingsPage.Notifications -> R.string.notifications_label
+                                SettingsPage.General -> R.string.settings_general
+                                SettingsPage.Privacy -> R.string.data_privacy_label
+                                SettingsPage.About -> R.string.settings_about
+                            },
+                        ),
+                        style = MaterialTheme.typography.titleLarge,
+                    )
+                }
+            }
+            item {
+                SettingsCard {
+                    when (open) {
+                        SettingsPage.Notifications -> notificationRows()
+                        SettingsPage.General -> generalRows()
+                        SettingsPage.Privacy -> privacyRows()
+                        SettingsPage.About -> aboutRows()
+                    }
+                }
+            }
+            if (open == SettingsPage.Privacy || open == SettingsPage.About) item { dataNote() }
+            return@LazyColumn
+        }
         item {
             if (onBack != null) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -151,64 +408,10 @@ fun ProfileScreen(
                 }
             }
         }
-        item {
-            Column(
-                if (layout == SettingsLayout.Minimal) Modifier else Modifier
-                    .clip(androidx.compose.foundation.shape.RoundedCornerShape(28.dp))
-                    .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.55f))
-                    .padding(horizontal = 16.dp),
-            ) {
-                Row(
-                    Modifier.fillMaxWidth().padding(vertical = 14.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(14.dp),
-                ) {
-                    Surface(
-                        modifier = Modifier.size(62.dp),
-                        shape = CircleShape,
-                        color = MaterialTheme.colorScheme.primaryContainer,
-                    ) {
-                        Icon(Icons.Rounded.Person, contentDescription = null, modifier = Modifier.padding(16.dp))
-                    }
-                    Column(Modifier.weight(1f)) {
-                        Text(
-                            when (cloudAccount) {
-                                is CloudAccountState.SignedIn -> cloudAccount.displayName.ifBlank { settings.profileName }
-                                else -> settings.profileName
-                            }.ifBlank { stringResource(R.string.personal_profile) },
-                            style = MaterialTheme.typography.titleLarge,
-                        )
-                        Text(
-                            when (cloudAccount) {
-                                is CloudAccountState.SignedIn -> cloudAccount.email
-                                else -> stringResource(R.string.local_profile_description)
-                            },
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
-                    }
-                    if (cloudAccount !is CloudAccountState.SignedIn) {
-                        IconButton(onClick = {
-                            nameDraft = settings.profileName
-                            activeDialog = DIALOG_NAME
-                        }) {
-                            Icon(Icons.Rounded.Edit, contentDescription = stringResource(R.string.edit_profile_name))
-                        }
-                    }
-                }
-                if (layout == SettingsLayout.Minimal) HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
-            }
-        }
-        if (layout == SettingsLayout.Tiles) {
-            item {
-                SettingsTiles(
-                    listOf(
-                        Triple(Icons.Rounded.Sync, stringResource(R.string.account_title), onOpenCloudAccount),
-                        Triple(Icons.Rounded.Palette, stringResource(R.string.appearance_theme_palette), onOpenAppearance),
-                        Triple(Icons.Rounded.Language, stringResource(R.string.language_label), onOpenLanguage),
-                        Triple(Icons.Rounded.Widgets, stringResource(R.string.widgets_sheet_title), onOpenWidgets),
-                    ),
-                )
-            }
+        item { profileCard() }
+        if (tiles) {
+            item { SettingsHomeTiles(categories, home) }
+            return@LazyColumn
         }
         item { SectionLabel(stringResource(R.string.account_label)) }
         item {
@@ -216,196 +419,29 @@ fun ProfileScreen(
                 ValueSettingRow(
                     icon = Icons.Rounded.Sync,
                     title = stringResource(R.string.account_title),
-                    value = when (cloudAccount) {
-                        CloudAccountState.Unavailable -> stringResource(R.string.firebase_setup_required)
-                        CloudAccountState.SignedOut -> stringResource(R.string.google_not_connected)
-                        is CloudAccountState.SignedIn -> cloudAccount.email.ifBlank { cloudAccount.displayName }
-                    },
+                    value = accountStatus,
                     onClick = onOpenCloudAccount,
                 )
-                ValueSettingRow(
-                    icon = Icons.Rounded.Notifications,
-                    title = stringResource(R.string.test_notification),
-                    value = stringResource(R.string.test_notification_description),
-                    onClick = {
-                        if (
-                            Build.VERSION.SDK_INT >= 33 &&
-                            context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
-                        ) {
-                            notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-                        } else {
-                            postTestNotification()
-                        }
-                    },
-                )
-                ValueSettingRow(
-                    icon = Icons.Rounded.Insights,
-                    title = stringResource(R.string.planning_and_review),
-                    value = stringResource(R.string.planning_and_review_description),
-                    onClick = onOpenPlanning,
-                )
-                ValueSettingRow(
-                    icon = Icons.Rounded.Star,
-                    title = stringResource(R.string.personal_records_milestones),
-                    value = stringResource(R.string.personal_records_desc),
-                    onClick = onOpenRecords,
-                )
+                ValueSettingRow(Icons.Rounded.Insights, stringResource(R.string.planning_and_review), stringResource(R.string.planning_and_review_description), onClick = onOpenPlanning)
+                ValueSettingRow(Icons.Rounded.Star, stringResource(R.string.personal_records_milestones), stringResource(R.string.personal_records_desc), onClick = onOpenRecords)
             }
         }
         item { SectionLabel(stringResource(R.string.appearance_label)) }
         item {
             SettingsCard {
-                ValueSettingRow(
-                    Icons.Rounded.Palette,
-                    stringResource(R.string.appearance_theme_palette),
-                    "${themeLabel(settings.theme)} · ${paletteName(settings.palette)}",
-                    onClick = onOpenAppearance,
-                )
-                WidgetOpacityRow(settings.widgetOpacity, onSetWidgetOpacity)
-                ValueSettingRow(
-                    Icons.Rounded.Language,
-                    stringResource(R.string.language_label),
-                    languageLabel(settings.language),
-                    onClick = onOpenLanguage,
-                )
-                ValueSettingRow(
-                    Icons.Rounded.CalendarMonth,
-                    stringResource(R.string.week_start_label),
-                    weekStartLabel(settings.weekStart),
-                    onClick = { activeDialog = DIALOG_WEEK_START },
-                )
-                SwitchSettingRow(
-                    Icons.Rounded.Summarize,
-                    stringResource(R.string.daily_summary_setting),
-                    stringResource(R.string.daily_summary_setting_description),
-                    checked = settings.showDailySummary,
-                    onCheckedChange = onSetShowDailySummary,
-                )
-                var askFeelingOn by remember { mutableStateOf(FeelingPromptSetting.isEnabled(context)) }
-                SwitchSettingRow(
-                    Icons.Rounded.Mood,
-                    stringResource(R.string.feeling_setting),
-                    stringResource(R.string.feeling_setting_description),
-                    askFeelingOn,
-                    onCheckedChange = {
-                        askFeelingOn = it
-                        FeelingPromptSetting.setEnabled(context, it)
-                    },
-                )
-                var moodReminderOn by remember { mutableStateOf(app.tsuzuku.notifications.MoodReminder.isEnabled(context)) }
-                SwitchSettingRow(
-                    Icons.Rounded.Notifications,
-                    stringResource(R.string.mood_reminder_setting),
-                    stringResource(R.string.mood_reminder_setting_description),
-                    moodReminderOn,
-                    onCheckedChange = {
-                        moodReminderOn = it
-                        app.tsuzuku.notifications.MoodReminder.setEnabled(context, it)
-                    },
-                )
-                var streakGuardOn by remember { mutableStateOf(app.tsuzuku.notifications.StreakGuard.isEnabled(context)) }
-                SwitchSettingRow(
-                    Icons.Rounded.Notifications,
-                    stringResource(R.string.streak_guard_setting),
-                    stringResource(R.string.streak_guard_setting_description),
-                    streakGuardOn,
-                    onCheckedChange = {
-                        streakGuardOn = it
-                        app.tsuzuku.notifications.StreakGuard.setEnabled(context, it)
-                    },
-                )
-                var updateCheckOn by remember { mutableStateOf(app.tsuzuku.update.UpdateChecker.isEnabled(context)) }
-                SwitchSettingRow(
-                    Icons.Rounded.SystemUpdate,
-                    stringResource(R.string.update_check_setting),
-                    stringResource(R.string.update_check_setting_description),
-                    updateCheckOn,
-                    onCheckedChange = {
-                        updateCheckOn = it
-                        app.tsuzuku.update.UpdateChecker.setEnabled(context, it)
-                    },
-                )
-                ValueSettingRow(
-                    Icons.Rounded.Code,
-                    stringResource(R.string.github_project),
-                    stringResource(R.string.github_project_description, app.tsuzuku.BuildConfig.VERSION_NAME),
-                    onClick = {
-                        runCatching {
-                            context.startActivity(android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(app.tsuzuku.update.GITHUB_URL)))
-                        }
-                    },
-                )
-                var weeklySummaryOn by remember { mutableStateOf(app.tsuzuku.notifications.WeeklySummary.isEnabled(context)) }
-                SwitchSettingRow(
-                    Icons.Rounded.Notifications,
-                    stringResource(R.string.weekly_summary_setting),
-                    stringResource(R.string.weekly_summary_setting_description),
-                    checked = weeklySummaryOn,
-                    onCheckedChange = {
-                        weeklySummaryOn = it
-                        app.tsuzuku.notifications.WeeklySummary.setEnabled(context, it)
-                    },
-                )
+                ValueSettingRow(Icons.Rounded.Palette, stringResource(R.string.appearance_theme_palette), "${themeLabel(settings.theme)} · ${paletteName(settings.palette)}", onClick = onOpenAppearance)
+                ValueSettingRow(Icons.Rounded.Language, stringResource(R.string.language_label), languageLabel(settings.language), onClick = onOpenLanguage)
+                ValueSettingRow(Icons.Rounded.Widgets, stringResource(R.string.home_widget), stringResource(R.string.home_widget_description), onClick = onOpenWidgets)
+                generalRows()
             }
         }
+        item { SectionLabel(stringResource(R.string.notifications_label)) }
+        item { SettingsCard { notificationRows() } }
         item { SectionLabel(stringResource(R.string.data_privacy_label)) }
-        item {
-            SettingsCard {
-                SwitchSettingRow(
-                    Icons.Rounded.Lock,
-                    stringResource(R.string.screen_protection),
-                    stringResource(R.string.screen_protection_description),
-                    checked = settings.protectScreen,
-                    onCheckedChange = onSetProtectScreen,
-                )
-                ValueSettingRow(
-                    Icons.Rounded.Lock,
-                    stringResource(R.string.app_lock),
-                    stringResource(if (settings.appLockEnabled) R.string.app_lock_status_on else R.string.app_lock_status_off),
-                    onClick = onOpenSecurity,
-                )
-                ValueSettingRow(
-                    Icons.Rounded.Backup,
-                    stringResource(R.string.backup_restore),
-                    stringResource(R.string.local_backup_available),
-                    onClick = onOpenBackup,
-                )
-                ValueSettingRow(
-                    Icons.Rounded.BugReport,
-                    stringResource(R.string.error_reports),
-                    stringResource(R.string.error_reports_description),
-                    onClick = onOpenDiagnostics,
-                )
-                ValueSettingRow(
-                    Icons.AutoMirrored.Rounded.Label,
-                    stringResource(R.string.categories_and_tags),
-                    stringResource(R.string.categories_description),
-                    onClick = onOpenCategories,
-                )
-                ValueSettingRow(
-                    Icons.Rounded.Widgets,
-                    stringResource(R.string.home_widget),
-                    stringResource(R.string.home_widget_description),
-                    onClick = onOpenWidgets,
-                )
-                ValueSettingRow(
-                    Icons.Rounded.AutoAwesome,
-                    stringResource(R.string.replay_intro),
-                    stringResource(R.string.replay_intro_description),
-                    onClick = { app.tsuzuku.ui.IntroReplay.start() },
-                )
-            }
-        }
-        item {
-            Text(
-                stringResource(
-                    if (cloudAccount is CloudAccountState.SignedIn) R.string.cloud_data_note else R.string.local_data_note,
-                ),
-                modifier = Modifier.padding(horizontal = 6.dp, vertical = 8.dp),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-        }
+        item { SettingsCard { privacyRows() } }
+        item { SectionLabel(stringResource(R.string.settings_about)) }
+        item { SettingsCard { aboutRows() } }
+        item { dataNote() }
     }
     }
 
@@ -507,32 +543,122 @@ private fun SectionLabel(text: String) {
     }
 }
 
-/** Big shortcuts to the pages people open most, two per row. */
+internal enum class SettingsPage { Notifications, General, Privacy, About }
+
+/** Looks for the tile home, drawn side by side in previews. */
+enum class SettingsHome { Grid, Bento, Groups }
+
+private class SettingsCategory(val icon: ImageVector, val title: String, val status: String?, val onClick: () -> Unit)
+
+/** Every settings group as a tile; Account first. */
 @Composable
-private fun SettingsTiles(tiles: List<Triple<ImageVector, String, () -> Unit>>) {
-    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        tiles.chunked(2).forEach { row ->
-            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                row.forEach { (icon, label, onClick) ->
-                    Surface(
-                        onClick = onClick,
-                        shape = androidx.compose.foundation.shape.RoundedCornerShape(24.dp),
-                        color = MaterialTheme.colorScheme.surfaceContainerLow,
-                        modifier = Modifier.weight(1f),
-                    ) {
-                        Column(Modifier.padding(16.dp)) {
-                            Box(
-                                Modifier.size(40.dp).clip(androidx.compose.foundation.shape.RoundedCornerShape(12.dp))
-                                    .background(MaterialTheme.colorScheme.secondaryContainer),
-                                contentAlignment = Alignment.Center,
-                            ) { Icon(icon, null, tint = MaterialTheme.colorScheme.onSecondaryContainer, modifier = Modifier.size(22.dp)) }
-                            Spacer(Modifier.height(12.dp))
-                            Text(label, style = MaterialTheme.typography.titleSmall, maxLines = 2)
-                        }
+private fun SettingsHomeTiles(categories: List<SettingsCategory>, home: SettingsHome) {
+    when (home) {
+        SettingsHome.Grid -> Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            categories.chunked(2).forEach { pair ->
+                Row(horizontalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.height(androidx.compose.foundation.layout.IntrinsicSize.Min)) {
+                    pair.forEachIndexed { index, c -> SquareTile(c, accent = 0, Modifier.weight(1f).fillMaxHeight()) }
+                    if (pair.size == 1) Spacer(Modifier.weight(1f))
+                }
+            }
+        }
+        SettingsHome.Bento -> Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            // Wide, two small, two small, wide, ... keeps the page lively without getting long.
+            var i = 0
+            var row = 0
+            while (i < categories.size) {
+                val wide = row % 3 == 0
+                if (wide) {
+                    WideTile(categories[i], accent = row % 3, Modifier.fillMaxWidth())
+                    i += 1
+                } else {
+                    Row(horizontalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.height(androidx.compose.foundation.layout.IntrinsicSize.Min)) {
+                        categories.drop(i).take(2).forEachIndexed { k, c -> SquareTile(c, accent = (row + k) % 3, Modifier.weight(1f).fillMaxHeight()) }
+                        if (categories.size - i == 1) Spacer(Modifier.weight(1f))
+                    }
+                    i += 2
+                }
+                row++
+            }
+        }
+        SettingsHome.Groups -> Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            val groups = listOf(
+                R.string.account_label to listOf(0, 4, 6, 7),
+                R.string.appearance_label to listOf(1, 2, 3, 5),
+                R.string.settings_group_more to listOf(8, 9),
+            )
+            groups.forEach { (label, indices) ->
+                SectionLabel(stringResource(label))
+                indices.chunked(2).forEach { pair ->
+                    Row(horizontalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.height(androidx.compose.foundation.layout.IntrinsicSize.Min)) {
+                        pair.forEach { CompactTile(categories[it], Modifier.weight(1f).fillMaxHeight()) }
+                        if (pair.size == 1) Spacer(Modifier.weight(1f))
                     }
                 }
-                if (row.size == 1) Spacer(Modifier.weight(1f))
             }
+        }
+    }
+}
+
+@Composable
+private fun accentColors(accent: Int): Pair<Color, Color> = when (accent) {
+    1 -> MaterialTheme.colorScheme.tertiaryContainer to MaterialTheme.colorScheme.onTertiaryContainer
+    2 -> MaterialTheme.colorScheme.primaryContainer to MaterialTheme.colorScheme.onPrimaryContainer
+    else -> MaterialTheme.colorScheme.secondaryContainer to MaterialTheme.colorScheme.onSecondaryContainer
+}
+
+@Composable
+private fun TileIcon(icon: ImageVector, accent: Int, size: androidx.compose.ui.unit.Dp = 40.dp) {
+    val (bg, fg) = accentColors(accent)
+    Box(
+        Modifier.size(size).clip(RoundedCornerShape(12.dp)).background(bg),
+        contentAlignment = Alignment.Center,
+    ) { Icon(icon, null, tint = fg, modifier = Modifier.size(size * 0.55f)) }
+}
+
+@Composable
+private fun SquareTile(c: SettingsCategory, accent: Int, modifier: Modifier) {
+    Surface(onClick = c.onClick, shape = RoundedCornerShape(24.dp), color = MaterialTheme.colorScheme.surfaceContainerLow, modifier = modifier) {
+        Column(Modifier.padding(16.dp)) {
+            TileIcon(c.icon, accent)
+            Spacer(Modifier.height(12.dp))
+            Text(c.title, style = MaterialTheme.typography.titleSmall, maxLines = 2)
+            if (c.status != null) {
+                Text(
+                    c.status,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    maxLines = 1,
+                    overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun WideTile(c: SettingsCategory, accent: Int, modifier: Modifier) {
+    val (bg, _) = accentColors(accent)
+    Surface(onClick = c.onClick, shape = RoundedCornerShape(24.dp), color = bg.copy(alpha = 0.45f), modifier = modifier) {
+        Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+            TileIcon(c.icon, accent, 48.dp)
+            Column(Modifier.padding(start = 14.dp).weight(1f)) {
+                Text(c.title, style = MaterialTheme.typography.titleMedium, maxLines = 2)
+                if (c.status != null) {
+                    Text(c.status, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
+                }
+            }
+            Icon(Icons.AutoMirrored.Rounded.KeyboardArrowRight, null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+    }
+}
+
+@Composable
+private fun CompactTile(c: SettingsCategory, modifier: Modifier) {
+    Surface(onClick = c.onClick, shape = RoundedCornerShape(20.dp), color = MaterialTheme.colorScheme.surfaceContainerLow, modifier = modifier) {
+        Row(Modifier.padding(horizontal = 12.dp, vertical = 14.dp), verticalAlignment = Alignment.CenterVertically) {
+            TileIcon(c.icon, 0, 34.dp)
+            Text(c.title, style = MaterialTheme.typography.labelLarge, maxLines = 2, modifier = Modifier.padding(start = 10.dp))
         }
     }
 }

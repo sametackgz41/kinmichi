@@ -148,6 +148,7 @@ internal class HabitEditorState(existing: Habit?) {
     var reminderTime by mutableStateOf(existing?.reminderMinutes?.toClockText() ?: "09:00")
     var repeatEnabled by mutableStateOf(existing?.reminderRepeatMinutes != null)
     var repeatMinutes by mutableStateOf(existing?.reminderRepeatMinutes?.toString() ?: "10")
+    var alarmEnabled by mutableStateOf(false)
     private val generalNote = existing?.generalNote.orEmpty()
 
     private val target get() = targetText.toLocaleDoubleOrNull() ?: 0.0
@@ -213,6 +214,7 @@ internal class HabitEditorState(existing: Habit?) {
             repeatIntervalDays = repeatIntervalText.toIntOrNull()?.coerceIn(1, 365) ?: 1,
             pausedUntilEpochDay = pausedUntilEpochDay,
             tags = tags,
+            alarm = reminderEnabled && alarmEnabled,
         )
     }
 
@@ -221,7 +223,7 @@ internal class HabitEditorState(existing: Habit?) {
         minimumTargetText, maximumTargetText, difficulty, contextLabel, intention,
         activeStartEpochDay, activeEndEpochDay, pausedUntilEpochDay, repeatIntervalText, tags,
         selectedDays, goalPeriod.name, periodTargetText, routineName, prerequisiteId,
-        reminderEnabled, reminderTime, repeatEnabled, repeatMinutes, tinyVersion, healthMetric.name,
+        reminderEnabled, reminderTime, repeatEnabled, repeatMinutes, tinyVersion, healthMetric.name, alarmEnabled,
     )
 
     private fun restore(values: List<Any?>) {
@@ -242,6 +244,7 @@ internal class HabitEditorState(existing: Habit?) {
         repeatEnabled = next(); repeatMinutes = next()
         if (i < values.size) tinyVersion = next()
         if (i < values.size) healthMetric = HealthMetric.valueOf(next())
+        if (i < values.size) alarmEnabled = next()
     }
 
     companion object {
@@ -286,6 +289,12 @@ internal fun HabitEditorContent(
     // A template only fills in a new habit's starting values; it is still saved as new.
     val start = existing ?: template
     val state = rememberSaveable(existing?.id, saver = HabitEditorState.saver(start)) { HabitEditorState(start) }
+    val editorContext = LocalContext.current
+    // The alarm choice lives on the device; read it once when an existing habit opens.
+    rememberSaveable(existing?.id) {
+        if (existing != null) state.alarmEnabled = app.tsuzuku.notifications.HabitAlarms.isOn(editorContext, existing.id)
+        true
+    }
     val others = availableHabits.filterNot { it.id == existing?.id }
     // Steps only for a new habit; editing shows everything on one page.
     val effective = if (layout == EditorLayout.Steps && existing != null) EditorLayout.Cards else layout
@@ -620,11 +629,20 @@ private fun ReminderSection(state: HabitEditorState) {
         enter = fadeIn(tween(200)) + expandVertically(tween(240), expandFrom = Alignment.Top),
         exit = fadeOut(tween(150)) + shrinkVertically(tween(200), shrinkTowards = Alignment.Top),
     ) {
-        ReminderTimePicker(
-            minutes = state.reminderTime.toReminderMinutesOrNull() ?: (9 * 60),
-            onChange = { state.reminderTime = "%02d:%02d".format(it / 60, it % 60) },
-            modifier = Modifier.padding(top = 12.dp),
-        )
+        Column {
+            ReminderTimePicker(
+                minutes = state.reminderTime.toReminderMinutesOrNull() ?: (9 * 60),
+                onChange = { state.reminderTime = "%02d:%02d".format(it / 60, it % 60) },
+                modifier = Modifier.padding(top = 12.dp),
+            )
+            Row(Modifier.fillMaxWidth().padding(top = 12.dp), verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text(stringResource(R.string.alarm_setting), style = MaterialTheme.typography.bodyLarge)
+                    Text(stringResource(R.string.alarm_setting_description), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+                Switch(checked = state.alarmEnabled, onCheckedChange = { state.alarmEnabled = it })
+            }
+        }
     }
 }
 

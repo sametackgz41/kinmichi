@@ -875,6 +875,19 @@
     <string name="editor_step_when_body">曜日と、必要ならリマインダーを選びます。</string>
     <string name="editor_step_more_title">細かい設定（任意）</string>
     <string name="editor_step_more_body">ここは後回しでOK。準備ができたら保存しましょう。</string>
+    <string name="settings_general">一般</string>
+    <string name="settings_about">このアプリについて</string>
+    <string name="settings_version">バージョン %1$s</string>
+    <string name="settings_records_short">記録</string>
+    <string name="alarm_setting">アラームとして鳴らす</string>
+    <string name="alarm_setting_description">時間ちょうどに、アラーム音と全画面で、応答するまで鳴ります</string>
+    <string name="alarm_channel_name">習慣のアラーム</string>
+    <string name="alarm_channel_description">目覚ましのように鳴らす習慣</string>
+    <string name="alarm_time_to_start">始める時間です</string>
+    <string name="alarm_start">始める</string>
+    <string name="alarm_snooze">%1$d分スヌーズ</string>
+    <string name="alarm_not_today">今日はやめておく</string>
+    <string name="settings_group_more">その他</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

@@ -895,3 +895,16 @@ whats_new_items[0]|I widget funzionano di nuovo|I widget vuoti ora si riempiono 
 whats_new_items[1]|Un nuovo benvenuto|Inizia con Google, GitHub o come ospite. Niente password.
 whats_new_items[2]|Dieci lingue|Arrivano francese, italiano, russo e coreano, con bandiere e ricerca.
 whats_new_items[3]|Abitudini più facili|Aggiungi un'abitudine passo passo, di' com'è andata e guarda i progressi da sempre.
+settings_general|Generali
+settings_about|Informazioni
+settings_version|Versione %1$s
+settings_records_short|Record
+alarm_setting|Suona come sveglia
+alarm_setting_description|Puntuale, con il suono della sveglia e a schermo intero finché non rispondi
+alarm_channel_name|Sveglie delle abitudini
+alarm_channel_description|Abitudini impostate per suonare come una sveglia
+alarm_time_to_start|È ora di iniziare
+alarm_start|Inizia
+alarm_snooze|Posticipa %1$d min
+alarm_not_today|Non oggi
+settings_group_more|Altro

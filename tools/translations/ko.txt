@@ -895,3 +895,16 @@ whats_new_items[0]|위젯이 다시 작동해요|하얗던 위젯이 제대로 �
 whats_new_items[1]|새로운 시작 화면|Google, GitHub 또는 게스트로 시작하세요. 비밀번호는 필요 없어요.
 whats_new_items[2]|10개 언어|프랑스어, 이탈리아어, 러시아어, 한국어가 추가되고 국기와 검색으로 고를 수 있어요.
 whats_new_items[3]|더 쉬운 습관|단계별로 추가하고, 마친 뒤 어땠는지 남기고, 전체 기간 진행도 확인하세요.
+settings_general|일반
+settings_about|앱 정보
+settings_version|버전 %1$s
+settings_records_short|기록
+alarm_setting|알람으로 울리기
+alarm_setting_description|정각에 알람 소리와 전체 화면으로, 응답할 때까지 울려요
+alarm_channel_name|습관 알람
+alarm_channel_description|알람처럼 울리도록 설정한 습관
+alarm_time_to_start|시작할 시간이에요
+alarm_start|시작
+alarm_snooze|%1$d분 다시 알림
+alarm_not_today|오늘은 안 할래요
+settings_group_more|기타

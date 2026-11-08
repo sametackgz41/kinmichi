@@ -907,3 +907,16 @@ whats_new_items[0]|Виджеты снова работают|Пустые ви�
 whats_new_items[1]|Новое приветствие|Начните через Google, GitHub или как гость. Без пароля.
 whats_new_items[2]|Десять языков|Добавлены французский, итальянский, русский и корейский, с флагами и поиском.
 whats_new_items[3]|Привычки проще|Добавляйте привычку по шагам, отмечайте, как прошло, и смотрите прогресс за всё время.
+settings_general|Общие
+settings_about|О приложении
+settings_version|Версия %1$s
+settings_records_short|Рекорды
+alarm_setting|Звонить как будильник
+alarm_setting_description|Точно в срок, со звуком будильника и на весь экран, пока не ответишь
+alarm_channel_name|Будильники привычек
+alarm_channel_description|Привычки, которые звонят как будильник
+alarm_time_to_start|Пора начинать
+alarm_start|Начать
+alarm_snooze|Отложить на %1$d мин
+alarm_not_today|Не сегодня
+settings_group_more|Другое

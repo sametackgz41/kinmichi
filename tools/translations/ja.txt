@@ -889,3 +889,16 @@ whats_new_items[0]|ウィジェットが復活|真っ白だったウィジェッ
 whats_new_items[1]|新しいようこそ画面|Google、GitHub、またはゲストで始められます。パスワード不要。
 whats_new_items[2]|10の言語|フランス語、イタリア語、ロシア語、韓国語が加わり、国旗と検索で選べます。
 whats_new_items[3]|習慣をもっと簡単に|ステップごとに追加し、終えたら気分を記録、全期間の進捗も見られます。
+settings_general|一般
+settings_about|このアプリについて
+settings_version|バージョン %1$s
+settings_records_short|記録
+alarm_setting|アラームとして鳴らす
+alarm_setting_description|時間ちょうどに、アラーム音と全画面で、応答するまで鳴ります
+alarm_channel_name|習慣のアラーム
+alarm_channel_description|目覚ましのように鳴らす習慣
+alarm_time_to_start|始める時間です
+alarm_start|始める
+alarm_snooze|%1$d分スヌーズ
+alarm_not_today|今日はやめておく
+settings_group_more|その他

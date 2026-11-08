@@ -1274,4 +1274,17 @@
     <string name="editor_step_when_body">Günleri seç, istersen bir hatırlatma ekle.</string>
     <string name="editor_step_more_title">İnce ayar (isteğe bağlı)</string>
     <string name="editor_step_more_body">Buradakilerin hepsi bekleyebilir. Hazır olunca kaydet.</string>
+    <string name="settings_general">Genel</string>
+    <string name="settings_about">Hakkında</string>
+    <string name="settings_version">Sürüm %1$s</string>
+    <string name="settings_records_short">Rekorlar</string>
+    <string name="alarm_setting">Alarm olarak çal</string>
+    <string name="alarm_setting_description">Tam saatinde, alarm sesinle ve cevap verene kadar tam ekran çalar</string>
+    <string name="alarm_channel_name">Alışkanlık alarmları</string>
+    <string name="alarm_channel_description">Alarm gibi çalması seçilen alışkanlıklar</string>
+    <string name="alarm_time_to_start">Başlama zamanı</string>
+    <string name="alarm_start">Başla</string>
+    <string name="alarm_snooze">%1$d dk ertele</string>
+    <string name="alarm_not_today">Bugün değil</string>
+    <string name="settings_group_more">Diğer</string>
 </resources>

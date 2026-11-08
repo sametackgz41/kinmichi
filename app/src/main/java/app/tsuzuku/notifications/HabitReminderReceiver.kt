@@ -49,6 +49,10 @@ class HabitReminderReceiver : BroadcastReceiver() {
                         val doneToday = RoomHabitRepository(dao).observeToday().first()
                             .firstOrNull { it.habit.id == habitId }?.isComplete == true
                         if (doneToday) return@launch
+                        if (HabitAlarms.isOn(context, habitId)) {
+                            HabitAlarms.ring(context, habitId, habit.name, habit.emoji, habit.intention)
+                            return@launch
+                        }
                         HabitNotifications.show(
                             context,
                             habitId,

@@ -895,3 +895,16 @@ whats_new_items[0]|Widgets funcionando de novo|Widgets em branco agora carregam 
 whats_new_items[1]|Novas boas-vindas|Comece com Google, GitHub ou como convidado. Sem senha.
 whats_new_items[2]|Dez idiomas|Chegam francês, italiano, russo e coreano, com bandeiras e busca no seletor.
 whats_new_items[3]|Hábitos mais fáceis|Adicione passo a passo, diga como foi e veja seu progresso de todo o período.
+settings_general|Geral
+settings_about|Sobre
+settings_version|Versão %1$s
+settings_records_short|Recordes
+alarm_setting|Tocar como alarme
+alarm_setting_description|Na hora exata, com seu som de alarme e em tela cheia até você responder
+alarm_channel_name|Alarmes de hábitos
+alarm_channel_description|Hábitos configurados para tocar como despertador
+alarm_time_to_start|Hora de começar
+alarm_start|Começar
+alarm_snooze|Adiar %1$d min
+alarm_not_today|Hoje não
+settings_group_more|Mais
