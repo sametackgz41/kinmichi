@@ -1162,3 +1162,16 @@ trash_delete_forever|Elimina definitivamente
 trash_move_confirmation|Spostare %1$s nel cestino? Puoi recuperarla entro 30 giorni.
 trash_moved|“%1$s” spostata nel cestino
 trash_undo|Annulla
+slot_morning|Mattina
+slot_noon|Mezzogiorno
+slot_evening|Sera
+slots_setting|Più volte al giorno
+slots_setting_desc|Ogni volta si spunta e si ricorda a parte
+slots_preset_two|%1$s · %2$s
+slots_preset_three|%1$s · %2$s · %3$s
+slots_preset_hours|Ogni 3 ore
+slots_add|Aggiungi un orario
+slots_remove|Rimuovi questo orario
+slots_footer|Quando le fai tutte, la giornata conta come completa e allunga la serie.
+slots_next|prossimo: %1$s · %2$s
+slots_all_done|tutto fatto per oggi

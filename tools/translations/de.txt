@@ -1162,3 +1162,16 @@ trash_delete_forever|Endgültig löschen
 trash_move_confirmation|%1$s in den Papierkorb verschieben? Du kannst es 30 Tage lang zurückholen.
 trash_moved|„%1$s“ ist im Papierkorb
 trash_undo|Rückgängig
+slot_morning|Morgens
+slot_noon|Mittags
+slot_evening|Abends
+slots_setting|Mehrmals am Tag
+slots_setting_desc|Jedes Mal wird einzeln abgehakt und erinnert
+slots_preset_two|%1$s · %2$s
+slots_preset_three|%1$s · %2$s · %3$s
+slots_preset_hours|Alle 3 Stunden
+slots_add|Zeit hinzufügen
+slots_remove|Diese Zeit entfernen
+slots_footer|Sind alle erledigt, zählt der Tag als geschafft und die Serie wächst.
+slots_next|als Nächstes: %1$s · %2$s
+slots_all_done|für heute alles erledigt

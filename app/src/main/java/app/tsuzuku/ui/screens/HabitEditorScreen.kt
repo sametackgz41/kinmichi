@@ -1,5 +1,8 @@
 package app.tsuzuku.ui.screens
 
+import app.tsuzuku.ui.formatClock
+import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.rounded.Add
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.animation.AnimatedContent
@@ -161,6 +164,14 @@ internal class HabitEditorState(existing: Habit?) {
     var spreadWindow by mutableStateOf(1)
     var screenTime by mutableStateOf(false)
     var alarmType by mutableStateOf(false)
+    /** Done several times a day, each time of day ticked and reminded on its own. */
+    var slotsOn by mutableStateOf((existing?.slots?.size ?: 0) > 1)
+    var slotsText by mutableStateOf(existing?.slots?.let { app.tsuzuku.model.HabitSlot.format(it) }.orEmpty())
+    val slotList: List<app.tsuzuku.model.HabitSlot> get() = app.tsuzuku.model.HabitSlot.parse(slotsText)
+
+    fun setSlots(list: List<app.tsuzuku.model.HabitSlot>) {
+        slotsText = app.tsuzuku.model.HabitSlot.format(list.sortedBy { it.minutes })
+    }
     var alarmTasks by mutableStateOf(app.tsuzuku.notifications.AlarmTask.Default.joinToString(",") { it.name })
     var alarmLevel by mutableStateOf(1)
     var alarmRamp by mutableStateOf(true)
@@ -264,7 +275,7 @@ internal class HabitEditorState(existing: Habit?) {
 
     fun toDraft(): HabitDraft {
         val check = type == HabitType.Check
-        return HabitDraft(
+        val base = HabitDraft(
             name = name.trim(),
             emoji = emoji,
             colorArgb = habitColors[colorIndex],
@@ -305,6 +316,24 @@ internal class HabitEditorState(existing: Habit?) {
             alarmRamp = alarmRamp,
             alarmSnoozes = alarmSnoozes,
         )
+        val slots = slotList
+        if (!slotsOn || slots.size < 2 || alarmType) return base.copy(slots = "")
+        // Several times a day: a count of one per time of day, so streaks and stats keep working.
+        return base.copy(
+            type = HabitType.Count,
+            target = slots.size.toDouble(),
+            step = 1.0,
+            unit = "",
+            minimumTarget = 0.0,
+            maximumTarget = null,
+            healthMetric = HealthMetric.None,
+            reminderMinutes = if (reminderEnabled) slots.first().minutes else null,
+            reminderRepeatMinutes = null,
+            alarm = false,
+            spreadStartMinutes = null,
+            screenTime = false,
+            slots = app.tsuzuku.model.HabitSlot.format(slots),
+        )
     }
 
     private fun snapshot(): List<Any?> = listOf(
@@ -315,6 +344,7 @@ internal class HabitEditorState(existing: Habit?) {
         reminderEnabled, reminderTime, repeatEnabled, repeatMinutes, tinyVersion, healthMetric.name, alarmEnabled,
         alarmMission.name, alarmMarkDone, spreadOn, spreadWindow, screenTime,
         alarmType, alarmTasks, alarmLevel, alarmRamp, alarmSnoozes,
+        slotsOn, slotsText,
     )
 
     private fun restore(values: List<Any?>) {
@@ -346,6 +376,8 @@ internal class HabitEditorState(existing: Habit?) {
         if (i < values.size) alarmLevel = next()
         if (i < values.size) alarmRamp = next()
         if (i < values.size) alarmSnoozes = next()
+        if (i < values.size) slotsOn = next()
+        if (i < values.size) slotsText = next()
     }
 
     companion object {
@@ -763,6 +795,7 @@ private fun ReminderSection(state: HabitEditorState) {
     val permissionLauncher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
         notificationsAllowed = granted && NotificationManagerCompat.from(context).areNotificationsEnabled()
     }
+    if (!state.alarmType) SlotsField(state)
     Row(verticalAlignment = Alignment.CenterVertically) {
         Column(Modifier.weight(1f)) {
             Text(stringResource(R.string.reminder_label), style = MaterialTheme.typography.bodyLarge)
@@ -804,12 +837,12 @@ private fun ReminderSection(state: HabitEditorState) {
         exit = fadeOut(tween(150)) + shrinkVertically(tween(200), shrinkTowards = Alignment.Top),
     ) {
         Column {
-            ReminderTimePicker(
+            if (!state.slotsOn) ReminderTimePicker(
                 minutes = state.reminderTime.toReminderMinutesOrNull() ?: (9 * 60),
                 onChange = { state.reminderTime = "%02d:%02d".format(it / 60, it % 60) },
                 modifier = Modifier.padding(top = 12.dp),
             )
-            if (!state.alarmType) Row(Modifier.fillMaxWidth().padding(top = 12.dp), verticalAlignment = Alignment.CenterVertically) {
+            if (!state.alarmType && !state.slotsOn) Row(Modifier.fillMaxWidth().padding(top = 12.dp), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
                     Text(stringResource(R.string.alarm_setting), style = MaterialTheme.typography.bodyLarge)
                     Text(stringResource(R.string.alarm_setting_description), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -1101,6 +1134,119 @@ internal fun AlarmTypeSection(state: HabitEditorState) {
                     selected = state.alarmSnoozes == n,
                     onClick = { state.alarmSnoozes = n },
                     label = { Text(if (n == 0) stringResource(R.string.alarm_snoozes_none) else n.toString()) },
+                )
+            }
+        }
+    }
+}
+
+/** "Several times a day": presets, one row per time of day, add and remove. */
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+internal fun SlotsField(state: HabitEditorState) {
+    val morning = stringResource(R.string.slot_morning)
+    val noon = stringResource(R.string.slot_noon)
+    val evening = stringResource(R.string.slot_evening)
+    val locale = androidx.compose.ui.platform.LocalConfiguration.current.locales[0]
+    fun partName(minutes: Int) = when {
+        minutes < 11 * 60 -> morning
+        minutes < 17 * 60 -> noon
+        else -> evening
+    }
+    var editing by remember { mutableStateOf(-1) }
+    Column(Modifier.fillMaxWidth().padding(bottom = 16.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text(stringResource(R.string.slots_setting), style = MaterialTheme.typography.bodyLarge)
+                Text(stringResource(R.string.slots_setting_desc), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            Switch(
+                checked = state.slotsOn,
+                onCheckedChange = { on ->
+                    state.slotsOn = on
+                    if (on && state.slotList.size < 2) {
+                        state.setSlots(listOf(app.tsuzuku.model.HabitSlot(morning, 8 * 60), app.tsuzuku.model.HabitSlot(evening, 21 * 60)))
+                    }
+                    if (on) state.reminderEnabled = true
+                },
+            )
+        }
+        AnimatedVisibility(visible = state.slotsOn) {
+            Column(Modifier.padding(top = 12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                val presets = listOf(
+                    stringResource(R.string.slots_preset_two, morning, evening) to listOf(8 * 60 to morning, 21 * 60 to evening),
+                    stringResource(R.string.slots_preset_three, morning, noon, evening) to listOf(8 * 60 to morning, 13 * 60 to noon, 21 * 60 to evening),
+                    stringResource(R.string.slots_preset_hours) to (9..21 step 3).map { it * 60 to formatClock(it * 60, locale) },
+                )
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    presets.forEach { (label, times) ->
+                        val list = times.map { (m, n) -> app.tsuzuku.model.HabitSlot(n, m) }
+                        FilterChip(
+                            selected = state.slotList == list,
+                            onClick = { state.setSlots(list); editing = -1 },
+                            label = { Text(label) },
+                        )
+                    }
+                }
+                val slots = state.slotList
+                slots.forEachIndexed { i, slot ->
+                    Column(Modifier.fillMaxWidth().clip(RoundedCornerShape(20.dp)).background(MaterialTheme.colorScheme.surfaceContainerLow)) {
+                        Row(Modifier.padding(start = 14.dp, end = 4.dp, top = 4.dp, bottom = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+                            Text(
+                                when {
+                                    slot.minutes < 11 * 60 -> "☀️"
+                                    slot.minutes < 17 * 60 -> "🌤️"
+                                    else -> "🌙"
+                                },
+                                fontSize = 20.sp,
+                            )
+                            androidx.compose.foundation.text.BasicTextField(
+                                value = slot.name,
+                                onValueChange = { v -> state.setSlots(slots.mapIndexed { j, s -> if (j == i) s.copy(name = v.take(16)) else s }) },
+                                singleLine = true,
+                                textStyle = MaterialTheme.typography.titleMedium.copy(color = MaterialTheme.colorScheme.onSurface),
+                                cursorBrush = androidx.compose.ui.graphics.SolidColor(MaterialTheme.colorScheme.primary),
+                                modifier = Modifier.weight(1f).padding(start = 12.dp),
+                            )
+                            Surface(
+                                onClick = { editing = if (editing == i) -1 else i },
+                                shape = RoundedCornerShape(12.dp),
+                                color = if (editing == i) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondaryContainer,
+                            ) {
+                                Text(
+                                    formatClock(slot.minutes, locale),
+                                    style = MaterialTheme.typography.titleMedium,
+                                    color = if (editing == i) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSecondaryContainer,
+                                    modifier = Modifier.padding(horizontal = 14.dp, vertical = 6.dp),
+                                )
+                            }
+                            IconButton(
+                                onClick = { state.setSlots(slots.filterIndexed { j, _ -> j != i }); editing = -1 },
+                                enabled = slots.size > 2,
+                            ) { Icon(Icons.Rounded.Close, stringResource(R.string.slots_remove)) }
+                        }
+                        AnimatedVisibility(visible = editing == i) {
+                            ReminderTimePicker(
+                                minutes = slot.minutes,
+                                onChange = { m -> state.slotsText = app.tsuzuku.model.HabitSlot.format(slots.mapIndexed { j, s -> if (j == i) s.copy(minutes = m) else s }) },
+                                modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 12.dp),
+                            )
+                        }
+                    }
+                }
+                if (slots.size < app.tsuzuku.model.HabitSlot.MAX) TextButton(onClick = {
+                    val last = slots.maxOfOrNull { it.minutes } ?: (8 * 60)
+                    val m = (last + 3 * 60).coerceAtMost(23 * 60)
+                    state.setSlots(slots + app.tsuzuku.model.HabitSlot(partName(m), m))
+                    editing = -1
+                }) {
+                    Icon(Icons.Rounded.Add, null, Modifier.size(18.dp))
+                    Text(stringResource(R.string.slots_add), Modifier.padding(start = 6.dp))
+                }
+                Text(
+                    stringResource(R.string.slots_footer),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
         }

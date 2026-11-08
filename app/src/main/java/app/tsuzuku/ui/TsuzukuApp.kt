@@ -47,6 +47,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import kotlinx.coroutines.launch
+import app.tsuzuku.model.slotStates
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -448,6 +449,13 @@ fun TsuzukuApp(
                         todayViewModel.incrementHabit(habitId)
                         connectionViewModel.onHabitProgressApplied(habitId, 1.0)
                         if (h != null && !h.isComplete && h.progress + h.habit.step >= h.habit.target) askFeeling(h.habit)
+                    },
+                    onToggleSlot = { habitId, index ->
+                        val h = habits.firstOrNull { it.habit.id == habitId }
+                        todayViewModel.toggleSlot(habitId, index)
+                        if (h != null && !h.isComplete && h.slotStates().count { it } + 1 >= h.habit.slots.size &&
+                            h.slotStates().getOrNull(index) == false
+                        ) askFeeling(h.habit)
                     },
                     onDecrementHabit = todayViewModel::decrementHabit,
                     onToggleTimer = todayViewModel::toggleTimer,

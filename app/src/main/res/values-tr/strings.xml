@@ -1541,4 +1541,17 @@
     <string name="trash_move_confirmation">%1$s çöp kutusuna taşınsın mı? 30 gün içinde geri getirebilirsin.</string>
     <string name="trash_moved">“%1$s” çöp kutusuna taşındı</string>
     <string name="trash_undo">Geri al</string>
+    <string name="slot_morning">Sabah</string>
+    <string name="slot_noon">Öğle</string>
+    <string name="slot_evening">Akşam</string>
+    <string name="slots_setting">Günde birden fazla</string>
+    <string name="slots_setting_desc">Her biri ayrı işaretlenir, ayrı hatırlatılır</string>
+    <string name="slots_preset_two">%1$s · %2$s</string>
+    <string name="slots_preset_three">%1$s · %2$s · %3$s</string>
+    <string name="slots_preset_hours">3 saatte bir</string>
+    <string name="slots_add">Tekrar ekle</string>
+    <string name="slots_remove">Bu tekrarı kaldır</string>
+    <string name="slots_footer">Hepsi bitince gün tamamlanmış sayılır ve seriye eklenir.</string>
+    <string name="slots_next">sıradaki: %1$s · %2$s</string>
+    <string name="slots_all_done">bugünlük hepsi tamam</string>
 </resources>

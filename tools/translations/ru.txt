@@ -1174,3 +1174,16 @@ trash_delete_forever|Удалить навсегда
 trash_move_confirmation|Переместить «%1$s» в корзину? Её можно вернуть в течение 30 дней.
 trash_moved|«%1$s» в корзине
 trash_undo|Отменить
+slot_morning|Утро
+slot_noon|День
+slot_evening|Вечер
+slots_setting|Несколько раз в день
+slots_setting_desc|Каждый раз отмечается и напоминается отдельно
+slots_preset_two|%1$s · %2$s
+slots_preset_three|%1$s · %2$s · %3$s
+slots_preset_hours|Каждые 3 часа
+slots_add|Добавить время
+slots_remove|Убрать это время
+slots_footer|Когда всё сделано, день засчитывается и продлевает серию.
+slots_next|далее: %1$s · %2$s
+slots_all_done|на сегодня всё

@@ -1,5 +1,7 @@
 package app.tsuzuku.ui.screens
 
+import androidx.compose.foundation.shape.RoundedCornerShape
+import app.tsuzuku.model.slotStates
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
@@ -100,7 +102,9 @@ internal fun HabitRow(
     onUndoSkip: () -> Unit,
     modifier: Modifier = Modifier,
     compact: Boolean = false,
+    onToggleSlot: (Int) -> Unit = {},
 ) {
+    val slotStates = if (todayHabit.habit.slots.size > 1) todayHabit.slotStates() else emptyList()
     val habit = todayHabit.habit
     val accent = Color(habit.colorArgb.toInt())
     val done = todayHabit.isComplete
@@ -143,6 +147,7 @@ internal fun HabitRow(
                 }
             },
     ) {
+        Column {
         Row(
             Modifier.padding(start = 14.dp, end = 8.dp, top = if (compact) 4.dp else 10.dp, bottom = if (compact) 4.dp else 10.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -170,7 +175,7 @@ internal fun HabitRow(
                         Spacer(Modifier.width(8.dp))
                     }
                     Text(
-                        habitContextLine(todayHabit, timerRunning, timerElapsedSeconds),
+                        if (slotStates.isNotEmpty()) slotContextLine(todayHabit, slotStates) else habitContextLine(todayHabit, timerRunning, timerElapsedSeconds),
                         style = MaterialTheme.typography.bodyMedium.copy(
                             fontFamily = app.tsuzuku.ui.theme.SerifDisplay,
                             fontStyle = androidx.compose.ui.text.font.FontStyle.Italic,
@@ -186,16 +191,23 @@ internal fun HabitRow(
                 }
             }
             Box {
-                when (habit.type) {
-                    HabitType.Check -> CheckButton(done = done, enabled = enabled, onToggle = onToggle)
-                    HabitType.Count -> RingButton(
+                when {
+                    slotStates.isNotEmpty() -> Box(Modifier.size(48.dp), contentAlignment = Alignment.Center) {
+                        Text(
+                            "${slotStates.count { it }}/${slotStates.size}",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = if (done) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.primary,
+                        )
+                    }
+                    habit.type == HabitType.Check -> CheckButton(done = done, enabled = enabled, onToggle = onToggle)
+                    habit.type == HabitType.Count -> RingButton(
                         fraction = todayHabit.progressFraction,
                         done = done,
                         enabled = enabled,
                         icon = { Icon(Icons.Rounded.Add, contentDescription = stringResource(R.string.increase_progress)) },
                         onClick = onIncrement,
                     )
-                    HabitType.Duration -> RingButton(
+                    else -> RingButton(
                         fraction = todayHabit.progressFraction,
                         done = done,
                         enabled = enabled,
@@ -229,10 +241,63 @@ internal fun HabitRow(
                 }
             }
         }
+        if (slotStates.isNotEmpty() && !compact) Box(Modifier.alpha(contentAlpha)) { SlotChips(habit.slots, slotStates, enabled, onToggleSlot) }
+        }
     }
 }
 
 /** The single most useful line of context for a habit today. */
+/** One chip per time of the day; the first open one is lit as "next". */
+@Composable
+private fun SlotChips(slots: List<app.tsuzuku.model.HabitSlot>, states: List<Boolean>, enabled: Boolean, onToggle: (Int) -> Unit) {
+    val next = states.indexOfFirst { !it }
+    val locale = androidx.compose.ui.platform.LocalConfiguration.current.locales[0]
+    Row(
+        Modifier.fillMaxWidth().padding(start = 14.dp, end = 14.dp, bottom = 12.dp),
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+    ) {
+        slots.forEachIndexed { i, slot ->
+            val on = states[i]
+            Surface(
+                onClick = { onToggle(i) },
+                enabled = enabled,
+                shape = RoundedCornerShape(50),
+                color = when {
+                    on -> MaterialTheme.colorScheme.primary
+                    i == next -> MaterialTheme.colorScheme.primaryContainer
+                    else -> Color.Transparent
+                },
+                border = if (on || i == next) null else androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+                modifier = Modifier.weight(1f),
+            ) {
+                Row(
+                    Modifier.padding(vertical = 8.dp, horizontal = 4.dp),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    if (on) Icon(Icons.Rounded.Check, null, Modifier.size(16.dp).padding(end = 2.dp), tint = MaterialTheme.colorScheme.onPrimary)
+                    Text(
+                        if (slots.size > 3) slot.name else "${slot.name} ${app.tsuzuku.ui.formatClock(slot.minutes, locale)}",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = if (on) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun slotContextLine(todayHabit: TodayHabit, states: List<Boolean>): String {
+    val next = states.indexOfFirst { !it }
+    if (next < 0) return stringResource(R.string.slots_all_done)
+    val slot = todayHabit.habit.slots[next]
+    val locale = androidx.compose.ui.platform.LocalConfiguration.current.locales[0]
+    return stringResource(R.string.slots_next, slot.name, app.tsuzuku.ui.formatClock(slot.minutes, locale))
+}
+
 @Composable
 private fun habitContextLine(todayHabit: TodayHabit, timerRunning: Boolean, timerElapsedSeconds: Long): String {
     val habit = todayHabit.habit

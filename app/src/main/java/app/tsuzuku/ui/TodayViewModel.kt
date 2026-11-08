@@ -80,6 +80,10 @@ class TodayViewModel(
         viewModelScope.launch { repository.incrementHabit(id); onDataChanged() }
     }
 
+    fun toggleSlot(id: Long, index: Int) {
+        viewModelScope.launch { repository.toggleSlot(id, index); onDataChanged() }
+    }
+
     fun decrementHabit(id: Long) {
         viewModelScope.launch { repository.decrementHabit(id); onDataChanged() }
     }

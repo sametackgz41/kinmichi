@@ -542,9 +542,77 @@ class PreviewGalleryTest {
     @Test fun archiveTr() {
         setVariant("tr", false)
         val habits = sampleToday("tr").take(3).map { it.habit.copy(createdOn = LocalDate.of(2026, 3, 14)) }
-        compose.setContent { TsuzukuTheme(darkTheme = false) { app.tsuzuku.ui.screens.ArchiveScreen(habits, onBack = {}, onRestore = {}, onDelete = {}) } }
+        compose.setContent { TsuzukuTheme(darkTheme = false) { app.tsuzuku.ui.screens.ArchiveScreen(habits, emptyList(), onBack = {}, onRestore = {}, onTrash = {}, onDeleteForever = {}, onEmptyTrash = {}) } }
         compose.mainClock.advanceTimeBy(800)
         captureScreen("archive_tr")
+    }
+
+    @Test fun slotsTodayTr() {
+        setVariant("tr", false)
+        val base = sampleToday("tr")
+        val slots = listOf(app.tsuzuku.model.HabitSlot("Sabah", 480), app.tsuzuku.model.HabitSlot("Öğle", 780), app.tsuzuku.model.HabitSlot("Akşam", 1260))
+        val pill = base[0].copy(
+            habit = base[0].habit.copy(name = "İlaç", emoji = "💊", type = app.tsuzuku.model.HabitType.Count, target = 3.0, slots = slots),
+            progress = 1.0, doneSlots = setOf(0), status = app.tsuzuku.model.HabitDayStatus.Pending,
+        )
+        val teeth = base[1].copy(
+            habit = base[1].habit.copy(name = "Diş fırçala", emoji = "🦷", type = app.tsuzuku.model.HabitType.Count, target = 2.0,
+                slots = listOf(app.tsuzuku.model.HabitSlot("Sabah", 480), app.tsuzuku.model.HabitSlot("Akşam", 1350))),
+            progress = 2.0, doneSlots = setOf(0, 1), status = app.tsuzuku.model.HabitDayStatus.Pending,
+        )
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false) {
+                androidx.compose.material3.Surface {
+                    androidx.compose.foundation.layout.Column(
+                        androidx.compose.ui.Modifier.fillMaxSize().padding(16.dp),
+                        verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(8.dp),
+                    ) {
+                        listOf(pill, base[2], teeth, base[3]).forEach { t ->
+                            app.tsuzuku.ui.screens.HabitRow(
+                                todayHabit = t, timerRunning = false, timerElapsedSeconds = 0, interactionDisabled = false,
+                                onToggle = {}, onIncrement = {}, onDecrement = {}, onToggleTimer = {}, onOpen = {},
+                                onOpenSkipDialog = {}, onUndoSkip = {},
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        compose.mainClock.advanceTimeBy(900)
+        captureScreen("slots_today_tr")
+    }
+
+    @Test fun slotsEditorTr() {
+        setVariant("tr", false)
+        val state = app.tsuzuku.ui.screens.HabitEditorState(null).apply {
+            name = "İlaç"; slotsOn = true; reminderEnabled = true
+            setSlots(listOf(app.tsuzuku.model.HabitSlot("Sabah", 480), app.tsuzuku.model.HabitSlot("Öğle", 780), app.tsuzuku.model.HabitSlot("Akşam", 1260)))
+        }
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false) {
+                androidx.compose.material3.Surface {
+                    androidx.compose.foundation.layout.Column(androidx.compose.ui.Modifier.fillMaxSize().padding(20.dp)) {
+                        app.tsuzuku.ui.screens.SlotsField(state)
+                    }
+                }
+            }
+        }
+        compose.mainClock.advanceTimeBy(900)
+        captureScreen("slots_editor_tr")
+    }
+
+    @Test fun trashTr() {
+        setVariant("tr", false)
+        val day = 86_400_000L
+        val now = System.currentTimeMillis()
+        val trashed = sampleToday("tr").take(3).mapIndexed { i, t -> app.tsuzuku.data.TrashedHabit(t.habit, now - listOf(2, 11, 26)[i] * day) }
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false) {
+                app.tsuzuku.ui.screens.ArchiveScreen(emptyList(), trashed, onBack = {}, onRestore = {}, onTrash = {}, onDeleteForever = {}, onEmptyTrash = {}, startInTrash = true)
+            }
+        }
+        compose.mainClock.advanceTimeBy(800)
+        captureScreen("trash_tr")
     }
 
     @Test fun task01() = renderTask("task01_math") { app.tsuzuku.notifications.MathMission(onProgress = {}, onSolved = {}, seed = 7, count = 1) }
@@ -559,6 +627,10 @@ class PreviewGalleryTest {
     @Test fun task10() = renderTask("task10_catch") { app.tsuzuku.notifications.CatchMission(onProgress = {}, onSolved = {}, seed = 6) }
 
     @Test fun trashA() = renderMock("trash_a") { TrashOptionA() }
+    @Test fun repeatsA() = renderMock("repeats_a") { RepeatsOptionA() }
+    @Test fun repeatsB() = renderMock("repeats_b") { RepeatsOptionB() }
+    @Test fun repeatsC() = renderMock("repeats_c") { RepeatsOptionC() }
+    @Test fun repeatsEditor() = renderMock("repeats_editor") { RepeatsEditor() }
     @Test fun trashB() = renderMock("trash_b") { TrashOptionB() }
     @Test fun trashC() = renderMock("trash_c") { TrashOptionC() }
 

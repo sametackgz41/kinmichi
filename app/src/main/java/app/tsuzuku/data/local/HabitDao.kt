@@ -81,6 +81,15 @@ interface HabitDao {
     @Insert
     suspend fun insertEntry(entry: HabitEntryEntity): Long
 
+    @Query("DELETE FROM habit_entries WHERE habitId = :habitId AND localDate = :localDate AND note = :note")
+    suspend fun deleteEntriesWithNote(habitId: Long, localDate: String, note: String)
+
+    @Query(
+        "DELETE FROM habit_entries WHERE id = (SELECT id FROM habit_entries WHERE habitId = :habitId AND localDate = :localDate " +
+            "AND status = 'PROGRESS' AND (note IS NULL OR note NOT LIKE 'SLOT:%') ORDER BY createdAt DESC LIMIT 1)",
+    )
+    suspend fun deleteLatestUntaggedProgress(habitId: Long, localDate: String)
+
     @Insert
     suspend fun insertEntries(entries: List<HabitEntryEntity>)
 

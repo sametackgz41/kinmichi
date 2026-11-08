@@ -1156,3 +1156,16 @@ trash_delete_forever|完全に削除
 trash_move_confirmation|%1$sをごみ箱に移しますか？30日以内なら元に戻せます。
 trash_moved|「%1$s」をごみ箱に移しました
 trash_undo|元に戻す
+slot_morning|朝
+slot_noon|昼
+slot_evening|夜
+slots_setting|1日に複数回
+slots_setting_desc|それぞれ個別にチェック・通知
+slots_preset_two|%1$s・%2$s
+slots_preset_three|%1$s・%2$s・%3$s
+slots_preset_hours|3時間ごと
+slots_add|時間を追加
+slots_remove|この時間を削除
+slots_footer|すべて終わるとその日は達成となり、連続記録に加わります。
+slots_next|次：%1$s・%2$s
+slots_all_done|今日はすべて完了

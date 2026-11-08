@@ -20,8 +20,31 @@ class HabitReminderScheduler(
 
     fun schedule(habit: HabitEntity) {
         val reminderMinutes = habit.reminderMinutes ?: return cancel(habit.id)
+        val slots = app.tsuzuku.model.HabitSlot.parse(habit.slots)
+        cancelSlots(habit.id)
+        if (slots.size > 1) {
+            slots.forEachIndexed { i, slot ->
+                val at = nextReminderTime(habit.scheduleDaysMask, slot.minutes, ZonedDateTime.now()).toInstant().toEpochMilli()
+                alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, slotPendingIntent(habit.id, i))
+            }
+            return
+        }
         schedule(habit.id, habit.scheduleDaysMask, reminderMinutes)
     }
+
+    private fun cancelSlots(habitId: Long) {
+        for (i in 0 until app.tsuzuku.model.HabitSlot.MAX) alarmManager.cancel(slotPendingIntent(habitId, i))
+    }
+
+    private fun slotPendingIntent(habitId: Long, index: Int): PendingIntent = PendingIntent.getBroadcast(
+        context,
+        habitId.hashCode() xor ((index + 1) shl 24),
+        Intent(context, HabitReminderReceiver::class.java).apply {
+            action = HabitReminderReceiver.ACTION_REMIND
+            putExtra(HabitReminderReceiver.EXTRA_HABIT_ID, habitId)
+        },
+        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+    )
 
     fun schedule(habitId: Long, daysMask: Int, reminderMinutes: Int) {
         val triggerAt = nextReminderTime(
@@ -44,6 +67,7 @@ class HabitReminderScheduler(
     fun cancel(habitId: Long) {
         alarmManager.cancel(reminderPendingIntent(habitId))
         alarmManager.cancel(snoozePendingIntent(habitId))
+        cancelSlots(habitId)
         HabitAlarms.stop(context, habitId)
     }
 

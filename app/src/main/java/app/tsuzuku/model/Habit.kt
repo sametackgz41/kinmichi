@@ -69,6 +69,7 @@ data class Habit(
     val currentLevel: Int = 1,
     /** What still counts on a bad day, e.g. "1 page"; keeps the streak alive. */
     val tinyVersion: String = "",
+    val slots: List<HabitSlot> = emptyList(),
 )
 
 data class HabitLevel(
@@ -86,6 +87,8 @@ data class HabitLevel(
 data class TodayHabit(
     val habit: Habit,
     val progress: Double,
+    /** Which of the habit's times of day were ticked by name today. */
+    val doneSlots: Set<Int> = emptySet(),
     val status: HabitDayStatus = HabitDayStatus.Pending,
     val streakDays: Int = 0,
     val restUsedThisWeek: Boolean = false,
@@ -176,6 +179,8 @@ data class HabitDraft(
     val currentLevel: Int = 1,
     /** What still counts on a bad day, e.g. "1 page"; keeps the streak alive. */
     val tinyVersion: String = "",
+    /** Times of the day in the stored form, see [HabitSlot.format]. */
+    val slots: String = "",
     /** Ring like an alarm clock instead of a quiet notification (kept per device). */
     val alarm: Boolean = false,
     /** Name of an app.tsuzuku.notifications.AlarmMission. */
@@ -199,3 +204,41 @@ data class WeeklyReview(
     val note: String,
     val updatedAt: Long,
 )
+
+
+/** One time of the day for a habit done several times a day ("Morning, 08.00"). */
+data class HabitSlot(val name: String, val minutes: Int) {
+    companion object {
+        const val MAX = 6
+        fun parse(stored: String?): List<HabitSlot> = stored.orEmpty().split('|').mapNotNull { part ->
+            val at = part.lastIndexOf('@')
+            if (at <= 0) return@mapNotNull null
+            val minutes = part.substring(at + 1).toIntOrNull() ?: return@mapNotNull null
+            HabitSlot(part.substring(0, at).replace('|', ' ').replace('@', ' ').trim(), minutes.coerceIn(0, 24 * 60 - 1))
+        }.take(MAX)
+
+        fun format(slots: List<HabitSlot>): String =
+            slots.take(MAX).joinToString("|") { "${it.name.replace('|', ' ').replace('@', ' ').trim()}@${it.minutes}" }
+
+        /** The note on an entry that ticks the slot at [index]. */
+        fun note(index: Int) = "SLOT:$index"
+        fun indexOf(note: String?): Int? = note?.takeIf { it.startsWith("SLOT:") }?.removePrefix("SLOT:")?.toIntOrNull()
+    }
+}
+
+/**
+ * Which slots count as done: the ones ticked by name, then any other progress (from a
+ * notification or a widget) fills the earliest open ones.
+ */
+fun TodayHabit.slotStates(): List<Boolean> {
+    val slots = habit.slots
+    val named = doneSlots.filter { it in slots.indices }.toSet()
+    var extra = (progress.toInt() - named.size).coerceAtLeast(0)
+    return slots.indices.map { i ->
+        when {
+            i in named -> true
+            extra > 0 -> { extra--; true }
+            else -> false
+        }
+    }
+}

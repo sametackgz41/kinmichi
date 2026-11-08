@@ -1142,6 +1142,19 @@
     <string name="trash_move_confirmation">%1$sをごみ箱に移しますか？30日以内なら元に戻せます。</string>
     <string name="trash_moved">「%1$s」をごみ箱に移しました</string>
     <string name="trash_undo">元に戻す</string>
+    <string name="slot_morning">朝</string>
+    <string name="slot_noon">昼</string>
+    <string name="slot_evening">夜</string>
+    <string name="slots_setting">1日に複数回</string>
+    <string name="slots_setting_desc">それぞれ個別にチェック・通知</string>
+    <string name="slots_preset_two">%1$s・%2$s</string>
+    <string name="slots_preset_three">%1$s・%2$s・%3$s</string>
+    <string name="slots_preset_hours">3時間ごと</string>
+    <string name="slots_add">時間を追加</string>
+    <string name="slots_remove">この時間を削除</string>
+    <string name="slots_footer">すべて終わるとその日は達成となり、連続記録に加わります。</string>
+    <string name="slots_next">次：%1$s・%2$s</string>
+    <string name="slots_all_done">今日はすべて完了</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

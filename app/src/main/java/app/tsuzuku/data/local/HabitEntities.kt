@@ -43,6 +43,8 @@ data class HabitEntity(
     val tinyVersion: String = "",
     /** Set when the habit is in the trash; it is deleted for good 30 days later. */
     val deletedAt: Long? = null,
+    /** Times of the day, "Morning@480|Noon@780"; each is ticked and reminded on its own. */
+    val slots: String = "",
 )
 
 @Entity(

@@ -16,6 +16,7 @@ import app.tsuzuku.model.HabitLevel
 import app.tsuzuku.model.HabitType
 import app.tsuzuku.model.HealthMetric
 import app.tsuzuku.model.TodayHabit
+import app.tsuzuku.model.slotStates
 import app.tsuzuku.model.WeeklyReview
 import app.tsuzuku.model.isScheduledOn
 import java.time.LocalDate
@@ -38,6 +39,8 @@ interface HabitRepository {
     suspend fun incrementHabitOnDate(id: Long, date: LocalDate)
     suspend fun decrementHabitOnDate(id: Long, date: LocalDate)
     suspend fun addProgress(id: Long, amount: Double)
+    /** Ticks or unticks one time of the day of a habit done several times a day. */
+    suspend fun toggleSlot(id: Long, index: Int) {}
     suspend fun addHabit(draft: HabitDraft): Long
     suspend fun updateHabit(id: Long, draft: HabitDraft)
     suspend fun updateHabitNote(id: Long, note: String)
@@ -108,6 +111,7 @@ class RoomHabitRepository(
                 }
                 TodayHabit(
                     habit = entity.toDomain(),
+                    doneSlots = habitEntries.mapNotNull { app.tsuzuku.model.HabitSlot.indexOf(it.note) }.toSet(),
                     progress = habitEntries
                         .filter(HabitEntryEntity::isProgress)
                         .sumOf(HabitEntryEntity::amount),
@@ -277,6 +281,28 @@ class RoomHabitRepository(
         )
     }
 
+    override suspend fun toggleSlot(id: Long, index: Int) {
+        val habit = dao.getHabit(id) ?: return
+        val date = today().toString()
+        val entries = dao.getEntries(id, date)
+        val today = TodayHabit(
+            habit = habit.toDomain(),
+            progress = entries.filter(HabitEntryEntity::isProgress).sumOf(HabitEntryEntity::amount),
+            doneSlots = entries.mapNotNull { app.tsuzuku.model.HabitSlot.indexOf(it.note) }.toSet(),
+        )
+        val states = today.slotStates()
+        if (index !in states.indices) return
+        val note = app.tsuzuku.model.HabitSlot.note(index)
+        when {
+            index in today.doneSlots -> dao.deleteEntriesWithNote(id, date, note)
+            states[index] -> dao.deleteLatestUntaggedProgress(id, date)
+            else -> {
+                val timestamp = now()
+                dao.insertEntry(HabitEntryEntity(habitId = id, localDate = date, amount = 1.0, note = note, createdAt = timestamp, updatedAt = timestamp))
+            }
+        }
+    }
+
     override suspend fun addHabit(draft: HabitDraft): Long {
         val timestamp = now()
         val sortOrder = dao.countHabits()
@@ -302,6 +328,7 @@ class RoomHabitRepository(
                 contextLabel = draft.contextLabel.trim().take(40),
                 intention = draft.intention.trim().take(240),
                 tinyVersion = draft.tinyVersion.trim().take(60),
+                slots = draft.slots,
                 activeStartEpochDay = draft.activeStartEpochDay,
                 activeEndEpochDay = draft.activeEndEpochDay,
                 repeatIntervalDays = draft.repeatIntervalDays.coerceIn(1, 365),
@@ -342,6 +369,7 @@ class RoomHabitRepository(
                 contextLabel = draft.contextLabel.trim().take(40),
                 intention = draft.intention.trim().take(240),
                 tinyVersion = draft.tinyVersion.trim().take(60),
+                slots = draft.slots,
                 activeStartEpochDay = draft.activeStartEpochDay,
                 activeEndEpochDay = draft.activeEndEpochDay,
                 repeatIntervalDays = draft.repeatIntervalDays.coerceIn(1, 365),
@@ -623,6 +651,7 @@ private fun HabitEntity.toDomain() = Habit(
     tags = tags,
     currentLevel = currentLevel,
     tinyVersion = tinyVersion,
+    slots = app.tsuzuku.model.HabitSlot.parse(slots),
 )
 
 private fun HabitLevelEntity.toDomain() = HabitLevel(

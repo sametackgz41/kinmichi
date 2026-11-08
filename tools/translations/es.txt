@@ -1162,3 +1162,16 @@ trash_delete_forever|Borrar definitivamente
 trash_move_confirmation|¿Mover %1$s a la papelera? Puedes recuperarlo en 30 días.
 trash_moved|«%1$s» se movió a la papelera
 trash_undo|Deshacer
+slot_morning|Mañana
+slot_noon|Mediodía
+slot_evening|Noche
+slots_setting|Varias veces al día
+slots_setting_desc|Cada vez se marca y se recuerda por separado
+slots_preset_two|%1$s · %2$s
+slots_preset_three|%1$s · %2$s · %3$s
+slots_preset_hours|Cada 3 horas
+slots_add|Añadir una vez
+slots_remove|Quitar esta vez
+slots_footer|Cuando estén todas, el día cuenta como completo y suma a la racha.
+slots_next|siguiente: %1$s · %2$s
+slots_all_done|todo hecho por hoy
