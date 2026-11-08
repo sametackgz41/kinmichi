@@ -289,6 +289,10 @@ fun TsuzukuApp(
             }
         },
     ) { innerPadding ->
+        androidx.compose.runtime.CompositionLocalProvider(
+            LocalScaffoldPadding provides innerPadding,
+            LocalCurrentRoute provides currentRoute,
+        ) {
         NavHost(
             navController = navController,
             startDestination = "today",
@@ -310,11 +314,9 @@ fun TsuzukuApp(
                 if (isTabSwitch(initialState.destination.route, targetState.destination.route)) fadeThroughOut()
                 else sharedAxisOut(forward = false)
             },
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
+            modifier = Modifier.fillMaxSize(),
         ) {
-            composable("today") {
+            screen("today") {
                 val dailyReviewToday by reviewViewModel.dailyReviewToday.collectAsStateWithLifecycle()
                 val focusSessions by focusViewModel.sessions.collectAsStateWithLifecycle()
                 val todayEpoch = remember { java.time.LocalDate.now().toEpochDay() }
@@ -447,7 +449,7 @@ fun TsuzukuApp(
                     },
                 )
             }
-            composable("plan") {
+            screen("plan") {
                 val planTemplates by planViewModel.templates.collectAsStateWithLifecycle()
                 Scaffold(
                     topBar = {
@@ -484,7 +486,7 @@ fun TsuzukuApp(
                     }
                 }
             }
-            composable("plan/new") {
+            screen("plan/new") {
                 PlanTaskEditorScreen(
                     customCategories = categories,
                     onBack = navController::popBackStack,
@@ -498,11 +500,11 @@ fun TsuzukuApp(
                     },
                 )
             }
-            composable(
+            screen(
                 route = "plan/{taskId}",
                 arguments = listOf(navArgument("taskId") { type = NavType.LongType }),
             ) { entry ->
-                val taskId = entry.arguments?.getLong("taskId") ?: return@composable
+                val taskId = entry.arguments?.getLong("taskId") ?: return@screen
                 planTasks.firstOrNull { it.id == taskId }?.let { task ->
                     val linkedLink = taskGoalLinks.firstOrNull { it.taskId == taskId }
                     val linkedGoal = linkedLink?.let { link ->
@@ -538,11 +540,11 @@ fun TsuzukuApp(
                     )
                 }
             }
-            composable(
+            screen(
                 route = "plan/{taskId}/edit",
                 arguments = listOf(navArgument("taskId") { type = NavType.LongType }),
             ) { entry ->
-                val taskId = entry.arguments?.getLong("taskId") ?: return@composable
+                val taskId = entry.arguments?.getLong("taskId") ?: return@screen
                 planTasks.firstOrNull { it.id == taskId }?.let { task ->
                     PlanTaskEditorScreen(
                         existing = task,
@@ -552,7 +554,7 @@ fun TsuzukuApp(
                     )
                 }
             }
-            composable("progress") {
+            screen("progress") {
                 val weeklySummary by reviewViewModel.weeklySummary.collectAsStateWithLifecycle()
                 val monthlySummary by reviewViewModel.monthlySummary.collectAsStateWithLifecycle()
                 val yearlySummary by reviewViewModel.yearlySummary.collectAsStateWithLifecycle()
@@ -611,7 +613,7 @@ fun TsuzukuApp(
                     }
                 }
             }
-            composable("settings") {
+            screen("settings") {
                 val cloudAccount by cloudSyncRepository.account.collectAsStateWithLifecycle()
                 ProfileScreen(
                     settings = settings,
@@ -644,7 +646,7 @@ fun TsuzukuApp(
                     },
                 )
             }
-            composable("goals") {
+            screen("goals") {
                 GoalsScreen(
                     goals = goals,
                     onBack = navController::popBackStack,
@@ -654,7 +656,7 @@ fun TsuzukuApp(
                     onDecrement = { goalViewModel.changeProgress(it, -1.0) },
                 )
             }
-            composable("search") {
+            screen("search") {
                 UnifiedSearchScreen(
                     habits = history.habits,
                     tasks = planTasks,
@@ -665,7 +667,7 @@ fun TsuzukuApp(
                     onOpenContent = {},
                 )
             }
-            composable("goal/new") {
+            screen("goal/new") {
                 GoalEditorScreen(
                     onBack = navController::popBackStack,
                     onSave = { draft ->
@@ -675,11 +677,11 @@ fun TsuzukuApp(
                     },
                 )
             }
-            composable(
+            screen(
                 route = "goal/{goalId}",
                 arguments = listOf(navArgument("goalId") { type = NavType.LongType }),
             ) { entry ->
-                val goalId = entry.arguments?.getLong("goalId") ?: return@composable
+                val goalId = entry.arguments?.getLong("goalId") ?: return@screen
                 val goal = goals.firstOrNull { it.id == goalId }
                 if (goal == null) {
                     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { Text(stringResource(R.string.goal_details)) }
@@ -710,11 +712,11 @@ fun TsuzukuApp(
                     )
                 }
             }
-            composable(
+            screen(
                 route = "goal/{goalId}/edit",
                 arguments = listOf(navArgument("goalId") { type = NavType.LongType }),
             ) { entry ->
-                val goalId = entry.arguments?.getLong("goalId") ?: return@composable
+                val goalId = entry.arguments?.getLong("goalId") ?: return@screen
                 goals.firstOrNull { it.id == goalId }?.let { goal ->
                     GoalEditorScreen(
                         existing = goal,
@@ -723,7 +725,7 @@ fun TsuzukuApp(
                     )
                 }
             }
-            composable("security") {
+            screen("security") {
                 SecurityScreen(
                     settings = settings,
                     biometricAvailable = biometricAvailable,
@@ -735,7 +737,7 @@ fun TsuzukuApp(
                     onSetLockDelayMinutes = onSetLockDelayMinutes,
                 )
             }
-            composable("backup") {
+            screen("backup") {
                 BackupScreen(
                     repository = backupRepository,
                     onBack = navController::popBackStack,
@@ -745,10 +747,10 @@ fun TsuzukuApp(
                     },
                 )
             }
-            composable("diagnostics") {
+            screen("diagnostics") {
                 DiagnosticsScreen(store = diagnosticStore, onBack = navController::popBackStack)
             }
-            composable("categories") {
+            screen("categories") {
                 CategoryManagerScreen(
                     categories = categories,
                     onBack = navController::popBackStack,
@@ -756,17 +758,17 @@ fun TsuzukuApp(
                     onDelete = categoryViewModel::delete,
                 )
             }
-            composable("widgets") {
+            screen("widgets") {
                 app.tsuzuku.ui.screens.WidgetsScreen(onBack = navController::popBackStack)
             }
-            composable("language") {
+            screen("language") {
                 app.tsuzuku.ui.screens.LanguageScreen(
                     selected = settings.language,
                     onBack = navController::popBackStack,
                     onSelect = onSetLanguage,
                 )
             }
-            composable("appearance") {
+            screen("appearance") {
                 app.tsuzuku.ui.screens.AppearanceScreen(
                     theme = settings.theme,
                     palette = settings.palette,
@@ -778,7 +780,7 @@ fun TsuzukuApp(
                     onSetPureBlack = onSetPureBlack,
                 )
             }
-            composable("cloud-account") {
+            screen("cloud-account") {
                 CloudAccountScreen(
                     repository = cloudSyncRepository,
                     settings = settings,
@@ -791,7 +793,7 @@ fun TsuzukuApp(
                     onSignedInName = onSetProfileName,
                 )
             }
-            composable("planning") {
+            screen("planning") {
                 val weeklyReviews by repository.observeWeeklyReviews().collectAsStateWithLifecycle(initialValue = emptyList())
                 PlanningScreen(
                     history = history,
@@ -809,7 +811,7 @@ fun TsuzukuApp(
                     onSaveReview = repository::saveWeeklyReview,
                 )
             }
-            composable("habit/new") {
+            screen("habit/new") {
                 val template = remember { NewHabitTemplate.take() }
                 HabitEditorScreen(
                     template = template,
@@ -827,18 +829,18 @@ fun TsuzukuApp(
                     },
                 )
             }
-            composable("habit/order") {
+            screen("habit/order") {
                 HabitOrderScreen(
                     habits = history.habits.sortedBy { it.sortOrder },
                     onBack = navController::popBackStack,
                     onMove = todayViewModel::moveHabit,
                 )
             }
-            composable(
+            screen(
                 route = "habit/{habitId}",
                 arguments = listOf(navArgument("habitId") { type = NavType.LongType }),
             ) { entry ->
-                val habitId = entry.arguments?.getLong("habitId") ?: return@composable
+                val habitId = entry.arguments?.getLong("habitId") ?: return@screen
                 val habit = history.habits.firstOrNull { it.id == habitId }
                 if (habit == null) {
                     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -893,11 +895,11 @@ fun TsuzukuApp(
                     )
                 }
             }
-            composable(
+            screen(
                 route = "habit/{habitId}/edit",
                 arguments = listOf(navArgument("habitId") { type = NavType.LongType }),
             ) { entry ->
-                val habitId = entry.arguments?.getLong("habitId") ?: return@composable
+                val habitId = entry.arguments?.getLong("habitId") ?: return@screen
                 val habit = history.habits.firstOrNull { it.id == habitId }
                 if (habit == null) {
                     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -923,7 +925,7 @@ fun TsuzukuApp(
                     )
                 }
             }
-            composable("focus") {
+            screen("focus") {
                 val focusSessions by focusViewModel.sessions.collectAsStateWithLifecycle()
                 val focusState by focusViewModel.activeState.collectAsStateWithLifecycle()
                 FocusScreen(
@@ -947,11 +949,11 @@ fun TsuzukuApp(
                     onBack = navController::popBackStack,
                 )
             }
-            composable(
+            screen(
                 route = "routine/{routineName}",
                 arguments = listOf(navArgument("routineName") { type = NavType.StringType }),
             ) { entry ->
-                val routineName = entry.arguments?.getString("routineName") ?: return@composable
+                val routineName = entry.arguments?.getString("routineName") ?: return@screen
                 RoutinePlayerScreen(
                     routineName = routineName,
                     routineHabits = habits.filter { it.habit.routineName.equals(routineName, ignoreCase = true) },
@@ -966,6 +968,7 @@ fun TsuzukuApp(
                     onBack = navController::popBackStack,
                 )
             }
+        }
         }
     }
 
@@ -1047,3 +1050,25 @@ private fun sharedAxisIn(forward: Boolean): androidx.compose.animation.EnterTran
 private fun sharedAxisOut(forward: Boolean): androidx.compose.animation.ExitTransition =
     androidx.compose.animation.slideOutHorizontally(androidx.compose.animation.core.tween(220)) { width -> if (forward) -width / 10 else width / 10 } +
         fadeOut(androidx.compose.animation.core.tween(60))
+
+
+/** The scaffold's live padding (top bar, bottom bar, insets) and the route on screen. */
+private val LocalScaffoldPadding = androidx.compose.runtime.staticCompositionLocalOf<androidx.compose.foundation.layout.PaddingValues> { androidx.compose.foundation.layout.PaddingValues() }
+private val LocalCurrentRoute = androidx.compose.runtime.compositionLocalOf<String?> { null }
+
+/**
+ * A destination that applies the scaffold padding itself. While it is leaving (another route is
+ * current) it keeps the padding it had, so it doesn't jump when the top and bottom bars appear or
+ * disappear for the incoming screen; that jump read as a flash of the old screen.
+ */
+private fun androidx.navigation.NavGraphBuilder.screen(
+    route: String,
+    arguments: List<androidx.navigation.NamedNavArgument> = emptyList(),
+    content: @Composable androidx.compose.animation.AnimatedContentScope.(androidx.navigation.NavBackStackEntry) -> Unit,
+) = composable(route = route, arguments = arguments) { entry ->
+    val live = LocalScaffoldPadding.current
+    val current = LocalCurrentRoute.current == entry.destination.route
+    var kept by remember { mutableStateOf(live) }
+    if (current) androidx.compose.runtime.SideEffect { kept = live }
+    Box(Modifier.fillMaxSize().padding(if (current) live else kept)) { content(entry) }
+}
