@@ -116,6 +116,8 @@ fun ProfileScreen(
     onSetShowDailySummary: (Boolean) -> Unit,
     onSetProtectScreen: (Boolean) -> Unit,
     onOpenCloudAccount: () -> Unit,
+    onOpenProfile: (() -> Unit)? = null,
+    profileStats: ProfileStats? = null,
     onOpenAppearance: () -> Unit = {},
     onOpenLanguage: () -> Unit = {},
     onOpenWidgets: () -> Unit = {},
@@ -293,23 +295,24 @@ fun ProfileScreen(
     }
     val profileCard: @Composable () -> Unit = {
         Column(
-            if (layout == SettingsLayout.Minimal) Modifier else Modifier
+            (if (layout == SettingsLayout.Minimal) Modifier else Modifier
                 .clip(androidx.compose.foundation.shape.RoundedCornerShape(28.dp))
-                .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.55f))
-                .padding(horizontal = 16.dp),
+                .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.55f)))
+                .then(if (onOpenProfile != null) Modifier.clickable(onClick = onOpenProfile) else Modifier)
+                .then(if (layout == SettingsLayout.Minimal) Modifier else Modifier.padding(horizontal = 16.dp)),
         ) {
             Row(
                 Modifier.fillMaxWidth().padding(vertical = 14.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(14.dp),
             ) {
-                Surface(
-                    modifier = Modifier.size(62.dp),
-                    shape = CircleShape,
-                    color = MaterialTheme.colorScheme.primaryContainer,
-                ) {
-                    Icon(Icons.Rounded.Person, contentDescription = null, modifier = Modifier.padding(16.dp))
-                }
+                ProfileAvatar(
+                    when (cloudAccount) {
+                        is CloudAccountState.SignedIn -> cloudAccount.displayName.ifBlank { settings.profileName }
+                        else -> settings.profileName
+                    },
+                    58,
+                )
                 Column(Modifier.weight(1f)) {
                     Text(
                         when (cloudAccount) {
@@ -324,9 +327,20 @@ fun ProfileScreen(
                             else -> stringResource(R.string.local_profile_description)
                         },
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        style = MaterialTheme.typography.bodySmall,
                     )
+                    profileStats?.let { st ->
+                        Text(
+                            stringResource(R.string.profile_card_stats, st.streak, st.comebacks, st.days),
+                            style = MaterialTheme.typography.labelMedium,
+                            color = Color(0xFF8A6A1F),
+                            modifier = Modifier.padding(top = 2.dp),
+                        )
+                    }
                 }
-                if (cloudAccount !is CloudAccountState.SignedIn) {
+                if (onOpenProfile != null) {
+                    Icon(Icons.AutoMirrored.Rounded.KeyboardArrowRight, contentDescription = stringResource(R.string.profile_title))
+                } else if (cloudAccount !is CloudAccountState.SignedIn) {
                     IconButton(onClick = {
                         nameDraft = settings.profileName
                         activeDialog = DIALOG_NAME

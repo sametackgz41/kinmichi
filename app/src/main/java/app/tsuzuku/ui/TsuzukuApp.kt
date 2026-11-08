@@ -701,6 +701,8 @@ fun TsuzukuApp(
                     onSetShowDailySummary = onSetShowDailySummary,
                     onSetProtectScreen = onSetProtectScreen,
                     onOpenCloudAccount = { navController.navigate("cloud-account") },
+                    onOpenProfile = { navController.navigate("profile") },
+                    profileStats = remember(history) { app.tsuzuku.ui.screens.profileStats(history) },
                     onOpenAppearance = { navController.navigate("appearance") },
                     onOpenLanguage = { navController.navigate("language") },
                     onOpenWidgets = { navController.navigate("widgets") },
@@ -839,6 +841,28 @@ fun TsuzukuApp(
                     data = data,
                     onClose = navController::popBackStack,
                     onShare = { app.tsuzuku.share.shareMonthCard(context, data) },
+                )
+            }
+            screen("profile") {
+                val cloudAccount by cloudSyncRepository.account.collectAsStateWithLifecycle()
+                val signedIn = cloudAccount as? app.tsuzuku.data.CloudAccountState.SignedIn
+                app.tsuzuku.ui.screens.ProfilePage(
+                    name = signedIn?.displayName?.ifBlank { settings.profileName } ?: settings.profileName,
+                    email = signedIn?.email,
+                    provider = signedIn?.provider?.let { if (it.contains("github", ignoreCase = true)) "GitHub" else "Google" },
+                    stats = remember(history) { app.tsuzuku.ui.screens.profileStats(history) },
+                    lockSummary = androidx.compose.ui.res.stringResource(
+                        when {
+                            !settings.appLockEnabled -> R.string.profile_lock_off
+                            settings.biometricUnlockEnabled -> R.string.profile_lock_fingerprint
+                            else -> R.string.profile_lock_pin
+                        },
+                    ),
+                    accountSummary = if (signedIn != null) signedIn.email else androidx.compose.ui.res.stringResource(R.string.local_profile_description),
+                    onSetName = onSetProfileName,
+                    onOpenSecurity = { navController.navigate("security") },
+                    onOpenAccount = { navController.navigate("cloud-account") },
+                    onBack = navController::popBackStack,
                 )
             }
             screen("year-review") {

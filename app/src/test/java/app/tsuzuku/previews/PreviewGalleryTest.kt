@@ -972,6 +972,13 @@ class PreviewGalleryTest {
     @Test fun task10() = renderTask("task10_catch") { app.tsuzuku.notifications.CatchMission(onProgress = {}, onSolved = {}, seed = 6) }
 
     @Test fun trashA() = renderMock("trash_a") { TrashOptionA() }
+    @Test fun profileA() = renderMock("profile_a") { ProfileOptionA() }
+    @Test fun profileB() = renderMock("profile_b") { ProfileOptionB() }
+    @Test fun profileC() = renderMock("profile_c") { ProfileOptionC() }
+    @Test fun splashA() = renderMock("splash_a") { SplashOptionA() }
+    @Test fun splashB() = renderMock("splash_b") { SplashOptionB() }
+    @Test fun splashC() = renderMock("splash_c") { SplashOptionC() }
+    @Test fun lockNew() = renderMock("lock_new") { LockNew() }
     @Test fun healthA() = renderMock("health_a") { HealthOptionA() }
     @Test fun healthB() = renderMock("health_b") { HealthOptionB() }
     @Test fun healthC() = renderMock("health_c") { HealthOptionC() }
@@ -1283,6 +1290,19 @@ class PreviewGalleryTest {
         }
         compose.mainClock.advanceTimeBy(1500)
         captureScreen("calendars_tr")
+    }
+
+    @Test fun profileRealTr() = renderMock("profile_real_tr") {
+        app.tsuzuku.ui.screens.ProfilePage(
+            name = "Samet", email = "41samet49@gmail.com", provider = "Google",
+            stats = app.tsuzuku.ui.screens.ProfileStats(84, 12, 47),
+            lockSummary = "Parmak izi açık", accountSummary = "41samet49@gmail.com",
+            onSetName = {}, onOpenSecurity = {}, onOpenAccount = {}, onBack = {},
+        )
+    }
+    @Test fun openingRealTr() = renderMock("opening_real_tr") { app.tsuzuku.ui.screens.OpeningScreen(onDone = {}, still = 1f) }
+    @Test fun lockRealTr() = renderMock("lock_real_tr") {
+        app.tsuzuku.ui.screens.AppLockScreen(biometricEnabled = true, biometricAvailable = true, onVerifyPin = { false }, onUnlocked = {}, onBiometric = {}, name = "Samet", autoPrompt = false)
     }
 
     @Test fun todayEditTr() {

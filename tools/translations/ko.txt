@@ -1267,3 +1267,19 @@ today_edit_seasonal|계절 장식
 today_edit_seasonal_desc|꽃잎, 반딧불, 낙엽, 눈. 흔들면 흩날려요
 today_edit_group_desc|알림 시간에 따라 아침·오후·저녁으로
 today_edit_compact_desc|한 화면에 더 많은 습관
+profile_title|프로필
+profile_days|일째
+profile_streak|현재 연속
+profile_comebacks|다시 시작
+profile_icon|프로필 아이콘
+profile_icon_letter|이름 첫 글자
+profile_greeting|인사말
+profile_greeting_preview|좋은 저녁이에요, %1$s님
+profile_lock_off|꺼짐
+profile_lock_pin|PIN
+profile_lock_fingerprint|지문 켜짐
+profile_card_stats|🔥 %1$d  ·  ✨ %2$d  ·  %3$d일째
+opening_tagline|金道 · 황금의 길
+lock_welcome_back|다시 오신 걸 환영해요, %1$s님
+lock_fingerprint|지문으로 열기
+lock_use_pin|PIN으로 열기

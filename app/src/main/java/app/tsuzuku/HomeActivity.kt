@@ -9,6 +9,7 @@ import android.view.WindowManager
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.biometric.BiometricManager
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.biometric.BiometricPrompt
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.SideEffect
@@ -52,7 +53,9 @@ class HomeActivity : FragmentActivity() {
         val settingsRepository = application.settingsRepository
         isUnlocked = !settingsRepository.settings.value.appLockEnabled
         if (savedInstanceState == null) launchRoute = routeFor(intent)
+        val freshStart = savedInstanceState == null
         setContent {
+            var showOpening by androidx.compose.runtime.saveable.rememberSaveable { androidx.compose.runtime.mutableStateOf(freshStart) }
             val settings by settingsRepository.settings.collectAsStateWithLifecycle()
             val introReplay by app.tsuzuku.ui.IntroReplay.stage.collectAsStateWithLifecycle()
             val darkTheme = when (settings.theme) {
@@ -68,6 +71,7 @@ class HomeActivity : FragmentActivity() {
                 }
             }
             app.tsuzuku.ui.theme.LookPrefs.load(this@HomeActivity)
+            app.tsuzuku.ui.screens.ProfilePrefs.load(this@HomeActivity)
             val baseDensity = androidx.compose.ui.platform.LocalDensity.current
             androidx.compose.runtime.CompositionLocalProvider(
                 androidx.compose.ui.platform.LocalDensity provides androidx.compose.ui.unit.Density(
@@ -75,10 +79,13 @@ class HomeActivity : FragmentActivity() {
                 ),
             ) {
             TsuzukuTheme(darkTheme = darkTheme, palette = settings.palette, pureBlack = settings.pureBlack, highContrast = app.tsuzuku.ui.theme.LookPrefs.highContrast) {
+                androidx.compose.foundation.layout.Box(androidx.compose.ui.Modifier.fillMaxSize()) {
                 if (settings.appLockEnabled && !isUnlocked) {
-                    AppLockScreen(
+                    app.tsuzuku.ui.screens.AppLockScreen(
                         biometricEnabled = settings.biometricUnlockEnabled,
                         biometricAvailable = biometricAvailable(),
+                        name = settings.profileName,
+                        autoPrompt = !showOpening,
                         onVerifyPin = settingsRepository::verifyPin,
                         onUnlocked = { isUnlocked = true },
                         onBiometric = { showBiometricPrompt() },
@@ -166,6 +173,9 @@ class HomeActivity : FragmentActivity() {
                         launchRoute = launchRoute,
                         onLaunchRouteHandled = { launchRoute = null },
                     )
+                }
+                // The opening, once per start of the app, over whatever comes first.
+                if (showOpening) app.tsuzuku.ui.screens.OpeningScreen(onDone = { showOpening = false })
                 }
             }
             }

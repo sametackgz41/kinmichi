@@ -1267,3 +1267,19 @@ today_edit_seasonal|Tocchi di stagione
 today_edit_seasonal_desc|Petali, lucciole, foglie o neve; scuoti per farli volare
 today_edit_group_desc|Mattina, pomeriggio e sera, in base al promemoria
 today_edit_compact_desc|Più abitudini sullo schermo
+profile_title|Profilo
+profile_days|giorni in cammino
+profile_streak|serie attuale
+profile_comebacks|ritorni
+profile_icon|Immagine del profilo
+profile_icon_letter|La tua iniziale
+profile_greeting|Saluto
+profile_greeting_preview|Buonasera, %1$s
+profile_lock_off|Disattivato
+profile_lock_pin|Con PIN
+profile_lock_fingerprint|Impronta attiva
+profile_card_stats|🔥 %1$d  ·  ✨ %2$d  ·  giorno %3$d
+opening_tagline|金道 · la via d'oro
+lock_welcome_back|Bentornato, %1$s
+lock_fingerprint|Apri con l'impronta
+lock_use_pin|Usa il PIN

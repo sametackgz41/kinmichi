@@ -1279,3 +1279,19 @@ today_edit_seasonal|Сезонные детали
 today_edit_seasonal_desc|Лепестки, светлячки, листья или снег; встряхните — закружатся
 today_edit_group_desc|Утро, день и вечер по времени напоминания
 today_edit_compact_desc|Больше привычек на экране сразу
+profile_title|Профиль
+profile_days|дней в пути
+profile_streak|текущая серия
+profile_comebacks|возвращений
+profile_icon|Значок профиля
+profile_icon_letter|Первая буква имени
+profile_greeting|Приветствие
+profile_greeting_preview|Добрый вечер, %1$s
+profile_lock_off|Выкл.
+profile_lock_pin|PIN-код
+profile_lock_fingerprint|Отпечаток вкл.
+profile_card_stats|🔥 %1$d  ·  ✨ %2$d  ·  день %3$d
+opening_tagline|金道 · золотой путь
+lock_welcome_back|С возвращением, %1$s
+lock_fingerprint|Откройте отпечатком
+lock_use_pin|Ввести PIN

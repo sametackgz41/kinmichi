@@ -1267,3 +1267,19 @@ today_edit_seasonal|Toques da estação
 today_edit_seasonal_desc|Pétalas, vaga-lumes, folhas ou neve; balance para agitar
 today_edit_group_desc|Manhã, tarde e noite, pelo horário do lembrete
 today_edit_compact_desc|Mais hábitos na tela de uma vez
+profile_title|Perfil
+profile_days|dias no caminho
+profile_streak|sequência atual
+profile_comebacks|retornos
+profile_icon|Imagem do perfil
+profile_icon_letter|Sua inicial
+profile_greeting|Saudação
+profile_greeting_preview|Boa noite, %1$s
+profile_lock_off|Desligado
+profile_lock_pin|Com PIN
+profile_lock_fingerprint|Digital ativada
+profile_card_stats|🔥 %1$d  ·  ✨ %2$d  ·  dia %3$d
+opening_tagline|金道 · o caminho dourado
+lock_welcome_back|Bem-vindo de volta, %1$s
+lock_fingerprint|Abra com sua digital
+lock_use_pin|Usar PIN

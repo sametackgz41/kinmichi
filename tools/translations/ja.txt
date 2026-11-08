@@ -1261,3 +1261,19 @@ today_edit_seasonal|季節の飾り
 today_edit_seasonal_desc|花びら、蛍、紅葉、雪。振ると舞い上がります
 today_edit_group_desc|リマインダー時刻で朝・昼・夜に分けます
 today_edit_compact_desc|一度に多くの習慣を表示
+profile_title|プロフィール
+profile_days|日目
+profile_streak|今の連続
+profile_comebacks|カムバック
+profile_icon|プロフィール画像
+profile_icon_letter|名前の頭文字
+profile_greeting|あいさつ
+profile_greeting_preview|こんばんは、%1$sさん
+profile_lock_off|オフ
+profile_lock_pin|PINで
+profile_lock_fingerprint|指紋オン
+profile_card_stats|🔥 %1$d  ·  ✨ %2$d  ·  %3$d日目
+opening_tagline|金道 · 金の道
+lock_welcome_back|おかえりなさい、%1$sさん
+lock_fingerprint|指紋で開く
+lock_use_pin|PINで開く

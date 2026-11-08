@@ -1267,3 +1267,19 @@ today_edit_seasonal|Jahreszeitliche Details
 today_edit_seasonal_desc|Blüten, Glühwürmchen, Blätter oder Schnee; schütteln wirbelt sie auf
 today_edit_group_desc|Morgens, mittags, abends nach Erinnerungszeit
 today_edit_compact_desc|Mehr Gewohnheiten auf einmal
+profile_title|Profil
+profile_days|Tage unterwegs
+profile_streak|aktuelle Serie
+profile_comebacks|Comebacks
+profile_icon|Profilbild
+profile_icon_letter|Dein Anfangsbuchstabe
+profile_greeting|Begrüßung
+profile_greeting_preview|Guten Abend, %1$s
+profile_lock_off|Aus
+profile_lock_pin|Mit PIN
+profile_lock_fingerprint|Fingerabdruck an
+profile_card_stats|🔥 %1$d  ·  ✨ %2$d  ·  Tag %3$d
+opening_tagline|金道 · der goldene Weg
+lock_welcome_back|Willkommen zurück, %1$s
+lock_fingerprint|Mit Fingerabdruck öffnen
+lock_use_pin|PIN verwenden

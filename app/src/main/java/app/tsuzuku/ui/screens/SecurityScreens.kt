@@ -182,44 +182,6 @@ fun SecurityScreen(
 }
 
 @Composable
-fun AppLockScreen(
-    biometricEnabled: Boolean,
-    biometricAvailable: Boolean,
-    onVerifyPin: (String) -> Boolean,
-    onUnlocked: () -> Unit,
-    onBiometric: () -> Unit,
-) {
-    var pin by rememberSaveable { mutableStateOf("") }
-    var error by rememberSaveable { mutableStateOf(false) }
-    Box(Modifier.fillMaxSize().statusBarsPadding().padding(28.dp), contentAlignment = Alignment.Center) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            Text(stringResource(R.string.app_locked), style = MaterialTheme.typography.headlineMedium)
-            Text(stringResource(R.string.enter_pin_to_continue), color = MaterialTheme.colorScheme.onSurfaceVariant)
-            PinField(
-                value = pin,
-                onValueChange = { pin = pinInput(it); error = false },
-                labelRes = R.string.pin_code,
-                isError = error,
-            )
-            if (error) Text(stringResource(R.string.incorrect_pin), color = MaterialTheme.colorScheme.error)
-            Button(
-                enabled = pin.length == 4,
-                onClick = {
-                    if (onVerifyPin(pin)) onUnlocked() else { error = true; pin = "" }
-                },
-                modifier = Modifier.fillMaxWidth(),
-            ) { Text(stringResource(R.string.unlock)) }
-            if (biometricEnabled && biometricAvailable) {
-                FilledTonalButton(onClick = onBiometric, modifier = Modifier.fillMaxWidth()) {
-                    Icon(Icons.Rounded.Fingerprint, contentDescription = null)
-                    Text(stringResource(R.string.use_biometrics), modifier = Modifier.padding(start = 8.dp))
-                }
-            }
-        }
-    }
-}
-
-@Composable
 private fun ChangePinDialog(onDismiss: () -> Unit, onConfirm: (String, String) -> Boolean) {
     var current by rememberSaveable { mutableStateOf("") }
     var newPin by rememberSaveable { mutableStateOf("") }

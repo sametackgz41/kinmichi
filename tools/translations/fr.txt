@@ -1267,3 +1267,19 @@ today_edit_seasonal|Touches de saison
 today_edit_seasonal_desc|Pétales, lucioles, feuilles ou neige ; secoue pour les faire voler
 today_edit_group_desc|Matin, après-midi et soir, selon l'heure du rappel
 today_edit_compact_desc|Plus d'habitudes à l'écran
+profile_title|Profil
+profile_days|jours en route
+profile_streak|série actuelle
+profile_comebacks|retours
+profile_icon|Image de profil
+profile_icon_letter|Ton initiale
+profile_greeting|Salutation
+profile_greeting_preview|Bonsoir, %1$s
+profile_lock_off|Désactivé
+profile_lock_pin|Par PIN
+profile_lock_fingerprint|Empreinte activée
+profile_card_stats|🔥 %1$d  ·  ✨ %2$d  ·  jour %3$d
+opening_tagline|金道 · le chemin doré
+lock_welcome_back|Bon retour, %1$s
+lock_fingerprint|Ouvre avec ton empreinte
+lock_use_pin|Utiliser le PIN

@@ -1629,4 +1629,20 @@
     <string name="today_edit_seasonal_desc">Petals, fireflies, leaves or snow; shake to stir them</string>
     <string name="today_edit_group_desc">Morning, afternoon and evening, by reminder time</string>
     <string name="today_edit_compact_desc">More habits on the screen at once</string>
+    <string name="profile_title">Profile</string>
+    <string name="profile_days">days on the path</string>
+    <string name="profile_streak">current streak</string>
+    <string name="profile_comebacks">comebacks</string>
+    <string name="profile_icon">Profile picture</string>
+    <string name="profile_icon_letter">Your initial</string>
+    <string name="profile_greeting">Greeting</string>
+    <string name="profile_greeting_preview">Good evening, %1$s</string>
+    <string name="profile_lock_off">Off</string>
+    <string name="profile_lock_pin">PIN</string>
+    <string name="profile_lock_fingerprint">Fingerprint on</string>
+    <string name="profile_card_stats">🔥 %1$d  ·  ✨ %2$d  ·  day %3$d</string>
+    <string name="opening_tagline">金道 · the golden path</string>
+    <string name="lock_welcome_back">Welcome back, %1$s</string>
+    <string name="lock_fingerprint">Open with your fingerprint</string>
+    <string name="lock_use_pin">Use PIN instead</string>
 </resources>

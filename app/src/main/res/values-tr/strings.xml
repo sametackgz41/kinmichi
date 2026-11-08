@@ -1628,4 +1628,20 @@
     <string name="today_edit_seasonal_desc">Yaprak, ateş böceği ya da kar; sallayınca savrulur</string>
     <string name="today_edit_group_desc">Hatırlatma saatine göre sabah, öğle, akşam</string>
     <string name="today_edit_compact_desc">Ekrana aynı anda daha çok alışkanlık sığar</string>
+    <string name="profile_title">Profil</string>
+    <string name="profile_days">gündür yolda</string>
+    <string name="profile_streak">şu anki seri</string>
+    <string name="profile_comebacks">geri dönüş</string>
+    <string name="profile_icon">Profil simgesi</string>
+    <string name="profile_icon_letter">Adının baş harfi</string>
+    <string name="profile_greeting">Selamlama</string>
+    <string name="profile_greeting_preview">İyi akşamlar, %1$s</string>
+    <string name="profile_lock_off">Kapalı</string>
+    <string name="profile_lock_pin">PIN ile</string>
+    <string name="profile_lock_fingerprint">Parmak izi açık</string>
+    <string name="profile_card_stats">🔥 %1$d  ·  ✨ %2$d  ·  %3$d gün</string>
+    <string name="opening_tagline">金道 · altın yol</string>
+    <string name="lock_welcome_back">Tekrar hoş geldin, %1$s</string>
+    <string name="lock_fingerprint">Parmak izinle aç</string>
+    <string name="lock_use_pin">PIN ile aç</string>
 </resources>

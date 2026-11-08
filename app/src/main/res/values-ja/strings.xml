@@ -1247,6 +1247,22 @@
     <string name="today_edit_seasonal_desc">花びら、蛍、紅葉、雪。振ると舞い上がります</string>
     <string name="today_edit_group_desc">リマインダー時刻で朝・昼・夜に分けます</string>
     <string name="today_edit_compact_desc">一度に多くの習慣を表示</string>
+    <string name="profile_title">プロフィール</string>
+    <string name="profile_days">日目</string>
+    <string name="profile_streak">今の連続</string>
+    <string name="profile_comebacks">カムバック</string>
+    <string name="profile_icon">プロフィール画像</string>
+    <string name="profile_icon_letter">名前の頭文字</string>
+    <string name="profile_greeting">あいさつ</string>
+    <string name="profile_greeting_preview">こんばんは、%1$sさん</string>
+    <string name="profile_lock_off">オフ</string>
+    <string name="profile_lock_pin">PINで</string>
+    <string name="profile_lock_fingerprint">指紋オン</string>
+    <string name="profile_card_stats">🔥 %1$d  ·  ✨ %2$d  ·  %3$d日目</string>
+    <string name="opening_tagline">金道 · 金の道</string>
+    <string name="lock_welcome_back">おかえりなさい、%1$sさん</string>
+    <string name="lock_fingerprint">指紋で開く</string>
+    <string name="lock_use_pin">PINで開く</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>
