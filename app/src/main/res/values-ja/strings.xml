@@ -1265,6 +1265,12 @@
     <string name="lock_use_pin">PINで開く</string>
     <string name="health_settings_allow">インストール済み。タップしてKinmichiに歩数や睡眠などの読み取りを許可</string>
     <string name="health_card_allow">アクセスを許可</string>
+    <string name="health_page_title">ヘルス</string>
+    <string name="health_page_connected">Health Connect連携中</string>
+    <string name="health_page_allowed">%2$d種類中%1$d種類を許可</string>
+    <string name="health_page_permissions">権限</string>
+    <string name="health_page_not_allowed">まだ許可されていません</string>
+    <string name="health_page_create">+ これで習慣をつくる</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

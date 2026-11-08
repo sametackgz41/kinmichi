@@ -1279,3 +1279,9 @@ lock_fingerprint|指紋で開く
 lock_use_pin|PINで開く
 health_settings_allow|インストール済み。タップしてKinmichiに歩数や睡眠などの読み取りを許可
 health_card_allow|アクセスを許可
+health_page_title|ヘルス
+health_page_connected|Health Connect連携中
+health_page_allowed|%2$d種類中%1$d種類を許可
+health_page_permissions|権限
+health_page_not_allowed|まだ許可されていません
+health_page_create|+ これで習慣をつくる

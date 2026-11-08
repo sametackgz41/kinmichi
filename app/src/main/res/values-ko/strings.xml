@@ -1265,6 +1265,12 @@
     <string name="lock_use_pin">PIN으로 열기</string>
     <string name="health_settings_allow">설치됨. 눌러서 Kinmichi가 걸음 수, 수면 등을 읽도록 허용하세요</string>
     <string name="health_card_allow">접근 허용</string>
+    <string name="health_page_title">건강</string>
+    <string name="health_page_connected">Health Connect 연결됨</string>
+    <string name="health_page_allowed">데이터 %2$d종 중 %1$d종 허용</string>
+    <string name="health_page_permissions">권한</string>
+    <string name="health_page_not_allowed">아직 허용되지 않음</string>
+    <string name="health_page_create">+ 이걸로 습관 만들기</string>
     <plurals name="streak_days">
         <item quantity="one">%d일 연속</item>
         <item quantity="other">%d일 연속</item>

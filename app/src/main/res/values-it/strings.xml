@@ -1265,6 +1265,12 @@
     <string name="lock_use_pin">Usa il PIN</string>
     <string name="health_settings_allow">Installato. Tocca per consentire a Kinmichi di leggere passi, sonno e altro</string>
     <string name="health_card_allow">Consenti accesso</string>
+    <string name="health_page_title">Salute</string>
+    <string name="health_page_connected">Health Connect collegato</string>
+    <string name="health_page_allowed">%1$d tipi di dati su %2$d consentiti</string>
+    <string name="health_page_permissions">Permessi</string>
+    <string name="health_page_not_allowed">Non ancora consentito</string>
+    <string name="health_page_create">+ Crea un\'abitudine con questo</string>
     <plurals name="streak_days">
         <item quantity="one">Serie di %d giorno</item>
         <item quantity="other">Serie di %d giorni</item>

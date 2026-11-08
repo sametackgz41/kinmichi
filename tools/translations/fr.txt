@@ -1285,3 +1285,9 @@ lock_fingerprint|Ouvre avec ton empreinte
 lock_use_pin|Utiliser le PIN
 health_settings_allow|Installé. Touche pour autoriser Kinmichi à lire les pas, le sommeil et plus
 health_card_allow|Autoriser l'accès
+health_page_title|Santé
+health_page_connected|Health Connect est relié
+health_page_allowed|%1$d types de données sur %2$d autorisés
+health_page_permissions|Autorisations
+health_page_not_allowed|Pas encore autorisé
+health_page_create|+ En faire une habitude

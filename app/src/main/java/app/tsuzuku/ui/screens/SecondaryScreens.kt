@@ -119,6 +119,7 @@ fun ProfileScreen(
     onSetProtectScreen: (Boolean) -> Unit,
     onOpenCloudAccount: () -> Unit,
     onOpenProfile: (() -> Unit)? = null,
+    onOpenHealth: () -> Unit = {},
     profileStats: ProfileStats? = null,
     onOpenAppearance: () -> Unit = {},
     onOpenLanguage: () -> Unit = {},
@@ -223,7 +224,7 @@ fun ProfileScreen(
             onCheckedChange = onSetShowDailySummary,
         )
             WidgetOpacityRow(settings.widgetOpacity, onSetWidgetOpacity)
-        HealthConnectRow()
+        HealthConnectRow(onOpenHealth)
         ValueSettingRow(
             Icons.AutoMirrored.Rounded.Label,
             stringResource(R.string.categories_and_tags),
@@ -861,7 +862,7 @@ private fun WidgetOpacityRow(value: Int, onChange: (Int) -> Unit) {
 
 /** Health Connect: whether it can be used here, and one tap to install it or manage its permissions. */
 @Composable
-private fun HealthConnectRow() {
+private fun HealthConnectRow(onOpenHealth: () -> Unit) {
     val context = androidx.compose.ui.platform.LocalContext.current
     var status by remember { mutableStateOf(app.tsuzuku.health.HealthSync.status(context)) }
     androidx.lifecycle.compose.LifecycleResumeEffect(Unit) {
@@ -888,9 +889,9 @@ private fun HealthConnectRow() {
                 app.tsuzuku.health.HealthSync.open(context)
             } else {
                 scope.launch {
+                    // Allowed: the Health page with the numbers; not yet: ask first.
                     val granted = app.tsuzuku.health.HealthSync.granted(context)
-                    if (granted.containsAll(app.tsuzuku.health.HealthSync.allPermissions)) app.tsuzuku.health.HealthSync.open(context)
-                    else request.launch(app.tsuzuku.health.HealthSync.allPermissions)
+                    if (granted.isNotEmpty()) onOpenHealth() else request.launch(app.tsuzuku.health.HealthSync.allPermissions)
                 }
             }
         },

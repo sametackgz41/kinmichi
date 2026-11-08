@@ -972,6 +972,9 @@ class PreviewGalleryTest {
     @Test fun task10() = renderTask("task10_catch") { app.tsuzuku.notifications.CatchMission(onProgress = {}, onSolved = {}, seed = 6) }
 
     @Test fun trashA() = renderMock("trash_a") { TrashOptionA() }
+    @Test fun healthPageA() = renderMock("healthpage_a") { HealthPageA() }
+    @Test fun healthPageB() = renderMock("healthpage_b") { HealthPageB() }
+    @Test fun healthPageC() = renderMock("healthpage_c") { HealthPageC() }
     @Test fun profileA() = renderMock("profile_a") { ProfileOptionA() }
     @Test fun profileB() = renderMock("profile_b") { ProfileOptionB() }
     @Test fun profileC() = renderMock("profile_c") { ProfileOptionC() }
@@ -1292,6 +1295,21 @@ class PreviewGalleryTest {
         captureScreen("calendars_tr")
     }
 
+    @Test fun healthPageRealTr() {
+        setVariant("tr", false)
+        val habits = sampleToday("tr").map { it.habit }.mapIndexed { i, h -> if (i == 0) h.copy(name = "Günde 8.000 adım", healthMetric = app.tsuzuku.model.HealthMetric.Steps) else h }
+        fun week(vararg v: Double) = v.mapIndexed { i, x -> LocalDate.now().minusDays((v.size - 1 - i).toLong()) to x }
+        val data = listOf(
+            app.tsuzuku.ui.screens.HealthCardData(app.tsuzuku.model.HealthMetric.Steps, week(5200.0, 8100.0, 6900.0, 10240.0, 4800.0, 7800.0, 6214.0)),
+            app.tsuzuku.ui.screens.HealthCardData(app.tsuzuku.model.HealthMetric.Distance, week(3.6, 5.8, 4.9, 7.2, 3.3, 5.5, 4.3)),
+            app.tsuzuku.ui.screens.HealthCardData(app.tsuzuku.model.HealthMetric.Calories, week(1700.0, 1950.0, 1820.0, 2100.0, 1650.0, 1900.0, 1850.0)),
+            app.tsuzuku.ui.screens.HealthCardData(app.tsuzuku.model.HealthMetric.ExerciseDuration, null),
+            app.tsuzuku.ui.screens.HealthCardData(app.tsuzuku.model.HealthMetric.SleepDuration, week(410.0, 380.0, 450.0, 360.0, 430.0, 470.0, 400.0)),
+        )
+        compose.setContent { TsuzukuTheme(darkTheme = false) { app.tsuzuku.ui.screens.HealthPage(habits, {}, {}, {}, preview = data) } }
+        compose.mainClock.advanceTimeBy(900)
+        captureScreen("healthpage_real_tr")
+    }
     @Test fun profileRealTr() = renderMock("profile_real_tr") {
         app.tsuzuku.ui.screens.ProfilePage(
             name = "Samet", email = "41samet49@gmail.com", provider = "Google",

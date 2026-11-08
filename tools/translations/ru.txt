@@ -1297,3 +1297,9 @@ lock_fingerprint|Откройте отпечатком
 lock_use_pin|Ввести PIN
 health_settings_allow|Установлено. Нажмите, чтобы разрешить Kinmichi читать шаги, сон и другое
 health_card_allow|Разрешить доступ
+health_page_title|Здоровье
+health_page_connected|Health Connect подключён
+health_page_allowed|Разрешено %1$d из %2$d типов данных
+health_page_permissions|Разрешения
+health_page_not_allowed|Пока нет доступа
+health_page_create|+ Сделать привычкой

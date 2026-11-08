@@ -1646,4 +1646,10 @@
     <string name="lock_use_pin">PIN ile aç</string>
     <string name="health_settings_allow">Yüklü. Kinmichi\'nin adım, uyku ve dahasını okumasına izin vermek için dokun</string>
     <string name="health_card_allow">İzin ver</string>
+    <string name="health_page_title">Sağlık</string>
+    <string name="health_page_connected">Health Connect bağlı</string>
+    <string name="health_page_allowed">%2$d veri türünden %1$d tanesine izin var</string>
+    <string name="health_page_permissions">İzinler</string>
+    <string name="health_page_not_allowed">Henüz izin verilmedi</string>
+    <string name="health_page_create">+ Bununla alışkanlık oluştur</string>
 </resources>

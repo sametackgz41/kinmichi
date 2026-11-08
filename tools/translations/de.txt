@@ -1285,3 +1285,9 @@ lock_fingerprint|Mit Fingerabdruck öffnen
 lock_use_pin|PIN verwenden
 health_settings_allow|Installiert. Tippe, um Kinmichi Schritte, Schlaf und mehr lesen zu lassen
 health_card_allow|Zugriff erlauben
+health_page_title|Gesundheit
+health_page_connected|Health Connect verbunden
+health_page_allowed|%1$d von %2$d Datenarten erlaubt
+health_page_permissions|Berechtigungen
+health_page_not_allowed|Noch nicht erlaubt
+health_page_create|+ Gewohnheit daraus machen

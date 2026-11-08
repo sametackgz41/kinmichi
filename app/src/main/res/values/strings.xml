@@ -1647,4 +1647,10 @@
     <string name="lock_use_pin">Use PIN instead</string>
     <string name="health_settings_allow">Installed. Tap to allow Kinmichi to read steps, sleep and more</string>
     <string name="health_card_allow">Allow access</string>
+    <string name="health_page_title">Health</string>
+    <string name="health_page_connected">Health Connect is linked</string>
+    <string name="health_page_allowed">%1$d of %2$d kinds of data allowed</string>
+    <string name="health_page_permissions">Permissions</string>
+    <string name="health_page_not_allowed">Not allowed yet</string>
+    <string name="health_page_create">+ Make a habit from this</string>
 </resources>

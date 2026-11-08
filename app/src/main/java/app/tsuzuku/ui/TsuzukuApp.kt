@@ -702,6 +702,7 @@ fun TsuzukuApp(
                     onSetProtectScreen = onSetProtectScreen,
                     onOpenCloudAccount = { navController.navigate("cloud-account") },
                     onOpenProfile = { navController.navigate("profile") },
+                    onOpenHealth = { navController.navigate("health") },
                     profileStats = remember(history) { app.tsuzuku.ui.screens.profileStats(history) },
                     onOpenAppearance = { navController.navigate("appearance") },
                     onOpenLanguage = { navController.navigate("language") },
@@ -841,6 +842,17 @@ fun TsuzukuApp(
                     data = data,
                     onClose = navController::popBackStack,
                     onShare = { app.tsuzuku.share.shareMonthCard(context, data) },
+                )
+            }
+            screen("health") {
+                app.tsuzuku.ui.screens.HealthPage(
+                    habits = history.habits,
+                    onBack = navController::popBackStack,
+                    onCreateHabit = { habit ->
+                        app.tsuzuku.ui.NewHabitTemplate.offer(habit)
+                        navController.navigate("habit/new")
+                    },
+                    onOpenHabit = { id -> navController.navigate("habit/$id") },
                 )
             }
             screen("profile") {

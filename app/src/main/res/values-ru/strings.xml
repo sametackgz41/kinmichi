@@ -1265,6 +1265,12 @@
     <string name="lock_use_pin">Ввести PIN</string>
     <string name="health_settings_allow">Установлено. Нажмите, чтобы разрешить Kinmichi читать шаги, сон и другое</string>
     <string name="health_card_allow">Разрешить доступ</string>
+    <string name="health_page_title">Здоровье</string>
+    <string name="health_page_connected">Health Connect подключён</string>
+    <string name="health_page_allowed">Разрешено %1$d из %2$d типов данных</string>
+    <string name="health_page_permissions">Разрешения</string>
+    <string name="health_page_not_allowed">Пока нет доступа</string>
+    <string name="health_page_create">+ Сделать привычкой</string>
     <plurals name="streak_days">
         <item quantity="one">Серия %d день</item>
         <item quantity="few">Серия %d дня</item>

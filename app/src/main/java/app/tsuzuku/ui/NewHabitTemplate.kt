@@ -49,6 +49,9 @@ object NewHabitTemplate {
         )
     }
 
+    /** Offers a ready habit (from inside the app) to the next new-habit screen. */
+    fun offer(habit: Habit) { pending = habit }
+
     /** The waiting template, handed out once. */
     fun take(): Habit? = pending.also { pending = null }
 }
