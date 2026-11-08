@@ -1567,4 +1567,16 @@
     <string name="timer_resume">Devam</string>
     <string name="timer_finish">Bitir</string>
     <string name="timer_done">%1$s tamam, kaydedildi.</string>
+    <string name="journey_setting">Toplamı belli bir iş</string>
+    <string name="journey_setting_desc">Kitap, kurs, dizi… Nerede kaldığını gir, bugünkü ilerleme kendiliğinden hesaplansın</string>
+    <string name="journey_total">Toplam</string>
+    <string name="journey_start">Başladığım yer</string>
+    <string name="journey_where">Nerede kaldın?</string>
+    <string name="journey_today">Bugün</string>
+    <string name="journey_finish_at">Bu hızla biter</string>
+    <string name="journey_finished">Bitti! 🎉</string>
+    <string name="journey_save">Kaydet</string>
+    <string name="journey_context">%1$s / %2$s · bugün +%3$s</string>
+    <string name="journey_context_done">bitti · %1$s %2$s 🎉</string>
+    <string name="journey_percent">%%%1$d</string>
 </resources>

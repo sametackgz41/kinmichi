@@ -108,6 +108,7 @@ fun TodayScreen(
     onIncrementHabit: (Long) -> Unit,
     onDecrementHabit: (Long) -> Unit,
     onToggleSlot: (Long, Int) -> Unit = { _, _ -> },
+    onSetJourneyPosition: (Long, Double) -> Unit = { _, _ -> },
     onToggleTimer: (Long) -> Unit,
     onOpenHabit: (Long) -> Unit,
     onReorderHabits: () -> Unit,
@@ -150,6 +151,10 @@ fun TodayScreen(
     val completed = habits.filter(TodayHabit::isComplete)
     var showConfigSheet by remember { mutableStateOf(false) }
     var skipHabitTarget by remember { mutableStateOf<TodayHabit?>(null) }
+    var journeyTarget by remember { mutableStateOf<TodayHabit?>(null) }
+    journeyTarget?.let { target ->
+        JourneySheet(target, onSave = { onSetJourneyPosition(target.habit.id, it) }, onDismiss = { journeyTarget = null })
+    }
     var selectedCarryTask by remember { mutableStateOf<PlanTask?>(null) }
     val screenContext = androidx.compose.ui.platform.LocalContext.current
     remember { TodayViewPrefs.load(screenContext); true }
@@ -171,7 +176,8 @@ fun TodayScreen(
             todayHabit = todayHabit,
             enabled = !todayHabit.isBlocked && !vacationActive,
             onComplete = {
-                if (todayHabit.habit.type == app.tsuzuku.model.HabitType.Check) onToggleHabit(todayHabit.habit.id)
+                if (todayHabit.habit.journeyTotal != null) journeyTarget = todayHabit
+                else if (todayHabit.habit.type == app.tsuzuku.model.HabitType.Check) onToggleHabit(todayHabit.habit.id)
                 else onIncrementHabit(todayHabit.habit.id)
             },
             onLeft = {
@@ -184,7 +190,7 @@ fun TodayScreen(
                 timerElapsedSeconds = if (timer.habitId == todayHabit.habit.id) timer.elapsedSeconds else 0,
                 interactionDisabled = vacationActive,
                 onToggle = { onToggleHabit(todayHabit.habit.id) },
-                onIncrement = { onIncrementHabit(todayHabit.habit.id) },
+                onIncrement = { if (todayHabit.habit.journeyTotal != null) journeyTarget = todayHabit else onIncrementHabit(todayHabit.habit.id) },
                 onDecrement = { onDecrementHabit(todayHabit.habit.id) },
                 onToggleSlot = { onToggleSlot(todayHabit.habit.id, it) },
                 onToggleTimer = { onToggleTimer(todayHabit.habit.id) },

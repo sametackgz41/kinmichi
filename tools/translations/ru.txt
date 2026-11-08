@@ -1200,3 +1200,15 @@ timer_pause|Пауза
 timer_resume|Продолжить
 timer_finish|Завершить
 timer_done|%1$s готово, сохранено.
+journey_setting|Есть общий объём
+journey_setting_desc|Книга, курс, сериал… Укажите, где вы, и прогресс за день посчитается сам
+journey_total|Всего
+journey_start|Начинаю с
+journey_where|Где вы сейчас?
+journey_today|Сегодня
+journey_finish_at|В этом темпе закончите
+journey_finished|Готово! 🎉
+journey_save|Сохранить
+journey_context|%1$s / %2$s · сегодня +%3$s
+journey_context_done|готово · %1$s %2$s 🎉
+journey_percent|%1$d%%

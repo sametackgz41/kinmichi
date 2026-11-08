@@ -582,6 +582,43 @@ class PreviewGalleryTest {
         captureScreen("slots_today_tr")
     }
 
+    @Test fun journeyRealTr() {
+        setVariant("tr", false)
+        val base = sampleToday("tr")
+        val book = base[0].copy(
+            habit = base[0].habit.copy(name = "Sefiller", emoji = "📖", type = app.tsuzuku.model.HabitType.Count, target = 20.0, unit = "sayfa", journeyTotal = 320.0),
+            progress = 12.0, journeyPosition = 184.0, journeyPace = 18.0, status = app.tsuzuku.model.HabitDayStatus.Pending,
+        )
+        val state = app.tsuzuku.ui.screens.HabitEditorState(book.habit)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false) {
+                androidx.compose.material3.Surface {
+                    androidx.compose.foundation.layout.Column(
+                        androidx.compose.ui.Modifier.fillMaxSize().padding(16.dp),
+                        verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(12.dp),
+                    ) {
+                        app.tsuzuku.ui.screens.HabitRow(
+                            todayHabit = book, timerRunning = false, timerElapsedSeconds = 0, interactionDisabled = false,
+                            onToggle = {}, onIncrement = {}, onDecrement = {}, onToggleTimer = {}, onOpen = {},
+                            onOpenSkipDialog = {}, onUndoSkip = {},
+                        )
+                        app.tsuzuku.ui.screens.JourneyFields(state)
+                        androidx.compose.material3.Surface(
+                            shape = androidx.compose.foundation.shape.RoundedCornerShape(28.dp),
+                            color = androidx.compose.material3.MaterialTheme.colorScheme.surfaceContainerLow,
+                        ) {
+                            androidx.compose.foundation.layout.Box(androidx.compose.ui.Modifier.padding(top = 20.dp)) {
+                                app.tsuzuku.ui.screens.JourneySheetContent(book, {}, {})
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        compose.mainClock.advanceTimeBy(900)
+        captureScreen("journey_real_tr")
+    }
+
     @Test fun timerBarTr() {
         setVariant("tr", false)
         compose.setContent {
@@ -680,7 +717,10 @@ class PreviewGalleryTest {
     @Test fun task10() = renderTask("task10_catch") { app.tsuzuku.notifications.CatchMission(onProgress = {}, onSolved = {}, seed = 6) }
 
     @Test fun trashA() = renderMock("trash_a") { TrashOptionA() }
-    @Test fun timerA() = renderMock("timer_a") { TimerOptionA() }
+    @Test fun journeyA() = renderMock("journey_a") { JourneyOptionA() }
+    @Test fun journeyB() = renderMock("journey_b") { JourneyOptionB() }
+    @Test fun journeyC() = renderMock("journey_c") { JourneyOptionC() }
+    @Test fun timerA() =renderMock("timer_a") { TimerOptionA() }
     @Test fun timerB() = renderMock("timer_b") { TimerOptionB() }
     @Test fun timerC() = renderMock("timer_c") { TimerOptionC() }
     @Test fun periodA() =renderMock("period_a") { PeriodOptionA() }

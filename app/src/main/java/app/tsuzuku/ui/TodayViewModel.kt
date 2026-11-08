@@ -112,6 +112,10 @@ class TodayViewModel(
         viewModelScope.launch { repository.incrementHabit(id); onDataChanged() }
     }
 
+    fun setJourneyPosition(id: Long, position: Double) {
+        viewModelScope.launch { repository.setJourneyPosition(id, position); onDataChanged() }
+    }
+
     fun toggleSlot(id: Long, index: Int) {
         viewModelScope.launch { repository.toggleSlot(id, index); onDataChanged() }
     }

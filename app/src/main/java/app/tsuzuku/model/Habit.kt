@@ -73,6 +73,8 @@ data class Habit(
     /** What still counts on a bad day, e.g. "1 page"; keeps the streak alive. */
     val tinyVersion: String = "",
     val slots: List<HabitSlot> = emptyList(),
+    val journeyTotal: Double? = null,
+    val journeyStart: Double = 0.0,
 )
 
 data class HabitLevel(
@@ -92,6 +94,10 @@ data class TodayHabit(
     val progress: Double,
     /** Which of the habit's times of day were ticked by name today. */
     val doneSlots: Set<Int> = emptySet(),
+    /** For a habit with a whole to get through: where it stands now (page 184). */
+    val journeyPosition: Double = 0.0,
+    /** Average gain per day lately, for the finish-date guess. */
+    val journeyPace: Double = 0.0,
     val status: HabitDayStatus = HabitDayStatus.Pending,
     val streakDays: Int = 0,
     val restUsedThisWeek: Boolean = false,
@@ -185,6 +191,8 @@ data class HabitDraft(
     val tinyVersion: String = "",
     /** Times of the day in the stored form, see [HabitSlot.format]. */
     val slots: String = "",
+    val journeyTotal: Double? = null,
+    val journeyStart: Double = 0.0,
     /** Ring like an alarm clock instead of a quiet notification (kept per device). */
     val alarm: Boolean = false,
     /** Name of an app.tsuzuku.notifications.AlarmMission. */

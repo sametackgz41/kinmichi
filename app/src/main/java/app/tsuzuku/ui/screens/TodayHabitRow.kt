@@ -176,7 +176,11 @@ internal fun HabitRow(
                         Spacer(Modifier.width(8.dp))
                     }
                     Text(
-                        if (slotStates.isNotEmpty()) slotContextLine(todayHabit, slotStates) else habitContextLine(todayHabit, timerRunning, timerElapsedSeconds),
+                        when {
+                            slotStates.isNotEmpty() -> slotContextLine(todayHabit, slotStates)
+                            habit.journeyTotal != null -> journeyContextLine(todayHabit)
+                            else -> habitContextLine(todayHabit, timerRunning, timerElapsedSeconds)
+                        },
                         style = MaterialTheme.typography.bodyMedium.copy(
                             fontFamily = app.tsuzuku.ui.theme.SerifDisplay,
                             fontStyle = androidx.compose.ui.text.font.FontStyle.Italic,
@@ -201,6 +205,19 @@ internal fun HabitRow(
                         )
                     }
                     habit.type == HabitType.Check -> CheckButton(done = done, enabled = enabled, onToggle = onToggle)
+                    habit.journeyTotal != null -> RingButton(
+                        fraction = (todayHabit.journeyPosition / habit.journeyTotal).coerceIn(0.0, 1.0).toFloat(),
+                        done = done,
+                        enabled = enabled,
+                        icon = {
+                            Text(
+                                stringResource(R.string.journey_percent, (todayHabit.journeyPosition * 100 / habit.journeyTotal).toInt().coerceIn(0, 100)),
+                                style = MaterialTheme.typography.labelSmall,
+                                fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
+                            )
+                        },
+                        onClick = onIncrement,
+                    )
                     habit.type == HabitType.Count -> RingButton(
                         fraction = todayHabit.progressFraction,
                         done = done,
@@ -287,6 +304,17 @@ private fun SlotChips(slots: List<app.tsuzuku.model.HabitSlot>, states: List<Boo
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun journeyContextLine(todayHabit: TodayHabit): String {
+    val habit = todayHabit.habit
+    val total = habit.journeyTotal ?: return ""
+    return if (todayHabit.journeyPosition >= total) {
+        stringResource(R.string.journey_context_done, formatHabitAmount(total), habit.unit)
+    } else {
+        stringResource(R.string.journey_context, formatHabitAmount(todayHabit.journeyPosition), formatHabitAmount(total), formatHabitAmount(todayHabit.progress.coerceAtLeast(0.0)))
     }
 }
 

@@ -1188,3 +1188,15 @@ timer_pause|Pause
 timer_resume|Weiter
 timer_finish|Beenden
 timer_done|%1$s geschafft, gespeichert.
+journey_setting|Ein Ganzes schaffen
+journey_setting_desc|Buch, Kurs, Serie … Gib an, wo du bist – der heutige Fortschritt wird berechnet
+journey_total|Gesamt
+journey_start|Start bei
+journey_where|Wo bist du?
+journey_today|Heute
+journey_finish_at|In diesem Tempo fertig
+journey_finished|Geschafft! 🎉
+journey_save|Speichern
+journey_context|%1$s / %2$s · heute +%3$s
+journey_context_done|geschafft · %1$s %2$s 🎉
+journey_percent|%1$d %%

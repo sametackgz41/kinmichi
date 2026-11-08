@@ -466,6 +466,11 @@ fun TsuzukuApp(
                         connectionViewModel.onHabitProgressApplied(habitId, 1.0)
                         if (h != null && !h.isComplete && h.progress + h.habit.step >= h.habit.target) askFeeling(h.habit)
                     },
+                    onSetJourneyPosition = { habitId, position ->
+                        val h = habits.firstOrNull { it.habit.id == habitId }
+                        todayViewModel.setJourneyPosition(habitId, position)
+                        if (h != null && !h.isComplete && h.progress + (position - h.journeyPosition) >= h.habit.target) askFeeling(h.habit)
+                    },
                     onToggleSlot = { habitId, index ->
                         val h = habits.firstOrNull { it.habit.id == habitId }
                         todayViewModel.toggleSlot(habitId, index)

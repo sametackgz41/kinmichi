@@ -1568,4 +1568,16 @@
     <string name="timer_resume">Resume</string>
     <string name="timer_finish">Finish</string>
     <string name="timer_done">%1$s done, saved.</string>
+    <string name="journey_setting">A whole to get through</string>
+    <string name="journey_setting_desc">A book, a course, a series… Enter where you are and today\'s progress is worked out</string>
+    <string name="journey_total">Total</string>
+    <string name="journey_start">Starting at</string>
+    <string name="journey_where">Where are you?</string>
+    <string name="journey_today">Today</string>
+    <string name="journey_finish_at">Done at this pace</string>
+    <string name="journey_finished">Finished! 🎉</string>
+    <string name="journey_save">Save</string>
+    <string name="journey_context">%1$s / %2$s · today +%3$s</string>
+    <string name="journey_context_done">finished · %1$s %2$s 🎉</string>
+    <string name="journey_percent">%1$d%%</string>
 </resources>

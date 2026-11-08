@@ -40,6 +40,8 @@ interface HabitRepository {
     suspend fun incrementHabitOnDate(id: Long, date: LocalDate)
     suspend fun decrementHabitOnDate(id: Long, date: LocalDate)
     suspend fun addProgress(id: Long, amount: Double)
+    /** Sets where a habit with a whole stands (page 184); the difference counts for today. */
+    suspend fun setJourneyPosition(id: Long, position: Double) {}
     /** Ticks or unticks one time of the day of a habit done several times a day. */
     suspend fun toggleSlot(id: Long, index: Int) {}
     suspend fun addHabit(draft: HabitDraft): Long
@@ -113,6 +115,8 @@ class RoomHabitRepository(
                 TodayHabit(
                     habit = entity.toDomain(),
                     doneSlots = habitEntries.mapNotNull { app.tsuzuku.model.HabitSlot.indexOf(it.note) }.toSet(),
+                    journeyPosition = if (entity.journeyTotal == null) 0.0 else entity.journeyStart + allHabitEntries.filter(HabitEntryEntity::isProgress).sumOf(HabitEntryEntity::amount),
+                    journeyPace = if (entity.journeyTotal == null) 0.0 else journeyPace(allHabitEntries, date),
                     progress = habitEntries
                         .filter(HabitEntryEntity::isProgress)
                         .sumOf(HabitEntryEntity::amount),
@@ -282,6 +286,17 @@ class RoomHabitRepository(
         )
     }
 
+    override suspend fun setJourneyPosition(id: Long, position: Double) {
+        val habit = dao.getHabit(id) ?: return
+        val total = habit.journeyTotal ?: return
+        val done = dao.getEntriesBetween(id, "0000-01-01", "9999-12-31").filter(HabitEntryEntity::isProgress).sumOf(HabitEntryEntity::amount)
+        val delta = position.coerceIn(0.0, total) - (habit.journeyStart + done)
+        if (kotlin.math.abs(delta) < 0.001) return
+        val timestamp = now()
+        // Going back is allowed (a wrong page); it lowers today's count.
+        dao.insertEntry(HabitEntryEntity(habitId = id, localDate = today().toString(), amount = delta, createdAt = timestamp, updatedAt = timestamp))
+    }
+
     override suspend fun toggleSlot(id: Long, index: Int) {
         val habit = dao.getHabit(id) ?: return
         val date = today().toString()
@@ -331,6 +346,8 @@ class RoomHabitRepository(
                 intention = draft.intention.trim().take(240),
                 tinyVersion = draft.tinyVersion.trim().take(60),
                 slots = draft.slots,
+                journeyTotal = draft.journeyTotal,
+                journeyStart = draft.journeyStart,
                 activeStartEpochDay = draft.activeStartEpochDay,
                 activeEndEpochDay = draft.activeEndEpochDay,
                 repeatIntervalDays = draft.repeatIntervalDays.coerceIn(1, 365),
@@ -373,6 +390,8 @@ class RoomHabitRepository(
                 intention = draft.intention.trim().take(240),
                 tinyVersion = draft.tinyVersion.trim().take(60),
                 slots = draft.slots,
+                journeyTotal = draft.journeyTotal,
+                journeyStart = draft.journeyStart,
                 activeStartEpochDay = draft.activeStartEpochDay,
                 activeEndEpochDay = draft.activeEndEpochDay,
                 repeatIntervalDays = draft.repeatIntervalDays.coerceIn(1, 365),
@@ -656,6 +675,8 @@ private fun HabitEntity.toDomain() = Habit(
     currentLevel = currentLevel,
     tinyVersion = tinyVersion,
     slots = app.tsuzuku.model.HabitSlot.parse(slots),
+    journeyTotal = journeyTotal,
+    journeyStart = journeyStart,
 )
 
 private fun HabitLevelEntity.toDomain() = HabitLevel(
@@ -685,6 +706,16 @@ private fun HabitLevel.toEntity() = HabitLevelEntity(
 private fun normalizeHabitTags(value: String): String = value.split(',', ';', '#').map(String::trim).filter(String::isNotBlank).distinct().joinToString(",")
 
 private fun HabitEntryEntity.isProgress(): Boolean = status == HabitEntryEntity.STATUS_PROGRESS || status == HabitEntryEntity.STATUS_HEALTH
+
+/** Gain per day over the last week (or since the first entry, if newer). */
+private fun journeyPace(entries: List<HabitEntryEntity>, date: LocalDate): Double {
+    val from = date.minusDays(6)
+    val recent = entries.filter { e -> e.isProgress() && runCatching { LocalDate.parse(e.localDate) }.getOrNull()?.let { !it.isBefore(from) && !it.isAfter(date) } == true }
+    if (recent.isEmpty()) return 0.0
+    val first = recent.minOf { LocalDate.parse(it.localDate) }
+    val days = (java.time.temporal.ChronoUnit.DAYS.between(first, date) + 1).coerceIn(1, 7)
+    return (recent.sumOf(HabitEntryEntity::amount) / days).coerceAtLeast(0.0)
+}
 
 private fun periodCompletionCount(habit: HabitEntity, entries: List<HabitEntryEntity>, date: LocalDate): Int {
     val period = GoalPeriod.entries.firstOrNull { it.name == habit.goalPeriod } ?: GoalPeriod.Daily

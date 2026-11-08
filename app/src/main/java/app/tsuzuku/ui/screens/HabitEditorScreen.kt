@@ -147,6 +147,9 @@ internal class HabitEditorState(existing: Habit?) {
     var intention by mutableStateOf(existing?.intention.orEmpty())
     var tinyVersion by mutableStateOf(existing?.tinyVersion.orEmpty())
     var healthMetric by mutableStateOf(existing?.healthMetric ?: HealthMetric.None)
+    var journeyOn by mutableStateOf(existing?.journeyTotal != null)
+    var journeyTotalText by mutableStateOf(existing?.journeyTotal?.let(::formatEditorAmount).orEmpty())
+    var journeyStartText by mutableStateOf(existing?.journeyStart?.takeIf { it > 0 }?.let(::formatEditorAmount).orEmpty())
     var activeStartEpochDay by mutableStateOf(existing?.activeStartEpochDay)
     var activeEndEpochDay by mutableStateOf(existing?.activeEndEpochDay)
     var pausedUntilEpochDay by mutableStateOf(existing?.pausedUntilEpochDay)
@@ -330,7 +333,14 @@ internal class HabitEditorState(existing: Habit?) {
             alarmSnoozes = alarmSnoozes,
         )
         val slots = slotList
-        if (!slotsOn || slots.size < 2 || alarmType) return base.copy(slots = "")
+        val journeyTotal = journeyTotalText.toLocaleDoubleOrNull()?.takeIf { journeyOn && type == HabitType.Count && it > 0 }
+        if (!slotsOn || slots.size < 2 || alarmType) {
+            return base.copy(
+                slots = "",
+                journeyTotal = journeyTotal,
+                journeyStart = if (journeyTotal == null) 0.0 else (journeyStartText.toLocaleDoubleOrNull() ?: 0.0).coerceIn(0.0, journeyTotal),
+            )
+        }
         // Several times a day: a count of one per time of day, so streaks and stats keep working.
         return base.copy(
             type = HabitType.Count,
@@ -357,7 +367,7 @@ internal class HabitEditorState(existing: Habit?) {
         reminderEnabled, reminderTime, repeatEnabled, repeatMinutes, tinyVersion, healthMetric.name, alarmEnabled,
         alarmMission.name, alarmMarkDone, spreadOn, spreadWindow, screenTime,
         alarmType, alarmTasks, alarmLevel, alarmRamp, alarmSnoozes,
-        slotsOn, slotsText, periodDays,
+        slotsOn, slotsText, periodDays, journeyOn, journeyTotalText, journeyStartText,
     )
 
     private fun restore(values: List<Any?>) {
@@ -392,6 +402,9 @@ internal class HabitEditorState(existing: Habit?) {
         if (i < values.size) slotsOn = next()
         if (i < values.size) slotsText = next()
         if (i < values.size) periodDays = next()
+        if (i < values.size) journeyOn = next()
+        if (i < values.size) journeyTotalText = next()
+        if (i < values.size) journeyStartText = next()
     }
 
     companion object {
@@ -976,6 +989,7 @@ private fun GoalGroup(state: HabitEditorState) {
     if (state.type != HabitType.Check && state.direction == HabitDirection.Build) {
         HealthMetricPicker(state.healthMetric) { state.healthMetric = it }
     }
+    if (state.type == HabitType.Count && state.direction == HabitDirection.Build && !state.slotsOn) JourneyFields(state)
     EditorLabel(R.string.goal_period)
     SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
         GoalPeriod.entries.forEachIndexed { index, option ->
@@ -1264,6 +1278,26 @@ internal fun SlotsField(state: HabitEditorState) {
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
+            }
+        }
+    }
+}
+
+/** "A whole to get through": the total (320 pages) and where it starts. */
+@Composable
+internal fun JourneyFields(state: HabitEditorState) {
+    Column(Modifier.fillMaxWidth().padding(top = 14.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text(stringResource(R.string.journey_setting), style = MaterialTheme.typography.bodyLarge)
+                Text(stringResource(R.string.journey_setting_desc), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            Switch(checked = state.journeyOn, onCheckedChange = { state.journeyOn = it })
+        }
+        AnimatedVisibility(visible = state.journeyOn) {
+            Row(Modifier.padding(top = 10.dp), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                NumberField(state.journeyTotalText, { state.journeyTotalText = it }, R.string.journey_total, Modifier.weight(1f))
+                NumberField(state.journeyStartText, { state.journeyStartText = it }, R.string.journey_start, Modifier.weight(1f))
             }
         }
     }

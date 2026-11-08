@@ -1182,3 +1182,15 @@ timer_pause|一時停止
 timer_resume|再開
 timer_finish|終了
 timer_done|%1$s達成、記録しました。
+journey_setting|全体量が決まっている
+journey_setting_desc|本・講座・シリーズなど。今どこかを入れると今日の進みを計算します
+journey_total|全体
+journey_start|開始位置
+journey_where|今どこまで？
+journey_today|今日
+journey_finish_at|このペースで完了
+journey_finished|完了！🎉
+journey_save|保存
+journey_context|%1$s / %2$s・今日 +%3$s
+journey_context_done|完了・%1$s %2$s 🎉
+journey_percent|%1$d%%

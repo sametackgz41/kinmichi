@@ -1168,6 +1168,18 @@
     <string name="timer_resume">再開</string>
     <string name="timer_finish">終了</string>
     <string name="timer_done">%1$s達成、記録しました。</string>
+    <string name="journey_setting">全体量が決まっている</string>
+    <string name="journey_setting_desc">本・講座・シリーズなど。今どこかを入れると今日の進みを計算します</string>
+    <string name="journey_total">全体</string>
+    <string name="journey_start">開始位置</string>
+    <string name="journey_where">今どこまで？</string>
+    <string name="journey_today">今日</string>
+    <string name="journey_finish_at">このペースで完了</string>
+    <string name="journey_finished">完了！🎉</string>
+    <string name="journey_save">保存</string>
+    <string name="journey_context">%1$s / %2$s・今日 +%3$s</string>
+    <string name="journey_context_done">完了・%1$s %2$s 🎉</string>
+    <string name="journey_percent">%1$d%%</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

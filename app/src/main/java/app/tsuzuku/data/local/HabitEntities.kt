@@ -46,6 +46,10 @@ data class HabitEntity(
     val deletedAt: Long? = null,
     /** Times of the day, "Morning@480|Noon@780"; each is ticked and reminded on its own. */
     val slots: String = "",
+    /** A whole to get through (a 320-page book); null for ordinary counts. */
+    val journeyTotal: Double? = null,
+    /** Where it stood when the habit began (already read 40 pages). */
+    val journeyStart: Double = 0.0,
 )
 
 @Entity(

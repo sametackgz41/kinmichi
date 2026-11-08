@@ -1188,3 +1188,15 @@ timer_pause|일시정지
 timer_resume|계속
 timer_finish|끝내기
 timer_done|%1$s 완료, 저장했어요.
+journey_setting|전체 분량이 있어요
+journey_setting_desc|책, 강의, 시리즈… 어디까지 했는지 입력하면 오늘 진행량을 계산해요
+journey_total|전체
+journey_start|시작 위치
+journey_where|어디까지 했나요?
+journey_today|오늘
+journey_finish_at|이 속도면 완료
+journey_finished|완료! 🎉
+journey_save|저장
+journey_context|%1$s / %2$s · 오늘 +%3$s
+journey_context_done|완료 · %1$s %2$s 🎉
+journey_percent|%1$d%%

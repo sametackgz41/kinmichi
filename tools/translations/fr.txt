@@ -1188,3 +1188,15 @@ timer_pause|Pause
 timer_resume|Reprendre
 timer_finish|Terminer
 timer_done|%1$s faits, enregistré.
+journey_setting|Un total à parcourir
+journey_setting_desc|Un livre, un cours, une série… Indique où tu en es, le progrès du jour est calculé
+journey_total|Total
+journey_start|Je commence à
+journey_where|Où en es-tu ?
+journey_today|Aujourd'hui
+journey_finish_at|Fini à ce rythme
+journey_finished|Fini ! 🎉
+journey_save|Enregistrer
+journey_context|%1$s / %2$s · aujourd'hui +%3$s
+journey_context_done|fini · %1$s %2$s 🎉
+journey_percent|%1$d %%
