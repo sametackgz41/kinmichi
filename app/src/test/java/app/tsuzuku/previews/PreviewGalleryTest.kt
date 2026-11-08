@@ -242,15 +242,15 @@ class PreviewGalleryTest {
     @Test fun siteWidgetPageRu() = renderSiteWidgetPage("ru")
     @Test fun siteWidgetPageKo() = renderSiteWidgetPage("ko")
 
-    private fun renderSiteWidgetPage(lang: String) {
-        setVariant(lang, false)
+    private fun renderSiteWidgetPage(lang: String, dark: Boolean = false) {
+        setVariant(lang, dark)
         compose.setContent {
-            TsuzukuTheme(darkTheme = false) {
+            TsuzukuTheme(darkTheme = dark) {
                 app.tsuzuku.ui.screens.WidgetsScreen(onBack = {}, layout = app.tsuzuku.ui.screens.WidgetsLayout.Carousel, canPinOverride = true)
             }
         }
         compose.mainClock.advanceTimeBy(1_000)
-        captureScreen("site_widgets_$lang")
+        captureScreen("site_widgets_$lang" + if (dark) "_dark" else "")
     }
 
     @Test fun palettesTr() = renderPalettes("tr")
@@ -648,6 +648,77 @@ class PreviewGalleryTest {
     @Test fun feat_timer_ko() = renderFeatureFor("ko", "timer")
     @Test fun feat_safe_ko() = renderFeatureFor("ko", "safe")
 
+    @Test fun featd_alarm_en() { featDark = true; renderFeatureFor("en", "alarm") }
+    @Test fun featd_slots_en() { featDark = true; renderFeatureFor("en", "slots") }
+    @Test fun featd_period_en() { featDark = true; renderFeatureFor("en", "period") }
+    @Test fun featd_journey_en() { featDark = true; renderFeatureFor("en", "journey") }
+    @Test fun featd_timer_en() { featDark = true; renderFeatureFor("en", "timer") }
+    @Test fun featd_safe_en() { featDark = true; renderFeatureFor("en", "safe") }
+    @Test fun featd_alarm_tr() { featDark = true; renderFeatureFor("tr", "alarm") }
+    @Test fun featd_slots_tr() { featDark = true; renderFeatureFor("tr", "slots") }
+    @Test fun featd_period_tr() { featDark = true; renderFeatureFor("tr", "period") }
+    @Test fun featd_journey_tr() { featDark = true; renderFeatureFor("tr", "journey") }
+    @Test fun featd_timer_tr() { featDark = true; renderFeatureFor("tr", "timer") }
+    @Test fun featd_safe_tr() { featDark = true; renderFeatureFor("tr", "safe") }
+    @Test fun featd_alarm_es() { featDark = true; renderFeatureFor("es", "alarm") }
+    @Test fun featd_slots_es() { featDark = true; renderFeatureFor("es", "slots") }
+    @Test fun featd_period_es() { featDark = true; renderFeatureFor("es", "period") }
+    @Test fun featd_journey_es() { featDark = true; renderFeatureFor("es", "journey") }
+    @Test fun featd_timer_es() { featDark = true; renderFeatureFor("es", "timer") }
+    @Test fun featd_safe_es() { featDark = true; renderFeatureFor("es", "safe") }
+    @Test fun featd_alarm_de() { featDark = true; renderFeatureFor("de", "alarm") }
+    @Test fun featd_slots_de() { featDark = true; renderFeatureFor("de", "slots") }
+    @Test fun featd_period_de() { featDark = true; renderFeatureFor("de", "period") }
+    @Test fun featd_journey_de() { featDark = true; renderFeatureFor("de", "journey") }
+    @Test fun featd_timer_de() { featDark = true; renderFeatureFor("de", "timer") }
+    @Test fun featd_safe_de() { featDark = true; renderFeatureFor("de", "safe") }
+    @Test fun featd_alarm_pt() { featDark = true; renderFeatureFor("pt", "alarm") }
+    @Test fun featd_slots_pt() { featDark = true; renderFeatureFor("pt", "slots") }
+    @Test fun featd_period_pt() { featDark = true; renderFeatureFor("pt", "period") }
+    @Test fun featd_journey_pt() { featDark = true; renderFeatureFor("pt", "journey") }
+    @Test fun featd_timer_pt() { featDark = true; renderFeatureFor("pt", "timer") }
+    @Test fun featd_safe_pt() { featDark = true; renderFeatureFor("pt", "safe") }
+    @Test fun featd_alarm_ja() { featDark = true; renderFeatureFor("ja", "alarm") }
+    @Test fun featd_slots_ja() { featDark = true; renderFeatureFor("ja", "slots") }
+    @Test fun featd_period_ja() { featDark = true; renderFeatureFor("ja", "period") }
+    @Test fun featd_journey_ja() { featDark = true; renderFeatureFor("ja", "journey") }
+    @Test fun featd_timer_ja() { featDark = true; renderFeatureFor("ja", "timer") }
+    @Test fun featd_safe_ja() { featDark = true; renderFeatureFor("ja", "safe") }
+    @Test fun featd_alarm_fr() { featDark = true; renderFeatureFor("fr", "alarm") }
+    @Test fun featd_slots_fr() { featDark = true; renderFeatureFor("fr", "slots") }
+    @Test fun featd_period_fr() { featDark = true; renderFeatureFor("fr", "period") }
+    @Test fun featd_journey_fr() { featDark = true; renderFeatureFor("fr", "journey") }
+    @Test fun featd_timer_fr() { featDark = true; renderFeatureFor("fr", "timer") }
+    @Test fun featd_safe_fr() { featDark = true; renderFeatureFor("fr", "safe") }
+    @Test fun featd_alarm_it() { featDark = true; renderFeatureFor("it", "alarm") }
+    @Test fun featd_slots_it() { featDark = true; renderFeatureFor("it", "slots") }
+    @Test fun featd_period_it() { featDark = true; renderFeatureFor("it", "period") }
+    @Test fun featd_journey_it() { featDark = true; renderFeatureFor("it", "journey") }
+    @Test fun featd_timer_it() { featDark = true; renderFeatureFor("it", "timer") }
+    @Test fun featd_safe_it() { featDark = true; renderFeatureFor("it", "safe") }
+    @Test fun featd_alarm_ru() { featDark = true; renderFeatureFor("ru", "alarm") }
+    @Test fun featd_slots_ru() { featDark = true; renderFeatureFor("ru", "slots") }
+    @Test fun featd_period_ru() { featDark = true; renderFeatureFor("ru", "period") }
+    @Test fun featd_journey_ru() { featDark = true; renderFeatureFor("ru", "journey") }
+    @Test fun featd_timer_ru() { featDark = true; renderFeatureFor("ru", "timer") }
+    @Test fun featd_safe_ru() { featDark = true; renderFeatureFor("ru", "safe") }
+    @Test fun featd_alarm_ko() { featDark = true; renderFeatureFor("ko", "alarm") }
+    @Test fun featd_slots_ko() { featDark = true; renderFeatureFor("ko", "slots") }
+    @Test fun featd_period_ko() { featDark = true; renderFeatureFor("ko", "period") }
+    @Test fun featd_journey_ko() { featDark = true; renderFeatureFor("ko", "journey") }
+    @Test fun featd_timer_ko() { featDark = true; renderFeatureFor("ko", "timer") }
+    @Test fun featd_safe_ko() { featDark = true; renderFeatureFor("ko", "safe") }
+    @Test fun siteWidgetsDark_en() = renderSiteWidgetPage("en", true)
+    @Test fun siteWidgetsDark_tr() = renderSiteWidgetPage("tr", true)
+    @Test fun siteWidgetsDark_es() = renderSiteWidgetPage("es", true)
+    @Test fun siteWidgetsDark_de() = renderSiteWidgetPage("de", true)
+    @Test fun siteWidgetsDark_pt() = renderSiteWidgetPage("pt", true)
+    @Test fun siteWidgetsDark_ja() = renderSiteWidgetPage("ja", true)
+    @Test fun siteWidgetsDark_fr() = renderSiteWidgetPage("fr", true)
+    @Test fun siteWidgetsDark_it() = renderSiteWidgetPage("it", true)
+    @Test fun siteWidgetsDark_ru() = renderSiteWidgetPage("ru", true)
+    @Test fun siteWidgetsDark_ko() = renderSiteWidgetPage("ko", true)
+
     private data class FeatWords(val pill: String, val book: String, val pages: String, val swim: String)
 
     private fun featWords(lang: String) = when (lang) {
@@ -723,10 +794,12 @@ class PreviewGalleryTest {
         }
     }
 
+    private var featDark = false
+
     private fun renderFeature(lang: String, name: String, palette: app.tsuzuku.data.preferences.PalettePreference, content: @Composable () -> Unit) {
-        setVariant(lang, false)
+        setVariant(lang, featDark)
         compose.setContent {
-            TsuzukuTheme(darkTheme = false, palette = palette) {
+            TsuzukuTheme(darkTheme = featDark, palette = palette) {
                 androidx.compose.material3.Surface(color = androidx.compose.material3.MaterialTheme.colorScheme.background) {
                     androidx.compose.foundation.layout.Column(
                         Modifier.fillMaxSize().padding(16.dp),
@@ -736,7 +809,7 @@ class PreviewGalleryTest {
             }
         }
         compose.mainClock.advanceTimeBy(900)
-        captureScreen("feat_${name}_$lang")
+        captureScreen("feat_${name}_$lang" + if (featDark) "_dark" else "")
     }
 
     @Test fun historyBackupRealTr() {

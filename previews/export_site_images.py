@@ -76,3 +76,30 @@ for l in LANGS:
         im = load(f"feat_{f}_{l}")
         save(im, (0, 0, im.width, content_bottom(im)), 720, os.path.join(DST, l, f"feat_{f}.webp"))
 print("features done")
+
+
+# "A look inside": each screen in its own palette, light and dark, cropped to a fixed window.
+GALLERY = {
+    "detail": lambda im: (0, 480, 1233, 1560),
+    "progress": lambda im: (0, 520, 1233, 1600),
+    "editor": lambda im: (0, 180, 1233, 1260),
+}
+
+for l in LANGS:
+    for mode in ("light", "dark"):
+        for name, box in GALLERY.items():
+            im = load(f"gal_{name}_{l}_{mode}")
+            save(im, box(im), 620, os.path.join(DST, l, f"gal_{name}_{mode}.webp"))
+        today = load(f"gal_today_{l}_{mode}")
+        top = progress_card_top(today) if mode == "light" else progress_card_top(load(f"gal_today_{l}_light"))
+        save(today, (0, top - 190, 1233, top + 890), 620, os.path.join(DST, l, f"gal_today_{mode}.webp"))
+print("gallery done")
+
+
+# Dark versions for the page's dark theme: the showcase and the widget page.
+for l in LANGS:
+    for f in FEATURES:
+        im = load(f"feat_{f}_{l}_dark")
+        save(im, (0, 0, im.width, content_bottom(im)), 720, os.path.join(DST, l, f"feat_{f}_dark.webp"))
+    save(load(f"site_widgets_{l}_dark"), WIDGET_PHONE, 760, os.path.join(DST, l, "widgets_dark.webp"))
+print("dark done")

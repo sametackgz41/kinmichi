@@ -301,7 +301,7 @@ footer .brand { font-size: 18px; }
 .feat[aria-pressed="true"] .feat-d { display: block; }
 .feat[aria-pressed="true"] .feat-pal { display: inline-flex; }
 .feat:not([aria-pressed="true"]):hover { background: color-mix(in srgb, var(--card) 55%, transparent); }
-.is-dark .showcase { background: color-mix(in srgb, var(--feat-acc) 16%, var(--paper)); }
+.is-dark .showcase { background: var(--feat-soft); }
 .feat-phone { border-radius: 46px; padding: 12px; background: #1c1c22; box-shadow: 0 24px 60px rgba(0,0,0,.22); }
 .feat-screen { border-radius: 35px; overflow: hidden; background: var(--feat-bg); aspect-ratio: 9 / 15; transition: background .35s; }
 .feat-screen img { width: 100%; height: auto; display: block; }
@@ -310,6 +310,25 @@ footer .brand { font-size: 18px; }
   .feat-phone { max-width: 340px; margin: 0 auto; width: 100%; }
 }
 @media (max-width: 420px) { header .brand { font-size: 0; gap: 0; } nav.links { gap: 8px; } }
+
+/* "A look inside": each tile in one of the palettes, its screen in the same palette; dark follows the page. */
+.pbento { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 16px; }
+.ptile { margin: 0; border-radius: 28px; overflow: hidden; display: flex; flex-direction: column; background: var(--pt-bg); transition: background .3s; }
+.ptile[data-pal="sakura"] { --pt-bg: #FBF1F1; --pt-acc: #A2445E; }
+.ptile[data-pal="matcha"] { --pt-bg: #F1F3EA; --pt-acc: #4E6B2E; }
+.ptile[data-pal="umi"] { --pt-bg: #EEF3F5; --pt-acc: #1F6680; }
+.ptile[data-pal="momiji"] { --pt-bg: #F8F0E3; --pt-acc: #B5651D; }
+.is-dark .ptile[data-pal="sakura"] { --pt-bg: #1C1316; --pt-acc: #F2A7BC; }
+.is-dark .ptile[data-pal="matcha"] { --pt-bg: #121710; --pt-acc: #A7C77F; }
+.is-dark .ptile[data-pal="umi"] { --pt-bg: #0E161C; --pt-acc: #7CC6E0; }
+.is-dark .ptile[data-pal="momiji"] { --pt-bg: #1A140D; --pt-acc: #F2A65A; }
+.pshot { height: 270px; overflow: hidden; padding: 20px 20px 0; }
+.pshot img { width: 100%; height: auto; display: block; border-radius: 18px 18px 0 0; box-shadow: 0 14px 34px -18px rgba(0,0,0,.35); }
+.ptile figcaption { padding: 16px 20px 20px; font-size: 14px; color: var(--muted); }
+.ptile figcaption b { display: block; color: var(--ink); font: 600 18px/1.3 Newsreader, serif; margin-bottom: 2px; }
+.pchip { display: inline-flex; align-items: center; gap: 6px; font: 600 12px Inter, sans-serif; color: var(--pt-acc); margin-bottom: 6px; }
+.pchip i { width: 9px; height: 9px; border-radius: 50%; background: var(--pt-acc); }
+@media (max-width: 760px) { .pbento { grid-template-columns: 1fr; } .pshot { height: 240px; } }
 </style>
 </head>
 <body>
@@ -377,39 +396,39 @@ footer .brand { font-size: 18px; }
           <h2 data-i18n="new_title">Wake up, count, keep going</h2>
           <p class="muted showcase-lead" data-i18n="new_lead">A real alarm, new ways to track, and a timer that keeps counting with the app closed.</p>
           <div class="feat-list" role="group">
-          <button type="button" class="feat" data-feat="alarm" data-bg="#EFF0F6" data-soft="#DCDDF5" data-acc="#3B3F8F" aria-pressed="true">
+          <button type="button" class="feat" data-feat="alarm" data-bg-dark="#0C0D1A" data-soft-dark="#2A2D63" data-bg="#EFF0F6" data-soft="#DCDDF5" data-acc="#3B3F8F" aria-pressed="true">
             <span class="feat-pal"><i style="background:#3B3F8F"></i>Yoru</span>
             <span class="feat-t" data-i18n="n_alarm_t">A real alarm</span>
             <span class="feat-d" data-i18n="n_alarm">Habits can ring like an alarm, over the lock screen. The Alarm type has ten wake-up tasks, from sums to shaking the phone; pick up to three, choose how hard, with a rising sound and limited snoozes.</span>
           </button>
-          <button type="button" class="feat" data-feat="slots" data-bg="#F5F0E6" data-soft="#DCE3F0" data-acc="#2E4A7D" aria-pressed="false">
+          <button type="button" class="feat" data-feat="slots" data-bg-dark="#15171C" data-soft-dark="#2A3550" data-bg="#F5F0E6" data-soft="#DCE3F0" data-acc="#2E4A7D" aria-pressed="false">
             <span class="feat-pal"><i style="background:#2E4A7D"></i>Washi</span>
             <span class="feat-t" data-i18n="n_slots_t">Several times a day</span>
             <span class="feat-d" data-i18n="n_slots">Morning, noon and evening, each its own chip on Today and its own reminder. All done, the day counts.</span>
           </button>
-          <button type="button" class="feat" data-feat="period" data-bg="#F1F3EA" data-soft="#DDE7CC" data-acc="#4E6B2E" aria-pressed="false">
+          <button type="button" class="feat" data-feat="period" data-bg-dark="#121710" data-soft-dark="#2C3A20" data-bg="#F1F3EA" data-soft="#DDE7CC" data-acc="#4E6B2E" aria-pressed="false">
             <span class="feat-pal"><i style="background:#4E6B2E"></i>Matcha</span>
             <span class="feat-t" data-i18n="n_period_t">Every few days</span>
             <span class="feat-d" data-i18n="n_period">Four times in every ten days, counted from the day you start. Today shows how many are left in this stretch.</span>
           </button>
-          <button type="button" class="feat" data-feat="journey" data-bg="#FBF1F1" data-soft="#F6DCE3" data-acc="#A2445E" aria-pressed="false">
+          <button type="button" class="feat" data-feat="journey" data-bg-dark="#1C1316" data-soft-dark="#4A2433" data-bg="#FBF1F1" data-soft="#F6DCE3" data-acc="#A2445E" aria-pressed="false">
             <span class="feat-pal"><i style="background:#A2445E"></i>Sakura</span>
             <span class="feat-t" data-i18n="n_journey_t">A whole to get through</span>
             <span class="feat-d" data-i18n="n_journey">A 320-page book, a course, a series: say where you are and today's progress works itself out, with a guess of when you'll finish.</span>
           </button>
-          <button type="button" class="feat" data-feat="timer" data-bg="#EFEDE8" data-soft="#E2DFD9" data-acc="#2C2B29" aria-pressed="false">
+          <button type="button" class="feat" data-feat="timer" data-bg-dark="#101010" data-soft-dark="#34322F" data-bg="#EFEDE8" data-soft="#E2DFD9" data-acc="#2C2B29" aria-pressed="false">
             <span class="feat-pal"><i style="background:#2C2B29"></i>Sumi</span>
             <span class="feat-t" data-i18n="n_timer_t">A timer that keeps going</span>
             <span class="feat-d" data-i18n="n_timer">Counts with the screen off and the app closed. Pause or finish it from the notification or the small bar at the bottom.</span>
           </button>
-          <button type="button" class="feat" data-feat="safe" data-bg="#F8F0E3" data-soft="#F7E0C2" data-acc="#B5651D" aria-pressed="false">
+          <button type="button" class="feat" data-feat="safe" data-bg-dark="#1A140D" data-soft-dark="#4A3015" data-bg="#F8F0E3" data-soft="#F7E0C2" data-acc="#B5651D" aria-pressed="false">
             <span class="feat-pal"><i style="background:#B5651D"></i>Momiji</span>
             <span class="feat-t" data-i18n="n_safe_t">Safer by default</span>
             <span class="feat-d" data-i18n="n_safe">Deleted habits wait thirty days in the trash, backups can be locked with a password, and past days keep the target they had.</span>
           </button>
           </div>
         </div>
-        <div class="feat-phone"><div class="feat-screen"><img id="feat-shot" data-img="feat_alarm" src="img/en/feat_alarm.webp" alt="" width="720" height="871" loading="lazy"></div></div>
+        <div class="feat-phone"><div class="feat-screen"><img id="feat-shot" data-theme-img="feat_alarm" src="img/en/feat_alarm.webp" alt="" width="720" height="871" loading="lazy"></div></div>
       </div>
     </div>
   </section>
@@ -490,26 +509,22 @@ footer .brand { font-size: 18px; }
         <h2 data-i18n="inside_title">A look inside</h2>
         <p data-i18n="inside_lead">Today, your progress, a year of every habit, and adding a habit step by step.</p>
       </div>
-      <div class="bento">
-        <figure class="tile wide">
-          <div class="shot"><img data-img="g_heatmap" data-i18n-alt="alt_heat" src="img/en/g_heatmap.webp" alt="A habit's last twelve months, with comebacks outlined in gold" width="760" height="633" loading="lazy"></div>
-          <figcaption><b data-i18n="g_detail_t">A year at a glance</b><span data-i18n="g_detail">Streaks, comebacks in gold and twelve months of days.</span></figcaption>
+      <div class="pbento">
+        <figure class="ptile" data-pal="sakura">
+          <div class="pshot"><img data-gal="detail" data-i18n-alt="alt_heat" src="img/en/gal_detail_light.webp" alt="" width="620" height="543" loading="lazy"></div>
+          <figcaption><span class="pchip"><i></i>Sakura</span><b data-i18n="g_detail_t">A year at a glance</b><span data-i18n="g_detail">Streaks, comebacks in gold and twelve months of days.</span></figcaption>
         </figure>
-        <figure class="tile">
-          <div class="shot"><img data-img="g_today" data-i18n-alt="alt_today" src="img/en/g_today.webp" alt="Habit rows with one-tap buttons" width="760" height="758" loading="lazy"></div>
-          <figcaption><b data-i18n="g_today_t">Today</b><span data-i18n="g_today">The week as small circles, then one tap per habit.</span></figcaption>
+        <figure class="ptile" data-pal="matcha">
+          <div class="pshot"><img data-gal="today" data-i18n-alt="alt_today" src="img/en/gal_today_light.webp" alt="" width="620" height="543" loading="lazy"></div>
+          <figcaption><span class="pchip"><i></i>Matcha</span><b data-i18n="g_today_t">Today</b><span data-i18n="g_today">The week as small circles, then one tap per habit.</span></figcaption>
         </figure>
-        <figure class="tile">
-          <div class="shot"><img data-img="g_rate" data-i18n-alt="alt_rate" src="img/en/g_rate.webp" alt="Completion rate card" width="760" height="452" loading="lazy"></div>
-          <figcaption><b data-i18n="g_progress_t">Progress</b><span data-i18n="g_progress">Completion, records, and which habits line up with your better days.</span></figcaption>
+        <figure class="ptile" data-pal="umi">
+          <div class="pshot"><img data-gal="progress" data-i18n-alt="alt_rate" src="img/en/gal_progress_light.webp" alt="" width="620" height="543" loading="lazy"></div>
+          <figcaption><span class="pchip"><i></i>Umi</span><b data-i18n="g_progress_t">Progress</b><span data-i18n="g_progress">Completion, records, and which habits line up with your better days.</span></figcaption>
         </figure>
-        <figure class="tile">
-          <div class="shot"><img data-img="g_breakdown" data-i18n-alt="alt_break" src="img/en/g_breakdown.webp" alt="Per-habit breakdown with streaks" width="760" height="580" loading="lazy"></div>
-          <figcaption><b data-i18n="g_break_t">Every habit, honestly</b><span data-i18n="g_break">How each one is going over the last 7, 30 or 90 days, or all time.</span></figcaption>
-        </figure>
-        <figure class="tile">
-          <div class="shot"><img data-img="g_editor" data-i18n-alt="alt_editor" src="img/en/g_editor.webp" alt="Adding a habit: name, icon and colour" width="760" height="883" loading="lazy"></div>
-          <figcaption><b data-i18n="g_editor_t">A habit in four steps</b><span data-i18n="g_editor">What, how you count it, when, then fine-tune only if you like.</span></figcaption>
+        <figure class="ptile" data-pal="momiji">
+          <div class="pshot"><img data-gal="editor" data-i18n-alt="alt_editor" src="img/en/gal_editor_light.webp" alt="" width="620" height="543" loading="lazy"></div>
+          <figcaption><span class="pchip"><i></i>Momiji</span><b data-i18n="g_editor_t">A habit in four steps</b><span data-i18n="g_editor">What, how you count it, when, then fine-tune only if you like.</span></figcaption>
         </figure>
       </div>
     </div>
@@ -542,7 +557,7 @@ footer .brand { font-size: 18px; }
 
   <section class="alt">
     <div class="wrap split">
-      <div class="widget-shot"><img data-img="widgets" data-i18n-alt="alt_widgets" src="img/en/widgets.webp" alt="The Today widget on a phone's home screen" width="760" height="942" loading="lazy"></div>
+      <div class="widget-shot"><img data-theme-img="widgets" data-i18n-alt="alt_widgets" src="img/en/widgets.webp" alt="The Today widget on a phone's home screen" width="760" height="942" loading="lazy"></div>
       <div>
         <h2 data-i18n="w_title">On your home screen and wrist</h2>
         <p class="muted" style="margin-top:14px;font-size:18px" data-i18n="w_lead">Eight widgets: Today, a single habit, this week, your streak, the next habit, a progress ring, a mini heatmap and a sunrise wake alarm. Add them straight from Settings; on Android 12 and up their boxes tick the moment you tap. A Wear OS tile and watch app mark habits from your wrist.</p>
@@ -635,10 +650,33 @@ footer .brand { font-size: 18px; }
       if (el.tagName === 'SOURCE') el.srcset = url; else el.src = url;
     });
     select.value = lang;
+    galleryShots();
     themeLabel();
     showPalette(true);
   }
 
+
+  // Gallery screens follow the page's language and light/dark.
+  function galleryShots() {
+    var dark = isDark();
+    var mode = dark ? 'dark' : 'light';
+    document.querySelectorAll('[data-gal]').forEach(function (el) {
+      el.src = 'img/' + lang + '/gal_' + el.dataset.gal + '_' + mode + '.webp';
+    });
+    // Other shots with a dark twin: "name.webp" in light, "name_dark.webp" in dark.
+    document.querySelectorAll('[data-theme-img]').forEach(function (el) {
+      el.src = 'img/' + lang + '/' + el.dataset.themeImg + (dark ? '_dark' : '') + '.webp';
+    });
+    var on = document.querySelector('.feat[aria-pressed="true"]');
+    if (on) featColours(on);
+  }
+  function featColours(btn) {
+    var dark = isDark();
+    var show = document.querySelector('.showcase');
+    show.style.setProperty('--feat-bg', dark ? btn.dataset.bgDark : btn.dataset.bg);
+    show.style.setProperty('--feat-soft', dark ? btn.dataset.softDark : btn.dataset.soft);
+    show.style.setProperty('--feat-acc', btn.dataset.acc);
+  }
   // Saved choice first, then the browser's preferred languages, then English.
   function detect() {
     var saved = null;
@@ -664,11 +702,8 @@ footer .brand { font-size: 18px; }
   document.querySelectorAll('.feat').forEach(function (btn) {
     btn.addEventListener('click', function () {
       document.querySelectorAll('.feat').forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
-      featShot.dataset.img = 'feat_' + btn.dataset.feat;
-      featShot.src = 'img/' + lang + '/feat_' + btn.dataset.feat + '.webp';
-      showcase.style.setProperty('--feat-bg', btn.dataset.bg);
-      showcase.style.setProperty('--feat-soft', btn.dataset.soft);
-      showcase.style.setProperty('--feat-acc', btn.dataset.acc);
+      featShot.dataset.themeImg = 'feat_' + btn.dataset.feat;
+      galleryShots();
     });
   });
   // Palette picker: one phone, recoloured on tap.
@@ -685,6 +720,7 @@ footer .brand { font-size: 18px; }
     root.classList.toggle('is-dark', dark);
     if (heroDark) heroDark.media = dark ? 'all' : 'not all';
     document.querySelectorAll('meta[name=theme-color]').forEach(function (m) { m.content = dark ? '#15171C' : '#F5F0E6'; m.removeAttribute('media'); });
+    galleryShots();
     themeLabel();
   }
   themeBtn.addEventListener('click', function () {
