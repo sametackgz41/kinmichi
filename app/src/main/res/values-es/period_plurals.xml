@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="period_custom_progress">
+        <item quantity="one">este periodo %1$d/%2$d · queda %3$d día</item>
+        <item quantity="other">este periodo %1$d/%2$d · quedan %3$d días</item>
+    </plurals>
+</resources>

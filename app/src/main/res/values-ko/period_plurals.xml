@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="period_custom_progress">
+        <item quantity="other">이번 기간 %1$d/%2$d · %3$d일 남음</item>
+    </plurals>
+</resources>

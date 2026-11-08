@@ -129,6 +129,6 @@ fun frequencyAdvice(history: HabitHistorySnapshot, habit: Habit, today: LocalDat
                 else -> null
             }
         }
-        GoalPeriod.Monthly -> null
+        GoalPeriod.Monthly, GoalPeriod.Custom -> null
     }
 }

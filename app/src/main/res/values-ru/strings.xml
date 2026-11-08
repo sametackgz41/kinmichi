@@ -1155,6 +1155,12 @@
     <string name="slots_footer">Когда всё сделано, день засчитывается и продлевает серию.</string>
     <string name="slots_next">далее: %1$s · %2$s</string>
     <string name="slots_all_done">на сегодня всё</string>
+    <string name="period_custom">Своё</string>
+    <string name="period_every">Каждые</string>
+    <string name="period_days_suffix">дней</string>
+    <string name="period_times_suffix">раз</string>
+    <string name="period_custom_summary">%2$d раз за %1$d дней</string>
+    <string name="period_custom_hint">Периоды считаются со дня начала. Лишнее не переносится на следующий.</string>
     <plurals name="streak_days">
         <item quantity="one">Серия %d день</item>
         <item quantity="few">Серия %d дня</item>

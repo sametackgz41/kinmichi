@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="period_custom_progress">
+        <item quantity="other">今期 %1$d/%2$d・残り%3$d日</item>
+    </plurals>
+</resources>

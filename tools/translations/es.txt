@@ -1175,3 +1175,9 @@ slots_remove|Quitar esta vez
 slots_footer|Cuando estén todas, el día cuenta como completo y suma a la racha.
 slots_next|siguiente: %1$s · %2$s
 slots_all_done|todo hecho por hoy
+period_custom|Otro
+period_every|Cada
+period_days_suffix|días
+period_times_suffix|veces
+period_custom_summary|%2$d veces en %1$d días
+period_custom_hint|Los periodos cuentan desde el día en que empiezas. Lo que sobra no pasa al siguiente.

@@ -1,5 +1,9 @@
 package app.tsuzuku.ui.screens
 
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.FilledTonalIconButton
+import androidx.compose.material.icons.rounded.Remove
+import app.tsuzuku.model.periodBounds
 import app.tsuzuku.ui.formatClock
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Add
@@ -151,6 +155,13 @@ internal class HabitEditorState(existing: Habit?) {
     var selectedDays by mutableStateOf(existing?.scheduleDaysMask?.toDaySelection() ?: "1111111")
     var goalPeriod by mutableStateOf(existing?.goalPeriod ?: GoalPeriod.Daily)
     var periodTargetText by mutableStateOf(existing?.periodTarget?.toString() ?: "3")
+    var periodDays by mutableStateOf(existing?.periodDays ?: 10)
+    /** Where today falls in the current custom block (0 = first day), for the dots. */
+    val periodDayIndex: Int = existing?.let { h ->
+        if (h.goalPeriod == GoalPeriod.Custom) {
+            java.time.temporal.ChronoUnit.DAYS.between(h.periodBounds(java.time.LocalDate.now()).first, java.time.LocalDate.now()).toInt()
+        } else 0
+    } ?: 0
     var routineName by mutableStateOf(existing?.routineName.orEmpty())
     var prerequisiteId by mutableStateOf(existing?.prerequisiteHabitId ?: 0L)
     var reminderEnabled by mutableStateOf(existing?.reminderMinutes != null)
@@ -249,6 +260,7 @@ internal class HabitEditorState(existing: Habit?) {
             (type == HabitType.Check || target > 0.0) &&
             selectedDays.contains('1') &&
             (goalPeriod == GoalPeriod.Daily || periodTarget in 1..31) &&
+            (goalPeriod != GoalPeriod.Custom || periodTarget <= periodDays) &&
             (!reminderEnabled || (reminderTime.toReminderMinutesOrNull() != null && (!repeatEnabled || (repeatMinutes.toIntOrNull() ?: 0) in 1..720)))
 
     fun changeType(newType: HabitType, timesUnit: String, minutesUnit: String) {
@@ -287,6 +299,7 @@ internal class HabitEditorState(existing: Habit?) {
             scheduleDaysMask = selectedDays.toDaysMask(),
             goalPeriod = goalPeriod,
             periodTarget = if (goalPeriod == GoalPeriod.Daily) 1 else periodTarget,
+            periodDays = periodDays,
             routineName = routineName,
             prerequisiteHabitId = prerequisiteId.takeIf { it > 0L },
             healthMetric = if (check) HealthMetric.None else healthMetric,
@@ -344,7 +357,7 @@ internal class HabitEditorState(existing: Habit?) {
         reminderEnabled, reminderTime, repeatEnabled, repeatMinutes, tinyVersion, healthMetric.name, alarmEnabled,
         alarmMission.name, alarmMarkDone, spreadOn, spreadWindow, screenTime,
         alarmType, alarmTasks, alarmLevel, alarmRamp, alarmSnoozes,
-        slotsOn, slotsText,
+        slotsOn, slotsText, periodDays,
     )
 
     private fun restore(values: List<Any?>) {
@@ -378,6 +391,7 @@ internal class HabitEditorState(existing: Habit?) {
         if (i < values.size) alarmSnoozes = next()
         if (i < values.size) slotsOn = next()
         if (i < values.size) slotsText = next()
+        if (i < values.size) periodDays = next()
     }
 
     companion object {
@@ -973,7 +987,9 @@ private fun GoalGroup(state: HabitEditorState) {
             )
         }
     }
-    if (state.goalPeriod != GoalPeriod.Daily) {
+    if (state.goalPeriod == GoalPeriod.Custom) {
+        CustomPeriodCard(state)
+    } else if (state.goalPeriod != GoalPeriod.Daily) {
         Spacer(Modifier.height(10.dp))
         NumberField(
             state.periodTargetText,
@@ -1253,6 +1269,59 @@ internal fun SlotsField(state: HabitEditorState) {
     }
 }
 
+/** "Every [10] days, [4] times", with the days of one block as dots. */
+@Composable
+internal fun CustomPeriodCard(state: HabitEditorState) {
+    val times = state.periodTargetText.toIntOrNull() ?: 1
+    Column(
+        Modifier.fillMaxWidth().padding(top = 10.dp).clip(RoundedCornerShape(24.dp))
+            .background(MaterialTheme.colorScheme.surfaceContainerLow).padding(18.dp),
+        verticalArrangement = Arrangement.spacedBy(14.dp),
+    ) {
+        Text(stringResource(R.string.period_every), style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        PeriodStepper(state.periodDays, 2..60, stringResource(R.string.period_days_suffix)) { d ->
+            state.periodDays = d
+            if (times > d) state.periodTargetText = d.toString()
+        }
+        PeriodStepper(times, 1..state.periodDays, stringResource(R.string.period_times_suffix)) { state.periodTargetText = it.toString() }
+        Text(
+            stringResource(R.string.period_custom_summary, state.periodDays, times),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        if (state.periodDays <= 15) Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            repeat(state.periodDays) { i ->
+                Box(
+                    Modifier.size(20.dp).clip(CircleShape)
+                        .background(if (i < times) MaterialTheme.colorScheme.primary.copy(alpha = 0.35f) else MaterialTheme.colorScheme.surfaceContainerHighest)
+                        .then(if (i == state.periodDayIndex) Modifier.border(2.dp, MaterialTheme.colorScheme.primary, CircleShape) else Modifier),
+                )
+            }
+        }
+        Text(stringResource(R.string.period_custom_hint), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+}
+
+@Composable
+private fun PeriodStepper(value: Int, range: IntRange, suffix: String, onChange: (Int) -> Unit) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        FilledTonalIconButton(onClick = { onChange((value - 1).coerceIn(range)) }, enabled = value > range.first, modifier = Modifier.size(40.dp)) {
+            Icon(Icons.Rounded.Remove, stringResource(R.string.decrease_progress), Modifier.size(18.dp))
+        }
+        Text(
+            "$value",
+            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.SemiBold,
+            textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+            modifier = Modifier.width(56.dp),
+        )
+        FilledTonalIconButton(onClick = { onChange((value + 1).coerceIn(range)) }, enabled = value < range.last, modifier = Modifier.size(40.dp)) {
+            Icon(Icons.Rounded.Add, stringResource(R.string.increase_progress), Modifier.size(18.dp))
+        }
+        Text(suffix, style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(start = 12.dp))
+    }
+}
+
 @Composable
 private fun ScreenTimeTemplateCard(onUse: () -> Unit) {
     Surface(onClick = onUse, shape = RoundedCornerShape(24.dp), color = MaterialTheme.colorScheme.primaryContainer, modifier = Modifier.fillMaxWidth()) {
@@ -1397,6 +1466,7 @@ private fun goalPeriodLabel(period: GoalPeriod): Int = when (period) {
     GoalPeriod.Daily -> R.string.daily
     GoalPeriod.Weekly -> R.string.weekly
     GoalPeriod.Monthly -> R.string.monthly
+    GoalPeriod.Custom -> R.string.period_custom
 }
 
 private fun typeLabel(type: HabitType): Int = when (type) {

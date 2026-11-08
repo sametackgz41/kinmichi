@@ -1175,3 +1175,9 @@ slots_remove|Remover este horário
 slots_footer|Quando todas estiverem feitas, o dia conta como completo e soma à sequência.
 slots_next|próximo: %1$s · %2$s
 slots_all_done|tudo feito por hoje
+period_custom|Outro
+period_every|A cada
+period_days_suffix|dias
+period_times_suffix|vezes
+period_custom_summary|%2$d vezes em %1$d dias
+period_custom_hint|Os períodos contam a partir do dia em que você começa. O excedente não passa para o próximo.

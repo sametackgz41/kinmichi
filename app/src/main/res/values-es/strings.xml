@@ -1155,6 +1155,12 @@
     <string name="slots_footer">Cuando estén todas, el día cuenta como completo y suma a la racha.</string>
     <string name="slots_next">siguiente: %1$s · %2$s</string>
     <string name="slots_all_done">todo hecho por hoy</string>
+    <string name="period_custom">Otro</string>
+    <string name="period_every">Cada</string>
+    <string name="period_days_suffix">días</string>
+    <string name="period_times_suffix">veces</string>
+    <string name="period_custom_summary">%2$d veces en %1$d días</string>
+    <string name="period_custom_hint">Los periodos cuentan desde el día en que empiezas. Lo que sobra no pasa al siguiente.</string>
     <plurals name="streak_days">
         <item quantity="one">Racha de %d día</item>
         <item quantity="other">Racha de %d días</item>

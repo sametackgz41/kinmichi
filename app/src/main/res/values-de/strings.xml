@@ -1155,6 +1155,12 @@
     <string name="slots_footer">Sind alle erledigt, zählt der Tag als geschafft und die Serie wächst.</string>
     <string name="slots_next">als Nächstes: %1$s · %2$s</string>
     <string name="slots_all_done">für heute alles erledigt</string>
+    <string name="period_custom">Eigene</string>
+    <string name="period_every">Alle</string>
+    <string name="period_days_suffix">Tage</string>
+    <string name="period_times_suffix">Mal</string>
+    <string name="period_custom_summary">%2$d-mal in %1$d Tagen</string>
+    <string name="period_custom_hint">Zeiträume zählen ab deinem Starttag. Überschuss wird nicht übertragen.</string>
     <plurals name="streak_days">
         <item quantity="one">%d Tag in Folge</item>
         <item quantity="other">%d Tage in Folge</item>

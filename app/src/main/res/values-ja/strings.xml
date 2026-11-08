@@ -1155,6 +1155,12 @@
     <string name="slots_footer">すべて終わるとその日は達成となり、連続記録に加わります。</string>
     <string name="slots_next">次：%1$s・%2$s</string>
     <string name="slots_all_done">今日はすべて完了</string>
+    <string name="period_custom">カスタム</string>
+    <string name="period_every">毎</string>
+    <string name="period_days_suffix">日ごとに</string>
+    <string name="period_times_suffix">回</string>
+    <string name="period_custom_summary">%1$d日のうち%2$d回</string>
+    <string name="period_custom_hint">期間は始めた日から数えます。多くできても次の期間には持ち越しません。</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

@@ -92,9 +92,9 @@ data class HabitHistorySnapshot(
             }
             val allScheduledDates = generateScheduledDates(habit, endDate)
             val completedDates = scheduledDates.filter { date -> isComplete(habit, date) }
-            val periodResults = scheduledDates.groupBy { it.periodKey(habit.goalPeriod) }
+            val periodResults = scheduledDates.groupBy { habit.periodKey(it) }
                 .map { (_, periodDates) -> periodDates.count { isComplete(habit, it) } >= habit.periodTarget }
-            val allPeriodResults = allScheduledDates.groupBy { it.periodKey(habit.goalPeriod) }
+            val allPeriodResults = allScheduledDates.groupBy { habit.periodKey(it) }
                 .map { (_, periodDates) -> periodDates.count { isComplete(habit, it) } >= habit.periodTarget }
             val scheduledCount = if (habit.goalPeriod == GoalPeriod.Daily) scheduledDates.size else periodResults.size
             val completedCount = if (habit.goalPeriod == GoalPeriod.Daily) completedDates.size else periodResults.count { it }
@@ -277,11 +277,7 @@ fun Habit.isScheduledOn(date: LocalDate): Boolean {
 private fun ratio(completed: Int, scheduled: Int): Float =
     if (scheduled <= 0) 0f else completed.toFloat() / scheduled
 
-private fun LocalDate.periodKey(period: GoalPeriod): String = when (period) {
-    GoalPeriod.Daily -> toString()
-    GoalPeriod.Weekly -> minusDays((dayOfWeek.value - 1).toLong()).toString()
-    GoalPeriod.Monthly -> "%04d-%02d".format(year, monthValue)
-}
+private fun Habit.periodKey(date: LocalDate): String = periodBounds(date).first.toString()
 
 sealed interface HeatDay {
     /** Not scheduled and nothing logged. */

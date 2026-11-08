@@ -1155,6 +1155,12 @@
     <string name="slots_footer">Quando todas estiverem feitas, o dia conta como completo e soma à sequência.</string>
     <string name="slots_next">próximo: %1$s · %2$s</string>
     <string name="slots_all_done">tudo feito por hoje</string>
+    <string name="period_custom">Outro</string>
+    <string name="period_every">A cada</string>
+    <string name="period_days_suffix">dias</string>
+    <string name="period_times_suffix">vezes</string>
+    <string name="period_custom_summary">%2$d vezes em %1$d dias</string>
+    <string name="period_custom_hint">Os períodos contam a partir do dia em que você começa. O excedente não passa para o próximo.</string>
     <plurals name="streak_days">
         <item quantity="one">Sequência de %d dia</item>
         <item quantity="other">Sequência de %d dias</item>

@@ -202,7 +202,7 @@ internal object BackupCodec {
         put("type", item.type); put("direction", item.direction); put("target", item.target); put("unit", item.unit)
         put("step", item.step); put("scheduleDaysMask", item.scheduleDaysMask); put("sortOrder", item.sortOrder)
         putNullable("reminderMinutes", item.reminderMinutes); putNullable("reminderRepeatMinutes", item.reminderRepeatMinutes)
-        put("goalPeriod", item.goalPeriod); put("periodTarget", item.periodTarget); put("routineName", item.routineName)
+        put("goalPeriod", item.goalPeriod); put("periodTarget", item.periodTarget); put("periodDays", item.periodDays); put("routineName", item.routineName)
         putNullable("prerequisiteHabitId", item.prerequisiteHabitId); put("healthMetric", item.healthMetric)
         put("minimumTarget", item.minimumTarget); putNullable("maximumTarget", item.maximumTarget); put("difficulty", item.difficulty)
         put("contextLabel", item.contextLabel); put("intention", item.intention); put("tinyVersion", item.tinyVersion); item.deletedAt?.let { put("deletedAt", it) }; put("slots", item.slots)
@@ -217,7 +217,7 @@ internal object BackupCodec {
         type = o.getString("type"), direction = o.getString("direction"), target = o.getDouble("target"), unit = o.getString("unit"),
         step = o.getDouble("step"), scheduleDaysMask = o.getInt("scheduleDaysMask"), sortOrder = o.getInt("sortOrder"),
         reminderMinutes = o.optionalInt("reminderMinutes"), reminderRepeatMinutes = o.optionalInt("reminderRepeatMinutes"),
-        goalPeriod = o.optString("goalPeriod", "Daily"), periodTarget = o.optInt("periodTarget", 1).coerceAtLeast(1),
+        goalPeriod = o.optString("goalPeriod", "Daily"), periodTarget = o.optInt("periodTarget", 1).coerceAtLeast(1), periodDays = o.optInt("periodDays", 10),
         routineName = o.optString("routineName", ""), prerequisiteHabitId = o.optionalLong("prerequisiteHabitId"),
         healthMetric = o.optString("healthMetric", "None"),
         minimumTarget = o.optDouble("minimumTarget", 0.0), maximumTarget = o.optionalDouble("maximumTarget"),

@@ -1554,4 +1554,10 @@
     <string name="slots_footer">Hepsi bitince gün tamamlanmış sayılır ve seriye eklenir.</string>
     <string name="slots_next">sıradaki: %1$s · %2$s</string>
     <string name="slots_all_done">bugünlük hepsi tamam</string>
+    <string name="period_custom">Özel</string>
+    <string name="period_every">Her</string>
+    <string name="period_days_suffix">günde</string>
+    <string name="period_times_suffix">kez</string>
+    <string name="period_custom_summary">Her dönem: %1$d gün içinde %2$d kez</string>
+    <string name="period_custom_hint">Dönemler başladığın günden itibaren sayılır. Fazlası sonraki döneme devretmez.</string>
 </resources>

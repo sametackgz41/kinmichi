@@ -1169,3 +1169,9 @@ slots_remove|この時間を削除
 slots_footer|すべて終わるとその日は達成となり、連続記録に加わります。
 slots_next|次：%1$s・%2$s
 slots_all_done|今日はすべて完了
+period_custom|カスタム
+period_every|毎
+period_days_suffix|日ごとに
+period_times_suffix|回
+period_custom_summary|%1$d日のうち%2$d回
+period_custom_hint|期間は始めた日から数えます。多くできても次の期間には持ち越しません。

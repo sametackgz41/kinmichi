@@ -26,6 +26,7 @@ data class HabitEntity(
     val updatedAt: Long,
     val goalPeriod: String = "Daily",
     val periodTarget: Int = 1,
+    val periodDays: Int = 10,
     val routineName: String = "",
     val prerequisiteHabitId: Long? = null,
     val healthMetric: String = "None",

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="period_custom_progress">
+        <item quantity="one">questo periodo %1$d/%2$d · manca %3$d giorno</item>
+        <item quantity="other">questo periodo %1$d/%2$d · mancano %3$d giorni</item>
+    </plurals>
+</resources>

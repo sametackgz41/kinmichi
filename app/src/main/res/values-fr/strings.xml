@@ -1155,6 +1155,12 @@
     <string name="slots_footer">Quand tout est fait, la journée compte comme réussie et prolonge la série.</string>
     <string name="slots_next">ensuite : %1$s · %2$s</string>
     <string name="slots_all_done">tout est fait pour aujourd\'hui</string>
+    <string name="period_custom">Perso</string>
+    <string name="period_every">Tous les</string>
+    <string name="period_days_suffix">jours</string>
+    <string name="period_times_suffix">fois</string>
+    <string name="period_custom_summary">%2$d fois en %1$d jours</string>
+    <string name="period_custom_hint">Les périodes comptent à partir du jour où tu commences. Le surplus ne se reporte pas.</string>
     <plurals name="streak_days">
         <item quantity="one">Série de %d jour</item>
         <item quantity="other">Série de %d jours</item>

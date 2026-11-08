@@ -1,5 +1,6 @@
 package app.tsuzuku.ui.screens
 
+import app.tsuzuku.model.periodBounds
 import androidx.compose.foundation.shape.RoundedCornerShape
 import app.tsuzuku.model.slotStates
 import androidx.compose.animation.AnimatedContent
@@ -319,6 +320,11 @@ private fun habitContextLine(todayHabit: TodayHabit, timerRunning: Boolean, time
             formatHabitAmount(habit.target),
             habit.unit,
         )
+        habit.goalPeriod == GoalPeriod.Custom -> {
+            val today = java.time.LocalDate.now()
+            val left = java.time.temporal.ChronoUnit.DAYS.between(today, habit.periodBounds(today).second).toInt() + 1
+            pluralStringResource(R.plurals.period_custom_progress, left, todayHabit.periodProgress, habit.periodTarget, left)
+        }
         habit.goalPeriod != GoalPeriod.Daily -> stringResource(R.string.period_progress, todayHabit.periodProgress, habit.periodTarget)
         todayHabit.isComplete -> stringResource(R.string.habit_completed)
         habit.intention.isNotBlank() -> habit.intention

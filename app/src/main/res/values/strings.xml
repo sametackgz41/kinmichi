@@ -1555,4 +1555,10 @@
     <string name="slots_footer">When all are done, the day counts as complete and adds to the streak.</string>
     <string name="slots_next">next: %1$s · %2$s</string>
     <string name="slots_all_done">all done for today</string>
+    <string name="period_custom">Custom</string>
+    <string name="period_every">Every</string>
+    <string name="period_days_suffix">days</string>
+    <string name="period_times_suffix">times</string>
+    <string name="period_custom_summary">%2$d times within %1$d days</string>
+    <string name="period_custom_hint">Periods are counted from the day you start. Extra days don\'t carry over to the next one.</string>
 </resources>

@@ -1155,6 +1155,12 @@
     <string name="slots_footer">모두 끝내면 그날은 완료로 치고 연속 기록에 더해져요.</string>
     <string name="slots_next">다음: %1$s · %2$s</string>
     <string name="slots_all_done">오늘은 모두 완료</string>
+    <string name="period_custom">직접</string>
+    <string name="period_every">매</string>
+    <string name="period_days_suffix">일마다</string>
+    <string name="period_times_suffix">번</string>
+    <string name="period_custom_summary">%1$d일 동안 %2$d번</string>
+    <string name="period_custom_hint">기간은 시작한 날부터 셉니다. 넘친 횟수는 다음 기간으로 넘어가지 않아요.</string>
     <plurals name="streak_days">
         <item quantity="one">%d일 연속</item>
         <item quantity="other">%d일 연속</item>

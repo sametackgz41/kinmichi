@@ -1175,3 +1175,9 @@ slots_remove|Rimuovi questo orario
 slots_footer|Quando le fai tutte, la giornata conta come completa e allunga la serie.
 slots_next|prossimo: %1$s · %2$s
 slots_all_done|tutto fatto per oggi
+period_custom|Altro
+period_every|Ogni
+period_days_suffix|giorni
+period_times_suffix|volte
+period_custom_summary|%2$d volte in %1$d giorni
+period_custom_hint|I periodi si contano dal giorno in cui inizi. L'eccesso non passa al successivo.

@@ -17,6 +17,8 @@ enum class GoalPeriod {
     Daily,
     Weekly,
     Monthly,
+    /** X times in every block of [Habit.periodDays] days, counted from the habit's start. */
+    Custom,
 }
 
 enum class HealthMetric {
@@ -48,6 +50,7 @@ data class Habit(
     val scheduleDaysMask: Int,
     val goalPeriod: GoalPeriod = GoalPeriod.Daily,
     val periodTarget: Int = 1,
+    val periodDays: Int = 10,
     val routineName: String = "",
     val prerequisiteHabitId: Long? = null,
     val healthMetric: HealthMetric = HealthMetric.None,
@@ -160,6 +163,7 @@ data class HabitDraft(
     val scheduleDaysMask: Int,
     val goalPeriod: GoalPeriod = GoalPeriod.Daily,
     val periodTarget: Int = 1,
+    val periodDays: Int = 10,
     val routineName: String = "",
     val prerequisiteHabitId: Long? = null,
     val healthMetric: HealthMetric = HealthMetric.None,
@@ -240,5 +244,20 @@ fun TodayHabit.slotStates(): List<Boolean> {
             extra > 0 -> { extra--; true }
             else -> false
         }
+    }
+}
+
+
+/** First and last day of the goal period that [date] falls in. */
+fun Habit.periodBounds(date: java.time.LocalDate): Pair<java.time.LocalDate, java.time.LocalDate> = when (goalPeriod) {
+    GoalPeriod.Daily -> date to date
+    GoalPeriod.Weekly -> date.minusDays((date.dayOfWeek.value - 1).toLong()) to date.plusDays((7 - date.dayOfWeek.value).toLong())
+    GoalPeriod.Monthly -> date.withDayOfMonth(1) to date.with(java.time.temporal.TemporalAdjusters.lastDayOfMonth())
+    GoalPeriod.Custom -> {
+        val anchor = activeStartEpochDay?.let(java.time.LocalDate::ofEpochDay) ?: createdOn.takeIf { it != java.time.LocalDate.MIN } ?: date
+        val length = periodDays.coerceIn(2, 90).toLong()
+        val offset = Math.floorMod(java.time.temporal.ChronoUnit.DAYS.between(anchor, date), length)
+        val start = date.minusDays(offset)
+        start to start.plusDays(length - 1)
     }
 }

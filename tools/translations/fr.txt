@@ -1175,3 +1175,9 @@ slots_remove|Retirer ce moment
 slots_footer|Quand tout est fait, la journée compte comme réussie et prolonge la série.
 slots_next|ensuite : %1$s · %2$s
 slots_all_done|tout est fait pour aujourd'hui
+period_custom|Perso
+period_every|Tous les
+period_days_suffix|jours
+period_times_suffix|fois
+period_custom_summary|%2$d fois en %1$d jours
+period_custom_hint|Les périodes comptent à partir du jour où tu commences. Le surplus ne se reporte pas.

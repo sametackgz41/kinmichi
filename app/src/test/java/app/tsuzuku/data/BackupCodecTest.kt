@@ -49,7 +49,7 @@ class BackupCodecTest {
 
     private fun sampleSnapshot() = BackupSnapshot(
         habits = listOf(
-            HabitEntity(1, "Kitap oku", "📖", 0xFF5068A9, "Duration", "Build", 30.0, "dk", 5.0, 127, 0, 540, 10, "Not", false, 1, 2, "Weekly", 3, "Akşam", null, "None"),
+            HabitEntity(1, "Kitap oku", "📖", 0xFF5068A9, "Duration", "Build", 30.0, "dk", 5.0, 127, 0, 540, 10, "Not", false, 1, 2, "Weekly", 3, 10, "Akşam", null, "None"),
         ),
         habitEntries = listOf(HabitEntryEntity(1, 1, "2026-08-18", 5.0, "PROGRESS", "", 2, 3)),
         contents = listOf(LibraryContentEntity(1, "Frieren", "Series", "InProgress", "", null, 4.0, 40.0, "bölüm", "Harika", 0, 1, 2)),

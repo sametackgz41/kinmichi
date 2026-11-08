@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="period_custom_progress">
+        <item quantity="one">за период %1$d/%2$d · остался %3$d день</item>
+        <item quantity="few">за период %1$d/%2$d · осталось %3$d дня</item>
+        <item quantity="many">за период %1$d/%2$d · осталось %3$d дней</item>
+        <item quantity="other">за период %1$d/%2$d · осталось %3$d дня</item>
+    </plurals>
+</resources>

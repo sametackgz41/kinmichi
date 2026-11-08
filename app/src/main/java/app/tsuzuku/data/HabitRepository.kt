@@ -17,6 +17,7 @@ import app.tsuzuku.model.HabitType
 import app.tsuzuku.model.HealthMetric
 import app.tsuzuku.model.TodayHabit
 import app.tsuzuku.model.slotStates
+import app.tsuzuku.model.periodBounds
 import app.tsuzuku.model.WeeklyReview
 import app.tsuzuku.model.isScheduledOn
 import java.time.LocalDate
@@ -319,6 +320,7 @@ class RoomHabitRepository(
                 scheduleDaysMask = draft.scheduleDaysMask,
                 goalPeriod = draft.goalPeriod.name,
                 periodTarget = draft.periodTarget.coerceAtLeast(1),
+                periodDays = draft.periodDays.coerceIn(2, 90),
                 routineName = draft.routineName.trim().take(40),
                 prerequisiteHabitId = draft.prerequisiteHabitId,
                 healthMetric = draft.healthMetric.name,
@@ -360,6 +362,7 @@ class RoomHabitRepository(
                 scheduleDaysMask = draft.scheduleDaysMask,
                 goalPeriod = draft.goalPeriod.name,
                 periodTarget = draft.periodTarget.coerceAtLeast(1),
+                periodDays = draft.periodDays.coerceIn(2, 90),
                 routineName = draft.routineName.trim().take(40),
                 prerequisiteHabitId = draft.prerequisiteHabitId?.takeUnless { it == id },
                 healthMetric = draft.healthMetric.name,
@@ -564,7 +567,7 @@ class RoomHabitRepository(
     private suspend fun periodGoalReached(habit: HabitEntity, date: LocalDate): Boolean {
         val period = GoalPeriod.entries.firstOrNull { it.name == habit.goalPeriod } ?: GoalPeriod.Daily
         if (period == GoalPeriod.Daily) return false
-        val (start, end) = period.bounds(date)
+        val (start, end) = habit.toDomain().periodBounds(date)
         return periodCompletionCount(habit, dao.getEntriesBetween(habit.id, start.toString(), end.toString()), date) >= habit.periodTarget
     }
 
@@ -631,6 +634,7 @@ private fun HabitEntity.toDomain() = Habit(
     scheduleDaysMask = scheduleDaysMask,
     goalPeriod = GoalPeriod.entries.firstOrNull { it.name == goalPeriod } ?: GoalPeriod.Daily,
     periodTarget = periodTarget.coerceAtLeast(1),
+    periodDays = periodDays,
     routineName = routineName,
     prerequisiteHabitId = prerequisiteHabitId,
     healthMetric = HealthMetric.entries.firstOrNull { it.name == healthMetric } ?: HealthMetric.None,
@@ -682,16 +686,10 @@ private fun normalizeHabitTags(value: String): String = value.split(',', ';', '#
 
 private fun HabitEntryEntity.isProgress(): Boolean = status == HabitEntryEntity.STATUS_PROGRESS || status == HabitEntryEntity.STATUS_HEALTH
 
-private fun GoalPeriod.bounds(date: LocalDate): Pair<LocalDate, LocalDate> = when (this) {
-    GoalPeriod.Daily -> date to date
-    GoalPeriod.Weekly -> date.minusDays((date.dayOfWeek.value - 1).toLong()) to date.plusDays((7 - date.dayOfWeek.value).toLong())
-    GoalPeriod.Monthly -> date.withDayOfMonth(1) to date.with(TemporalAdjusters.lastDayOfMonth())
-}
-
 private fun periodCompletionCount(habit: HabitEntity, entries: List<HabitEntryEntity>, date: LocalDate): Int {
     val period = GoalPeriod.entries.firstOrNull { it.name == habit.goalPeriod } ?: GoalPeriod.Daily
     if (period == GoalPeriod.Daily) return 0
-    val (start, end) = period.bounds(date)
+    val (start, end) = habit.toDomain().periodBounds(date)
     return entries.filter { runCatching { LocalDate.parse(it.localDate) }.getOrNull()?.let { day -> !day.isBefore(start) && !day.isAfter(end) } == true }
         .groupBy(HabitEntryEntity::localDate)
         .count { (_, dayEntries) -> dayEntries.any { it.status == HabitEntryEntity.STATUS_COMPLETED } || dayEntries.filter(HabitEntryEntity::isProgress).sumOf(HabitEntryEntity::amount) >= habit.target }

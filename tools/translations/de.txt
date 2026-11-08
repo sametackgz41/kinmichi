@@ -1175,3 +1175,9 @@ slots_remove|Diese Zeit entfernen
 slots_footer|Sind alle erledigt, zählt der Tag als geschafft und die Serie wächst.
 slots_next|als Nächstes: %1$s · %2$s
 slots_all_done|für heute alles erledigt
+period_custom|Eigene
+period_every|Alle
+period_days_suffix|Tage
+period_times_suffix|Mal
+period_custom_summary|%2$d-mal in %1$d Tagen
+period_custom_hint|Zeiträume zählen ab deinem Starttag. Überschuss wird nicht übertragen.

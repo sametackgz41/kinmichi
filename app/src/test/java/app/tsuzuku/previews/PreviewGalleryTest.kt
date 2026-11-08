@@ -582,6 +582,40 @@ class PreviewGalleryTest {
         captureScreen("slots_today_tr")
     }
 
+    @Test fun periodRealTr() {
+        setVariant("tr", false)
+        val base = sampleToday("tr")
+        val start = LocalDate.now().minusDays(3)
+        val swim = base[0].copy(
+            habit = base[0].habit.copy(
+                name = "Yüzme", emoji = "🏊", type = app.tsuzuku.model.HabitType.Check, target = 1.0,
+                goalPeriod = app.tsuzuku.model.GoalPeriod.Custom, periodTarget = 4, periodDays = 10, createdOn = start,
+                activeStartEpochDay = null,
+            ),
+            progress = 0.0, periodProgress = 2, status = app.tsuzuku.model.HabitDayStatus.Pending,
+        )
+        val state = app.tsuzuku.ui.screens.HabitEditorState(swim.habit)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false) {
+                androidx.compose.material3.Surface {
+                    androidx.compose.foundation.layout.Column(
+                        androidx.compose.ui.Modifier.fillMaxSize().padding(20.dp),
+                        verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(16.dp),
+                    ) {
+                        app.tsuzuku.ui.screens.CustomPeriodCard(state)
+                        app.tsuzuku.ui.screens.HabitRow(
+                            todayHabit = swim, timerRunning = false, timerElapsedSeconds = 0, interactionDisabled = false,
+                            onToggle = {}, onIncrement = {}, onDecrement = {}, onToggleTimer = {}, onOpen = {},
+                            onOpenSkipDialog = {}, onUndoSkip = {},
+                        )
+                    }
+                }
+            }
+        }
+        compose.mainClock.advanceTimeBy(900)
+        captureScreen("period_real_tr")
+    }
+
     @Test fun slotsEditorTr() {
         setVariant("tr", false)
         val state = app.tsuzuku.ui.screens.HabitEditorState(null).apply {
@@ -627,7 +661,10 @@ class PreviewGalleryTest {
     @Test fun task10() = renderTask("task10_catch") { app.tsuzuku.notifications.CatchMission(onProgress = {}, onSolved = {}, seed = 6) }
 
     @Test fun trashA() = renderMock("trash_a") { TrashOptionA() }
-    @Test fun repeatsA() = renderMock("repeats_a") { RepeatsOptionA() }
+    @Test fun periodA() = renderMock("period_a") { PeriodOptionA() }
+    @Test fun periodB() = renderMock("period_b") { PeriodOptionB() }
+    @Test fun periodC() = renderMock("period_c") { PeriodOptionC() }
+    @Test fun repeatsA() =renderMock("repeats_a") { RepeatsOptionA() }
     @Test fun repeatsB() = renderMock("repeats_b") { RepeatsOptionB() }
     @Test fun repeatsC() = renderMock("repeats_c") { RepeatsOptionC() }
     @Test fun repeatsEditor() = renderMock("repeats_editor") { RepeatsEditor() }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="period_custom_progress">
+        <item quantity="one">bu dönem %1$d/%2$d · %3$d gün kaldı</item>
+        <item quantity="other">bu dönem %1$d/%2$d · %3$d gün kaldı</item>
+    </plurals>
+</resources>
