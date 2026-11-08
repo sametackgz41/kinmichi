@@ -594,6 +594,7 @@ fun TsuzukuApp(
                                 history = history,
                                 libraryItems = emptyList(),
                                 moods = moodsByDay,
+                                onOpenYearReview = { navController.navigate("year-review") },
                                 weekStartsMonday = settings.weekStart == WeekStartPreference.Monday,
                                 onShareWeek = { w ->
                                     app.tsuzuku.share.shareWeekCard(
@@ -777,6 +778,15 @@ fun TsuzukuApp(
                     onBack = navController::popBackStack,
                     onCreate = categoryViewModel::create,
                     onDelete = categoryViewModel::delete,
+                )
+            }
+            screen("year-review") {
+                val moodsForYear by reviewViewModel.moodsByDay.collectAsStateWithLifecycle()
+                val data = remember(history, moodsForYear) { app.tsuzuku.ui.screens.yearReview(history, moodsForYear, java.time.LocalDate.now()) }
+                app.tsuzuku.ui.screens.YearReviewScreen(
+                    data = data,
+                    onClose = navController::popBackStack,
+                    onShare = { app.tsuzuku.share.shareYearCard(context, data) },
                 )
             }
             screen("archive") {
@@ -1134,6 +1144,7 @@ private fun androidx.navigation.NavGraphBuilder.screen(
 
 /** Saves a habit's spread-reminder choice and sets its next reminder. */
 private fun applySpread(context: android.content.Context, habitId: Long, draft: app.tsuzuku.model.HabitDraft) {
+    app.tsuzuku.health.ScreenTime.set(context, habitId, draft.screenTime)
     val window = draft.spreadStartMinutes?.let { app.tsuzuku.notifications.SpreadWindow(it, draft.spreadEndMinutes) }
     app.tsuzuku.notifications.SpreadReminders.set(context, habitId, window)
     if (window != null) {

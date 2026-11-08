@@ -157,6 +157,20 @@ internal class HabitEditorState(existing: Habit?) {
     var alarmMarkDone by mutableStateOf(false)
     var spreadOn by mutableStateOf(false)
     var spreadWindow by mutableStateOf(1)
+    var screenTime by mutableStateOf(false)
+
+    /** A daily screen-time limit: a quit habit in minutes, filled from the phone's usage. */
+    fun applyScreenTimeTemplate(name: String, minutesUnit: String) {
+        this.name = name
+        emoji = "📱"
+        direction = HabitDirection.Quit
+        type = HabitType.Duration
+        targetText = "120"; maximumTargetText = "120"; stepText = "15"
+        unit = minutesUnit
+        selectedDays = "1111111"
+        goalPeriod = GoalPeriod.Daily
+        screenTime = true
+    }
 
     /** Fills the editor from a library template; names and units come from [context]'s language. */
     fun applyTemplate(template: LibraryHabit, context: android.content.Context, color: Int = colorIndex) {
@@ -258,6 +272,7 @@ internal class HabitEditorState(existing: Habit?) {
             alarmMarkDone = alarmMarkDone,
             spreadStartMinutes = if (spreadOn && type == HabitType.Count) app.tsuzuku.notifications.SpreadWindow.Presets[spreadWindow].startMinutes else null,
             spreadEndMinutes = app.tsuzuku.notifications.SpreadWindow.Presets[spreadWindow].endMinutes,
+            screenTime = screenTime && type != HabitType.Check,
         )
     }
 
@@ -267,7 +282,7 @@ internal class HabitEditorState(existing: Habit?) {
         activeStartEpochDay, activeEndEpochDay, pausedUntilEpochDay, repeatIntervalText, tags,
         selectedDays, goalPeriod.name, periodTargetText, routineName, prerequisiteId,
         reminderEnabled, reminderTime, repeatEnabled, repeatMinutes, tinyVersion, healthMetric.name, alarmEnabled,
-        alarmMission.name, alarmMarkDone, spreadOn, spreadWindow,
+        alarmMission.name, alarmMarkDone, spreadOn, spreadWindow, screenTime,
     )
 
     private fun restore(values: List<Any?>) {
@@ -293,6 +308,7 @@ internal class HabitEditorState(existing: Habit?) {
         if (i < values.size) alarmMarkDone = next()
         if (i < values.size) spreadOn = next()
         if (i < values.size) spreadWindow = next()
+        if (i < values.size) screenTime = next()
     }
 
     companion object {
@@ -366,6 +382,7 @@ internal fun HabitEditorContent(
             state.alarmEnabled = options.on
             state.alarmMission = options.mission
             state.alarmMarkDone = options.markDone
+            state.screenTime = app.tsuzuku.health.ScreenTime.isLinked(editorContext, existing.id)
             app.tsuzuku.notifications.SpreadReminders.window(editorContext, existing.id)?.let { w ->
                 state.spreadOn = true
                 state.spreadWindow = app.tsuzuku.notifications.SpreadWindow.Presets.indexOf(w).coerceAtLeast(0)
@@ -452,6 +469,10 @@ internal fun HabitEditorContent(
                                         TemplateLibraryCard { showLibrary = true }
                                         Spacer(Modifier.height(10.dp))
                                         WakeTemplateCard { state.applyWakeTemplate(editorContext.getString(R.string.wake_habit_name)) }
+                                        Spacer(Modifier.height(10.dp))
+                                        ScreenTimeTemplateCard {
+                                            state.applyScreenTimeTemplate(editorContext.getString(R.string.screen_time_habit_name), editorContext.getString(R.string.unit_minutes))
+                                        }
                                         Spacer(Modifier.height(12.dp))
                                     }
                                     SectionCard(Icons.Rounded.Edit, R.string.editor_section_what) { NameAndLookSection(state) }
@@ -647,6 +668,7 @@ private fun TrackingSection(state: HabitEditorState) {
             )
         }
     }
+    if (state.type != HabitType.Check) ScreenTimeField(state)
 }
 
 /** Seven round day buttons; filled when the habit is scheduled that day. */
@@ -952,6 +974,44 @@ private fun SpreadFields(state: HabitEditorState) {
                         label = { Text("%02d:00–%02d:00".format(w.startMinutes / 60, w.endMinutes / 60)) },
                     )
                 }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ScreenTimeTemplateCard(onUse: () -> Unit) {
+    Surface(onClick = onUse, shape = RoundedCornerShape(24.dp), color = MaterialTheme.colorScheme.primaryContainer, modifier = Modifier.fillMaxWidth()) {
+        Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Text("📱", fontSize = 30.sp)
+            Column(Modifier.padding(start = 14.dp).weight(1f)) {
+                Text(stringResource(R.string.screen_time_template_title), style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onPrimaryContainer)
+                Text(stringResource(R.string.screen_time_template_body), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f))
+            }
+        }
+    }
+}
+
+/** Fill this habit from the phone's screen time; asks for usage access the first time. */
+@Composable
+private fun ScreenTimeField(state: HabitEditorState) {
+    val context = LocalContext.current
+    var access by remember { mutableStateOf(app.tsuzuku.health.ScreenTime.hasAccess(context)) }
+    androidx.lifecycle.compose.LifecycleResumeEffect(Unit) {
+        access = app.tsuzuku.health.ScreenTime.hasAccess(context)
+        onPauseOrDispose { }
+    }
+    Column(Modifier.fillMaxWidth().padding(vertical = 6.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text(stringResource(R.string.screen_time_setting), style = MaterialTheme.typography.bodyLarge)
+                Text(stringResource(R.string.screen_time_setting_desc), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            Switch(checked = state.screenTime, onCheckedChange = { state.screenTime = it })
+        }
+        if (state.screenTime && !access) {
+            TextButton(onClick = { runCatching { context.startActivity(app.tsuzuku.health.ScreenTime.accessSettingsIntent()) } }) {
+                Text(stringResource(R.string.screen_time_grant))
             }
         }
     }

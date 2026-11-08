@@ -62,6 +62,8 @@ interface HabitRepository {
     suspend fun healthMetricsInUse(): Set<HealthMetric> = emptySet()
     /** Replaces today's health reading for every habit linked to [metric]; [valueFor] converts to the habit's unit. */
     suspend fun syncHealth(metric: HealthMetric, valueFor: (unit: String) -> Double) {}
+    /** Replaces today's automatic reading for one habit (e.g. screen time); hand entries stay. */
+    suspend fun setAutoValue(habitId: Long, value: Double) {}
     /** Marks today done with the habit's bad-day version (its minimum, or a plain completion). */
     suspend fun completeTinyVersion(id: Long)
     /** Minute of the day each habit was usually done on, over the last [days] days. */
@@ -471,6 +473,15 @@ class RoomHabitRepository(
                 val timestamp = now()
                 dao.insertEntry(HabitEntryEntity(habitId = habit.id, localDate = date, amount = value, status = HabitEntryEntity.STATUS_HEALTH, createdAt = timestamp, updatedAt = timestamp))
             }
+        }
+    }
+
+    override suspend fun setAutoValue(habitId: Long, value: Double) {
+        val date = today().toString()
+        dao.clearHealthEntries(habitId, date)
+        if (value > 0) {
+            val timestamp = now()
+            dao.insertEntry(HabitEntryEntity(habitId = habitId, localDate = date, amount = value, status = HabitEntryEntity.STATUS_HEALTH, createdAt = timestamp, updatedAt = timestamp))
         }
     }
 

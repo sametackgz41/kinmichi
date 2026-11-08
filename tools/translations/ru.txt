@@ -1083,3 +1083,32 @@ look_icon_path|Золотой путь
 look_icon_enso|Энсо
 look_icon_night|Ночь
 look_icon_note|После смены лаунчер может убрать значок в меню приложений.
+close|Закрыть
+year_intro|Твой год — привычка за привычкой.
+year_completions|выполнено привычек за %1$d разных дней
+year_days|%1$d дн.
+year_streak|твоя самая длинная серия: %1$s
+year_streak_plain|твоя самая длинная серия
+year_comebacks|раз ты вернулся на следующий день после пропуска — залатано золотом
+year_top_habit|самая частая привычка: %1$d раз
+year_best_month|лучший месяц: выполнено %1$d%%
+year_loved|привычка, которая радовала больше всего
+year_mood|среднее настроение за год
+year_thanks_big|Продолжай.
+year_thanks|%1$d идеальных дней в этом году. Следующий — завтра.
+year_share|Поделиться годом
+year_share_text|Мой %1$d год с Kinmichi: выполнено %2$d привычек.
+year_tap_hint|Нажми справа, чтобы продолжить
+year_entry_title|Итоги %1$d года
+year_entry_body|Серии, возвращения и любимая привычка — по карточкам
+year_card_title|Мой год с Kinmichi
+year_card_completions|выполнено
+year_card_active|активных дней
+year_card_streak|дн. лучшая серия
+year_card_comebacks|золотых возвращений
+screen_time_template_title|Ограничить экранное время
+screen_time_template_body|Меньше 2 часов в день — заполняется по использованию телефона
+screen_time_habit_name|Экранное время
+screen_time_setting|Заполнять по экранному времени
+screen_time_setting_desc|Минуты за сегодня, считаются на устройстве
+screen_time_grant|Разрешить доступ к статистике

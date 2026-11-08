@@ -1071,3 +1071,32 @@ look_icon_path|Goldener Pfad
 look_icon_enso|Ensō
 look_icon_night|Nacht
 look_icon_note|Nach dem Wechsel legt der Launcher das Symbol evtl. zurück in die App-Übersicht.
+close|Schließen
+year_intro|Dein Jahr, Gewohnheit für Gewohnheit.
+year_completions|Gewohnheiten erledigt, an %1$d Tagen
+year_days|%1$d Tage
+year_streak|deine längste Serie, mit %1$s
+year_streak_plain|deine längste Serie
+year_comebacks|Mal bist du am Tag nach einer Lücke zurückgekommen, in Gold geflickt
+year_top_habit|deine häufigste Gewohnheit, %1$d-mal
+year_best_month|dein bester Monat, %1$d%% erledigt
+year_loved|die Gewohnheit, die dir am meisten Freude machte
+year_mood|deine durchschnittliche Stimmung
+year_thanks_big|Mach weiter.
+year_thanks|%1$d perfekte Tage in diesem Jahr. Der nächste beginnt morgen.
+year_share|Mein Jahr teilen
+year_share_text|Mein %1$d mit Kinmichi: %2$d Gewohnheiten erledigt.
+year_tap_hint|Rechts tippen, um weiterzugehen
+year_entry_title|Dein Jahr %1$d im Rückblick
+year_entry_body|Serien, Comebacks und deine Lieblingsgewohnheit, Karte für Karte
+year_card_title|Mein Jahr mit Kinmichi
+year_card_completions|Gewohnheiten erledigt
+year_card_active|aktive Tage
+year_card_streak|Tage beste Serie
+year_card_comebacks|Comebacks in Gold
+screen_time_template_title|Bildschirmzeit begrenzen
+screen_time_template_body|Unter 2 Stunden am Tag, automatisch aus der Handynutzung
+screen_time_habit_name|Bildschirmzeit
+screen_time_setting|Aus der Bildschirmzeit füllen
+screen_time_setting_desc|Heutige Minuten am Handy, auf dem Gerät gezählt
+screen_time_grant|Nutzungszugriff erlauben

@@ -218,6 +218,11 @@ class HomeActivity : FragmentActivity() {
             System.currentTimeMillis() - backgroundedAt >= settings.lockDelayMinutes * 60_000L
         ) isUnlocked = false
         backgroundedAt = 0L
+        // Today's screen time for habits linked to it.
+        lifecycleScope.launch(kotlinx.coroutines.Dispatchers.IO) {
+            app.tsuzuku.health.ScreenTime.syncToday(this@HomeActivity, tsuzukuApplication.habitRepository)
+            app.tsuzuku.widget.TsuzukuWidgets.requestUpdate(this@HomeActivity)
+        }
         // Fresh Health Connect totals every time the app comes to the front.
         if (settings.healthSyncEnabled) {
             lifecycleScope.launch {

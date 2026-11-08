@@ -1071,3 +1071,32 @@ look_icon_path|Caminho dourado
 look_icon_enso|Ensō
 look_icon_night|Noite
 look_icon_note|Ao trocar, o launcher pode mover o ícone para a gaveta de apps.
+close|Fechar
+year_intro|Seu ano, um hábito de cada vez.
+year_completions|hábitos concluídos, em %1$d dias diferentes
+year_days|%1$d dias
+year_streak|sua maior sequência, com %1$s
+year_streak_plain|sua maior sequência
+year_comebacks|vezes você voltou no dia seguinte a uma falha, reparadas em ouro
+year_top_habit|seu hábito mais feito, %1$d vezes
+year_best_month|seu melhor mês, %1$d%% concluído
+year_loved|o hábito de que você mais gostou
+year_mood|seu humor médio este ano
+year_thanks_big|Continue.
+year_thanks|%1$d dias perfeitos este ano. O próximo começa amanhã.
+year_share|Compartilhar meu ano
+year_share_text|Meu %1$d com Kinmichi: %2$d hábitos concluídos.
+year_tap_hint|Toque à direita para seguir
+year_entry_title|Seu %1$d em resumo
+year_entry_body|Sequências, retornos e seu hábito favorito, cartão a cartão
+year_card_title|Meu ano com Kinmichi
+year_card_completions|hábitos concluídos
+year_card_active|dias ativos
+year_card_streak|dias de melhor sequência
+year_card_comebacks|retornos em ouro
+screen_time_template_title|Definir limite de tela
+screen_time_template_body|Menos de 2 horas por dia, preenchido pelo uso do celular
+screen_time_habit_name|Tempo de tela
+screen_time_setting|Preencher com o tempo de tela
+screen_time_setting_desc|Os minutos de hoje no celular, contados no aparelho
+screen_time_grant|Permitir acesso ao uso

@@ -1071,3 +1071,32 @@ look_icon_path|Sentiero d'oro
 look_icon_enso|Ensō
 look_icon_night|Notte
 look_icon_note|Dopo il cambio, il launcher potrebbe spostare l'icona nel cassetto app.
+close|Chiudi
+year_intro|Il tuo anno, un'abitudine alla volta.
+year_completions|abitudini fatte, in %1$d giorni diversi
+year_days|%1$d giorni
+year_streak|la tua serie più lunga, con %1$s
+year_streak_plain|la tua serie più lunga
+year_comebacks|volte sei tornato il giorno dopo una pausa, riparato in oro
+year_top_habit|la tua abitudine più fatta, %1$d volte
+year_best_month|il tuo mese migliore, %1$d%% fatto
+year_loved|l'abitudine che ti è piaciuta di più
+year_mood|il tuo umore medio quest'anno
+year_thanks_big|Continua.
+year_thanks|%1$d giorni perfetti quest'anno. Il prossimo inizia domani.
+year_share|Condividi il mio anno
+year_share_text|Il mio %1$d con Kinmichi: %2$d abitudini fatte.
+year_tap_hint|Tocca a destra per continuare
+year_entry_title|Il tuo %1$d in breve
+year_entry_body|Serie, ritorni e la tua abitudine preferita, carta per carta
+year_card_title|Il mio anno con Kinmichi
+year_card_completions|abitudini fatte
+year_card_active|giorni attivi
+year_card_streak|giorni di serie migliore
+year_card_comebacks|ritorni d'oro
+screen_time_template_title|Limita il tempo davanti allo schermo
+screen_time_template_body|Meno di 2 ore al giorno, compilato dall'uso del telefono
+screen_time_habit_name|Tempo davanti allo schermo
+screen_time_setting|Compila dal tempo davanti allo schermo
+screen_time_setting_desc|I minuti di oggi al telefono, contati sul dispositivo
+screen_time_grant|Consenti accesso all'utilizzo

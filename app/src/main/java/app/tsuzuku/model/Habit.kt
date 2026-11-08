@@ -184,6 +184,8 @@ data class HabitDraft(
     /** Spread-out reminders through the day (count habits); null start = off. */
     val spreadStartMinutes: Int? = null,
     val spreadEndMinutes: Int = 21 * 60,
+    /** Filled automatically from today's screen time. */
+    val screenTime: Boolean = false,
 )
 
 data class WeeklyReview(

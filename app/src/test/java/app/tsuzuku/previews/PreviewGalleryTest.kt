@@ -689,6 +689,48 @@ class PreviewGalleryTest {
         captureScreen(name)
     }
 
+    // Package E: year in review, card by card, plus its share card; screen-time template in the editor.
+    @Test fun yearReviewTr() {
+        setVariant("tr", false)
+        val data = app.tsuzuku.ui.screens.YearReviewData(
+            year = 2026, completions = 1248, activeDays = 286, perfectDays = 74, comebacks = 41,
+            bestStreak = 63, bestStreakHabit = "Kitap oku", topHabit = "Su iç", topHabitEmoji = "💧", topHabitCount = 301,
+            bestMonth = java.time.YearMonth.of(2026, 7), bestMonthRate = 0.91f, loved = "Meditasyon", lovedEmoji = "🧘", averageMood = 3.8f,
+        )
+        val page = mutableStateOf(0)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = true) {
+                androidx.compose.runtime.key(page.value) {
+                    app.tsuzuku.ui.screens.YearReviewScreen(data, onClose = {}, onShare = {}, startPage = page.value)
+                }
+            }
+        }
+        (0..7).forEach { i ->
+            page.value = i
+            compose.mainClock.advanceTimeBy(1500)
+            captureScreen("year_$i")
+        }
+        val ctx = ApplicationProvider.getApplicationContext<android.content.Context>()
+        save("year_share", app.tsuzuku.share.renderYearCard(ctx, data))
+    }
+
+    @Test fun screenTimeTemplateTr() {
+        setVariant("tr", false)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false) {
+                app.tsuzuku.ui.screens.HabitEditorContent(existing = null, onBack = {}, onSave = {}, layout = app.tsuzuku.ui.screens.EditorLayout.Steps)
+            }
+        }
+        compose.mainClock.advanceTimeBy(800)
+        compose.onNodeWithText("Ekran süresi sınırı koy").performScrollTo().performClick()
+        compose.mainClock.advanceTimeBy(800)
+        compose.onNodeWithText("Devam et").performClick()
+        compose.mainClock.advanceTimeBy(800)
+        compose.onNodeWithText("Ekran süresinden doldur").performScrollTo()
+        compose.mainClock.advanceTimeBy(500)
+        captureScreen("screentime_editor_tr")
+    }
+
     private fun renderAppearance(layout: app.tsuzuku.ui.screens.AppearanceLayout, dark: Boolean) {
         setVariant("tr", dark)
         compose.setContent {

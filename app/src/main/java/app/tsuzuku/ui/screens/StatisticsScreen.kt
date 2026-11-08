@@ -111,6 +111,7 @@ fun StatisticsScreen(
     moods: Map<LocalDate, Int> = emptyMap(),
     weekStartsMonday: Boolean = true,
     onShareWeek: (WeekSummary) -> Unit = {},
+    onOpenYearReview: (() -> Unit)? = null,
 ) {
     var currentTab by rememberSaveable(initialTab) { mutableStateOf(initialTab) }
     var reviewSubTab by rememberSaveable { mutableStateOf(ReviewSubTab.Weekly) }
@@ -162,6 +163,9 @@ fun StatisticsScreen(
                             availableTags.forEach { tag -> FilterChip(selected = selectedTag == tag, onClick = { selectedTag = tag }, label = { Text("#$tag") }) }
                         }
                     }
+                }
+                if (onOpenYearReview != null && yearReviewSeason(LocalDate.now())) {
+                    item { YearReviewEntryCard(reviewYear(LocalDate.now()), onOpenYearReview) }
                 }
                 item {
                     val week = remember(history) { weekSummary(history, LocalDate.now()) }
@@ -423,6 +427,10 @@ fun StatisticsScreen(
                     }
 
                     ReviewSubTab.Yearly -> {
+                        // The story-style review is always reachable here, not only in its season.
+                        if (onOpenYearReview != null) {
+                            item { YearReviewEntryCard(reviewYear(LocalDate.now()), onOpenYearReview) }
+                        }
                         yearlySummary?.let { summary ->
                             item {
                                 Row(
