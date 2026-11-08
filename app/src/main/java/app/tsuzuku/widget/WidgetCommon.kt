@@ -42,6 +42,23 @@ fun TsuzukuGlanceTheme(content: @Composable () -> Unit) {
 }
 
 /**
+ * A theme colour as a plain day/night pair. Glance's check boxes refuse resource-backed colours,
+ * which is what the wallpaper palette gives on Android 12+, so they get these instead.
+ */
+@Composable
+fun fixedThemeColor(pick: (androidx.compose.material3.ColorScheme) -> androidx.compose.ui.graphics.Color): androidx.glance.unit.ColorProvider {
+    val context = androidx.glance.LocalContext.current
+    val settings = (context.applicationContext as? TsuzukuApplication)?.settingsRepository?.settings?.value
+    val palette = settings?.palette ?: PalettePreference.Washi
+    val (light, dark) = if (palette == PalettePreference.Dynamic && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        androidx.compose.material3.dynamicLightColorScheme(context) to androidx.compose.material3.dynamicDarkColorScheme(context)
+    } else {
+        paletteScheme(palette, false) to paletteScheme(palette, true, settings?.pureBlack == true)
+    }
+    return androidx.glance.color.ColorProvider(day = pick(light), night = pick(dark))
+}
+
+/**
  * Widget card colour: warm paper (or indigo ink at night) for Washi, the launcher's own widget
  * background for the wallpaper palette.
  */

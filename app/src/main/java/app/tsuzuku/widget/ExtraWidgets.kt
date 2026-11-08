@@ -208,8 +208,8 @@ private fun QuickTile(item: TodayHabit, modifier: GlanceModifier) {
                 checked = done,
                 onCheckedChange = actionRunCallback<ToggleHabitAction>(params),
                 colors = androidx.glance.appwidget.CheckboxDefaults.colors(
-                    checkedColor = GlanceTheme.colors.onPrimary,
-                    uncheckedColor = GlanceTheme.colors.outline,
+                    checkedColor = fixedThemeColor { it.onPrimary },
+                    uncheckedColor = fixedThemeColor { it.outline },
                 ),
             )
         }

@@ -358,7 +358,7 @@ internal fun NativeHabitCheck(done: Boolean, accent: Int, params: androidx.glanc
             onCheckedChange = actionRunCallback<ToggleHabitAction>(params),
             colors = androidx.glance.appwidget.CheckboxDefaults.colors(
                 checkedColor = FixedColor(androidx.compose.ui.graphics.Color(accent)),
-                uncheckedColor = GlanceTheme.colors.outline,
+                uncheckedColor = fixedThemeColor { it.outline },
             ),
         )
     }
