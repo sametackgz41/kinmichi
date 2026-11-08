@@ -216,13 +216,6 @@ fun ProfileScreen(
             weekStartLabel(settings.weekStart),
             onClick = { activeDialog = DIALOG_WEEK_START },
         )
-        SwitchSettingRow(
-            Icons.Rounded.Summarize,
-            stringResource(R.string.daily_summary_setting),
-            stringResource(R.string.daily_summary_setting_description),
-            checked = settings.showDailySummary,
-            onCheckedChange = onSetShowDailySummary,
-        )
             WidgetOpacityRow(settings.widgetOpacity, onSetWidgetOpacity)
         HealthConnectRow(onOpenHealth)
         ValueSettingRow(
@@ -375,14 +368,12 @@ fun ProfileScreen(
     var page by rememberSaveable { mutableStateOf<SettingsPage?>(null) }
     androidx.activity.compose.BackHandler(enabled = page != null) { page = null }
     val categories = listOf(
-        SettingsCategory(Icons.Rounded.Sync, stringResource(R.string.account_title), accountStatus, onOpenCloudAccount),
         SettingsCategory(Icons.Rounded.Palette, stringResource(R.string.appearance_theme_palette), "${themeLabel(settings.theme)} · ${paletteName(settings.palette)}", onOpenAppearance),
         SettingsCategory(Icons.Rounded.Language, stringResource(R.string.language_label), languageLabel(settings.language), onOpenLanguage),
         SettingsCategory(Icons.Rounded.Widgets, stringResource(R.string.widgets_sheet_title), null, onOpenWidgets),
         SettingsCategory(Icons.Rounded.Notifications, stringResource(R.string.notifications_label), null) { page = SettingsPage.Notifications },
         SettingsCategory(Icons.Rounded.Tune, stringResource(R.string.settings_general), weekStartLabel(settings.weekStart)) { page = SettingsPage.General },
         SettingsCategory(Icons.Rounded.Insights, stringResource(R.string.planning_and_review), null, onOpenPlanning),
-        SettingsCategory(Icons.Rounded.Star, stringResource(R.string.settings_records_short), null, onOpenRecords),
         SettingsCategory(Icons.Rounded.Lock, stringResource(R.string.data_privacy_label), stringResource(if (settings.appLockEnabled) R.string.app_lock_status_on else R.string.app_lock_status_off)) { page = SettingsPage.Privacy },
         SettingsCategory(Icons.Rounded.Info, stringResource(R.string.settings_about), stringResource(R.string.settings_version, app.tsuzuku.BuildConfig.VERSION_NAME)) { page = SettingsPage.About },
     )
@@ -445,14 +436,7 @@ fun ProfileScreen(
         item { SectionLabel(stringResource(R.string.account_label)) }
         item {
             SettingsCard {
-                ValueSettingRow(
-                    icon = Icons.Rounded.Sync,
-                    title = stringResource(R.string.account_title),
-                    value = accountStatus,
-                    onClick = onOpenCloudAccount,
-                )
                 ValueSettingRow(Icons.Rounded.Insights, stringResource(R.string.planning_and_review), stringResource(R.string.planning_and_review_description), onClick = onOpenPlanning)
-                ValueSettingRow(Icons.Rounded.Star, stringResource(R.string.personal_records_milestones), stringResource(R.string.personal_records_desc), onClick = onOpenRecords)
             }
         }
         item { SectionLabel(stringResource(R.string.appearance_label)) }
@@ -612,9 +596,9 @@ private fun SettingsHomeTiles(categories: List<SettingsCategory>, home: Settings
         }
         SettingsHome.Groups -> Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             val groups = listOf(
-                R.string.account_label to listOf(0, 4, 6, 7),
-                R.string.appearance_label to listOf(1, 2, 3, 5),
-                R.string.settings_group_more to listOf(8, 9),
+                R.string.habits to listOf(3, 5),
+                R.string.appearance_label to listOf(0, 1, 2, 4),
+                R.string.settings_group_more to listOf(6, 7),
             )
             groups.forEach { (label, indices) ->
                 SectionLabel(stringResource(label))

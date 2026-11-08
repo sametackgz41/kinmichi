@@ -184,13 +184,10 @@ internal fun ProfilePage(
         item {
             Surface(shape = RoundedCornerShape(24.dp), color = MaterialTheme.colorScheme.surfaceContainerLow) {
                 Column {
-                    ProfileRow(stringResource(R.string.profile_name), shownName) { editName = true }
+                    // The name is also how Today greets you: one row shows both.
+                    ProfileRow(stringResource(R.string.profile_name), stringResource(R.string.profile_greeting_preview, shownName)) { editName = true }
                     HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
                     ProfileRow(stringResource(R.string.profile_icon), ProfilePrefs.emoji.ifBlank { stringResource(R.string.profile_icon_letter) }) { pickEmoji = true }
-                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
-                    ProfileRow(stringResource(R.string.profile_greeting), stringResource(R.string.profile_greeting_preview, shownName)) { editName = true }
-                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
-                    ProfileRow(stringResource(R.string.app_lock), lockSummary, onOpenSecurity)
                     HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
                     ProfileRow(stringResource(R.string.account_title), accountSummary, onOpenAccount)
                 }

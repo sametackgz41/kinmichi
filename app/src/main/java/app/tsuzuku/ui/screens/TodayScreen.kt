@@ -970,21 +970,9 @@ private fun HabitsToolbar(
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.weight(1f).padding(start = 4.dp),
         )
+        // Grouping, compact rows and reordering are on the "Edit the Today screen" sheet.
         if (reorderMode) {
             TextButton(onClick = onToggleReorder) { Text(stringResource(R.string.today_reorder_done)) }
-        } else {
-            androidx.compose.material3.IconToggleButton(checked = groupByTime, onCheckedChange = onGroupByTime) {
-                Icon(androidx.compose.material.icons.Icons.Rounded.Schedule, contentDescription = stringResource(R.string.today_group_time),
-                    tint = if (groupByTime) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant)
-            }
-            androidx.compose.material3.IconToggleButton(checked = compact, onCheckedChange = onCompact) {
-                Icon(androidx.compose.material.icons.Icons.Rounded.ViewAgenda, contentDescription = stringResource(R.string.today_compact),
-                    tint = if (compact) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant)
-            }
-            IconButton(onClick = onToggleReorder) {
-                Icon(androidx.compose.material.icons.Icons.Rounded.SwapVert, contentDescription = stringResource(R.string.today_reorder),
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant)
-            }
         }
     }
 }

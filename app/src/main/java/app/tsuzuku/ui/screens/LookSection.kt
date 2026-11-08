@@ -43,7 +43,6 @@ internal fun LookSection() {
         Text(stringResource(R.string.look_more_title), style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(start = 4.dp, top = 8.dp))
         Column(Modifier.fillMaxWidth().clip(RoundedCornerShape(24.dp)).background(MaterialTheme.colorScheme.surfaceContainerLow).padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp)) {
-            SwitchLine(stringResource(R.string.look_seasonal), stringResource(R.string.look_seasonal_desc), LookPrefs.seasonal) { LookPrefs.setSeasonal(context, it) }
             Column {
                 Text(stringResource(R.string.look_text_size), style = MaterialTheme.typography.bodyLarge)
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(top = 6.dp)) {

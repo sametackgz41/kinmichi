@@ -381,6 +381,7 @@ class PreviewGalleryTest {
                             onSetShowDailySummary = {}, onSetProtectScreen = {}, onOpenCloudAccount = {},
                             onOpenPlanning = {}, onOpenSecurity = {}, onOpenBackup = {}, onOpenDiagnostics = {},
                             onOpenCategories = {}, layout = layout, home = home,
+                            onOpenProfile = {}, profileStats = app.tsuzuku.ui.screens.ProfileStats(84, 12, 47),
                         )
                     }
                 }
