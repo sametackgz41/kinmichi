@@ -58,7 +58,7 @@ import kotlin.random.Random
 
 /** Shared backdrop: a soft wash of the theme's colours, dark enough for a bedroom at night. */
 @Composable
-private fun AlarmBackdrop(content: @Composable () -> Unit) {
+internal fun AlarmBackdrop(content: @Composable () -> Unit) {
     val scheme = MaterialTheme.colorScheme
     Box(
         Modifier.fillMaxSize().background(
@@ -135,7 +135,7 @@ internal fun AlarmRingingPage(
 
 /** Header shared by the tasks: what to do and how far along. */
 @Composable
-private fun MissionHeader(title: String, done: Int, total: Int) {
+internal fun MissionHeader(title: String, done: Int, total: Int) {
     Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
         Text(stringResource(R.string.alarm_step_of, done + 1, total), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
         Spacer(Modifier.height(10.dp))
@@ -428,15 +428,18 @@ internal fun MorningPage(
 
 // ---- One verification, several kinds of task --------------------------------------------------
 
-internal enum class VerificationTask { Math, Memory, Hunt }
-
-/** Two of each task (sum, memory round, 1-9 number hunt), shuffled so the same kind never comes twice in a row. */
+/**
+ * The chosen tasks, each repeated by difficulty (easy once, normal twice, hard three times) and
+ * made harder with it, shuffled so the same kind never comes twice in a row.
+ */
 @Composable
 internal fun VerificationFlow(
     onProgress: () -> Unit,
     onSolved: () -> Unit,
+    tasks: List<AlarmTask> = AlarmTask.Default,
+    level: Int = 1,
     seed: Long = System.nanoTime(),
-    order: List<VerificationTask> = remember { verificationOrder(Random(seed)) },
+    order: List<AlarmTask> = remember { verificationOrder(Random(seed), tasks.ifEmpty { AlarmTask.Default }, level + 1) },
     startAt: Int = 0,
 ) {
     var index by remember { mutableIntStateOf(startAt) }
@@ -445,6 +448,7 @@ internal fun VerificationFlow(
         if (index + 1 >= order.size) onSolved() else index++
     }
     val step = index to order.size
+    val l = level.coerceIn(0, 2)
     androidx.compose.animation.AnimatedContent(
         targetState = index,
         transitionSpec = {
@@ -455,18 +459,26 @@ internal fun VerificationFlow(
     ) { i ->
         val taskSeed = seed + i * 7919
         when (order[i]) {
-            VerificationTask.Math -> MathMission(onProgress, advance, seed = taskSeed, count = 1, step = step)
-            VerificationTask.Memory -> MemoryMission(onProgress, advance, seed = taskSeed, lengths = listOf(4), step = step)
-            VerificationTask.Hunt -> PuzzleMission(onProgress, advance, seed = taskSeed, size = 3, step = step)
+            AlarmTask.Math -> MathMission(onProgress, advance, seed = taskSeed, count = 1, step = step)
+            AlarmTask.Memory -> MemoryMission(onProgress, advance, seed = taskSeed, lengths = listOf(3 + l), step = step)
+            AlarmTask.Hunt -> PuzzleMission(onProgress, advance, seed = taskSeed, size = if (l == 2) 4 else 3, step = step)
+            AlarmTask.Shake -> ShakeMission(onProgress, advance, target = listOf(15, 30, 50)[l], step = step)
+            AlarmTask.Steps -> StepMission(onProgress, advance, target = listOf(10, 20, 40)[l], step = step)
+            AlarmTask.Type -> TypeMission(onProgress, advance, seed = taskSeed, step = step)
+            AlarmTask.Stroop -> StroopMission(onProgress, advance, rounds = listOf(3, 5, 8)[l], seed = taskSeed, step = step)
+            AlarmTask.Anagram -> AnagramMission(onProgress, advance, seed = taskSeed, step = step)
+            AlarmTask.Pattern -> PatternMission(onProgress, advance, length = 4 + l, seed = taskSeed, step = step)
+            AlarmTask.Catch -> CatchMission(onProgress, advance, target = listOf(8, 12, 18)[l], seed = taskSeed, step = step)
         }
     }
 }
 
-internal fun verificationOrder(random: Random, each: Int = 2): List<VerificationTask> {
-    val pool = VerificationTask.entries.flatMap { task -> List(each) { task } }
+internal fun verificationOrder(random: Random, tasks: List<AlarmTask> = AlarmTask.Default, each: Int = 2): List<AlarmTask> {
+    val pool = tasks.flatMap { task -> List(each) { task } }
+    if (tasks.size < 2) return pool
     repeat(50) {
         val order = pool.shuffled(random)
         if (order.zipWithNext().none { (a, b) -> a == b }) return order
     }
-    return List(each) { VerificationTask.entries }.flatten()
+    return List(each) { tasks }.flatten()
 }

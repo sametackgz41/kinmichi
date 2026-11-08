@@ -1129,3 +1129,38 @@ widget_alarm_today|Сегодня
 widget_alarm_tomorrow|Завтра
 widget_alarm_off|Выключен
 widget_alarm_on|Включён
+alarm_shake_title|Потряси телефон
+alarm_shake_hint|Считаются только сильные встряхивания
+alarm_steps_title|Встань и пройдись
+alarm_steps_hint|Иди с телефоном в руке
+alarm_type_title|Напиши это точно
+alarm_type_hint|Регистр не важен
+alarm_stroop_title|Цветовая ловушка
+alarm_stroop_hint|Нажми на цвет текста, а не на слово
+alarm_stroop_wrong|Это слово. Смотри на цвет.
+alarm_anagram_title|Собери слово
+alarm_anagram_hint|Нажимай буквы по порядку
+alarm_pattern_title|Повтори узор
+alarm_pattern_hint|Начни с отмеченной точки и проведи линию одним движением
+alarm_pattern_wrong|Почти, попробуй ещё
+alarm_catch_title|Поймай
+alarm_catch_hint|Нажми на искру, пока она не прыгнула
+alarm_type_label|Будильник
+alarm_tasks_title|Задания для пробуждения
+alarm_tasks_count|Выбрано %1$d из 3
+alarm_task_shake|Трясти
+alarm_task_steps|Шаги
+alarm_task_type|Текст
+alarm_task_stroop|Цвета
+alarm_task_anagram|Слово
+alarm_task_pattern|Узор
+alarm_task_catch|Поймать
+alarm_level_title|Сложность
+alarm_level_easy|Легко
+alarm_level_normal|Средне
+alarm_level_hard|Сложно
+alarm_level_summary|%1$d шагов, чтобы выключить; на сложном уровне задания тоже труднее
+alarm_ramp_setting|Нарастающий звук
+alarm_ramp_desc|Начинается тихо и за 30 секунд доходит до максимума
+alarm_snoozes_title|Сколько можно отложить
+alarm_snoozes_none|Нет

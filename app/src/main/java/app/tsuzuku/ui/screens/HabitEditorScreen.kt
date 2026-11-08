@@ -1,5 +1,7 @@
 package app.tsuzuku.ui.screens
 
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
@@ -158,6 +160,29 @@ internal class HabitEditorState(existing: Habit?) {
     var spreadOn by mutableStateOf(false)
     var spreadWindow by mutableStateOf(1)
     var screenTime by mutableStateOf(false)
+    var alarmType by mutableStateOf(false)
+    var alarmTasks by mutableStateOf(app.tsuzuku.notifications.AlarmTask.Default.joinToString(",") { it.name })
+    var alarmLevel by mutableStateOf(1)
+    var alarmRamp by mutableStateOf(true)
+    var alarmSnoozes by mutableStateOf(2)
+
+    /** Switches to the Alarm type: a check habit that rings, needs the tasks, and ticks itself off. */
+    fun chooseAlarmType() {
+        alarmType = true
+        type = HabitType.Check
+        targetText = "1"; stepText = "1"; unit = ""
+        reminderEnabled = true
+        alarmEnabled = true
+        alarmMarkDone = true
+        alarmMission = app.tsuzuku.notifications.AlarmMission.Mixed
+        if (reminderTime == "09:00") reminderTime = "07:00"
+    }
+
+    fun toggleAlarmTask(task: app.tsuzuku.notifications.AlarmTask) {
+        val list = app.tsuzuku.notifications.AlarmTask.parse(alarmTasks).toMutableList()
+        if (task in list) { if (list.size > 1) list.remove(task) } else if (list.size < 3) list.add(task)
+        alarmTasks = list.joinToString(",") { it.name }
+    }
 
     /** A daily screen-time limit: a quit habit in minutes, filled from the phone's usage. */
     fun applyScreenTimeTemplate(name: String, minutesUnit: String) {
@@ -201,6 +226,7 @@ internal class HabitEditorState(existing: Habit?) {
         alarmEnabled = true
         alarmMission = app.tsuzuku.notifications.AlarmMission.Mixed
         alarmMarkDone = true
+        alarmType = true
     }
     private val generalNote = existing?.generalNote.orEmpty()
 
@@ -273,6 +299,11 @@ internal class HabitEditorState(existing: Habit?) {
             spreadStartMinutes = if (spreadOn && type == HabitType.Count) app.tsuzuku.notifications.SpreadWindow.Presets[spreadWindow].startMinutes else null,
             spreadEndMinutes = app.tsuzuku.notifications.SpreadWindow.Presets[spreadWindow].endMinutes,
             screenTime = screenTime && type != HabitType.Check,
+            alarmType = alarmType,
+            alarmTasks = alarmTasks,
+            alarmLevel = alarmLevel,
+            alarmRamp = alarmRamp,
+            alarmSnoozes = alarmSnoozes,
         )
     }
 
@@ -283,6 +314,7 @@ internal class HabitEditorState(existing: Habit?) {
         selectedDays, goalPeriod.name, periodTargetText, routineName, prerequisiteId,
         reminderEnabled, reminderTime, repeatEnabled, repeatMinutes, tinyVersion, healthMetric.name, alarmEnabled,
         alarmMission.name, alarmMarkDone, spreadOn, spreadWindow, screenTime,
+        alarmType, alarmTasks, alarmLevel, alarmRamp, alarmSnoozes,
     )
 
     private fun restore(values: List<Any?>) {
@@ -309,6 +341,11 @@ internal class HabitEditorState(existing: Habit?) {
         if (i < values.size) spreadOn = next()
         if (i < values.size) spreadWindow = next()
         if (i < values.size) screenTime = next()
+        if (i < values.size) alarmType = next()
+        if (i < values.size) alarmTasks = next()
+        if (i < values.size) alarmLevel = next()
+        if (i < values.size) alarmRamp = next()
+        if (i < values.size) alarmSnoozes = next()
     }
 
     companion object {
@@ -383,6 +420,11 @@ internal fun HabitEditorContent(
             state.alarmMission = options.mission
             state.alarmMarkDone = options.markDone
             state.screenTime = app.tsuzuku.health.ScreenTime.isLinked(editorContext, existing.id)
+            state.alarmType = options.isAlarmType
+            state.alarmTasks = options.tasks.joinToString(",") { it.name }
+            state.alarmLevel = options.level
+            state.alarmRamp = options.rampUp
+            state.alarmSnoozes = options.snoozes
             app.tsuzuku.notifications.SpreadReminders.window(editorContext, existing.id)?.let { w ->
                 state.spreadOn = true
                 state.spreadWindow = app.tsuzuku.notifications.SpreadWindow.Presets.indexOf(w).coerceAtLeast(0)
@@ -634,15 +676,26 @@ private fun NameAndLookSection(state: HabitEditorState) {
 private fun TrackingSection(state: HabitEditorState) {
     val context = LocalContext.current
     SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
+        val count = HabitType.entries.size + 1
         HabitType.entries.forEachIndexed { index, option ->
             SegmentedButton(
-                selected = state.type == option,
-                onClick = { state.changeType(option, context.getString(R.string.unit_times), context.getString(R.string.unit_minutes)) },
-                shape = SegmentedButtonDefaults.itemShape(index, HabitType.entries.size),
+                selected = !state.alarmType && state.type == option,
+                onClick = {
+                    if (state.alarmType) { state.alarmType = false; state.alarmEnabled = false }
+                    state.changeType(option, context.getString(R.string.unit_times), context.getString(R.string.unit_minutes))
+                },
+                shape = SegmentedButtonDefaults.itemShape(index, count),
                 label = { Text(stringResource(typeLabel(option)), maxLines = 1) },
             )
         }
+        SegmentedButton(
+            selected = state.alarmType,
+            onClick = { state.chooseAlarmType() },
+            shape = SegmentedButtonDefaults.itemShape(count - 1, count),
+            label = { Text(stringResource(R.string.alarm_type_label), maxLines = 1) },
+        )
     }
+    AnimatedVisibility(visible = state.alarmType) { AlarmTypeSection(state) }
     AnimatedVisibility(
         visible = state.type != HabitType.Check,
         enter = fadeIn(tween(200)) + expandVertically(tween(240), expandFrom = Alignment.Top),
@@ -756,14 +809,14 @@ private fun ReminderSection(state: HabitEditorState) {
                 onChange = { state.reminderTime = "%02d:%02d".format(it / 60, it % 60) },
                 modifier = Modifier.padding(top = 12.dp),
             )
-            Row(Modifier.fillMaxWidth().padding(top = 12.dp), verticalAlignment = Alignment.CenterVertically) {
+            if (!state.alarmType) Row(Modifier.fillMaxWidth().padding(top = 12.dp), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
                     Text(stringResource(R.string.alarm_setting), style = MaterialTheme.typography.bodyLarge)
                     Text(stringResource(R.string.alarm_setting_description), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 Switch(checked = state.alarmEnabled, onCheckedChange = { state.alarmEnabled = it })
             }
-            AnimatedVisibility(visible = state.alarmEnabled) {
+            AnimatedVisibility(visible = state.alarmEnabled && !state.alarmType) {
                 AlarmOptionsFields(state)
             }
         }
@@ -974,6 +1027,81 @@ private fun SpreadFields(state: HabitEditorState) {
                         label = { Text(app.tsuzuku.ui.formatClock(w.startMinutes) + "–" + app.tsuzuku.ui.formatClock(w.endMinutes)) },
                     )
                 }
+            }
+        }
+    }
+}
+
+/** The Alarm type's own settings: up to three wake-up tasks, difficulty, rising sound, snoozes. */
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+internal fun AlarmTypeSection(state: HabitEditorState) {
+    val chosen = app.tsuzuku.notifications.AlarmTask.parse(state.alarmTasks)
+    Column(Modifier.fillMaxWidth().padding(top = 16.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(stringResource(R.string.alarm_tasks_title), style = MaterialTheme.typography.titleSmall, modifier = Modifier.weight(1f))
+            Text(stringResource(R.string.alarm_tasks_count, chosen.size), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+        }
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            app.tsuzuku.notifications.AlarmTask.entries.chunked(5).forEach { row ->
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    row.forEach { task ->
+                        val on = task in chosen
+                        val full = !on && chosen.size >= 3
+                        Surface(
+                            onClick = { state.toggleAlarmTask(task) },
+                            enabled = !full,
+                            shape = RoundedCornerShape(16.dp),
+                            color = if (on) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceContainerHigh,
+                            border = if (on) androidx.compose.foundation.BorderStroke(2.dp, MaterialTheme.colorScheme.primary) else null,
+                            modifier = Modifier.weight(1f).alpha(if (full) 0.45f else 1f),
+                        ) {
+                            Column(Modifier.padding(vertical = 10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                                Text(task.emoji, fontSize = 22.sp)
+                                Text(
+                                    stringResource(task.label),
+                                    style = MaterialTheme.typography.labelSmall,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                    modifier = Modifier.padding(top = 4.dp, start = 2.dp, end = 2.dp),
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        Text(stringResource(R.string.alarm_level_title), style = MaterialTheme.typography.titleSmall)
+        SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
+            listOf(R.string.alarm_level_easy, R.string.alarm_level_normal, R.string.alarm_level_hard).forEachIndexed { i, label ->
+                SegmentedButton(
+                    selected = state.alarmLevel == i,
+                    onClick = { state.alarmLevel = i },
+                    shape = SegmentedButtonDefaults.itemShape(i, 3),
+                    label = { Text(stringResource(label)) },
+                )
+            }
+        }
+        Text(
+            stringResource(R.string.alarm_level_summary, chosen.size * (state.alarmLevel + 1)),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text(stringResource(R.string.alarm_ramp_setting), style = MaterialTheme.typography.bodyLarge)
+                Text(stringResource(R.string.alarm_ramp_desc), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            Switch(checked = state.alarmRamp, onCheckedChange = { state.alarmRamp = it })
+        }
+        Text(stringResource(R.string.alarm_snoozes_title), style = MaterialTheme.typography.titleSmall)
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            (0..3).forEach { n ->
+                FilterChip(
+                    selected = state.alarmSnoozes == n,
+                    onClick = { state.alarmSnoozes = n },
+                    label = { Text(if (n == 0) stringResource(R.string.alarm_snoozes_none) else n.toString()) },
+                )
             }
         }
     }

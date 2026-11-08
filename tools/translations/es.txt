@@ -1117,3 +1117,38 @@ widget_alarm_today|Hoy
 widget_alarm_tomorrow|Mañana
 widget_alarm_off|Desactivada
 widget_alarm_on|Activada
+alarm_shake_title|Agita el teléfono
+alarm_shake_hint|Cuentan las sacudidas firmes, no las suaves
+alarm_steps_title|Levántate y camina
+alarm_steps_hint|Camina con el teléfono en la mano
+alarm_type_title|Escribe esto tal cual
+alarm_type_hint|Las mayúsculas no importan
+alarm_stroop_title|Trampa de colores
+alarm_stroop_hint|Toca el color de la tinta, no la palabra
+alarm_stroop_wrong|Esa es la palabra. Mira el color.
+alarm_anagram_title|Ordena la palabra
+alarm_anagram_hint|Toca las letras en orden
+alarm_pattern_title|Traza el patrón
+alarm_pattern_hint|Empieza en el punto marcado y sigue la línea de un trazo
+alarm_pattern_wrong|Casi, inténtalo otra vez
+alarm_catch_title|Atrápalo
+alarm_catch_hint|Toca la chispa antes de que salte
+alarm_type_label|Alarma
+alarm_tasks_title|Tareas para despertar
+alarm_tasks_count|%1$d de 3 elegidas
+alarm_task_shake|Agitar
+alarm_task_steps|Caminar
+alarm_task_type|Escribir
+alarm_task_stroop|Colores
+alarm_task_anagram|Palabra
+alarm_task_pattern|Patrón
+alarm_task_catch|Atrapar
+alarm_level_title|Dificultad
+alarm_level_easy|Fácil
+alarm_level_normal|Normal
+alarm_level_hard|Difícil
+alarm_level_summary|%1$d pasos para apagarla; más dificultad también endurece cada tarea
+alarm_ramp_setting|Sonido creciente
+alarm_ramp_desc|Empieza bajo y llega al máximo en 30 segundos
+alarm_snoozes_title|Aplazamientos permitidos
+alarm_snoozes_none|Ninguno

@@ -1117,3 +1117,38 @@ widget_alarm_today|Hoje
 widget_alarm_tomorrow|Amanhã
 widget_alarm_off|Desligado
 widget_alarm_on|Ligado
+alarm_shake_title|Balance o celular
+alarm_shake_hint|Só contam balançadas firmes
+alarm_steps_title|Levante e caminhe
+alarm_steps_hint|Caminhe com o celular na mão
+alarm_type_title|Digite exatamente isto
+alarm_type_hint|Maiúsculas não importam
+alarm_stroop_title|Armadilha de cores
+alarm_stroop_hint|Toque na cor da tinta, não na palavra
+alarm_stroop_wrong|Essa é a palavra. Olhe a cor.
+alarm_anagram_title|Desembaralhe a palavra
+alarm_anagram_hint|Toque as letras na ordem
+alarm_pattern_title|Desenhe o padrão
+alarm_pattern_hint|Comece no ponto marcado e siga a linha de uma vez
+alarm_pattern_wrong|Quase, tente de novo
+alarm_catch_title|Pegue
+alarm_catch_hint|Toque a faísca antes que ela pule
+alarm_type_label|Alarme
+alarm_tasks_title|Tarefas para acordar
+alarm_tasks_count|%1$d de 3 escolhidas
+alarm_task_shake|Balançar
+alarm_task_steps|Caminhar
+alarm_task_type|Digitar
+alarm_task_stroop|Cores
+alarm_task_anagram|Palavra
+alarm_task_pattern|Padrão
+alarm_task_catch|Pegar
+alarm_level_title|Dificuldade
+alarm_level_easy|Fácil
+alarm_level_normal|Normal
+alarm_level_hard|Difícil
+alarm_level_summary|%1$d passos para desligar; níveis maiores também dificultam cada tarefa
+alarm_ramp_setting|Som crescente
+alarm_ramp_desc|Começa baixo e chega ao máximo em 30 segundos
+alarm_snoozes_title|Adiamentos permitidos
+alarm_snoozes_none|Nenhum

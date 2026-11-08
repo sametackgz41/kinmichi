@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Content for the alarm's wake-up tasks: words to unscramble, sentences to type, colour names. -->
+<resources>
+    <string-array name="alarm_words">
+        <item>УТРО</item>
+        <item>СОЛНЦЕ</item>
+        <item>КОФЕ</item>
+        <item>МОРЕ</item>
+        <item>ЦВЕТОК</item>
+        <item>НЕБО</item>
+        <item>УЛЫБКА</item>
+        <item>ЗВЕЗДА</item>
+        <item>ОБЛАКО</item>
+        <item>РЕКА</item>
+    </string-array>
+    <string-array name="alarm_phrases">
+        <item>Сегодня будет хороший день</item>
+        <item>Я проснулся и готов</item>
+        <item>Маленькие шаги открывают долгий путь</item>
+        <item>Сначала вода, потом кофе</item>
+        <item>Встать с кровати — первая победа</item>
+    </string-array>
+    <string-array name="alarm_colors">
+        <item>Красный</item>
+        <item>Синий</item>
+        <item>Зелёный</item>
+        <item>Жёлтый</item>
+    </string-array>
+</resources>

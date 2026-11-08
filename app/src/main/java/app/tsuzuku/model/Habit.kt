@@ -186,6 +186,12 @@ data class HabitDraft(
     val spreadEndMinutes: Int = 21 * 60,
     /** Filled automatically from today's screen time. */
     val screenTime: Boolean = false,
+    /** Made as the "Alarm" type: these tasks (names of AlarmTask), level 0-2, rising sound, snoozes. */
+    val alarmType: Boolean = false,
+    val alarmTasks: String = "",
+    val alarmLevel: Int = 1,
+    val alarmRamp: Boolean = true,
+    val alarmSnoozes: Int = 2,
 )
 
 data class WeeklyReview(

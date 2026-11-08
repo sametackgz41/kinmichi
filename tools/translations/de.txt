@@ -1117,3 +1117,38 @@ widget_alarm_today|Heute
 widget_alarm_tomorrow|Morgen
 widget_alarm_off|Aus
 widget_alarm_on|An
+alarm_shake_title|Schüttle dein Handy
+alarm_shake_hint|Nur kräftiges Schütteln zählt
+alarm_steps_title|Steh auf und geh
+alarm_steps_hint|Geh mit dem Handy in der Hand
+alarm_type_title|Tippe das genau ab
+alarm_type_hint|Groß- und Kleinschreibung egal
+alarm_stroop_title|Farbfalle
+alarm_stroop_hint|Tippe die Farbe der Schrift, nicht das Wort
+alarm_stroop_wrong|Das war das Wort. Achte auf die Farbe.
+alarm_anagram_title|Finde das Wort
+alarm_anagram_hint|Tippe die Buchstaben der Reihe nach
+alarm_pattern_title|Zeichne das Muster nach
+alarm_pattern_hint|Beginne am markierten Punkt und folge der Linie in einem Zug
+alarm_pattern_wrong|Nicht ganz, versuch es noch mal
+alarm_catch_title|Fang es
+alarm_catch_hint|Tippe den Funken, bevor er wegspringt
+alarm_type_label|Wecker
+alarm_tasks_title|Aufwach-Aufgaben
+alarm_tasks_count|%1$d von 3 gewählt
+alarm_task_shake|Schütteln
+alarm_task_steps|Gehen
+alarm_task_type|Tippen
+alarm_task_stroop|Farben
+alarm_task_anagram|Wort
+alarm_task_pattern|Muster
+alarm_task_catch|Fangen
+alarm_level_title|Schwierigkeit
+alarm_level_easy|Leicht
+alarm_level_normal|Mittel
+alarm_level_hard|Schwer
+alarm_level_summary|%1$d Schritte zum Ausschalten; höhere Stufen machen jede Aufgabe schwerer
+alarm_ramp_setting|Ansteigender Ton
+alarm_ramp_desc|Beginnt leise und ist nach 30 Sekunden voll laut
+alarm_snoozes_title|Erlaubtes Schlummern
+alarm_snoozes_none|Keins

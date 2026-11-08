@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Content for the alarm's wake-up tasks: words to unscramble, sentences to type, colour names. -->
+<resources>
+    <string-array name="alarm_words">
+        <item>KAFFEE</item>
+        <item>SONNE</item>
+        <item>GARTEN</item>
+        <item>MORGEN</item>
+        <item>BLUME</item>
+        <item>HIMMEL</item>
+        <item>WOLKE</item>
+        <item>LACHEN</item>
+        <item>APFEL</item>
+        <item>MEER</item>
+    </string-array>
+    <string-array name="alarm_phrases">
+        <item>Heute wird ein guter Tag</item>
+        <item>Ich bin wach und bereit</item>
+        <item>Kleine Schritte öffnen lange Wege</item>
+        <item>Erst Wasser, dann Kaffee</item>
+        <item>Aufstehen ist der erste Sieg</item>
+    </string-array>
+    <string-array name="alarm_colors">
+        <item>Rot</item>
+        <item>Blau</item>
+        <item>Grün</item>
+        <item>Gelb</item>
+    </string-array>
+</resources>

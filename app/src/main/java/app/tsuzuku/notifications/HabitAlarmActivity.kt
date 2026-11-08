@@ -115,7 +115,7 @@ class HabitAlarmActivity : ComponentActivity() {
                         if (options.mission == AlarmMission.None) {
                             androidx.compose.runtime.LaunchedEffect(Unit) { wakeUp() }
                         } else {
-                            VerificationFlow(onProgress = progress, onSolved = ::wakeUp)
+                            VerificationFlow(onProgress = progress, onSolved = ::wakeUp, tasks = options.tasks, level = options.level)
                         }
                     }
                     Stage.Morning -> MorningPage(

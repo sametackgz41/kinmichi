@@ -31,12 +31,22 @@ class AlarmRingService : Service() {
     private val handler = Handler(Looper.getMainLooper())
     private val audio by lazy { getSystemService(AudioManager::class.java) }
     private var hushedUntil = 0L
+    private var startedAt = 0L
+    private var rampUp = false
+
+    /** How loud it should be now: full at once, or rising from a quarter over 30 seconds. */
+    private fun targetVolume(): Int {
+        val max = audio.getStreamMaxVolume(AudioManager.STREAM_ALARM)
+        if (!rampUp) return max
+        val t = ((System.currentTimeMillis() - startedAt) / 30_000f).coerceIn(0f, 1f)
+        return (max * (0.25f + 0.75f * t)).toInt().coerceIn(1, max)
+    }
 
     /** Keeps the volume up and brings the sound back after a hush runs out. */
     private val keepLoud = object : Runnable {
         override fun run() {
-            val max = audio.getStreamMaxVolume(AudioManager.STREAM_ALARM)
-            if (audio.getStreamVolume(AudioManager.STREAM_ALARM) < max) audio.setStreamVolume(AudioManager.STREAM_ALARM, max, 0)
+            val want = targetVolume()
+            if (audio.getStreamVolume(AudioManager.STREAM_ALARM) < want) audio.setStreamVolume(AudioManager.STREAM_ALARM, want, 0)
             val p = player
             if (p != null && !p.isPlaying && System.currentTimeMillis() >= hushedUntil) {
                 p.start()
@@ -71,6 +81,8 @@ class AlarmRingService : Service() {
         val plan = intent.getStringExtra(HabitAlarmActivity.EXTRA_PLAN).orEmpty()
         habitId = id
         ringingHabitId = id
+        startedAt = System.currentTimeMillis()
+        rampUp = HabitAlarms.options(this, id).rampUp
         val notification = buildNotification(id, name, emoji, plan)
         if (Build.VERSION.SDK_INT >= 29) {
             startForeground(HabitAlarms.notificationId(id), notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK)
@@ -124,7 +136,7 @@ class AlarmRingService : Service() {
     private fun startSound() {
         if (player != null) return
         savedVolume = audio.getStreamVolume(AudioManager.STREAM_ALARM)
-        audio.setStreamVolume(AudioManager.STREAM_ALARM, audio.getStreamMaxVolume(AudioManager.STREAM_ALARM), 0)
+        audio.setStreamVolume(AudioManager.STREAM_ALARM, targetVolume(), 0)
         val uri = RingtoneManager.getActualDefaultRingtoneUri(this, RingtoneManager.TYPE_ALARM)
             ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
             ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)

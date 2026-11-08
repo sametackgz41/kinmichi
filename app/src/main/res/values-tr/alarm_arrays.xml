@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Content for the alarm's wake-up tasks: words to unscramble, sentences to type, colour names. -->
+<resources>
+    <string-array name="alarm_words">
+        <item>SABAH</item>
+        <item>GÜNEŞ</item>
+        <item>KAHVE</item>
+        <item>ÇİÇEK</item>
+        <item>DENİZ</item>
+        <item>BAHAR</item>
+        <item>HAYAT</item>
+        <item>UMUT</item>
+        <item>YILDIZ</item>
+        <item>ORMAN</item>
+    </string-array>
+    <string-array name="alarm_phrases">
+        <item>Bugün güzel bir gün olacak</item>
+        <item>Kalktım ve hazırım</item>
+        <item>Küçük adımlar uzun yollar açar</item>
+        <item>Önce su, sonra kahve</item>
+        <item>Yataktan çıkmak ilk zafer</item>
+    </string-array>
+    <string-array name="alarm_colors">
+        <item>Kırmızı</item>
+        <item>Mavi</item>
+        <item>Yeşil</item>
+        <item>Sarı</item>
+    </string-array>
+</resources>

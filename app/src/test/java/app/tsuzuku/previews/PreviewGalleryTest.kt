@@ -409,7 +409,7 @@ class PreviewGalleryTest {
     private fun renderVerify(at: Int) = renderAlarm("alarm_verify${at + 1}_tr") {
         app.tsuzuku.notifications.VerificationFlow(
             onProgress = {}, onSolved = {}, seed = 11,
-            order = listOf(app.tsuzuku.notifications.VerificationTask.Math, app.tsuzuku.notifications.VerificationTask.Hunt, app.tsuzuku.notifications.VerificationTask.Memory),
+            order = listOf(app.tsuzuku.notifications.AlarmTask.Math, app.tsuzuku.notifications.AlarmTask.Hunt, app.tsuzuku.notifications.AlarmTask.Memory),
             startAt = at,
         )
     }
@@ -545,6 +545,49 @@ class PreviewGalleryTest {
         compose.setContent { TsuzukuTheme(darkTheme = false) { app.tsuzuku.ui.screens.ArchiveScreen(habits, onBack = {}, onRestore = {}, onDelete = {}) } }
         compose.mainClock.advanceTimeBy(800)
         captureScreen("archive_tr")
+    }
+
+    @Test fun task01() = renderTask("task01_math") { app.tsuzuku.notifications.MathMission(onProgress = {}, onSolved = {}, seed = 7, count = 1) }
+    @Test fun task02() = renderTask("task02_memory") { app.tsuzuku.notifications.MemoryMission(onProgress = {}, onSolved = {}, seed = 3, preview = listOf(4), lengths = listOf(4)) }
+    @Test fun task03() = renderTask("task03_hunt") { app.tsuzuku.notifications.PuzzleMission(onProgress = {}, onSolved = {}, seed = 5, startAt = 4, size = 3) }
+    @Test fun task04() = renderTask("task04_shake") { app.tsuzuku.notifications.ShakeMission(onProgress = {}, onSolved = {}, preview = 18) }
+    @Test fun task05() = renderTask("task05_steps") { app.tsuzuku.notifications.StepMission(onProgress = {}, onSolved = {}, preview = 12) }
+    @Test fun task06() = renderTask("task06_type") { app.tsuzuku.notifications.TypeMission(onProgress = {}, onSolved = {}, seed = 1, preview = "Kalktım ve") }
+    @Test fun task07() = renderTask("task07_stroop") { app.tsuzuku.notifications.StroopMission(onProgress = {}, onSolved = {}, seed = 4) }
+    @Test fun task08() = renderTask("task08_anagram") { app.tsuzuku.notifications.AnagramMission(onProgress = {}, onSolved = {}, seed = 2) }
+    @Test fun task09() = renderTask("task09_pattern") { app.tsuzuku.notifications.PatternMission(onProgress = {}, onSolved = {}, seed = 9, preview = 3) }
+    @Test fun task10() = renderTask("task10_catch") { app.tsuzuku.notifications.CatchMission(onProgress = {}, onSolved = {}, seed = 6) }
+
+    @Test fun alarmTypeSettings() = renderAlarmType("alarm_type_settings", dark = false)
+    @Test fun alarmTypeSettingsDark() = renderAlarmType("alarm_type_settings_dark", dark = true)
+
+    private fun renderAlarmType(name: String, dark: Boolean) {
+        setVariant("tr", dark)
+        val state = app.tsuzuku.ui.screens.HabitEditorState(null).apply {
+            this.name = "Uyan"; emoji = "⏰"
+            chooseAlarmType()
+            alarmTasks = "Math,Shake,Pattern"
+            alarmLevel = 2
+        }
+        compose.setContent {
+            TsuzukuTheme(darkTheme = dark) {
+                androidx.compose.material3.Surface {
+                    androidx.compose.foundation.layout.Column(androidx.compose.ui.Modifier.padding(20.dp)) {
+                        app.tsuzuku.ui.screens.AlarmTypeSection(state)
+                    }
+                }
+            }
+        }
+        compose.mainClock.advanceTimeBy(900)
+        captureScreen(name)
+    }
+
+    private fun renderTask(name: String, content: @Composable () -> Unit) {
+        setVariant("tr", true)
+        compose.mainClock.autoAdvance = false
+        compose.setContent { TsuzukuTheme(darkTheme = true) { content() } }
+        compose.mainClock.advanceTimeBy(600)
+        captureScreen(name)
     }
 
     private fun renderAlarm(name: String, content: @Composable () -> Unit) {

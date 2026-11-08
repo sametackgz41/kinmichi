@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Content for the alarm's wake-up tasks: words to unscramble, sentences to type, colour names. -->
+<resources>
+    <string-array name="alarm_words">
+        <item>あさがお</item>
+        <item>さくら</item>
+        <item>ひまわり</item>
+        <item>うみべ</item>
+        <item>そらいろ</item>
+        <item>おはよう</item>
+        <item>たいよう</item>
+        <item>みずうみ</item>
+        <item>あおぞら</item>
+        <item>にじいろ</item>
+    </string-array>
+    <string-array name="alarm_phrases">
+        <item>きょうはいいひになる</item>
+        <item>おきた、じゅんびできた</item>
+        <item>ちいさないっぽがみちをひらく</item>
+        <item>まずみず、つぎにコーヒー</item>
+        <item>おきることがさいしょのかち</item>
+    </string-array>
+    <string-array name="alarm_colors">
+        <item>あか</item>
+        <item>あお</item>
+        <item>みどり</item>
+        <item>きいろ</item>
+    </string-array>
+</resources>

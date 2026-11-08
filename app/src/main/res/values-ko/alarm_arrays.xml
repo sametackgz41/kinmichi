@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Content for the alarm's wake-up tasks: words to unscramble, sentences to type, colour names. -->
+<resources>
+    <string-array name="alarm_words">
+        <item>아침햇살</item>
+        <item>해바라기</item>
+        <item>무지개</item>
+        <item>바닷가</item>
+        <item>하늘색</item>
+        <item>커피향</item>
+        <item>봄바람</item>
+        <item>별빛</item>
+        <item>산책길</item>
+        <item>꽃다발</item>
+    </string-array>
+    <string-array name="alarm_phrases">
+        <item>오늘은 좋은 날이 될 거야</item>
+        <item>일어났고 준비됐어</item>
+        <item>작은 걸음이 먼 길을 연다</item>
+        <item>물 먼저, 그다음 커피</item>
+        <item>일어나는 것이 첫 번째 승리</item>
+    </string-array>
+    <string-array name="alarm_colors">
+        <item>빨강</item>
+        <item>파랑</item>
+        <item>초록</item>
+        <item>노랑</item>
+    </string-array>
+</resources>

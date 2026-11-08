@@ -20,11 +20,39 @@ import java.time.LocalDate
 /** What has to be done before an alarm habit goes quiet. */
 enum class AlarmMission { None, Math, Memory, Puzzle, Mixed }
 
+/** The ten wake-up tasks; an alarm uses up to three of them. */
+enum class AlarmTask(val emoji: String, val label: Int) {
+    Math("➕", R.string.alarm_mission_math),
+    Memory("🧠", R.string.alarm_mission_memory),
+    Hunt("🔢", R.string.alarm_mission_puzzle),
+    Shake("📳", R.string.alarm_task_shake),
+    Steps("🚶", R.string.alarm_task_steps),
+    Type("⌨️", R.string.alarm_task_type),
+    Stroop("🎨", R.string.alarm_task_stroop),
+    Anagram("🔤", R.string.alarm_task_anagram),
+    Pattern("✍️", R.string.alarm_task_pattern),
+    Catch("✨", R.string.alarm_task_catch);
+
+    companion object {
+        val Default = listOf(Math, Memory, Hunt)
+        fun parse(csv: String?): List<AlarmTask> =
+            csv.orEmpty().split(',').mapNotNull { name -> entries.firstOrNull { it.name == name } }.distinct().take(3)
+    }
+}
+
 data class AlarmOptions(
     val on: Boolean = false,
     val mission: AlarmMission = AlarmMission.None,
     /** Turning the alarm off counts the habit as done (the wake-up habit). */
     val markDone: Boolean = false,
+    /** Made with the "Alarm" habit type (not just a reminder that rings). */
+    val isAlarmType: Boolean = false,
+    val tasks: List<AlarmTask> = AlarmTask.Default,
+    /** 0 easy, 1 normal, 2 hard. */
+    val level: Int = 1,
+    /** The sound starts low and rises over half a minute. */
+    val rampUp: Boolean = true,
+    val snoozes: Int = 2,
 )
 
 /**
@@ -51,7 +79,23 @@ object HabitAlarms {
             on = p.getBoolean(habitId.toString(), false),
             mission = runCatching { AlarmMission.valueOf(p.getString("$habitId.mission", null) ?: "None") }.getOrDefault(AlarmMission.None),
             markDone = p.getBoolean("$habitId.done", false),
+            isAlarmType = p.getBoolean("$habitId.kind", false),
+            tasks = AlarmTask.parse(p.getString("$habitId.tasks", null)).ifEmpty { AlarmTask.Default },
+            level = p.getInt("$habitId.level", 1).coerceIn(0, 2),
+            rampUp = p.getBoolean("$habitId.ramp", true),
+            snoozes = p.getInt("$habitId.snoozes", MAX_SNOOZES).coerceIn(0, 3),
         )
+    }
+
+    /** The alarm type's own choices: which tasks, how hard, rising sound, how many snoozes. */
+    fun setDetails(context: Context, habitId: Long, isAlarmType: Boolean, tasks: List<AlarmTask>, level: Int, rampUp: Boolean, snoozes: Int) {
+        prefs(context).edit()
+            .putBoolean("$habitId.kind", isAlarmType)
+            .putString("$habitId.tasks", tasks.take(3).joinToString(",") { it.name })
+            .putInt("$habitId.level", level.coerceIn(0, 2))
+            .putBoolean("$habitId.ramp", rampUp)
+            .putInt("$habitId.snoozes", snoozes.coerceIn(0, 3))
+            .apply()
     }
 
     fun set(context: Context, habitId: Long, on: Boolean, mission: AlarmMission = AlarmMission.None, markDone: Boolean = false) {
@@ -83,7 +127,7 @@ object HabitAlarms {
     private fun snoozeKey(habitId: Long) = "$habitId.snoozed.${LocalDate.now().toEpochDay()}"
 
     fun snoozesLeft(context: Context, habitId: Long): Int =
-        (MAX_SNOOZES - prefs(context).getInt(snoozeKey(habitId), 0)).coerceAtLeast(0)
+        (options(context, habitId).snoozes - prefs(context).getInt(snoozeKey(habitId), 0)).coerceAtLeast(0)
 
     /** A silent, urgent channel: the service plays the sound itself. */
     fun createChannel(context: Context) {

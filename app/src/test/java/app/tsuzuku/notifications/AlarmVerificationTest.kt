@@ -11,7 +11,7 @@ class AlarmVerificationTest {
         repeat(200) { seed ->
             val order = verificationOrder(Random(seed))
             assertEquals(6, order.size)
-            VerificationTask.entries.forEach { task -> assertEquals(2, order.count { it == task }) }
+            AlarmTask.Default.forEach { task -> assertEquals(2, order.count { it == task }) }
             assertTrue(order.zipWithNext().none { (a, b) -> a == b })
         }
     }

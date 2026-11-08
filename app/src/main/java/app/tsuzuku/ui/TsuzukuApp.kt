@@ -1144,6 +1144,11 @@ private fun androidx.navigation.NavGraphBuilder.screen(
 
 /** Saves a habit's spread-reminder choice and sets its next reminder. */
 private fun applySpread(context: android.content.Context, habitId: Long, draft: app.tsuzuku.model.HabitDraft) {
+    app.tsuzuku.notifications.HabitAlarms.setDetails(
+        context, habitId, draft.alarmType,
+        app.tsuzuku.notifications.AlarmTask.parse(draft.alarmTasks).ifEmpty { app.tsuzuku.notifications.AlarmTask.Default },
+        draft.alarmLevel, draft.alarmRamp, draft.alarmSnoozes,
+    )
     app.tsuzuku.health.ScreenTime.set(context, habitId, draft.screenTime)
     val window = draft.spreadStartMinutes?.let { app.tsuzuku.notifications.SpreadWindow(it, draft.spreadEndMinutes) }
     app.tsuzuku.notifications.SpreadReminders.set(context, habitId, window)
