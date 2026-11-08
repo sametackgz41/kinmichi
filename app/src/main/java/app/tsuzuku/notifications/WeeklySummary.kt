@@ -9,7 +9,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import app.tsuzuku.MainActivity
+import app.tsuzuku.HomeActivity
 import app.tsuzuku.R
 import app.tsuzuku.data.RoomHabitRepository
 import app.tsuzuku.data.local.TsuzukuDatabase
@@ -85,7 +85,7 @@ object WeeklySummary {
         val open = PendingIntent.getActivity(
             context,
             REQUEST_CODE,
-            Intent(context, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),
+            Intent(context, HomeActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
         val body = if (recap.scheduled == 0 || recap.bestHabit == null) {

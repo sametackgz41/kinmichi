@@ -52,7 +52,7 @@ import androidx.glance.text.Text
 import androidx.glance.text.TextAlign
 import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider as FixedColor
-import app.tsuzuku.MainActivity
+import app.tsuzuku.HomeActivity
 import app.tsuzuku.R
 import app.tsuzuku.TsuzukuApplication
 import app.tsuzuku.model.HabitType
@@ -172,7 +172,7 @@ private fun Header(habits: List<TodayHabit>, locked: Boolean, today: LocalDate) 
         else -> context.resources.getQuantityString(R.plurals.tile_habits_left, left, left)
     }
     Row(
-        modifier = GlanceModifier.fillMaxWidth().clickable(actionStartActivity<MainActivity>()),
+        modifier = GlanceModifier.fillMaxWidth().clickable(actionStartActivity<HomeActivity>()),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Box(modifier = GlanceModifier.size(ringSize), contentAlignment = Alignment.Center) {
@@ -240,7 +240,7 @@ private fun HabitLine(item: TodayHabit) {
     val habit = item.habit
     val accent = habit.colorArgb.toInt()
     val params = actionParametersOf(HabitIdKey to habit.id)
-    val openApp: Action = actionStartActivity<MainActivity>()
+    val openApp: Action = actionStartActivity<HomeActivity>()
     val done = item.isComplete
 
     Row(

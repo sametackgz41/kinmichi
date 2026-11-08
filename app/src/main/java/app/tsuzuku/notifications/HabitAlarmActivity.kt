@@ -146,7 +146,7 @@ class HabitAlarmActivity : ComponentActivity() {
     }
 
     private fun startDay() {
-        startActivity(Intent(this, app.tsuzuku.MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP))
+        startActivity(Intent(this, app.tsuzuku.HomeActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP))
         finish()
     }
 

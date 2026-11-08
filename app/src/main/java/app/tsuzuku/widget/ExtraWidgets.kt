@@ -40,7 +40,7 @@ import androidx.glance.text.Text
 import androidx.glance.text.TextAlign
 import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider
-import app.tsuzuku.MainActivity
+import app.tsuzuku.HomeActivity
 import app.tsuzuku.R
 import app.tsuzuku.TsuzukuApplication
 import app.tsuzuku.model.HabitType
@@ -81,7 +81,7 @@ internal fun StreakContent(top: TodayHabit?, comebacks: Int, locked: Boolean) {
     val context = LocalContext.current
     Column(
         modifier = GlanceModifier.fillMaxSize().background(tsuzukuWidgetBackground()).cornerRadius(28.dp)
-            .padding(16.dp).clickable(actionStartActivity<MainActivity>()),
+            .padding(16.dp).clickable(actionStartActivity<HomeActivity>()),
         verticalAlignment = Alignment.Vertical.CenterVertically,
     ) {
         if (locked || top == null || top.streakDays == 0) {
@@ -144,7 +144,7 @@ internal fun QuickGridContent(tiles: List<TodayHabit>, locked: Boolean) {
         modifier = GlanceModifier.fillMaxSize().background(tsuzukuWidgetBackground()).cornerRadius(28.dp).padding(8.dp),
     ) {
         if (locked || tiles.isEmpty()) {
-            Box(GlanceModifier.fillMaxSize().clickable(actionStartActivity<MainActivity>()), contentAlignment = Alignment.Center) {
+            Box(GlanceModifier.fillMaxSize().clickable(actionStartActivity<HomeActivity>()), contentAlignment = Alignment.Center) {
                 Text(
                     context.getString(if (locked) R.string.widget_locked else R.string.widget_no_habits),
                     style = TextStyle(color = GlanceTheme.colors.onSurfaceVariant, fontSize = 13.sp, textAlign = TextAlign.Center),

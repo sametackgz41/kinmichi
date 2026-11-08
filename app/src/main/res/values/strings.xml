@@ -1433,4 +1433,22 @@
     <string name="savings_total">So far: %1$s saved</string>
     <string name="completions_count">%1$d completions</string>
     <string name="hours_count">%1$d h</string>
+    <string name="palette_momiji">Momiji</string>
+    <string name="palette_momiji_desc">Autumn maples, warm and russet</string>
+    <string name="palette_yoru">Yoru</string>
+    <string name="palette_yoru_desc">Night, deep indigo and quiet</string>
+    <string name="look_more_title">More</string>
+    <string name="look_seasonal">Seasonal touches</string>
+    <string name="look_seasonal_desc">Petals, fireflies, leaves or snow drifting on Today</string>
+    <string name="look_text_size">Text size</string>
+    <string name="look_text_normal">Normal</string>
+    <string name="look_text_large">Large</string>
+    <string name="look_text_larger">Larger</string>
+    <string name="look_contrast">High contrast</string>
+    <string name="look_contrast_desc">Darker secondary text and stronger lines</string>
+    <string name="look_icon_title">Home-screen icon</string>
+    <string name="look_icon_path">Golden path</string>
+    <string name="look_icon_enso">Ensō</string>
+    <string name="look_icon_night">Night</string>
+    <string name="look_icon_note">After switching, your launcher may move the icon back to the app drawer.</string>
 </resources>

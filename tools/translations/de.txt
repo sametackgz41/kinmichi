@@ -1053,3 +1053,21 @@ savings_per_day|Ersparnis pro sauberem Tag
 savings_total|Bisher gespart: %1$s
 completions_count|%1$d erledigt
 hours_count|%1$d Std.
+palette_momiji|Momiji
+palette_momiji_desc|Herbstahorn, warm und rostrot
+palette_yoru|Yoru
+palette_yoru_desc|Nacht, tiefes Indigo und still
+look_more_title|Mehr
+look_seasonal|Jahreszeitliche Details
+look_seasonal_desc|Blüten, Glühwürmchen, Blätter oder Schnee auf Heute
+look_text_size|Textgröße
+look_text_normal|Normal
+look_text_large|Groß
+look_text_larger|Größer
+look_contrast|Hoher Kontrast
+look_contrast_desc|Dunklerer Nebentext und kräftigere Linien
+look_icon_title|App-Symbol
+look_icon_path|Goldener Pfad
+look_icon_enso|Ensō
+look_icon_night|Nacht
+look_icon_note|Nach dem Wechsel legt der Launcher das Symbol evtl. zurück in die App-Übersicht.

@@ -1053,3 +1053,21 @@ savings_per_day|클린한 하루당 절약액
 savings_total|지금까지 %1$s 절약
 completions_count|%1$d회 완료
 hours_count|%1$d시간
+palette_momiji|모미지
+palette_momiji_desc|가을 단풍, 따뜻한 적갈색
+palette_yoru|요루
+palette_yoru_desc|밤, 깊은 남색과 고요함
+look_more_title|더보기
+look_seasonal|계절 장식
+look_seasonal_desc|오늘 화면에 꽃잎, 반딧불, 낙엽, 눈
+look_text_size|글자 크기
+look_text_normal|보통
+look_text_large|크게
+look_text_larger|더 크게
+look_contrast|고대비
+look_contrast_desc|보조 텍스트를 진하게, 선을 뚜렷하게
+look_icon_title|앱 아이콘
+look_icon_path|황금 길
+look_icon_enso|엔소
+look_icon_night|밤
+look_icon_note|바꾼 뒤 런처가 아이콘을 앱 서랍으로 옮길 수 있어요.

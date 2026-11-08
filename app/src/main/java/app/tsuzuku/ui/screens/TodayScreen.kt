@@ -213,6 +213,8 @@ fun TodayScreen(
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         item(key = "header") {
+            Box(Modifier.fillMaxWidth()) {
+            if (app.tsuzuku.ui.theme.LookPrefs.seasonal) SeasonalDecor(Modifier.matchParentSize())
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Box(Modifier.weight(1f)) { GreetingBlock(profileName) }
                 IconButton(onClick = { showConfigSheet = true }) {
@@ -236,6 +238,7 @@ fun TodayScreen(
                         )
                     }
                 }
+            }
             }
         }
         if (availableUpdate != null) {

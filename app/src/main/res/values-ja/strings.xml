@@ -1033,6 +1033,24 @@
     <string name="savings_total">これまでに%1$sを節約</string>
     <string name="completions_count">%1$d回達成</string>
     <string name="hours_count">%1$d時間</string>
+    <string name="palette_momiji">紅葉</string>
+    <string name="palette_momiji_desc">秋の紅葉、あたたかな赤</string>
+    <string name="palette_yoru">夜</string>
+    <string name="palette_yoru_desc">夜、深い藍と静けさ</string>
+    <string name="look_more_title">その他</string>
+    <string name="look_seasonal">季節の演出</string>
+    <string name="look_seasonal_desc">「今日」に花びら・蛍・紅葉・雪</string>
+    <string name="look_text_size">文字サイズ</string>
+    <string name="look_text_normal">標準</string>
+    <string name="look_text_large">大</string>
+    <string name="look_text_larger">特大</string>
+    <string name="look_contrast">ハイコントラスト</string>
+    <string name="look_contrast_desc">補助テキストを濃く、線をはっきり</string>
+    <string name="look_icon_title">アプリアイコン</string>
+    <string name="look_icon_path">金の道</string>
+    <string name="look_icon_enso">円相</string>
+    <string name="look_icon_night">夜</string>
+    <string name="look_icon_note">切り替えるとホーム画面のアイコンがアプリ一覧に戻ることがあります。</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

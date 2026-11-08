@@ -52,6 +52,8 @@ internal val PalettePickerOrder = listOf(
     PalettePreference.Matcha,
     PalettePreference.Sakura,
     PalettePreference.Umi,
+    PalettePreference.Momiji,
+    PalettePreference.Yoru,
     PalettePreference.Dynamic,
 )
 
@@ -63,6 +65,8 @@ internal fun paletteName(value: PalettePreference): String = stringResource(
         PalettePreference.Matcha -> R.string.palette_matcha
         PalettePreference.Sakura -> R.string.palette_sakura
         PalettePreference.Umi -> R.string.palette_umi
+        PalettePreference.Momiji -> R.string.palette_momiji
+        PalettePreference.Yoru -> R.string.palette_yoru
         PalettePreference.Dynamic -> R.string.palette_dynamic
     },
 )
@@ -75,6 +79,8 @@ private fun paletteDescription(value: PalettePreference): String = stringResourc
         PalettePreference.Matcha -> R.string.palette_matcha_desc
         PalettePreference.Sakura -> R.string.palette_sakura_desc
         PalettePreference.Umi -> R.string.palette_umi_desc
+        PalettePreference.Momiji -> R.string.palette_momiji_desc
+        PalettePreference.Yoru -> R.string.palette_yoru_desc
         PalettePreference.Dynamic -> R.string.palette_dynamic_desc
     },
 )

@@ -128,8 +128,8 @@ class IncrementHabitAction : ActionCallback {
 
 /** Opens the app straight on the new-habit screen (same route as the launcher shortcut). */
 fun addHabitIntent(context: Context): android.content.Intent =
-    android.content.Intent(context, app.tsuzuku.MainActivity::class.java)
-        .setAction(app.tsuzuku.MainActivity.ACTION_ADD_HABIT)
+    android.content.Intent(context, app.tsuzuku.HomeActivity::class.java)
+        .setAction(app.tsuzuku.HomeActivity.ACTION_ADD_HABIT)
         .addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK or android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
 /** A filled circle, used where Glance can't round corners (Android 11 and older). */

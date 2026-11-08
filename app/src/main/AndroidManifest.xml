@@ -35,9 +35,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tsuzuku">
         <activity
-            android:name=".MainActivity"
+            android:name=".HomeActivity"
             android:exported="true"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask" />
+        <!-- Home-screen icon ".MainActivity"; only the chosen one is enabled (Settings > Appearance). -->
+        <activity-alias
+            android:name=".MainActivity"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher"
+            android:targetActivity=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -45,17 +53,45 @@
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
-            <!-- Health Connect (Android 13 and lower) opens this to explain how the data is used. -->
+        </activity-alias>
+        <!-- Home-screen icon ".LauncherEnso"; only the chosen one is enabled (Settings > Appearance). -->
+        <activity-alias
+            android:name=".LauncherEnso"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_enso"
+            android:roundIcon="@mipmap/ic_launcher_enso"
+            android:targetActivity=".HomeActivity">
             <intent-filter>
-                <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity-alias>
+        <!-- Home-screen icon ".LauncherNight"; only the chosen one is enabled (Settings > Appearance). -->
+        <activity-alias
+            android:name=".LauncherNight"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_night"
+            android:roundIcon="@mipmap/ic_launcher_night"
+            android:targetActivity=".HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity-alias>
         <!-- Health Connect on Android 14+ asks for the same explanation through this alias. -->
         <activity-alias
             android:name="ViewPermissionUsageActivity"
             android:exported="true"
             android:permission="android.permission.START_VIEW_PERMISSION_USAGE"
-            android:targetActivity=".MainActivity">
+            android:targetActivity=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW_PERMISSION_USAGE" />
                 <category android:name="android.intent.category.HEALTH_PERMISSIONS" />

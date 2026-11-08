@@ -39,6 +39,8 @@ enum class PalettePreference {
     Matcha,
     Sakura,
     Umi,
+    Momiji,
+    Yoru,
     Dynamic;
 
     companion object {

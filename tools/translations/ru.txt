@@ -1065,3 +1065,21 @@ savings_per_day|Экономия за чистый день
 savings_total|Сэкономлено: %1$s
 completions_count|%1$d выполнений
 hours_count|%1$d ч
+palette_momiji|Момидзи
+palette_momiji_desc|Осенние клёны, тёплые и рыжие
+palette_yoru|Ёру
+palette_yoru_desc|Ночь, глубокий индиго и тишина
+look_more_title|Ещё
+look_seasonal|Сезонные детали
+look_seasonal_desc|Лепестки, светлячки, листья или снег на «Сегодня»
+look_text_size|Размер текста
+look_text_normal|Обычный
+look_text_large|Крупный
+look_text_larger|Очень крупный
+look_contrast|Высокий контраст
+look_contrast_desc|Темнее второстепенный текст и чётче линии
+look_icon_title|Значок приложения
+look_icon_path|Золотой путь
+look_icon_enso|Энсо
+look_icon_night|Ночь
+look_icon_note|После смены лаунчер может убрать значок в меню приложений.

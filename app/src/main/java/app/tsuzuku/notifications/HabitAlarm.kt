@@ -96,7 +96,7 @@ object HabitAlarms {
         val show = PendingIntent.getActivity(
             context,
             0x51,
-            Intent(context, app.tsuzuku.MainActivity::class.java),
+            Intent(context, app.tsuzuku.HomeActivity::class.java),
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
         alarmManager.setAlarmClock(AlarmManager.AlarmClockInfo(triggerAtMillis, show), operation)

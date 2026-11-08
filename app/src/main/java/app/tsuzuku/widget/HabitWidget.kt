@@ -44,7 +44,7 @@ import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextAlign
 import androidx.glance.text.TextStyle
-import app.tsuzuku.MainActivity
+import app.tsuzuku.HomeActivity
 import app.tsuzuku.R
 import app.tsuzuku.TsuzukuApplication
 import app.tsuzuku.model.HabitType
@@ -86,7 +86,7 @@ class HabitWidgetReceiver : GlanceAppWidgetReceiver() {
 internal fun HabitContent(item: TodayHabit?, locked: Boolean) {
     val context = LocalContext.current
     val size = LocalSize.current
-    val openApp: Action = actionStartActivity<MainActivity>()
+    val openApp: Action = actionStartActivity<HomeActivity>()
     val tapAction: Action = when {
         item == null || locked || item.isBlocked -> openApp
         item.habit.type == HabitType.Check -> actionRunCallback<ToggleHabitAction>(actionParametersOf(HabitIdKey to item.habit.id))

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Kinmichi: steps along a winding path, one a day; today's in gold. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFF5F0E6"
+        android:pathData="M30.91,74.80 a3.89,3.89 0 1,0 7.78,0 a3.89,3.89 0 1,0 -7.78,0 z" />
+    <path
+        android:fillColor="#FFF5F0E6"
+        android:pathData="M34.56,65.26 a4.23,4.23 0 1,0 8.47,0 a4.23,4.23 0 1,0 -8.47,0 z" />
+    <path
+        android:fillColor="#FFF5F0E6"
+        android:pathData="M43.74,59.57 a4.58,4.58 0 1,0 9.16,0 a4.58,4.58 0 1,0 -9.16,0 z" />
+    <path
+        android:fillColor="#FFF5F0E6"
+        android:pathData="M54.76,54.64 a4.92,4.92 0 1,0 9.85,0 a4.92,4.92 0 1,0 -9.85,0 z" />
+    <path
+        android:fillColor="#FFF5F0E6"
+        android:pathData="M63.94,47.41 a5.27,5.27 0 1,0 10.54,0 a5.27,5.27 0 1,0 -10.54,0 z" />
+    <path
+        android:fillColor="#FFE0C178"
+        android:pathData="M66.72,34.80 a6.48,6.48 0 1,0 12.96,0 a6.48,6.48 0 1,0 -12.96,0 z" />
+</vector>

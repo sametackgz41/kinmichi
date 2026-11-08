@@ -113,6 +113,27 @@ private val UmiDark = PaletteSpec(
     0xFFB3CEC3, 0xFF1F362D, 0xFF2B4239, 0xFFD4E8DF,
 )
 
+private val MomijiLight = PaletteSpec(
+    0xFFF7EFE6, 0xFFFCF7F1, 0xFFE6D3C2, 0xFF96806D, 0xFF2A1B12, 0xFF6B5546, 0xFFEFE0D2,
+    0xFFB2472A, 0xFFFFFFFF, 0xFFF6DACE, 0xFF4A160A,
+    0xFF8A5A2B, 0xFFFFFFFF, 0xFFF2E0C8, 0xFF33200A,
+)
+private val MomijiDark = PaletteSpec(
+    0xFF1A120E, 0xFF241914, 0xFF3A2A22, 0xFF7D685B, 0xFFF2E6DC, 0xFFC2ADA0, 0xFF30231C,
+    0xFFF08A68, 0xFF4A160A, 0xFF4A2618, 0xFFF6DACE,
+    0xFFE0B98A, 0xFF3A2610, 0xFF453221, 0xFFF2E0C8,
+)
+private val YoruLight = PaletteSpec(
+    0xFFEFF0F6, 0xFFF8F8FC, 0xFFD3D5E3, 0xFF7C8098, 0xFF15172A, 0xFF4E5268, 0xFFE0E2EE,
+    0xFF3B3F8F, 0xFFFFFFFF, 0xFFDCDDF5, 0xFF14164A,
+    0xFF5E5A78, 0xFFFFFFFF, 0xFFE3E0F2, 0xFF1F1C33,
+)
+private val YoruDark = PaletteSpec(
+    0xFF0C0D1A, 0xFF151629, 0xFF26283F, 0xFF62667F, 0xFFE3E4F2, 0xFFA3A6C0, 0xFF1D1F35,
+    0xFFAEB2F5, 0xFF181B5C, 0xFF2A2D63, 0xFFDCDDF5,
+    0xFFC8C3E3, 0xFF2F2B47, 0xFF34314C, 0xFFE3E0F2,
+)
+
 /**
  * Tsuzuku's own scheme for [palette] in the given mode. [PalettePreference.Dynamic] is resolved
  * by the caller (it needs a context); here it falls back to Washi.
@@ -124,6 +145,8 @@ fun paletteScheme(palette: PalettePreference, dark: Boolean, pureBlack: Boolean 
         PalettePreference.Matcha -> (if (dark) MatchaDark else MatchaLight).toScheme(dark)
         PalettePreference.Sakura -> (if (dark) SakuraDark else SakuraLight).toScheme(dark)
         PalettePreference.Umi -> (if (dark) UmiDark else UmiLight).toScheme(dark)
+        PalettePreference.Momiji -> (if (dark) MomijiDark else MomijiLight).toScheme(dark)
+        PalettePreference.Yoru -> (if (dark) YoruDark else YoruLight).toScheme(dark)
     }
     return if (dark && pureBlack) scheme.withPureBlack() else scheme
 }
@@ -136,4 +159,12 @@ fun ColorScheme.withPureBlack(): ColorScheme = copy(
     surfaceContainerLowest = Color.Black,
     surfaceContainerLow = lerp(Color.Black, surfaceContainerLow, 0.7f),
     surfaceContainer = lerp(Color.Black, surfaceContainer, 0.75f),
+)
+
+
+/** Stronger text and lines for people who want more contrast. */
+fun androidx.compose.material3.ColorScheme.withHighContrast(): androidx.compose.material3.ColorScheme = copy(
+    onSurfaceVariant = onSurface,
+    outline = lerp(outline, onSurface, 0.6f),
+    outlineVariant = lerp(outlineVariant, onSurface, 0.45f),
 )

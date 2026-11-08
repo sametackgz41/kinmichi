@@ -1053,3 +1053,21 @@ savings_per_day|Risparmio per giorno pulito
 savings_total|Finora: %1$s risparmiati
 completions_count|%1$d completamenti
 hours_count|%1$d h
+palette_momiji|Momiji
+palette_momiji_desc|Aceri d'autunno, caldi e ramati
+palette_yoru|Yoru
+palette_yoru_desc|Notte, indaco profondo e quiete
+look_more_title|Altro
+look_seasonal|Tocchi stagionali
+look_seasonal_desc|Petali, lucciole, foglie o neve su Oggi
+look_text_size|Dimensione testo
+look_text_normal|Normale
+look_text_large|Grande
+look_text_larger|Più grande
+look_contrast|Contrasto elevato
+look_contrast_desc|Testo secondario più scuro e linee più marcate
+look_icon_title|Icona dell'app
+look_icon_path|Sentiero d'oro
+look_icon_enso|Ensō
+look_icon_night|Notte
+look_icon_note|Dopo il cambio, il launcher potrebbe spostare l'icona nel cassetto app.

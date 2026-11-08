@@ -1432,4 +1432,22 @@
     <string name="savings_total">Şimdiye kadar %1$s biriktirdin</string>
     <string name="completions_count">%1$d tamamlama</string>
     <string name="hours_count">%1$d saat</string>
+    <string name="palette_momiji">Momiji</string>
+    <string name="palette_momiji_desc">Sonbahar yaprakları, sıcak ve kızıl</string>
+    <string name="palette_yoru">Yoru</string>
+    <string name="palette_yoru_desc">Gece, derin lacivert ve sakin</string>
+    <string name="look_more_title">Diğer</string>
+    <string name="look_seasonal">Mevsim süslemeleri</string>
+    <string name="look_seasonal_desc">Bugün ekranında süzülen yapraklar, ateş böcekleri ya da kar</string>
+    <string name="look_text_size">Yazı boyutu</string>
+    <string name="look_text_normal">Normal</string>
+    <string name="look_text_large">Büyük</string>
+    <string name="look_text_larger">Daha büyük</string>
+    <string name="look_contrast">Yüksek kontrast</string>
+    <string name="look_contrast_desc">Daha koyu yardımcı yazılar ve belirgin çizgiler</string>
+    <string name="look_icon_title">Uygulama simgesi</string>
+    <string name="look_icon_path">Altın yol</string>
+    <string name="look_icon_enso">Ensō</string>
+    <string name="look_icon_night">Gece</string>
+    <string name="look_icon_note">Değiştirince başlatıcın simgeyi uygulama çekmecesine taşıyabilir; ana ekrana yeniden eklemen gerekebilir.</string>
 </resources>

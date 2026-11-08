@@ -95,7 +95,7 @@ object SpreadReminders {
         if (Build.VERSION.SDK_INT >= 33 && context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) return
         val open = PendingIntent.getActivity(
             context, notificationId(habitId),
-            Intent(context, app.tsuzuku.MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),
+            Intent(context, app.tsuzuku.HomeActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
         val addOne = PendingIntent.getBroadcast(

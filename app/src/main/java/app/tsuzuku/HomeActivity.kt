@@ -29,7 +29,7 @@ import app.tsuzuku.ui.screens.CloudAccountScreen
 import app.tsuzuku.ui.screens.OnboardingScreen
 import app.tsuzuku.ui.theme.TsuzukuTheme
 
-class MainActivity : FragmentActivity() {
+class HomeActivity : FragmentActivity() {
     private var isUnlocked by mutableStateOf(true)
     private var biometricPromptActive = false
     private var backgroundedAt: Long = 0L
@@ -67,7 +67,14 @@ class MainActivity : FragmentActivity() {
                     window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
                 }
             }
-            TsuzukuTheme(darkTheme = darkTheme, palette = settings.palette, pureBlack = settings.pureBlack) {
+            app.tsuzuku.ui.theme.LookPrefs.load(this@HomeActivity)
+            val baseDensity = androidx.compose.ui.platform.LocalDensity.current
+            androidx.compose.runtime.CompositionLocalProvider(
+                androidx.compose.ui.platform.LocalDensity provides androidx.compose.ui.unit.Density(
+                    baseDensity.density, baseDensity.fontScale * app.tsuzuku.ui.theme.LookPrefs.textScale,
+                ),
+            ) {
+            TsuzukuTheme(darkTheme = darkTheme, palette = settings.palette, pureBlack = settings.pureBlack, highContrast = app.tsuzuku.ui.theme.LookPrefs.highContrast) {
                 if (settings.appLockEnabled && !isUnlocked) {
                     AppLockScreen(
                         biometricEnabled = settings.biometricUnlockEnabled,
@@ -133,9 +140,9 @@ class MainActivity : FragmentActivity() {
                         settings = settings,
                         onSetProfileName = settingsRepository::setProfileName,
                         onSetTheme = settingsRepository::setTheme,
-                        onSetPalette = { settingsRepository.setPalette(it); app.tsuzuku.widget.TsuzukuWidgets.requestUpdate(this@MainActivity) },
-                        onSetPureBlack = { settingsRepository.setPureBlack(it); app.tsuzuku.widget.TsuzukuWidgets.requestUpdate(this@MainActivity) },
-                        onSetWidgetOpacity = { settingsRepository.setWidgetOpacity(it); app.tsuzuku.widget.TsuzukuWidgets.requestUpdate(this@MainActivity) },
+                        onSetPalette = { settingsRepository.setPalette(it); app.tsuzuku.widget.TsuzukuWidgets.requestUpdate(this@HomeActivity) },
+                        onSetPureBlack = { settingsRepository.setPureBlack(it); app.tsuzuku.widget.TsuzukuWidgets.requestUpdate(this@HomeActivity) },
+                        onSetWidgetOpacity = { settingsRepository.setWidgetOpacity(it); app.tsuzuku.widget.TsuzukuWidgets.requestUpdate(this@HomeActivity) },
                         onSetLanguage = { language ->
                             settingsRepository.setLanguage(language)
                             recreate()
@@ -160,6 +167,7 @@ class MainActivity : FragmentActivity() {
                         onLaunchRouteHandled = { launchRoute = null },
                     )
                 }
+            }
             }
         }
     }
@@ -213,8 +221,8 @@ class MainActivity : FragmentActivity() {
         // Fresh Health Connect totals every time the app comes to the front.
         if (settings.healthSyncEnabled) {
             lifecycleScope.launch {
-                app.tsuzuku.health.HealthSync.syncToday(this@MainActivity, tsuzukuApplication.habitRepository)
-                app.tsuzuku.widget.TsuzukuWidgets.requestUpdate(this@MainActivity)
+                app.tsuzuku.health.HealthSync.syncToday(this@HomeActivity, tsuzukuApplication.habitRepository)
+                app.tsuzuku.widget.TsuzukuWidgets.requestUpdate(this@HomeActivity)
             }
         }
     }

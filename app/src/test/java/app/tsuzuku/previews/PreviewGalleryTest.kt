@@ -639,6 +639,56 @@ class PreviewGalleryTest {
     @Test fun appearanceCardsTrDark() = renderAppearance(app.tsuzuku.ui.screens.AppearanceLayout.Cards, true)
     @Test fun appearanceGridTrDark() = renderAppearance(app.tsuzuku.ui.screens.AppearanceLayout.Grid, true)
 
+    // Package D: new palettes, the look section, and Today in Momiji / Yoru with autumn touches.
+    @Test fun lookPackageDTr() {
+        setVariant("tr", false)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false) {
+                app.tsuzuku.ui.screens.AppearanceScreen(
+                    theme = app.tsuzuku.data.preferences.ThemePreference.Light,
+                    palette = app.tsuzuku.data.preferences.PalettePreference.Momiji,
+                    pureBlack = false, systemDark = false,
+                    onBack = {}, onSetTheme = {}, onSetPalette = {}, onSetPureBlack = {},
+                )
+            }
+        }
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.onNode(androidx.compose.ui.test.hasScrollAction()).performScrollToNode(androidx.compose.ui.test.hasText("Momiji"))
+        compose.mainClock.advanceTimeBy(500)
+        captureScreen("lookD_palettes_tr")
+        compose.onNode(androidx.compose.ui.test.hasScrollAction()).performScrollToNode(androidx.compose.ui.test.hasText("Uygulama simgesi"))
+        compose.mainClock.advanceTimeBy(500)
+        captureScreen("lookD_section_tr")
+        compose.onNode(androidx.compose.ui.test.hasScrollAction()).performScrollToNode(androidx.compose.ui.test.hasText("Gece"))
+        compose.mainClock.advanceTimeBy(500)
+        captureScreen("lookD_icons_tr")
+    }
+
+    @Test fun todayMomijiTr() = renderTodayPalette(app.tsuzuku.data.preferences.PalettePreference.Momiji, false, "lookD_today_momiji_tr")
+    @Test fun todayYoruTr() = renderTodayPalette(app.tsuzuku.data.preferences.PalettePreference.Yoru, true, "lookD_today_yoru_tr")
+
+    private fun renderTodayPalette(palette: app.tsuzuku.data.preferences.PalettePreference, dark: Boolean, name: String) {
+        setVariant("tr", dark)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = dark, palette = palette) {
+                Shell(title = androidx.compose.ui.res.stringResource(app.tsuzuku.R.string.today), route = "today", profile = "Samet") { modifier ->
+                    Box(modifier) {
+                        TodayScreen(
+                            habits = sampleToday("tr"), profileName = "Samet", showDailySummary = true,
+                            timer = HabitTimerState(), onAddHabit = {}, onToggleHabit = {}, onIncrementHabit = {},
+                            onDecrementHabit = {}, onToggleTimer = {}, onOpenHabit = {}, onReorderHabits = {},
+                            onOpenGoals = {}, onSearch = {},
+                            todayHiddenSections = app.tsuzuku.data.preferences.DEFAULT_TODAY_HIDDEN_SECTIONS,
+                            weekProgress = sampleWeek(),
+                        )
+                    }
+                }
+            }
+        }
+        compose.mainClock.advanceTimeBy(6_000)
+        captureScreen(name)
+    }
+
     private fun renderAppearance(layout: app.tsuzuku.ui.screens.AppearanceLayout, dark: Boolean) {
         setVariant("tr", dark)
         compose.setContent {

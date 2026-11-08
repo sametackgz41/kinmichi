@@ -1053,3 +1053,21 @@ savings_per_day|Ahorro por día limpio
 savings_total|Hasta ahora: %1$s ahorrados
 completions_count|%1$d completados
 hours_count|%1$d h
+palette_momiji|Momiji
+palette_momiji_desc|Arces de otoño, cálidos y rojizos
+palette_yoru|Yoru
+palette_yoru_desc|Noche, índigo profundo y silencio
+look_more_title|Más
+look_seasonal|Toques de temporada
+look_seasonal_desc|Pétalos, luciérnagas, hojas o nieve en Hoy
+look_text_size|Tamaño del texto
+look_text_normal|Normal
+look_text_large|Grande
+look_text_larger|Más grande
+look_contrast|Alto contraste
+look_contrast_desc|Texto secundario más oscuro y líneas más marcadas
+look_icon_title|Icono de la app
+look_icon_path|Camino dorado
+look_icon_enso|Ensō
+look_icon_night|Noche
+look_icon_note|Al cambiarlo, el launcher puede mover el icono al cajón de apps.

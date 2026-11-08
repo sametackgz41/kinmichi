@@ -10,7 +10,7 @@
         <intent
             android:action="app.tsuzuku.action.ADD_HABIT"
             android:targetPackage="app.tsuzuku"
-            android:targetClass="app.tsuzuku.MainActivity" />
+            android:targetClass="app.tsuzuku.HomeActivity" />
     </shortcut>
     <shortcut
         android:shortcutId="progress"
@@ -21,6 +21,6 @@
         <intent
             android:action="app.tsuzuku.action.PROGRESS"
             android:targetPackage="app.tsuzuku"
-            android:targetClass="app.tsuzuku.MainActivity" />
+            android:targetClass="app.tsuzuku.HomeActivity" />
     </shortcut>
 </shortcuts>

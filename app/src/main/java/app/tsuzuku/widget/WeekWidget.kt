@@ -44,7 +44,7 @@ import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextAlign
 import androidx.glance.text.TextStyle
-import app.tsuzuku.MainActivity
+import app.tsuzuku.HomeActivity
 import app.tsuzuku.R
 import app.tsuzuku.TsuzukuApplication
 import app.tsuzuku.model.HabitHistorySnapshot
@@ -111,7 +111,7 @@ internal fun WeekContent(days: List<DayScore>, bestStreak: Int, locked: Boolean,
             .appWidgetBackground()
             .background(tsuzukuWidgetBackground())
             .cornerRadius(24.dp)
-            .clickable(actionStartActivity<MainActivity>())
+            .clickable(actionStartActivity<HomeActivity>())
             .padding(horizontal = 14.dp, vertical = 12.dp),
     ) {
         Row(modifier = GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {

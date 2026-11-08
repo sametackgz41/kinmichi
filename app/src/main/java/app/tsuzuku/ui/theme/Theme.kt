@@ -125,6 +125,7 @@ fun TsuzukuTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     palette: app.tsuzuku.data.preferences.PalettePreference = app.tsuzuku.data.preferences.PalettePreference.Washi,
     pureBlack: Boolean = false,
+    highContrast: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     val context = LocalContext.current
@@ -136,7 +137,7 @@ fun TsuzukuTheme(
                 dynamicLightColorScheme(context)
             }
         else -> paletteScheme(palette, darkTheme, pureBlack)
-    }
+    }.let { if (highContrast) it.withHighContrast() else it }
     val view = LocalView.current
 
     if (!view.isInEditMode) {

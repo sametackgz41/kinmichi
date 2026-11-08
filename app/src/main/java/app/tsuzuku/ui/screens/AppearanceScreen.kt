@@ -136,6 +136,7 @@ internal fun AppearanceScreen(
                     PureBlackRow(pureBlack, onSetPureBlack)
                 }
             }
+            LookSection()
             Spacer(Modifier.height(16.dp))
         }
     }
@@ -363,6 +364,8 @@ private fun paletteDescriptionText(value: PalettePreference): String = stringRes
         PalettePreference.Matcha -> R.string.palette_matcha_desc
         PalettePreference.Sakura -> R.string.palette_sakura_desc
         PalettePreference.Umi -> R.string.palette_umi_desc
+        PalettePreference.Momiji -> R.string.palette_momiji_desc
+        PalettePreference.Yoru -> R.string.palette_yoru_desc
         PalettePreference.Dynamic -> R.string.palette_dynamic_desc
     },
 )
