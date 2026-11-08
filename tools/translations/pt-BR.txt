@@ -933,3 +933,6 @@ alarm_start_day|Começar o dia
 wake_template_title|Criar um alarme para acordar
 wake_template_body|Com alarme, uma tarefa para desligar e uma sequência de despertar
 wake_habit_name|Acordar
+alarm_verify_setting|Pedir uma verificação para desligar
+alarm_verify_description|Uma mistura rápida de uma conta, uma rodada de memória e uma caça aos números, em ordem diferente a cada vez
+alarm_puzzle_title9|Toque de 1 a 9 em ordem

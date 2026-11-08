@@ -111,11 +111,11 @@ class HabitAlarmActivity : ComponentActivity() {
                     )
                     Stage.Mission -> {
                         val progress = { HabitAlarms.hush(this) }
-                        when (options.mission) {
-                            AlarmMission.Math -> MathMission(onProgress = progress, onSolved = ::wakeUp)
-                            AlarmMission.Memory -> MemoryMission(onProgress = progress, onSolved = ::wakeUp)
-                            AlarmMission.Puzzle -> PuzzleMission(onProgress = progress, onSolved = ::wakeUp)
-                            AlarmMission.None -> androidx.compose.runtime.LaunchedEffect(Unit) { wakeUp() }
+                        // Any task choice means the one mixed verification.
+                        if (options.mission == AlarmMission.None) {
+                            androidx.compose.runtime.LaunchedEffect(Unit) { wakeUp() }
+                        } else {
+                            VerificationFlow(onProgress = progress, onSolved = ::wakeUp)
                         }
                     }
                     Stage.Morning -> MorningPage(

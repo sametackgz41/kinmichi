@@ -933,3 +933,6 @@ alarm_start_day|In den Tag starten
 wake_template_title|Weckalarm einrichten
 wake_template_body|Mit Wecker, Aufgabe zum Ausschalten und Aufsteh-Serie
 wake_habit_name|Aufstehen
+alarm_verify_setting|Zum Ausschalten eine Prüfung verlangen
+alarm_verify_description|Ein kurzer Mix aus Rechnung, Gedächtnisrunde und Zahlenjagd, jedes Mal anders sortiert
+alarm_puzzle_title9|Tippe 1 bis 9 der Reihe nach

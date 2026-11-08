@@ -166,7 +166,7 @@ internal class HabitEditorState(existing: Habit?) {
         reminderEnabled = true
         reminderTime = "07:00"
         alarmEnabled = true
-        alarmMission = app.tsuzuku.notifications.AlarmMission.Math
+        alarmMission = app.tsuzuku.notifications.AlarmMission.Mixed
         alarmMarkDone = true
     }
     private val generalNote = existing?.generalNote.orEmpty()
@@ -890,20 +890,17 @@ private fun WakeTemplateCard(onUse: () -> Unit) {
 @Composable
 private fun AlarmOptionsFields(state: HabitEditorState) {
     Column(Modifier.fillMaxWidth().padding(top = 10.dp)) {
-        Text(stringResource(R.string.alarm_mission_label), style = MaterialTheme.typography.bodyLarge)
-        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(top = 6.dp)) {
-            listOf(
-                app.tsuzuku.notifications.AlarmMission.None to R.string.alarm_mission_none,
-                app.tsuzuku.notifications.AlarmMission.Math to R.string.alarm_mission_math,
-                app.tsuzuku.notifications.AlarmMission.Memory to R.string.alarm_mission_memory,
-                app.tsuzuku.notifications.AlarmMission.Puzzle to R.string.alarm_mission_puzzle,
-            ).forEach { (mission, label) ->
-                FilterChip(
-                    selected = state.alarmMission == mission,
-                    onClick = { state.alarmMission = mission },
-                    label = { Text(stringResource(label)) },
-                )
+        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text(stringResource(R.string.alarm_verify_setting), style = MaterialTheme.typography.bodyLarge)
+                Text(stringResource(R.string.alarm_verify_description), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
+            Switch(
+                checked = state.alarmMission != app.tsuzuku.notifications.AlarmMission.None,
+                onCheckedChange = {
+                    state.alarmMission = if (it) app.tsuzuku.notifications.AlarmMission.Mixed else app.tsuzuku.notifications.AlarmMission.None
+                },
+            )
         }
         Row(Modifier.fillMaxWidth().padding(top = 6.dp), verticalAlignment = Alignment.CenterVertically) {
             Text(stringResource(R.string.alarm_mark_done), style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))

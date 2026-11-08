@@ -913,6 +913,9 @@
     <string name="wake_template_title">Crear una alarma para despertar</string>
     <string name="wake_template_body">Con alarma, una tarea para apagarla y una racha de despertares</string>
     <string name="wake_habit_name">Despertar</string>
+    <string name="alarm_verify_setting">Pedir una prueba para apagarla</string>
+    <string name="alarm_verify_description">Una mezcla rápida de una suma, una ronda de memoria y una caza de números, en distinto orden cada vez</string>
+    <string name="alarm_puzzle_title9">Toca del 1 al 9 en orden</string>
     <plurals name="streak_days">
         <item quantity="one">Racha de %d día</item>
         <item quantity="other">Racha de %d días</item>

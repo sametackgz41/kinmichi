@@ -913,6 +913,9 @@
     <string name="wake_template_title">Criar um alarme para acordar</string>
     <string name="wake_template_body">Com alarme, uma tarefa para desligar e uma sequência de despertar</string>
     <string name="wake_habit_name">Acordar</string>
+    <string name="alarm_verify_setting">Pedir uma verificação para desligar</string>
+    <string name="alarm_verify_description">Uma mistura rápida de uma conta, uma rodada de memória e uma caça aos números, em ordem diferente a cada vez</string>
+    <string name="alarm_puzzle_title9">Toque de 1 a 9 em ordem</string>
     <plurals name="streak_days">
         <item quantity="one">Sequência de %d dia</item>
         <item quantity="other">Sequência de %d dias</item>

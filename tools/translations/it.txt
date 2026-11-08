@@ -933,3 +933,6 @@ alarm_start_day|Inizia la giornata
 wake_template_title|Crea una sveglia
 wake_template_body|Con sveglia, una sfida per spegnerla e una serie di risvegli
 wake_habit_name|Svegliarsi
+alarm_verify_setting|Chiedi una verifica per spegnerla
+alarm_verify_description|Un breve mix di un calcolo, un turno di memoria e una caccia ai numeri, ogni volta in ordine diverso
+alarm_puzzle_title9|Tocca da 1 a 9 in ordine

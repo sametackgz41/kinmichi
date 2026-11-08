@@ -913,6 +913,9 @@
     <string name="wake_template_title">기상 알람 만들기</string>
     <string name="wake_template_body">알람, 끄기 미션, 기상 연속 기록이 준비돼요</string>
     <string name="wake_habit_name">일어나기</string>
+    <string name="alarm_verify_setting">끄려면 확인 미션 요청</string>
+    <string name="alarm_verify_description">계산, 기억력, 숫자 찾기를 섞은 짧은 미션으로 순서는 매번 바뀌어요</string>
+    <string name="alarm_puzzle_title9">1부터 9까지 순서대로 탭하세요</string>
     <plurals name="streak_days">
         <item quantity="one">%d일 연속</item>
         <item quantity="other">%d일 연속</item>

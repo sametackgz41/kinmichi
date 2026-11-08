@@ -400,6 +400,16 @@ class PreviewGalleryTest {
     @Test fun alarmMathTr() = renderAlarm("alarm_math_tr") { app.tsuzuku.notifications.MathMission(onProgress = {}, onSolved = {}, seed = 7) }
     @Test fun alarmMemoryTr() = renderAlarm("alarm_memory_tr") { app.tsuzuku.notifications.MemoryMission(onProgress = {}, onSolved = {}, seed = 3, preview = listOf(2)) }
     @Test fun alarmPuzzleTr() = renderAlarm("alarm_puzzle_tr") { app.tsuzuku.notifications.PuzzleMission(onProgress = {}, onSolved = {}, seed = 5, startAt = 6) }
+    @Test fun alarmVerify1Tr() = renderVerify(0)
+    @Test fun alarmVerify2Tr() = renderVerify(1)
+    @Test fun alarmVerify3Tr() = renderVerify(2)
+    private fun renderVerify(at: Int) = renderAlarm("alarm_verify${at + 1}_tr") {
+        app.tsuzuku.notifications.VerificationFlow(
+            onProgress = {}, onSolved = {}, seed = 11,
+            order = listOf(app.tsuzuku.notifications.VerificationTask.Math, app.tsuzuku.notifications.VerificationTask.Hunt, app.tsuzuku.notifications.VerificationTask.Memory),
+            startAt = at,
+        )
+    }
     @Test fun alarmMorningTr() = renderAlarm("alarm_morning_tr") {
         app.tsuzuku.notifications.MorningPage(
             greeting = "Günaydın", date = "9 Kasım Pazartesi", streak = 5, habits = sampleToday("tr"), onStartDay = {},

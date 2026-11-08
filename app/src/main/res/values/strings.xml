@@ -1313,4 +1313,7 @@
     <string name="wake_template_title">Set up a wake-up alarm</string>
     <string name="wake_template_body">Ready with an alarm, a task to turn it off and a wake-up streak</string>
     <string name="wake_habit_name">Wake up</string>
+    <string name="alarm_verify_setting">Ask for a check to turn it off</string>
+    <string name="alarm_verify_description">A quick mix of a sum, a memory round and a number hunt, in a new order each time</string>
+    <string name="alarm_puzzle_title9">Tap 1 to 9 in order</string>
 </resources>

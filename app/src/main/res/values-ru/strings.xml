@@ -913,6 +913,9 @@
     <string name="wake_template_title">Создать будильник для подъёма</string>
     <string name="wake_template_body">С будильником, заданием для выключения и серией подъёмов</string>
     <string name="wake_habit_name">Подъём</string>
+    <string name="alarm_verify_setting">Просить проверку для выключения</string>
+    <string name="alarm_verify_description">Короткий набор: пример, раунд на память и охота на числа, каждый раз в новом порядке</string>
+    <string name="alarm_puzzle_title9">Нажимай от 1 до 9 по порядку</string>
     <plurals name="streak_days">
         <item quantity="one">Серия %d день</item>
         <item quantity="few">Серия %d дня</item>

@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.first
 import java.time.LocalDate
 
 /** What has to be done before an alarm habit goes quiet. */
-enum class AlarmMission { None, Math, Memory, Puzzle }
+enum class AlarmMission { None, Math, Memory, Puzzle, Mixed }
 
 data class AlarmOptions(
     val on: Boolean = false,

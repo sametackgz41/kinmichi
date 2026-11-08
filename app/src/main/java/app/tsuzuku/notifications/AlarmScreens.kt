@@ -7,6 +7,7 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -158,7 +159,7 @@ internal fun mathProblem(random: Random): MathProblem = when (random.nextInt(3))
 }
 
 @Composable
-internal fun MathMission(onProgress: () -> Unit, onSolved: () -> Unit, seed: Long = System.nanoTime(), count: Int = 3) = AlarmBackdrop {
+internal fun MathMission(onProgress: () -> Unit, onSolved: () -> Unit, seed: Long = System.nanoTime(), count: Int = 3, step: Pair<Int, Int>? = null) = AlarmBackdrop {
     val random = remember { Random(seed) }
     var solved by remember { mutableIntStateOf(0) }
     var problem by remember { mutableStateOf(mathProblem(random)) }
@@ -167,7 +168,7 @@ internal fun MathMission(onProgress: () -> Unit, onSolved: () -> Unit, seed: Lon
     val answerColor by animateColorAsState(if (wrong) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface, label = "answer")
     Column(Modifier.fillMaxSize().padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         Spacer(Modifier.height(40.dp))
-        MissionHeader(stringResource(R.string.alarm_math_title), solved, count)
+        MissionHeader(stringResource(R.string.alarm_math_title), step?.first ?: solved, step?.second ?: count)
         Spacer(Modifier.weight(1f))
         Text(problem.text, style = MaterialTheme.typography.displayMedium, color = MaterialTheme.colorScheme.onSurface)
         Spacer(Modifier.height(12.dp))
@@ -218,9 +219,15 @@ internal fun MathMission(onProgress: () -> Unit, onSolved: () -> Unit, seed: Lon
 // ---- Memory -----------------------------------------------------------------------------------
 
 @Composable
-internal fun MemoryMission(onProgress: () -> Unit, onSolved: () -> Unit, seed: Long = System.nanoTime(), preview: List<Int>? = null) = AlarmBackdrop {
+internal fun MemoryMission(
+    onProgress: () -> Unit,
+    onSolved: () -> Unit,
+    seed: Long = System.nanoTime(),
+    preview: List<Int>? = null,
+    lengths: List<Int> = listOf(4, 5),
+    step: Pair<Int, Int>? = null,
+) = AlarmBackdrop {
     val random = remember { Random(seed) }
-    val lengths = listOf(4, 5)
     var round by remember { mutableIntStateOf(0) }
     var attempt by remember { mutableIntStateOf(0) }
     val sequence = remember(round, attempt) { List(lengths[round.coerceAtMost(lengths.lastIndex)]) { random.nextInt(9) } }
@@ -247,8 +254,8 @@ internal fun MemoryMission(onProgress: () -> Unit, onSolved: () -> Unit, seed: L
                     else -> R.string.alarm_memory_repeat
                 },
             ),
-            round,
-            lengths.size,
+            step?.first ?: round,
+            step?.second ?: lengths.size,
         )
         Spacer(Modifier.weight(1f))
         Column(verticalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth(0.86f)) {
@@ -295,19 +302,31 @@ internal fun MemoryMission(onProgress: () -> Unit, onSolved: () -> Unit, seed: L
 // ---- Number hunt ------------------------------------------------------------------------------
 
 @Composable
-internal fun PuzzleMission(onProgress: () -> Unit, onSolved: () -> Unit, seed: Long = System.nanoTime(), startAt: Int = 1) = AlarmBackdrop {
-    val numbers = remember { (1..16).shuffled(Random(seed)) }
+internal fun PuzzleMission(
+    onProgress: () -> Unit,
+    onSolved: () -> Unit,
+    seed: Long = System.nanoTime(),
+    startAt: Int = 1,
+    size: Int = 4,
+    step: Pair<Int, Int>? = null,
+) = AlarmBackdrop {
+    val last = size * size
+    val numbers = remember { (1..last).shuffled(Random(seed)) }
     var next by remember { mutableIntStateOf(startAt) }
     var miss by remember { mutableIntStateOf(-1) }
     LaunchedEffect(miss) { if (miss >= 0) { delay(350); miss = -1 } }
     Column(Modifier.fillMaxSize().padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         Spacer(Modifier.height(40.dp))
-        MissionHeader(stringResource(R.string.alarm_puzzle_title), next - 1, 16)
+        MissionHeader(
+            if (last == 16) stringResource(R.string.alarm_puzzle_title) else stringResource(R.string.alarm_puzzle_title9),
+            step?.first ?: (next - 1),
+            step?.second ?: last,
+        )
         Spacer(Modifier.height(8.dp))
         Text(stringResource(R.string.alarm_puzzle_next, next), style = MaterialTheme.typography.headlineSmall, color = MaterialTheme.colorScheme.primary)
         Spacer(Modifier.weight(1f))
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            numbers.chunked(4).forEach { row ->
+            numbers.chunked(size).forEach { row ->
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     row.forEach { n ->
                         val done = n < next
@@ -325,7 +344,7 @@ internal fun PuzzleMission(onProgress: () -> Unit, onSolved: () -> Unit, seed: L
                                     onProgress()
                                     if (n == next) {
                                         next++
-                                        if (next > 16) onSolved()
+                                        if (next > last) onSolved()
                                     } else {
                                         miss = n
                                     }
@@ -403,6 +422,42 @@ internal fun MorningPage(
         Spacer(Modifier.weight(1f))
         Button(onClick = onStartDay, modifier = Modifier.fillMaxWidth().height(64.dp), shape = RoundedCornerShape(24.dp)) {
             Text(stringResource(R.string.alarm_start_day), style = MaterialTheme.typography.titleMedium)
+        }
+    }
+}
+
+// ---- One verification, several kinds of task --------------------------------------------------
+
+internal enum class VerificationTask { Math, Memory, Hunt }
+
+/** A short mix: one sum, one memory round and a 1-9 number hunt, shuffled each time. */
+@Composable
+internal fun VerificationFlow(
+    onProgress: () -> Unit,
+    onSolved: () -> Unit,
+    seed: Long = System.nanoTime(),
+    order: List<VerificationTask> = remember { VerificationTask.entries.shuffled(Random(seed)) },
+    startAt: Int = 0,
+) {
+    var index by remember { mutableIntStateOf(startAt) }
+    val advance: () -> Unit = {
+        onProgress()
+        if (index + 1 >= order.size) onSolved() else index++
+    }
+    val step = index to order.size
+    androidx.compose.animation.AnimatedContent(
+        targetState = index,
+        transitionSpec = {
+            (androidx.compose.animation.slideInHorizontally { it / 3 } + androidx.compose.animation.fadeIn()) togetherWith
+                (androidx.compose.animation.slideOutHorizontally { -it / 3 } + androidx.compose.animation.fadeOut())
+        },
+        label = "verification",
+    ) { i ->
+        val taskSeed = seed + i * 7919
+        when (order[i]) {
+            VerificationTask.Math -> MathMission(onProgress, advance, seed = taskSeed, count = 1, step = step)
+            VerificationTask.Memory -> MemoryMission(onProgress, advance, seed = taskSeed, lengths = listOf(4), step = step)
+            VerificationTask.Hunt -> PuzzleMission(onProgress, advance, seed = taskSeed, size = 3, step = step)
         }
     }
 }
