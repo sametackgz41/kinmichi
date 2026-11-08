@@ -166,10 +166,21 @@ class MainActivity : FragmentActivity() {
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        routeFor(intent)?.let { launchRoute = it }
+        setIntent(intent)
+        // Reset first so the same screen asked for twice in a row still opens again.
+        routeFor(intent)?.let { route ->
+            launchRoute = null
+            window.decorView.post { launchRoute = route }
+        }
     }
 
-    private fun routeFor(intent: Intent?): String? = when (intent?.action) {
+    private fun routeFor(intent: Intent?): String? = when {
+        // Reopened from recents: the old request was already handled back then.
+        intent == null || intent.flags and Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY != 0 -> null
+        else -> routeForAction(intent)
+    }
+
+    private fun routeForAction(intent: Intent): String? = when (intent.action) {
         ACTION_ADD_HABIT -> {
             app.tsuzuku.ui.NewHabitTemplate.offer(intent)
             "habit/new"

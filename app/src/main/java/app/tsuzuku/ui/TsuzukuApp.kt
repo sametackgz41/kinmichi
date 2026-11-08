@@ -155,6 +155,8 @@ fun TsuzukuApp(
     val navController = rememberNavController()
     LaunchedEffect(launchRoute) {
         val route = launchRoute ?: return@LaunchedEffect
+        // A new pre-filled habit replaces one that is already open, so its values show.
+        if (route == "habit/new" && navController.currentDestination?.route == "habit/new") navController.popBackStack()
         navController.navigate(route) {
             if (route == "progress") {
                 popUpTo(navController.graph.findStartDestination().id) { saveState = true }

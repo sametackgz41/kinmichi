@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tile_label">Habitudes du jour</string>
+    <string name="tile_description">Coche les habitudes du jour depuis ta montre</string>
+    <string name="tile_title">Aujourd\'hui</string>
+    <string name="tile_title_progress">Aujourd\'hui %1$d/%2$d</string>
+    <string name="tile_waiting">Ouvre Kinmichi sur ton téléphone pour synchroniser</string>
+    <string name="tile_nothing_today">Rien de prévu aujourd\'hui</string>
+    <string name="tile_all_done">Tout est fait pour aujourd\'hui 🎉</string>
+    <string name="tile_open_all">Tout</string>
+    <string name="tile_refresh">Actualiser</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tile_label">Привычки на сегодня</string>
+    <string name="tile_description">Отмечай сегодняшние привычки с часов</string>
+    <string name="tile_title">Сегодня</string>
+    <string name="tile_title_progress">Сегодня %1$d/%2$d</string>
+    <string name="tile_waiting">Открой Kinmichi на телефоне для синхронизации</string>
+    <string name="tile_nothing_today">На сегодня ничего не запланировано</string>
+    <string name="tile_all_done">На сегодня всё готово 🎉</string>
+    <string name="tile_open_all">Все</string>
+    <string name="tile_refresh">Обновить</string>
+</resources>
