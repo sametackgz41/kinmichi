@@ -1116,3 +1116,4 @@ widget_alarm_none|Ainda sem alarme. Toque para criar um
 widget_alarm_today|Hoje
 widget_alarm_tomorrow|Amanhã
 widget_alarm_off|Desligado
+widget_alarm_on|Ligado

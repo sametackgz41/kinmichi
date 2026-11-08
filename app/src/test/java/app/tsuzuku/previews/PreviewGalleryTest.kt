@@ -1207,6 +1207,39 @@ class PreviewGalleryTest {
     @Test fun widgetsKoLight() = renderWidgets("ko", false)
     @Test fun widgetsKoDark() = renderWidgets("ko", true)
 
+    @Test fun alarmStylesLight() = renderAlarmStyles(false)
+    @Test fun alarmStylesDark() = renderAlarmStyles(true)
+
+    @Test fun ringStylesLight() = renderRingStyles(false)
+    @Test fun ringStylesDark() = renderRingStyles(true)
+
+    private fun renderRingStyles(dark: Boolean) {
+        setVariant("tr", dark)
+        val mode = if (dark) "dark" else "light"
+        val base = sampleToday("tr")
+        listOf(1, 3, 5).forEach { doneCount ->
+            val habits = base.mapIndexed { i, t -> if (i < doneCount) t.copy(status = HabitDayStatus.Completed, progress = t.habit.target) else t.copy(status = HabitDayStatus.Pending, progress = 0.0) }
+            app.tsuzuku.widget.RingStyle.entries.forEach { style ->
+                renderWidget("ringstyle_${style.name.lowercase()}_${doneCount}_$mode", 110, 110) {
+                    TsuzukuGlanceTheme { app.tsuzuku.widget.RingStyled(habits, locked = false, style = style) }
+                }
+            }
+        }
+    }
+
+    private fun renderAlarmStyles(dark: Boolean) {
+        setVariant("tr", dark)
+        val mode = if (dark) "dark" else "light"
+        listOf(true, false).forEach { on ->
+            val wake = app.tsuzuku.widget.NextAlarm(1, "Uyan", "⏰", java.time.ZonedDateTime.now().plusDays(1).withHour(7).withMinute(0), on = on)
+            app.tsuzuku.widget.AlarmStyle.entries.forEach { style ->
+                renderWidget("alarmstyle_${style.name.lowercase()}_${if (on) "on" else "off"}_$mode", 300, 96) {
+                    TsuzukuGlanceTheme { app.tsuzuku.widget.AlarmStyled(wake, style) }
+                }
+            }
+        }
+    }
+
     private fun renderWidgets(lang: String, dark: Boolean) {
         setVariant(lang, dark)
         val suffix = "${lang}_${if (dark) "dark" else "light"}"

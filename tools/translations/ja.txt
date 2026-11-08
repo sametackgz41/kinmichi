@@ -1110,3 +1110,4 @@ widget_alarm_none|アラームはまだありません。タップで設定
 widget_alarm_today|今日
 widget_alarm_tomorrow|明日
 widget_alarm_off|オフ
+widget_alarm_on|オン

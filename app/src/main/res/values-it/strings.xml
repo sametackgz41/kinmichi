@@ -1096,6 +1096,7 @@
     <string name="widget_alarm_today">Oggi</string>
     <string name="widget_alarm_tomorrow">Domani</string>
     <string name="widget_alarm_off">Spenta</string>
+    <string name="widget_alarm_on">Accesa</string>
     <plurals name="streak_days">
         <item quantity="one">Serie di %d giorno</item>
         <item quantity="other">Serie di %d giorni</item>

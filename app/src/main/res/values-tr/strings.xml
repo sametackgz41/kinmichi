@@ -1495,4 +1495,5 @@
     <string name="widget_alarm_today">Bugün</string>
     <string name="widget_alarm_tomorrow">Yarın</string>
     <string name="widget_alarm_off">Kapalı</string>
+    <string name="widget_alarm_on">Açık</string>
 </resources>

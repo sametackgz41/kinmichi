@@ -1096,6 +1096,7 @@
     <string name="widget_alarm_today">今日</string>
     <string name="widget_alarm_tomorrow">明日</string>
     <string name="widget_alarm_off">オフ</string>
+    <string name="widget_alarm_on">オン</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

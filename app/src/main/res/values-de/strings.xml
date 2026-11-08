@@ -1096,6 +1096,7 @@
     <string name="widget_alarm_today">Heute</string>
     <string name="widget_alarm_tomorrow">Morgen</string>
     <string name="widget_alarm_off">Aus</string>
+    <string name="widget_alarm_on">An</string>
     <plurals name="streak_days">
         <item quantity="one">%d Tag in Folge</item>
         <item quantity="other">%d Tage in Folge</item>

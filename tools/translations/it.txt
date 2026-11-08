@@ -1116,3 +1116,4 @@ widget_alarm_none|Nessuna sveglia. Tocca per crearne una
 widget_alarm_today|Oggi
 widget_alarm_tomorrow|Domani
 widget_alarm_off|Spenta
+widget_alarm_on|Accesa

@@ -1116,3 +1116,4 @@ widget_alarm_none|알람이 없어요. 탭해서 기상 알람 만들기
 widget_alarm_today|오늘
 widget_alarm_tomorrow|내일
 widget_alarm_off|꺼짐
+widget_alarm_on|켜짐

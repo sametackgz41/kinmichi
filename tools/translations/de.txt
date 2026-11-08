@@ -1116,3 +1116,4 @@ widget_alarm_none|Noch kein Wecker. Tippen, um einen einzurichten
 widget_alarm_today|Heute
 widget_alarm_tomorrow|Morgen
 widget_alarm_off|Aus
+widget_alarm_on|An

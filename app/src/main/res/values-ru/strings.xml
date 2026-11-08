@@ -1096,6 +1096,7 @@
     <string name="widget_alarm_today">Сегодня</string>
     <string name="widget_alarm_tomorrow">Завтра</string>
     <string name="widget_alarm_off">Выключен</string>
+    <string name="widget_alarm_on">Включён</string>
     <plurals name="streak_days">
         <item quantity="one">Серия %d день</item>
         <item quantity="few">Серия %d дня</item>

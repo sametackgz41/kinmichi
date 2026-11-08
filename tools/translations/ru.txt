@@ -1128,3 +1128,4 @@ widget_alarm_none|Будильника пока нет. Нажми, чтобы �
 widget_alarm_today|Сегодня
 widget_alarm_tomorrow|Завтра
 widget_alarm_off|Выключен
+widget_alarm_on|Включён

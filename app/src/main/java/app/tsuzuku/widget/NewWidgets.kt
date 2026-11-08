@@ -177,33 +177,7 @@ class RingWidgetReceiver : GlanceAppWidgetReceiver() {
 }
 
 @Composable
-internal fun RingContent(habits: List<TodayHabit>, locked: Boolean) {
-    val context = LocalContext.current
-    val density = context.resources.displayMetrics.density
-    val total = habits.size
-    val done = habits.count(TodayHabit::isComplete)
-    val fraction = if (locked || total == 0) 0f else done.toFloat() / total
-    val primary = GlanceTheme.colors.primary.getColor(context).toArgb()
-    val gold = GlanceTheme.colors.tertiary.getColor(context).toArgb()
-    Box(
-        GlanceModifier.fillMaxSize().background(tsuzukuWidgetBackground()).cornerRadius(28.dp).padding(8.dp).clickable(actionStartActivity<HomeActivity>()),
-        contentAlignment = Alignment.Center,
-    ) {
-        val px = (84 * density).toInt()
-        Image(
-            ImageProvider(ringBitmap(px, fraction, GlanceTheme.colors.surfaceVariant.getColor(context).toArgb(), if (fraction >= 1f) gold else primary, 7f * density)),
-            null,
-            GlanceModifier.size(84.dp),
-        )
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(
-                if (locked) "·" else "%${(fraction * 100).toInt()}",
-                style = TextStyle(color = GlanceTheme.colors.onSurface, fontSize = 18.sp, fontWeight = FontWeight.Bold, fontFamily = FontFamily.Serif),
-            )
-            if (!locked && total > 0) Text("$done/$total", style = TextStyle(color = GlanceTheme.colors.onSurfaceVariant, fontSize = 11.sp))
-        }
-    }
-}
+internal fun RingContent(habits: List<TodayHabit>, locked: Boolean) = RingStyled(habits, locked, RingStyle.Enso)
 
 // ---------------------------------------------------------------------------------------------
 // Mini heatmap: the last 13 weeks as small squares; comeback days are ringed in gold.
@@ -352,34 +326,5 @@ internal fun AlarmContent(alarm: NextAlarm?, today: LocalDate = LocalDate.now())
         }
         return
     }
-    val day = when (alarm.at.toLocalDate()) {
-        today -> context.getString(R.string.widget_alarm_today)
-        today.plusDays(1) -> context.getString(R.string.widget_alarm_tomorrow)
-        else -> alarm.at.dayOfWeek.getDisplayName(DayStyle.FULL, locale).replaceFirstChar { it.titlecase(locale) }
-    }
-    Row(
-        GlanceModifier.fillMaxSize().background(tsuzukuWidgetBackground()).cornerRadius(28.dp).padding(horizontal = 16.dp, vertical = 8.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Column(GlanceModifier.defaultWeight().clickable(actionStartActivity<HomeActivity>())) {
-            Text("${alarm.emoji} ${alarm.name}".trim(), style = TextStyle(color = GlanceTheme.colors.onSurfaceVariant, fontSize = 12.sp), maxLines = 1)
-            Text(
-                formatClock(alarm.at.hour * 60 + alarm.at.minute, locale),
-                style = TextStyle(
-                    color = if (alarm.on) GlanceTheme.colors.onSurface else GlanceTheme.colors.outline,
-                    fontSize = 28.sp, fontWeight = FontWeight.Bold, fontFamily = FontFamily.Serif,
-                ),
-            )
-            Text(if (alarm.on) day else context.getString(R.string.widget_alarm_off), style = TextStyle(color = GlanceTheme.colors.primary, fontSize = 12.sp))
-        }
-        val params = actionParametersOf(HabitIdKey to alarm.habitId)
-        Box(
-            GlanceModifier.size(48.dp).cornerRadius(24.dp)
-                .background(if (alarm.on) GlanceTheme.colors.primary else GlanceTheme.colors.surfaceVariant)
-                .clickable(actionRunCallback<ToggleAlarmAction>(params)),
-            contentAlignment = Alignment.Center,
-        ) {
-            Text(if (alarm.on) "⏰" else "💤", style = TextStyle(fontSize = 20.sp))
-        }
-    }
+    AlarmStyled(alarm, AlarmStyle.Sunrise, today)
 }
