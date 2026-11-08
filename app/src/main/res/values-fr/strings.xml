@@ -914,7 +914,7 @@
     <string name="wake_template_body">Avec une alarme, une tâche pour l\'arrêter et une série de réveils</string>
     <string name="wake_habit_name">Se lever</string>
     <string name="alarm_verify_setting">Demander une vérification pour l\'arrêter</string>
-    <string name="alarm_verify_description">Un court mélange d\'un calcul, d\'une manche de mémoire et d\'une chasse aux nombres, dans un ordre différent à chaque fois</string>
+    <string name="alarm_verify_description">Six étapes rapides : deux calculs, deux manches de mémoire et deux chasses aux nombres, dans un ordre différent à chaque fois</string>
     <string name="alarm_puzzle_title9">Touche de 1 à 9 dans l\'ordre</string>
     <plurals name="streak_days">
         <item quantity="one">Série de %d jour</item>

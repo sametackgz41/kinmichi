@@ -430,13 +430,13 @@ internal fun MorningPage(
 
 internal enum class VerificationTask { Math, Memory, Hunt }
 
-/** A short mix: one sum, one memory round and a 1-9 number hunt, shuffled each time. */
+/** Two of each task (sum, memory round, 1-9 number hunt), shuffled so the same kind never comes twice in a row. */
 @Composable
 internal fun VerificationFlow(
     onProgress: () -> Unit,
     onSolved: () -> Unit,
     seed: Long = System.nanoTime(),
-    order: List<VerificationTask> = remember { VerificationTask.entries.shuffled(Random(seed)) },
+    order: List<VerificationTask> = remember { verificationOrder(Random(seed)) },
     startAt: Int = 0,
 ) {
     var index by remember { mutableIntStateOf(startAt) }
@@ -460,4 +460,13 @@ internal fun VerificationFlow(
             VerificationTask.Hunt -> PuzzleMission(onProgress, advance, seed = taskSeed, size = 3, step = step)
         }
     }
+}
+
+internal fun verificationOrder(random: Random, each: Int = 2): List<VerificationTask> {
+    val pool = VerificationTask.entries.flatMap { task -> List(each) { task } }
+    repeat(50) {
+        val order = pool.shuffled(random)
+        if (order.zipWithNext().none { (a, b) -> a == b }) return order
+    }
+    return List(each) { VerificationTask.entries }.flatten()
 }

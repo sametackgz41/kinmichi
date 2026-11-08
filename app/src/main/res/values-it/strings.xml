@@ -914,7 +914,7 @@
     <string name="wake_template_body">Con sveglia, una sfida per spegnerla e una serie di risvegli</string>
     <string name="wake_habit_name">Svegliarsi</string>
     <string name="alarm_verify_setting">Chiedi una verifica per spegnerla</string>
-    <string name="alarm_verify_description">Un breve mix di un calcolo, un turno di memoria e una caccia ai numeri, ogni volta in ordine diverso</string>
+    <string name="alarm_verify_description">Sei passi veloci: due calcoli, due turni di memoria e due cacce ai numeri, ogni volta in ordine diverso</string>
     <string name="alarm_puzzle_title9">Tocca da 1 a 9 in ordine</string>
     <plurals name="streak_days">
         <item quantity="one">Serie di %d giorno</item>

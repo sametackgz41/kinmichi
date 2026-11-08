@@ -928,5 +928,5 @@ wake_template_title|起床アラームを作る
 wake_template_body|アラーム、止めるためのタスク、起床の連続記録つき
 wake_habit_name|起きる
 alarm_verify_setting|止めるときに確認を求める
-alarm_verify_description|計算・記憶・数字さがしの短いミックス。順番は毎回変わります
+alarm_verify_description|6つの短いステップ：計算2問、記憶2回、数字さがし2回。順番は毎回変わります
 alarm_puzzle_title9|1から9まで順にタップ

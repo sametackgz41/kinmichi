@@ -914,7 +914,7 @@
     <string name="wake_template_body">С будильником, заданием для выключения и серией подъёмов</string>
     <string name="wake_habit_name">Подъём</string>
     <string name="alarm_verify_setting">Просить проверку для выключения</string>
-    <string name="alarm_verify_description">Короткий набор: пример, раунд на память и охота на числа, каждый раз в новом порядке</string>
+    <string name="alarm_verify_description">Шесть коротких шагов: два примера, два раунда на память и две охоты на числа, каждый раз в новом порядке</string>
     <string name="alarm_puzzle_title9">Нажимай от 1 до 9 по порядку</string>
     <plurals name="streak_days">
         <item quantity="one">Серия %d день</item>

@@ -914,7 +914,7 @@
     <string name="wake_template_body">Mit Wecker, Aufgabe zum Ausschalten und Aufsteh-Serie</string>
     <string name="wake_habit_name">Aufstehen</string>
     <string name="alarm_verify_setting">Zum Ausschalten eine Prüfung verlangen</string>
-    <string name="alarm_verify_description">Ein kurzer Mix aus Rechnung, Gedächtnisrunde und Zahlenjagd, jedes Mal anders sortiert</string>
+    <string name="alarm_verify_description">Sechs kurze Schritte: zwei Rechnungen, zwei Gedächtnisrunden und zwei Zahlenjagden, jedes Mal anders sortiert</string>
     <string name="alarm_puzzle_title9">Tippe 1 bis 9 der Reihe nach</string>
     <plurals name="streak_days">
         <item quantity="one">%d Tag in Folge</item>

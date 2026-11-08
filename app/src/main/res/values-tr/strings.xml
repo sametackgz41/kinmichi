@@ -1313,6 +1313,6 @@
     <string name="wake_template_body">Alarm, susturma görevi ve uyanma serisi hazır gelir</string>
     <string name="wake_habit_name">Uyan</string>
     <string name="alarm_verify_setting">Susturmak için doğrulama iste</string>
-    <string name="alarm_verify_description">Bir işlem, bir hafıza turu ve bir sayı avından oluşan kısa bir karışım; sırası her seferinde değişir</string>
+    <string name="alarm_verify_description">Altı kısa adım: iki işlem, iki hafıza turu ve iki sayı avı; sırası her seferinde değişir</string>
     <string name="alarm_puzzle_title9">1\'den 9\'a sırayla dokun</string>
 </resources>
