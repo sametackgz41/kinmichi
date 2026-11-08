@@ -108,6 +108,9 @@ fun StatisticsScreen(
     skipReasonStats: Map<SkipReasonType, Int> = emptyMap(),
     moodInsights: app.tsuzuku.model.MoodInsights? = null,
     initialTab: StatisticsTab = StatisticsTab.General,
+    moods: Map<LocalDate, Int> = emptyMap(),
+    weekStartsMonday: Boolean = true,
+    onShareWeek: (WeekSummary) -> Unit = {},
 ) {
     var currentTab by rememberSaveable(initialTab) { mutableStateOf(initialTab) }
     var reviewSubTab by rememberSaveable { mutableStateOf(ReviewSubTab.Weekly) }
@@ -160,6 +163,10 @@ fun StatisticsScreen(
                         }
                     }
                 }
+                item {
+                    val week = remember(history) { weekSummary(history, LocalDate.now()) }
+                    WeeklySummaryCard(week) { onShareWeek(week) }
+                }
                 if (moodInsights != null) {
                     item { MoodInsightsCard(moodInsights) }
                 }
@@ -191,15 +198,17 @@ fun StatisticsScreen(
                         ) {
                             Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
                                 Text(stringResource(R.string.completion_rate), style = MaterialTheme.typography.titleMedium)
-                                Text(percentText(filteredRate), style = MaterialTheme.typography.displaySmall, fontWeight = FontWeight.Bold)
+                                val shownRate = countUp(filteredRate)
+                                Text(percentText(shownRate), style = MaterialTheme.typography.displaySmall, fontWeight = FontWeight.Bold)
                                 Text(
                                     stringResource(R.string.completed_scheduled, filteredCompleted, filteredScheduled),
                                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                                 )
                             }
                             Box(contentAlignment = Alignment.Center) {
+                                val ringRate = countUp(filteredRate)
                                 androidx.compose.material3.CircularWavyProgressIndicator(
-                                    progress = { filteredRate },
+                                    progress = { ringRate },
                                     modifier = Modifier.size(96.dp),
                                     stroke = androidx.compose.ui.graphics.drawscope.Stroke(width = with(androidx.compose.ui.platform.LocalDensity.current) { 10.dp.toPx() }, cap = androidx.compose.ui.graphics.StrokeCap.Round),
                                     trackStroke = androidx.compose.ui.graphics.drawscope.Stroke(width = with(androidx.compose.ui.platform.LocalDensity.current) { 10.dp.toPx() }, cap = androidx.compose.ui.graphics.StrokeCap.Round),
@@ -227,6 +236,7 @@ fun StatisticsScreen(
             }
 
             StatisticsTab.Heatmap -> {
+                item { MonthCalendarCard(history, moods, weekStartsMonday) }
                 item {
                     HeatmapCalendarView(
                         days = heatmapDays,
@@ -439,7 +449,7 @@ fun StatisticsScreen(
                                         }
                                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                                             Text(stringResource(R.string.total_focus_label), style = MaterialTheme.typography.bodyMedium)
-                                            Text("${summary.totalFocusMinutes / 60} saat", fontWeight = FontWeight.Bold)
+                                            Text(stringResource(R.string.hours_count, summary.totalFocusMinutes / 60), fontWeight = FontWeight.Bold)
                                         }
                                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                                             Text(stringResource(R.string.completed_goals_label), style = MaterialTheme.typography.bodyMedium)
@@ -487,7 +497,7 @@ fun StatisticsScreen(
                                     icon = "⚡",
                                     title = stringResource(R.string.most_productive_day),
                                     value = records.mostProductiveDayName,
-                                    subtitle = "${records.mostProductiveDayCount} tamamlama",
+                                    subtitle = stringResource(R.string.completions_count, records.mostProductiveDayCount),
                                     modifier = Modifier.weight(1f),
                                 )
                             }
@@ -495,7 +505,7 @@ fun StatisticsScreen(
                                 RecordTile(
                                     icon = "⏱️",
                                     title = stringResource(R.string.total_focus),
-                                    value = "${records.totalFocusHours} saat",
+                                    value = stringResource(R.string.hours_count, records.totalFocusHours),
                                     subtitle = stringResource(R.string.deep_work),
                                     modifier = Modifier.weight(1f),
                                 )
@@ -513,9 +523,7 @@ fun StatisticsScreen(
                         Spacer(Modifier.height(4.dp))
                         Text(stringResource(R.string.milestones_and_badges), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                     }
-                    items(records.milestones) { milestone ->
-                        MilestoneBadgeCard(milestone)
-                    }
+                    item { BadgeShowcase(records.milestones) { milestoneTitle(it) } }
                 }
             }
 
@@ -727,7 +735,8 @@ private fun HabitStatisticCard(stat: HabitPeriodStat) {
                 }
                 Text(percentText(stat.completionRate), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
             }
-            androidx.compose.material3.LinearWavyProgressIndicator(progress = { stat.completionRate }, modifier = Modifier.fillMaxWidth())
+            val grown = countUp(stat.completionRate)
+            androidx.compose.material3.LinearWavyProgressIndicator(progress = { grown }, modifier = Modifier.fillMaxWidth())
             Text(
                 stringResource(R.string.streak_pair, stat.currentStreak, stat.bestStreak),
                 style = MaterialTheme.typography.bodySmall,
@@ -764,3 +773,4 @@ private fun percentText(rate: Number): String {
 
 /** Range chip value for "all time" on the Progress screen. */
 private const val ALL_TIME = 0
+

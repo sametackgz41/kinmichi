@@ -1035,3 +1035,21 @@ emoji_home|Zuhause
 emoji_work|Arbeit & Geld
 emoji_social|Menschen
 emoji_symbols|Symbole
+week_summary_title|Diese Woche
+week_summary_up|▲ %1$d Pkt. besser als letzte Woche
+week_summary_down|▼ %1$d Pkt. weniger als letzte Woche
+week_summary_same|wie letzte Woche
+week_summary_line|%1$d von %2$d erledigt · %3$d perfekte Tage
+share_progress|Fortschritt teilen
+share_week_text|Meine Woche mit Kinmichi: %1$d%% meiner Gewohnheiten erledigt.
+share_week_tagline|ein ruhiger Gewohnheitstracker
+calendar_mode_done|Erledigt
+calendar_mode_mood|Stimmung
+badges_earned|%1$d von %2$d verdient
+clean_days_title|Saubere Serie
+clean_days_unit|Tage
+clean_days_line|Bestwert %1$d Tage · insgesamt %2$d saubere Tage
+savings_per_day|Ersparnis pro sauberem Tag
+savings_total|Bisher gespart: %1$s
+completions_count|%1$d erledigt
+hours_count|%1$d Std.

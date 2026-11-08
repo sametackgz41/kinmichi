@@ -593,6 +593,14 @@ fun TsuzukuApp(
                             StatisticsScreen(
                                 history = history,
                                 libraryItems = emptyList(),
+                                moods = moodsByDay,
+                                weekStartsMonday = settings.weekStart == WeekStartPreference.Monday,
+                                onShareWeek = { w ->
+                                    app.tsuzuku.share.shareWeekCard(
+                                        context,
+                                        app.tsuzuku.share.WeekCardData(w.rate, w.completed, w.scheduled, w.perfectDays, w.dayFractions, w.bestDay),
+                                    )
+                                },
                                 heatmapDays = heatmapDays,
                                 selectedHeatmapHabitId = selectedHeatmapHabitId,
                                 onSelectHeatmapHabitId = reviewViewModel::setHeatmapHabitId,

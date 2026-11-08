@@ -1015,6 +1015,24 @@
     <string name="emoji_work">仕事とお金</string>
     <string name="emoji_social">人</string>
     <string name="emoji_symbols">記号</string>
+    <string name="week_summary_title">今週</string>
+    <string name="week_summary_up">▲ 先週より%1$dポイント上</string>
+    <string name="week_summary_down">▼ 先週より%1$dポイント下</string>
+    <string name="week_summary_same">先週と同じ</string>
+    <string name="week_summary_line">%2$d件中%1$d件完了・完璧な日 %3$d日</string>
+    <string name="share_progress">進捗を共有</string>
+    <string name="share_week_text">Kinmichiでの1週間：習慣の%1$d%%を達成。</string>
+    <string name="share_week_tagline">穏やかな習慣トラッカー</string>
+    <string name="calendar_mode_done">達成</string>
+    <string name="calendar_mode_mood">気分</string>
+    <string name="badges_earned">%2$d個中%1$d個獲得</string>
+    <string name="clean_days_title">クリーンな連続日数</string>
+    <string name="clean_days_unit">日</string>
+    <string name="clean_days_line">最長%1$d日・合計%2$d日</string>
+    <string name="savings_per_day">1日あたりの節約額</string>
+    <string name="savings_total">これまでに%1$sを節約</string>
+    <string name="completions_count">%1$d回達成</string>
+    <string name="hours_count">%1$d時間</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

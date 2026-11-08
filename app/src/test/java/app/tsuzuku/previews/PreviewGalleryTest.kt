@@ -797,6 +797,67 @@ class PreviewGalleryTest {
         captureScreen("progress_${lang}_${if (dark) "dark" else "light"}")
     }
 
+    // Package C: weekly card, month calendar (done / mood), badge showcase, clean days, share card.
+    @Test fun progressPackageCTr() {
+        setVariant("tr", false)
+        val history = sampleHistory("tr")
+        val today = LocalDate.now()
+        val moods = (0L..40L).associate { today.minusDays(it) to (1 + ((it * 7 + 3) % 5)).toInt() }
+        val milestones = listOf(
+            app.tsuzuku.model.PersonalMilestone("streak_7", "", "", "🔥", 7, 7, true),
+            app.tsuzuku.model.PersonalMilestone("streak_30", "", "", "🏆", 16, 30, false),
+            app.tsuzuku.model.PersonalMilestone("completions_100", "", "", "💯", 100, 100, true),
+            app.tsuzuku.model.PersonalMilestone("comeback_1", "", "", "✨", 1, 1, true),
+            app.tsuzuku.model.PersonalMilestone("focus_10", "", "", "⏱️", 4, 10, false),
+            app.tsuzuku.model.PersonalMilestone("goals_1", "", "", "🎯", 0, 1, false),
+        )
+        val records = app.tsuzuku.model.PersonalRecords(16, "Kitap oku", "Salı", 41, 12, 230, 2, 3, milestones)
+        val tab = mutableStateOf(app.tsuzuku.ui.screens.StatisticsTab.General)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false) {
+                Shell(title = androidx.compose.ui.res.stringResource(app.tsuzuku.R.string.progress_tab), route = "progress", profile = "Samet") { modifier ->
+                    Box(modifier) {
+                        androidx.compose.runtime.key(tab.value) {
+                            StatisticsScreen(history = history, libraryItems = emptyList(), moods = moods, personalRecords = records, initialTab = tab.value)
+                        }
+                    }
+                }
+            }
+        }
+        compose.mainClock.advanceTimeBy(1500)
+        captureScreen("progressC_week_tr")
+        tab.value = app.tsuzuku.ui.screens.StatisticsTab.Heatmap
+        compose.mainClock.advanceTimeBy(1000)
+        captureScreen("progressC_month_tr")
+        compose.onNodeWithText("Ruh hali").performClick()
+        compose.mainClock.advanceTimeBy(800)
+        captureScreen("progressC_mood_tr")
+        tab.value = app.tsuzuku.ui.screens.StatisticsTab.Records
+        compose.mainClock.advanceTimeBy(1000)
+        compose.onNode(androidx.compose.ui.test.hasScrollToNodeAction()).performScrollToNode(androidx.compose.ui.test.hasText("Rozet", substring = true))
+        compose.mainClock.advanceTimeBy(600)
+        captureScreen("progressC_badges_tr")
+        val ctx = ApplicationProvider.getApplicationContext<android.content.Context>()
+        val w = app.tsuzuku.ui.screens.weekSummary(history, today)
+        val bmp = app.tsuzuku.share.renderWeekCard(ctx, app.tsuzuku.share.WeekCardData(w.rate, w.completed, w.scheduled, w.perfectDays, w.dayFractions, w.bestDay))
+        save("progressC_sharecard_tr", bmp)
+    }
+
+    @Test fun cleanDaysTr() {
+        setVariant("tr", false)
+        val today = LocalDate.now()
+        val quit = sampleToday("tr")[0].habit.copy(name = "Sigara yok", emoji = "🚭", direction = app.tsuzuku.model.HabitDirection.Quit,
+            maximumTarget = 0.0, createdOn = today.minusDays(60), type = HabitType.Count, unit = "adet")
+        val records = listOf(40L, 25L).map { HabitHistoryRecord(quit.id, today.minusDays(it), 3.0, HabitDayStatus.Pending) }
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false) {
+                app.tsuzuku.ui.screens.HabitDetailScreen(habit = quit, records = records, onBack = {}, onEdit = {}, onSaveNote = {}, onArchive = {}, onDuplicate = {}, onDelete = {})
+            }
+        }
+        compose.mainClock.advanceTimeBy(1500)
+        captureScreen("progressC_clean_tr")
+    }
+
     @Test fun editorTrLight() = renderEditorAndSettings("tr", false)
     @Test fun editorTrDark() = renderEditorAndSettings("tr", true)
     @Test fun editorEnLight() = renderEditorAndSettings("en", false)

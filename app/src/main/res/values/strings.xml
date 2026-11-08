@@ -1415,4 +1415,22 @@
     <string name="emoji_work">Work &amp; money</string>
     <string name="emoji_social">People</string>
     <string name="emoji_symbols">Symbols</string>
+    <string name="week_summary_title">This week</string>
+    <string name="week_summary_up">▲ %1$d pts vs last week</string>
+    <string name="week_summary_down">▼ %1$d pts vs last week</string>
+    <string name="week_summary_same">same as last week</string>
+    <string name="week_summary_line">%1$d of %2$d done · %3$d perfect days</string>
+    <string name="share_progress">Share progress</string>
+    <string name="share_week_text">My week with Kinmichi: %1$d%% of my habits done.</string>
+    <string name="share_week_tagline">a calm habit tracker</string>
+    <string name="calendar_mode_done">Completion</string>
+    <string name="calendar_mode_mood">Mood</string>
+    <string name="badges_earned">%1$d of %2$d earned</string>
+    <string name="clean_days_title">Clean streak</string>
+    <string name="clean_days_unit">days</string>
+    <string name="clean_days_line">Best %1$d days · %2$d clean days in total</string>
+    <string name="savings_per_day">Saved per clean day</string>
+    <string name="savings_total">So far: %1$s saved</string>
+    <string name="completions_count">%1$d completions</string>
+    <string name="hours_count">%1$d h</string>
 </resources>

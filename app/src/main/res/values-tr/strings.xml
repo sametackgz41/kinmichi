@@ -1414,4 +1414,22 @@
     <string name="emoji_work">İş ve para</string>
     <string name="emoji_social">İnsanlar</string>
     <string name="emoji_symbols">Semboller</string>
+    <string name="week_summary_title">Bu hafta</string>
+    <string name="week_summary_up">▲ geçen haftadan %1$d puan iyi</string>
+    <string name="week_summary_down">▼ geçen haftadan %1$d puan az</string>
+    <string name="week_summary_same">geçen haftayla aynı</string>
+    <string name="week_summary_line">%2$d alışkanlığın %1$d tanesi · %3$d kusursuz gün</string>
+    <string name="share_progress">İlerlemeyi paylaş</string>
+    <string name="share_week_text">Kinmichi ile haftam: alışkanlıklarımın %%%1$d kadarı tamam.</string>
+    <string name="share_week_tagline">sakin bir alışkanlık uygulaması</string>
+    <string name="calendar_mode_done">Tamamlama</string>
+    <string name="calendar_mode_mood">Ruh hali</string>
+    <string name="badges_earned">%2$d rozetten %1$d tanesi kazanıldı</string>
+    <string name="clean_days_title">Temiz seri</string>
+    <string name="clean_days_unit">gün</string>
+    <string name="clean_days_line">En iyi %1$d gün · toplam %2$d temiz gün</string>
+    <string name="savings_per_day">Temiz gün başına tasarruf</string>
+    <string name="savings_total">Şimdiye kadar %1$s biriktirdin</string>
+    <string name="completions_count">%1$d tamamlama</string>
+    <string name="hours_count">%1$d saat</string>
 </resources>

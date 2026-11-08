@@ -1047,3 +1047,21 @@ emoji_home|Дом
 emoji_work|Работа и деньги
 emoji_social|Люди
 emoji_symbols|Символы
+week_summary_title|Эта неделя
+week_summary_up|▲ на %1$d п. лучше прошлой недели
+week_summary_down|▼ на %1$d п. ниже прошлой недели
+week_summary_same|как на прошлой неделе
+week_summary_line|Выполнено %1$d из %2$d · идеальных дней: %3$d
+share_progress|Поделиться прогрессом
+share_week_text|Моя неделя с Kinmichi: выполнено %1$d%% привычек.
+share_week_tagline|спокойный трекер привычек
+calendar_mode_done|Выполнение
+calendar_mode_mood|Настроение
+badges_earned|Получено %1$d из %2$d
+clean_days_title|Чистая серия
+clean_days_unit|дн.
+clean_days_line|Лучшая %1$d дн. · всего чистых дней: %2$d
+savings_per_day|Экономия за чистый день
+savings_total|Сэкономлено: %1$s
+completions_count|%1$d выполнений
+hours_count|%1$d ч
