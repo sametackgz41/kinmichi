@@ -99,6 +99,7 @@ internal fun HabitRow(
     onOpenSkipDialog: () -> Unit,
     onUndoSkip: () -> Unit,
     modifier: Modifier = Modifier,
+    compact: Boolean = false,
 ) {
     val habit = todayHabit.habit
     val accent = Color(habit.colorArgb.toInt())
@@ -143,19 +144,19 @@ internal fun HabitRow(
             },
     ) {
         Row(
-            Modifier.padding(start = 14.dp, end = 8.dp, top = 10.dp, bottom = 10.dp),
+            Modifier.padding(start = 14.dp, end = 8.dp, top = if (compact) 4.dp else 10.dp, bottom = if (compact) 4.dp else 10.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Box(
                 Modifier
-                    .size(42.dp)
+                    .size(if (compact) 32.dp else 42.dp)
                     .alpha(contentAlpha)
                     .background(accent.copy(alpha = 0.16f), androidx.compose.foundation.shape.RoundedCornerShape(14.dp)),
                 contentAlignment = Alignment.Center,
             ) {
-                Text(habit.emoji, fontSize = 22.sp)
+                Text(habit.emoji, fontSize = if (compact) 17.sp else 22.sp)
             }
-            Spacer(Modifier.width(14.dp))
+            Spacer(Modifier.width(if (compact) 10.dp else 14.dp))
             Column(Modifier.weight(1f).alpha(contentAlpha)) {
                 Text(
                     habit.name,
@@ -163,7 +164,7 @@ internal fun HabitRow(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                if (!compact) Row(verticalAlignment = Alignment.CenterVertically) {
                     if (todayHabit.streakDays > 1) {
                         StreakBadge(todayHabit.streakDays, todayHabit.restUsedThisWeek)
                         Spacer(Modifier.width(8.dp))
@@ -461,7 +462,6 @@ internal fun TodayProgressHeader(completed: Int, total: Int, modifier: Modifier 
     // Starts as the current value so opening an already finished day doesn't buzz.
     var wasAllDone by remember { mutableStateOf(allDone) }
     LaunchedEffect(allDone) {
-        if (allDone && !wasAllDone) haptic.performHapticFeedback(HapticFeedbackType.LongPress)
         wasAllDone = allDone
         if (allDone) {
             celebrate.animateTo(1.06f, spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessMedium))

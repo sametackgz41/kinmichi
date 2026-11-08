@@ -1380,4 +1380,19 @@
     <string name="spread_setting">Remind me through the day</string>
     <string name="spread_description">Spreads what\'s left over the hours left, and goes quiet once you reach the target</string>
     <string name="spread_add_one">+1</string>
+    <string name="swipe_done">Done</string>
+    <string name="swipe_add_one">+1</string>
+    <string name="swipe_tiny">Bad-day version</string>
+    <string name="swipe_skip">Skip</string>
+    <string name="day_part_morning">Morning</string>
+    <string name="day_part_afternoon">Afternoon</string>
+    <string name="day_part_evening">Evening</string>
+    <string name="day_part_anytime">Any time</string>
+    <string name="day_part_now">now</string>
+    <string name="today_habits_label">Habits</string>
+    <string name="today_group_time">Group by time of day</string>
+    <string name="today_compact">Compact rows</string>
+    <string name="today_reorder">Reorder</string>
+    <string name="today_reorder_hint">Hold and drag to move</string>
+    <string name="today_reorder_done">Done</string>
 </resources>

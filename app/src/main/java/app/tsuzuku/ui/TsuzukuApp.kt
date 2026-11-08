@@ -359,6 +359,7 @@ fun TsuzukuApp(
                         habits.filter { !it.isComplete && history.missedYesterday(it.habit, today) }.map { it.habit.id }.toSet()
                     },
                     onTinyVersion = todayViewModel::completeTinyVersion,
+                    onReorderList = todayViewModel::reorderHabits,
                     reminderSuggestion = reminderSuggestion,
                     availableUpdate = availableUpdate,
                     onOpenUpdate = { update ->

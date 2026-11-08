@@ -48,6 +48,8 @@ interface HabitRepository {
     suspend fun deleteHabit(id: Long)
     suspend fun duplicateHabit(id: Long): Long?
     suspend fun moveHabit(id: Long, direction: Int)
+    /** Puts [orderedIds] in this order; habits not listed (not on today's list) keep their slots. */
+    suspend fun reorderHabits(orderedIds: List<Long>) {}
     fun observeWeeklyReviews(): Flow<List<WeeklyReview>>
     suspend fun saveWeeklyReview(weekStart: LocalDate, note: String)
     suspend fun applyVacation(startDate: LocalDate, endDate: LocalDate)
@@ -402,6 +404,16 @@ class RoomHabitRepository(
         val reordered = habits.toMutableList().apply { add(target, removeAt(index)) }
         val timestamp = now()
         reordered.forEachIndexed { order, habit -> dao.updateSortOrder(habit.id, order, timestamp) }
+    }
+
+    override suspend fun reorderHabits(orderedIds: List<Long>) {
+        val habits = dao.getActiveHabits()
+        val wanted = orderedIds.toSet()
+        val queue = ArrayDeque(orderedIds.filter { id -> habits.any { it.id == id } })
+        // Fill the listed habits' slots with the new order; the rest stay where they are.
+        val result = habits.map { habit -> if (habit.id in wanted && queue.isNotEmpty()) queue.removeFirst() else habit.id }
+        val timestamp = now()
+        result.forEachIndexed { order, id -> dao.updateSortOrder(id, order, timestamp) }
     }
 
     override fun observeWeeklyReviews(): Flow<List<WeeklyReview>> = dao.observeWeeklyReviews().map { reviews ->

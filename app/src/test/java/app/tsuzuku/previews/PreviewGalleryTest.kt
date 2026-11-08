@@ -22,6 +22,9 @@ import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.performScrollToNode
+import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
@@ -463,6 +466,70 @@ class PreviewGalleryTest {
         compose.onNodeWithText("Gün boyu hatırlat").performScrollTo().performClick()
         compose.mainClock.advanceTimeBy(800)
         captureScreen("spread_reminders_tr")
+    }
+
+    // Package A on Today: toolbar, time-of-day groups, compact rows, reorder mode, swipe, confetti.
+    @Test fun todayPackageATr() {
+        setVariant("tr", false)
+        val ctx = ApplicationProvider.getApplicationContext<android.content.Context>()
+        app.tsuzuku.ui.screens.TodayViewPrefs.load(ctx)
+        app.tsuzuku.ui.screens.TodayViewPrefs.setGroupByTime(ctx, false)
+        app.tsuzuku.ui.screens.TodayViewPrefs.setCompact(ctx, false)
+        val times = listOf(7 * 60 + 30, 13 * 60, 21 * 60, null)
+        val base = sampleToday("tr").mapIndexed { i, t -> t.copy(habit = t.habit.copy(reminderMinutes = times[i % times.size])) }
+        val state = mutableStateOf(base)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false) {
+                Shell(title = androidx.compose.ui.res.stringResource(app.tsuzuku.R.string.today), route = "today", profile = "Samet") { modifier ->
+                    Box(modifier) {
+                        TodayScreen(
+                            habits = state.value, profileName = "Samet", showDailySummary = true,
+                            timer = HabitTimerState(), onAddHabit = {}, onToggleHabit = {}, onIncrementHabit = {},
+                            onDecrementHabit = {}, onToggleTimer = {}, onOpenHabit = {}, onReorderHabits = {},
+                            onOpenGoals = {}, onSearch = {},
+                            todayHiddenSections = app.tsuzuku.data.preferences.DEFAULT_TODAY_HIDDEN_SECTIONS,
+                            weekProgress = sampleWeek(),
+                        )
+                    }
+                }
+            }
+        }
+        compose.mainClock.advanceTimeBy(800)
+        val list = compose.onNode(androidx.compose.ui.test.hasScrollAction())
+        list.performScrollToNode(androidx.compose.ui.test.hasText("Alışkanlıklar"))
+        compose.mainClock.advanceTimeBy(600)
+        captureScreen("todayA_normal_tr")
+        // Swipe right part-way on the first habit.
+        val first = base.first().habit.name
+        compose.onNodeWithText(first).performTouchInput {
+            down(centerLeft + androidx.compose.ui.geometry.Offset(40f, 0f))
+            moveBy(androidx.compose.ui.geometry.Offset(260f, 0f))
+        }
+        compose.mainClock.advanceTimeBy(300)
+        captureScreen("todayA_swipe_tr")
+        compose.onNodeWithText(first).performTouchInput { up() }
+        compose.mainClock.advanceTimeBy(800)
+        app.tsuzuku.ui.screens.TodayViewPrefs.setGroupByTime(ctx, true)
+        compose.mainClock.advanceTimeBy(800)
+        list.performScrollToNode(androidx.compose.ui.test.hasText("Alışkanlıklar"))
+        compose.mainClock.advanceTimeBy(400)
+        captureScreen("todayA_grouped_tr")
+        app.tsuzuku.ui.screens.TodayViewPrefs.setCompact(ctx, true)
+        compose.mainClock.advanceTimeBy(800)
+        captureScreen("todayA_compact_tr")
+        app.tsuzuku.ui.screens.TodayViewPrefs.setGroupByTime(ctx, false)
+        app.tsuzuku.ui.screens.TodayViewPrefs.setCompact(ctx, false)
+        compose.onNodeWithContentDescription("Sırala").performClick()
+        compose.mainClock.advanceTimeBy(800)
+        list.performScrollToNode(androidx.compose.ui.test.hasText("Bitti"))
+        compose.mainClock.advanceTimeBy(400)
+        captureScreen("todayA_reorder_tr")
+        compose.onNodeWithText("Bitti").performClick()
+        state.value = sampleToday("tr", allDone = true)
+        compose.mainClock.advanceTimeBy(250)
+        captureScreen("todayA_confetti0_tr")
+        compose.mainClock.advanceTimeBy(450)
+        captureScreen("todayA_confetti_tr")
     }
 
     private fun renderAlarm(name: String, content: @Composable () -> Unit) {

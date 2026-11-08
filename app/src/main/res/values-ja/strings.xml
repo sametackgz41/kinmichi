@@ -980,6 +980,21 @@
     <string name="spread_setting">一日を通してリマインド</string>
     <string name="spread_description">残りの量を残り時間に割り振り、目標に届いたら止まります</string>
     <string name="spread_add_one">+1</string>
+    <string name="swipe_done">完了</string>
+    <string name="swipe_add_one">+1</string>
+    <string name="swipe_tiny">ゆるい版</string>
+    <string name="swipe_skip">スキップ</string>
+    <string name="day_part_morning">朝</string>
+    <string name="day_part_afternoon">昼</string>
+    <string name="day_part_evening">夜</string>
+    <string name="day_part_anytime">いつでも</string>
+    <string name="day_part_now">今</string>
+    <string name="today_habits_label">習慣</string>
+    <string name="today_group_time">時間帯でまとめる</string>
+    <string name="today_compact">コンパクト表示</string>
+    <string name="today_reorder">並べ替え</string>
+    <string name="today_reorder_hint">長押ししてドラッグ</string>
+    <string name="today_reorder_done">完了</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

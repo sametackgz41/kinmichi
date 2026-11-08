@@ -1379,4 +1379,19 @@
     <string name="spread_setting">Gün boyu hatırlat</string>
     <string name="spread_description">Kalan miktarı kalan saatlere yayar; hedefe ulaşınca susar</string>
     <string name="spread_add_one">+1</string>
+    <string name="swipe_done">Tamam</string>
+    <string name="swipe_add_one">+1</string>
+    <string name="swipe_tiny">Kötü gün versiyonu</string>
+    <string name="swipe_skip">Atla</string>
+    <string name="day_part_morning">Sabah</string>
+    <string name="day_part_afternoon">Öğleden sonra</string>
+    <string name="day_part_evening">Akşam</string>
+    <string name="day_part_anytime">Herhangi bir saat</string>
+    <string name="day_part_now">şimdi</string>
+    <string name="today_habits_label">Alışkanlıklar</string>
+    <string name="today_group_time">Günün saatine göre grupla</string>
+    <string name="today_compact">Sık görünüm</string>
+    <string name="today_reorder">Sırala</string>
+    <string name="today_reorder_hint">Basılı tutup sürükle</string>
+    <string name="today_reorder_done">Bitti</string>
 </resources>

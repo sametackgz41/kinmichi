@@ -32,6 +32,8 @@ import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material.icons.rounded.Stop
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material.icons.rounded.SwapVert
+import androidx.compose.material.icons.rounded.ViewAgenda
+import androidx.compose.material.icons.rounded.Schedule
 import androidx.compose.material.icons.rounded.Flag
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -140,12 +142,58 @@ fun TodayScreen(
     onAcceptReminder: (app.tsuzuku.model.ReminderSuggestion) -> Unit = {},
     onDismissReminder: (app.tsuzuku.model.ReminderSuggestion) -> Unit = {},
     onTinyVersion: (Long) -> Unit = {},
+    onReorderList: (List<Long>) -> Unit = {},
 ) {
+
     val active = habits.filterNot(TodayHabit::isComplete)
     val completed = habits.filter(TodayHabit::isComplete)
     var showConfigSheet by remember { mutableStateOf(false) }
     var skipHabitTarget by remember { mutableStateOf<TodayHabit?>(null) }
     var selectedCarryTask by remember { mutableStateOf<PlanTask?>(null) }
+    val screenContext = androidx.compose.ui.platform.LocalContext.current
+    remember { TodayViewPrefs.load(screenContext); true }
+    var reorderMode by remember { mutableStateOf(false) }
+    // The last habit of the day: gold confetti and a "ta-da" buzz, once.
+    val allDone = habits.isNotEmpty() && habits.all(TodayHabit::isComplete)
+    var wasAllDone by remember { mutableStateOf(allDone) }
+    var confetti by remember { mutableStateOf(0) }
+    androidx.compose.runtime.LaunchedEffect(allDone) {
+        if (allDone && !wasAllDone) {
+            confetti++
+            celebrateVibration(screenContext)
+        }
+        wasAllDone = allDone
+    }
+    val compact = TodayViewPrefs.compact
+    val habitRow: @Composable (TodayHabit, Modifier) -> Unit = { todayHabit, rowModifier ->
+        SwipeableHabit(
+            todayHabit = todayHabit,
+            enabled = !todayHabit.isBlocked && !vacationActive,
+            onComplete = {
+                if (todayHabit.habit.type == app.tsuzuku.model.HabitType.Check) onToggleHabit(todayHabit.habit.id)
+                else onIncrementHabit(todayHabit.habit.id)
+            },
+            onLeft = {
+                if (todayHabit.habit.tinyVersion.isNotBlank()) onTinyVersion(todayHabit.habit.id) else skipHabitTarget = todayHabit
+            },
+        ) {
+            HabitRow(
+                todayHabit = todayHabit,
+                timerRunning = timer.habitId == todayHabit.habit.id,
+                timerElapsedSeconds = if (timer.habitId == todayHabit.habit.id) timer.elapsedSeconds else 0,
+                interactionDisabled = vacationActive,
+                onToggle = { onToggleHabit(todayHabit.habit.id) },
+                onIncrement = { onIncrementHabit(todayHabit.habit.id) },
+                onDecrement = { onDecrementHabit(todayHabit.habit.id) },
+                onToggleTimer = { onToggleTimer(todayHabit.habit.id) },
+                onOpen = { onOpenHabit(todayHabit.habit.id) },
+                onOpenSkipDialog = { skipHabitTarget = todayHabit },
+                onUndoSkip = { onSkipHabit(todayHabit.habit.id, null) },
+                compact = compact,
+            )
+        }
+        Spacer(rowModifier)
+    }
 
     val orderList = remember(todaySectionOrder) {
         todaySectionOrder.split(',').filter(String::isNotBlank)
@@ -158,6 +206,7 @@ fun TodayScreen(
         planTasks.filter { !it.completed && it.carryCount >= 3 }
     }
 
+    Box(Modifier.fillMaxSize()) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(start = 16.dp, top = 4.dp, end = 16.dp, bottom = 96.dp),
@@ -265,7 +314,32 @@ fun TodayScreen(
                         if (habits.isEmpty()) {
                             item(key = "empty-habits") { StarterTemplatesCard(onAddTemplate = onAddTemplate, onCreateOwn = onAddHabit, modifier = Modifier.animateItem()) }
                         }
-                        habits.groupBy { it.habit.routineName }.forEach { (routine, routineHabits) ->
+                        if (habits.isNotEmpty()) {
+                            item(key = "habits-toolbar") {
+                                HabitsToolbar(
+                                    reorderMode = reorderMode,
+                                    onToggleReorder = { reorderMode = !reorderMode },
+                                    groupByTime = TodayViewPrefs.groupByTime,
+                                    onGroupByTime = { TodayViewPrefs.setGroupByTime(screenContext, it) },
+                                    compact = compact,
+                                    onCompact = { TodayViewPrefs.setCompact(screenContext, it) },
+                                    modifier = Modifier.animateItem(),
+                                )
+                            }
+                        }
+                        if (reorderMode) {
+                            item(key = "reorder-list") { ReorderableHabitList(habits, onReorder = onReorderList) }
+                        } else if (TodayViewPrefs.groupByTime) {
+                            val nowMinutes = java.time.LocalTime.now().let { it.hour * 60 + it.minute }
+                            groupByDayPart(habits, nowMinutes).forEach { (part, partHabits) ->
+                                item(key = "part-${part.name}") {
+                                    DayPartHeader(part, current = part == dayPartOf(nowMinutes), modifier = Modifier.animateItem())
+                                }
+                                items(partHabits.sortedBy { it.isComplete }, key = { it.habit.id }) { todayHabit ->
+                                    Box(Modifier.animateItem()) { habitRow(todayHabit, Modifier) }
+                                }
+                            }
+                        } else habits.groupBy { it.habit.routineName }.forEach { (routine, routineHabits) ->
                             if (routine.isNotBlank()) {
                                 item(key = "routine-$routine") {
                                     Row(
@@ -288,20 +362,7 @@ fun TodayScreen(
                             }
                             // Completed habits glide to the bottom of their group instead of disappearing.
                             items(routineHabits.sortedBy { it.isComplete }, key = { it.habit.id }) { todayHabit ->
-                                HabitRow(
-                                    todayHabit = todayHabit,
-                                    timerRunning = timer.habitId == todayHabit.habit.id,
-                                    timerElapsedSeconds = if (timer.habitId == todayHabit.habit.id) timer.elapsedSeconds else 0,
-                                    interactionDisabled = vacationActive,
-                                    onToggle = { onToggleHabit(todayHabit.habit.id) },
-                                    onIncrement = { onIncrementHabit(todayHabit.habit.id) },
-                                    onDecrement = { onDecrementHabit(todayHabit.habit.id) },
-                                    onToggleTimer = { onToggleTimer(todayHabit.habit.id) },
-                                    onOpen = { onOpenHabit(todayHabit.habit.id) },
-                                    onOpenSkipDialog = { skipHabitTarget = todayHabit },
-                                    onUndoSkip = { onSkipHabit(todayHabit.habit.id, null) },
-                                    modifier = Modifier.animateItem(),
-                                )
+                                Box(Modifier.animateItem()) { habitRow(todayHabit, Modifier) }
                             }
                         }
                     }
@@ -379,6 +440,8 @@ fun TodayScreen(
                 onOpenDetails = onOpenDailyReview,
             )
         }
+    }
+    GoldConfetti(confetti)
     }
 
     if (showConfigSheet) {
@@ -869,3 +932,41 @@ private fun TodayRoutineCard(
     }
 }
 
+
+
+/** Small controls above the habit list: time-of-day groups, compact rows, drag to reorder. */
+@Composable
+private fun HabitsToolbar(
+    reorderMode: Boolean,
+    onToggleReorder: () -> Unit,
+    groupByTime: Boolean,
+    onGroupByTime: (Boolean) -> Unit,
+    compact: Boolean,
+    onCompact: (Boolean) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Row(modifier.fillMaxWidth().padding(top = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+        Text(
+            stringResource(if (reorderMode) R.string.today_reorder_hint else R.string.today_habits_label),
+            style = MaterialTheme.typography.titleSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.weight(1f).padding(start = 4.dp),
+        )
+        if (reorderMode) {
+            TextButton(onClick = onToggleReorder) { Text(stringResource(R.string.today_reorder_done)) }
+        } else {
+            androidx.compose.material3.IconToggleButton(checked = groupByTime, onCheckedChange = onGroupByTime) {
+                Icon(androidx.compose.material.icons.Icons.Rounded.Schedule, contentDescription = stringResource(R.string.today_group_time),
+                    tint = if (groupByTime) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            androidx.compose.material3.IconToggleButton(checked = compact, onCheckedChange = onCompact) {
+                Icon(androidx.compose.material.icons.Icons.Rounded.ViewAgenda, contentDescription = stringResource(R.string.today_compact),
+                    tint = if (compact) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            IconButton(onClick = onToggleReorder) {
+                Icon(androidx.compose.material.icons.Icons.Rounded.SwapVert, contentDescription = stringResource(R.string.today_reorder),
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+        }
+    }
+}

@@ -165,6 +165,10 @@ class TodayViewModel(
         viewModelScope.launch { repository.moveHabit(id, direction); onDataChanged() }
     }
 
+    fun reorderHabits(orderedIds: List<Long>) {
+        viewModelScope.launch { repository.reorderHabits(orderedIds); onDataChanged() }
+    }
+
     fun observeHabitLevels(habitId: Long): Flow<List<HabitLevel>> = repository.observeHabitLevels(habitId)
 
     fun saveHabitLevels(habitId: Long, levels: List<HabitLevel>) {

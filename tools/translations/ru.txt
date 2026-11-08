@@ -1012,3 +1012,18 @@ edit_past_days|Изменить прошлые дни
 spread_setting|Напоминать в течение дня
 spread_description|Распределяет остаток по оставшимся часам и замолкает, когда цель достигнута
 spread_add_one|+1
+swipe_done|Готово
+swipe_add_one|+1
+swipe_tiny|Мини-версия
+swipe_skip|Пропустить
+day_part_morning|Утро
+day_part_afternoon|День
+day_part_evening|Вечер
+day_part_anytime|В любое время
+day_part_now|сейчас
+today_habits_label|Привычки
+today_group_time|Группировать по времени дня
+today_compact|Компактный вид
+today_reorder|Упорядочить
+today_reorder_hint|Удерживай и перетаскивай
+today_reorder_done|Готово

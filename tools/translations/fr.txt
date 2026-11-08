@@ -1000,3 +1000,18 @@ edit_past_days|Modifier les jours passés
 spread_setting|Rappeler au fil de la journée
 spread_description|Répartit ce qui reste sur les heures restantes et se tait une fois l'objectif atteint
 spread_add_one|+1
+swipe_done|Fait
+swipe_add_one|+1
+swipe_tiny|Version jour difficile
+swipe_skip|Passer
+day_part_morning|Matin
+day_part_afternoon|Après-midi
+day_part_evening|Soir
+day_part_anytime|N'importe quand
+day_part_now|maintenant
+today_habits_label|Habitudes
+today_group_time|Grouper par moment de la journée
+today_compact|Lignes compactes
+today_reorder|Réorganiser
+today_reorder_hint|Maintiens et fais glisser
+today_reorder_done|Terminé

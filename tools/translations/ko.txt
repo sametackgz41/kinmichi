@@ -1000,3 +1000,18 @@ edit_past_days|지난 날 수정
 spread_setting|하루 동안 알림
 spread_description|남은 양을 남은 시간에 나눠 알리고, 목표에 도달하면 멈춰요
 spread_add_one|+1
+swipe_done|완료
+swipe_add_one|+1
+swipe_tiny|힘든 날 버전
+swipe_skip|건너뛰기
+day_part_morning|아침
+day_part_afternoon|오후
+day_part_evening|저녁
+day_part_anytime|아무 때나
+day_part_now|지금
+today_habits_label|습관
+today_group_time|시간대별로 묶기
+today_compact|촘촘하게 보기
+today_reorder|순서 바꾸기
+today_reorder_hint|길게 눌러 끌어요
+today_reorder_done|완료
