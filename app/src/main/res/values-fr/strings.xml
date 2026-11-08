@@ -1306,9 +1306,9 @@
         <item>Dim</item>
     </string-array>
     <string-array name="whats_new_items">
-        <item>Les widgets refonctionnent|Les widgets vides s\'affichent enfin, et leurs cases se cochent dès que tu touches.</item>
-        <item>Un nouvel accueil|Commence avec Google, GitHub ou en invité. Sans mot de passe.</item>
-        <item>Dix langues|Le français, l\'italien, le russe et le coréen arrivent, avec drapeaux et recherche.</item>
-        <item>Des habitudes plus simples|Ajoute une habitude pas à pas, dis comment ça s\'est passé et vois tes progrès depuis le début.</item>
+        <item>Ton mois en couleurs|Le 1er, un bilan détaillé du mois passé : chaque jour en couleur, meilleures séries, retours et une image format story à partager.</item>
+        <item>La santé dans l\'app|Réglages › Santé affiche pas, distance, calories, exercice et sommeil du jour et de la semaine ; chaque habitude montre sa propre semaine.</item>
+        <item>Ton profil|Une image, tes jours sur le chemin, ta meilleure série et tes retours. Une courte ouverture ensō, et le verrou demande ton empreinte tout de suite.</item>
+        <item>Plus fluide, plus calme|Les calendriers défilent mois par mois, le décor de saison tourbillonne quand tu secoues le téléphone, Sumi et Momiji se distinguent, et les réglages en double ont disparu.</item>
     </string-array>
 </resources>

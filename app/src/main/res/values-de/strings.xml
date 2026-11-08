@@ -1306,9 +1306,9 @@
         <item>So</item>
     </string-array>
     <string-array name="whats_new_items">
-        <item>Widgets funktionieren wieder|Leere Widgets füllen sich jetzt, und Kästchen haken sofort ab.</item>
-        <item>Ein neuer Empfang|Starte mit Google, GitHub oder als Gast. Ganz ohne Passwort.</item>
-        <item>Zehn Sprachen|Französisch, Italienisch, Russisch und Koreanisch kommen dazu, mit Flaggen und Suche.</item>
-        <item>Gewohnheiten leichter|Schritt für Schritt anlegen, sagen wie es war und den Gesamtfortschritt sehen.</item>
+        <item>Dein Monat in Farbe|Am 1. ein ausführlicher Rückblick auf den Vormonat: jeder Tag in Farbe, beste Serien, Comebacks und ein Bild im Story-Format zum Teilen.</item>
+        <item>Gesundheit in der App|Einstellungen › Gesundheit zeigt Schritte, Strecke, Kalorien, Training und Schlaf für heute und die Woche; jede Gewohnheit zeigt ihre eigene Woche.</item>
+        <item>Dein Profil|Ein Bild, deine Tage auf dem Weg, beste Serie und Comebacks. Ein kurzes Ensō zum Start, und die Sperre fragt sofort nach dem Fingerabdruck.</item>
+        <item>Ruhiger und flüssiger|Kalender wischen Monat für Monat, die Jahreszeiten-Deko wirbelt beim Schütteln, Sumi und Momiji sehen verschieden aus, doppelte Einstellungen sind weg.</item>
     </string-array>
 </resources>

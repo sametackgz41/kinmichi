@@ -1306,9 +1306,9 @@
         <item>Dom</item>
     </string-array>
     <string-array name="whats_new_items">
-        <item>I widget funzionano di nuovo|I widget vuoti ora si riempiono e le caselle si spuntano subito.</item>
-        <item>Un nuovo benvenuto|Inizia con Google, GitHub o come ospite. Niente password.</item>
-        <item>Dieci lingue|Arrivano francese, italiano, russo e coreano, con bandiere e ricerca.</item>
-        <item>Abitudini più facili|Aggiungi un\'abitudine passo passo, di\' com\'è andata e guarda i progressi da sempre.</item>
+        <item>Il tuo mese a colori|Il giorno 1, un riepilogo dettagliato del mese scorso: ogni giorno a colori, serie migliori, ritorni e un\'immagine formato storia da condividere.</item>
+        <item>La salute nell\'app|Impostazioni › Salute mostra passi, distanza, calorie, esercizio e sonno di oggi e della settimana; ogni abitudine mostra la sua settimana.</item>
+        <item>Il tuo profilo|Un\'immagine, i tuoi giorni sul cammino, la serie migliore e i ritorni. Una breve apertura ensō, e il blocco chiede subito l\'impronta.</item>
+        <item>Più fluida e serena|I calendari scorrono mese per mese, la decorazione stagionale vortica quando scuoti il telefono, Sumi e Momiji si distinguono e le impostazioni doppie sono sparite.</item>
     </string-array>
 </resources>

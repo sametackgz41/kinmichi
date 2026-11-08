@@ -1131,10 +1131,10 @@
     <string name="whats_new_title">What\'s new in %1$s</string>
     <string name="whats_new_ok">Got it</string>
     <string-array name="whats_new_items">
-        <item>A real alarm|Habits can ring like an alarm. The Alarm type has 10 wake-up tasks (pick up to 3), difficulty, a rising sound and limited snoozes.</item>
-        <item>More ways to track|Several times a day, X times in every N days, and a whole to get through: “page 184 of 320”, with a finish-date guess.</item>
-        <item>A timer that keeps going|Keeps counting with the app closed; pause or finish it from the notification or the bar at the bottom.</item>
-        <item>Safer and tidier|Deleted habits wait 30 days in the trash, backups can be locked with a password, and past days keep their old target.</item>
+        <item>Your month in colour|On the 1st, a detailed review of last month: every day in colour, best streaks, comebacks and a story-sized image to share.</item>
+        <item>Health, inside the app|Settings › Health shows steps, distance, calories, exercise and sleep for today and the week; each habit page shows its own week.</item>
+        <item>Your profile|A picture, your days on the path, best streak and comebacks. A short ensō opening, and the lock asks for your fingerprint at once.</item>
+        <item>Smoother and calmer|Calendars swipe month by month, seasonal decor whirls when you shake the phone, Sumi and Momiji look different, and repeated settings are gone.</item>
     </string-array>
     <string name="language_spanish">Español</string>
     <string name="language_german">Deutsch</string>

@@ -1,5 +1,28 @@
 # Değişiklik günlüğü
 
+## 2.10.0 — Ayın renkleri
+
+**Aylık özet**
+- Her ayın 1'inde saat 10.00'da geçen ayın ayrıntılı özeti: her gün kendi renginde bir kolaj, en iyi seriler, dönüş günleri
+- İlerleme sekmesinde özet kartı; hikâye boyutunda paylaşım görseli
+
+**Sağlık**
+- Ayarlar › Sağlık: bugünün ve haftanın adım, mesafe, kalori, egzersiz ve uyku değerleri, bağlı alışkanlıklar ve "alışkanlık yap" kısayolu
+- Alışkanlık sayfasında Health Connect haftası: hedef çizgisi, haftalık toplam ve 30 günlük ortalama
+- Android 13'te Health Connect izinleri düzgün isteniyor; izin verdikten sonra "izin yok" yazısı bir an bile görünmüyor
+
+**Profil ve açılış**
+- Profil sayfası: resim (emoji ya da baş harf), yolda geçen gün, en iyi seri ve dönüş sayısı
+- Her açılışta kısa bir ensō açılış ekranı (dokununca geçilir)
+- Kilit ekranı parmak izini hemen soruyor, PIN yedek olarak duruyor
+
+**Görünüm ve kullanım**
+- Takvimler ok tuşu yerine kaydırarak ay ay geçiyor
+- Telefonu salladıkça mevsim süsü hızlanıyor, sonra yavaşça duruluyor
+- Sumi artık gerçek mürekkep, Momiji sonbahar kehribarı; yedi palet kolayca ayırt ediliyor
+- "Bugün ekranını düzenle" yeniden yazıldı, sadece ekranda gerçekten olanları gösteriyor
+- Tekrarlar kalktı: ad ve selamlama tek satır, hesap sadece Profil'de, kilit sadece Gizlilik'te, Bugün'ün görünüm seçenekleri sadece düzenleme penceresinde
+
 ## 2.9.0 — Gerçek bir alarm
 
 **Alarm ve uyanma**

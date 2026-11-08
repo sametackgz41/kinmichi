@@ -1306,9 +1306,9 @@
         <item>Dom</item>
     </string-array>
     <string-array name="whats_new_items">
-        <item>Los widgets vuelven a funcionar|Los widgets en blanco ya se llenan y sus casillas se marcan al instante.</item>
-        <item>Una nueva bienvenida|Empieza con Google, GitHub o como invitado. Sin contraseña.</item>
-        <item>Diez idiomas|Llegan francés, italiano, ruso y coreano, con banderas y búsqueda en el selector.</item>
-        <item>Hábitos más fáciles|Añade un hábito paso a paso, cuenta qué tal fue y mira tu progreso de siempre.</item>
+        <item>Tu mes en color|El día 1, un resumen detallado del mes anterior: cada día en color, mejores rachas, regresos y una imagen tamaño historia para compartir.</item>
+        <item>Salud dentro de la app|Ajustes › Salud muestra pasos, distancia, calorías, ejercicio y sueño de hoy y de la semana; cada hábito muestra su propia semana.</item>
+        <item>Tu perfil|Una imagen, tus días en el camino, mejor racha y regresos. Una breve apertura ensō, y el bloqueo pide tu huella al instante.</item>
+        <item>Más fluido y tranquilo|Los calendarios se deslizan mes a mes, la decoración de temporada gira al agitar el móvil, Sumi y Momiji se distinguen y ya no hay ajustes repetidos.</item>
     </string-array>
 </resources>

@@ -1130,10 +1130,10 @@
     <string name="whats_new_title">%1$s sürümünde yenilikler</string>
     <string name="whats_new_ok">Tamam</string>
     <string-array name="whats_new_items">
-        <item>Gerçek bir alarm|Alışkanlıklar alarm gibi çalabiliyor. Alarm türünde 10 uyandırma görevi (en fazla 3), zorluk, yavaşça yükselen ses ve sınırlı erteleme var.</item>
-        <item>Daha çok takip biçimi|Günde birden fazla, her N günde X kez ve toplamı belli işler: “320 sayfanın 184.’sündeyim”, bitiş tarihi tahminiyle.</item>
-        <item>Durmayan kronometre|Uygulama kapalıyken de sayar; bildirimden ya da alttaki çubuktan duraklat, bitir.</item>
-        <item>Daha güvenli, daha düzenli|Silinenler 30 gün çöp kutusunda bekler, yedekler parolayla kilitlenebilir, geçmiş günler eski hedefini korur.</item>
+        <item>Ayın renkleri|Her ayın 1\'inde geçen ayın ayrıntılı özeti: her gün kendi renginde, en iyi seriler, dönüşler ve paylaşmak için hikâye boyutunda bir görsel.</item>
+        <item>Sağlık, uygulamanın içinde|Ayarlar › Sağlık\'ta bugünün ve haftanın adım, mesafe, kalori, egzersiz ve uyku değerleri; her alışkanlık sayfasında da kendi haftası.</item>
+        <item>Profilin|Bir resim, yolda geçen günler, en iyi seri ve dönüşler. Kısa bir ensō açılışı; kilit ekranı parmak izini hemen sorar.</item>
+        <item>Daha akıcı, daha sade|Takvimler ay ay kaydırılıyor, mevsim süsü telefonu sallayınca coşuyor, Sumi ile Momiji artık ayırt ediliyor, tekrar eden ayarlar kalktı.</item>
     </string-array>
     <string name="language_spanish">Español</string>
     <string name="language_german">Deutsch</string>
