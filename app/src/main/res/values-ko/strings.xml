@@ -1229,6 +1229,13 @@
     <string name="month_entry_title">%1$s 요약이 준비됐어요</string>
     <string name="month_entry_body">날짜, 연속 기록, 이달의 스타. 살펴보고 원하면 공유하세요.</string>
     <string name="month_notif_body">며칠, 어떤 연속 기록, 이달의 스타… 확인해 보세요.</string>
+    <string name="health_card_source">💚  Health Connect에서</string>
+    <string name="health_card_today">/ %1$s %2$s 오늘</string>
+    <string name="health_card_week">이번 주</string>
+    <string name="health_card_average">30일 평균</string>
+    <string name="health_card_per_day">%1$s / 일</string>
+    <string name="health_card_no_access">이 습관은 건강 데이터로 채워지지만 지금은 읽을 수 없어요. Health Connect에서 허용하세요.</string>
+    <string name="health_card_open">Health Connect 열기</string>
     <plurals name="streak_days">
         <item quantity="one">%d일 연속</item>
         <item quantity="other">%d일 연속</item>

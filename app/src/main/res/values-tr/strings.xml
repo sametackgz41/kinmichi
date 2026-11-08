@@ -1610,4 +1610,11 @@
     <string name="month_entry_title">%1$s özetin hazır</string>
     <string name="month_entry_body">Günler, seriler, ayın yıldızı. Bir bak, istersen paylaş.</string>
     <string name="month_notif_body">Kaç gün, hangi seri, ayın yıldızı… Bir bak.</string>
+    <string name="health_card_source">💚  Health Connect\'ten</string>
+    <string name="health_card_today">/ %1$s %2$s bugün</string>
+    <string name="health_card_week">Bu hafta</string>
+    <string name="health_card_average">30 gün ortalaması</string>
+    <string name="health_card_per_day">%1$s / gün</string>
+    <string name="health_card_no_access">Bu alışkanlık sağlık verisinden doluyor ama Kinmichi şu an okuyamıyor. Health Connect\'te izin ver.</string>
+    <string name="health_card_open">Health Connect\'i aç</string>
 </resources>

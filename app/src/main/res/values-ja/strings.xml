@@ -1229,6 +1229,13 @@
     <string name="month_entry_title">%1$sのまとめができました</string>
     <string name="month_entry_body">日数、連続記録、今月のスター。見てみて、よければシェアも。</string>
     <string name="month_notif_body">何日、どの連続記録、今月のスター…見てみましょう。</string>
+    <string name="health_card_source">💚  Health Connectから</string>
+    <string name="health_card_today">/ %1$s %2$s 今日</string>
+    <string name="health_card_week">今週</string>
+    <string name="health_card_average">30日平均</string>
+    <string name="health_card_per_day">%1$s / 日</string>
+    <string name="health_card_no_access">この習慣は健康データで記録されますが、今は読み取れません。Health Connectで許可してください。</string>
+    <string name="health_card_open">Health Connectを開く</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

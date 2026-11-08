@@ -1229,6 +1229,13 @@
     <string name="month_entry_title">Seu resumo de %1$s está pronto</string>
     <string name="month_entry_body">Dias, sequências, sua estrela do mês. Dê uma olhada e compartilhe se quiser.</string>
     <string name="month_notif_body">Quantos dias, qual sequência, sua estrela do mês… dê uma olhada.</string>
+    <string name="health_card_source">💚  Do Health Connect</string>
+    <string name="health_card_today">/ %1$s %2$s hoje</string>
+    <string name="health_card_week">Esta semana</string>
+    <string name="health_card_average">Média de 30 dias</string>
+    <string name="health_card_per_day">%1$s / dia</string>
+    <string name="health_card_no_access">Este hábito se preenche com dados de saúde, mas o Kinmichi não consegue lê-los agora. Permita no Health Connect.</string>
+    <string name="health_card_open">Abrir Health Connect</string>
     <plurals name="streak_days">
         <item quantity="one">Sequência de %d dia</item>
         <item quantity="other">Sequência de %d dias</item>

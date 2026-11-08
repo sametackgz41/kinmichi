@@ -1261,3 +1261,10 @@ month_share_text|Мой %1$s в Kinmichi: %2$d выполнено
 month_entry_title|Итоги: %1$s
 month_entry_body|Дни, серии, звезда месяца. Загляните и поделитесь, если хотите.
 month_notif_body|Сколько дней, какая серия, звезда месяца… загляните.
+health_card_source|💚  Из Health Connect
+health_card_today|/ %1$s %2$s сегодня
+health_card_week|На этой неделе
+health_card_average|Среднее за 30 дней
+health_card_per_day|%1$s / день
+health_card_no_access|Эта привычка заполняется данными о здоровье, но Kinmichi сейчас не может их прочитать. Разрешите доступ в Health Connect.
+health_card_open|Открыть Health Connect

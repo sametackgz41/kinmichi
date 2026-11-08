@@ -899,6 +899,9 @@ class PreviewGalleryTest {
     @Test fun task10() = renderTask("task10_catch") { app.tsuzuku.notifications.CatchMission(onProgress = {}, onSolved = {}, seed = 6) }
 
     @Test fun trashA() = renderMock("trash_a") { TrashOptionA() }
+    @Test fun healthA() = renderMock("health_a") { HealthOptionA() }
+    @Test fun healthB() = renderMock("health_b") { HealthOptionB() }
+    @Test fun healthC() = renderMock("health_c") { HealthOptionC() }
     @Test fun monthA() = renderMock("month_a") { MonthOptionA() }
     @Test fun monthB() = renderMock("month_b") { MonthOptionB() }
     @Test fun monthC() = renderMock("month_c") { MonthOptionC() }
@@ -1101,6 +1104,24 @@ class PreviewGalleryTest {
         }
         compose.mainClock.advanceTimeBy(6_000)
         captureScreen(name)
+    }
+
+    @Test fun healthCardTr() {
+        setVariant("tr", false)
+        val habit = sampleToday("tr")[0].habit.copy(name = "Günde 8.000 adım", emoji = "🚶", type = app.tsuzuku.model.HabitType.Count, target = 8000.0, unit = "adım", healthMetric = app.tsuzuku.model.HealthMetric.Steps)
+        val values = listOf(5200, 6100, 7400, 6800, 8100, 7900, 6500, 7200, 8800, 9100, 7700, 6900, 7500, 8400, 9600, 8200, 7100, 6400, 7900, 8700, 9900, 8500, 7600, 8100, 9400, 10240, 7800, 8900, 5300, 6214)
+        val days = values.mapIndexed { i, v -> LocalDate.now().minusDays((values.size - 1 - i).toLong()) to v.toDouble() }
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false) {
+                androidx.compose.material3.Surface {
+                    androidx.compose.foundation.layout.Column(androidx.compose.ui.Modifier.fillMaxSize().padding(16.dp)) {
+                        app.tsuzuku.ui.screens.HealthWeekCard(habit, days)
+                    }
+                }
+            }
+        }
+        compose.mainClock.advanceTimeBy(900)
+        captureScreen("health_real_tr")
     }
 
     @Test fun monthReviewTr() {

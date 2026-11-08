@@ -1243,3 +1243,10 @@ month_share_text|Kinmichiの%1$s：%2$d回達成
 month_entry_title|%1$sのまとめができました
 month_entry_body|日数、連続記録、今月のスター。見てみて、よければシェアも。
 month_notif_body|何日、どの連続記録、今月のスター…見てみましょう。
+health_card_source|💚  Health Connectから
+health_card_today|/ %1$s %2$s 今日
+health_card_week|今週
+health_card_average|30日平均
+health_card_per_day|%1$s / 日
+health_card_no_access|この習慣は健康データで記録されますが、今は読み取れません。Health Connectで許可してください。
+health_card_open|Health Connectを開く

@@ -1229,6 +1229,13 @@
     <string name="month_entry_title">Итоги: %1$s</string>
     <string name="month_entry_body">Дни, серии, звезда месяца. Загляните и поделитесь, если хотите.</string>
     <string name="month_notif_body">Сколько дней, какая серия, звезда месяца… загляните.</string>
+    <string name="health_card_source">💚  Из Health Connect</string>
+    <string name="health_card_today">/ %1$s %2$s сегодня</string>
+    <string name="health_card_week">На этой неделе</string>
+    <string name="health_card_average">Среднее за 30 дней</string>
+    <string name="health_card_per_day">%1$s / день</string>
+    <string name="health_card_no_access">Эта привычка заполняется данными о здоровье, но Kinmichi сейчас не может их прочитать. Разрешите доступ в Health Connect.</string>
+    <string name="health_card_open">Открыть Health Connect</string>
     <plurals name="streak_days">
         <item quantity="one">Серия %d день</item>
         <item quantity="few">Серия %d дня</item>

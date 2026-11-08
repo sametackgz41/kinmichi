@@ -1249,3 +1249,10 @@ month_share_text|Mein %1$s in Kinmichi: %2$d erledigt
 month_entry_title|Dein %1$s-Rückblick ist da
 month_entry_body|Tage, Serien, dein Star des Monats. Schau rein und teile, wenn du magst.
 month_notif_body|Wie viele Tage, welche Serie, dein Star des Monats … schau mal.
+health_card_source|💚  Aus Health Connect
+health_card_today|/ %1$s %2$s heute
+health_card_week|Diese Woche
+health_card_average|Schnitt 30 Tage
+health_card_per_day|%1$s / Tag
+health_card_no_access|Diese Gewohnheit füllt sich aus Gesundheitsdaten, aber Kinmichi kann sie gerade nicht lesen. Erlaube es in Health Connect.
+health_card_open|Health Connect öffnen

@@ -1611,4 +1611,11 @@
     <string name="month_entry_title">Your %1$s review is ready</string>
     <string name="month_entry_body">Days, streaks, your star of the month. Take a look, share if you like.</string>
     <string name="month_notif_body">How many days, which streak, your star of the month… have a look.</string>
+    <string name="health_card_source">💚  From Health Connect</string>
+    <string name="health_card_today">/ %1$s %2$s today</string>
+    <string name="health_card_week">This week</string>
+    <string name="health_card_average">30-day average</string>
+    <string name="health_card_per_day">%1$s / day</string>
+    <string name="health_card_no_access">This habit fills itself from health data, but Kinmichi can\'t read it right now. Allow it in Health Connect.</string>
+    <string name="health_card_open">Open Health Connect</string>
 </resources>

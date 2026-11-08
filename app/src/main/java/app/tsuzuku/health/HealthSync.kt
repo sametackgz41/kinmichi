@@ -84,6 +84,30 @@ object HealthSync {
         HealthMetric.SleepDuration -> HealthPermission.getReadPermission(SleepSessionRecord::class)
     }
 
+    /** Day-by-day values for the last [days] days, oldest first, in the habit's [unit]; null when not readable. */
+    suspend fun history(context: Context, metric: HealthMetric, unit: String, days: Int = 30): List<Pair<LocalDate, Double>>? {
+        if (metric == HealthMetric.None || !isAvailable(context)) return null
+        return runCatching {
+            val client = HealthConnectClient.getOrCreate(context)
+            if (permissionFor(metric) !in client.permissionController.getGrantedPermissions()) return null
+            val zone = ZoneId.systemDefault()
+            val now = Instant.now()
+            val today = LocalDate.now()
+            (days - 1 downTo 0).map { back ->
+                val day = today.minusDays(back.toLong())
+                val start = day.atStartOfDay(zone).toInstant()
+                val end = minOf(now, day.plusDays(1).atStartOfDay(zone).toInstant())
+                day to healthValueInUnit(metric, read(client, metric, start, end, day, zone) ?: 0.0, unit)
+            }
+        }.onFailure { Log.w(TAG, "Health history failed", it) }.getOrNull()
+    }
+
+    /** Whether the app may read this metric right now (installed and allowed). */
+    suspend fun canRead(context: Context, metric: HealthMetric): Boolean =
+        metric != HealthMetric.None && isAvailable(context) && runCatching {
+            permissionFor(metric) in HealthConnectClient.getOrCreate(context).permissionController.getGrantedPermissions()
+        }.getOrDefault(false)
+
     suspend fun syncToday(context: Context, repository: HabitRepository) {
         if (!isAvailable(context)) return
         val metrics = repository.healthMetricsInUse()
