@@ -47,6 +47,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import kotlinx.coroutines.launch
+import androidx.compose.foundation.layout.navigationBarsPadding
 import app.tsuzuku.model.slotStates
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -169,7 +170,7 @@ fun TsuzukuApp(
         onLaunchRouteHandled()
     }
     val todayViewModel: TodayViewModel = viewModel(
-        factory = TodayViewModel.factory(repository, timerSessionStore) {
+        factory = TodayViewModel.factory(repository, timerSessionStore, context.applicationContext) {
             TsuzukuWidgetProvider.requestUpdate(context.applicationContext)
         },
     )
@@ -306,6 +307,20 @@ fun TsuzukuApp(
             }
         },
         bottomBar = {
+            androidx.compose.foundation.layout.Column {
+            androidx.compose.animation.AnimatedVisibility(
+                visible = timer.isRunning,
+                enter = androidx.compose.animation.expandVertically() + androidx.compose.animation.fadeIn(),
+                exit = androidx.compose.animation.shrinkVertically() + androidx.compose.animation.fadeOut(),
+            ) {
+                app.tsuzuku.ui.screens.HabitTimerBar(
+                    timer = timer,
+                    onPauseResume = { if (timer.paused) todayViewModel.resumeTimer() else todayViewModel.pauseTimer() },
+                    onStop = todayViewModel::stopTimer,
+                    onOpen = { timer.habitId?.let { navController.navigate("habit/$it") { launchSingleTop = true } } },
+                    modifier = if (currentRoute in mainRoutes) Modifier else Modifier.navigationBarsPadding(),
+                )
+            }
             if (currentRoute in mainRoutes) {
                 MainNavigationBar(
                     destinations = mainDestinations,
@@ -318,6 +333,7 @@ fun TsuzukuApp(
                         }
                     },
                 )
+            }
             }
         },
     ) { innerPadding ->

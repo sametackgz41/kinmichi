@@ -1161,6 +1161,13 @@
     <string name="period_times_suffix">veces</string>
     <string name="period_custom_summary">%2$d veces en %1$d días</string>
     <string name="period_custom_hint">Los periodos cuentan desde el día en que empiezas. Lo que sobra no pasa al siguiente.</string>
+    <string name="timer_channel_name">Cronómetro</string>
+    <string name="timer_goal">meta %1$s</string>
+    <string name="timer_paused">En pausa · %1$s / %2$s</string>
+    <string name="timer_pause">Pausar</string>
+    <string name="timer_resume">Seguir</string>
+    <string name="timer_finish">Terminar</string>
+    <string name="timer_done">%1$s hecho, guardado.</string>
     <plurals name="streak_days">
         <item quantity="one">Racha de %d día</item>
         <item quantity="other">Racha de %d días</item>

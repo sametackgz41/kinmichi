@@ -1193,3 +1193,10 @@ period_days_suffix|дней
 period_times_suffix|раз
 period_custom_summary|%2$d раз за %1$d дней
 period_custom_hint|Периоды считаются со дня начала. Лишнее не переносится на следующий.
+timer_channel_name|Таймер
+timer_goal|цель %1$s
+timer_paused|Пауза · %1$s / %2$s
+timer_pause|Пауза
+timer_resume|Продолжить
+timer_finish|Завершить
+timer_done|%1$s готово, сохранено.

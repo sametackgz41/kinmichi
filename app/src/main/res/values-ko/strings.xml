@@ -1161,6 +1161,13 @@
     <string name="period_times_suffix">번</string>
     <string name="period_custom_summary">%1$d일 동안 %2$d번</string>
     <string name="period_custom_hint">기간은 시작한 날부터 셉니다. 넘친 횟수는 다음 기간으로 넘어가지 않아요.</string>
+    <string name="timer_channel_name">타이머</string>
+    <string name="timer_goal">목표 %1$s</string>
+    <string name="timer_paused">일시정지 · %1$s / %2$s</string>
+    <string name="timer_pause">일시정지</string>
+    <string name="timer_resume">계속</string>
+    <string name="timer_finish">끝내기</string>
+    <string name="timer_done">%1$s 완료, 저장했어요.</string>
     <plurals name="streak_days">
         <item quantity="one">%d일 연속</item>
         <item quantity="other">%d일 연속</item>

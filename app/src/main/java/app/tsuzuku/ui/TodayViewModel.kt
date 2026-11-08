@@ -27,6 +27,9 @@ data class HabitTimerState(
     val habitId: Long? = null,
     val elapsedSeconds: Long = 0,
     val maxSeconds: Long = 0,
+    val paused: Boolean = false,
+    val name: String = "",
+    val emoji: String = "",
 ) {
     val isRunning: Boolean get() = habitId != null
 }
@@ -37,6 +40,8 @@ class TodayViewModel(
     private val now: () -> Long = System::currentTimeMillis,
     private val today: () -> LocalDate = LocalDate::now,
     private val onDataChanged: () -> Unit = {},
+    /** For the timer's notification; null in tests. */
+    private val appContext: android.content.Context? = null,
 ) : ViewModel() {
     val habits: StateFlow<List<TodayHabit>> = repository.observeToday().flowOn(kotlinx.coroutines.Dispatchers.Default).stateIn(
         scope = viewModelScope,
@@ -55,13 +60,40 @@ class TodayViewModel(
     private var timerJob: Job? = null
 
     init {
-        timerStore.load()?.let { session ->
-            if (session.localDate == today()) {
-                runTimer(session)
-            } else {
-                timerStore.clear()
+        // Follows the stored session, so Pause and Finish in the notification show up here too.
+        viewModelScope.launch {
+            timerStore.observe().collect { session ->
+                when {
+                    session == null -> stopTicker()
+                    session.localDate != today() -> { timerStore.clear(); stopTicker() }
+                    else -> runTimer(session)
+                }
             }
         }
+    }
+
+    private fun stopTicker() {
+        timerJob?.cancel()
+        timerJob = null
+        mutableTimer.value = HabitTimerState()
+    }
+
+    fun pauseTimer() {
+        val context = appContext
+        if (context != null) app.tsuzuku.notifications.HabitTimer.pause(context, now())
+        else timerStore.load()?.takeUnless { it.isPaused }?.let { timerStore.save(it.copy(pausedAtMillis = now())) }
+    }
+
+    fun resumeTimer() {
+        val context = appContext
+        if (context != null) app.tsuzuku.notifications.HabitTimer.resume(context, now())
+        else timerStore.load()?.takeIf { it.isPaused }?.let {
+            timerStore.save(it.copy(pausedMillis = it.pausedMillis + (now() - it.pausedAtMillis), pausedAtMillis = 0L))
+        }
+    }
+
+    fun stopTimer() {
+        viewModelScope.launch { timerStore.load()?.let { finishTimer(it) } }
     }
 
     fun toggleHabit(id: Long) {
@@ -205,8 +237,11 @@ class TodayViewModel(
                 startedAtMillis = now(),
                 maxSeconds = remainingSeconds,
                 localDate = today(),
+                habitName = item.habit.name,
+                habitEmoji = item.habit.emoji,
             )
-            timerStore.save(session)
+            val context = appContext
+            if (context != null) app.tsuzuku.notifications.HabitTimer.start(context, session) else timerStore.save(session)
             runTimer(session)
         }
     }
@@ -216,9 +251,10 @@ class TodayViewModel(
         timerJob = viewModelScope.launch {
             while (true) {
                 val elapsed = elapsedSeconds(session, now())
-                mutableTimer.value = HabitTimerState(session.habitId, elapsed, session.maxSeconds)
+                mutableTimer.value = HabitTimerState(session.habitId, elapsed, session.maxSeconds, session.isPaused, session.habitName, session.habitEmoji)
+                if (session.isPaused) break
                 if (elapsed >= session.maxSeconds) {
-                    finishTimer(session, cancelTicker = false)
+                    finishTimer(session, cancelTicker = false, reachedGoal = true)
                     break
                 }
                 delay(1_000)
@@ -226,25 +262,36 @@ class TodayViewModel(
         }
     }
 
-    private suspend fun finishTimer(session: StoredTimerSession, cancelTicker: Boolean = true) {
+    private suspend fun finishTimer(session: StoredTimerSession, cancelTicker: Boolean = true, reachedGoal: Boolean = false) {
         if (cancelTicker) timerJob?.cancel()
         timerJob = null
-        val elapsed = elapsedSeconds(session, now())
-        if (elapsed > 0) repository.addProgress(session.habitId, elapsed / 60.0)
-        if (elapsed > 0) onDataChanged()
-        timerStore.clear()
+        val context = appContext
+        if (context != null) {
+            app.tsuzuku.notifications.HabitTimer.finish(context, repository, reachedGoal, now())
+        } else {
+            if (timerStore.load() == null) return
+            timerStore.clear()
+            val elapsed = elapsedSeconds(session, now())
+            if (elapsed > 0) repository.addProgress(session.habitId, elapsed / 60.0)
+        }
+        onDataChanged()
         mutableTimer.value = HabitTimerState()
     }
 
     companion object {
-        fun factory(repository: HabitRepository, timerStore: TimerSessionStore, onDataChanged: () -> Unit = {}): ViewModelProvider.Factory =
+        fun factory(
+            repository: HabitRepository,
+            timerStore: TimerSessionStore,
+            appContext: android.content.Context? = null,
+            onDataChanged: () -> Unit = {},
+        ): ViewModelProvider.Factory =
             object : ViewModelProvider.Factory {
                 @Suppress("UNCHECKED_CAST")
                 override fun <T : ViewModel> create(modelClass: Class<T>): T =
-                    TodayViewModel(repository, timerStore, onDataChanged = onDataChanged) as T
+                    TodayViewModel(repository, timerStore, onDataChanged = onDataChanged, appContext = appContext) as T
             }
     }
 }
 
 internal fun elapsedSeconds(session: StoredTimerSession, nowMillis: Long): Long =
-    ((nowMillis - session.startedAtMillis).coerceAtLeast(0L) / 1_000L).coerceAtMost(session.maxSeconds)
+    app.tsuzuku.notifications.HabitTimer.elapsed(session, nowMillis)

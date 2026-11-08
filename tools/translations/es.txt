@@ -1181,3 +1181,10 @@ period_days_suffix|días
 period_times_suffix|veces
 period_custom_summary|%2$d veces en %1$d días
 period_custom_hint|Los periodos cuentan desde el día en que empiezas. Lo que sobra no pasa al siguiente.
+timer_channel_name|Cronómetro
+timer_goal|meta %1$s
+timer_paused|En pausa · %1$s / %2$s
+timer_pause|Pausar
+timer_resume|Seguir
+timer_finish|Terminar
+timer_done|%1$s hecho, guardado.

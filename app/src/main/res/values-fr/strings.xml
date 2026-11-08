@@ -1161,6 +1161,13 @@
     <string name="period_times_suffix">fois</string>
     <string name="period_custom_summary">%2$d fois en %1$d jours</string>
     <string name="period_custom_hint">Les périodes comptent à partir du jour où tu commences. Le surplus ne se reporte pas.</string>
+    <string name="timer_channel_name">Chronomètre</string>
+    <string name="timer_goal">objectif %1$s</string>
+    <string name="timer_paused">En pause · %1$s / %2$s</string>
+    <string name="timer_pause">Pause</string>
+    <string name="timer_resume">Reprendre</string>
+    <string name="timer_finish">Terminer</string>
+    <string name="timer_done">%1$s faits, enregistré.</string>
     <plurals name="streak_days">
         <item quantity="one">Série de %d jour</item>
         <item quantity="other">Série de %d jours</item>

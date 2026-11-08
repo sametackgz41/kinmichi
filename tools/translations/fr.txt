@@ -1181,3 +1181,10 @@ period_days_suffix|jours
 period_times_suffix|fois
 period_custom_summary|%2$d fois en %1$d jours
 period_custom_hint|Les périodes comptent à partir du jour où tu commences. Le surplus ne se reporte pas.
+timer_channel_name|Chronomètre
+timer_goal|objectif %1$s
+timer_paused|En pause · %1$s / %2$s
+timer_pause|Pause
+timer_resume|Reprendre
+timer_finish|Terminer
+timer_done|%1$s faits, enregistré.

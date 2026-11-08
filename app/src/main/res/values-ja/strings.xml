@@ -1161,6 +1161,13 @@
     <string name="period_times_suffix">回</string>
     <string name="period_custom_summary">%1$d日のうち%2$d回</string>
     <string name="period_custom_hint">期間は始めた日から数えます。多くできても次の期間には持ち越しません。</string>
+    <string name="timer_channel_name">タイマー</string>
+    <string name="timer_goal">目標 %1$s</string>
+    <string name="timer_paused">一時停止中・%1$s / %2$s</string>
+    <string name="timer_pause">一時停止</string>
+    <string name="timer_resume">再開</string>
+    <string name="timer_finish">終了</string>
+    <string name="timer_done">%1$s達成、記録しました。</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

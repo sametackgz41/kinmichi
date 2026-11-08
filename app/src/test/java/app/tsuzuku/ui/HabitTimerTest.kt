@@ -27,4 +27,17 @@ class HabitTimerTest {
     fun elapsedTimeStopsAtTarget() {
         assertEquals(120, elapsedSeconds(session, 999_000))
     }
+
+    @Test
+    fun pausedTimeIsNotCounted() {
+        // Started at 10 s, 20 s of it paused: at 70 s on the clock, 40 s counted.
+        val resumed = session.copy(pausedMillis = 20_000)
+        assertEquals(40, elapsedSeconds(resumed, 70_000))
+    }
+
+    @Test
+    fun clockStandsStillWhilePaused() {
+        val paused = session.copy(pausedAtMillis = 40_000)
+        assertEquals(30, elapsedSeconds(paused, 500_000))
+    }
 }

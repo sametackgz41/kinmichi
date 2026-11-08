@@ -1161,6 +1161,13 @@
     <string name="period_times_suffix">раз</string>
     <string name="period_custom_summary">%2$d раз за %1$d дней</string>
     <string name="period_custom_hint">Периоды считаются со дня начала. Лишнее не переносится на следующий.</string>
+    <string name="timer_channel_name">Таймер</string>
+    <string name="timer_goal">цель %1$s</string>
+    <string name="timer_paused">Пауза · %1$s / %2$s</string>
+    <string name="timer_pause">Пауза</string>
+    <string name="timer_resume">Продолжить</string>
+    <string name="timer_finish">Завершить</string>
+    <string name="timer_done">%1$s готово, сохранено.</string>
     <plurals name="streak_days">
         <item quantity="one">Серия %d день</item>
         <item quantity="few">Серия %d дня</item>

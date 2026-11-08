@@ -1561,4 +1561,11 @@
     <string name="period_times_suffix">times</string>
     <string name="period_custom_summary">%2$d times within %1$d days</string>
     <string name="period_custom_hint">Periods are counted from the day you start. Extra days don\'t carry over to the next one.</string>
+    <string name="timer_channel_name">Timer</string>
+    <string name="timer_goal">goal %1$s</string>
+    <string name="timer_paused">Paused · %1$s / %2$s</string>
+    <string name="timer_pause">Pause</string>
+    <string name="timer_resume">Resume</string>
+    <string name="timer_finish">Finish</string>
+    <string name="timer_done">%1$s done, saved.</string>
 </resources>

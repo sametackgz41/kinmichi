@@ -582,6 +582,25 @@ class PreviewGalleryTest {
         captureScreen("slots_today_tr")
     }
 
+    @Test fun timerBarTr() {
+        setVariant("tr", false)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false) {
+                androidx.compose.material3.Surface {
+                    androidx.compose.foundation.layout.Column(
+                        androidx.compose.ui.Modifier.fillMaxSize().padding(vertical = 20.dp),
+                        verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(12.dp),
+                    ) {
+                        app.tsuzuku.ui.screens.HabitTimerBar(app.tsuzuku.ui.HabitTimerState(1, 754, 1200, false, "Kitap oku", "📖"), {}, {}, {})
+                        app.tsuzuku.ui.screens.HabitTimerBar(app.tsuzuku.ui.HabitTimerState(1, 754, 1200, true, "Kitap oku", "📖"), {}, {}, {})
+                    }
+                }
+            }
+        }
+        compose.mainClock.advanceTimeBy(900)
+        captureScreen("timer_bar_tr")
+    }
+
     @Test fun periodRealTr() {
         setVariant("tr", false)
         val base = sampleToday("tr")
@@ -661,7 +680,10 @@ class PreviewGalleryTest {
     @Test fun task10() = renderTask("task10_catch") { app.tsuzuku.notifications.CatchMission(onProgress = {}, onSolved = {}, seed = 6) }
 
     @Test fun trashA() = renderMock("trash_a") { TrashOptionA() }
-    @Test fun periodA() = renderMock("period_a") { PeriodOptionA() }
+    @Test fun timerA() = renderMock("timer_a") { TimerOptionA() }
+    @Test fun timerB() = renderMock("timer_b") { TimerOptionB() }
+    @Test fun timerC() = renderMock("timer_c") { TimerOptionC() }
+    @Test fun periodA() =renderMock("period_a") { PeriodOptionA() }
     @Test fun periodB() = renderMock("period_b") { PeriodOptionB() }
     @Test fun periodC() = renderMock("period_c") { PeriodOptionC() }
     @Test fun repeatsA() =renderMock("repeats_a") { RepeatsOptionA() }

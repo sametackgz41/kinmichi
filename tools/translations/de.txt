@@ -1181,3 +1181,10 @@ period_days_suffix|Tage
 period_times_suffix|Mal
 period_custom_summary|%2$d-mal in %1$d Tagen
 period_custom_hint|Zeiträume zählen ab deinem Starttag. Überschuss wird nicht übertragen.
+timer_channel_name|Stoppuhr
+timer_goal|Ziel %1$s
+timer_paused|Pausiert · %1$s / %2$s
+timer_pause|Pause
+timer_resume|Weiter
+timer_finish|Beenden
+timer_done|%1$s geschafft, gespeichert.

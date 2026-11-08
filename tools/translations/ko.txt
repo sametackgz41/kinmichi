@@ -1181,3 +1181,10 @@ period_days_suffix|일마다
 period_times_suffix|번
 period_custom_summary|%1$d일 동안 %2$d번
 period_custom_hint|기간은 시작한 날부터 셉니다. 넘친 횟수는 다음 기간으로 넘어가지 않아요.
+timer_channel_name|타이머
+timer_goal|목표 %1$s
+timer_paused|일시정지 · %1$s / %2$s
+timer_pause|일시정지
+timer_resume|계속
+timer_finish|끝내기
+timer_done|%1$s 완료, 저장했어요.

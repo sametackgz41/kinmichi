@@ -1175,3 +1175,10 @@ period_days_suffix|日ごとに
 period_times_suffix|回
 period_custom_summary|%1$d日のうち%2$d回
 period_custom_hint|期間は始めた日から数えます。多くできても次の期間には持ち越しません。
+timer_channel_name|タイマー
+timer_goal|目標 %1$s
+timer_paused|一時停止中・%1$s / %2$s
+timer_pause|一時停止
+timer_resume|再開
+timer_finish|終了
+timer_done|%1$s達成、記録しました。

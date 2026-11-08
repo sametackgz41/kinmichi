@@ -1181,3 +1181,10 @@ period_days_suffix|dias
 period_times_suffix|vezes
 period_custom_summary|%2$d vezes em %1$d dias
 period_custom_hint|Os períodos contam a partir do dia em que você começa. O excedente não passa para o próximo.
+timer_channel_name|Cronômetro
+timer_goal|meta %1$s
+timer_paused|Pausado · %1$s / %2$s
+timer_pause|Pausar
+timer_resume|Continuar
+timer_finish|Encerrar
+timer_done|%1$s feito, salvo.

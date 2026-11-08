@@ -230,6 +230,9 @@
             android:name=".notifications.HabitReminderReceiver"
             android:exported="false" />
         <receiver
+            android:name=".notifications.HabitTimerReceiver"
+            android:exported="false" />
+        <receiver
             android:name=".notifications.HabitReminderSnoozeReceiver"
             android:exported="false" />
         <receiver

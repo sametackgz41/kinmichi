@@ -1560,4 +1560,11 @@
     <string name="period_times_suffix">kez</string>
     <string name="period_custom_summary">Her dönem: %1$d gün içinde %2$d kez</string>
     <string name="period_custom_hint">Dönemler başladığın günden itibaren sayılır. Fazlası sonraki döneme devretmez.</string>
+    <string name="timer_channel_name">Kronometre</string>
+    <string name="timer_goal">hedef %1$s</string>
+    <string name="timer_paused">Duraklatıldı · %1$s / %2$s</string>
+    <string name="timer_pause">Duraklat</string>
+    <string name="timer_resume">Devam</string>
+    <string name="timer_finish">Bitir</string>
+    <string name="timer_done">%1$s tamam, kaydedildi.</string>
 </resources>

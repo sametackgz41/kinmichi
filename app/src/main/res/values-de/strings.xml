@@ -1161,6 +1161,13 @@
     <string name="period_times_suffix">Mal</string>
     <string name="period_custom_summary">%2$d-mal in %1$d Tagen</string>
     <string name="period_custom_hint">Zeiträume zählen ab deinem Starttag. Überschuss wird nicht übertragen.</string>
+    <string name="timer_channel_name">Stoppuhr</string>
+    <string name="timer_goal">Ziel %1$s</string>
+    <string name="timer_paused">Pausiert · %1$s / %2$s</string>
+    <string name="timer_pause">Pause</string>
+    <string name="timer_resume">Weiter</string>
+    <string name="timer_finish">Beenden</string>
+    <string name="timer_done">%1$s geschafft, gespeichert.</string>
     <plurals name="streak_days">
         <item quantity="one">%d Tag in Folge</item>
         <item quantity="other">%d Tage in Folge</item>

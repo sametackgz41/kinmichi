@@ -1181,3 +1181,10 @@ period_days_suffix|giorni
 period_times_suffix|volte
 period_custom_summary|%2$d volte in %1$d giorni
 period_custom_hint|I periodi si contano dal giorno in cui inizi. L'eccesso non passa al successivo.
+timer_channel_name|Cronometro
+timer_goal|obiettivo %1$s
+timer_paused|In pausa · %1$s / %2$s
+timer_pause|Pausa
+timer_resume|Riprendi
+timer_finish|Termina
+timer_done|%1$s fatti, salvato.
