@@ -1618,4 +1618,15 @@
     <string name="health_card_per_day">%1$s / day</string>
     <string name="health_card_no_access">This habit fills itself from health data, but Kinmichi can\'t read it right now. Allow it in Health Connect.</string>
     <string name="health_card_open">Open Health Connect</string>
+    <string name="today_edit_hint">Changes show at once.</string>
+    <string name="today_edit_shown">On the screen</string>
+    <string name="today_edit_list">Habit list</string>
+    <string name="today_edit_week">The week\'s circles</string>
+    <string name="today_edit_week_desc">Seven small ensō, one per day</string>
+    <string name="today_edit_summary">Daily progress card</string>
+    <string name="today_edit_summary_desc">How many done today, and your streak</string>
+    <string name="today_edit_seasonal">Seasonal touches</string>
+    <string name="today_edit_seasonal_desc">Petals, fireflies, leaves or snow; shake to stir them</string>
+    <string name="today_edit_group_desc">Morning, afternoon and evening, by reminder time</string>
+    <string name="today_edit_compact_desc">More habits on the screen at once</string>
 </resources>

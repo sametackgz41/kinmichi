@@ -493,6 +493,7 @@ fun TsuzukuApp(
                         onSetTodaySectionOrder(order)
                         onSetTodayHiddenSections(hidden)
                     },
+                    onShowDailySummary = onSetShowDailySummary,
                     onStartFocus = { navController.navigate("focus") },
                     onStartRoutine = { routineName -> navController.navigate("routine/$routineName") },
                     onTogglePlanTask = { task ->

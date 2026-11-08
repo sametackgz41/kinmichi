@@ -1264,6 +1264,21 @@ class PreviewGalleryTest {
     @Test fun gal_editor_ko_light() = gallery("ko", false, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
     @Test fun gal_editor_ko_dark() = gallery("ko", true, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
 
+    @Test fun todayEditTr() {
+        setVariant("tr", false)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false) {
+                androidx.compose.material3.Surface(color = androidx.compose.material3.MaterialTheme.colorScheme.surfaceContainerLow) {
+                    androidx.compose.foundation.layout.Column(androidx.compose.ui.Modifier.fillMaxSize().padding(top = 24.dp)) {
+                        app.tsuzuku.ui.screens.TodayEditContent(summaryVisible = true, onSummaryVisible = {}, onReorder = {})
+                    }
+                }
+            }
+        }
+        compose.mainClock.advanceTimeBy(900)
+        captureScreen("today_edit_tr")
+    }
+
     @Test fun healthCardTr() {
         setVariant("tr", false)
         val habit = sampleToday("tr")[0].habit.copy(name = "Günde 8.000 adım", emoji = "🚶", type = app.tsuzuku.model.HabitType.Count, target = 8000.0, unit = "adım", healthMetric = app.tsuzuku.model.HealthMetric.Steps)

@@ -1250,3 +1250,14 @@ health_card_average|30日平均
 health_card_per_day|%1$s / 日
 health_card_no_access|この習慣は健康データで記録されますが、今は読み取れません。Health Connectで許可してください。
 health_card_open|Health Connectを開く
+today_edit_hint|変更はすぐに反映されます。
+today_edit_shown|画面に表示
+today_edit_list|習慣リスト
+today_edit_week|今週の円
+today_edit_week_desc|1日ひとつ、7つの小さな円相
+today_edit_summary|今日の進捗カード
+today_edit_summary_desc|今日の達成数と連続記録
+today_edit_seasonal|季節の飾り
+today_edit_seasonal_desc|花びら、蛍、紅葉、雪。振ると舞い上がります
+today_edit_group_desc|リマインダー時刻で朝・昼・夜に分けます
+today_edit_compact_desc|一度に多くの習慣を表示

@@ -145,14 +145,22 @@ fun CalendarScreen(
                             Icon(Icons.AutoMirrored.Rounded.ArrowForward, contentDescription = stringResource(R.string.next_month))
                         }
                     }
-                    CalendarMonthGrid(
+                    MonthPager(
                         month = displayedMonth,
-                        weekStartsMonday = weekStartsMonday,
-                        selectedDate = selectedDate,
-                        today = today,
-                        summaryFor = history::daySummary,
-                        onSelect = { selectedText = it.toString(); showDaySheet = true },
-                    )
+                        onMonth = { m ->
+                            monthText = m.toString()
+                            selectedText = if (m == YearMonth.from(today)) today.toString() else m.atDay(1).toString()
+                        },
+                    ) { pageMonth ->
+                        CalendarMonthGrid(
+                            month = pageMonth,
+                            weekStartsMonday = weekStartsMonday,
+                            selectedDate = selectedDate,
+                            today = today,
+                            summaryFor = history::daySummary,
+                            onSelect = { selectedText = it.toString(); showDaySheet = true },
+                        )
+                    }
                 }
             }
         }

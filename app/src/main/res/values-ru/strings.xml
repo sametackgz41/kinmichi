@@ -1236,6 +1236,17 @@
     <string name="health_card_per_day">%1$s / день</string>
     <string name="health_card_no_access">Эта привычка заполняется данными о здоровье, но Kinmichi сейчас не может их прочитать. Разрешите доступ в Health Connect.</string>
     <string name="health_card_open">Открыть Health Connect</string>
+    <string name="today_edit_hint">Изменения видны сразу.</string>
+    <string name="today_edit_shown">На экране</string>
+    <string name="today_edit_list">Список привычек</string>
+    <string name="today_edit_week">Круги недели</string>
+    <string name="today_edit_week_desc">Семь маленьких энсо, по одному на день</string>
+    <string name="today_edit_summary">Карточка прогресса дня</string>
+    <string name="today_edit_summary_desc">Сколько сделано сегодня и серия</string>
+    <string name="today_edit_seasonal">Сезонные детали</string>
+    <string name="today_edit_seasonal_desc">Лепестки, светлячки, листья или снег; встряхните — закружатся</string>
+    <string name="today_edit_group_desc">Утро, день и вечер по времени напоминания</string>
+    <string name="today_edit_compact_desc">Больше привычек на экране сразу</string>
     <plurals name="streak_days">
         <item quantity="one">Серия %d день</item>
         <item quantity="few">Серия %d дня</item>

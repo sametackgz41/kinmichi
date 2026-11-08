@@ -120,6 +120,7 @@ fun TodayScreen(
     todaySectionOrder: String = "summary,intelligence,habits,plan,goals,library,focus,health,routines",
     todayHiddenSections: String = "",
     onUpdateSectionConfig: (newOrder: String, newHidden: String) -> Unit = { _, _ -> },
+    onShowDailySummary: (Boolean) -> Unit = {},
     onStartFocus: () -> Unit = {},
     onStartRoutine: (String) -> Unit = {},
     onTogglePlanTask: (PlanTask) -> Unit = {},
@@ -259,7 +260,7 @@ fun TodayScreen(
                 )
             }
         }
-        if (weekProgress.isNotEmpty()) {
+        if (weekProgress.isNotEmpty() && TodayViewPrefs.showWeek) {
             item(key = "week-enso") {
                 WeekEnsoStrip(weekProgress, Modifier.padding(top = 4.dp, bottom = 8.dp))
             }
@@ -457,9 +458,15 @@ fun TodayScreen(
 
     if (showConfigSheet) {
         TodaySectionsConfigSheet(
-            currentOrder = todaySectionOrder,
-            currentHidden = todayHiddenSections,
-            onSave = onUpdateSectionConfig,
+            summaryVisible = showDailySummary && "summary" !in hiddenSet,
+            onSummaryVisible = { on ->
+                // One switch for the card: the section and the Settings toggle move together.
+                val order = orderList.toMutableList().apply { if ("summary" !in this) add(0, "summary"); if ("habits" !in this) add("habits") }
+                val hidden = if (on) hiddenSet - "summary" else hiddenSet + "summary"
+                onUpdateSectionConfig(order.joinToString(","), hidden.joinToString(","))
+                if (on) onShowDailySummary(true)
+            },
+            onReorder = { reorderMode = true },
             onClose = { showConfigSheet = false },
         )
     }

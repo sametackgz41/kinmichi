@@ -1617,4 +1617,15 @@
     <string name="health_card_per_day">%1$s / gün</string>
     <string name="health_card_no_access">Bu alışkanlık sağlık verisinden doluyor ama Kinmichi şu an okuyamıyor. Health Connect\'te izin ver.</string>
     <string name="health_card_open">Health Connect\'i aç</string>
+    <string name="today_edit_hint">Değişiklikler hemen görünür.</string>
+    <string name="today_edit_shown">Ekranda</string>
+    <string name="today_edit_list">Alışkanlık listesi</string>
+    <string name="today_edit_week">Hafta halkaları</string>
+    <string name="today_edit_week_desc">Her gün için küçük bir ensō</string>
+    <string name="today_edit_summary">Günlük ilerleme kartı</string>
+    <string name="today_edit_summary_desc">Bugün kaçı bitti, kaç günlük seri</string>
+    <string name="today_edit_seasonal">Mevsim süslemesi</string>
+    <string name="today_edit_seasonal_desc">Yaprak, ateş böceği ya da kar; sallayınca savrulur</string>
+    <string name="today_edit_group_desc">Hatırlatma saatine göre sabah, öğle, akşam</string>
+    <string name="today_edit_compact_desc">Ekrana aynı anda daha çok alışkanlık sığar</string>
 </resources>

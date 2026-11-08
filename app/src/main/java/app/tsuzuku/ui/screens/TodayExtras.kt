@@ -69,6 +69,8 @@ object TodayViewPrefs {
         private set
     var compact by mutableStateOf(false)
         private set
+    var showWeek by mutableStateOf(true)
+        private set
     private var loaded = false
 
     fun load(context: Context) {
@@ -77,6 +79,12 @@ object TodayViewPrefs {
         val p = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
         groupByTime = p.getBoolean("group_by_time", false)
         compact = p.getBoolean("compact", false)
+        showWeek = p.getBoolean("show_week", true)
+    }
+
+    fun setShowWeek(context: Context, on: Boolean) {
+        showWeek = on
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().putBoolean("show_week", on).apply()
     }
 
     fun setGroupByTime(context: Context, on: Boolean) {

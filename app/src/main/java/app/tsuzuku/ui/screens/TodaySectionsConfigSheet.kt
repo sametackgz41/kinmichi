@@ -1,216 +1,105 @@
 package app.tsuzuku.ui.screens
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowDownward
-import androidx.compose.material.icons.rounded.ArrowUpward
-import androidx.compose.material.icons.rounded.Close
-import androidx.compose.material.icons.rounded.Checklist
-import androidx.compose.material.icons.rounded.Flag
-import androidx.compose.material.icons.rounded.HealthAndSafety
-import androidx.compose.material.icons.rounded.Lightbulb
-import androidx.compose.material.icons.rounded.MenuBook
-import androidx.compose.material.icons.rounded.PieChart
-import androidx.compose.material.icons.rounded.Repeat
-import androidx.compose.material.icons.rounded.Timer
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.material.icons.rounded.AutoAwesome
+import androidx.compose.material.icons.rounded.DonutLarge
+import androidx.compose.material.icons.rounded.Schedule
+import androidx.compose.material.icons.rounded.SwapVert
+import androidx.compose.material.icons.rounded.TrackChanges
+import androidx.compose.material.icons.rounded.ViewAgenda
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.tsuzuku.R
+import app.tsuzuku.ui.theme.LookPrefs
 
-data class SectionItem(val id: String, @param:StringRes val titleRes: Int, val icon: ImageVector)
-
-val ALL_SECTIONS = listOf(
-    SectionItem("summary", R.string.daily_summary_section, Icons.Rounded.PieChart),
-    SectionItem("habits", R.string.habits, Icons.Rounded.Repeat),
-    SectionItem("plan", R.string.todays_plan_section, Icons.Rounded.Checklist),
-    SectionItem("goals", R.string.goal_progress_section, Icons.Rounded.Flag),
-    SectionItem("focus", R.string.focus_info_section, Icons.Rounded.Timer),
-    SectionItem("routines", R.string.routines_label, Icons.Rounded.Repeat),
-)
-
+/** "Edit the Today screen": only things that are really on it, and each change shows at once. */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TodaySectionsConfigSheet(
-    currentOrder: String,
-    currentHidden: String,
-    onSave: (newOrder: String, newHidden: String) -> Unit,
+    summaryVisible: Boolean,
+    onSummaryVisible: (Boolean) -> Unit,
+    onReorder: () -> Unit,
     onClose: () -> Unit,
 ) {
-    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-
-    val initialList = remember(currentOrder) {
-        val orderKeys = currentOrder.split(',').filter(String::isNotBlank)
-        val ordered = orderKeys.mapNotNull { key -> ALL_SECTIONS.firstOrNull { it.id == key } }
-        val remaining = ALL_SECTIONS.filter { s -> s.id !in orderKeys }
-        ordered + remaining
+    ModalBottomSheet(onDismissRequest = onClose, sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)) {
+        TodayEditContent(summaryVisible, onSummaryVisible, onReorder = { onClose(); onReorder() })
     }
+}
 
-    var sections by remember { mutableStateOf(initialList) }
-    var hiddenSet by remember { mutableStateOf(currentHidden.split(',').filter(String::isNotBlank).toSet()) }
-
-    fun notifyChange() {
-        val newOrder = sections.joinToString(",") { it.id }
-        val newHidden = hiddenSet.joinToString(",")
-        onSave(newOrder, newHidden)
-    }
-
-    ModalBottomSheet(
-        onDismissRequest = onClose,
-        sheetState = sheetState,
-        containerColor = MaterialTheme.colorScheme.surface,
+@Composable
+internal fun TodayEditContent(summaryVisible: Boolean, onSummaryVisible: (Boolean) -> Unit, onReorder: () -> Unit) {
+    val context = LocalContext.current
+    Column(
+        Modifier.fillMaxWidth().padding(horizontal = 20.dp).padding(bottom = 16.dp).navigationBarsPadding(),
+        verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp, vertical = 8.dp),
-            verticalArrangement = Arrangement.spacedBy(14.dp),
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Column {
-                    Text(
-                        text = stringResource(R.string.customize_sections),
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.SemiBold,
-                    )
-                    Text(
-                        text = stringResource(R.string.sections_config_hint),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                }
-                IconButton(onClick = onClose) {
-                    Icon(Icons.Rounded.Close, contentDescription = null)
-                }
+        Text(stringResource(R.string.customize_sections), style = MaterialTheme.typography.titleLarge)
+        Text(stringResource(R.string.today_edit_hint), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Group(stringResource(R.string.today_edit_shown)) {
+            ToggleRow(Icons.Rounded.TrackChanges, stringResource(R.string.today_edit_week), stringResource(R.string.today_edit_week_desc), TodayViewPrefs.showWeek) {
+                TodayViewPrefs.setShowWeek(context, it)
             }
-
-            HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
-
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(360.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                itemsIndexed(sections, key = { _, s -> s.id }) { index, section ->
-                    val isVisible = section.id !in hiddenSet
-
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp),
-                        colors = CardDefaults.cardColors(
-                            containerColor = if (isVisible) MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f) else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.2f),
-                        ),
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 12.dp, vertical = 8.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                        ) {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier.weight(1f),
-                            ) {
-                                Icon(
-                                    section.icon,
-                                    contentDescription = null,
-                                    tint = if (isVisible) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
-                                    modifier = Modifier.size(22.dp),
-                                )
-                                Spacer(modifier = Modifier.size(12.dp))
-                                Text(
-                                    text = stringResource(section.titleRes),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = if (isVisible) FontWeight.SemiBold else FontWeight.Normal,
-                                    color = if (isVisible) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
-                                )
-                            }
-
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                IconButton(
-                                    onClick = {
-                                        if (index > 0) {
-                                            val mutable = sections.toMutableList()
-                                            val item = mutable.removeAt(index)
-                                            mutable.add(index - 1, item)
-                                            sections = mutable
-                                            notifyChange()
-                                        }
-                                    },
-                                    enabled = index > 0,
-                                    modifier = Modifier.size(32.dp),
-                                ) {
-                                    Icon(Icons.Rounded.ArrowUpward, contentDescription = null, modifier = Modifier.size(18.dp))
-                                }
-
-                                IconButton(
-                                    onClick = {
-                                        if (index < sections.size - 1) {
-                                            val mutable = sections.toMutableList()
-                                            val item = mutable.removeAt(index)
-                                            mutable.add(index + 1, item)
-                                            sections = mutable
-                                            notifyChange()
-                                        }
-                                    },
-                                    enabled = index < sections.size - 1,
-                                    modifier = Modifier.size(32.dp),
-                                ) {
-                                    Icon(Icons.Rounded.ArrowDownward, contentDescription = null, modifier = Modifier.size(18.dp))
-                                }
-
-                                Spacer(modifier = Modifier.size(6.dp))
-
-                                Switch(
-                                    checked = isVisible,
-                                    onCheckedChange = { checked ->
-                                        hiddenSet = if (checked) hiddenSet - section.id else hiddenSet + section.id
-                                        notifyChange()
-                                    },
-                                )
-                            }
-                        }
-                    }
-                }
+            ToggleRow(Icons.Rounded.DonutLarge, stringResource(R.string.today_edit_summary), stringResource(R.string.today_edit_summary_desc), summaryVisible, onSummaryVisible)
+            ToggleRow(Icons.Rounded.AutoAwesome, stringResource(R.string.today_edit_seasonal), stringResource(R.string.today_edit_seasonal_desc), LookPrefs.seasonal) {
+                LookPrefs.setSeasonal(context, it)
             }
-
-            Spacer(modifier = Modifier.height(16.dp))
         }
+        Group(stringResource(R.string.today_edit_list)) {
+            ToggleRow(Icons.Rounded.Schedule, stringResource(R.string.today_group_time), stringResource(R.string.today_edit_group_desc), TodayViewPrefs.groupByTime) {
+                TodayViewPrefs.setGroupByTime(context, it)
+            }
+            ToggleRow(Icons.Rounded.ViewAgenda, stringResource(R.string.today_compact), stringResource(R.string.today_edit_compact_desc), TodayViewPrefs.compact) {
+                TodayViewPrefs.setCompact(context, it)
+            }
+        }
+        FilledTonalButton(onClick = onReorder, modifier = Modifier.fillMaxWidth().padding(top = 4.dp)) {
+            Icon(Icons.Rounded.SwapVert, null, Modifier.size(18.dp))
+            Text(stringResource(R.string.today_reorder), Modifier.padding(start = 8.dp))
+        }
+        Spacer(Modifier.height(4.dp))
+    }
+}
+
+@Composable
+private fun Group(title: String, content: @Composable () -> Unit) {
+    Text(title.uppercase(), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 6.dp, start = 4.dp))
+    Surface(shape = RoundedCornerShape(20.dp), color = MaterialTheme.colorScheme.surfaceContainerHigh) {
+        Column(Modifier.padding(vertical = 4.dp)) { content() }
+    }
+}
+
+@Composable
+private fun ToggleRow(icon: ImageVector, title: String, desc: String, checked: Boolean, onChange: (Boolean) -> Unit) {
+    Row(Modifier.fillMaxWidth().padding(horizontal = 14.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+        Icon(icon, null, tint = if (checked) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.size(22.dp))
+        Column(Modifier.weight(1f).padding(horizontal = 14.dp)) {
+            Text(title, style = MaterialTheme.typography.bodyLarge)
+            Text(desc, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+        Switch(checked = checked, onCheckedChange = onChange)
     }
 }

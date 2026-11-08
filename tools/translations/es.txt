@@ -1256,3 +1256,14 @@ health_card_average|Media de 30 días
 health_card_per_day|%1$s / día
 health_card_no_access|Este hábito se llena con datos de salud, pero Kinmichi no puede leerlos ahora. Permítelo en Health Connect.
 health_card_open|Abrir Health Connect
+today_edit_hint|Los cambios se ven al momento.
+today_edit_shown|En la pantalla
+today_edit_list|Lista de hábitos
+today_edit_week|Círculos de la semana
+today_edit_week_desc|Siete pequeños ensō, uno por día
+today_edit_summary|Tarjeta de progreso diario
+today_edit_summary_desc|Cuántos hiciste hoy y tu racha
+today_edit_seasonal|Toques de temporada
+today_edit_seasonal_desc|Pétalos, luciérnagas, hojas o nieve; agita para moverlos
+today_edit_group_desc|Mañana, tarde y noche, según la hora del recordatorio
+today_edit_compact_desc|Más hábitos en pantalla a la vez

@@ -1236,6 +1236,17 @@
     <string name="health_card_per_day">%1$s / día</string>
     <string name="health_card_no_access">Este hábito se llena con datos de salud, pero Kinmichi no puede leerlos ahora. Permítelo en Health Connect.</string>
     <string name="health_card_open">Abrir Health Connect</string>
+    <string name="today_edit_hint">Los cambios se ven al momento.</string>
+    <string name="today_edit_shown">En la pantalla</string>
+    <string name="today_edit_list">Lista de hábitos</string>
+    <string name="today_edit_week">Círculos de la semana</string>
+    <string name="today_edit_week_desc">Siete pequeños ensō, uno por día</string>
+    <string name="today_edit_summary">Tarjeta de progreso diario</string>
+    <string name="today_edit_summary_desc">Cuántos hiciste hoy y tu racha</string>
+    <string name="today_edit_seasonal">Toques de temporada</string>
+    <string name="today_edit_seasonal_desc">Pétalos, luciérnagas, hojas o nieve; agita para moverlos</string>
+    <string name="today_edit_group_desc">Mañana, tarde y noche, según la hora del recordatorio</string>
+    <string name="today_edit_compact_desc">Más hábitos en pantalla a la vez</string>
     <plurals name="streak_days">
         <item quantity="one">Racha de %d día</item>
         <item quantity="other">Racha de %d días</item>

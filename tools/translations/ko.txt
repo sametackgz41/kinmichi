@@ -1256,3 +1256,14 @@ health_card_average|30일 평균
 health_card_per_day|%1$s / 일
 health_card_no_access|이 습관은 건강 데이터로 채워지지만 지금은 읽을 수 없어요. Health Connect에서 허용하세요.
 health_card_open|Health Connect 열기
+today_edit_hint|바뀐 내용이 바로 보여요.
+today_edit_shown|화면에 표시
+today_edit_list|습관 목록
+today_edit_week|이번 주 원
+today_edit_week_desc|하루 하나씩, 작은 원상 7개
+today_edit_summary|오늘 진행 카드
+today_edit_summary_desc|오늘 몇 개 했는지와 연속 기록
+today_edit_seasonal|계절 장식
+today_edit_seasonal_desc|꽃잎, 반딧불, 낙엽, 눈. 흔들면 흩날려요
+today_edit_group_desc|알림 시간에 따라 아침·오후·저녁으로
+today_edit_compact_desc|한 화면에 더 많은 습관

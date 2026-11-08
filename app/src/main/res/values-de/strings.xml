@@ -1236,6 +1236,17 @@
     <string name="health_card_per_day">%1$s / Tag</string>
     <string name="health_card_no_access">Diese Gewohnheit füllt sich aus Gesundheitsdaten, aber Kinmichi kann sie gerade nicht lesen. Erlaube es in Health Connect.</string>
     <string name="health_card_open">Health Connect öffnen</string>
+    <string name="today_edit_hint">Änderungen siehst du sofort.</string>
+    <string name="today_edit_shown">Auf dem Bildschirm</string>
+    <string name="today_edit_list">Gewohnheitsliste</string>
+    <string name="today_edit_week">Wochenkreise</string>
+    <string name="today_edit_week_desc">Sieben kleine Ensō, einer pro Tag</string>
+    <string name="today_edit_summary">Tagesfortschritt-Karte</string>
+    <string name="today_edit_summary_desc">Wie viele heute erledigt sind und deine Serie</string>
+    <string name="today_edit_seasonal">Jahreszeitliche Details</string>
+    <string name="today_edit_seasonal_desc">Blüten, Glühwürmchen, Blätter oder Schnee; schütteln wirbelt sie auf</string>
+    <string name="today_edit_group_desc">Morgens, mittags, abends nach Erinnerungszeit</string>
+    <string name="today_edit_compact_desc">Mehr Gewohnheiten auf einmal</string>
     <plurals name="streak_days">
         <item quantity="one">%d Tag in Folge</item>
         <item quantity="other">%d Tage in Folge</item>

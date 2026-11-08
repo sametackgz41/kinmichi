@@ -188,8 +188,10 @@ internal fun MonthCalendarCard(history: HabitHistorySnapshot, moods: Map<LocalDa
                         textAlign = TextAlign.Center, modifier = Modifier.weight(1f))
                 }
             }
-            val lead = (month.atDay(1).dayOfWeek.value - firstDow.value + 7) % 7
-            val cells = List(lead) { null } + (1..month.lengthOfMonth()).map { month.atDay(it) }
+            MonthPager(month = month, onMonth = { monthText = it.toString() }) { pageMonth ->
+            androidx.compose.foundation.layout.Column {
+            val lead = (pageMonth.atDay(1).dayOfWeek.value - firstDow.value + 7) % 7
+            val cells = List(lead) { null } + (1..pageMonth.lengthOfMonth()).map { pageMonth.atDay(it) }
             cells.chunked(7).forEach { week ->
                 Row(Modifier.fillMaxWidth().padding(vertical = 3.dp), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     week.forEach { date ->
@@ -221,6 +223,8 @@ internal fun MonthCalendarCard(history: HabitHistorySnapshot, moods: Map<LocalDa
                     }
                     repeat(7 - week.size) { Spacer(Modifier.weight(1f)) }
                 }
+            }
+            }
             }
             if (moodMode) {
                 Row(Modifier.padding(top = 8.dp, start = 4.dp), verticalAlignment = Alignment.CenterVertically) {

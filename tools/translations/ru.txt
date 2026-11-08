@@ -1268,3 +1268,14 @@ health_card_average|Среднее за 30 дней
 health_card_per_day|%1$s / день
 health_card_no_access|Эта привычка заполняется данными о здоровье, но Kinmichi сейчас не может их прочитать. Разрешите доступ в Health Connect.
 health_card_open|Открыть Health Connect
+today_edit_hint|Изменения видны сразу.
+today_edit_shown|На экране
+today_edit_list|Список привычек
+today_edit_week|Круги недели
+today_edit_week_desc|Семь маленьких энсо, по одному на день
+today_edit_summary|Карточка прогресса дня
+today_edit_summary_desc|Сколько сделано сегодня и серия
+today_edit_seasonal|Сезонные детали
+today_edit_seasonal_desc|Лепестки, светлячки, листья или снег; встряхните — закружатся
+today_edit_group_desc|Утро, день и вечер по времени напоминания
+today_edit_compact_desc|Больше привычек на экране сразу
