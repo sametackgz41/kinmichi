@@ -178,6 +178,9 @@ data class HabitDraft(
     val tinyVersion: String = "",
     /** Ring like an alarm clock instead of a quiet notification (kept per device). */
     val alarm: Boolean = false,
+    /** Name of an app.tsuzuku.notifications.AlarmMission. */
+    val alarmMission: String = "None",
+    val alarmMarkDone: Boolean = false,
 )
 
 data class WeeklyReview(

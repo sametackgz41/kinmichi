@@ -908,3 +908,28 @@ alarm_start|Começar
 alarm_snooze|Adiar %1$d min
 alarm_not_today|Hoje não
 settings_group_more|Mais
+alarm_start_mission|Começar a tarefa
+alarm_snooze_left|Adiar %1$d min · restam %2$d
+alarm_no_snooze|Sem adiamentos; conclua a tarefa para desligar
+alarm_mission_label|Para desligar
+alarm_mission_none|Só um toque
+alarm_mission_math|Matemática
+alarm_mission_memory|Memória
+alarm_mission_puzzle|Caça aos números
+alarm_mark_done|Contar como feito ao desligar
+alarm_step_of|%1$d de %2$d
+alarm_math_title|Resolva isto
+alarm_memory_watch|Observe os quadrados…
+alarm_memory_repeat|Toque na mesma ordem
+alarm_memory_wrong|Quase, observe de novo
+alarm_puzzle_title|Toque de 1 a 16 em ordem
+alarm_puzzle_next|Próximo: %1$d
+alarm_good_morning|Bom dia
+alarm_hello|Olá
+alarm_wake_streak|🔥 %1$d dias acordando na hora
+alarm_today_list|Esperando por você hoje
+alarm_all_clear|Nada mais hoje
+alarm_start_day|Começar o dia
+wake_template_title|Criar um alarme para acordar
+wake_template_body|Com alarme, uma tarefa para desligar e uma sequência de despertar
+wake_habit_name|Acordar

@@ -908,3 +908,28 @@ alarm_start|Commencer
 alarm_snooze|Répéter dans %1$d min
 alarm_not_today|Pas aujourd'hui
 settings_group_more|Plus
+alarm_start_mission|Lancer la tâche
+alarm_snooze_left|Répéter %1$d min · encore %2$d
+alarm_no_snooze|Plus de répétition possible, termine la tâche pour l'arrêter
+alarm_mission_label|Pour l'arrêter
+alarm_mission_none|Un simple appui
+alarm_mission_math|Calcul
+alarm_mission_memory|Mémoire
+alarm_mission_puzzle|Chasse aux nombres
+alarm_mark_done|Compter comme fait à l'arrêt
+alarm_step_of|%1$d sur %2$d
+alarm_math_title|Résous ceci
+alarm_memory_watch|Regarde les cases…
+alarm_memory_repeat|Touche-les dans le même ordre
+alarm_memory_wrong|Presque, regarde encore
+alarm_puzzle_title|Touche de 1 à 16 dans l'ordre
+alarm_puzzle_next|Suivant : %1$d
+alarm_good_morning|Bonjour
+alarm_hello|Salut
+alarm_wake_streak|🔥 %1$d jours levé à l'heure
+alarm_today_list|Ce qui t'attend aujourd'hui
+alarm_all_clear|Rien d'autre aujourd'hui
+alarm_start_day|Commencer la journée
+wake_template_title|Créer une alarme de réveil
+wake_template_body|Avec une alarme, une tâche pour l'arrêter et une série de réveils
+wake_habit_name|Se lever

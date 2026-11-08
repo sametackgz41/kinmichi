@@ -908,3 +908,28 @@ alarm_start|Los geht's
 alarm_snooze|%1$d Min. schlummern
 alarm_not_today|Heute nicht
 settings_group_more|Mehr
+alarm_start_mission|Aufgabe starten
+alarm_snooze_left|%1$d Min. schlummern · noch %2$d
+alarm_no_snooze|Kein Schlummern mehr, löse die Aufgabe zum Ausschalten
+alarm_mission_label|Zum Ausschalten
+alarm_mission_none|Nur tippen
+alarm_mission_math|Rechnen
+alarm_mission_memory|Gedächtnis
+alarm_mission_puzzle|Zahlenjagd
+alarm_mark_done|Beim Ausschalten als erledigt zählen
+alarm_step_of|%1$d von %2$d
+alarm_math_title|Löse das
+alarm_memory_watch|Schau dir die Felder an…
+alarm_memory_repeat|Tippe sie in derselben Reihenfolge
+alarm_memory_wrong|Nicht ganz, schau noch mal
+alarm_puzzle_title|Tippe 1 bis 16 der Reihe nach
+alarm_puzzle_next|Als Nächstes: %1$d
+alarm_good_morning|Guten Morgen
+alarm_hello|Hallo
+alarm_wake_streak|🔥 Seit %1$d Tagen pünktlich auf
+alarm_today_list|Heute wartet auf dich
+alarm_all_clear|Heute sonst nichts
+alarm_start_day|In den Tag starten
+wake_template_title|Weckalarm einrichten
+wake_template_body|Mit Wecker, Aufgabe zum Ausschalten und Aufsteh-Serie
+wake_habit_name|Aufstehen

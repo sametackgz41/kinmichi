@@ -6,41 +6,54 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawingPadding
-import androidx.compose.material3.Button
-import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import app.tsuzuku.R
+import app.tsuzuku.data.RoomHabitRepository
+import app.tsuzuku.data.local.TsuzukuDatabase
+import app.tsuzuku.model.TodayHabit
+import app.tsuzuku.data.preferences.AppLocaleContext
 import app.tsuzuku.ui.theme.TsuzukuTheme
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
-/** The full-screen page an alarm habit opens, over the lock screen. */
+/**
+ * The full-screen alarm, over the lock screen: ringing page, then the task (if any), then a
+ * good-morning page. Volume keys and Back do nothing while it rings.
+ */
 class HabitAlarmActivity : ComponentActivity() {
+    private enum class Stage { Ringing, Mission, Morning }
+
     private var habitId = -1L
+    private var stage by mutableStateOf(Stage.Ringing)
+    private var morningHabits by mutableStateOf<List<TodayHabit>>(emptyList())
+    private var streak by mutableStateOf<Int?>(null)
+    private var snoozesLeft by mutableIntStateOf(0)
+
     private val closer = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) = finish()
+        override fun onReceive(context: Context, intent: Intent) {
+            if (stage != Stage.Morning) finish()
+        }
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(AppLocaleContext.wrap(newBase))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,24 +67,95 @@ class HabitAlarmActivity : ComponentActivity() {
         }
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         ContextCompat.registerReceiver(this, closer, IntentFilter(ACTION_CLOSE), ContextCompat.RECEIVER_NOT_EXPORTED)
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (stage == Stage.Morning) startDay()
+            }
+        })
         habitId = intent.getLongExtra(HabitReminderReceiver.EXTRA_HABIT_ID, -1L)
-        // A notification button that opens this page with an answer already chosen.
-        intent.getStringExtra(EXTRA_ANSWER)?.let { answer(it); return }
+        val options = HabitAlarms.options(this, habitId)
+        snoozesLeft = HabitAlarms.snoozesLeft(this, habitId)
+        // Opened from the notification after the ringing already ended: nothing left to answer.
+        if (AlarmRingService.ringingHabitId != habitId && savedInstanceState == null && AlarmRingService.ringingHabitId >= 0) {
+            finish(); return
+        }
         val name = intent.getStringExtra(EXTRA_NAME).orEmpty()
         val emoji = intent.getStringExtra(EXTRA_EMOJI).orEmpty()
         val plan = intent.getStringExtra(EXTRA_PLAN).orEmpty()
-        val time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))
+        val date = LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(resources.configuration.locales[0]))
         setContent {
             TsuzukuTheme(darkTheme = true) {
-                AlarmPage(time, emoji, name, plan, onAnswer = ::answer)
+                when (stage) {
+                    Stage.Ringing -> AlarmRingingPage(
+                        time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")),
+                        date = date,
+                        emoji = emoji,
+                        name = name,
+                        plan = plan,
+                        mission = options.mission,
+                        snoozesLeft = snoozesLeft,
+                        onStart = {
+                            if (options.mission == AlarmMission.None) wakeUp() else {
+                                HabitAlarms.hush(this)
+                                stage = Stage.Mission
+                            }
+                        },
+                        onSnooze = {
+                            HabitAlarms.snooze(this, habitId)
+                            finish()
+                        },
+                        onNotToday = {
+                            HabitAlarms.stop(this, habitId)
+                            finish()
+                        },
+                    )
+                    Stage.Mission -> {
+                        val progress = { HabitAlarms.hush(this) }
+                        when (options.mission) {
+                            AlarmMission.Math -> MathMission(onProgress = progress, onSolved = ::wakeUp)
+                            AlarmMission.Memory -> MemoryMission(onProgress = progress, onSolved = ::wakeUp)
+                            AlarmMission.Puzzle -> PuzzleMission(onProgress = progress, onSolved = ::wakeUp)
+                            AlarmMission.None -> androidx.compose.runtime.LaunchedEffect(Unit) { wakeUp() }
+                        }
+                    }
+                    Stage.Morning -> MorningPage(
+                        greeting = stringResource(if (LocalTime.now().hour < 12) R.string.alarm_good_morning else R.string.alarm_hello),
+                        date = date,
+                        streak = streak,
+                        habits = morningHabits,
+                        onStartDay = ::startDay,
+                    )
+                }
             }
         }
     }
 
-    private fun answer(kind: String) {
-        if (habitId >= 0) HabitAlarms.answer(this, habitId, kind)
+    /** Answered for good: quiet, tick off the wake-up habit, show the day ahead. */
+    private fun wakeUp() {
+        if (stage == Stage.Morning) return
+        stage = Stage.Morning
+        val id = habitId
+        lifecycleScope.launch {
+            val today = withContext(Dispatchers.IO) {
+                HabitAlarms.finish(applicationContext, id)
+                RoomHabitRepository(TsuzukuDatabase.getInstance(applicationContext).habitDao()).observeToday().first()
+            }
+            morningHabits = today.filterNot { it.habit.id == id }
+            streak = today.firstOrNull { it.habit.id == id }?.takeIf { HabitAlarms.options(applicationContext, id).markDone }?.streakDays
+        }
+    }
+
+    private fun startDay() {
+        startActivity(Intent(this, app.tsuzuku.MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP))
         finish()
     }
+
+    // The volume keys must not silence or lower the alarm.
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean =
+        if (stage != Stage.Morning && keyCode in SWALLOWED_KEYS) true else super.onKeyDown(keyCode, event)
+
+    override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean =
+        if (stage != Stage.Morning && keyCode in SWALLOWED_KEYS) true else super.onKeyUp(keyCode, event)
 
     override fun onDestroy() {
         runCatching { unregisterReceiver(closer) }
@@ -82,43 +166,7 @@ class HabitAlarmActivity : ComponentActivity() {
         const val EXTRA_NAME = "name"
         const val EXTRA_EMOJI = "emoji"
         const val EXTRA_PLAN = "plan"
-        const val EXTRA_ANSWER = "answer"
         const val ACTION_CLOSE = "app.tsuzuku.action.ALARM_CLOSE"
-    }
-}
-
-@Composable
-internal fun AlarmPage(time: String, emoji: String, name: String, plan: String, onAnswer: (String) -> Unit) {
-    Column(
-        Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface).safeDrawingPadding().padding(28.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Spacer(Modifier.weight(1f))
-        Text(time, style = MaterialTheme.typography.displayLarge, color = MaterialTheme.colorScheme.onSurface)
-        Text(
-            stringResource(R.string.alarm_time_to_start),
-            style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
-        Spacer(Modifier.height(40.dp))
-        Text(emoji, fontSize = 72.sp)
-        Spacer(Modifier.height(12.dp))
-        Text(name, style = MaterialTheme.typography.headlineMedium, textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.onSurface)
-        if (plan.isNotBlank()) {
-            Spacer(Modifier.height(8.dp))
-            Text(plan, style = MaterialTheme.typography.bodyLarge, textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        }
-        Spacer(Modifier.weight(1.4f))
-        Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            Button(onClick = { onAnswer(HabitAlarms.ACTION_START) }, modifier = Modifier.fillMaxWidth().height(64.dp)) {
-                Text(stringResource(R.string.alarm_start), style = MaterialTheme.typography.titleMedium)
-            }
-            FilledTonalButton(onClick = { onAnswer(HabitAlarms.ACTION_SNOOZE) }, modifier = Modifier.fillMaxWidth().height(56.dp)) {
-                Text(stringResource(R.string.alarm_snooze, HabitAlarms.SNOOZE_MINUTES))
-            }
-            TextButton(onClick = { onAnswer(HabitAlarms.ACTION_DISMISS) }, modifier = Modifier.fillMaxWidth()) {
-                Text(stringResource(R.string.alarm_not_today))
-            }
-        }
+        private val SWALLOWED_KEYS = setOf(KeyEvent.KEYCODE_VOLUME_UP, KeyEvent.KEYCODE_VOLUME_DOWN, KeyEvent.KEYCODE_VOLUME_MUTE)
     }
 }

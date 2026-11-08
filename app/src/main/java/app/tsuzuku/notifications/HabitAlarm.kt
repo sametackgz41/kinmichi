@@ -10,48 +10,76 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.media.AudioAttributes
-import android.media.RingtoneManager
 import android.os.Build
 import app.tsuzuku.R
+import app.tsuzuku.data.RoomHabitRepository
 import app.tsuzuku.data.local.TsuzukuDatabase
+import kotlinx.coroutines.flow.first
+import java.time.LocalDate
+
+/** What has to be done before an alarm habit goes quiet. */
+enum class AlarmMission { None, Math, Memory, Puzzle }
+
+data class AlarmOptions(
+    val on: Boolean = false,
+    val mission: AlarmMission = AlarmMission.None,
+    /** Turning the alarm off counts the habit as done (the wake-up habit). */
+    val markDone: Boolean = false,
+)
 
 /**
  * Habits whose reminder rings like an alarm clock: on time to the minute, with the phone's
- * alarm sound repeating and a full-screen page, instead of a quiet notification.
+ * alarm sound (played by [AlarmRingService], so volume and power keys can't silence it),
+ * a full-screen page, an optional task to turn it off and a limited snooze.
  *
- * Which habits ring is kept on the device (it describes this phone, not the habit itself).
+ * The choices are kept on the device: they describe this phone, not the habit itself.
  */
 object HabitAlarms {
     private const val PREFS = "habit_alarms"
-    const val CHANNEL_ID = "habit_alarms_v1"
-    const val SNOOZE_MINUTES = 10
+    const val CHANNEL_ID = "habit_alarm_ring_v2"
+    private const val OLD_CHANNEL_ID = "habit_alarms_v1"
+    const val SNOOZE_MINUTES = 5
+    const val MAX_SNOOZES = 2
 
-    fun isOn(context: Context, habitId: Long): Boolean =
-        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getBoolean(habitId.toString(), false)
+    private fun prefs(context: Context) = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
 
-    fun set(context: Context, habitId: Long, on: Boolean) {
-        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().apply {
-            if (on) putBoolean(habitId.toString(), true) else remove(habitId.toString())
+    fun isOn(context: Context, habitId: Long): Boolean = prefs(context).getBoolean(habitId.toString(), false)
+
+    fun options(context: Context, habitId: Long): AlarmOptions {
+        val p = prefs(context)
+        return AlarmOptions(
+            on = p.getBoolean(habitId.toString(), false),
+            mission = runCatching { AlarmMission.valueOf(p.getString("$habitId.mission", null) ?: "None") }.getOrDefault(AlarmMission.None),
+            markDone = p.getBoolean("$habitId.done", false),
+        )
+    }
+
+    fun set(context: Context, habitId: Long, on: Boolean, mission: AlarmMission = AlarmMission.None, markDone: Boolean = false) {
+        prefs(context).edit().apply {
+            if (on) {
+                putBoolean(habitId.toString(), true)
+                putString("$habitId.mission", mission.name)
+                putBoolean("$habitId.done", markDone)
+            } else {
+                remove(habitId.toString()); remove("$habitId.mission"); remove("$habitId.done")
+            }
         }.apply()
     }
 
+    private fun snoozeKey(habitId: Long) = "$habitId.snoozed.${LocalDate.now().toEpochDay()}"
+
+    fun snoozesLeft(context: Context, habitId: Long): Int =
+        (MAX_SNOOZES - prefs(context).getInt(snoozeKey(habitId), 0)).coerceAtLeast(0)
+
+    /** A silent, urgent channel: the service plays the sound itself. */
     fun createChannel(context: Context) {
-        val sound = RingtoneManager.getActualDefaultRingtoneUri(context, RingtoneManager.TYPE_ALARM)
-            ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-            ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        context.getSystemService(NotificationManager::class.java).createNotificationChannel(
+        val manager = context.getSystemService(NotificationManager::class.java)
+        manager.deleteNotificationChannel(OLD_CHANNEL_ID)
+        manager.createNotificationChannel(
             NotificationChannel(CHANNEL_ID, context.getString(R.string.alarm_channel_name), NotificationManager.IMPORTANCE_HIGH).apply {
                 description = context.getString(R.string.alarm_channel_description)
-                setSound(
-                    sound,
-                    AudioAttributes.Builder()
-                        .setUsage(AudioAttributes.USAGE_ALARM)
-                        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                        .build(),
-                )
-                enableVibration(true)
-                vibrationPattern = longArrayOf(0, 600, 400, 600, 400)
+                setSound(null, null)
+                enableVibration(false)
                 setBypassDnd(true)
                 lockscreenVisibility = Notification.VISIBILITY_PUBLIC
             },
@@ -74,91 +102,82 @@ object HabitAlarms {
         alarmManager.setAlarmClock(AlarmManager.AlarmClockInfo(triggerAtMillis, show), operation)
     }
 
-    private fun notificationId(habitId: Long) = habitId.hashCode() xor 0x10000000
+    internal fun notificationId(habitId: Long) = habitId.hashCode() xor 0x10000000
 
-    /** Rings now: a looping alarm-sound notification that opens the full-screen page. */
+    internal fun pageIntent(context: Context, habitId: Long, name: String, emoji: String, plan: String): Intent =
+        Intent(context, HabitAlarmActivity::class.java).apply {
+            putExtra(HabitReminderReceiver.EXTRA_HABIT_ID, habitId)
+            putExtra(HabitAlarmActivity.EXTRA_NAME, name)
+            putExtra(HabitAlarmActivity.EXTRA_EMOJI, emoji)
+            putExtra(HabitAlarmActivity.EXTRA_PLAN, plan)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_USER_ACTION)
+        }
+
+    /** Rings now. */
     fun ring(context: Context, habitId: Long, name: String, emoji: String, plan: String) {
         if (Build.VERSION.SDK_INT >= 33 && context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) return
         createChannel(context)
-        val page = PendingIntent.getActivity(
-            context,
-            notificationId(habitId),
-            Intent(context, HabitAlarmActivity::class.java).apply {
-                putExtra(HabitReminderReceiver.EXTRA_HABIT_ID, habitId)
-                putExtra(HabitAlarmActivity.EXTRA_NAME, name)
-                putExtra(HabitAlarmActivity.EXTRA_EMOJI, emoji)
-                putExtra(HabitAlarmActivity.EXTRA_PLAN, plan)
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_USER_ACTION)
-            },
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
-        )
-        fun action(kind: String, label: String) = Notification.Action.Builder(
-            android.graphics.drawable.Icon.createWithResource(context, R.drawable.ic_notification),
-            label,
-            // Start opens a page, which Android 12+ only allows straight from the notification.
-            if (kind == ACTION_START) PendingIntent.getActivity(
-                context,
-                notificationId(habitId) xor kind.hashCode(),
-                Intent(context, HabitAlarmActivity::class.java).apply {
-                    putExtra(HabitReminderReceiver.EXTRA_HABIT_ID, habitId)
-                    putExtra(HabitAlarmActivity.EXTRA_ANSWER, kind)
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                },
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
-            ) else PendingIntent.getBroadcast(
-                context,
-                notificationId(habitId) xor kind.hashCode(),
-                Intent(context, HabitAlarmActionReceiver::class.java).apply {
-                    action = kind
-                    putExtra(HabitReminderReceiver.EXTRA_HABIT_ID, habitId)
-                },
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
-            ),
-        ).build()
-        val notification = Notification.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle("$emoji $name")
-            .setContentText(plan.ifBlank { context.getString(R.string.alarm_time_to_start) })
-            .setCategory(Notification.CATEGORY_ALARM)
-            .setVisibility(Notification.VISIBILITY_PUBLIC)
-            .setOngoing(true)
-            .setFullScreenIntent(page, true)
-            .setContentIntent(page)
-            .addAction(action(ACTION_START, context.getString(R.string.alarm_start)))
-            .addAction(action(ACTION_SNOOZE, context.getString(R.string.alarm_snooze, SNOOZE_MINUTES)))
-            .addAction(action(ACTION_DISMISS, context.getString(R.string.alarm_not_today)))
-            .build()
-        // Insistent: the sound keeps repeating until someone answers it.
-        notification.flags = notification.flags or Notification.FLAG_INSISTENT
-        context.getSystemService(NotificationManager::class.java).notify(notificationId(habitId), notification)
+        val start = Intent(context, AlarmRingService::class.java).apply {
+            putExtra(HabitReminderReceiver.EXTRA_HABIT_ID, habitId)
+            putExtra(HabitAlarmActivity.EXTRA_NAME, name)
+            putExtra(HabitAlarmActivity.EXTRA_EMOJI, emoji)
+            putExtra(HabitAlarmActivity.EXTRA_PLAN, plan)
+        }
+        runCatching { context.startForegroundService(start) }
+            .onFailure { HabitNotifications.show(context, habitId, name, emoji, null, plan) }
     }
 
+    /** Ends the ringing, whatever the reason. */
     fun stop(context: Context, habitId: Long) {
+        // stopService never starts anything, so it is safe from the background too.
+        if (AlarmRingService.ringingHabitId.let { it < 0 || it == habitId }) context.stopService(Intent(context, AlarmRingService::class.java))
         context.getSystemService(NotificationManager::class.java).cancel(notificationId(habitId))
     }
 
-    /** What the three answers do, shared by the full-screen page and the notification buttons. */
-    fun answer(context: Context, habitId: Long, kind: String) {
+    /** Quiet for a moment while the task is being solved; it rings again if left alone. */
+    fun hush(context: Context, seconds: Int = 40) {
+        if (AlarmRingService.ringingHabitId < 0) return
+        runCatching { context.startService(Intent(context, AlarmRingService::class.java).setAction(AlarmRingService.ACTION_HUSH).putExtra(AlarmRingService.EXTRA_SECONDS, seconds)) }
+    }
+
+    fun snooze(context: Context, habitId: Long): Boolean {
+        if (snoozesLeft(context, habitId) <= 0) return false
+        val p = prefs(context)
+        p.edit().putInt(snoozeKey(habitId), p.getInt(snoozeKey(habitId), 0) + 1).apply()
         stop(context, habitId)
-        when (kind) {
-            ACTION_SNOOZE -> HabitReminderScheduler(context, TsuzukuDatabase.getInstance(context).habitDao()).snooze(habitId, SNOOZE_MINUTES)
-            ACTION_START -> context.startActivity(
-                Intent(context, app.tsuzuku.MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP),
-            )
+        HabitReminderScheduler(context, TsuzukuDatabase.getInstance(context).habitDao()).snooze(habitId, SNOOZE_MINUTES)
+        return true
+    }
+
+    /** The alarm was answered for good: stop it and, for the wake-up habit, tick it off. */
+    suspend fun finish(context: Context, habitId: Long) {
+        stop(context, habitId)
+        if (!options(context, habitId).markDone) return
+        val repository = RoomHabitRepository(TsuzukuDatabase.getInstance(context).habitDao())
+        val today = repository.observeToday().first().firstOrNull { it.habit.id == habitId }
+        if (today != null && !today.isComplete) {
+            if (today.habit.type == app.tsuzuku.model.HabitType.Check) {
+                repository.toggleHabit(habitId)
+            } else {
+                repository.addProgress(habitId, (today.habit.target - today.progress).coerceAtLeast(0.0))
+            }
+            app.tsuzuku.widget.TsuzukuWidgets.updateAll(context)
         }
     }
 
-    const val ACTION_START = "app.tsuzuku.action.ALARM_START"
     const val ACTION_SNOOZE = "app.tsuzuku.action.ALARM_SNOOZE"
     const val ACTION_DISMISS = "app.tsuzuku.action.ALARM_DISMISS"
 }
 
+/** Snooze / not-today from the heads-up notification when the phone is in use. */
 class HabitAlarmActionReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val habitId = intent.getLongExtra(HabitReminderReceiver.EXTRA_HABIT_ID, -1L)
-        val kind = intent.action ?: return
         if (habitId < 0) return
-        HabitAlarms.answer(context, habitId, kind)
+        when (intent.action) {
+            HabitAlarms.ACTION_SNOOZE -> HabitAlarms.snooze(context, habitId)
+            HabitAlarms.ACTION_DISMISS -> if (HabitAlarms.options(context, habitId).mission == AlarmMission.None) HabitAlarms.stop(context, habitId)
+        }
         context.sendBroadcast(Intent(HabitAlarmActivity.ACTION_CLOSE).setPackage(context.packageName))
     }
 }

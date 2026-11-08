@@ -94,6 +94,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import app.tsuzuku.R
 import app.tsuzuku.data.local.CategoryEntity
 import app.tsuzuku.model.GoalPeriod
@@ -149,6 +152,23 @@ internal class HabitEditorState(existing: Habit?) {
     var repeatEnabled by mutableStateOf(existing?.reminderRepeatMinutes != null)
     var repeatMinutes by mutableStateOf(existing?.reminderRepeatMinutes?.toString() ?: "10")
     var alarmEnabled by mutableStateOf(false)
+    var alarmMission by mutableStateOf(app.tsuzuku.notifications.AlarmMission.None)
+    var alarmMarkDone by mutableStateOf(false)
+
+    /** The ready-made wake-up habit: an alarm with a task, ticked off when it goes quiet. */
+    fun applyWakeTemplate(name: String) {
+        this.name = name
+        emoji = "⏰"
+        type = HabitType.Check
+        targetText = "1"; stepText = "1"; unit = ""
+        selectedDays = "1111111"
+        goalPeriod = GoalPeriod.Daily
+        reminderEnabled = true
+        reminderTime = "07:00"
+        alarmEnabled = true
+        alarmMission = app.tsuzuku.notifications.AlarmMission.Math
+        alarmMarkDone = true
+    }
     private val generalNote = existing?.generalNote.orEmpty()
 
     private val target get() = targetText.toLocaleDoubleOrNull() ?: 0.0
@@ -215,6 +235,8 @@ internal class HabitEditorState(existing: Habit?) {
             pausedUntilEpochDay = pausedUntilEpochDay,
             tags = tags,
             alarm = reminderEnabled && alarmEnabled,
+            alarmMission = alarmMission.name,
+            alarmMarkDone = alarmMarkDone,
         )
     }
 
@@ -224,6 +246,7 @@ internal class HabitEditorState(existing: Habit?) {
         activeStartEpochDay, activeEndEpochDay, pausedUntilEpochDay, repeatIntervalText, tags,
         selectedDays, goalPeriod.name, periodTargetText, routineName, prerequisiteId,
         reminderEnabled, reminderTime, repeatEnabled, repeatMinutes, tinyVersion, healthMetric.name, alarmEnabled,
+        alarmMission.name, alarmMarkDone,
     )
 
     private fun restore(values: List<Any?>) {
@@ -245,6 +268,8 @@ internal class HabitEditorState(existing: Habit?) {
         if (i < values.size) tinyVersion = next()
         if (i < values.size) healthMetric = HealthMetric.valueOf(next())
         if (i < values.size) alarmEnabled = next()
+        if (i < values.size) alarmMission = app.tsuzuku.notifications.AlarmMission.valueOf(next())
+        if (i < values.size) alarmMarkDone = next()
     }
 
     companion object {
@@ -292,7 +317,12 @@ internal fun HabitEditorContent(
     val editorContext = LocalContext.current
     // The alarm choice lives on the device; read it once when an existing habit opens.
     rememberSaveable(existing?.id) {
-        if (existing != null) state.alarmEnabled = app.tsuzuku.notifications.HabitAlarms.isOn(editorContext, existing.id)
+        if (existing != null) {
+            val options = app.tsuzuku.notifications.HabitAlarms.options(editorContext, existing.id)
+            state.alarmEnabled = options.on
+            state.alarmMission = options.mission
+            state.alarmMarkDone = options.markDone
+        }
         true
     }
     val others = availableHabits.filterNot { it.id == existing?.id }
@@ -369,7 +399,13 @@ internal fun HabitEditorContent(
                             StepTitle(current)
                             HabitLivePreview(state)
                             when (current) {
-                                0 -> SectionCard(Icons.Rounded.Edit, R.string.editor_section_what) { NameAndLookSection(state) }
+                                0 -> {
+                                    if (existing == null && template == null && state.name.isBlank()) {
+                                        WakeTemplateCard { state.applyWakeTemplate(editorContext.getString(R.string.wake_habit_name)) }
+                                        Spacer(Modifier.height(12.dp))
+                                    }
+                                    SectionCard(Icons.Rounded.Edit, R.string.editor_section_what) { NameAndLookSection(state) }
+                                }
                                 1 -> SectionCard(Icons.Rounded.Tune, R.string.editor_section_how) { TrackingSection(state) }
                                 2 -> SectionCard(Icons.Rounded.Schedule, R.string.editor_section_when) {
                                     DaysSection(state)
@@ -642,6 +678,9 @@ private fun ReminderSection(state: HabitEditorState) {
                 }
                 Switch(checked = state.alarmEnabled, onCheckedChange = { state.alarmEnabled = it })
             }
+            AnimatedVisibility(visible = state.alarmEnabled) {
+                AlarmOptionsFields(state)
+            }
         }
     }
 }
@@ -825,6 +864,50 @@ private fun PlanGroup(state: HabitEditorState, otherHabits: List<Habit>) {
             otherHabits.forEach { habit ->
                 FilterChip(selected = state.prerequisiteId == habit.id, onClick = { state.prerequisiteId = habit.id }, label = { Text("${habit.emoji} ${habit.name}") })
             }
+        }
+    }
+}
+
+@Composable
+private fun WakeTemplateCard(onUse: () -> Unit) {
+    Surface(
+        onClick = onUse,
+        shape = RoundedCornerShape(24.dp),
+        color = MaterialTheme.colorScheme.tertiaryContainer,
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Text("⏰", fontSize = 30.sp)
+            Column(Modifier.padding(start = 14.dp).weight(1f)) {
+                Text(stringResource(R.string.wake_template_title), style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onTertiaryContainer)
+                Text(stringResource(R.string.wake_template_body), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.8f))
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun AlarmOptionsFields(state: HabitEditorState) {
+    Column(Modifier.fillMaxWidth().padding(top = 10.dp)) {
+        Text(stringResource(R.string.alarm_mission_label), style = MaterialTheme.typography.bodyLarge)
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(top = 6.dp)) {
+            listOf(
+                app.tsuzuku.notifications.AlarmMission.None to R.string.alarm_mission_none,
+                app.tsuzuku.notifications.AlarmMission.Math to R.string.alarm_mission_math,
+                app.tsuzuku.notifications.AlarmMission.Memory to R.string.alarm_mission_memory,
+                app.tsuzuku.notifications.AlarmMission.Puzzle to R.string.alarm_mission_puzzle,
+            ).forEach { (mission, label) ->
+                FilterChip(
+                    selected = state.alarmMission == mission,
+                    onClick = { state.alarmMission = mission },
+                    label = { Text(stringResource(label)) },
+                )
+            }
+        }
+        Row(Modifier.fillMaxWidth().padding(top = 6.dp), verticalAlignment = Alignment.CenterVertically) {
+            Text(stringResource(R.string.alarm_mark_done), style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
+            Switch(checked = state.alarmMarkDone, onCheckedChange = { state.alarmMarkDone = it })
         }
     }
 }

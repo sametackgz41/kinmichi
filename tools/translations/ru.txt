@@ -920,3 +920,28 @@ alarm_start|Начать
 alarm_snooze|Отложить на %1$d мин
 alarm_not_today|Не сегодня
 settings_group_more|Другое
+alarm_start_mission|Начать задание
+alarm_snooze_left|Отложить на %1$d мин · осталось %2$d
+alarm_no_snooze|Откладывать больше нельзя — выполни задание, чтобы выключить
+alarm_mission_label|Чтобы выключить
+alarm_mission_none|Одно касание
+alarm_mission_math|Примеры
+alarm_mission_memory|Память
+alarm_mission_puzzle|Охота на числа
+alarm_mark_done|Считать выполненным при выключении
+alarm_step_of|%1$d из %2$d
+alarm_math_title|Реши пример
+alarm_memory_watch|Смотри на клетки…
+alarm_memory_repeat|Нажми в том же порядке
+alarm_memory_wrong|Почти, смотри ещё раз
+alarm_puzzle_title|Нажимай от 1 до 16 по порядку
+alarm_puzzle_next|Дальше: %1$d
+alarm_good_morning|Доброе утро
+alarm_hello|Привет
+alarm_wake_streak|🔥 %1$d дн. подряд встаёшь вовремя
+alarm_today_list|Сегодня тебя ждут
+alarm_all_clear|На сегодня больше ничего
+alarm_start_day|Начать день
+wake_template_title|Создать будильник для подъёма
+wake_template_body|С будильником, заданием для выключения и серией подъёмов
+wake_habit_name|Подъём

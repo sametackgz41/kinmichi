@@ -908,3 +908,28 @@ alarm_start|Empezar
 alarm_snooze|Posponer %1$d min
 alarm_not_today|Hoy no
 settings_group_more|Más
+alarm_start_mission|Empezar la tarea
+alarm_snooze_left|Posponer %1$d min · quedan %2$d
+alarm_no_snooze|Ya no puedes posponer; completa la tarea para apagarla
+alarm_mission_label|Para apagarla
+alarm_mission_none|Solo un toque
+alarm_mission_math|Matemáticas
+alarm_mission_memory|Memoria
+alarm_mission_puzzle|Caza de números
+alarm_mark_done|Contar como hecho al apagarla
+alarm_step_of|%1$d de %2$d
+alarm_math_title|Resuelve esto
+alarm_memory_watch|Mira los cuadros…
+alarm_memory_repeat|Tócalos en el mismo orden
+alarm_memory_wrong|Casi, mira otra vez
+alarm_puzzle_title|Toca del 1 al 16 en orden
+alarm_puzzle_next|Siguiente: %1$d
+alarm_good_morning|Buenos días
+alarm_hello|Hola
+alarm_wake_streak|🔥 %1$d días levantándote a tiempo
+alarm_today_list|Te espera hoy
+alarm_all_clear|Nada más por hoy
+alarm_start_day|Empezar el día
+wake_template_title|Crear una alarma para despertar
+wake_template_body|Con alarma, una tarea para apagarla y una racha de despertares
+wake_habit_name|Despertar

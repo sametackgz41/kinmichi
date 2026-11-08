@@ -390,6 +390,48 @@ class PreviewGalleryTest {
         captureScreen("${name}_tr_${if (dark) "dark" else "light"}")
     }
 
+    // Alarm: ringing page, the three tasks, and the good-morning page (dark, like at night).
+    @Test fun alarmRingingTr() = renderAlarm("alarm_ringing_tr") {
+        app.tsuzuku.notifications.AlarmRingingPage(
+            time = "07:00", date = "9 Kasım Pazartesi", emoji = "⏰", name = "Uyan", plan = "",
+            mission = app.tsuzuku.notifications.AlarmMission.Math, snoozesLeft = 2, onStart = {}, onSnooze = {}, onNotToday = {},
+        )
+    }
+    @Test fun alarmMathTr() = renderAlarm("alarm_math_tr") { app.tsuzuku.notifications.MathMission(onProgress = {}, onSolved = {}, seed = 7) }
+    @Test fun alarmMemoryTr() = renderAlarm("alarm_memory_tr") { app.tsuzuku.notifications.MemoryMission(onProgress = {}, onSolved = {}, seed = 3, preview = listOf(2)) }
+    @Test fun alarmPuzzleTr() = renderAlarm("alarm_puzzle_tr") { app.tsuzuku.notifications.PuzzleMission(onProgress = {}, onSolved = {}, seed = 5, startAt = 6) }
+    @Test fun alarmMorningTr() = renderAlarm("alarm_morning_tr") {
+        app.tsuzuku.notifications.MorningPage(
+            greeting = "Günaydın", date = "9 Kasım Pazartesi", streak = 5, habits = sampleToday("tr"), onStartDay = {},
+        )
+    }
+    @Test fun editorAlarmTr() {
+        setVariant("tr", false)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false) {
+                app.tsuzuku.ui.screens.HabitEditorContent(existing = null, onBack = {}, onSave = {}, layout = app.tsuzuku.ui.screens.EditorLayout.Steps)
+            }
+        }
+        compose.mainClock.advanceTimeBy(800)
+        captureScreen("editor_wake_card_tr")
+        compose.onNodeWithText("Uyanma alarmı kur").performClick()
+        compose.mainClock.advanceTimeBy(800)
+        repeat(2) {
+            compose.onNodeWithText("Devam et").performClick()
+            compose.mainClock.advanceTimeBy(800)
+        }
+        compose.onNodeWithText("Alarm olarak çal").performScrollTo()
+        compose.mainClock.advanceTimeBy(800)
+        captureScreen("editor_alarm_options_tr")
+    }
+
+    private fun renderAlarm(name: String, content: @Composable () -> Unit) {
+        setVariant("tr", true)
+        compose.setContent { TsuzukuTheme(darkTheme = true) { content() } }
+        compose.mainClock.advanceTimeBy(900)
+        captureScreen(name)
+    }
+
     // Habit editor: three layouts (new habit), plus an open "more" group.
     @Test fun editorCardsTr() = renderEditorLayout(app.tsuzuku.ui.screens.EditorLayout.Cards, false)
     @Test fun editorStepsTr() = renderEditorLayout(app.tsuzuku.ui.screens.EditorLayout.Steps, false)

@@ -902,3 +902,28 @@ alarm_start|始める
 alarm_snooze|%1$d分スヌーズ
 alarm_not_today|今日はやめておく
 settings_group_more|その他
+alarm_start_mission|タスクを始める
+alarm_snooze_left|%1$d分スヌーズ・残り%2$d回
+alarm_no_snooze|スヌーズはもう使えません。止めるにはタスクを完了してください
+alarm_mission_label|止めるには
+alarm_mission_none|タップだけ
+alarm_mission_math|計算
+alarm_mission_memory|記憶
+alarm_mission_puzzle|数字さがし
+alarm_mark_done|止めたら完了にする
+alarm_step_of|%1$d / %2$d
+alarm_math_title|これを解いて
+alarm_memory_watch|光るマスを見て…
+alarm_memory_repeat|同じ順番でタップ
+alarm_memory_wrong|惜しい、もう一度見て
+alarm_puzzle_title|1から16まで順にタップ
+alarm_puzzle_next|次：%1$d
+alarm_good_morning|おはようございます
+alarm_hello|こんにちは
+alarm_wake_streak|🔥 %1$d日連続で時間どおりに起床
+alarm_today_list|今日やること
+alarm_all_clear|今日はほかにありません
+alarm_start_day|一日を始める
+wake_template_title|起床アラームを作る
+wake_template_body|アラーム、止めるためのタスク、起床の連続記録つき
+wake_habit_name|起きる

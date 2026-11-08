@@ -908,3 +908,28 @@ alarm_start|Inizia
 alarm_snooze|Posticipa %1$d min
 alarm_not_today|Non oggi
 settings_group_more|Altro
+alarm_start_mission|Inizia la sfida
+alarm_snooze_left|Posticipa %1$d min · ne restano %2$d
+alarm_no_snooze|Niente più posticipi, completa la sfida per spegnerla
+alarm_mission_label|Per spegnerla
+alarm_mission_none|Solo un tocco
+alarm_mission_math|Matematica
+alarm_mission_memory|Memoria
+alarm_mission_puzzle|Caccia ai numeri
+alarm_mark_done|Conta come fatto quando la spegni
+alarm_step_of|%1$d di %2$d
+alarm_math_title|Risolvi questo
+alarm_memory_watch|Guarda i quadrati…
+alarm_memory_repeat|Toccali nello stesso ordine
+alarm_memory_wrong|Quasi, guarda di nuovo
+alarm_puzzle_title|Tocca da 1 a 16 in ordine
+alarm_puzzle_next|Prossimo: %1$d
+alarm_good_morning|Buongiorno
+alarm_hello|Ciao
+alarm_wake_streak|🔥 %1$d giorni in piedi puntuale
+alarm_today_list|Ti aspetta oggi
+alarm_all_clear|Nient'altro oggi
+alarm_start_day|Inizia la giornata
+wake_template_title|Crea una sveglia
+wake_template_body|Con sveglia, una sfida per spegnerla e una serie di risvegli
+wake_habit_name|Svegliarsi

@@ -10,6 +10,8 @@
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
 
     <!-- Health Connect: read-only, used to fill linked habits automatically. -->
     <uses-permission android:name="android.permission.health.READ_STEPS" />
@@ -171,6 +173,10 @@
         <receiver
             android:name=".notifications.HabitAlarmActionReceiver"
             android:exported="false" />
+        <service
+            android:name=".notifications.AlarmRingService"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
         <activity
             android:name=".notifications.HabitAlarmActivity"
             android:exported="false"

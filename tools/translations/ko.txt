@@ -908,3 +908,28 @@ alarm_start|시작
 alarm_snooze|%1$d분 다시 알림
 alarm_not_today|오늘은 안 할래요
 settings_group_more|기타
+alarm_start_mission|미션 시작
+alarm_snooze_left|%1$d분 다시 알림 · %2$d회 남음
+alarm_no_snooze|다시 알림 횟수를 다 썼어요. 끄려면 미션을 완료하세요
+alarm_mission_label|끄려면
+alarm_mission_none|한 번 탭
+alarm_mission_math|수학
+alarm_mission_memory|기억력
+alarm_mission_puzzle|숫자 찾기
+alarm_mark_done|끄면 완료로 기록
+alarm_step_of|%1$d / %2$d
+alarm_math_title|이 문제를 풀어요
+alarm_memory_watch|칸을 잘 보세요…
+alarm_memory_repeat|같은 순서로 탭하세요
+alarm_memory_wrong|아쉬워요, 다시 보세요
+alarm_puzzle_title|1부터 16까지 순서대로 탭하세요
+alarm_puzzle_next|다음: %1$d
+alarm_good_morning|좋은 아침이에요
+alarm_hello|안녕하세요
+alarm_wake_streak|🔥 %1$d일째 제시간에 일어났어요
+alarm_today_list|오늘 할 일
+alarm_all_clear|오늘은 더 없어요
+alarm_start_day|하루 시작하기
+wake_template_title|기상 알람 만들기
+wake_template_body|알람, 끄기 미션, 기상 연속 기록이 준비돼요
+wake_habit_name|일어나기
