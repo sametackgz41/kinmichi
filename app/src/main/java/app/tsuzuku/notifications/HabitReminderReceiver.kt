@@ -98,6 +98,7 @@ class ReminderBootReceiver : BroadcastReceiver() {
                 HabitReminderScheduler(context, TsuzukuDatabase.getInstance(context).habitDao()).rescheduleAll()
                 WeeklySummary.schedule(context)
                 MoodReminder.schedule(context)
+                MonthlyReview.schedule(context)
                 StreakGuard.schedule(context)
                 SpreadReminders.rescheduleAll(context)
             } finally {

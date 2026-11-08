@@ -194,6 +194,7 @@ class HomeActivity : FragmentActivity() {
             "habit/new"
         }
         ACTION_PROGRESS -> "progress"
+        ACTION_MONTH_REVIEW -> "month-review"
         else -> null
     }
 
@@ -281,5 +282,6 @@ class HomeActivity : FragmentActivity() {
     companion object {
         const val ACTION_ADD_HABIT = "app.tsuzuku.action.ADD_HABIT"
         const val ACTION_PROGRESS = "app.tsuzuku.action.PROGRESS"
+        const val ACTION_MONTH_REVIEW = "app.tsuzuku.action.MONTH_REVIEW"
     }
 }

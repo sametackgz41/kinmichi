@@ -112,6 +112,7 @@ fun StatisticsScreen(
     weekStartsMonday: Boolean = true,
     onShareWeek: (WeekSummary) -> Unit = {},
     onOpenYearReview: (() -> Unit)? = null,
+    onOpenMonthReview: (() -> Unit)? = null,
 ) {
     var currentTab by rememberSaveable(initialTab) { mutableStateOf(initialTab) }
     var reviewSubTab by rememberSaveable { mutableStateOf(ReviewSubTab.Weekly) }
@@ -163,6 +164,9 @@ fun StatisticsScreen(
                             availableTags.forEach { tag -> FilterChip(selected = selectedTag == tag, onClick = { selectedTag = tag }, label = { Text("#$tag") }) }
                         }
                     }
+                }
+                if (onOpenMonthReview != null && monthReviewSeason(LocalDate.now())) {
+                    item { MonthReviewEntryCard(reviewMonth(LocalDate.now()), onOpenMonthReview) }
                 }
                 if (onOpenYearReview != null && yearReviewSeason(LocalDate.now())) {
                     item { YearReviewEntryCard(reviewYear(LocalDate.now()), onOpenYearReview) }
@@ -368,6 +372,8 @@ fun StatisticsScreen(
                     }
 
                     ReviewSubTab.Monthly -> {
+                        // The collage is always reachable here: last month in the first week, this month later.
+                        if (onOpenMonthReview != null) item { MonthReviewEntryCard(reviewMonth(LocalDate.now()), onOpenMonthReview) }
                         monthlySummary?.let { summary ->
                             item {
                                 val locale = LocalConfiguration.current.locales[0]

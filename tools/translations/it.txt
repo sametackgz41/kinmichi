@@ -1219,3 +1219,33 @@ sealed_open|Apri
 health_install|Installa
 health_settings_ready|Passi, sonno e altro riempiono le abitudini da soli · gestisci permessi
 health_settings_install|Non installato. Tocca per scaricarlo da Google Play, poi collega un'abitudine a passi o sonno
+month_title|Il tuo mese
+month_completions|completate
+month_vs_prev|vs mese scorso
+month_up|+%1$d%%
+month_down|−%1$d%%
+month_new|nuovo
+month_active|giorni attivi
+month_of_days|su %1$d giorni
+month_perfect|giorni perfetti
+month_perfect_hint|tutto fatto
+month_streak|serie più lunga
+month_star|stella del mese
+month_days_n|%1$d giorni
+month_calendar|il tuo mese in calendario
+month_gold_hint|oro: giorni in cui sei tornato
+month_top|quello che hai fatto di più
+month_best_day|il tuo giorno migliore
+month_best_week|la tua settimana migliore
+month_completions_n|%1$d completate
+month_totals|in totale
+month_hm|%1$d h %2$d min
+month_m|%1$d min
+month_comebacks|ritorni
+month_loved|il più piacevole
+month_mood|umore medio
+month_share|Condividi nelle storie
+month_share_text|Il mio %1$s su Kinmichi: %2$d completate
+month_entry_title|Il riepilogo di %1$s è pronto
+month_entry_body|Giorni, serie, la stella del mese. Dai un'occhiata e condividi se vuoi.
+month_notif_body|Quanti giorni, quale serie, la stella del mese… dai un'occhiata.

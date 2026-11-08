@@ -1219,3 +1219,33 @@ sealed_open|열기
 health_install|설치
 health_settings_ready|걸음 수, 수면 등으로 습관이 자동으로 채워져요 · 권한 관리
 health_settings_install|설치되지 않았어요. 눌러서 Google Play에서 받은 뒤 습관을 걸음 수나 수면에 연결하세요
+month_title|이번 달 요약
+month_completions|완료
+month_vs_prev|지난달 대비
+month_up|+%1$d%%
+month_down|−%1$d%%
+month_new|첫 달
+month_active|활동한 날
+month_of_days|%1$d일 중
+month_perfect|완벽한 날
+month_perfect_hint|모두 완료
+month_streak|최장 연속
+month_star|이달의 스타
+month_days_n|%1$d일
+month_calendar|달력으로 본 이번 달
+month_gold_hint|금색: 다시 돌아온 날
+month_top|가장 많이 한 습관
+month_best_day|가장 잘한 요일
+month_best_week|가장 잘한 주
+month_completions_n|%1$d회 완료
+month_totals|합계
+month_hm|%1$d시간 %2$d분
+month_m|%1$d분
+month_comebacks|다시 시작
+month_loved|가장 즐거웠던
+month_mood|평균 기분
+month_share|스토리에 공유
+month_share_text|Kinmichi의 %1$s: %2$d회 완료
+month_entry_title|%1$s 요약이 준비됐어요
+month_entry_body|날짜, 연속 기록, 이달의 스타. 살펴보고 원하면 공유하세요.
+month_notif_body|며칠, 어떤 연속 기록, 이달의 스타… 확인해 보세요.

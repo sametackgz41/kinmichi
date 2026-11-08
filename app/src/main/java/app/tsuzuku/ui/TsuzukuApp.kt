@@ -645,6 +645,7 @@ fun TsuzukuApp(
                                 libraryItems = emptyList(),
                                 moods = moodsByDay,
                                 onOpenYearReview = { navController.navigate("year-review") },
+                                onOpenMonthReview = { navController.navigate("month-review") },
                                 weekStartsMonday = settings.weekStart == WeekStartPreference.Monday,
                                 onShareWeek = { w ->
                                     app.tsuzuku.share.shareWeekCard(
@@ -828,6 +829,15 @@ fun TsuzukuApp(
                     onBack = navController::popBackStack,
                     onCreate = categoryViewModel::create,
                     onDelete = categoryViewModel::delete,
+                )
+            }
+            screen("month-review") {
+                val moodsForMonth by reviewViewModel.moodsByDay.collectAsStateWithLifecycle()
+                val data = remember(history, moodsForMonth) { app.tsuzuku.ui.screens.monthReview(history, moodsForMonth, java.time.LocalDate.now()) }
+                app.tsuzuku.ui.screens.MonthReviewScreen(
+                    data = data,
+                    onClose = navController::popBackStack,
+                    onShare = { app.tsuzuku.share.shareMonthCard(context, data) },
                 )
             }
             screen("year-review") {

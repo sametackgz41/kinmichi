@@ -1219,3 +1219,33 @@ sealed_open|Öffnen
 health_install|Installieren
 health_settings_ready|Schritte, Schlaf und mehr füllen Gewohnheiten selbst · Berechtigungen verwalten
 health_settings_install|Nicht installiert. Tippe, um es aus Google Play zu holen, dann verknüpfe eine Gewohnheit mit Schritten oder Schlaf
+month_title|Dein Monat
+month_completions|erledigt
+month_vs_prev|zum Vormonat
+month_up|+%1$d %%
+month_down|−%1$d %%
+month_new|neu
+month_active|aktive Tage
+month_of_days|von %1$d Tagen
+month_perfect|perfekte Tage
+month_perfect_hint|alles erledigt
+month_streak|längste Serie
+month_star|Star des Monats
+month_days_n|%1$d Tage
+month_calendar|dein Monat im Kalender
+month_gold_hint|Gold: Tage, an denen du zurückkamst
+month_top|was du am meisten gemacht hast
+month_best_day|dein bester Tag
+month_best_week|deine beste Woche
+month_completions_n|%1$d erledigt
+month_totals|insgesamt
+month_hm|%1$d Std. %2$d Min.
+month_m|%1$d Min.
+month_comebacks|Comebacks
+month_loved|am meisten genossen
+month_mood|Stimmung im Schnitt
+month_share|In deiner Story teilen
+month_share_text|Mein %1$s in Kinmichi: %2$d erledigt
+month_entry_title|Dein %1$s-Rückblick ist da
+month_entry_body|Tage, Serien, dein Star des Monats. Schau rein und teile, wenn du magst.
+month_notif_body|Wie viele Tage, welche Serie, dein Star des Monats … schau mal.

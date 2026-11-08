@@ -1231,3 +1231,33 @@ sealed_open|Открыть
 health_install|Установить
 health_settings_ready|Шаги, сон и другое заполняют привычки сами · управлять разрешениями
 health_settings_install|Не установлено. Нажмите, чтобы скачать из Google Play, затем свяжите привычку с шагами или сном
+month_title|Ваш месяц
+month_completions|выполнено
+month_vs_prev|к прошлому месяцу
+month_up|+%1$d%%
+month_down|−%1$d%%
+month_new|новый
+month_active|активных дней
+month_of_days|из %1$d дней
+month_perfect|идеальных дней
+month_perfect_hint|всё сделано
+month_streak|самая длинная серия
+month_star|звезда месяца
+month_days_n|%1$d дн.
+month_calendar|месяц в календаре
+month_gold_hint|золото: дни возвращения
+month_top|чаще всего
+month_best_day|лучший день недели
+month_best_week|лучшая неделя
+month_completions_n|%1$d выполнено
+month_totals|всего
+month_hm|%1$d ч %2$d мин
+month_m|%1$d мин
+month_comebacks|возвращений
+month_loved|больше всего понравилось
+month_mood|среднее настроение
+month_share|Поделиться в истории
+month_share_text|Мой %1$s в Kinmichi: %2$d выполнено
+month_entry_title|Итоги: %1$s
+month_entry_body|Дни, серии, звезда месяца. Загляните и поделитесь, если хотите.
+month_notif_body|Сколько дней, какая серия, звезда месяца… загляните.

@@ -23,6 +23,7 @@ import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.swipeUp
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.performTouchInput
@@ -898,7 +899,10 @@ class PreviewGalleryTest {
     @Test fun task10() = renderTask("task10_catch") { app.tsuzuku.notifications.CatchMission(onProgress = {}, onSolved = {}, seed = 6) }
 
     @Test fun trashA() = renderMock("trash_a") { TrashOptionA() }
-    @Test fun historyA() = renderMock("history_a") { HistoryOptionA() }
+    @Test fun monthA() = renderMock("month_a") { MonthOptionA() }
+    @Test fun monthB() = renderMock("month_b") { MonthOptionB() }
+    @Test fun monthC() = renderMock("month_c") { MonthOptionC() }
+    @Test fun historyA() =renderMock("history_a") { HistoryOptionA() }
     @Test fun historyB() = renderMock("history_b") { HistoryOptionB() }
     @Test fun backupA() = renderMock("backup_a") { BackupOptionA() }
     @Test fun backupB() = renderMock("backup_b") { BackupOptionB() }
@@ -1097,6 +1101,30 @@ class PreviewGalleryTest {
         }
         compose.mainClock.advanceTimeBy(6_000)
         captureScreen(name)
+    }
+
+    @Test fun monthReviewTr() {
+        setVariant("tr", false)
+        val history = sampleHistory("tr")
+        val moods = (0L..40L).associate { LocalDate.now().minusDays(it) to (3 + (it % 3).toInt()).coerceAtMost(5) }
+        val data = app.tsuzuku.ui.screens.monthReview(history, moods, LocalDate.now(), java.time.YearMonth.from(LocalDate.now()).minusMonths(1))
+        compose.setContent { TsuzukuTheme(darkTheme = true) { app.tsuzuku.ui.screens.MonthReviewScreen(data, onClose = {}, onShare = {}) } }
+        compose.mainClock.advanceTimeBy(2000)
+        captureScreen("month_real_1")
+        compose.onRoot().performTouchInput { swipeUp(startY = bottom - 50f, endY = top + 50f, durationMillis = 600) }
+        compose.mainClock.advanceTimeBy(2000)
+        captureScreen("month_real_2")
+        compose.onRoot().performTouchInput { swipeUp(startY = bottom - 50f, endY = top + 50f, durationMillis = 600) }
+        compose.mainClock.advanceTimeBy(2000)
+        captureScreen("month_real_3")
+    }
+
+    @Test fun monthShareCardTr() {
+        setVariant("tr", false)
+        val history = sampleHistory("tr")
+        val data = app.tsuzuku.ui.screens.monthReview(history, emptyMap(), LocalDate.now(), java.time.YearMonth.from(LocalDate.now()).minusMonths(1))
+        val ctx = androidx.test.core.app.ApplicationProvider.getApplicationContext<android.content.Context>()
+        save("month_share_card", app.tsuzuku.share.renderMonthCard(ctx, data))
     }
 
     // Package E: year in review, card by card, plus its share card; screen-time template in the editor.

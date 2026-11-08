@@ -1219,3 +1219,33 @@ sealed_open|Ouvrir
 health_install|Installer
 health_settings_ready|Pas, sommeil et plus remplissent les habitudes · gérer les autorisations
 health_settings_install|Non installé. Touche pour l'obtenir sur Google Play, puis relie une habitude aux pas ou au sommeil
+month_title|Ton mois
+month_completions|réussites
+month_vs_prev|vs mois dernier
+month_up|+%1$d %%
+month_down|−%1$d %%
+month_new|nouveau
+month_active|jours actifs
+month_of_days|sur %1$d jours
+month_perfect|jours parfaits
+month_perfect_hint|tout fait
+month_streak|plus longue série
+month_star|star du mois
+month_days_n|%1$d jours
+month_calendar|ton mois en calendrier
+month_gold_hint|or : jours où tu es revenu
+month_top|ce que tu as le plus fait
+month_best_day|ton meilleur jour
+month_best_week|ta meilleure semaine
+month_completions_n|%1$d réussites
+month_totals|au total
+month_hm|%1$d h %2$d min
+month_m|%1$d min
+month_comebacks|retours
+month_loved|le plus apprécié
+month_mood|humeur moyenne
+month_share|Partager en story
+month_share_text|Mon %1$s sur Kinmichi : %2$d réussites
+month_entry_title|Ton bilan de %1$s est prêt
+month_entry_body|Jours, séries, ta star du mois. Jette un œil et partage si tu veux.
+month_notif_body|Combien de jours, quelle série, ta star du mois… jette un œil.

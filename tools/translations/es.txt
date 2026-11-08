@@ -1219,3 +1219,33 @@ sealed_open|Abrir
 health_install|Instalar
 health_settings_ready|Pasos, sueño y más llenan hábitos solos · gestionar permisos
 health_settings_install|No instalado. Toca para obtenerlo en Google Play y luego vincula un hábito a pasos o sueño
+month_title|Tu mes
+month_completions|completados
+month_vs_prev|vs. mes pasado
+month_up|+%1$d %%
+month_down|−%1$d %%
+month_new|nuevo
+month_active|días activos
+month_of_days|de %1$d días
+month_perfect|días perfectos
+month_perfect_hint|todo hecho
+month_streak|racha más larga
+month_star|estrella del mes
+month_days_n|%1$d días
+month_calendar|tu mes en el calendario
+month_gold_hint|dorado: días en que volviste
+month_top|lo que más hiciste
+month_best_day|tu mejor día
+month_best_week|tu mejor semana
+month_completions_n|%1$d completados
+month_totals|en total
+month_hm|%1$d h %2$d min
+month_m|%1$d min
+month_comebacks|regresos
+month_loved|lo que más disfrutaste
+month_mood|ánimo medio
+month_share|Compartir en tu historia
+month_share_text|Mi %1$s en Kinmichi: %2$d completados
+month_entry_title|Tu resumen de %1$s está listo
+month_entry_body|Días, rachas, tu estrella del mes. Échale un vistazo y compártelo si quieres.
+month_notif_body|Cuántos días, qué racha, tu estrella del mes… échale un vistazo.
