@@ -1264,6 +1264,27 @@ class PreviewGalleryTest {
     @Test fun gal_editor_ko_light() = gallery("ko", false, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
     @Test fun gal_editor_ko_dark() = gallery("ko", true, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
 
+    @Test fun calendarsTr() {
+        setVariant("tr", false)
+        val history = sampleHistory("tr")
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false) {
+                androidx.compose.material3.Surface {
+                    androidx.compose.foundation.layout.Column(androidx.compose.ui.Modifier.fillMaxSize()) {
+                        Box(androidx.compose.ui.Modifier.weight(1f)) {
+                            app.tsuzuku.ui.screens.CalendarScreen(history, true, { _, _ -> }, { _, _ -> }, { _, _ -> })
+                        }
+                        Box(androidx.compose.ui.Modifier.weight(1f).padding(16.dp)) {
+                            app.tsuzuku.ui.screens.MonthCalendarCard(history, emptyMap())
+                        }
+                    }
+                }
+            }
+        }
+        compose.mainClock.advanceTimeBy(1500)
+        captureScreen("calendars_tr")
+    }
+
     @Test fun todayEditTr() {
         setVariant("tr", false)
         compose.setContent {

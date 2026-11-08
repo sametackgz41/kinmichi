@@ -152,6 +152,8 @@ fun CalendarScreen(
                             selectedText = if (m == YearMonth.from(today)) today.toString() else m.atDay(1).toString()
                         },
                     ) { pageMonth ->
+                        // The grid is a stack of rows: keep them in one column inside the page.
+                        Column(Modifier.fillMaxWidth()) {
                         CalendarMonthGrid(
                             month = pageMonth,
                             weekStartsMonday = weekStartsMonday,
@@ -160,6 +162,7 @@ fun CalendarScreen(
                             summaryFor = history::daySummary,
                             onSelect = { selectedText = it.toString(); showDaySheet = true },
                         )
+                        }
                     }
                 }
             }
