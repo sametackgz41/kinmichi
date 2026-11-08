@@ -146,7 +146,7 @@ internal fun YearReviewScreen(data: YearReviewData, onClose: () -> Unit, onShare
     val gradients = listOf(
         listOf(Color(0xFF1C2E52), Color(0xFF2E4A7D)),
         listOf(Color(0xFF2E4A7D), Color(0xFF3B5E9A)),
-        listOf(Color(0xFF5C2A1E), Color(0xFFB2472A)),
+        listOf(Color(0xFF4A2A0C), Color(0xFFB5651D)),
         listOf(Color(0xFF3D2E05), Color(0xFF8A6A1F)),
         listOf(Color(0xFF1F3209), Color(0xFF4E6B2E)),
         listOf(Color(0xFF14164A), Color(0xFF3B3F8F)),

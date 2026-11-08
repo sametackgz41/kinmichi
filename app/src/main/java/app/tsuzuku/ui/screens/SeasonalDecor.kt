@@ -6,6 +6,7 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import androidx.compose.foundation.Canvas
+import androidx.compose.animation.core.animateFloat
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -72,21 +73,33 @@ private fun rememberShakeEnergy(onJolt: (Float) -> Unit) {
  */
 @Composable
 internal fun SeasonalDecor(modifier: Modifier = Modifier, season: Season = seasonOf(LocalDate.now())) {
-    var t by remember { mutableFloatStateOf(0f) }
+    // The calm drift is an ordinary endless animation; a shake adds extra distance on top of it.
+    val base by androidx.compose.animation.core.rememberInfiniteTransition(label = "season").animateFloat(
+        0f, 1f,
+        androidx.compose.animation.core.infiniteRepeatable(
+            androidx.compose.animation.core.tween((DRIFT_SECONDS * 1000).toInt(), easing = androidx.compose.animation.core.LinearEasing),
+            androidx.compose.animation.core.RepeatMode.Restart,
+        ),
+        label = "drift",
+    )
+    var extra by remember { mutableFloatStateOf(0f) }
     var energy by remember { mutableFloatStateOf(0f) }
-    rememberShakeEnergy { jolt -> energy = (energy + jolt * 0.35f).coerceAtMost(1f) }
-    LaunchedEffect(Unit) {
+    var jolts by remember { androidx.compose.runtime.mutableIntStateOf(0) }
+    rememberShakeEnergy { jolt -> energy = (energy + jolt * 0.35f).coerceAtMost(1f); jolts++ }
+    // Runs only while there is energy left, so nothing ticks when the phone is still.
+    LaunchedEffect(jolts > 0 && energy > 0.01f) {
         var last = 0L
-        while (true) {
+        while (energy > 0.01f) {
             withFrameNanos { now ->
                 val dt = if (last == 0L) 0f else ((now - last) / 1e9f).coerceAtMost(0.1f)
                 last = now
-                // Time runs faster with energy; energy fades back to calm in about two seconds.
-                t = (t + dt / DRIFT_SECONDS * (1f + energy * MAX_BOOST)) % 1000f
+                extra = (extra + dt / DRIFT_SECONDS * energy * MAX_BOOST) % 1000f
                 energy *= exp(-dt / 0.8f)
             }
         }
+        energy = 0f
     }
+    val t = base + extra
     val bits = remember(season) {
         val r = Random(season.ordinal * 31 + 7)
         List(14) { floatArrayOf(r.nextFloat(), r.nextFloat(), 0.6f + r.nextFloat() * 0.8f, r.nextFloat() * 360f, r.nextFloat()) }

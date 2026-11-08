@@ -50,7 +50,7 @@ fun renderMonthCard(context: Context, data: MonthReviewData): Bitmap {
         change < 0 -> context.getString(R.string.month_down, -change)
         else -> "="
     }
-    tile(80f, 340f, 620f, 760f, 0xFFB2472A, context.getString(R.string.month_completions), data.completions.toString(), 190f)
+    tile(80f, 340f, 620f, 760f, 0xFFB5651D, context.getString(R.string.month_completions), data.completions.toString(), 190f)
     tile(650f, 340f, 1000f, 760f, 0xFF8A6A1F, context.getString(R.string.month_vs_prev), changeText, 96f)
     tile(80f, 790f, 470f, 1150f, 0xFF3B3F8F, context.getString(R.string.month_streak), "🔥 ${data.bestStreak}", 110f, data.bestStreakHabit.ifBlank { null })
     val star = data.top.firstOrNull()

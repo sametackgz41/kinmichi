@@ -1106,6 +1106,91 @@ class PreviewGalleryTest {
         captureScreen(name)
     }
 
+    // Site gallery: each screen in its own palette, light and dark.
+    private var sitePalette = app.tsuzuku.data.preferences.PalettePreference.Washi
+    private var sitePrefix = ""
+    private fun gallery(l: String, d: Boolean, palette: app.tsuzuku.data.preferences.PalettePreference, render: (String, Boolean) -> Unit) { sitePalette = palette; sitePrefix = "gal_"; render(l, d) }
+    @Test fun gal_detail_en_light() = gallery("en", false, app.tsuzuku.data.preferences.PalettePreference.Sakura) { l, d -> renderDetail(l, d) }
+    @Test fun gal_detail_en_dark() = gallery("en", true, app.tsuzuku.data.preferences.PalettePreference.Sakura) { l, d -> renderDetail(l, d) }
+    @Test fun gal_today_en_light() = gallery("en", false, app.tsuzuku.data.preferences.PalettePreference.Matcha) { l, d -> renderToday(l, d) }
+    @Test fun gal_today_en_dark() = gallery("en", true, app.tsuzuku.data.preferences.PalettePreference.Matcha) { l, d -> renderToday(l, d) }
+    @Test fun gal_progress_en_light() = gallery("en", false, app.tsuzuku.data.preferences.PalettePreference.Umi) { l, d -> renderProgress(l, d) }
+    @Test fun gal_progress_en_dark() = gallery("en", true, app.tsuzuku.data.preferences.PalettePreference.Umi) { l, d -> renderProgress(l, d) }
+    @Test fun gal_editor_en_light() = gallery("en", false, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
+    @Test fun gal_editor_en_dark() = gallery("en", true, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
+    @Test fun gal_detail_tr_light() = gallery("tr", false, app.tsuzuku.data.preferences.PalettePreference.Sakura) { l, d -> renderDetail(l, d) }
+    @Test fun gal_detail_tr_dark() = gallery("tr", true, app.tsuzuku.data.preferences.PalettePreference.Sakura) { l, d -> renderDetail(l, d) }
+    @Test fun gal_today_tr_light() = gallery("tr", false, app.tsuzuku.data.preferences.PalettePreference.Matcha) { l, d -> renderToday(l, d) }
+    @Test fun gal_today_tr_dark() = gallery("tr", true, app.tsuzuku.data.preferences.PalettePreference.Matcha) { l, d -> renderToday(l, d) }
+    @Test fun gal_progress_tr_light() = gallery("tr", false, app.tsuzuku.data.preferences.PalettePreference.Umi) { l, d -> renderProgress(l, d) }
+    @Test fun gal_progress_tr_dark() = gallery("tr", true, app.tsuzuku.data.preferences.PalettePreference.Umi) { l, d -> renderProgress(l, d) }
+    @Test fun gal_editor_tr_light() = gallery("tr", false, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
+    @Test fun gal_editor_tr_dark() = gallery("tr", true, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
+    @Test fun gal_detail_es_light() = gallery("es", false, app.tsuzuku.data.preferences.PalettePreference.Sakura) { l, d -> renderDetail(l, d) }
+    @Test fun gal_detail_es_dark() = gallery("es", true, app.tsuzuku.data.preferences.PalettePreference.Sakura) { l, d -> renderDetail(l, d) }
+    @Test fun gal_today_es_light() = gallery("es", false, app.tsuzuku.data.preferences.PalettePreference.Matcha) { l, d -> renderToday(l, d) }
+    @Test fun gal_today_es_dark() = gallery("es", true, app.tsuzuku.data.preferences.PalettePreference.Matcha) { l, d -> renderToday(l, d) }
+    @Test fun gal_progress_es_light() = gallery("es", false, app.tsuzuku.data.preferences.PalettePreference.Umi) { l, d -> renderProgress(l, d) }
+    @Test fun gal_progress_es_dark() = gallery("es", true, app.tsuzuku.data.preferences.PalettePreference.Umi) { l, d -> renderProgress(l, d) }
+    @Test fun gal_editor_es_light() = gallery("es", false, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
+    @Test fun gal_editor_es_dark() = gallery("es", true, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
+    @Test fun gal_detail_de_light() = gallery("de", false, app.tsuzuku.data.preferences.PalettePreference.Sakura) { l, d -> renderDetail(l, d) }
+    @Test fun gal_detail_de_dark() = gallery("de", true, app.tsuzuku.data.preferences.PalettePreference.Sakura) { l, d -> renderDetail(l, d) }
+    @Test fun gal_today_de_light() = gallery("de", false, app.tsuzuku.data.preferences.PalettePreference.Matcha) { l, d -> renderToday(l, d) }
+    @Test fun gal_today_de_dark() = gallery("de", true, app.tsuzuku.data.preferences.PalettePreference.Matcha) { l, d -> renderToday(l, d) }
+    @Test fun gal_progress_de_light() = gallery("de", false, app.tsuzuku.data.preferences.PalettePreference.Umi) { l, d -> renderProgress(l, d) }
+    @Test fun gal_progress_de_dark() = gallery("de", true, app.tsuzuku.data.preferences.PalettePreference.Umi) { l, d -> renderProgress(l, d) }
+    @Test fun gal_editor_de_light() = gallery("de", false, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
+    @Test fun gal_editor_de_dark() = gallery("de", true, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
+    @Test fun gal_detail_pt_light() = gallery("pt", false, app.tsuzuku.data.preferences.PalettePreference.Sakura) { l, d -> renderDetail(l, d) }
+    @Test fun gal_detail_pt_dark() = gallery("pt", true, app.tsuzuku.data.preferences.PalettePreference.Sakura) { l, d -> renderDetail(l, d) }
+    @Test fun gal_today_pt_light() = gallery("pt", false, app.tsuzuku.data.preferences.PalettePreference.Matcha) { l, d -> renderToday(l, d) }
+    @Test fun gal_today_pt_dark() = gallery("pt", true, app.tsuzuku.data.preferences.PalettePreference.Matcha) { l, d -> renderToday(l, d) }
+    @Test fun gal_progress_pt_light() = gallery("pt", false, app.tsuzuku.data.preferences.PalettePreference.Umi) { l, d -> renderProgress(l, d) }
+    @Test fun gal_progress_pt_dark() = gallery("pt", true, app.tsuzuku.data.preferences.PalettePreference.Umi) { l, d -> renderProgress(l, d) }
+    @Test fun gal_editor_pt_light() = gallery("pt", false, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
+    @Test fun gal_editor_pt_dark() = gallery("pt", true, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
+    @Test fun gal_detail_ja_light() = gallery("ja", false, app.tsuzuku.data.preferences.PalettePreference.Sakura) { l, d -> renderDetail(l, d) }
+    @Test fun gal_detail_ja_dark() = gallery("ja", true, app.tsuzuku.data.preferences.PalettePreference.Sakura) { l, d -> renderDetail(l, d) }
+    @Test fun gal_today_ja_light() = gallery("ja", false, app.tsuzuku.data.preferences.PalettePreference.Matcha) { l, d -> renderToday(l, d) }
+    @Test fun gal_today_ja_dark() = gallery("ja", true, app.tsuzuku.data.preferences.PalettePreference.Matcha) { l, d -> renderToday(l, d) }
+    @Test fun gal_progress_ja_light() = gallery("ja", false, app.tsuzuku.data.preferences.PalettePreference.Umi) { l, d -> renderProgress(l, d) }
+    @Test fun gal_progress_ja_dark() = gallery("ja", true, app.tsuzuku.data.preferences.PalettePreference.Umi) { l, d -> renderProgress(l, d) }
+    @Test fun gal_editor_ja_light() = gallery("ja", false, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
+    @Test fun gal_editor_ja_dark() = gallery("ja", true, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
+    @Test fun gal_detail_fr_light() = gallery("fr", false, app.tsuzuku.data.preferences.PalettePreference.Sakura) { l, d -> renderDetail(l, d) }
+    @Test fun gal_detail_fr_dark() = gallery("fr", true, app.tsuzuku.data.preferences.PalettePreference.Sakura) { l, d -> renderDetail(l, d) }
+    @Test fun gal_today_fr_light() = gallery("fr", false, app.tsuzuku.data.preferences.PalettePreference.Matcha) { l, d -> renderToday(l, d) }
+    @Test fun gal_today_fr_dark() = gallery("fr", true, app.tsuzuku.data.preferences.PalettePreference.Matcha) { l, d -> renderToday(l, d) }
+    @Test fun gal_progress_fr_light() = gallery("fr", false, app.tsuzuku.data.preferences.PalettePreference.Umi) { l, d -> renderProgress(l, d) }
+    @Test fun gal_progress_fr_dark() = gallery("fr", true, app.tsuzuku.data.preferences.PalettePreference.Umi) { l, d -> renderProgress(l, d) }
+    @Test fun gal_editor_fr_light() = gallery("fr", false, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
+    @Test fun gal_editor_fr_dark() = gallery("fr", true, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
+    @Test fun gal_detail_it_light() = gallery("it", false, app.tsuzuku.data.preferences.PalettePreference.Sakura) { l, d -> renderDetail(l, d) }
+    @Test fun gal_detail_it_dark() = gallery("it", true, app.tsuzuku.data.preferences.PalettePreference.Sakura) { l, d -> renderDetail(l, d) }
+    @Test fun gal_today_it_light() = gallery("it", false, app.tsuzuku.data.preferences.PalettePreference.Matcha) { l, d -> renderToday(l, d) }
+    @Test fun gal_today_it_dark() = gallery("it", true, app.tsuzuku.data.preferences.PalettePreference.Matcha) { l, d -> renderToday(l, d) }
+    @Test fun gal_progress_it_light() = gallery("it", false, app.tsuzuku.data.preferences.PalettePreference.Umi) { l, d -> renderProgress(l, d) }
+    @Test fun gal_progress_it_dark() = gallery("it", true, app.tsuzuku.data.preferences.PalettePreference.Umi) { l, d -> renderProgress(l, d) }
+    @Test fun gal_editor_it_light() = gallery("it", false, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
+    @Test fun gal_editor_it_dark() = gallery("it", true, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
+    @Test fun gal_detail_ru_light() = gallery("ru", false, app.tsuzuku.data.preferences.PalettePreference.Sakura) { l, d -> renderDetail(l, d) }
+    @Test fun gal_detail_ru_dark() = gallery("ru", true, app.tsuzuku.data.preferences.PalettePreference.Sakura) { l, d -> renderDetail(l, d) }
+    @Test fun gal_today_ru_light() = gallery("ru", false, app.tsuzuku.data.preferences.PalettePreference.Matcha) { l, d -> renderToday(l, d) }
+    @Test fun gal_today_ru_dark() = gallery("ru", true, app.tsuzuku.data.preferences.PalettePreference.Matcha) { l, d -> renderToday(l, d) }
+    @Test fun gal_progress_ru_light() = gallery("ru", false, app.tsuzuku.data.preferences.PalettePreference.Umi) { l, d -> renderProgress(l, d) }
+    @Test fun gal_progress_ru_dark() = gallery("ru", true, app.tsuzuku.data.preferences.PalettePreference.Umi) { l, d -> renderProgress(l, d) }
+    @Test fun gal_editor_ru_light() = gallery("ru", false, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
+    @Test fun gal_editor_ru_dark() = gallery("ru", true, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
+    @Test fun gal_detail_ko_light() = gallery("ko", false, app.tsuzuku.data.preferences.PalettePreference.Sakura) { l, d -> renderDetail(l, d) }
+    @Test fun gal_detail_ko_dark() = gallery("ko", true, app.tsuzuku.data.preferences.PalettePreference.Sakura) { l, d -> renderDetail(l, d) }
+    @Test fun gal_today_ko_light() = gallery("ko", false, app.tsuzuku.data.preferences.PalettePreference.Matcha) { l, d -> renderToday(l, d) }
+    @Test fun gal_today_ko_dark() = gallery("ko", true, app.tsuzuku.data.preferences.PalettePreference.Matcha) { l, d -> renderToday(l, d) }
+    @Test fun gal_progress_ko_light() = gallery("ko", false, app.tsuzuku.data.preferences.PalettePreference.Umi) { l, d -> renderProgress(l, d) }
+    @Test fun gal_progress_ko_dark() = gallery("ko", true, app.tsuzuku.data.preferences.PalettePreference.Umi) { l, d -> renderProgress(l, d) }
+    @Test fun gal_editor_ko_light() = gallery("ko", false, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
+    @Test fun gal_editor_ko_dark() = gallery("ko", true, app.tsuzuku.data.preferences.PalettePreference.Momiji) { l, d -> renderEditorAndSettings(l, d) }
+
     @Test fun healthCardTr() {
         setVariant("tr", false)
         val habit = sampleToday("tr")[0].habit.copy(name = "Günde 8.000 adım", emoji = "🚶", type = app.tsuzuku.model.HabitType.Count, target = 8000.0, unit = "adım", healthMetric = app.tsuzuku.model.HealthMetric.Steps)
@@ -1305,7 +1390,7 @@ class PreviewGalleryTest {
         setVariant(lang, dark)
         val state = mutableStateOf(sampleToday(lang))
         compose.setContent {
-            TsuzukuTheme(darkTheme = dark) {
+            TsuzukuTheme(darkTheme = dark, palette = sitePalette) {
                 Shell(title = androidx.compose.ui.res.stringResource(app.tsuzuku.R.string.today), route = "today", profile = "Samet") { modifier ->
                     Box(modifier) {
                         TodayScreen(
@@ -1321,13 +1406,13 @@ class PreviewGalleryTest {
             }
         }
         val suffix = "${lang}_${if (dark) "dark" else "light"}"
-        captureScreen("today_$suffix")
+        captureScreen(sitePrefix + "today_$suffix")
         state.value = sampleToday(lang, allDone = true)
         compose.mainClock.advanceTimeBy(2_000)
-        captureScreen("today_done_$suffix")
+        captureScreen(sitePrefix + "today_done_$suffix")
         state.value = emptyList()
         compose.mainClock.advanceTimeBy(1_000)
-        captureScreen("today_empty_$suffix")
+        captureScreen(sitePrefix + "today_empty_$suffix")
     }
 
     @Test fun progressTrLight() = renderProgress("tr", false)
@@ -1339,13 +1424,13 @@ class PreviewGalleryTest {
         setVariant(lang, dark)
         val history = sampleHistory(lang)
         compose.setContent {
-            TsuzukuTheme(darkTheme = dark) {
+            TsuzukuTheme(darkTheme = dark, palette = sitePalette) {
                 Shell(title = androidx.compose.ui.res.stringResource(app.tsuzuku.R.string.progress_tab), route = "progress", profile = "Samet") { modifier ->
                     Box(modifier) { StatisticsScreen(history = history, libraryItems = emptyList()) }
                 }
             }
         }
-        captureScreen("progress_${lang}_${if (dark) "dark" else "light"}")
+        captureScreen(sitePrefix + "progress_${lang}_${if (dark) "dark" else "light"}")
     }
 
     // Package C: weekly card, month calendar (done / mood), badge showcase, clean days, share card.
@@ -1419,7 +1504,7 @@ class PreviewGalleryTest {
         val suffix = "${lang}_${if (dark) "dark" else "light"}"
         val screen = mutableStateOf("editor")
         compose.setContent {
-            TsuzukuTheme(darkTheme = dark) {
+            TsuzukuTheme(darkTheme = dark, palette = sitePalette) {
                 if (screen.value == "editor") {
                     app.tsuzuku.ui.screens.HabitEditorScreen(onBack = {}, onSave = {})
                 } else {
@@ -1438,7 +1523,7 @@ class PreviewGalleryTest {
                 }
             }
         }
-        captureScreen("editor_$suffix")
+        captureScreen(sitePrefix + "editor_$suffix")
         screen.value = "settings"
         compose.mainClock.advanceTimeBy(500)
         captureScreen("settings_$suffix")
@@ -1520,7 +1605,7 @@ class PreviewGalleryTest {
             }
         }
         compose.setContent {
-            TsuzukuTheme(darkTheme = dark) {
+            TsuzukuTheme(darkTheme = dark, palette = sitePalette) {
                 app.tsuzuku.ui.screens.HabitDetailScreen(
                     habit = water, records = records,
                     onBack = {}, onEdit = {}, onSaveNote = {}, onArchive = {}, onDuplicate = {}, onDelete = {},
@@ -1537,7 +1622,7 @@ class PreviewGalleryTest {
             compose.onNodeWithText(tapText).performClick()
             compose.mainClock.advanceTimeBy(800)
         }
-        captureScreen(name ?: "detail_${lang}_${if (dark) "dark" else "light"}")
+        captureScreen(name ?: sitePrefix + "detail_${lang}_${if (dark) "dark" else "light"}")
     }
 
     // ---- shareable streak card -------------------------------------------------------------

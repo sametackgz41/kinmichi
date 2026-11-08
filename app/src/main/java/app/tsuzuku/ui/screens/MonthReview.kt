@@ -181,7 +181,7 @@ private val Ink = Color(0xFF121212)
 private val White = Color.White
 private val Gold = Color(0xFFE2C57C)
 // The palettes' deep colours, one per tile.
-private val Momiji = Color(0xFFB2472A)
+private val Momiji = Color(0xFFB5651D)
 private val Kin = Color(0xFF8A6A1F)
 private val Yoru = Color(0xFF3B3F8F)
 private val Matcha = Color(0xFF4E6B2E)
