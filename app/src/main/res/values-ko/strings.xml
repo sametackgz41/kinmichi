@@ -1003,7 +1003,7 @@
     <string name="archive_empty">보관함이 비어 있어요</string>
     <string name="archive_restore">되살리기</string>
     <string name="archive_since">시작 %1$s</string>
-    <string name="archive_row_description">넣어 둔 습관</string>
+    <string name="archive_row_description">보관하거나 삭제한 습관</string>
     <string name="emoji_search_hint">아이콘 검색: water, book…</string>
     <string name="emoji_no_results">맞는 아이콘이 없어요</string>
     <string name="emoji_health">건강</string>
@@ -1132,6 +1132,16 @@
     <string name="alarm_ramp_desc">작게 시작해 30초 만에 최대 음량</string>
     <string name="alarm_snoozes_title">다시 알림 횟수</string>
     <string name="alarm_snoozes_none">없음</string>
+    <string name="trash_page_title">보관함과 휴지통</string>
+    <string name="trash_tab_archive">보관함 · %1$d</string>
+    <string name="trash_tab_trash">휴지통 · %1$d</string>
+    <string name="trash_description">삭제한 습관은 기록과 함께 30일 동안 여기 남았다가 완전히 사라져요.</string>
+    <string name="trash_empty">휴지통이 비어 있어요</string>
+    <string name="trash_empty_action">휴지통 비우기</string>
+    <string name="trash_delete_forever">영구 삭제</string>
+    <string name="trash_move_confirmation">%1$s을(를) 휴지통으로 옮길까요? 30일 안에 되돌릴 수 있어요.</string>
+    <string name="trash_moved">‘%1$s’을(를) 휴지통으로 옮겼어요</string>
+    <string name="trash_undo">실행 취소</string>
     <plurals name="streak_days">
         <item quantity="one">%d일 연속</item>
         <item quantity="other">%d일 연속</item>

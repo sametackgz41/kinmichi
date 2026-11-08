@@ -611,7 +611,7 @@ fun HabitDetailScreen(
         AlertDialog(
             onDismissRequest = { confirmDelete = false },
             title = { Text(stringResource(R.string.delete_habit)) },
-            text = { Text(stringResource(R.string.delete_habit_confirmation, habit.name)) },
+            text = { Text(stringResource(R.string.trash_move_confirmation, habit.name)) },
             confirmButton = {
                 TextButton(onClick = {
                     confirmDelete = false

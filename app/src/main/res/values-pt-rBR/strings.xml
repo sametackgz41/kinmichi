@@ -1003,7 +1003,7 @@
     <string name="archive_empty">Nada no arquivo</string>
     <string name="archive_restore">Restaurar</string>
     <string name="archive_since">Começou %1$s</string>
-    <string name="archive_row_description">Hábitos que você guardou</string>
+    <string name="archive_row_description">Hábitos guardados ou apagados</string>
     <string name="emoji_search_hint">Buscar ícones: água, livro…</string>
     <string name="emoji_no_results">Nenhum ícone encontrado</string>
     <string name="emoji_health">Saúde</string>
@@ -1132,6 +1132,16 @@
     <string name="alarm_ramp_desc">Começa baixo e chega ao máximo em 30 segundos</string>
     <string name="alarm_snoozes_title">Adiamentos permitidos</string>
     <string name="alarm_snoozes_none">Nenhum</string>
+    <string name="trash_page_title">Arquivo e lixeira</string>
+    <string name="trash_tab_archive">Arquivo · %1$d</string>
+    <string name="trash_tab_trash">Lixeira · %1$d</string>
+    <string name="trash_description">Hábitos apagados ficam aqui com o histórico por 30 dias e depois somem de vez.</string>
+    <string name="trash_empty">A lixeira está vazia</string>
+    <string name="trash_empty_action">Esvaziar lixeira</string>
+    <string name="trash_delete_forever">Apagar de vez</string>
+    <string name="trash_move_confirmation">Mover %1$s para a lixeira? Dá para recuperar em até 30 dias.</string>
+    <string name="trash_moved">“%1$s” foi para a lixeira</string>
+    <string name="trash_undo">Desfazer</string>
     <plurals name="streak_days">
         <item quantity="one">Sequência de %d dia</item>
         <item quantity="other">Sequência de %d dias</item>

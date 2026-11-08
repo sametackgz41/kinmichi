@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="trash_days_left">
+        <item quantity="other">%d일 후 삭제</item>
+    </plurals>
+    <plurals name="trash_empty_confirmation">
+        <item quantity="other">습관 %d개를 기록과 함께 영구 삭제할까요?</item>
+    </plurals>
+</resources>

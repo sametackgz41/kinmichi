@@ -1003,7 +1003,7 @@
     <string name="archive_empty">L\'archivio è vuoto</string>
     <string name="archive_restore">Ripristina</string>
     <string name="archive_since">Iniziata il %1$s</string>
-    <string name="archive_row_description">Abitudini messe da parte</string>
+    <string name="archive_row_description">Abitudini archiviate o eliminate</string>
     <string name="emoji_search_hint">Cerca icone: acqua, libro…</string>
     <string name="emoji_no_results">Nessuna icona trovata</string>
     <string name="emoji_health">Salute</string>
@@ -1132,6 +1132,16 @@
     <string name="alarm_ramp_desc">Parte piano e arriva al massimo in 30 secondi</string>
     <string name="alarm_snoozes_title">Posticipi consentiti</string>
     <string name="alarm_snoozes_none">Nessuno</string>
+    <string name="trash_page_title">Archivio e cestino</string>
+    <string name="trash_tab_archive">Archivio · %1$d</string>
+    <string name="trash_tab_trash">Cestino · %1$d</string>
+    <string name="trash_description">Le abitudini eliminate restano qui con la loro cronologia per 30 giorni, poi spariscono del tutto.</string>
+    <string name="trash_empty">Il cestino è vuoto</string>
+    <string name="trash_empty_action">Svuota cestino</string>
+    <string name="trash_delete_forever">Elimina definitivamente</string>
+    <string name="trash_move_confirmation">Spostare %1$s nel cestino? Puoi recuperarla entro 30 giorni.</string>
+    <string name="trash_moved">“%1$s” spostata nel cestino</string>
+    <string name="trash_undo">Annulla</string>
     <plurals name="streak_days">
         <item quantity="one">Serie di %d giorno</item>
         <item quantity="other">Serie di %d giorni</item>

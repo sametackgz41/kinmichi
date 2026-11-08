@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="trash_days_left">
+        <item quantity="one">%d gün sonra silinir</item>
+        <item quantity="other">%d gün sonra silinir</item>
+    </plurals>
+    <plurals name="trash_empty_confirmation">
+        <item quantity="one">%d alışkanlık geçmişiyle birlikte kalıcı olarak silinsin mi?</item>
+        <item quantity="other">%d alışkanlık geçmişiyle birlikte kalıcı olarak silinsin mi?</item>
+    </plurals>
+</resources>

@@ -1023,7 +1023,7 @@ archive_description|Le abitudini messe da parte, con tutta la cronologia. Riport
 archive_empty|L'archivio è vuoto
 archive_restore|Ripristina
 archive_since|Iniziata il %1$s
-archive_row_description|Abitudini messe da parte
+archive_row_description|Abitudini archiviate o eliminate
 emoji_search_hint|Cerca icone: acqua, libro…
 emoji_no_results|Nessuna icona trovata
 emoji_health|Salute
@@ -1152,3 +1152,13 @@ alarm_ramp_setting|Suono crescente
 alarm_ramp_desc|Parte piano e arriva al massimo in 30 secondi
 alarm_snoozes_title|Posticipi consentiti
 alarm_snoozes_none|Nessuno
+trash_page_title|Archivio e cestino
+trash_tab_archive|Archivio · %1$d
+trash_tab_trash|Cestino · %1$d
+trash_description|Le abitudini eliminate restano qui con la loro cronologia per 30 giorni, poi spariscono del tutto.
+trash_empty|Il cestino è vuoto
+trash_empty_action|Svuota cestino
+trash_delete_forever|Elimina definitivamente
+trash_move_confirmation|Spostare %1$s nel cestino? Puoi recuperarla entro 30 giorni.
+trash_moved|“%1$s” spostata nel cestino
+trash_undo|Annulla

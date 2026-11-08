@@ -1023,7 +1023,7 @@ archive_description|Os hábitos que você guardou, com todo o histórico. Traga 
 archive_empty|Nada no arquivo
 archive_restore|Restaurar
 archive_since|Começou %1$s
-archive_row_description|Hábitos que você guardou
+archive_row_description|Hábitos guardados ou apagados
 emoji_search_hint|Buscar ícones: água, livro…
 emoji_no_results|Nenhum ícone encontrado
 emoji_health|Saúde
@@ -1152,3 +1152,13 @@ alarm_ramp_setting|Som crescente
 alarm_ramp_desc|Começa baixo e chega ao máximo em 30 segundos
 alarm_snoozes_title|Adiamentos permitidos
 alarm_snoozes_none|Nenhum
+trash_page_title|Arquivo e lixeira
+trash_tab_archive|Arquivo · %1$d
+trash_tab_trash|Lixeira · %1$d
+trash_description|Hábitos apagados ficam aqui com o histórico por 30 dias e depois somem de vez.
+trash_empty|A lixeira está vazia
+trash_empty_action|Esvaziar lixeira
+trash_delete_forever|Apagar de vez
+trash_move_confirmation|Mover %1$s para a lixeira? Dá para recuperar em até 30 dias.
+trash_moved|“%1$s” foi para a lixeira
+trash_undo|Desfazer

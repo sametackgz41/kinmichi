@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="trash_days_left">
+        <item quantity="one">Noch %d Tag</item>
+        <item quantity="other">Noch %d Tage</item>
+    </plurals>
+    <plurals name="trash_empty_confirmation">
+        <item quantity="one">%d Gewohnheit samt Verlauf endgültig löschen?</item>
+        <item quantity="other">%d Gewohnheiten samt Verlauf endgültig löschen?</item>
+    </plurals>
+</resources>

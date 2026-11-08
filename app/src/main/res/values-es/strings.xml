@@ -1003,7 +1003,7 @@
     <string name="archive_empty">No hay nada en el archivo</string>
     <string name="archive_restore">Recuperar</string>
     <string name="archive_since">Empezó %1$s</string>
-    <string name="archive_row_description">Hábitos que guardaste</string>
+    <string name="archive_row_description">Hábitos guardados o borrados</string>
     <string name="emoji_search_hint">Buscar iconos: agua, libro…</string>
     <string name="emoji_no_results">Ningún icono coincide</string>
     <string name="emoji_health">Salud</string>
@@ -1132,6 +1132,16 @@
     <string name="alarm_ramp_desc">Empieza bajo y llega al máximo en 30 segundos</string>
     <string name="alarm_snoozes_title">Aplazamientos permitidos</string>
     <string name="alarm_snoozes_none">Ninguno</string>
+    <string name="trash_page_title">Archivo y papelera</string>
+    <string name="trash_tab_archive">Archivo · %1$d</string>
+    <string name="trash_tab_trash">Papelera · %1$d</string>
+    <string name="trash_description">Los hábitos borrados se quedan aquí con su historial 30 días; después se eliminan del todo.</string>
+    <string name="trash_empty">La papelera está vacía</string>
+    <string name="trash_empty_action">Vaciar papelera</string>
+    <string name="trash_delete_forever">Borrar definitivamente</string>
+    <string name="trash_move_confirmation">¿Mover %1$s a la papelera? Puedes recuperarlo en 30 días.</string>
+    <string name="trash_moved">«%1$s» se movió a la papelera</string>
+    <string name="trash_undo">Deshacer</string>
     <plurals name="streak_days">
         <item quantity="one">Racha de %d día</item>
         <item quantity="other">Racha de %d días</item>

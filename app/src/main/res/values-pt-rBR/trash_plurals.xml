@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="trash_days_left">
+        <item quantity="one">Some em %d dia</item>
+        <item quantity="other">Some em %d dias</item>
+    </plurals>
+    <plurals name="trash_empty_confirmation">
+        <item quantity="one">Apagar de vez %d hábito e o histórico?</item>
+        <item quantity="other">Apagar de vez %d hábitos e o histórico?</item>
+    </plurals>
+</resources>

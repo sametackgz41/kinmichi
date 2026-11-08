@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="trash_days_left">
+        <item quantity="one">Encore %d jour</item>
+        <item quantity="other">Encore %d jours</item>
+    </plurals>
+    <plurals name="trash_empty_confirmation">
+        <item quantity="one">Supprimer définitivement %d habitude et son historique ?</item>
+        <item quantity="other">Supprimer définitivement %d habitudes et leur historique ?</item>
+    </plurals>
+</resources>

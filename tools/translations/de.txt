@@ -1023,7 +1023,7 @@ archive_description|Weggelegte Gewohnheiten samt Verlauf. Hol sie jederzeit zur�
 archive_empty|Das Archiv ist leer
 archive_restore|Zurückholen
 archive_since|Begonnen %1$s
-archive_row_description|Weggelegte Gewohnheiten
+archive_row_description|Abgelegte und gelöschte Gewohnheiten
 emoji_search_hint|Symbole suchen: Wasser, Buch…
 emoji_no_results|Kein passendes Symbol
 emoji_health|Gesundheit
@@ -1152,3 +1152,13 @@ alarm_ramp_setting|Ansteigender Ton
 alarm_ramp_desc|Beginnt leise und ist nach 30 Sekunden voll laut
 alarm_snoozes_title|Erlaubtes Schlummern
 alarm_snoozes_none|Keins
+trash_page_title|Archiv und Papierkorb
+trash_tab_archive|Archiv · %1$d
+trash_tab_trash|Papierkorb · %1$d
+trash_description|Gelöschte Gewohnheiten bleiben 30 Tage samt Verlauf hier und verschwinden dann endgültig.
+trash_empty|Der Papierkorb ist leer
+trash_empty_action|Papierkorb leeren
+trash_delete_forever|Endgültig löschen
+trash_move_confirmation|%1$s in den Papierkorb verschieben? Du kannst es 30 Tage lang zurückholen.
+trash_moved|„%1$s“ ist im Papierkorb
+trash_undo|Rückgängig

@@ -1023,7 +1023,7 @@ archive_description|Les habitudes mises de côté, historique compris. Fais-en r
 archive_empty|Rien dans les archives
 archive_restore|Restaurer
 archive_since|Commencée le %1$s
-archive_row_description|Habitudes mises de côté
+archive_row_description|Habitudes rangées ou supprimées
 emoji_search_hint|Chercher une icône : eau, livre…
 emoji_no_results|Aucune icône trouvée
 emoji_health|Santé
@@ -1152,3 +1152,13 @@ alarm_ramp_setting|Son progressif
 alarm_ramp_desc|Commence doucement et atteint le maximum en 30 secondes
 alarm_snoozes_title|Répétitions autorisées
 alarm_snoozes_none|Aucune
+trash_page_title|Archives et corbeille
+trash_tab_archive|Archives · %1$d
+trash_tab_trash|Corbeille · %1$d
+trash_description|Les habitudes supprimées restent ici 30 jours avec leur historique, puis disparaissent pour de bon.
+trash_empty|La corbeille est vide
+trash_empty_action|Vider la corbeille
+trash_delete_forever|Supprimer définitivement
+trash_move_confirmation|Mettre %1$s à la corbeille ? Tu peux le récupérer pendant 30 jours.
+trash_moved|« %1$s » est dans la corbeille
+trash_undo|Annuler

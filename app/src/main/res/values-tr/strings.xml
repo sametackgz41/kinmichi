@@ -1402,7 +1402,7 @@
     <string name="archive_empty">Arşivde alışkanlık yok</string>
     <string name="archive_restore">Geri getir</string>
     <string name="archive_since">Başlangıç %1$s</string>
-    <string name="archive_row_description">Bıraktığın alışkanlıklar</string>
+    <string name="archive_row_description">Bıraktığın ve sildiğin alışkanlıklar</string>
     <string name="emoji_search_hint">Simge ara: su, kitap, koşu…</string>
     <string name="emoji_no_results">Eşleşen simge yok</string>
     <string name="emoji_health">Sağlık</string>
@@ -1531,4 +1531,14 @@
     <string name="alarm_ramp_desc">Kısık başlar, 30 saniyede tam sese çıkar</string>
     <string name="alarm_snoozes_title">Erteleme hakkı</string>
     <string name="alarm_snoozes_none">Yok</string>
+    <string name="trash_page_title">Arşiv ve çöp kutusu</string>
+    <string name="trash_tab_archive">Arşiv · %1$d</string>
+    <string name="trash_tab_trash">Çöp kutusu · %1$d</string>
+    <string name="trash_description">Silinenler geçmişleriyle 30 gün burada kalır, sonra tamamen silinir.</string>
+    <string name="trash_empty">Çöp kutusu boş</string>
+    <string name="trash_empty_action">Çöp kutusunu boşalt</string>
+    <string name="trash_delete_forever">Kalıcı olarak sil</string>
+    <string name="trash_move_confirmation">%1$s çöp kutusuna taşınsın mı? 30 gün içinde geri getirebilirsin.</string>
+    <string name="trash_moved">“%1$s” çöp kutusuna taşındı</string>
+    <string name="trash_undo">Geri al</string>
 </resources>

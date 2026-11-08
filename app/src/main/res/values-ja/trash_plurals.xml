@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="trash_days_left">
+        <item quantity="other">あと%d日で削除</item>
+    </plurals>
+    <plurals name="trash_empty_confirmation">
+        <item quantity="other">%d件の習慣を記録ごと完全に削除しますか？</item>
+    </plurals>
+</resources>

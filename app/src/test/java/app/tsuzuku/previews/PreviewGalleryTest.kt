@@ -558,7 +558,18 @@ class PreviewGalleryTest {
     @Test fun task09() = renderTask("task09_pattern") { app.tsuzuku.notifications.PatternMission(onProgress = {}, onSolved = {}, seed = 9, preview = 3) }
     @Test fun task10() = renderTask("task10_catch") { app.tsuzuku.notifications.CatchMission(onProgress = {}, onSolved = {}, seed = 6) }
 
-    @Test fun alarmTypeSettings() = renderAlarmType("alarm_type_settings", dark = false)
+    @Test fun trashA() = renderMock("trash_a") { TrashOptionA() }
+    @Test fun trashB() = renderMock("trash_b") { TrashOptionB() }
+    @Test fun trashC() = renderMock("trash_c") { TrashOptionC() }
+
+    private fun renderMock(name: String, dark: Boolean = false, content: @Composable () -> Unit) {
+        setVariant("tr", dark)
+        compose.setContent { TsuzukuTheme(darkTheme = dark) { content() } }
+        compose.mainClock.advanceTimeBy(900)
+        captureScreen(name)
+    }
+
+    @Test fun alarmTypeSettings() =renderAlarmType("alarm_type_settings", dark = false)
     @Test fun alarmTypeSettingsDark() = renderAlarmType("alarm_type_settings_dark", dark = true)
 
     private fun renderAlarmType(name: String, dark: Boolean) {

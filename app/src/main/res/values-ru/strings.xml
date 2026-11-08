@@ -1003,7 +1003,7 @@
     <string name="archive_empty">В архиве пусто</string>
     <string name="archive_restore">Вернуть</string>
     <string name="archive_since">Начата %1$s</string>
-    <string name="archive_row_description">Отложенные привычки</string>
+    <string name="archive_row_description">Отложенные и удалённые привычки</string>
     <string name="emoji_search_hint">Поиск значков: water, book…</string>
     <string name="emoji_no_results">Ничего не найдено</string>
     <string name="emoji_health">Здоровье</string>
@@ -1132,6 +1132,16 @@
     <string name="alarm_ramp_desc">Начинается тихо и за 30 секунд доходит до максимума</string>
     <string name="alarm_snoozes_title">Сколько можно отложить</string>
     <string name="alarm_snoozes_none">Нет</string>
+    <string name="trash_page_title">Архив и корзина</string>
+    <string name="trash_tab_archive">Архив · %1$d</string>
+    <string name="trash_tab_trash">Корзина · %1$d</string>
+    <string name="trash_description">Удалённые привычки хранятся здесь с историей 30 дней, затем удаляются навсегда.</string>
+    <string name="trash_empty">Корзина пуста</string>
+    <string name="trash_empty_action">Очистить корзину</string>
+    <string name="trash_delete_forever">Удалить навсегда</string>
+    <string name="trash_move_confirmation">Переместить «%1$s» в корзину? Её можно вернуть в течение 30 дней.</string>
+    <string name="trash_moved">«%1$s» в корзине</string>
+    <string name="trash_undo">Отменить</string>
     <plurals name="streak_days">
         <item quantity="one">Серия %d день</item>
         <item quantity="few">Серия %d дня</item>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="trash_days_left">
+        <item quantity="one">Осталось %d день</item>
+        <item quantity="few">Осталось %d дня</item>
+        <item quantity="many">Осталось %d дней</item>
+        <item quantity="other">Осталось %d дня</item>
+    </plurals>
+    <plurals name="trash_empty_confirmation">
+        <item quantity="one">Удалить навсегда %d привычку с историей?</item>
+        <item quantity="few">Удалить навсегда %d привычки с историей?</item>
+        <item quantity="many">Удалить навсегда %d привычек с историей?</item>
+        <item quantity="other">Удалить навсегда %d привычки с историей?</item>
+    </plurals>
+</resources>

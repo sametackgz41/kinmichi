@@ -1003,7 +1003,7 @@
     <string name="archive_empty">アーカイブは空です</string>
     <string name="archive_restore">戻す</string>
     <string name="archive_since">開始 %1$s</string>
-    <string name="archive_row_description">しまった習慣</string>
+    <string name="archive_row_description">しまった習慣と削除した習慣</string>
     <string name="emoji_search_hint">アイコンを検索（例：water）</string>
     <string name="emoji_no_results">見つかりません</string>
     <string name="emoji_health">健康</string>
@@ -1132,6 +1132,16 @@
     <string name="alarm_ramp_desc">小さく始まり、30秒で最大音量に</string>
     <string name="alarm_snoozes_title">スヌーズ回数</string>
     <string name="alarm_snoozes_none">なし</string>
+    <string name="trash_page_title">アーカイブとごみ箱</string>
+    <string name="trash_tab_archive">アーカイブ · %1$d</string>
+    <string name="trash_tab_trash">ごみ箱 · %1$d</string>
+    <string name="trash_description">削除した習慣は記録ごと30日間ここに残り、その後完全に消えます。</string>
+    <string name="trash_empty">ごみ箱は空です</string>
+    <string name="trash_empty_action">ごみ箱を空にする</string>
+    <string name="trash_delete_forever">完全に削除</string>
+    <string name="trash_move_confirmation">%1$sをごみ箱に移しますか？30日以内なら元に戻せます。</string>
+    <string name="trash_moved">「%1$s」をごみ箱に移しました</string>
+    <string name="trash_undo">元に戻す</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

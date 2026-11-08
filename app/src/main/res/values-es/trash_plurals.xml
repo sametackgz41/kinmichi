@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="trash_days_left">
+        <item quantity="one">Se borra en %d día</item>
+        <item quantity="other">Se borra en %d días</item>
+    </plurals>
+    <plurals name="trash_empty_confirmation">
+        <item quantity="one">¿Borrar definitivamente %d hábito y su historial?</item>
+        <item quantity="other">¿Borrar definitivamente %d hábitos y su historial?</item>
+    </plurals>
+</resources>

@@ -41,6 +41,8 @@ data class HabitEntity(
     val tags: String = "",
     val currentLevel: Int = 1,
     val tinyVersion: String = "",
+    /** Set when the habit is in the trash; it is deleted for good 30 days later. */
+    val deletedAt: Long? = null,
 )
 
 @Entity(

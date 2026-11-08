@@ -1003,7 +1003,7 @@
     <string name="archive_empty">Rien dans les archives</string>
     <string name="archive_restore">Restaurer</string>
     <string name="archive_since">Commencée le %1$s</string>
-    <string name="archive_row_description">Habitudes mises de côté</string>
+    <string name="archive_row_description">Habitudes rangées ou supprimées</string>
     <string name="emoji_search_hint">Chercher une icône : eau, livre…</string>
     <string name="emoji_no_results">Aucune icône trouvée</string>
     <string name="emoji_health">Santé</string>
@@ -1132,6 +1132,16 @@
     <string name="alarm_ramp_desc">Commence doucement et atteint le maximum en 30 secondes</string>
     <string name="alarm_snoozes_title">Répétitions autorisées</string>
     <string name="alarm_snoozes_none">Aucune</string>
+    <string name="trash_page_title">Archives et corbeille</string>
+    <string name="trash_tab_archive">Archives · %1$d</string>
+    <string name="trash_tab_trash">Corbeille · %1$d</string>
+    <string name="trash_description">Les habitudes supprimées restent ici 30 jours avec leur historique, puis disparaissent pour de bon.</string>
+    <string name="trash_empty">La corbeille est vide</string>
+    <string name="trash_empty_action">Vider la corbeille</string>
+    <string name="trash_delete_forever">Supprimer définitivement</string>
+    <string name="trash_move_confirmation">Mettre %1$s à la corbeille ? Tu peux le récupérer pendant 30 jours.</string>
+    <string name="trash_moved">« %1$s » est dans la corbeille</string>
+    <string name="trash_undo">Annuler</string>
     <plurals name="streak_days">
         <item quantity="one">Série de %d jour</item>
         <item quantity="other">Série de %d jours</item>

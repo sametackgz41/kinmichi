@@ -45,11 +45,23 @@ interface HabitDao {
     @Query("UPDATE habits SET isArchived = 1, updatedAt = :updatedAt WHERE id = :id")
     suspend fun archiveHabit(id: Long, updatedAt: Long)
 
-    @Query("UPDATE habits SET isArchived = 0, updatedAt = :updatedAt WHERE id = :id")
+    @Query("UPDATE habits SET isArchived = 0, deletedAt = NULL, updatedAt = :updatedAt WHERE id = :id")
     suspend fun unarchiveHabit(id: Long, updatedAt: Long)
 
-    @Query("SELECT * FROM habits WHERE isArchived = 1 ORDER BY updatedAt DESC")
+    @Query("SELECT * FROM habits WHERE isArchived = 1 AND deletedAt IS NULL ORDER BY updatedAt DESC")
     fun observeArchivedHabits(): Flow<List<HabitEntity>>
+
+    @Query("UPDATE habits SET isArchived = 1, deletedAt = :now, updatedAt = :now WHERE id = :id")
+    suspend fun trashHabit(id: Long, now: Long)
+
+    @Query("SELECT * FROM habits WHERE deletedAt IS NOT NULL ORDER BY deletedAt DESC")
+    fun observeTrashedHabits(): Flow<List<HabitEntity>>
+
+    @Query("DELETE FROM habits WHERE deletedAt IS NOT NULL AND deletedAt < :before")
+    suspend fun purgeTrash(before: Long)
+
+    @Query("DELETE FROM habits WHERE deletedAt IS NOT NULL")
+    suspend fun emptyTrash()
 
     @Query("DELETE FROM habits WHERE id = :id")
     suspend fun deleteHabit(id: Long)

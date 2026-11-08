@@ -1017,7 +1017,7 @@ archive_description|しまった習慣が履歴ごと残っています。いつ
 archive_empty|アーカイブは空です
 archive_restore|戻す
 archive_since|開始 %1$s
-archive_row_description|しまった習慣
+archive_row_description|しまった習慣と削除した習慣
 emoji_search_hint|アイコンを検索（例：water）
 emoji_no_results|見つかりません
 emoji_health|健康
@@ -1146,3 +1146,13 @@ alarm_ramp_setting|だんだん大きく
 alarm_ramp_desc|小さく始まり、30秒で最大音量に
 alarm_snoozes_title|スヌーズ回数
 alarm_snoozes_none|なし
+trash_page_title|アーカイブとごみ箱
+trash_tab_archive|アーカイブ · %1$d
+trash_tab_trash|ごみ箱 · %1$d
+trash_description|削除した習慣は記録ごと30日間ここに残り、その後完全に消えます。
+trash_empty|ごみ箱は空です
+trash_empty_action|ごみ箱を空にする
+trash_delete_forever|完全に削除
+trash_move_confirmation|%1$sをごみ箱に移しますか？30日以内なら元に戻せます。
+trash_moved|「%1$s」をごみ箱に移しました
+trash_undo|元に戻す

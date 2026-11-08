@@ -238,8 +238,29 @@ fun TsuzukuApp(
         if (app.tsuzuku.ui.screens.FeelingPromptSetting.isEnabled(context)) feelingPromptHabit = habit
     }
 
+    val trashSnackbar = remember { androidx.compose.material3.SnackbarHostState() }
+    val trashScope = androidx.compose.runtime.rememberCoroutineScope()
+    LaunchedEffect(Unit) { repository.purgeOldTrash() }
+    /** After a habit goes to the trash: a bar with "Undo" that brings it straight back. */
+    val announceTrashed: (Long, String) -> Unit = { id, name ->
+        trashScope.launch {
+            trashSnackbar.currentSnackbarData?.dismiss()
+            val result = trashSnackbar.showSnackbar(
+                message = context.getString(R.string.trash_moved, name),
+                actionLabel = context.getString(R.string.trash_undo),
+                duration = androidx.compose.material3.SnackbarDuration.Long,
+            )
+            if (result == androidx.compose.material3.SnackbarResult.ActionPerformed) {
+                repository.unarchiveHabit(id)
+                reminderScheduler.schedule(id)
+                TsuzukuWidgetProvider.requestUpdate(context.applicationContext)
+            }
+        }
+    }
+
     Scaffold(
         snackbarHost = {
+            androidx.compose.material3.SnackbarHost(trashSnackbar)
             val habit = feelingPromptHabit
             androidx.compose.animation.AnimatedVisibility(
                 visible = habit != null && currentRoute == "today",
@@ -791,9 +812,11 @@ fun TsuzukuApp(
             }
             screen("archive") {
                 val archived by repository.observeArchivedHabits().collectAsStateWithLifecycle(initialValue = emptyList())
+                val trashed by repository.observeTrash().collectAsStateWithLifecycle(initialValue = emptyList())
                 val archiveScope = androidx.compose.runtime.rememberCoroutineScope()
                 app.tsuzuku.ui.screens.ArchiveScreen(
                     habits = archived,
+                    trashed = trashed,
                     onBack = navController::popBackStack,
                     onRestore = { id ->
                         archiveScope.launch {
@@ -802,10 +825,12 @@ fun TsuzukuApp(
                             TsuzukuWidgetProvider.requestUpdate(context.applicationContext)
                         }
                     },
-                    onDelete = { id ->
+                    onTrash = { id ->
                         reminderScheduler.cancel(id)
-                        archiveScope.launch { repository.deleteHabit(id) }
+                        archiveScope.launch { repository.trashHabit(id) }
                     },
+                    onDeleteForever = { id -> archiveScope.launch { repository.deleteHabit(id) } },
+                    onEmptyTrash = { archiveScope.launch { repository.emptyTrash() } },
                 )
             }
             screen("widgets") {
@@ -941,7 +966,11 @@ fun TsuzukuApp(
                         },
                         onDelete = {
                             reminderScheduler.cancel(habitId)
-                            todayViewModel.deleteHabit(habitId) { navController.popBackStack("today", inclusive = false) }
+                            val name = habit.name
+                            todayViewModel.deleteHabit(habitId) {
+                                navController.popBackStack("today", inclusive = false)
+                                announceTrashed(habitId, name)
+                            }
                         },
                         linkedGoals = linkedG,
                         linkedContents = emptyList(),

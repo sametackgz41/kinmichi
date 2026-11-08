@@ -49,6 +49,12 @@ interface HabitRepository {
     fun observeArchivedHabits(): Flow<List<Habit>> = kotlinx.coroutines.flow.flowOf(emptyList())
     suspend fun unarchiveHabit(id: Long) {}
     suspend fun deleteHabit(id: Long)
+    /** Moves a habit to the trash; it stays there, restorable, for [TRASH_DAYS] days. */
+    suspend fun trashHabit(id: Long) {}
+    fun observeTrash(): Flow<List<TrashedHabit>> = kotlinx.coroutines.flow.flowOf(emptyList())
+    suspend fun emptyTrash() {}
+    /** Deletes for good what has been in the trash longer than [TRASH_DAYS] days. */
+    suspend fun purgeOldTrash() {}
     suspend fun duplicateHabit(id: Long): Long?
     suspend fun moveHabit(id: Long, direction: Int)
     /** Puts [orderedIds] in this order; habits not listed (not on today's list) keep their slots. */
@@ -387,6 +393,15 @@ class RoomHabitRepository(
 
     override suspend fun deleteHabit(id: Long) = dao.deleteHabit(id)
 
+    override suspend fun trashHabit(id: Long) = dao.trashHabit(id, now())
+
+    override fun observeTrash(): Flow<List<TrashedHabit>> =
+        dao.observeTrashedHabits().map { list -> list.map { TrashedHabit(it.toDomain(), it.deletedAt ?: it.updatedAt) } }
+
+    override suspend fun emptyTrash() = dao.emptyTrash()
+
+    override suspend fun purgeOldTrash() = dao.purgeTrash(now() - TRASH_DAYS * 86_400_000L)
+
     override suspend fun duplicateHabit(id: Long): Long? {
         val source = dao.getHabit(id) ?: return null
         val timestamp = now()
@@ -566,6 +581,14 @@ class RoomHabitRepository(
         )
     }
 }
+
+/** A habit in the trash and when it was put there. */
+data class TrashedHabit(val habit: Habit, val deletedAt: Long) {
+    fun daysLeft(now: Long = System.currentTimeMillis()): Int =
+        (TRASH_DAYS - ((now - deletedAt) / 86_400_000L).toInt()).coerceIn(0, TRASH_DAYS)
+}
+
+const val TRASH_DAYS = 30
 
 private fun HabitEntity.toDomain() = Habit(
     id = id,

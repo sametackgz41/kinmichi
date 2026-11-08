@@ -1003,7 +1003,7 @@
     <string name="archive_empty">Das Archiv ist leer</string>
     <string name="archive_restore">Zurückholen</string>
     <string name="archive_since">Begonnen %1$s</string>
-    <string name="archive_row_description">Weggelegte Gewohnheiten</string>
+    <string name="archive_row_description">Abgelegte und gelöschte Gewohnheiten</string>
     <string name="emoji_search_hint">Symbole suchen: Wasser, Buch…</string>
     <string name="emoji_no_results">Kein passendes Symbol</string>
     <string name="emoji_health">Gesundheit</string>
@@ -1132,6 +1132,16 @@
     <string name="alarm_ramp_desc">Beginnt leise und ist nach 30 Sekunden voll laut</string>
     <string name="alarm_snoozes_title">Erlaubtes Schlummern</string>
     <string name="alarm_snoozes_none">Keins</string>
+    <string name="trash_page_title">Archiv und Papierkorb</string>
+    <string name="trash_tab_archive">Archiv · %1$d</string>
+    <string name="trash_tab_trash">Papierkorb · %1$d</string>
+    <string name="trash_description">Gelöschte Gewohnheiten bleiben 30 Tage samt Verlauf hier und verschwinden dann endgültig.</string>
+    <string name="trash_empty">Der Papierkorb ist leer</string>
+    <string name="trash_empty_action">Papierkorb leeren</string>
+    <string name="trash_delete_forever">Endgültig löschen</string>
+    <string name="trash_move_confirmation">%1$s in den Papierkorb verschieben? Du kannst es 30 Tage lang zurückholen.</string>
+    <string name="trash_moved">„%1$s“ ist im Papierkorb</string>
+    <string name="trash_undo">Rückgängig</string>
     <plurals name="streak_days">
         <item quantity="one">%d Tag in Folge</item>
         <item quantity="other">%d Tage in Folge</item>

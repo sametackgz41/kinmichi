@@ -1403,7 +1403,7 @@
     <string name="archive_empty">Nothing in the archive</string>
     <string name="archive_restore">Restore</string>
     <string name="archive_since">Started %1$s</string>
-    <string name="archive_row_description">Habits you put away</string>
+    <string name="archive_row_description">Habits you put away or deleted</string>
     <string name="emoji_search_hint">Search icons, e.g. water, book</string>
     <string name="emoji_no_results">No matching icon</string>
     <string name="emoji_health">Health</string>
@@ -1532,4 +1532,14 @@
     <string name="alarm_ramp_desc">Starts quiet and reaches full volume in 30 seconds</string>
     <string name="alarm_snoozes_title">Snoozes allowed</string>
     <string name="alarm_snoozes_none">None</string>
+    <string name="trash_page_title">Archive and trash</string>
+    <string name="trash_tab_archive">Archive · %1$d</string>
+    <string name="trash_tab_trash">Trash · %1$d</string>
+    <string name="trash_description">Deleted habits stay here with their history for 30 days, then they are gone for good.</string>
+    <string name="trash_empty">The trash is empty</string>
+    <string name="trash_empty_action">Empty trash</string>
+    <string name="trash_delete_forever">Delete for good</string>
+    <string name="trash_move_confirmation">Move %1$s to the trash? You can bring it back within 30 days.</string>
+    <string name="trash_moved">“%1$s” moved to the trash</string>
+    <string name="trash_undo">Undo</string>
 </resources>

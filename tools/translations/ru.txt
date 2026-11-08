@@ -1035,7 +1035,7 @@ archive_description|Отложенные привычки вместе с ист
 archive_empty|В архиве пусто
 archive_restore|Вернуть
 archive_since|Начата %1$s
-archive_row_description|Отложенные привычки
+archive_row_description|Отложенные и удалённые привычки
 emoji_search_hint|Поиск значков: water, book…
 emoji_no_results|Ничего не найдено
 emoji_health|Здоровье
@@ -1164,3 +1164,13 @@ alarm_ramp_setting|Нарастающий звук
 alarm_ramp_desc|Начинается тихо и за 30 секунд доходит до максимума
 alarm_snoozes_title|Сколько можно отложить
 alarm_snoozes_none|Нет
+trash_page_title|Архив и корзина
+trash_tab_archive|Архив · %1$d
+trash_tab_trash|Корзина · %1$d
+trash_description|Удалённые привычки хранятся здесь с историей 30 дней, затем удаляются навсегда.
+trash_empty|Корзина пуста
+trash_empty_action|Очистить корзину
+trash_delete_forever|Удалить навсегда
+trash_move_confirmation|Переместить «%1$s» в корзину? Её можно вернуть в течение 30 дней.
+trash_moved|«%1$s» в корзине
+trash_undo|Отменить

@@ -147,7 +147,7 @@ class TodayViewModel(
 
     fun deleteHabit(id: Long, onDone: () -> Unit) {
         viewModelScope.launch {
-            repository.deleteHabit(id)
+            repository.trashHabit(id)
             onDataChanged()
             onDone()
         }
