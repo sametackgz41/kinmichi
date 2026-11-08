@@ -1653,4 +1653,5 @@
     <string name="health_page_permissions">Permissions</string>
     <string name="health_page_not_allowed">Not allowed yet</string>
     <string name="health_page_create">+ Make a habit from this</string>
+    <string name="health_page_loading">Reading from Health Connect…</string>
 </resources>

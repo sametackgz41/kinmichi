@@ -1291,3 +1291,4 @@ health_page_allowed|%1$d von %2$d Datenarten erlaubt
 health_page_permissions|Berechtigungen
 health_page_not_allowed|Noch nicht erlaubt
 health_page_create|+ Gewohnheit daraus machen
+health_page_loading|Wird aus Health Connect gelesen …

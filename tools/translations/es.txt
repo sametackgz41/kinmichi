@@ -1291,3 +1291,4 @@ health_page_allowed|%1$d de %2$d tipos de datos permitidos
 health_page_permissions|Permisos
 health_page_not_allowed|Aún sin permiso
 health_page_create|+ Crear un hábito con esto
+health_page_loading|Leyendo de Health Connect…

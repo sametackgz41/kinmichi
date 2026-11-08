@@ -55,8 +55,11 @@ import kotlinx.coroutines.launch
 
 private val HealthGreen = Color(0xFF3F7D5A)
 
-/** One kind of health data on the page: its last 7 days in its own unit, null when not allowed. */
-data class HealthCardData(val metric: HealthMetric, val days: List<Pair<LocalDate, Double>>?)
+/**
+ * One kind of health data on the page: its last 7 days in its own unit; null when not allowed.
+ * [loading] is allowed but still being read, so the card never says "not allowed" meanwhile.
+ */
+data class HealthCardData(val metric: HealthMetric, val days: List<Pair<LocalDate, Double>>?, val loading: Boolean = false)
 
 private val PageMetrics = listOf(HealthMetric.Steps, HealthMetric.Distance, HealthMetric.Calories, HealthMetric.ExerciseDuration, HealthMetric.SleepDuration)
 
@@ -122,16 +125,41 @@ internal fun HealthPage(
     var cards by remember { mutableStateOf(preview) }
     var granted by remember { mutableIntStateOf(if (preview != null) preview.count { it.days != null } else 0) }
     var refresh by remember { mutableIntStateOf(0) }
+    // Marks what was just allowed straight away, before Health Connect is asked again.
+    fun showAllowed(allowed: Set<String>) {
+        granted = PageMetrics.count { HealthSync.permissionFor(it) in allowed }
+        val old = cards.orEmpty().associateBy { it.metric }
+        cards = PageMetrics.map { m ->
+            val prev = old[m]
+            when {
+                HealthSync.permissionFor(m) !in allowed -> HealthCardData(m, null)
+                prev?.days != null -> prev
+                else -> HealthCardData(m, null, loading = true)
+            }
+        }
+    }
     val request = androidx.activity.compose.rememberLauncherForActivityResult(
         androidx.health.connect.client.PermissionController.createRequestPermissionResultContract(),
-    ) { refresh++ }
+    ) { justAllowed ->
+        if (preview == null) {
+            val known = cards.orEmpty().filter { it.days != null || it.loading }.mapNotNull { HealthSync.permissionFor(it.metric) }.toSet()
+            showAllowed(known + justAllowed)
+        }
+        refresh++
+    }
     LifecycleResumeEffect(Unit) { refresh++; onPauseOrDispose { } }
     LaunchedEffect(refresh) {
         if (preview != null) return@LaunchedEffect
+        // First the permissions (fast), then each kind fills in on its own, all at once.
         val allowed = HealthSync.granted(context)
-        granted = PageMetrics.count { HealthSync.permissionFor(it) in allowed }
-        cards = PageMetrics.map { m ->
-            HealthCardData(m, if (HealthSync.permissionFor(m) in allowed) HealthSync.history(context, m, pageUnit(m), days = 7) else null)
+        showAllowed(allowed)
+        kotlinx.coroutines.coroutineScope {
+            PageMetrics.filter { HealthSync.permissionFor(it) in allowed }.forEach { m ->
+                launch {
+                    val days = HealthSync.history(context, m, pageUnit(m), days = 7) ?: emptyList()
+                    cards = cards.orEmpty().map { if (it.metric == m) HealthCardData(m, days) else it }
+                }
+            }
         }
     }
     val locale = LocalConfiguration.current.locales[0]
@@ -185,7 +213,12 @@ internal fun HealthPage(
                 ) {
                     Column(Modifier.weight(1f)) {
                         Text("${metricEmoji(card.metric)}  ${stringResource(metricLabel(card.metric))}", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        if (days == null) {
+                        if (card.loading) {
+                            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
+                                CircularProgressIndicator(Modifier.size(18.dp), strokeWidth = 2.dp)
+                                Text(stringResource(R.string.health_page_loading), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(start = 10.dp))
+                            }
+                        } else if (days == null) {
                             Text(stringResource(R.string.health_page_not_allowed), style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(vertical = 4.dp))
                             Text(
                                 stringResource(R.string.health_card_allow),

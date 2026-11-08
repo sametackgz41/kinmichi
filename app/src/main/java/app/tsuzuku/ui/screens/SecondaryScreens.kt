@@ -874,7 +874,10 @@ private fun HealthConnectRow(onOpenHealth: () -> Unit) {
     var allowed by remember { mutableStateOf(0) }
     val request = androidx.activity.compose.rememberLauncherForActivityResult(
         androidx.health.connect.client.PermissionController.createRequestPermissionResultContract(),
-    ) { granted -> allowed = granted.size }
+    ) { granted ->
+        allowed = granted.size
+        if (granted.isNotEmpty()) onOpenHealth()
+    }
     LaunchedEffect(status) { allowed = app.tsuzuku.health.HealthSync.granted(context).size }
     ValueSettingRow(
         Icons.Rounded.FavoriteBorder,

@@ -1652,4 +1652,5 @@
     <string name="health_page_permissions">İzinler</string>
     <string name="health_page_not_allowed">Henüz izin verilmedi</string>
     <string name="health_page_create">+ Bununla alışkanlık oluştur</string>
+    <string name="health_page_loading">Health Connect\'ten okunuyor…</string>
 </resources>

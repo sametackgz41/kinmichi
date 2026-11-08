@@ -1291,3 +1291,4 @@ health_page_allowed|데이터 %2$d종 중 %1$d종 허용
 health_page_permissions|권한
 health_page_not_allowed|아직 허용되지 않음
 health_page_create|+ 이걸로 습관 만들기
+health_page_loading|Health Connect에서 읽는 중…

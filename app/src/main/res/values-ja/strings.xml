@@ -1271,6 +1271,7 @@
     <string name="health_page_permissions">権限</string>
     <string name="health_page_not_allowed">まだ許可されていません</string>
     <string name="health_page_create">+ これで習慣をつくる</string>
+    <string name="health_page_loading">Health Connectから読み込み中…</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

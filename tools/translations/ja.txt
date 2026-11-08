@@ -1285,3 +1285,4 @@ health_page_allowed|%2$d種類中%1$d種類を許可
 health_page_permissions|権限
 health_page_not_allowed|まだ許可されていません
 health_page_create|+ これで習慣をつくる
+health_page_loading|Health Connectから読み込み中…

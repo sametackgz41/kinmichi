@@ -1271,6 +1271,7 @@
     <string name="health_page_permissions">Разрешения</string>
     <string name="health_page_not_allowed">Пока нет доступа</string>
     <string name="health_page_create">+ Сделать привычкой</string>
+    <string name="health_page_loading">Чтение из Health Connect…</string>
     <plurals name="streak_days">
         <item quantity="one">Серия %d день</item>
         <item quantity="few">Серия %d дня</item>

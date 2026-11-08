@@ -1271,6 +1271,7 @@
     <string name="health_page_permissions">Permisos</string>
     <string name="health_page_not_allowed">Aún sin permiso</string>
     <string name="health_page_create">+ Crear un hábito con esto</string>
+    <string name="health_page_loading">Leyendo de Health Connect…</string>
     <plurals name="streak_days">
         <item quantity="one">Racha de %d día</item>
         <item quantity="other">Racha de %d días</item>

@@ -1303,3 +1303,4 @@ health_page_allowed|Разрешено %1$d из %2$d типов данных
 health_page_permissions|Разрешения
 health_page_not_allowed|Пока нет доступа
 health_page_create|+ Сделать привычкой
+health_page_loading|Чтение из Health Connect…

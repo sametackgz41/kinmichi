@@ -1271,6 +1271,7 @@
     <string name="health_page_permissions">권한</string>
     <string name="health_page_not_allowed">아직 허용되지 않음</string>
     <string name="health_page_create">+ 이걸로 습관 만들기</string>
+    <string name="health_page_loading">Health Connect에서 읽는 중…</string>
     <plurals name="streak_days">
         <item quantity="one">%d일 연속</item>
         <item quantity="other">%d일 연속</item>
