@@ -679,7 +679,7 @@
     <string name="mood_insight_worse">Dias com %1$s parecem mais difíceis</string>
     <string name="mood_insight_detail">Humor médio %1$s com ele, %2$s sem</string>
     <string name="mood_reminder_setting">Pergunta de humor à noite</string>
-    <string name="mood_reminder_setting_description">Às 21:00, se você ainda não registrou como foi o dia</string>
+    <string name="mood_reminder_setting_description">Às 23:00, se você ainda não registrou como foi o dia</string>
     <string name="share_streak">Compartilhar sequência</string>
     <string name="share_card_streak">dias de sequência</string>
     <string name="share_card_done">dias feitos</string>

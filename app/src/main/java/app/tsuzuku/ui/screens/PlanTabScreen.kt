@@ -201,7 +201,7 @@ fun PlanTabScreen(
                         Column(Modifier.weight(1f).padding(horizontal = 8.dp)) {
                             Text(task.title, style = MaterialTheme.typography.titleMedium)
                             val meta = buildList {
-                                task.startMinutes?.let { start -> add("%02d:%02d".format(start / 60, start % 60) + task.endMinutes?.let { end -> "–%02d:%02d".format(end / 60, end % 60) }.orEmpty()) }
+                                task.startMinutes?.let { start -> add(app.tsuzuku.ui.formatClock(start) + task.endMinutes?.let { end -> "–" + app.tsuzuku.ui.formatClock(end) }.orEmpty()) }
                                 task.estimatedMinutes?.let { add(stringResource(R.string.minute_count, it)) }
                                 task.scheduledEpochDay?.let { add(LocalDate.ofEpochDay(it).format(DateTimeFormatter.ofPattern("d MMM"))) }
                                 if ((task.scheduledEpochDay ?: today) < today) add(stringResource(R.string.overdue))

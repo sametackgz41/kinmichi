@@ -435,7 +435,7 @@ fun TodayScreen(
             }
         }
 
-        item(key = "daily-review-card") {
+        if (java.time.LocalTime.now().hour >= app.tsuzuku.ui.DAY_REVIEW_HOUR) item(key = "daily-review-card") {
             Spacer(Modifier.height(6.dp))
             MoodCheckInCard(
                 review = dailyReview,
@@ -548,7 +548,7 @@ private fun SmartReminderCard(
     modifier: Modifier = Modifier,
 ) {
     val habit = suggestion.habit
-    fun clock(minutes: Int) = "%02d:%02d".format(minutes / 60, minutes % 60)
+    fun clock(minutes: Int) = app.tsuzuku.ui.formatClock(minutes)
     Surface(
         color = MaterialTheme.colorScheme.primaryContainer,
         contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
@@ -694,7 +694,7 @@ private fun TodayPlanTaskCard(
                     if (task.dueMinutes != null) {
                         val h = task.dueMinutes / 60
                         val m = task.dueMinutes % 60
-                        Text("⏰ %02d:%02d".format(h, m), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text("⏰ " + app.tsuzuku.ui.formatClock(h * 60 + m), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                     if (task.carryCount > 0) {
                         Text(

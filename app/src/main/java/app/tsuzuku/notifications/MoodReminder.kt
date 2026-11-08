@@ -21,9 +21,9 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.ZonedDateTime
 
-/** Next 21:00 local time. */
+/** Next evening review time (23.00) local time. */
 internal fun nextMoodReminderTime(now: ZonedDateTime): ZonedDateTime {
-    val candidate = now.withHour(21).withMinute(0).withSecond(0).withNano(0)
+    val candidate = now.withHour(app.tsuzuku.ui.DAY_REVIEW_HOUR).withMinute(0).withSecond(0).withNano(0)
     return if (candidate.isAfter(now)) candidate else candidate.plusDays(1)
 }
 

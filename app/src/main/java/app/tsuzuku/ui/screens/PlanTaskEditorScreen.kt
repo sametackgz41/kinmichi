@@ -164,13 +164,9 @@ fun PlanTaskEditorScreen(existing: PlanTask? = null, customCategories: List<Cate
     }
 }
 
-private fun Int.toClock(): String = "%02d:%02d".format(this / 60, this % 60)
+private fun Int.toClock(): String = app.tsuzuku.ui.formatClock(this)
 
 private fun String.toMinutesOrNull(): Int? {
     if (isBlank()) return null
-    val parts = split(':')
-    if (parts.size != 2) return null
-    val hour = parts[0].toIntOrNull() ?: return null
-    val minute = parts[1].toIntOrNull() ?: return null
-    return if (hour in 0..23 && minute in 0..59) hour * 60 + minute else null
+    return app.tsuzuku.ui.parseClock(this)
 }

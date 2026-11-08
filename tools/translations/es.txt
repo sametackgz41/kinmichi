@@ -689,7 +689,7 @@ mood_insight_better|Los días con %1$s se sienten mejor
 mood_insight_worse|Los días con %1$s se sienten más duros
 mood_insight_detail|Ánimo medio %1$s con él, %2$s sin él
 mood_reminder_setting|Pregunta de ánimo por la noche
-mood_reminder_setting_description|A las 21:00 si aún no anotaste cómo fue el día
+mood_reminder_setting_description|A las 23:00 si aún no anotaste cómo fue el día
 mood_insights_collecting#one|Anota tu ánimo %d día más para ver qué hábitos coinciden con tus mejores días.
 mood_insights_collecting#other|Anota tu ánimo %d días más para ver qué hábitos coinciden con tus mejores días.
 share_streak|Compartir racha

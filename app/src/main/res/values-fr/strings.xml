@@ -679,7 +679,7 @@
     <string name="mood_insight_worse">Les jours avec %1$s semblent plus durs</string>
     <string name="mood_insight_detail">Humeur moyenne %1$s avec, %2$s sans</string>
     <string name="mood_reminder_setting">Humeur du soir</string>
-    <string name="mood_reminder_setting_description">À 21:00 si tu n\'as pas encore noté ta journée</string>
+    <string name="mood_reminder_setting_description">À 23:00 si tu n\'as pas encore noté ta journée</string>
     <string name="share_streak">Partager la série</string>
     <string name="share_card_streak">jours de série</string>
     <string name="share_card_done">jours réussis</string>

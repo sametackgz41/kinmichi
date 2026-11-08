@@ -689,7 +689,7 @@ mood_insight_better|Dias com %1$s parecem melhores
 mood_insight_worse|Dias com %1$s parecem mais difíceis
 mood_insight_detail|Humor médio %1$s com ele, %2$s sem
 mood_reminder_setting|Pergunta de humor à noite
-mood_reminder_setting_description|Às 21:00, se você ainda não registrou como foi o dia
+mood_reminder_setting_description|Às 23:00, se você ainda não registrou como foi o dia
 mood_insights_collecting#one|Registre seu humor por mais %d dia para ver quais hábitos combinam com seus dias melhores.
 mood_insights_collecting#other|Registre seu humor por mais %d dias para ver quais hábitos combinam com seus dias melhores.
 share_streak|Compartilhar sequência

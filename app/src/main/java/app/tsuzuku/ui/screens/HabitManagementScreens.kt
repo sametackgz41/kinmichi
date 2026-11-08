@@ -864,7 +864,7 @@ private fun scheduleSummaryForDetail(daysMask: Int): String = when (daysMask) {
     else -> stringResource(R.string.selected_days)
 }
 
-private fun clockText(minutes: Int): String = "%02d:%02d".format(minutes / 60, minutes % 60)
+private fun clockText(minutes: Int): String = app.tsuzuku.ui.formatClock(minutes)
 
 @Composable
 private fun habitStatusLabel(status: HabitDayStatus): String = stringResource(when (status) {

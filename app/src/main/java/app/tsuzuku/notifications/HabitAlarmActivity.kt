@@ -87,7 +87,7 @@ class HabitAlarmActivity : ComponentActivity() {
             TsuzukuTheme(darkTheme = true) {
                 when (stage) {
                     Stage.Ringing -> AlarmRingingPage(
-                        time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")),
+                        time = LocalTime.now().let { app.tsuzuku.ui.formatClock(it.hour * 60 + it.minute) },
                         date = date,
                         emoji = emoji,
                         name = name,

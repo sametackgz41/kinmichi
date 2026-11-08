@@ -679,7 +679,7 @@
     <string name="mood_insight_worse">Tage mit %1$s fühlen sich schwerer an</string>
     <string name="mood_insight_detail">Durchschnittliche Stimmung %1$s mit, %2$s ohne</string>
     <string name="mood_reminder_setting">Abendliche Stimmungsfrage</string>
-    <string name="mood_reminder_setting_description">Um 21:00, falls du noch nicht festgehalten hast, wie der Tag war</string>
+    <string name="mood_reminder_setting_description">Um 23:00, falls du noch nicht festgehalten hast, wie der Tag war</string>
     <string name="share_streak">Serie teilen</string>
     <string name="share_card_streak">Tage Serie</string>
     <string name="share_card_done">Tage erledigt</string>

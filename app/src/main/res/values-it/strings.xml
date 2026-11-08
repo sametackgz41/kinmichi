@@ -679,7 +679,7 @@
     <string name="mood_insight_worse">I giorni con %1$s sono più duri</string>
     <string name="mood_insight_detail">Umore medio %1$s con, %2$s senza</string>
     <string name="mood_reminder_setting">Umore della sera</string>
-    <string name="mood_reminder_setting_description">Alle 21:00 se non hai ancora registrato la giornata</string>
+    <string name="mood_reminder_setting_description">Alle 23:00 se non hai ancora registrato la giornata</string>
     <string name="share_streak">Condividi la serie</string>
     <string name="share_card_streak">giorni di serie</string>
     <string name="share_card_done">giorni fatti</string>

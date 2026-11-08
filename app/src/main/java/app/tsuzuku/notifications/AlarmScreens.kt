@@ -413,7 +413,7 @@ internal fun MorningPage(
                             maxLines = 1,
                         )
                         item.habit.reminderMinutes?.let { m ->
-                            Text("%02d:%02d".format(m / 60, m % 60), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            Text(app.tsuzuku.ui.formatClock(m), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                 }

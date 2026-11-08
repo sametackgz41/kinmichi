@@ -695,7 +695,7 @@ mood_insight_better|Дни с «%1$s» ощущаются лучше
 mood_insight_worse|Дни с «%1$s» даются тяжелее
 mood_insight_detail|Среднее настроение %1$s с ней, %2$s без неё
 mood_reminder_setting|Вечерняя отметка настроения
-mood_reminder_setting_description|В 21:00, если вы ещё не отметили день
+mood_reminder_setting_description|В 23:00, если вы ещё не отметили день
 mood_insights_collecting#one|Отмечайте настроение ещё %d день, чтобы увидеть связь привычек с лучшими днями.
 mood_insights_collecting#few|Отмечайте настроение ещё %d дня, чтобы увидеть связь привычек с лучшими днями.
 mood_insights_collecting#many|Отмечайте настроение ещё %d дней, чтобы увидеть связь привычек с лучшими днями.

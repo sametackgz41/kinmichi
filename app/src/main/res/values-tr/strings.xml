@@ -589,7 +589,7 @@
     <string name="convert_to_goal">Hedef</string>
     <string name="convert_to_library">Kütüphane</string>
     <string name="quick_add">Hızlı ekle</string>
-    <string name="quick_add_hint">Örn: Yarın 14:00 Matematik çalış</string>
+    <string name="quick_add_hint">Örn: Yarın 14.00 Matematik çalış</string>
     <string name="create_action">Oluştur</string>
     <string name="customize_sections">Bugün ekranını düzenle</string>
     <string name="section_summary">Günlük özet</string>
@@ -1057,7 +1057,7 @@
     <string name="mood_insight_worse">%1$s yaptığın günler daha zor geçiyor</string>
     <string name="mood_insight_detail">Ortalama ruh hali: yaptığında %1$s, yapmadığında %2$s</string>
     <string name="mood_reminder_setting">Akşam ruh hali sorusu</string>
-    <string name="mood_reminder_setting_description">Bugünü kaydetmediysen saat 21:00\'de sorar</string>
+    <string name="mood_reminder_setting_description">Bugünü kaydetmediysen saat 23.00\'de sorar</string>
     <plurals name="mood_insights_collecting">
         <item quantity="one">Hangi alışkanlıkların iyi günlerinle örtüştüğünü görmek için %d gün daha kaydet.</item>
         <item quantity="other">Hangi alışkanlıkların iyi günlerinle örtüştüğünü görmek için %d gün daha kaydet.</item>
@@ -1104,7 +1104,7 @@
     <string name="streak_guard_body">Bugün henüz yapılmadı. Küçük bir adım bile seriyi sürdürür.</string>
     <string name="streak_guard_body_tiny">Bugün henüz yapılmadı. %1$s bile seriyi sürdürür.</string>
     <string name="streak_guard_setting">Seri uyarısı</string>
-    <string name="streak_guard_setting_description">20:00\'de tek bir not, yalnızca 3+ günlük bir seri bozulmak üzereyse</string>
+    <string name="streak_guard_setting_description">20.00\'de tek bir not, yalnızca 3+ günlük bir seri bozulmak üzereyse</string>
     <string name="smart_reminder_title">Daha iyi bir hatırlatma saati</string>
     <string name="smart_reminder_body">%1$s alışkanlığını genelde %2$s civarında yapıyorsun, hatırlatma ise %3$s olarak ayarlı. %4$s yapalım mı?</string>
     <string name="smart_reminder_keep">Kalsın</string>

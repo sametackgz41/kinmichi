@@ -971,7 +971,7 @@ private fun SpreadFields(state: HabitEditorState) {
                     FilterChip(
                         selected = state.spreadWindow == index,
                         onClick = { state.spreadWindow = index },
-                        label = { Text("%02d:00–%02d:00".format(w.startMinutes / 60, w.endMinutes / 60)) },
+                        label = { Text(app.tsuzuku.ui.formatClock(w.startMinutes) + "–" + app.tsuzuku.ui.formatClock(w.endMinutes)) },
                     )
                 }
             }

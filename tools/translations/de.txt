@@ -689,7 +689,7 @@ mood_insight_better|Tage mit %1$s fühlen sich besser an
 mood_insight_worse|Tage mit %1$s fühlen sich schwerer an
 mood_insight_detail|Durchschnittliche Stimmung %1$s mit, %2$s ohne
 mood_reminder_setting|Abendliche Stimmungsfrage
-mood_reminder_setting_description|Um 21:00, falls du noch nicht festgehalten hast, wie der Tag war
+mood_reminder_setting_description|Um 23:00, falls du noch nicht festgehalten hast, wie der Tag war
 mood_insights_collecting#one|Halte deine Stimmung noch %d Tag fest, um zu sehen, welche Gewohnheiten zu deinen besseren Tagen passen.
 mood_insights_collecting#other|Halte deine Stimmung noch %d Tage fest, um zu sehen, welche Gewohnheiten zu deinen besseren Tagen passen.
 share_streak|Serie teilen

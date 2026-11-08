@@ -679,7 +679,7 @@
     <string name="mood_insight_worse">「%1$s」をした日はつらく感じる</string>
     <string name="mood_insight_detail">した日の平均 %1$s、しなかった日 %2$s</string>
     <string name="mood_reminder_setting">夜の気分チェック</string>
-    <string name="mood_reminder_setting_description">今日の気分をまだ記録していなければ 21:00 に</string>
+    <string name="mood_reminder_setting_description">今日の気分をまだ記録していなければ 23:00 に</string>
     <string name="share_streak">連続記録をシェア</string>
     <string name="share_card_streak">日連続</string>
     <string name="share_card_done">日達成</string>

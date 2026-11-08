@@ -689,7 +689,7 @@ mood_insight_better|I giorni con %1$s vanno meglio
 mood_insight_worse|I giorni con %1$s sono più duri
 mood_insight_detail|Umore medio %1$s con, %2$s senza
 mood_reminder_setting|Umore della sera
-mood_reminder_setting_description|Alle 21:00 se non hai ancora registrato la giornata
+mood_reminder_setting_description|Alle 23:00 se non hai ancora registrato la giornata
 mood_insights_collecting#one|Registra l'umore ancora %d giorno per vedere quali abitudini vanno con le giornate migliori.
 mood_insights_collecting#other|Registra l'umore ancora %d giorni per vedere quali abitudini vanno con le giornate migliori.
 share_streak|Condividi la serie

@@ -689,7 +689,7 @@ mood_insight_better|Les jours avec %1$s semblent meilleurs
 mood_insight_worse|Les jours avec %1$s semblent plus durs
 mood_insight_detail|Humeur moyenne %1$s avec, %2$s sans
 mood_reminder_setting|Humeur du soir
-mood_reminder_setting_description|À 21:00 si tu n'as pas encore noté ta journée
+mood_reminder_setting_description|À 23:00 si tu n'as pas encore noté ta journée
 mood_insights_collecting#one|Note ton humeur encore %d jour pour voir quelles habitudes vont avec tes meilleurs jours.
 mood_insights_collecting#other|Note ton humeur encore %d jours pour voir quelles habitudes vont avec tes meilleurs jours.
 share_streak|Partager la série

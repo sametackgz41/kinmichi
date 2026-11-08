@@ -679,7 +679,7 @@
     <string name="mood_insight_worse">Los días con %1$s se sienten más duros</string>
     <string name="mood_insight_detail">Ánimo medio %1$s con él, %2$s sin él</string>
     <string name="mood_reminder_setting">Pregunta de ánimo por la noche</string>
-    <string name="mood_reminder_setting_description">A las 21:00 si aún no anotaste cómo fue el día</string>
+    <string name="mood_reminder_setting_description">A las 23:00 si aún no anotaste cómo fue el día</string>
     <string name="share_streak">Compartir racha</string>
     <string name="share_card_streak">días de racha</string>
     <string name="share_card_done">días hechos</string>

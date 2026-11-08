@@ -679,7 +679,7 @@
     <string name="mood_insight_worse">Дни с «%1$s» даются тяжелее</string>
     <string name="mood_insight_detail">Среднее настроение %1$s с ней, %2$s без неё</string>
     <string name="mood_reminder_setting">Вечерняя отметка настроения</string>
-    <string name="mood_reminder_setting_description">В 21:00, если вы ещё не отметили день</string>
+    <string name="mood_reminder_setting_description">В 23:00, если вы ещё не отметили день</string>
     <string name="share_streak">Поделиться серией</string>
     <string name="share_card_streak">дн. подряд</string>
     <string name="share_card_done">дн. выполнено</string>

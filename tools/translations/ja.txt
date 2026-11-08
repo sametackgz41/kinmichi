@@ -686,7 +686,7 @@ mood_insight_better|「%1$s」をした日は気分がよい
 mood_insight_worse|「%1$s」をした日はつらく感じる
 mood_insight_detail|した日の平均 %1$s、しなかった日 %2$s
 mood_reminder_setting|夜の気分チェック
-mood_reminder_setting_description|今日の気分をまだ記録していなければ 21:00 に
+mood_reminder_setting_description|今日の気分をまだ記録していなければ 23:00 に
 mood_insights_collecting#other|あと %d 日気分を記録すると、どの習慣がよい日と重なるかがわかります。
 share_streak|連続記録をシェア
 share_card_streak|日連続

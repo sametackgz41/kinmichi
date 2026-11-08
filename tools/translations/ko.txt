@@ -689,7 +689,7 @@ mood_insight_better|%1$s 한 날은 기분이 더 좋아요
 mood_insight_worse|%1$s 한 날은 더 힘들어요
 mood_insight_detail|했을 때 평균 기분 %1$s, 안 했을 때 %2$s
 mood_reminder_setting|저녁 기분 체크
-mood_reminder_setting_description|오늘 기분을 기록하지 않았다면 21:00에
+mood_reminder_setting_description|오늘 기분을 기록하지 않았다면 23:00에
 mood_insights_collecting#one|%d일 더 기분을 기록하면 어떤 습관이 좋은 날과 함께하는지 보여요.
 mood_insights_collecting#other|%d일 더 기분을 기록하면 어떤 습관이 좋은 날과 함께하는지 보여요.
 share_streak|연속 기록 공유

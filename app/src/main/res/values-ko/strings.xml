@@ -679,7 +679,7 @@
     <string name="mood_insight_worse">%1$s 한 날은 더 힘들어요</string>
     <string name="mood_insight_detail">했을 때 평균 기분 %1$s, 안 했을 때 %2$s</string>
     <string name="mood_reminder_setting">저녁 기분 체크</string>
-    <string name="mood_reminder_setting_description">오늘 기분을 기록하지 않았다면 21:00에</string>
+    <string name="mood_reminder_setting_description">오늘 기분을 기록하지 않았다면 23:00에</string>
     <string name="share_streak">연속 기록 공유</string>
     <string name="share_card_streak">일 연속</string>
     <string name="share_card_done">일 완료</string>
