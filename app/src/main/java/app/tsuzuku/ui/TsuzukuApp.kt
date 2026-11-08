@@ -289,6 +289,7 @@ fun TsuzukuApp(
             }
         },
     ) { innerPadding ->
+        WarmUpOnce()
         androidx.compose.runtime.CompositionLocalProvider(
             LocalScaffoldPadding provides innerPadding,
             LocalCurrentRoute provides currentRoute,

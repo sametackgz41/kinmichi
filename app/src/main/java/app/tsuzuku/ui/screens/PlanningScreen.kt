@@ -72,7 +72,10 @@ fun PlanningScreen(
     val scope = rememberCoroutineScope()
     val today = LocalDate.now()
     val weekStart = today.minusDays((today.dayOfWeek.value - 1).toLong())
-    val weekStats = remember(history, today) { history.statistics(7, today) }
+    // Worked out off the main thread so the page opens at once.
+    val weekStats by androidx.compose.runtime.produceState<app.tsuzuku.model.PeriodStatistics?>(null, history, today) {
+        value = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Default) { history.statistics(7, today) }
+    }
     val currentReview = reviews.firstOrNull { it.weekStart == weekStart }
     var reviewNote by rememberSaveable(currentReview?.updatedAt) { mutableStateOf(currentReview?.note.orEmpty()) }
     var showVacationPicker by rememberSaveable { mutableStateOf(false) }
@@ -137,7 +140,10 @@ fun PlanningScreen(
         }
         item {
             FeatureCard(Icons.Rounded.RateReview, stringResource(R.string.weekly_review), stringResource(R.string.weekly_review_description)) {
-                Text(stringResource(R.string.weekly_review_stats, weekStats.completedCount, weekStats.scheduledCount, (weekStats.completionRate * 100).toInt()))
+                val stats = weekStats
+                Text(
+                    if (stats == null) " " else stringResource(R.string.weekly_review_stats, stats.completedCount, stats.scheduledCount, (stats.completionRate * 100).toInt()),
+                )
 
                 OutlinedTextField(
                     value = reviewNote,

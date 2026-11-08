@@ -131,7 +131,17 @@ private fun Modifier.wallpaper(): Modifier {
 
 @Composable
 private fun WidgetPreviewImage(kind: WidgetKind, modifier: Modifier = Modifier) {
-    Image(painterResource(kind.preview), contentDescription = stringResource(kind.name), contentScale = ContentScale.Fit, modifier = modifier)
+    // Decoded off the main thread (and usually already cached by the warm-up), so the page opens at once.
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val bitmap by androidx.compose.runtime.produceState(app.tsuzuku.ui.WidgetPreviewCache.get(context, kind.preview), kind.preview) {
+        if (value == null) value = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) { app.tsuzuku.ui.WidgetPreviewCache.load(context, kind.preview) }
+    }
+    val image = bitmap
+    if (image != null) {
+        Image(image, contentDescription = stringResource(kind.name), contentScale = ContentScale.Fit, modifier = modifier)
+    } else {
+        Box(modifier.aspectRatio(if (kind.wide) 2f else 1f))
+    }
 }
 
 @Composable

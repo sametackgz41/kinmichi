@@ -1,0 +1,14 @@
+# Ahead-of-time compile the app's own code and the UI stack it runs on, so screens open fast
+# from the first launch instead of after Android's overnight optimisation. ProfileInstaller
+# installs this for sideloaded APKs (GitHub / Obtainium) too.
+HSPLapp/tsuzuku/**->**(**)**
+Lapp/tsuzuku/**;
+HSPLandroidx/compose/**->**(**)**
+Landroidx/compose/**;
+HSPLandroidx/navigation/**->**(**)**
+Landroidx/navigation/**;
+HSPLandroidx/lifecycle/**->**(**)**
+HSPLandroidx/activity/**->**(**)**
+HSPLandroidx/room/**->**(**)**
+HSPLkotlinx/coroutines/**->**(**)**
+Lkotlinx/coroutines/**;
