@@ -597,7 +597,7 @@ test_notification_body|Voici à quoi ressembleront tes rappels.
 progress_tab|Progrès
 today_all_done|Tout est fait pour aujourd'hui 🎉
 habits_done_of|%1$d sur %2$d faites
-more_actions|Plus
+more_actions|Plus d'actions
 streak_days#one|Série de %d jour
 streak_days#other|Série de %d jours
 widget_today_name|Aujourd'hui
@@ -1015,3 +1015,23 @@ today_compact|Lignes compactes
 today_reorder|Réorganiser
 today_reorder_hint|Maintiens et fais glisser
 today_reorder_done|Terminé
+detail_tab_overview|Aperçu
+detail_tab_notes|Notes et historique
+detail_tab_links|Objectifs
+archive_title|Archives
+archive_description|Les habitudes mises de côté, historique compris. Fais-en revenir une quand tu veux.
+archive_empty|Rien dans les archives
+archive_restore|Restaurer
+archive_since|Commencée le %1$s
+archive_row_description|Habitudes mises de côté
+emoji_search_hint|Chercher une icône : eau, livre…
+emoji_no_results|Aucune icône trouvée
+emoji_health|Santé
+emoji_sport|Sport
+emoji_food|Alimentation
+emoji_mind|Esprit
+emoji_learning|Apprentissage
+emoji_home|Maison
+emoji_work|Travail et argent
+emoji_social|Personnes
+emoji_symbols|Symboles

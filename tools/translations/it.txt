@@ -597,7 +597,7 @@ test_notification_body|Ecco come appariranno i tuoi promemoria.
 progress_tab|Progressi
 today_all_done|Tutto fatto per oggi 🎉
 habits_done_of|%1$d di %2$d fatte
-more_actions|Altro
+more_actions|Altre azioni
 streak_days#one|Serie di %d giorno
 streak_days#other|Serie di %d giorni
 widget_today_name|Oggi
@@ -1015,3 +1015,23 @@ today_compact|Righe compatte
 today_reorder|Riordina
 today_reorder_hint|Tieni premuto e trascina
 today_reorder_done|Fatto
+detail_tab_overview|Panoramica
+detail_tab_notes|Note e cronologia
+detail_tab_links|Obiettivi
+archive_title|Archivio
+archive_description|Le abitudini messe da parte, con tutta la cronologia. Riportane una quando vuoi.
+archive_empty|L'archivio è vuoto
+archive_restore|Ripristina
+archive_since|Iniziata il %1$s
+archive_row_description|Abitudini messe da parte
+emoji_search_hint|Cerca icone: acqua, libro…
+emoji_no_results|Nessuna icona trovata
+emoji_health|Salute
+emoji_sport|Sport
+emoji_food|Cibo
+emoji_mind|Mente
+emoji_learning|Studio
+emoji_home|Casa
+emoji_work|Lavoro e soldi
+emoji_social|Persone
+emoji_symbols|Simboli

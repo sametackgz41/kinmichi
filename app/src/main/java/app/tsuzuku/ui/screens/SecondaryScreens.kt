@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.rounded.Info
+import androidx.compose.material.icons.rounded.Inventory2
 import androidx.compose.material.icons.rounded.Tune
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -125,6 +126,7 @@ fun ProfileScreen(
     onOpenDiagnostics: () -> Unit,
     onOpenCategories: () -> Unit,
     onOpenRecords: () -> Unit = {},
+    onOpenArchive: () -> Unit = {},
     onBack: (() -> Unit)? = null,
 ) {
     val context = LocalContext.current
@@ -221,6 +223,14 @@ fun ProfileScreen(
             stringResource(R.string.categories_and_tags),
             stringResource(R.string.categories_description),
             onClick = onOpenCategories,
+        )
+    }
+    val archiveRow: @Composable () -> Unit = {
+        ValueSettingRow(
+            Icons.Rounded.Inventory2,
+            stringResource(R.string.archive_title),
+            stringResource(R.string.archive_row_description),
+            onClick = onOpenArchive,
         )
     }
     val privacyRows: @Composable () -> Unit = {
@@ -389,7 +399,7 @@ fun ProfileScreen(
                 SettingsCard {
                     when (open) {
                         SettingsPage.Notifications -> notificationRows()
-                        SettingsPage.General -> generalRows()
+                        SettingsPage.General -> { generalRows(); archiveRow() }
                         SettingsPage.Privacy -> privacyRows()
                         SettingsPage.About -> aboutRows()
                     }

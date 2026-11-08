@@ -597,7 +597,7 @@ test_notification_body|É assim que seus lembretes vão aparecer.
 progress_tab|Progresso
 today_all_done|Tudo feito por hoje 🎉
 habits_done_of|%1$d de %2$d feitos
-more_actions|Mais
+more_actions|Mais ações
 streak_days#one|Sequência de %d dia
 streak_days#other|Sequência de %d dias
 widget_today_name|Hoje
@@ -1015,3 +1015,23 @@ today_compact|Linhas compactas
 today_reorder|Reordenar
 today_reorder_hint|Segure e arraste
 today_reorder_done|Pronto
+detail_tab_overview|Resumo
+detail_tab_notes|Notas e histórico
+detail_tab_links|Metas
+archive_title|Arquivo
+archive_description|Os hábitos que você guardou, com todo o histórico. Traga de volta quando quiser.
+archive_empty|Nada no arquivo
+archive_restore|Restaurar
+archive_since|Começou %1$s
+archive_row_description|Hábitos que você guardou
+emoji_search_hint|Buscar ícones: água, livro…
+emoji_no_results|Nenhum ícone encontrado
+emoji_health|Saúde
+emoji_sport|Esporte
+emoji_food|Comida
+emoji_mind|Mente
+emoji_learning|Aprendizado
+emoji_home|Casa
+emoji_work|Trabalho e dinheiro
+emoji_social|Pessoas
+emoji_symbols|Símbolos

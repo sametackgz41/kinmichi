@@ -532,6 +532,21 @@ class PreviewGalleryTest {
         captureScreen("todayA_confetti_tr")
     }
 
+    @Test fun emojiPickerTr() {
+        setVariant("tr", false)
+        compose.setContent { TsuzukuTheme(darkTheme = false) { app.tsuzuku.ui.screens.EmojiPickerContent(selected = "💧", onPick = {}, onDismiss = {}) } }
+        compose.mainClock.advanceTimeBy(800)
+        captureScreen("emoji_picker_tr")
+    }
+
+    @Test fun archiveTr() {
+        setVariant("tr", false)
+        val habits = sampleToday("tr").take(3).map { it.habit.copy(createdOn = LocalDate.of(2026, 3, 14)) }
+        compose.setContent { TsuzukuTheme(darkTheme = false) { app.tsuzuku.ui.screens.ArchiveScreen(habits, onBack = {}, onRestore = {}, onDelete = {}) } }
+        compose.mainClock.advanceTimeBy(800)
+        captureScreen("archive_tr")
+    }
+
     private fun renderAlarm(name: String, content: @Composable () -> Unit) {
         setVariant("tr", true)
         compose.setContent { TsuzukuTheme(darkTheme = true) { content() } }
@@ -862,7 +877,20 @@ class PreviewGalleryTest {
     @Test fun detailEnLight() = renderDetail("en", false)
     @Test fun detailEnDark() = renderDetail("en", true)
 
-    private fun renderDetail(lang: String, dark: Boolean) {
+    @Test fun detailLayoutTabsTr() = renderDetail("tr", false, app.tsuzuku.ui.screens.HabitDetailLayout.Tabs, "detaillayout_tabs_tr")
+    @Test fun detailLayoutTabsNotesTr() = renderDetail("tr", false, app.tsuzuku.ui.screens.HabitDetailLayout.Tabs, "detaillayout_tabs_notes_tr", tapText = "Not ve geçmiş")
+    @Test fun detailLayoutCardsTr() = renderDetail("tr", false, app.tsuzuku.ui.screens.HabitDetailLayout.Cards, "detaillayout_cards_tr", scrollTo = "Hedef ve seviyeler")
+    @Test fun detailLayoutCardsOpenTr() = renderDetail("tr", false, app.tsuzuku.ui.screens.HabitDetailLayout.Cards, "detaillayout_cards_open_tr", scrollTo = "Not ve geçmiş", tapText = "Not ve geçmiş")
+    @Test fun detailLayoutClassicTr() = renderDetail("tr", false, app.tsuzuku.ui.screens.HabitDetailLayout.Classic, "detaillayout_classic_tr")
+
+    private fun renderDetail(
+        lang: String,
+        dark: Boolean,
+        layout: app.tsuzuku.ui.screens.HabitDetailLayout = app.tsuzuku.ui.screens.HabitDetailLayout.Tabs,
+        name: String? = null,
+        tapText: String? = null,
+        scrollTo: String? = null,
+    ) {
         setVariant(lang, dark)
         val today = LocalDate.now()
         val water = sampleToday(lang)[1].habit.copy(createdOn = today.minusDays(400))
@@ -884,12 +912,20 @@ class PreviewGalleryTest {
                 app.tsuzuku.ui.screens.HabitDetailScreen(
                     habit = water, records = records,
                     onBack = {}, onEdit = {}, onSaveNote = {}, onArchive = {}, onDuplicate = {}, onDelete = {},
-                    onShare = {},
+                    onShare = {}, layout = layout,
                 )
             }
         }
         compose.mainClock.advanceTimeBy(1500)
-        captureScreen("detail_${lang}_${if (dark) "dark" else "light"}")
+        if (scrollTo != null) {
+            compose.onNode(androidx.compose.ui.test.hasScrollToNodeAction()).performScrollToNode(androidx.compose.ui.test.hasText(scrollTo))
+            compose.mainClock.advanceTimeBy(500)
+        }
+        if (tapText != null) {
+            compose.onNodeWithText(tapText).performClick()
+            compose.mainClock.advanceTimeBy(800)
+        }
+        captureScreen(name ?: "detail_${lang}_${if (dark) "dark" else "light"}")
     }
 
     // ---- shareable streak card -------------------------------------------------------------

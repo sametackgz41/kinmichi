@@ -45,6 +45,9 @@ interface HabitRepository {
     /** Switches to (or adjusts) a weekly goal of [timesPerWeek], on any day of the week. */
     suspend fun setWeeklyGoal(id: Long, timesPerWeek: Int) {}
     suspend fun archiveHabit(id: Long)
+    /** Habits put away with their history kept, newest first. */
+    fun observeArchivedHabits(): Flow<List<Habit>> = kotlinx.coroutines.flow.flowOf(emptyList())
+    suspend fun unarchiveHabit(id: Long) {}
     suspend fun deleteHabit(id: Long)
     suspend fun duplicateHabit(id: Long): Long?
     suspend fun moveHabit(id: Long, direction: Int)
@@ -375,6 +378,10 @@ class RoomHabitRepository(
     }
 
     override suspend fun archiveHabit(id: Long) = dao.archiveHabit(id, now())
+
+    override fun observeArchivedHabits(): Flow<List<Habit>> = dao.observeArchivedHabits().map { list -> list.map { it.toDomain() } }
+
+    override suspend fun unarchiveHabit(id: Long) = dao.unarchiveHabit(id, now())
 
     override suspend fun deleteHabit(id: Long) = dao.deleteHabit(id)
 

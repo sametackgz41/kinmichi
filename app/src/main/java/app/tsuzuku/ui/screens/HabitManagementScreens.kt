@@ -22,6 +22,11 @@ import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.ArrowDownward
 import androidx.compose.material.icons.rounded.ArrowUpward
 import androidx.compose.material.icons.rounded.Edit
+import androidx.compose.material.icons.rounded.ExpandMore
+import androidx.compose.material.icons.rounded.EditNote
+import androidx.compose.material.icons.rounded.Archive
+import androidx.compose.material.icons.rounded.ContentCopy
+import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -44,6 +49,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.clickable
@@ -102,7 +108,25 @@ fun HabitDetailScreen(
     onAdvanceLevel: (Int) -> Unit = {},
     onShare: (() -> Unit)? = null,
     feelingSummary: app.tsuzuku.model.FeelingSummary = app.tsuzuku.model.FeelingSummary(),
+    layout: HabitDetailLayout = HabitDetailLayout.Tabs,
 ) {
+    var tab by rememberSaveable(habit.id) { androidx.compose.runtime.mutableIntStateOf(0) }
+    var openSections by rememberSaveable(habit.id) { mutableStateOf("") }
+    var moreMenu by remember { mutableStateOf(false) }
+    val showSummary = layout != HabitDetailLayout.Tabs || tab == 0
+    val showNotes = when (layout) {
+        HabitDetailLayout.Classic -> true
+        HabitDetailLayout.Tabs -> tab == 1
+        HabitDetailLayout.Cards -> "notes" in openSections
+    }
+    val showLinks = when (layout) {
+        HabitDetailLayout.Classic -> true
+        HabitDetailLayout.Tabs -> tab == 2
+        HabitDetailLayout.Cards -> "links" in openSections
+    }
+    fun toggleSection(key: String) {
+        openSections = if (key in openSections) openSections.replace(key, "") else openSections + key
+    }
     var note by rememberSaveable(habit.id, habit.generalNote) { mutableStateOf(habit.generalNote) }
     var confirmDelete by rememberSaveable { mutableStateOf(false) }
     var showLinkGoalDialog by remember { mutableStateOf(false) }
@@ -127,6 +151,30 @@ fun HabitDetailScreen(
                     }
                     IconButton(onClick = onEdit) {
                         Icon(Icons.Rounded.Edit, contentDescription = stringResource(R.string.edit_habit))
+                    }
+                    if (layout != HabitDetailLayout.Classic) {
+                        Box {
+                            IconButton(onClick = { moreMenu = true }) {
+                                Icon(Icons.Rounded.MoreVert, contentDescription = stringResource(R.string.more_actions))
+                            }
+                            androidx.compose.material3.DropdownMenu(expanded = moreMenu, onDismissRequest = { moreMenu = false }) {
+                                androidx.compose.material3.DropdownMenuItem(
+                                    text = { Text(stringResource(R.string.duplicate_habit)) },
+                                    leadingIcon = { Icon(Icons.Rounded.ContentCopy, null) },
+                                    onClick = { moreMenu = false; onDuplicate() },
+                                )
+                                androidx.compose.material3.DropdownMenuItem(
+                                    text = { Text(stringResource(R.string.archive_habit)) },
+                                    leadingIcon = { Icon(Icons.Rounded.Archive, null) },
+                                    onClick = { moreMenu = false; onArchive() },
+                                )
+                                androidx.compose.material3.DropdownMenuItem(
+                                    text = { Text(stringResource(R.string.delete_habit), color = MaterialTheme.colorScheme.error) },
+                                    leadingIcon = { Icon(Icons.Rounded.Delete, null, tint = MaterialTheme.colorScheme.error) },
+                                    onClick = { moreMenu = false; confirmDelete = true },
+                                )
+                            }
+                        }
                     }
                 },
             )
@@ -159,6 +207,16 @@ fun HabitDetailScreen(
                     }
                 }
             }
+            if (layout == HabitDetailLayout.Tabs) {
+                item {
+                    androidx.compose.material3.SecondaryTabRow(selectedTabIndex = tab, containerColor = androidx.compose.ui.graphics.Color.Transparent) {
+                        listOf(R.string.detail_tab_overview, R.string.detail_tab_notes, R.string.detail_tab_links).forEachIndexed { index, label ->
+                            androidx.compose.material3.Tab(selected = tab == index, onClick = { tab = index }, text = { Text(stringResource(label), maxLines = 1) })
+                        }
+                    }
+                }
+            }
+            if (showSummary) {
             item { HabitYearCard(habit, records) }
             if (feelingSummary.total > 0) item { FeelingSummaryCard(feelingSummary) }
             item {
@@ -177,6 +235,45 @@ fun HabitDetailScreen(
                     }
                 }
             }
+            }
+            if (layout == HabitDetailLayout.Cards) {
+                item { DetailSectionHeader(stringResource(R.string.detail_tab_notes), Icons.Rounded.EditNote, open = "notes" in openSections) { toggleSection("notes") } }
+            }
+            if (showNotes) {
+            item { Text(stringResource(R.string.general_note), style = MaterialTheme.typography.titleLarge) }
+            item {
+                OutlinedTextField(
+                    value = note,
+                    onValueChange = { note = it },
+                    modifier = Modifier.fillMaxWidth(),
+                    minLines = 4,
+                    label = { Text(stringResource(R.string.habit_note_hint)) },
+                )
+            }
+            item {
+                Button(
+                    onClick = { onSaveNote(note) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) { Text(stringResource(R.string.save_note)) }
+            }
+            if (records.isNotEmpty()) {
+                item { Text(stringResource(R.string.recent_timeline), style = MaterialTheme.typography.titleLarge) }
+                items(records.sortedByDescending { it.date }.take(30).size) { index ->
+                    val record = records.sortedByDescending { it.date }.take(30)[index]
+                    Row(Modifier.fillMaxWidth().padding(vertical = 7.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+                        Column {
+                            Text(record.date.toString(), style = MaterialTheme.typography.titleSmall)
+                            Text(habitStatusLabel(record.status), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        }
+                        Text("${formatLibraryAmount(record.progress)} ${habit.unit}", color = MaterialTheme.colorScheme.secondary)
+                    }
+                }
+            }
+            }
+            if (layout == HabitDetailLayout.Cards) {
+                item { DetailSectionHeader(stringResource(R.string.detail_tab_links), Icons.Rounded.Flag, open = "links" in openSections) { toggleSection("links") } }
+            }
+            if (showLinks) {
             // Linked Goals Section
             item {
                 Row(
@@ -370,35 +467,8 @@ fun HabitDetailScreen(
                 }
             }
 
-            item { Text(stringResource(R.string.general_note), style = MaterialTheme.typography.titleLarge) }
-            item {
-                OutlinedTextField(
-                    value = note,
-                    onValueChange = { note = it },
-                    modifier = Modifier.fillMaxWidth(),
-                    minLines = 4,
-                    label = { Text(stringResource(R.string.habit_note_hint)) },
-                )
             }
-            item {
-                Button(
-                    onClick = { onSaveNote(note) },
-                    modifier = Modifier.fillMaxWidth(),
-                ) { Text(stringResource(R.string.save_note)) }
-            }
-            if (records.isNotEmpty()) {
-                item { Text(stringResource(R.string.recent_timeline), style = MaterialTheme.typography.titleLarge) }
-                items(records.sortedByDescending { it.date }.take(30).size) { index ->
-                    val record = records.sortedByDescending { it.date }.take(30)[index]
-                    Row(Modifier.fillMaxWidth().padding(vertical = 7.dp), horizontalArrangement = Arrangement.SpaceBetween) {
-                        Column {
-                            Text(record.date.toString(), style = MaterialTheme.typography.titleSmall)
-                            Text(habitStatusLabel(record.status), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        }
-                        Text("${formatLibraryAmount(record.progress)} ${habit.unit}", color = MaterialTheme.colorScheme.secondary)
-                    }
-                }
-            }
+            if (layout == HabitDetailLayout.Classic) {
             item {
                 OutlinedButton(onClick = onDuplicate, modifier = Modifier.fillMaxWidth()) {
                     Text(stringResource(R.string.duplicate_habit))
@@ -413,6 +483,7 @@ fun HabitDetailScreen(
                 TextButton(onClick = { confirmDelete = true }, modifier = Modifier.fillMaxWidth()) {
                     Text(stringResource(R.string.delete_habit), color = MaterialTheme.colorScheme.error)
                 }
+            }
             }
         }
     }
@@ -814,5 +885,35 @@ private fun DetailIconLine(icon: androidx.compose.ui.graphics.vector.ImageVector
         ) { Icon(icon, null, tint = MaterialTheme.colorScheme.onSecondaryContainer, modifier = Modifier.size(18.dp)) }
         Text(label, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f).padding(horizontal = 12.dp))
         Text(value, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+}
+
+
+/** Three ways to organise a habit's page, drawn side by side in previews. */
+enum class HabitDetailLayout { Classic, Tabs, Cards }
+
+/** A tappable section title that opens and closes what is under it. */
+@Composable
+private fun DetailSectionHeader(title: String, icon: androidx.compose.ui.graphics.vector.ImageVector, open: Boolean, onToggle: () -> Unit) {
+    val rotation by androidx.compose.animation.core.animateFloatAsState(if (open) 180f else 0f, label = "chevron")
+    androidx.compose.material3.Surface(
+        onClick = onToggle,
+        shape = RoundedCornerShape(24.dp),
+        color = MaterialTheme.colorScheme.surfaceContainerLow,
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Row(Modifier.padding(horizontal = 18.dp, vertical = 16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Box(
+                Modifier.size(36.dp).clip(RoundedCornerShape(12.dp)).background(MaterialTheme.colorScheme.secondaryContainer),
+                contentAlignment = Alignment.Center,
+            ) { Icon(icon, null, tint = MaterialTheme.colorScheme.onSecondaryContainer, modifier = Modifier.size(20.dp)) }
+            Text(title, style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(start = 14.dp).weight(1f))
+            Icon(
+                Icons.Rounded.ExpandMore,
+                contentDescription = null,
+                modifier = Modifier.graphicsLayer { rotationZ = rotation },
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
     }
 }

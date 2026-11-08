@@ -45,6 +45,12 @@ interface HabitDao {
     @Query("UPDATE habits SET isArchived = 1, updatedAt = :updatedAt WHERE id = :id")
     suspend fun archiveHabit(id: Long, updatedAt: Long)
 
+    @Query("UPDATE habits SET isArchived = 0, updatedAt = :updatedAt WHERE id = :id")
+    suspend fun unarchiveHabit(id: Long, updatedAt: Long)
+
+    @Query("SELECT * FROM habits WHERE isArchived = 1 ORDER BY updatedAt DESC")
+    fun observeArchivedHabits(): Flow<List<HabitEntity>>
+
     @Query("DELETE FROM habits WHERE id = :id")
     suspend fun deleteHabit(id: Long)
 

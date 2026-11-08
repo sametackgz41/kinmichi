@@ -643,6 +643,7 @@ fun TsuzukuApp(
                     onOpenAppearance = { navController.navigate("appearance") },
                     onOpenLanguage = { navController.navigate("language") },
                     onOpenWidgets = { navController.navigate("widgets") },
+                    onOpenArchive = { navController.navigate("archive") },
                     onOpenPlanning = { navController.navigate("planning") },
                     onOpenSecurity = { navController.navigate("security") },
                     onOpenBackup = { navController.navigate("backup") },
@@ -768,6 +769,25 @@ fun TsuzukuApp(
                     onBack = navController::popBackStack,
                     onCreate = categoryViewModel::create,
                     onDelete = categoryViewModel::delete,
+                )
+            }
+            screen("archive") {
+                val archived by repository.observeArchivedHabits().collectAsStateWithLifecycle(initialValue = emptyList())
+                val archiveScope = androidx.compose.runtime.rememberCoroutineScope()
+                app.tsuzuku.ui.screens.ArchiveScreen(
+                    habits = archived,
+                    onBack = navController::popBackStack,
+                    onRestore = { id ->
+                        archiveScope.launch {
+                            repository.unarchiveHabit(id)
+                            reminderScheduler.schedule(id)
+                            TsuzukuWidgetProvider.requestUpdate(context.applicationContext)
+                        }
+                    },
+                    onDelete = { id ->
+                        reminderScheduler.cancel(id)
+                        archiveScope.launch { repository.deleteHabit(id) }
+                    },
                 )
             }
             screen("widgets") {

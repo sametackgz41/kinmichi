@@ -597,7 +597,7 @@ test_notification_body|Так будут выглядеть ваши напом�
 progress_tab|Прогресс
 today_all_done|На сегодня всё сделано 🎉
 habits_done_of|Сделано %1$d из %2$d
-more_actions|Ещё
+more_actions|Другие действия
 streak_days#one|Серия %d день
 streak_days#few|Серия %d дня
 streak_days#many|Серия %d дней
@@ -1027,3 +1027,23 @@ today_compact|Компактный вид
 today_reorder|Упорядочить
 today_reorder_hint|Удерживай и перетаскивай
 today_reorder_done|Готово
+detail_tab_overview|Обзор
+detail_tab_notes|Заметки и история
+detail_tab_links|Цели
+archive_title|Архив
+archive_description|Отложенные привычки вместе с историей. Верни любую в любой момент.
+archive_empty|В архиве пусто
+archive_restore|Вернуть
+archive_since|Начата %1$s
+archive_row_description|Отложенные привычки
+emoji_search_hint|Поиск значков: water, book…
+emoji_no_results|Ничего не найдено
+emoji_health|Здоровье
+emoji_sport|Спорт
+emoji_food|Еда
+emoji_mind|Разум
+emoji_learning|Учёба
+emoji_home|Дом
+emoji_work|Работа и деньги
+emoji_social|Люди
+emoji_symbols|Символы

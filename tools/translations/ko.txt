@@ -1015,3 +1015,23 @@ today_compact|촘촘하게 보기
 today_reorder|순서 바꾸기
 today_reorder_hint|길게 눌러 끌어요
 today_reorder_done|완료
+detail_tab_overview|요약
+detail_tab_notes|메모와 기록
+detail_tab_links|목표
+archive_title|보관함
+archive_description|넣어 둔 습관이 기록과 함께 있어요. 언제든 되살릴 수 있어요.
+archive_empty|보관함이 비어 있어요
+archive_restore|되살리기
+archive_since|시작 %1$s
+archive_row_description|넣어 둔 습관
+emoji_search_hint|아이콘 검색: water, book…
+emoji_no_results|맞는 아이콘이 없어요
+emoji_health|건강
+emoji_sport|운동
+emoji_food|음식
+emoji_mind|마음
+emoji_learning|배움
+emoji_home|집
+emoji_work|일과 돈
+emoji_social|사람
+emoji_symbols|기호

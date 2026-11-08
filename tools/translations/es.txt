@@ -597,7 +597,7 @@ test_notification_body|Así se verán tus recordatorios.
 progress_tab|Progreso
 today_all_done|Todo listo por hoy 🎉
 habits_done_of|%1$d de %2$d hechos
-more_actions|Más
+more_actions|Más acciones
 streak_days#one|Racha de %d día
 streak_days#other|Racha de %d días
 widget_today_name|Hoy
@@ -1015,3 +1015,23 @@ today_compact|Filas compactas
 today_reorder|Reordenar
 today_reorder_hint|Mantén pulsado y arrastra
 today_reorder_done|Listo
+detail_tab_overview|Resumen
+detail_tab_notes|Notas e historial
+detail_tab_links|Metas
+archive_title|Archivo
+archive_description|Los hábitos que guardaste, con todo su historial. Recupera uno cuando quieras.
+archive_empty|No hay nada en el archivo
+archive_restore|Recuperar
+archive_since|Empezó %1$s
+archive_row_description|Hábitos que guardaste
+emoji_search_hint|Buscar iconos: agua, libro…
+emoji_no_results|Ningún icono coincide
+emoji_health|Salud
+emoji_sport|Deporte
+emoji_food|Comida
+emoji_mind|Mente
+emoji_learning|Aprendizaje
+emoji_home|Casa
+emoji_work|Trabajo y dinero
+emoji_social|Personas
+emoji_symbols|Símbolos

@@ -597,7 +597,7 @@ test_notification_body|リマインダーはこのように表示されます。
 progress_tab|進み具合
 today_all_done|今日はすべて完了 🎉
 habits_done_of|%2$d 件中 %1$d 件完了
-more_actions|その他
+more_actions|その他の操作
 streak_days#other|%d 日連続
 widget_today_name|今日
 widget_habit_name|ひとつの習慣
@@ -1009,3 +1009,23 @@ today_compact|コンパクト表示
 today_reorder|並べ替え
 today_reorder_hint|長押ししてドラッグ
 today_reorder_done|完了
+detail_tab_overview|概要
+detail_tab_notes|メモと履歴
+detail_tab_links|目標
+archive_title|アーカイブ
+archive_description|しまった習慣が履歴ごと残っています。いつでも戻せます。
+archive_empty|アーカイブは空です
+archive_restore|戻す
+archive_since|開始 %1$s
+archive_row_description|しまった習慣
+emoji_search_hint|アイコンを検索（例：water）
+emoji_no_results|見つかりません
+emoji_health|健康
+emoji_sport|運動
+emoji_food|食事
+emoji_mind|こころ
+emoji_learning|学び
+emoji_home|家
+emoji_work|仕事とお金
+emoji_social|人
+emoji_symbols|記号

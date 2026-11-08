@@ -55,6 +55,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material.icons.rounded.ExpandLess
 import androidx.compose.material.icons.rounded.ExpandMore
 import androidx.compose.material3.Button
@@ -563,8 +564,13 @@ private fun NameAndLookSection(state: HabitEditorState) {
         shape = RoundedCornerShape(16.dp),
     )
     EditorLabel(R.string.icon_label)
+    var showEmojiPicker by rememberSaveable { mutableStateOf(false) }
+    if (showEmojiPicker) {
+        EmojiPickerDialog(selected = state.emoji, onPick = { state.emoji = it; showEmojiPicker = false }, onDismiss = { showEmojiPicker = false })
+    }
     androidx.compose.foundation.layout.FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        habitEmojis.forEach { option ->
+        val quick = if (state.emoji in habitEmojis) habitEmojis else listOf(state.emoji) + habitEmojis.dropLast(1)
+        quick.forEach { option ->
             val selected = state.emoji == option
             Box(
                 Modifier
@@ -576,6 +582,14 @@ private fun NameAndLookSection(state: HabitEditorState) {
                 contentAlignment = Alignment.Center,
             ) { Text(option, style = MaterialTheme.typography.titleMedium) }
         }
+        Box(
+            Modifier
+                .size(44.dp)
+                .clip(CircleShape)
+                .background(MaterialTheme.colorScheme.secondaryContainer)
+                .clickable { showEmojiPicker = true },
+            contentAlignment = Alignment.Center,
+        ) { Icon(androidx.compose.material.icons.Icons.Rounded.Search, contentDescription = stringResource(R.string.emoji_search_hint), tint = MaterialTheme.colorScheme.onSecondaryContainer) }
     }
     EditorLabel(R.string.color_label)
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {

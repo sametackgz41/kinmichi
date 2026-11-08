@@ -593,7 +593,7 @@
     <string name="progress_tab">進み具合</string>
     <string name="today_all_done">今日はすべて完了 🎉</string>
     <string name="habits_done_of">%2$d 件中 %1$d 件完了</string>
-    <string name="more_actions">その他</string>
+    <string name="more_actions">その他の操作</string>
     <string name="widget_today_name">今日</string>
     <string name="widget_habit_name">ひとつの習慣</string>
     <string name="widget_week_name">今週</string>
@@ -995,6 +995,26 @@
     <string name="today_reorder">並べ替え</string>
     <string name="today_reorder_hint">長押ししてドラッグ</string>
     <string name="today_reorder_done">完了</string>
+    <string name="detail_tab_overview">概要</string>
+    <string name="detail_tab_notes">メモと履歴</string>
+    <string name="detail_tab_links">目標</string>
+    <string name="archive_title">アーカイブ</string>
+    <string name="archive_description">しまった習慣が履歴ごと残っています。いつでも戻せます。</string>
+    <string name="archive_empty">アーカイブは空です</string>
+    <string name="archive_restore">戻す</string>
+    <string name="archive_since">開始 %1$s</string>
+    <string name="archive_row_description">しまった習慣</string>
+    <string name="emoji_search_hint">アイコンを検索（例：water）</string>
+    <string name="emoji_no_results">見つかりません</string>
+    <string name="emoji_health">健康</string>
+    <string name="emoji_sport">運動</string>
+    <string name="emoji_food">食事</string>
+    <string name="emoji_mind">こころ</string>
+    <string name="emoji_learning">学び</string>
+    <string name="emoji_home">家</string>
+    <string name="emoji_work">仕事とお金</string>
+    <string name="emoji_social">人</string>
+    <string name="emoji_symbols">記号</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

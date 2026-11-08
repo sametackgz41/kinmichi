@@ -597,7 +597,7 @@ test_notification_body|So sehen deine Erinnerungen aus.
 progress_tab|Fortschritt
 today_all_done|Alles erledigt für heute 🎉
 habits_done_of|%1$d von %2$d erledigt
-more_actions|Mehr
+more_actions|Weitere Aktionen
 streak_days#one|%d Tag in Folge
 streak_days#other|%d Tage in Folge
 widget_today_name|Heute
@@ -1015,3 +1015,23 @@ today_compact|Kompakte Zeilen
 today_reorder|Sortieren
 today_reorder_hint|Gedrückt halten und ziehen
 today_reorder_done|Fertig
+detail_tab_overview|Überblick
+detail_tab_notes|Notizen & Verlauf
+detail_tab_links|Ziele
+archive_title|Archiv
+archive_description|Weggelegte Gewohnheiten samt Verlauf. Hol sie jederzeit zurück.
+archive_empty|Das Archiv ist leer
+archive_restore|Zurückholen
+archive_since|Begonnen %1$s
+archive_row_description|Weggelegte Gewohnheiten
+emoji_search_hint|Symbole suchen: Wasser, Buch…
+emoji_no_results|Kein passendes Symbol
+emoji_health|Gesundheit
+emoji_sport|Sport
+emoji_food|Essen
+emoji_mind|Geist
+emoji_learning|Lernen
+emoji_home|Zuhause
+emoji_work|Arbeit & Geld
+emoji_social|Menschen
+emoji_symbols|Symbole
