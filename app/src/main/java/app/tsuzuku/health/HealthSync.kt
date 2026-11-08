@@ -41,6 +41,40 @@ object HealthSync {
     fun isAvailable(context: Context): Boolean =
         HealthConnectClient.getSdkStatus(context) == HealthConnectClient.SDK_AVAILABLE
 
+    enum class Status { Ready, NeedsInstall, Unsupported }
+
+    /** Ready to use, missing (Android 13 and below need the app), or not possible on this phone. */
+    fun status(context: Context): Status = when (HealthConnectClient.getSdkStatus(context)) {
+        HealthConnectClient.SDK_AVAILABLE -> Status.Ready
+        HealthConnectClient.SDK_UNAVAILABLE_PROVIDER_UPDATE_REQUIRED -> Status.NeedsInstall
+        else -> if (android.os.Build.VERSION.SDK_INT >= 28) Status.NeedsInstall else Status.Unsupported
+    }
+
+    /** Opens what fits the status: the store page to install it, or Health Connect's own permission page. */
+    fun open(context: Context) {
+        val provider = "com.google.android.apps.healthdata"
+        val intent = when (status(context)) {
+            Status.Ready -> if (android.os.Build.VERSION.SDK_INT >= 34) {
+                android.content.Intent("android.health.connect.action.MANAGE_HEALTH_PERMISSIONS")
+                    .putExtra(android.content.Intent.EXTRA_PACKAGE_NAME, context.packageName)
+            } else {
+                android.content.Intent(HealthConnectClient.ACTION_HEALTH_CONNECT_SETTINGS)
+            }
+            else -> android.content.Intent(
+                android.content.Intent.ACTION_VIEW,
+                android.net.Uri.parse("market://details?id=$provider&url=healthconnect%3A%2F%2Fonboarding"),
+            ).setPackage("com.android.vending")
+        }.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
+        runCatching { context.startActivity(intent) }.onFailure {
+            runCatching {
+                context.startActivity(
+                    android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse("https://play.google.com/store/apps/details?id=$provider"))
+                        .addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK),
+                )
+            }
+        }
+    }
+
     fun permissionFor(metric: HealthMetric): String? = when (metric) {
         HealthMetric.None -> null
         HealthMetric.Steps -> HealthPermission.getReadPermission(StepsRecord::class)

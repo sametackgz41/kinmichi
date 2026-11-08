@@ -1092,7 +1092,7 @@
     <string name="smart_reminder_keep">Kalsın</string>
     <string name="smart_reminder_move">%1$s yap</string>
     <string name="health_fill_label">Sağlık verisinden doldur</string>
-    <string name="health_unavailable">Health Connect bu telefonda yok.</string>
+    <string name="health_unavailable">Health Connect bu telefonda henüz yok.</string>
     <string name="health_fill_help">Kinmichi her açıldığında güncellenir. Birim: %1$s.</string>
     <string name="health_none">Kapalı</string>
     <string name="health_steps">Adım</string>
@@ -1130,10 +1130,10 @@
     <string name="whats_new_title">%1$s sürümünde yenilikler</string>
     <string name="whats_new_ok">Tamam</string>
     <string-array name="whats_new_items">
-        <item>Widget\'lar yeniden çalışıyor|Bembeyaz kalan widget\'lar artık doluyor; kutucuklar dokunduğun an işaretleniyor.</item>
-        <item>Yeni karşılama|Google, GitHub ya da misafir olarak başla. İkisinde de şifre yok.</item>
-        <item>On dil|Fransızca, İtalyanca, Rusça ve Korece geldi; dil seçiminde bayraklar ve arama var.</item>
-        <item>Daha kolay alışkanlık|Adım adım ekle, bitirince nasıl geçtiğini söyle, tüm zamanlar ilerlemeni gör.</item>
+        <item>Gerçek bir alarm|Alışkanlıklar alarm gibi çalabiliyor. Alarm türünde 10 uyandırma görevi (en fazla 3), zorluk, yavaşça yükselen ses ve sınırlı erteleme var.</item>
+        <item>Daha çok takip biçimi|Günde birden fazla, her N günde X kez ve toplamı belli işler: “320 sayfanın 184.’sündeyim”, bitiş tarihi tahminiyle.</item>
+        <item>Durmayan kronometre|Uygulama kapalıyken de sayar; bildirimden ya da alttaki çubuktan duraklat, bitir.</item>
+        <item>Daha güvenli, daha düzenli|Silinenler 30 gün çöp kutusunda bekler, yedekler parolayla kilitlenebilir, geçmiş günler eski hedefini korur.</item>
     </string-array>
     <string name="language_spanish">Español</string>
     <string name="language_german">Deutsch</string>
@@ -1577,4 +1577,7 @@
     <string name="sealed_password">Parola</string>
     <string name="sealed_wrong_password">Parola yanlış ya da dosya bozuk</string>
     <string name="sealed_open">Aç</string>
+    <string name="health_install">Yükle</string>
+    <string name="health_settings_ready">Adım, uyku ve dahası alışkanlıkları kendiliğinden doldurur · izinleri yönet</string>
+    <string name="health_settings_install">Yüklü değil. Google Play\'den yüklemek için dokun, sonra bir alışkanlığı adıma ya da uykuya bağla</string>
 </resources>

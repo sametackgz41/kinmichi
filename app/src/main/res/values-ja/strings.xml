@@ -721,7 +721,7 @@
     <string name="smart_reminder_keep">このまま</string>
     <string name="smart_reminder_move">%1$s に移す</string>
     <string name="health_fill_label">ヘルスデータから入力</string>
-    <string name="health_unavailable">このスマホでは Health Connect を使えません。</string>
+    <string name="health_unavailable">このスマホにはまだHealth Connectがありません。</string>
     <string name="health_fill_help">Kinmichi を開くたびに更新されます。単位: %1$s。</string>
     <string name="health_none">オフ</string>
     <string name="health_steps">歩数</string>
@@ -1196,6 +1196,9 @@
     <string name="sealed_password">パスワード</string>
     <string name="sealed_wrong_password">パスワードが違うか、ファイルが壊れています</string>
     <string name="sealed_open">開く</string>
+    <string name="health_install">インストール</string>
+    <string name="health_settings_ready">歩数や睡眠などで習慣を自動記録・権限を管理</string>
+    <string name="health_settings_install">未インストール。タップしてGoogle Playから入手し、習慣を歩数や睡眠につなげましょう</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

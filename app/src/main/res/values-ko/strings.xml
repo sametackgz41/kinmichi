@@ -721,7 +721,7 @@
     <string name="smart_reminder_keep">그대로 두기</string>
     <string name="smart_reminder_move">%1$s(으)로 옮기기</string>
     <string name="health_fill_label">건강 데이터로 채우기</string>
-    <string name="health_unavailable">이 휴대폰에서는 Health Connect를 쓸 수 없어요.</string>
+    <string name="health_unavailable">이 휴대폰에는 아직 Health Connect가 없어요.</string>
     <string name="health_fill_help">Kinmichi를 열 때마다 업데이트돼요. 단위: %1$s.</string>
     <string name="health_none">끄기</string>
     <string name="health_steps">걸음 수</string>
@@ -1196,6 +1196,9 @@
     <string name="sealed_password">비밀번호</string>
     <string name="sealed_wrong_password">비밀번호가 틀렸거나 파일이 손상됐어요</string>
     <string name="sealed_open">열기</string>
+    <string name="health_install">설치</string>
+    <string name="health_settings_ready">걸음 수, 수면 등으로 습관이 자동으로 채워져요 · 권한 관리</string>
+    <string name="health_settings_install">설치되지 않았어요. 눌러서 Google Play에서 받은 뒤 습관을 걸음 수나 수면에 연결하세요</string>
     <plurals name="streak_days">
         <item quantity="one">%d일 연속</item>
         <item quantity="other">%d일 연속</item>

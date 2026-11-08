@@ -1551,11 +1551,17 @@ private fun HealthMetricPicker(selected: HealthMetric, onSelect: (HealthMetric) 
     }
     EditorLabel(R.string.health_fill_label)
     if (!available) {
-        Text(
-            stringResource(R.string.health_unavailable),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                stringResource(R.string.health_unavailable),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.weight(1f),
+            )
+            if (app.tsuzuku.health.HealthSync.status(context) == app.tsuzuku.health.HealthSync.Status.NeedsInstall) {
+                TextButton(onClick = { app.tsuzuku.health.HealthSync.open(context) }) { Text(stringResource(R.string.health_install)) }
+            }
+        }
         return
     }
     Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(7.dp)) {

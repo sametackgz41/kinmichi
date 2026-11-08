@@ -721,7 +721,7 @@
     <string name="smart_reminder_keep">Garder</string>
     <string name="smart_reminder_move">Déplacer à %1$s</string>
     <string name="health_fill_label">Remplir depuis les données santé</string>
-    <string name="health_unavailable">Health Connect n\'est pas disponible sur ce téléphone.</string>
+    <string name="health_unavailable">Health Connect n\'est pas encore sur ce téléphone.</string>
     <string name="health_fill_help">Mis à jour à chaque ouverture de Kinmichi. Unité : %1$s.</string>
     <string name="health_none">Désactivé</string>
     <string name="health_steps">Pas</string>
@@ -1196,6 +1196,9 @@
     <string name="sealed_password">Mot de passe</string>
     <string name="sealed_wrong_password">Mot de passe incorrect ou fichier endommagé</string>
     <string name="sealed_open">Ouvrir</string>
+    <string name="health_install">Installer</string>
+    <string name="health_settings_ready">Pas, sommeil et plus remplissent les habitudes · gérer les autorisations</string>
+    <string name="health_settings_install">Non installé. Touche pour l\'obtenir sur Google Play, puis relie une habitude aux pas ou au sommeil</string>
     <plurals name="streak_days">
         <item quantity="one">Série de %d jour</item>
         <item quantity="other">Série de %d jours</item>

@@ -735,7 +735,7 @@ smart_reminder_body|Você costuma fazer %1$s por volta das %2$s, mas o lembrete 
 smart_reminder_keep|Manter
 smart_reminder_move|Passar para %1$s
 health_fill_label|Preencher com dados de saúde
-health_unavailable|O Health Connect não está disponível neste celular.
+health_unavailable|O Health Connect ainda não está neste celular.
 health_fill_help|Atualiza sempre que você abre o Kinmichi. Unidade: %1$s.
 health_none|Desligado
 health_steps|Passos
@@ -1216,3 +1216,6 @@ sealed_open_title|Este backup é criptografado
 sealed_password|Senha
 sealed_wrong_password|Senha errada ou arquivo danificado
 sealed_open|Abrir
+health_install|Instalar
+health_settings_ready|Passos, sono e mais preenchem hábitos sozinhos · gerenciar permissões
+health_settings_install|Não instalado. Toque para baixar no Google Play e depois ligue um hábito a passos ou sono

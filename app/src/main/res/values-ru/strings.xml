@@ -721,7 +721,7 @@
     <string name="smart_reminder_keep">Оставить</string>
     <string name="smart_reminder_move">Перенести на %1$s</string>
     <string name="health_fill_label">Заполнять из данных о здоровье</string>
-    <string name="health_unavailable">Health Connect недоступен на этом телефоне.</string>
+    <string name="health_unavailable">Health Connect на этом телефоне пока нет.</string>
     <string name="health_fill_help">Обновляется при каждом открытии Kinmichi. Единица: %1$s.</string>
     <string name="health_none">Выкл.</string>
     <string name="health_steps">Шаги</string>
@@ -1196,6 +1196,9 @@
     <string name="sealed_password">Пароль</string>
     <string name="sealed_wrong_password">Неверный пароль или файл повреждён</string>
     <string name="sealed_open">Открыть</string>
+    <string name="health_install">Установить</string>
+    <string name="health_settings_ready">Шаги, сон и другое заполняют привычки сами · управлять разрешениями</string>
+    <string name="health_settings_install">Не установлено. Нажмите, чтобы скачать из Google Play, затем свяжите привычку с шагами или сном</string>
     <plurals name="streak_days">
         <item quantity="one">Серия %d день</item>
         <item quantity="few">Серия %d дня</item>

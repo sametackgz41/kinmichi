@@ -1,5 +1,6 @@
 package app.tsuzuku.ui.screens
 
+import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material.icons.rounded.Opacity
 import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
 import androidx.compose.ui.draw.clip
@@ -218,6 +219,7 @@ fun ProfileScreen(
             onCheckedChange = onSetShowDailySummary,
         )
             WidgetOpacityRow(settings.widgetOpacity, onSetWidgetOpacity)
+        HealthConnectRow()
         ValueSettingRow(
             Icons.AutoMirrored.Rounded.Label,
             stringResource(R.string.categories_and_tags),
@@ -839,4 +841,24 @@ private fun WidgetOpacityRow(value: Int, onChange: (Int) -> Unit) {
             modifier = Modifier.padding(start = 50.dp),
         )
     }
+}
+
+/** Health Connect: whether it can be used here, and one tap to install it or manage its permissions. */
+@Composable
+private fun HealthConnectRow() {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    var status by remember { mutableStateOf(app.tsuzuku.health.HealthSync.status(context)) }
+    androidx.lifecycle.compose.LifecycleResumeEffect(Unit) {
+        status = app.tsuzuku.health.HealthSync.status(context)
+        onPauseOrDispose { }
+    }
+    if (status == app.tsuzuku.health.HealthSync.Status.Unsupported) return
+    ValueSettingRow(
+        Icons.Rounded.FavoriteBorder,
+        "Health Connect",
+        stringResource(
+            if (status == app.tsuzuku.health.HealthSync.Status.Ready) R.string.health_settings_ready else R.string.health_settings_install,
+        ),
+        onClick = { app.tsuzuku.health.HealthSync.open(context) },
+    )
 }

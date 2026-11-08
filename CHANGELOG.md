@@ -1,5 +1,45 @@
 # Değişiklik günlüğü
 
+## 2.9.0 — Gerçek bir alarm
+
+**Alarm ve uyanma**
+- Alışkanlıklar bildirim yerine alarm gibi çalabiliyor: kilit ekranında çalar, ses tuşuyla susmaz
+- Yeni "Alarm" alışkanlık türü: 10 uyandırma görevinden en fazla 3'ünü seç (Matematik, Hafıza, Sayı avı, Salla, Adım at, Yazı yaz, Renk tuzağı, Kelime çöz, Desen çiz, Yakala)
+- Zorluk (Kolay / Orta / Zor), yavaşça yükselen ses, erteleme hakkı (Yok–3) ve alarm sonrası günaydın sayfası
+
+**Yeni takip biçimleri**
+- Günde birden fazla: Sabah / Öğle / Akşam gibi vakitler; Bugün'de her biri için bir çip, her biri ayrı hatırlatılır
+- Dönem hedefi: "her 10 günde 4 kez"; Bugün'de "bu dönem 2/4 · 7 gün kaldı"
+- Toplamı belli işler: "320 sayfanın 184.'sündeyim" diye gir, günlük ilerleme kendiliğinden hesaplansın; bu hızla ne zaman biteceği tahmini
+- Ekran süresi alışkanlıkları ve hazır şablon kütüphanesi
+- Bildirimden miktar ekleme; sayılı alışkanlıklar için gün içine yayılmış hatırlatmalar
+- Hedef geçmişi: hedefi değiştirince geçmiş günler eski hedefle sayılır, eski seriler bozulmaz
+
+**Kronometre**
+- Uygulama kapalıyken de sayar; bildirimde Duraklat / Devam / Bitir
+- Uygulamanın altında müzik çalar gibi küçük bir sayaç çubuğu; hedefe gelince kendiliğinden kaydeder
+
+**Bugün ve ilerleme**
+- Kaydırarak tamamla ya da atla, tamamlayınca kutlama, gün bölümlerine göre gruplama, sıkışık görünüm, sürükleyerek sıralama
+- "Bugün nasıl geçti?" artık 23.00'ten sonra; Türkçede saatler 23.00 biçiminde
+- Haftalık özet, ruh hâli renkli ay takvimi, rozetler, kötü alışkanlıklar için temiz günler, yıl özeti ve paylaşım kartları
+
+**Düzen ve güvenlik**
+- Kutucuklu yeni Ayarlar, sekmeli alışkanlık sayfası, aramalı emoji seçici
+- Arşiv ve çöp kutusu: silinenler 30 gün bekler, sildikten sonra "Geri al"
+- Parolalı şifreli yedek (.kinmichi)
+- Ayarlar › Genel'de Health Connect satırı: yüklü değilse Google Play'den tek dokunuşla yükle, yüklüyse izinleri yönet
+- Kullanılmayan bulut yapay zekâ ayarları temizlendi; daha önce girilmiş bir anahtar varsa telefondan silinir
+
+**Görünüm ve widget'lar**
+- Momiji ve Yoru paletleri, mevsimlik süslemeler, yazı boyutu ve yüksek kontrast, seçilebilir uygulama simgeleri (fırça darbesi ensō dahil)
+- Yeni widget'lar: Sıradaki alışkanlık, İlerleme halkası (1x1 ensō), Mini ısı haritası, gün doğumu tasarımlı Alarm
+- Hızlı ızgara ve Ruh hali widget'ları kaldırıldı
+
+**Hız**
+- Daha hızlı ilk açılış; ayarlarda sekme geçişlerinde ekranın bir anlık görünmesi büyük ölçüde azaldı
+- Saat uygulaması 10 dilde
+
 ## 2.8.0 — Daha kolay, daha çok dil
 
 **Düzeltmeler**

@@ -1093,7 +1093,7 @@
     <string name="smart_reminder_keep">Keep it</string>
     <string name="smart_reminder_move">Move to %1$s</string>
     <string name="health_fill_label">Fill from health data</string>
-    <string name="health_unavailable">Health Connect isn\'t available on this phone.</string>
+    <string name="health_unavailable">Health Connect isn\'t on this phone yet.</string>
     <string name="health_fill_help">Updates every time you open Kinmichi. Unit: %1$s.</string>
     <string name="health_none">Off</string>
     <string name="health_steps">Steps</string>
@@ -1131,10 +1131,10 @@
     <string name="whats_new_title">What\'s new in %1$s</string>
     <string name="whats_new_ok">Got it</string>
     <string-array name="whats_new_items">
-        <item>Widgets work again|Blank widgets now fill in, and their check boxes tick the moment you tap them.</item>
-        <item>A new welcome|Start with Google, GitHub or as a guest. No password either way.</item>
-        <item>Ten languages|French, Italian, Russian and Korean join in, with flags and search in the language picker.</item>
-        <item>Easier habits|Add a habit step by step, say how it went after you finish, and see your all-time progress.</item>
+        <item>A real alarm|Habits can ring like an alarm. The Alarm type has 10 wake-up tasks (pick up to 3), difficulty, a rising sound and limited snoozes.</item>
+        <item>More ways to track|Several times a day, X times in every N days, and a whole to get through: “page 184 of 320”, with a finish-date guess.</item>
+        <item>A timer that keeps going|Keeps counting with the app closed; pause or finish it from the notification or the bar at the bottom.</item>
+        <item>Safer and tidier|Deleted habits wait 30 days in the trash, backups can be locked with a password, and past days keep their old target.</item>
     </string-array>
     <string name="language_spanish">Español</string>
     <string name="language_german">Deutsch</string>
@@ -1578,4 +1578,7 @@
     <string name="sealed_password">Password</string>
     <string name="sealed_wrong_password">Wrong password, or the file is damaged</string>
     <string name="sealed_open">Open</string>
+    <string name="health_install">Install</string>
+    <string name="health_settings_ready">Steps, sleep and more fill habits on their own · manage permissions</string>
+    <string name="health_settings_install">Not installed. Tap to get it from Google Play, then link a habit to steps or sleep</string>
 </resources>

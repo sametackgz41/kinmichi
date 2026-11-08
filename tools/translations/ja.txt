@@ -730,7 +730,7 @@ smart_reminder_body|「%1$s」はたいてい %2$s ごろにしていますが�
 smart_reminder_keep|このまま
 smart_reminder_move|%1$s に移す
 health_fill_label|ヘルスデータから入力
-health_unavailable|このスマホでは Health Connect を使えません。
+health_unavailable|このスマホにはまだHealth Connectがありません。
 health_fill_help|Kinmichi を開くたびに更新されます。単位: %1$s。
 health_none|オフ
 health_steps|歩数
@@ -1210,3 +1210,6 @@ sealed_open_title|このバックアップは暗号化されています
 sealed_password|パスワード
 sealed_wrong_password|パスワードが違うか、ファイルが壊れています
 sealed_open|開く
+health_install|インストール
+health_settings_ready|歩数や睡眠などで習慣を自動記録・権限を管理
+health_settings_install|未インストール。タップしてGoogle Playから入手し、習慣を歩数や睡眠につなげましょう

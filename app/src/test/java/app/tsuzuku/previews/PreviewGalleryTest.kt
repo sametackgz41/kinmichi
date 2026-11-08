@@ -1,5 +1,6 @@
 package app.tsuzuku.previews
 
+import androidx.compose.runtime.remember
 import android.app.Application
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -281,6 +282,8 @@ class PreviewGalleryTest {
             app.tsuzuku.data.preferences.PalettePreference.Matcha,
             app.tsuzuku.data.preferences.PalettePreference.Sakura,
             app.tsuzuku.data.preferences.PalettePreference.Umi,
+            app.tsuzuku.data.preferences.PalettePreference.Momiji,
+            app.tsuzuku.data.preferences.PalettePreference.Yoru,
         ).forEach { choice ->
             listOf(false, true).forEach { night ->
                 palette.value = choice
@@ -580,6 +583,159 @@ class PreviewGalleryTest {
         }
         compose.mainClock.advanceTimeBy(900)
         captureScreen("slots_today_tr")
+    }
+
+    // Site: each new feature from the real app, each in one of the palettes, in every language.
+    @Test fun feat_alarm_en() = renderFeatureFor("en", "alarm")
+    @Test fun feat_slots_en() = renderFeatureFor("en", "slots")
+    @Test fun feat_period_en() = renderFeatureFor("en", "period")
+    @Test fun feat_journey_en() = renderFeatureFor("en", "journey")
+    @Test fun feat_timer_en() = renderFeatureFor("en", "timer")
+    @Test fun feat_safe_en() = renderFeatureFor("en", "safe")
+    @Test fun feat_alarm_tr() = renderFeatureFor("tr", "alarm")
+    @Test fun feat_slots_tr() = renderFeatureFor("tr", "slots")
+    @Test fun feat_period_tr() = renderFeatureFor("tr", "period")
+    @Test fun feat_journey_tr() = renderFeatureFor("tr", "journey")
+    @Test fun feat_timer_tr() = renderFeatureFor("tr", "timer")
+    @Test fun feat_safe_tr() = renderFeatureFor("tr", "safe")
+    @Test fun feat_alarm_es() = renderFeatureFor("es", "alarm")
+    @Test fun feat_slots_es() = renderFeatureFor("es", "slots")
+    @Test fun feat_period_es() = renderFeatureFor("es", "period")
+    @Test fun feat_journey_es() = renderFeatureFor("es", "journey")
+    @Test fun feat_timer_es() = renderFeatureFor("es", "timer")
+    @Test fun feat_safe_es() = renderFeatureFor("es", "safe")
+    @Test fun feat_alarm_de() = renderFeatureFor("de", "alarm")
+    @Test fun feat_slots_de() = renderFeatureFor("de", "slots")
+    @Test fun feat_period_de() = renderFeatureFor("de", "period")
+    @Test fun feat_journey_de() = renderFeatureFor("de", "journey")
+    @Test fun feat_timer_de() = renderFeatureFor("de", "timer")
+    @Test fun feat_safe_de() = renderFeatureFor("de", "safe")
+    @Test fun feat_alarm_pt() = renderFeatureFor("pt", "alarm")
+    @Test fun feat_slots_pt() = renderFeatureFor("pt", "slots")
+    @Test fun feat_period_pt() = renderFeatureFor("pt", "period")
+    @Test fun feat_journey_pt() = renderFeatureFor("pt", "journey")
+    @Test fun feat_timer_pt() = renderFeatureFor("pt", "timer")
+    @Test fun feat_safe_pt() = renderFeatureFor("pt", "safe")
+    @Test fun feat_alarm_ja() = renderFeatureFor("ja", "alarm")
+    @Test fun feat_slots_ja() = renderFeatureFor("ja", "slots")
+    @Test fun feat_period_ja() = renderFeatureFor("ja", "period")
+    @Test fun feat_journey_ja() = renderFeatureFor("ja", "journey")
+    @Test fun feat_timer_ja() = renderFeatureFor("ja", "timer")
+    @Test fun feat_safe_ja() = renderFeatureFor("ja", "safe")
+    @Test fun feat_alarm_fr() = renderFeatureFor("fr", "alarm")
+    @Test fun feat_slots_fr() = renderFeatureFor("fr", "slots")
+    @Test fun feat_period_fr() = renderFeatureFor("fr", "period")
+    @Test fun feat_journey_fr() = renderFeatureFor("fr", "journey")
+    @Test fun feat_timer_fr() = renderFeatureFor("fr", "timer")
+    @Test fun feat_safe_fr() = renderFeatureFor("fr", "safe")
+    @Test fun feat_alarm_it() = renderFeatureFor("it", "alarm")
+    @Test fun feat_slots_it() = renderFeatureFor("it", "slots")
+    @Test fun feat_period_it() = renderFeatureFor("it", "period")
+    @Test fun feat_journey_it() = renderFeatureFor("it", "journey")
+    @Test fun feat_timer_it() = renderFeatureFor("it", "timer")
+    @Test fun feat_safe_it() = renderFeatureFor("it", "safe")
+    @Test fun feat_alarm_ru() = renderFeatureFor("ru", "alarm")
+    @Test fun feat_slots_ru() = renderFeatureFor("ru", "slots")
+    @Test fun feat_period_ru() = renderFeatureFor("ru", "period")
+    @Test fun feat_journey_ru() = renderFeatureFor("ru", "journey")
+    @Test fun feat_timer_ru() = renderFeatureFor("ru", "timer")
+    @Test fun feat_safe_ru() = renderFeatureFor("ru", "safe")
+    @Test fun feat_alarm_ko() = renderFeatureFor("ko", "alarm")
+    @Test fun feat_slots_ko() = renderFeatureFor("ko", "slots")
+    @Test fun feat_period_ko() = renderFeatureFor("ko", "period")
+    @Test fun feat_journey_ko() = renderFeatureFor("ko", "journey")
+    @Test fun feat_timer_ko() = renderFeatureFor("ko", "timer")
+    @Test fun feat_safe_ko() = renderFeatureFor("ko", "safe")
+
+    private data class FeatWords(val pill: String, val book: String, val pages: String, val swim: String)
+
+    private fun featWords(lang: String) = when (lang) {
+        "tr" -> FeatWords("İlaç", "Sefiller", "sayfa", "Yüzme")
+        "es" -> FeatWords("Medicación", "Los miserables", "páginas", "Nadar")
+        "de" -> FeatWords("Medikament", "Die Elenden", "Seiten", "Schwimmen")
+        "pt" -> FeatWords("Remédio", "Os Miseráveis", "páginas", "Natação")
+        "ja" -> FeatWords("薬", "レ・ミゼラブル", "ページ", "水泳")
+        "fr" -> FeatWords("Médicament", "Les Misérables", "pages", "Natation")
+        "it" -> FeatWords("Medicina", "I miserabili", "pagine", "Nuoto")
+        "ru" -> FeatWords("Лекарство", "Отверженные", "стр.", "Плавание")
+        "ko" -> FeatWords("약", "레 미제라블", "쪽", "수영")
+        else -> FeatWords("Medicine", "Les Misérables", "pages", "Swim")
+    }
+
+    private fun renderFeatureFor(lang: String, name: String) {
+        val w = featWords(lang)
+        val base = sampleToday(lang)
+        when (name) {
+            "alarm" -> renderFeature(lang, name, app.tsuzuku.data.preferences.PalettePreference.Yoru) {
+                val state = remember { app.tsuzuku.ui.screens.HabitEditorState(null).apply { chooseAlarmType(); alarmTasks = "Math,Shake,Pattern"; alarmLevel = 2 } }
+                app.tsuzuku.ui.screens.AlarmTypeSection(state)
+            }
+            "slots" -> renderFeature(lang, name, app.tsuzuku.data.preferences.PalettePreference.Washi) {
+                val m = androidx.compose.ui.res.stringResource(app.tsuzuku.R.string.slot_morning)
+                val n = androidx.compose.ui.res.stringResource(app.tsuzuku.R.string.slot_noon)
+                val e = androidx.compose.ui.res.stringResource(app.tsuzuku.R.string.slot_evening)
+                val slots = listOf(app.tsuzuku.model.HabitSlot(m, 480), app.tsuzuku.model.HabitSlot(n, 780), app.tsuzuku.model.HabitSlot(e, 1260))
+                val pill = base[0].copy(habit = base[0].habit.copy(name = w.pill, emoji = "💊", type = app.tsuzuku.model.HabitType.Count, target = 3.0, slots = slots), progress = 1.0, doneSlots = setOf(0), status = app.tsuzuku.model.HabitDayStatus.Pending)
+                FeatureRows(listOf(pill, base[2], base[3]))
+            }
+            "period" -> renderFeature(lang, name, app.tsuzuku.data.preferences.PalettePreference.Matcha) {
+                val swim = base[0].copy(
+                    habit = base[0].habit.copy(name = w.swim, emoji = "🏊", type = app.tsuzuku.model.HabitType.Check, target = 1.0, goalPeriod = app.tsuzuku.model.GoalPeriod.Custom, periodTarget = 4, periodDays = 10, createdOn = LocalDate.now().minusDays(3)),
+                    progress = 0.0, periodProgress = 2, status = app.tsuzuku.model.HabitDayStatus.Pending,
+                )
+                FeatureRows(listOf(swim))
+                app.tsuzuku.ui.screens.CustomPeriodCard(remember { app.tsuzuku.ui.screens.HabitEditorState(swim.habit) })
+            }
+            "journey" -> renderFeature(lang, name, app.tsuzuku.data.preferences.PalettePreference.Sakura) {
+                val book = base[0].copy(
+                    habit = base[0].habit.copy(name = w.book, emoji = "📖", type = app.tsuzuku.model.HabitType.Count, target = 20.0, unit = w.pages, journeyTotal = 320.0),
+                    progress = 12.0, journeyPosition = 184.0, journeyPace = 18.0, status = app.tsuzuku.model.HabitDayStatus.Pending,
+                )
+                FeatureRows(listOf(book))
+                androidx.compose.material3.Surface(shape = androidx.compose.foundation.shape.RoundedCornerShape(28.dp), color = androidx.compose.material3.MaterialTheme.colorScheme.surfaceContainerLow) {
+                    Box(Modifier.padding(top = 20.dp)) { app.tsuzuku.ui.screens.JourneySheetContent(book, {}, {}) }
+                }
+            }
+            "timer" -> renderFeature(lang, name, app.tsuzuku.data.preferences.PalettePreference.Sumi) {
+                FeatureRows(listOf(base[2], base[0]), timerOn = base[2].habit.id)
+                app.tsuzuku.ui.screens.HabitTimerBar(HabitTimerState(base[2].habit.id, 754, 900, false, base[2].habit.name, base[2].habit.emoji), {}, {}, {})
+            }
+            else -> renderFeature(lang, name, app.tsuzuku.data.preferences.PalettePreference.Momiji) {
+                val day = 86_400_000L
+                val now = System.currentTimeMillis()
+                val trashed = base.take(2).mapIndexed { i, t -> app.tsuzuku.data.TrashedHabit(t.habit, now - listOf(2, 26)[i] * day) }
+                Box(Modifier.fillMaxSize()) {
+                    app.tsuzuku.ui.screens.ArchiveScreen(emptyList(), trashed, onBack = {}, onRestore = {}, onTrash = {}, onDeleteForever = {}, onEmptyTrash = {}, startInTrash = true)
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun FeatureRows(items: List<TodayHabit>, timerOn: Long? = null) {
+        items.forEach { t ->
+            app.tsuzuku.ui.screens.HabitRow(
+                todayHabit = t, timerRunning = t.habit.id == timerOn, timerElapsedSeconds = if (t.habit.id == timerOn) 754 else 0,
+                interactionDisabled = false, onToggle = {}, onIncrement = {}, onDecrement = {}, onToggleTimer = {}, onOpen = {},
+                onOpenSkipDialog = {}, onUndoSkip = {},
+            )
+        }
+    }
+
+    private fun renderFeature(lang: String, name: String, palette: app.tsuzuku.data.preferences.PalettePreference, content: @Composable () -> Unit) {
+        setVariant(lang, false)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false, palette = palette) {
+                androidx.compose.material3.Surface(color = androidx.compose.material3.MaterialTheme.colorScheme.background) {
+                    androidx.compose.foundation.layout.Column(
+                        Modifier.fillMaxSize().padding(16.dp),
+                        verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(12.dp),
+                    ) { content() }
+                }
+            }
+        }
+        compose.mainClock.advanceTimeBy(900)
+        captureScreen("feat_${name}_$lang")
     }
 
     @Test fun historyBackupRealTr() {

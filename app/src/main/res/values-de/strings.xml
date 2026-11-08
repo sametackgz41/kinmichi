@@ -721,7 +721,7 @@
     <string name="smart_reminder_keep">Beibehalten</string>
     <string name="smart_reminder_move">Auf %1$s verschieben</string>
     <string name="health_fill_label">Aus Gesundheitsdaten füllen</string>
-    <string name="health_unavailable">Health Connect ist auf diesem Handy nicht verfügbar.</string>
+    <string name="health_unavailable">Health Connect ist auf diesem Handy noch nicht installiert.</string>
     <string name="health_fill_help">Wird bei jedem Öffnen von Kinmichi aktualisiert. Einheit: %1$s.</string>
     <string name="health_none">Aus</string>
     <string name="health_steps">Schritte</string>
@@ -1196,6 +1196,9 @@
     <string name="sealed_password">Passwort</string>
     <string name="sealed_wrong_password">Falsches Passwort oder beschädigte Datei</string>
     <string name="sealed_open">Öffnen</string>
+    <string name="health_install">Installieren</string>
+    <string name="health_settings_ready">Schritte, Schlaf und mehr füllen Gewohnheiten selbst · Berechtigungen verwalten</string>
+    <string name="health_settings_install">Nicht installiert. Tippe, um es aus Google Play zu holen, dann verknüpfe eine Gewohnheit mit Schritten oder Schlaf</string>
     <plurals name="streak_days">
         <item quantity="one">%d Tag in Folge</item>
         <item quantity="other">%d Tage in Folge</item>

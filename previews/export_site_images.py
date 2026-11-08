@@ -5,7 +5,7 @@ from PIL import Image
 SRC = os.path.join("previews", "images")
 DST = os.path.join("docs", "img")
 LANGS = ["en", "tr", "es", "de", "pt", "ja", "fr", "it", "ru", "ko"]
-PALETTES = ["washi", "sumi", "matcha", "sakura", "umi"]
+PALETTES = ["washi", "sumi", "matcha", "sakura", "umi", "momiji", "yoru"]
 
 TILES = {
     "g_heatmap": ("detail_{l}_light", (40, 555, 1193, 1505)),
@@ -56,3 +56,23 @@ for l in LANGS:
         for mode in ("light", "dark"):
             save(load(f"palette_{p}_{mode}{suffix}"), PHONE, 900, os.path.join(folder, f"pal_{p}_{mode}.webp"))
     print(l, "done, card top", top)
+
+
+# The "new in this version" showcase: each feature cropped to its content.
+FEATURES = ["alarm", "slots", "period", "journey", "timer", "safe"]
+
+
+def content_bottom(im: Image.Image) -> int:
+    bg = im.getpixel((5, im.height - 5))
+    px = im.load()
+    for y in range(im.height - 1, 0, -4):
+        if any(sum(abs(a - b) for a, b in zip(px[x, y], bg)) > 18 for x in range(0, im.width, 6)):
+            return min(im.height, y + 48)
+    return im.height
+
+
+for l in LANGS:
+    for f in FEATURES:
+        im = load(f"feat_{f}_{l}")
+        save(im, (0, 0, im.width, content_bottom(im)), 720, os.path.join(DST, l, f"feat_{f}.webp"))
+print("features done")

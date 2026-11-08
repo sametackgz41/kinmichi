@@ -735,7 +735,7 @@ smart_reminder_body|Sueles hacer %1$s hacia las %2$s, pero el recordatorio suena
 smart_reminder_keep|Dejarlo así
 smart_reminder_move|Pasar a las %1$s
 health_fill_label|Rellenar con datos de salud
-health_unavailable|Health Connect no está disponible en este móvil.
+health_unavailable|Health Connect aún no está en este teléfono.
 health_fill_help|Se actualiza cada vez que abres Kinmichi. Unidad: %1$s.
 health_none|Desactivado
 health_steps|Pasos
@@ -1216,3 +1216,6 @@ sealed_open_title|Esta copia está cifrada
 sealed_password|Contraseña
 sealed_wrong_password|Contraseña incorrecta o archivo dañado
 sealed_open|Abrir
+health_install|Instalar
+health_settings_ready|Pasos, sueño y más llenan hábitos solos · gestionar permisos
+health_settings_install|No instalado. Toca para obtenerlo en Google Play y luego vincula un hábito a pasos o sueño

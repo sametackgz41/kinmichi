@@ -735,7 +735,7 @@ smart_reminder_body|보통 %2$s쯤 %1$s을(를) 하는데 알림은 %3$s에 울�
 smart_reminder_keep|그대로 두기
 smart_reminder_move|%1$s(으)로 옮기기
 health_fill_label|건강 데이터로 채우기
-health_unavailable|이 휴대폰에서는 Health Connect를 쓸 수 없어요.
+health_unavailable|이 휴대폰에는 아직 Health Connect가 없어요.
 health_fill_help|Kinmichi를 열 때마다 업데이트돼요. 단위: %1$s.
 health_none|끄기
 health_steps|걸음 수
@@ -1216,3 +1216,6 @@ sealed_open_title|이 백업은 암호화되어 있어요
 sealed_password|비밀번호
 sealed_wrong_password|비밀번호가 틀렸거나 파일이 손상됐어요
 sealed_open|열기
+health_install|설치
+health_settings_ready|걸음 수, 수면 등으로 습관이 자동으로 채워져요 · 권한 관리
+health_settings_install|설치되지 않았어요. 눌러서 Google Play에서 받은 뒤 습관을 걸음 수나 수면에 연결하세요
