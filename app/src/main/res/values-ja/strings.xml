@@ -1080,6 +1080,22 @@
     <string name="screen_time_setting">スクリーンタイムから入力</string>
     <string name="screen_time_setting_desc">今日のスマホ使用時間（端末内で計測）</string>
     <string name="screen_time_grant">使用状況へのアクセスを許可</string>
+    <string name="widget_next_name">次の習慣</string>
+    <string name="widget_next_description">今やる習慣をひとつ、タップで記録</string>
+    <string name="widget_next_title">次は</string>
+    <string name="widget_next_at">次は %1$s</string>
+    <string name="widget_ring_name">進捗リング</string>
+    <string name="widget_ring_description">今日の達成率を小さなリングで</string>
+    <string name="widget_heatmap_name">ミニヒートマップ</string>
+    <string name="widget_heatmap_description">直近3か月をひと目で、復帰は金色</string>
+    <string name="widget_heatmap_title">直近3か月</string>
+    <string name="widget_heatmap_days">%1$d日活動</string>
+    <string name="widget_alarm_name">起床アラーム</string>
+    <string name="widget_alarm_description">次のアラーム。タップでオン/オフ</string>
+    <string name="widget_alarm_none">アラームはまだありません。タップで設定</string>
+    <string name="widget_alarm_today">今日</string>
+    <string name="widget_alarm_tomorrow">明日</string>
+    <string name="widget_alarm_off">オフ</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

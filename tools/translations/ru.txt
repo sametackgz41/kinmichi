@@ -1112,3 +1112,19 @@ screen_time_habit_name|Экранное время
 screen_time_setting|Заполнять по экранному времени
 screen_time_setting_desc|Минуты за сегодня, считаются на устройстве
 screen_time_grant|Разрешить доступ к статистике
+widget_next_name|Следующая привычка
+widget_next_description|Привычка, которую пора сделать, отметка одним касанием
+widget_next_title|Далее
+widget_next_at|Далее · %1$s
+widget_ring_name|Кольцо прогресса
+widget_ring_description|Сегодняшний процент в маленьком кольце
+widget_heatmap_name|Мини-тепловая карта
+widget_heatmap_description|Последние три месяца, возвращения золотом
+widget_heatmap_title|Последние 3 месяца
+widget_heatmap_days|%1$d активных дней
+widget_alarm_name|Будильник
+widget_alarm_description|Следующий будильник; нажми, чтобы включить или выключить
+widget_alarm_none|Будильника пока нет. Нажми, чтобы создать
+widget_alarm_today|Сегодня
+widget_alarm_tomorrow|Завтра
+widget_alarm_off|Выключен

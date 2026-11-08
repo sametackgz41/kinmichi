@@ -98,10 +98,12 @@ object TsuzukuWidgets {
     suspend fun updateAll(context: Context, includeMood: Boolean = true) {
         runCatching { TodayWidget().updateAll(context) }
         runCatching { HabitWidget().updateAll(context) }
-        runCatching { QuickGridWidget().updateAll(context) }
+        runCatching { NextHabitWidget().updateAll(context) }
+        runCatching { RingWidget().updateAll(context) }
         runCatching { StreakWidget().updateAll(context) }
         runCatching { WeekWidget().updateAll(context) }
-        if (includeMood) runCatching { MoodWidget().updateAll(context) }
+        runCatching { HeatmapWidget().updateAll(context) }
+        runCatching { AlarmWidget().updateAll(context) }
         app.tsuzuku.tile.TodayTileService.requestRefresh(context)
     }
 }

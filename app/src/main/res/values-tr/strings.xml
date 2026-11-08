@@ -1479,4 +1479,20 @@
     <string name="screen_time_setting">Ekran süresinden doldur</string>
     <string name="screen_time_setting_desc">Bugün telefonda geçen dakikalar; sayım cihazda kalır</string>
     <string name="screen_time_grant">Kullanım erişimine izin ver</string>
+    <string name="widget_next_name">Sıradaki alışkanlık</string>
+    <string name="widget_next_description">Şimdi yapılacak tek alışkanlık; tek dokunuşla işaretle</string>
+    <string name="widget_next_title">Sıradaki</string>
+    <string name="widget_next_at">Sıradaki · %1$s</string>
+    <string name="widget_ring_name">İlerleme halkası</string>
+    <string name="widget_ring_description">Bugünün yüzdesi, küçük bir halkada</string>
+    <string name="widget_heatmap_name">Mini ısı haritası</string>
+    <string name="widget_heatmap_description">Son üç ay bir bakışta; geri dönüşler altınla</string>
+    <string name="widget_heatmap_title">Son 3 ay</string>
+    <string name="widget_heatmap_days">%1$d aktif gün</string>
+    <string name="widget_alarm_name">Uyanma alarmı</string>
+    <string name="widget_alarm_description">Sıradaki alarmın; açıp kapatmak için dokun</string>
+    <string name="widget_alarm_none">Henüz alarm yok. Uyanma alarmı kurmak için dokun</string>
+    <string name="widget_alarm_today">Bugün</string>
+    <string name="widget_alarm_tomorrow">Yarın</string>
+    <string name="widget_alarm_off">Kapalı</string>
 </resources>

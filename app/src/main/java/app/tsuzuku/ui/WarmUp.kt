@@ -79,7 +79,8 @@ object WidgetPreviewCache {
         listOf(
             app.tsuzuku.R.drawable.widget_preview_today, app.tsuzuku.R.drawable.widget_preview_habit,
             app.tsuzuku.R.drawable.widget_preview_streak, app.tsuzuku.R.drawable.widget_preview_week,
-            app.tsuzuku.R.drawable.widget_preview_quick, app.tsuzuku.R.drawable.widget_preview_mood,
+            app.tsuzuku.R.drawable.widget_preview_next, app.tsuzuku.R.drawable.widget_preview_ring,
+            app.tsuzuku.R.drawable.widget_preview_heatmap, app.tsuzuku.R.drawable.widget_preview_alarm,
         ).forEach { load(context, it) }
     }
 }

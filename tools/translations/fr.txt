@@ -1100,3 +1100,19 @@ screen_time_habit_name|Temps d'écran
 screen_time_setting|Remplir avec le temps d'écran
 screen_time_setting_desc|Les minutes d'aujourd'hui sur le téléphone, comptées sur l'appareil
 screen_time_grant|Autoriser l'accès à l'utilisation
+widget_next_name|Prochaine habitude
+widget_next_description|L'habitude à faire maintenant, cochée d'un appui
+widget_next_title|Ensuite
+widget_next_at|Ensuite · %1$s
+widget_ring_name|Anneau de progression
+widget_ring_description|Le pourcentage du jour dans un petit anneau
+widget_heatmap_name|Mini carte de chaleur
+widget_heatmap_description|Les trois derniers mois d'un coup d'œil, retours en or
+widget_heatmap_title|3 derniers mois
+widget_heatmap_days|%1$d jours actifs
+widget_alarm_name|Alarme de réveil
+widget_alarm_description|Ta prochaine alarme ; touche pour l'activer ou la couper
+widget_alarm_none|Pas encore d'alarme. Touche pour en créer une
+widget_alarm_today|Aujourd'hui
+widget_alarm_tomorrow|Demain
+widget_alarm_off|Désactivée

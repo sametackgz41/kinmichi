@@ -1480,4 +1480,20 @@
     <string name="screen_time_setting">Fill from screen time</string>
     <string name="screen_time_setting_desc">Today\'s minutes on the phone, counted on the device</string>
     <string name="screen_time_grant">Allow usage access</string>
+    <string name="widget_next_name">Next habit</string>
+    <string name="widget_next_description">The one habit to do now, one tap to mark it</string>
+    <string name="widget_next_title">Up next</string>
+    <string name="widget_next_at">Up next · %1$s</string>
+    <string name="widget_ring_name">Progress ring</string>
+    <string name="widget_ring_description">Today\'s share done in a small ring</string>
+    <string name="widget_heatmap_name">Mini heatmap</string>
+    <string name="widget_heatmap_description">The last three months at a glance, comebacks in gold</string>
+    <string name="widget_heatmap_title">Last 3 months</string>
+    <string name="widget_heatmap_days">%1$d active days</string>
+    <string name="widget_alarm_name">Wake alarm</string>
+    <string name="widget_alarm_description">Your next alarm; tap to turn it on or off</string>
+    <string name="widget_alarm_none">No alarm yet. Tap to set up a wake-up alarm</string>
+    <string name="widget_alarm_today">Today</string>
+    <string name="widget_alarm_tomorrow">Tomorrow</string>
+    <string name="widget_alarm_off">Off</string>
 </resources>

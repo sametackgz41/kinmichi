@@ -62,8 +62,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.tsuzuku.R
 import app.tsuzuku.widget.HabitWidgetReceiver
-import app.tsuzuku.widget.MoodWidgetReceiver
-import app.tsuzuku.widget.QuickGridWidgetReceiver
+import app.tsuzuku.widget.AlarmWidgetReceiver
+import app.tsuzuku.widget.HeatmapWidgetReceiver
+import app.tsuzuku.widget.NextHabitWidgetReceiver
+import app.tsuzuku.widget.RingWidgetReceiver
 import app.tsuzuku.widget.StreakWidgetReceiver
 import app.tsuzuku.widget.TsuzukuWidgetProvider
 import app.tsuzuku.widget.WeekWidgetReceiver
@@ -82,8 +84,10 @@ internal val widgetKinds = listOf(
     WidgetKind(HabitWidgetReceiver::class.java, R.string.widget_habit_name, R.string.widget_habit_description, R.drawable.widget_preview_habit, wide = false),
     WidgetKind(StreakWidgetReceiver::class.java, R.string.widget_streak_name, R.string.widget_streak_description, R.drawable.widget_preview_streak, wide = false),
     WidgetKind(WeekWidgetReceiver::class.java, R.string.widget_week_name, R.string.widget_week_description, R.drawable.widget_preview_week, wide = true),
-    WidgetKind(QuickGridWidgetReceiver::class.java, R.string.widget_quick_name, R.string.widget_quick_description, R.drawable.widget_preview_quick, wide = false),
-    WidgetKind(MoodWidgetReceiver::class.java, R.string.widget_mood_name, R.string.widget_mood_description, R.drawable.widget_preview_mood, wide = true),
+    WidgetKind(NextHabitWidgetReceiver::class.java, R.string.widget_next_name, R.string.widget_next_description, R.drawable.widget_preview_next, wide = true),
+    WidgetKind(RingWidgetReceiver::class.java, R.string.widget_ring_name, R.string.widget_ring_description, R.drawable.widget_preview_ring, wide = false),
+    WidgetKind(HeatmapWidgetReceiver::class.java, R.string.widget_heatmap_name, R.string.widget_heatmap_description, R.drawable.widget_preview_heatmap, wide = true),
+    WidgetKind(AlarmWidgetReceiver::class.java, R.string.widget_alarm_name, R.string.widget_alarm_description, R.drawable.widget_preview_alarm, wide = true),
 )
 
 /** Three layouts for the widget page, drawn side by side in previews. */

@@ -141,26 +141,48 @@
                 android:resource="@xml/streak_widget_info" />
         </receiver>
         <receiver
-            android:name=".widget.QuickGridWidgetReceiver"
+            android:name=".widget.NextHabitWidgetReceiver"
             android:exported="false"
-            android:label="@string/widget_quick_name">
+            android:label="@string/widget_next_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/quick_grid_widget_info" />
+                android:resource="@xml/next_habit_widget_info" />
         </receiver>
         <receiver
-            android:name=".widget.MoodWidgetReceiver"
+            android:name=".widget.RingWidgetReceiver"
             android:exported="false"
-            android:label="@string/widget_mood_name">
+            android:label="@string/widget_ring_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/mood_widget_info" />
+                android:resource="@xml/ring_widget_info" />
+        </receiver>
+        <receiver
+            android:name=".widget.HeatmapWidgetReceiver"
+            android:exported="false"
+            android:label="@string/widget_heatmap_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/heatmap_widget_info" />
+        </receiver>
+        <receiver
+            android:name=".widget.AlarmWidgetReceiver"
+            android:exported="false"
+            android:label="@string/widget_alarm_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/alarm_widget_info" />
         </receiver>
         <receiver
             android:name=".widget.HabitWidgetReceiver"

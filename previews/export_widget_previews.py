@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw
 
 SRC = os.path.join("previews", "images")
 RES = os.path.join("app", "src", "main", "res")
-WIDGETS = ["today", "habit", "week", "streak", "quick", "mood"]
+WIDGETS = ["today", "habit", "week", "streak", "next", "ring", "heatmap", "alarm"]
 LANGS = {"en": "", "tr": "-tr", "es": "-es", "de": "-de", "pt": "-pt-rBR", "ja": "-ja",
          "fr": "-fr", "it": "-it", "ru": "-ru", "ko": "-ko"}
 

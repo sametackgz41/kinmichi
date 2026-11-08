@@ -1100,3 +1100,19 @@ screen_time_habit_name|Tempo de tela
 screen_time_setting|Preencher com o tempo de tela
 screen_time_setting_desc|Os minutos de hoje no celular, contados no aparelho
 screen_time_grant|Permitir acesso ao uso
+widget_next_name|Próximo hábito
+widget_next_description|O hábito da vez, marque com um toque
+widget_next_title|A seguir
+widget_next_at|A seguir · %1$s
+widget_ring_name|Anel de progresso
+widget_ring_description|A porcentagem de hoje num anel pequeno
+widget_heatmap_name|Mini mapa de calor
+widget_heatmap_description|Os últimos três meses num relance, retornos em ouro
+widget_heatmap_title|Últimos 3 meses
+widget_heatmap_days|%1$d dias ativos
+widget_alarm_name|Alarme de despertar
+widget_alarm_description|Seu próximo alarme; toque para ligar ou desligar
+widget_alarm_none|Ainda sem alarme. Toque para criar um
+widget_alarm_today|Hoje
+widget_alarm_tomorrow|Amanhã
+widget_alarm_off|Desligado

@@ -1100,3 +1100,19 @@ screen_time_habit_name|Tempo davanti allo schermo
 screen_time_setting|Compila dal tempo davanti allo schermo
 screen_time_setting_desc|I minuti di oggi al telefono, contati sul dispositivo
 screen_time_grant|Consenti accesso all'utilizzo
+widget_next_name|Prossima abitudine
+widget_next_description|L'abitudine da fare ora, segnala con un tocco
+widget_next_title|Prossima
+widget_next_at|Prossima · %1$s
+widget_ring_name|Anello di progresso
+widget_ring_description|La percentuale di oggi in un piccolo anello
+widget_heatmap_name|Mini mappa di calore
+widget_heatmap_description|Gli ultimi tre mesi a colpo d'occhio, ritorni in oro
+widget_heatmap_title|Ultimi 3 mesi
+widget_heatmap_days|%1$d giorni attivi
+widget_alarm_name|Sveglia
+widget_alarm_description|La tua prossima sveglia; tocca per accenderla o spegnerla
+widget_alarm_none|Nessuna sveglia. Tocca per crearne una
+widget_alarm_today|Oggi
+widget_alarm_tomorrow|Domani
+widget_alarm_off|Spenta

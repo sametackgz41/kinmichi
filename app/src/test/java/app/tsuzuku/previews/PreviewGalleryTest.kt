@@ -1224,7 +1224,11 @@ class PreviewGalleryTest {
         renderWidget("widget_today_locked_$suffix", 300, 140) { TsuzukuGlanceTheme { TodayContent(emptyList(), loaded = true, locked = true, scrollable = false) } }
         val longest = today.maxBy { it.streakDays }
         renderWidget("widget_streak_$suffix", 160, 170) { TsuzukuGlanceTheme { app.tsuzuku.widget.StreakContent(longest, comebacks = 2, locked = false) } }
-        renderWidget("widget_quick_$suffix", 170, 170) { TsuzukuGlanceTheme { app.tsuzuku.widget.QuickGridContent(today.filter { it.habit.type != app.tsuzuku.model.HabitType.Duration }.sortedBy { it.isComplete }.take(4), locked = false) } }
-        renderWidget("widget_mood_$suffix", 340, 80) { TsuzukuGlanceTheme { app.tsuzuku.widget.MoodContent(selected = 4) } }
+        renderWidget("widget_next_$suffix", 300, 96) { TsuzukuGlanceTheme { app.tsuzuku.widget.NextHabitContent(today, locked = false) } }
+        renderWidget("widget_ring_$suffix", 110, 110) { TsuzukuGlanceTheme { app.tsuzuku.widget.RingContent(today, locked = false) } }
+        renderWidget("widget_heatmap_$suffix", 320, 170) { TsuzukuGlanceTheme { app.tsuzuku.widget.HeatmapContent(sampleHistory(lang), locked = false) } }
+        val wake = app.tsuzuku.widget.NextAlarm(1, if (lang == "tr") "Uyan" else "Wake up", "⏰",
+            java.time.ZonedDateTime.now().plusDays(1).withHour(7).withMinute(0), on = true)
+        renderWidget("widget_alarm_$suffix", 300, 96) { TsuzukuGlanceTheme { app.tsuzuku.widget.AlarmContent(wake) } }
     }
 }

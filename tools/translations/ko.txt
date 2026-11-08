@@ -1100,3 +1100,19 @@ screen_time_habit_name|화면 시간
 screen_time_setting|화면 시간으로 채우기
 screen_time_setting_desc|오늘 휴대폰 사용 시간, 기기 안에서 계산
 screen_time_grant|사용 기록 접근 허용
+widget_next_name|다음 습관
+widget_next_description|지금 할 습관 하나, 한 번 탭으로 체크
+widget_next_title|다음
+widget_next_at|다음 · %1$s
+widget_ring_name|진행 링
+widget_ring_description|오늘의 달성률을 작은 링으로
+widget_heatmap_name|미니 히트맵
+widget_heatmap_description|지난 3개월을 한눈에, 복귀는 금색으로
+widget_heatmap_title|지난 3개월
+widget_heatmap_days|%1$d일 활동
+widget_alarm_name|기상 알람
+widget_alarm_description|다음 알람, 탭해서 켜고 끄기
+widget_alarm_none|알람이 없어요. 탭해서 기상 알람 만들기
+widget_alarm_today|오늘
+widget_alarm_tomorrow|내일
+widget_alarm_off|꺼짐

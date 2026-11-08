@@ -1100,3 +1100,19 @@ screen_time_habit_name|Bildschirmzeit
 screen_time_setting|Aus der Bildschirmzeit füllen
 screen_time_setting_desc|Heutige Minuten am Handy, auf dem Gerät gezählt
 screen_time_grant|Nutzungszugriff erlauben
+widget_next_name|Nächste Gewohnheit
+widget_next_description|Die eine Gewohnheit für jetzt, mit einem Tipp abhaken
+widget_next_title|Als Nächstes
+widget_next_at|Als Nächstes · %1$s
+widget_ring_name|Fortschrittsring
+widget_ring_description|Der heutige Anteil in einem kleinen Ring
+widget_heatmap_name|Mini-Heatmap
+widget_heatmap_description|Die letzten drei Monate auf einen Blick, Comebacks in Gold
+widget_heatmap_title|Letzte 3 Monate
+widget_heatmap_days|%1$d aktive Tage
+widget_alarm_name|Weckalarm
+widget_alarm_description|Dein nächster Wecker; tippen zum Ein- oder Ausschalten
+widget_alarm_none|Noch kein Wecker. Tippen, um einen einzurichten
+widget_alarm_today|Heute
+widget_alarm_tomorrow|Morgen
+widget_alarm_off|Aus

@@ -61,9 +61,23 @@ object HabitAlarms {
                 putString("$habitId.mission", mission.name)
                 putBoolean("$habitId.done", markDone)
             } else {
-                remove(habitId.toString()); remove("$habitId.mission"); remove("$habitId.done")
+                remove(habitId.toString()); remove("$habitId.mission"); remove("$habitId.done"); remove("$habitId.paused")
             }
         }.apply()
+    }
+
+    /** Was an alarm and was switched off from the widget (kept so it can be switched back on). */
+    fun wasAlarm(context: Context, habitId: Long): Boolean = prefs(context).getBoolean("$habitId.paused", false)
+
+    /** Switches an alarm habit's ringing off or back on, keeping its task and settings. */
+    fun toggle(context: Context, habitId: Long) {
+        val p = prefs(context)
+        if (isOn(context, habitId)) {
+            p.edit().remove(habitId.toString()).putBoolean("$habitId.paused", true).apply()
+            stop(context, habitId)
+        } else if (wasAlarm(context, habitId)) {
+            p.edit().putBoolean(habitId.toString(), true).remove("$habitId.paused").apply()
+        }
     }
 
     private fun snoozeKey(habitId: Long) = "$habitId.snoozed.${LocalDate.now().toEpochDay()}"

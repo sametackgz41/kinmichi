@@ -19,7 +19,7 @@ class WidgetComposeTest {
     @Test
     fun everyWidgetRenders() = runBlocking {
         val context = ApplicationProvider.getApplicationContext<android.content.Context>()
-        listOf(TodayWidget(), HabitWidget(), WeekWidget(), StreakWidget(), QuickGridWidget(), MoodWidget()).forEach { widget ->
+        listOf(TodayWidget(), HabitWidget(), WeekWidget(), StreakWidget(), NextHabitWidget(), RingWidget(), HeatmapWidget(), AlarmWidget()).forEach { widget ->
             widget.compose(context, size = DpSize(250.dp, 180.dp))
         }
     }
