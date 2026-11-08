@@ -936,3 +936,67 @@ wake_habit_name|Acordar
 alarm_verify_setting|Pedir uma verificação para desligar
 alarm_verify_description|Seis passos rápidos: duas contas, duas rodadas de memória e duas caças aos números, em ordem diferente a cada vez
 alarm_puzzle_title9|Toque de 1 a 9 em ordem
+templates_title|Hábitos prontos
+templates_body|Escolha dos pacotes, um por um ou todos de uma vez
+templates_hint|Toque num hábito para preencher o editor ou adicione um pacote inteiro.
+templates_add_all|Adicionar todos (%1$d)
+templates_every_day|todo dia
+templates_days_a_week|%1$d dias por semana
+unit_words|palavras
+pack_morning|Manhã saudável
+pack_morning_desc|Comece o dia calmo e desperto
+pack_language|Aprender um idioma
+pack_language_desc|Um pouco por dia para não esquecer
+pack_fitness|Começar a treinar
+pack_fitness_desc|Comece pequeno, seja constante
+pack_calm|Mente calma
+pack_calm_desc|Diminua o barulho
+pack_sleep|Dormir melhor
+pack_sleep_desc|Mesmo horário de dormir, manhãs descansadas
+tpl_morning_water|Um copo d'água ao acordar
+tpl_morning_water_tiny|Alguns goles
+tpl_stretch|Alongamento
+tpl_stretch_tiny|2 minutos
+tpl_breakfast|Café da manhã
+tpl_breakfast_tiny|Uma fruta
+tpl_plan_day|Planejar o dia
+tpl_plan_day_tiny|Escreva uma prioridade
+tpl_vocab|Estudar vocabulário
+tpl_vocab_tiny|5 palavras
+tpl_listen|Ouvir
+tpl_listen_tiny|Uma música
+tpl_speak|Prática de conversação
+tpl_speak_tiny|Diga 3 frases em voz alta
+tpl_read_lang|Ler no idioma
+tpl_read_lang_tiny|Um parágrafo
+tpl_walk|Caminhada
+tpl_walk_tiny|10 minutos
+tpl_pushups|Flexões
+tpl_pushups_tiny|5 flexões
+tpl_plank|Prancha
+tpl_plank_tiny|30 segundos
+tpl_water|Beber água
+tpl_water_tiny|4 copos
+tpl_meditate|Meditação
+tpl_meditate_tiny|3 respirações lentas
+tpl_journal|Escrever no diário
+tpl_journal_tiny|Uma frase
+tpl_gratitude|Três coisas boas
+tpl_gratitude_tiny|Só uma
+tpl_no_screen|Noite sem telas
+tpl_no_screen_tiny|15 minutos antes de dormir
+tpl_bed_on_time|Dormir na hora
+tpl_bed_on_time_tiny|Diminua as luzes
+tpl_no_caffeine|Sem cafeína à tarde
+tpl_no_caffeine_tiny|Meia xícara
+tpl_read_bed|Ler antes de dormir
+tpl_read_bed_tiny|Uma página
+tpl_wind_down|Preparação para dormir
+tpl_wind_down_tiny|Lave o rosto
+notif_enter_amount|Inserir quantidade
+notif_amount_hint|Quantos %1$s?
+notif_amount_hint_plain|Quanto?
+edit_past_days|Editar dias anteriores
+spread_setting|Lembrar ao longo do dia
+spread_description|Distribui o que falta pelas horas restantes e para quando você atinge a meta
+spread_add_one|+1

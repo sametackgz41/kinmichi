@@ -948,3 +948,67 @@ wake_habit_name|Подъём
 alarm_verify_setting|Просить проверку для выключения
 alarm_verify_description|Шесть коротких шагов: два примера, два раунда на память и две охоты на числа, каждый раз в новом порядке
 alarm_puzzle_title9|Нажимай от 1 до 9 по порядку
+templates_title|Готовые привычки
+templates_body|Выбирай из наборов по одной или все сразу
+templates_hint|Нажми на привычку, чтобы заполнить редактор, или добавь весь набор.
+templates_add_all|Добавить все (%1$d)
+templates_every_day|каждый день
+templates_days_a_week|%1$d дн. в неделю
+unit_words|слов
+pack_morning|Здоровое утро
+pack_morning_desc|Начни день спокойно и бодро
+pack_language|Изучение языка
+pack_language_desc|Понемногу каждый день, чтобы не забывать
+pack_fitness|Начать заниматься спортом
+pack_fitness_desc|Начни с малого, будь регулярным
+pack_calm|Спокойный ум
+pack_calm_desc|Убавь шум
+pack_sleep|Режим сна
+pack_sleep_desc|Ложись в одно время — просыпайся отдохнувшим
+tpl_morning_water|Стакан воды после пробуждения
+tpl_morning_water_tiny|Пара глотков
+tpl_stretch|Растяжка
+tpl_stretch_tiny|2 минуты
+tpl_breakfast|Завтрак
+tpl_breakfast_tiny|Один фрукт
+tpl_plan_day|Спланировать день
+tpl_plan_day_tiny|Запиши одну главную задачу
+tpl_vocab|Учить слова
+tpl_vocab_tiny|5 слов
+tpl_listen|Аудирование
+tpl_listen_tiny|Одна песня
+tpl_speak|Разговорная практика
+tpl_speak_tiny|Произнеси вслух 3 фразы
+tpl_read_lang|Читать на языке
+tpl_read_lang_tiny|Один абзац
+tpl_walk|Прогулка
+tpl_walk_tiny|10 минут
+tpl_pushups|Отжимания
+tpl_pushups_tiny|5 отжиманий
+tpl_plank|Планка
+tpl_plank_tiny|30 секунд
+tpl_water|Пить воду
+tpl_water_tiny|4 стакана
+tpl_meditate|Медитация
+tpl_meditate_tiny|3 медленных вдоха
+tpl_journal|Вести дневник
+tpl_journal_tiny|Одно предложение
+tpl_gratitude|Три хороших момента
+tpl_gratitude_tiny|Только один
+tpl_no_screen|Вечер без экранов
+tpl_no_screen_tiny|15 минут перед сном
+tpl_bed_on_time|Ложиться вовремя
+tpl_bed_on_time_tiny|Приглуши свет
+tpl_no_caffeine|Без кофеина после обеда
+tpl_no_caffeine_tiny|Полчашки
+tpl_read_bed|Читать перед сном
+tpl_read_bed_tiny|Одна страница
+tpl_wind_down|Подготовка ко сну
+tpl_wind_down_tiny|Умойся
+notif_enter_amount|Ввести количество
+notif_amount_hint|Сколько (%1$s)?
+notif_amount_hint_plain|Сколько?
+edit_past_days|Изменить прошлые дни
+spread_setting|Напоминать в течение дня
+spread_description|Распределяет остаток по оставшимся часам и замолкает, когда цель достигнута
+spread_add_one|+1

@@ -936,3 +936,67 @@ wake_habit_name|Se lever
 alarm_verify_setting|Demander une vérification pour l'arrêter
 alarm_verify_description|Six étapes rapides : deux calculs, deux manches de mémoire et deux chasses aux nombres, dans un ordre différent à chaque fois
 alarm_puzzle_title9|Touche de 1 à 9 dans l'ordre
+templates_title|Habitudes toutes prêtes
+templates_body|Choisis dans les packs, une par une ou toutes d'un coup
+templates_hint|Touche une habitude pour remplir l'éditeur, ou ajoute un pack entier.
+templates_add_all|Tout ajouter (%1$d)
+templates_every_day|chaque jour
+templates_days_a_week|%1$d jours par semaine
+unit_words|mots
+pack_morning|Matin sain
+pack_morning_desc|Commence la journée calme et réveillé
+pack_language|Apprendre une langue
+pack_language_desc|Un peu chaque jour pour ne rien oublier
+pack_fitness|Se remettre au sport
+pack_fitness_desc|Commence petit, reste régulier
+pack_calm|Esprit apaisé
+pack_calm_desc|Baisse le bruit
+pack_sleep|Mieux dormir
+pack_sleep_desc|Même heure de coucher, matins reposés
+tpl_morning_water|Un verre d'eau au réveil
+tpl_morning_water_tiny|Quelques gorgées
+tpl_stretch|Étirements
+tpl_stretch_tiny|2 minutes
+tpl_breakfast|Petit-déjeuner
+tpl_breakfast_tiny|Un fruit
+tpl_plan_day|Planifier la journée
+tpl_plan_day_tiny|Écris une priorité
+tpl_vocab|Réviser du vocabulaire
+tpl_vocab_tiny|5 mots
+tpl_listen|Écoute
+tpl_listen_tiny|Une chanson
+tpl_speak|Pratique orale
+tpl_speak_tiny|Dis 3 phrases à voix haute
+tpl_read_lang|Lire dans la langue
+tpl_read_lang_tiny|Un paragraphe
+tpl_walk|Marche
+tpl_walk_tiny|10 minutes
+tpl_pushups|Pompes
+tpl_pushups_tiny|5 pompes
+tpl_plank|Gainage
+tpl_plank_tiny|30 secondes
+tpl_water|Boire de l'eau
+tpl_water_tiny|4 verres
+tpl_meditate|Méditation
+tpl_meditate_tiny|3 respirations lentes
+tpl_journal|Tenir un journal
+tpl_journal_tiny|Une phrase
+tpl_gratitude|Trois bonnes choses
+tpl_gratitude_tiny|Une seule
+tpl_no_screen|Soirée sans écran
+tpl_no_screen_tiny|15 minutes avant de dormir
+tpl_bed_on_time|Se coucher à l'heure
+tpl_bed_on_time_tiny|Baisse la lumière
+tpl_no_caffeine|Pas de caféine l'après-midi
+tpl_no_caffeine_tiny|Une demi-tasse
+tpl_read_bed|Lire avant de dormir
+tpl_read_bed_tiny|Une page
+tpl_wind_down|Rituel du coucher
+tpl_wind_down_tiny|Lave-toi le visage
+notif_enter_amount|Saisir la quantité
+notif_amount_hint|Combien de %1$s ?
+notif_amount_hint_plain|Combien ?
+edit_past_days|Modifier les jours passés
+spread_setting|Rappeler au fil de la journée
+spread_description|Répartit ce qui reste sur les heures restantes et se tait une fois l'objectif atteint
+spread_add_one|+1

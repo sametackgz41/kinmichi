@@ -154,6 +154,24 @@ internal class HabitEditorState(existing: Habit?) {
     var alarmEnabled by mutableStateOf(false)
     var alarmMission by mutableStateOf(app.tsuzuku.notifications.AlarmMission.None)
     var alarmMarkDone by mutableStateOf(false)
+    var spreadOn by mutableStateOf(false)
+    var spreadWindow by mutableStateOf(1)
+
+    /** Fills the editor from a library template; names and units come from [context]'s language. */
+    fun applyTemplate(template: LibraryHabit, context: android.content.Context, color: Int = colorIndex) {
+        name = context.getString(template.name)
+        emoji = template.emoji
+        type = template.type
+        targetText = formatEditorAmount(template.target)
+        stepText = formatEditorAmount(template.step)
+        unit = template.unit?.let(context::getString).orEmpty()
+        tinyVersion = context.getString(template.tiny)
+        selectedDays = template.days
+        goalPeriod = GoalPeriod.Daily
+        reminderEnabled = template.reminderMinutes != null
+        template.reminderMinutes?.let { reminderTime = "%02d:%02d".format(it / 60, it % 60) }
+        colorIndex = color.mod(habitColors.size)
+    }
 
     /** The ready-made wake-up habit: an alarm with a task, ticked off when it goes quiet. */
     fun applyWakeTemplate(name: String) {
@@ -237,6 +255,8 @@ internal class HabitEditorState(existing: Habit?) {
             alarm = reminderEnabled && alarmEnabled,
             alarmMission = alarmMission.name,
             alarmMarkDone = alarmMarkDone,
+            spreadStartMinutes = if (spreadOn && type == HabitType.Count) app.tsuzuku.notifications.SpreadWindow.Presets[spreadWindow].startMinutes else null,
+            spreadEndMinutes = app.tsuzuku.notifications.SpreadWindow.Presets[spreadWindow].endMinutes,
         )
     }
 
@@ -246,7 +266,7 @@ internal class HabitEditorState(existing: Habit?) {
         activeStartEpochDay, activeEndEpochDay, pausedUntilEpochDay, repeatIntervalText, tags,
         selectedDays, goalPeriod.name, periodTargetText, routineName, prerequisiteId,
         reminderEnabled, reminderTime, repeatEnabled, repeatMinutes, tinyVersion, healthMetric.name, alarmEnabled,
-        alarmMission.name, alarmMarkDone,
+        alarmMission.name, alarmMarkDone, spreadOn, spreadWindow,
     )
 
     private fun restore(values: List<Any?>) {
@@ -270,6 +290,8 @@ internal class HabitEditorState(existing: Habit?) {
         if (i < values.size) alarmEnabled = next()
         if (i < values.size) alarmMission = app.tsuzuku.notifications.AlarmMission.valueOf(next())
         if (i < values.size) alarmMarkDone = next()
+        if (i < values.size) spreadOn = next()
+        if (i < values.size) spreadWindow = next()
     }
 
     companion object {
@@ -297,7 +319,8 @@ fun HabitEditorScreen(
     onBack: () -> Unit,
     onSave: (HabitDraft) -> Unit,
     template: Habit? = null,
-) = HabitEditorContent(existing, availableHabits, customCategories, onBack, onSave, template = template)
+    onSaveMany: ((List<HabitDraft>) -> Unit)? = null,
+) = HabitEditorContent(existing, availableHabits, customCategories, onBack, onSave, template = template, onSaveMany = onSaveMany)
 
 @Composable
 internal fun HabitEditorContent(
@@ -310,11 +333,31 @@ internal fun HabitEditorContent(
     initialStep: Int = 0,
     openGroup: AdvancedGroup? = null,
     template: Habit? = null,
+    onSaveMany: ((List<HabitDraft>) -> Unit)? = null,
+    startInLibrary: Boolean = false,
 ) {
     // A template only fills in a new habit's starting values; it is still saved as new.
     val start = existing ?: template
     val state = rememberSaveable(existing?.id, saver = HabitEditorState.saver(start)) { HabitEditorState(start) }
     val editorContext = LocalContext.current
+    var showLibrary by rememberSaveable { mutableStateOf(startInLibrary) }
+    if (showLibrary) {
+        androidx.activity.compose.BackHandler { showLibrary = false }
+        TemplateLibrary(
+            onBack = { showLibrary = false },
+            onPick = { picked ->
+                state.applyTemplate(picked, editorContext)
+                showLibrary = false
+            },
+            onAddPack = { pack ->
+                val drafts = pack.habits.mapIndexed { i, t ->
+                    HabitEditorState(null).apply { applyTemplate(t, editorContext, i * 2) }.toDraft()
+                }
+                if (onSaveMany != null) onSaveMany(drafts) else drafts.forEach(onSave)
+            },
+        )
+        return
+    }
     // The alarm choice lives on the device; read it once when an existing habit opens.
     rememberSaveable(existing?.id) {
         if (existing != null) {
@@ -322,6 +365,10 @@ internal fun HabitEditorContent(
             state.alarmEnabled = options.on
             state.alarmMission = options.mission
             state.alarmMarkDone = options.markDone
+            app.tsuzuku.notifications.SpreadReminders.window(editorContext, existing.id)?.let { w ->
+                state.spreadOn = true
+                state.spreadWindow = app.tsuzuku.notifications.SpreadWindow.Presets.indexOf(w).coerceAtLeast(0)
+            }
         }
         true
     }
@@ -401,6 +448,8 @@ internal fun HabitEditorContent(
                             when (current) {
                                 0 -> {
                                     if (existing == null && template == null && state.name.isBlank()) {
+                                        TemplateLibraryCard { showLibrary = true }
+                                        Spacer(Modifier.height(10.dp))
                                         WakeTemplateCard { state.applyWakeTemplate(editorContext.getString(R.string.wake_habit_name)) }
                                         Spacer(Modifier.height(12.dp))
                                     }
@@ -683,6 +732,7 @@ private fun ReminderSection(state: HabitEditorState) {
             }
         }
     }
+    if (state.type == HabitType.Count) SpreadFields(state)
 }
 
 /** The optional settings, split into four small groups that open one at a time. */
@@ -863,6 +913,31 @@ private fun PlanGroup(state: HabitEditorState, otherHabits: List<Habit>) {
             FilterChip(selected = state.prerequisiteId == 0L, onClick = { state.prerequisiteId = 0L }, label = { Text(stringResource(R.string.none_label)) })
             otherHabits.forEach { habit ->
                 FilterChip(selected = state.prerequisiteId == habit.id, onClick = { state.prerequisiteId = habit.id }, label = { Text("${habit.emoji} ${habit.name}") })
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun SpreadFields(state: HabitEditorState) {
+    Column(Modifier.fillMaxWidth().padding(top = 14.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text(stringResource(R.string.spread_setting), style = MaterialTheme.typography.bodyLarge)
+                Text(stringResource(R.string.spread_description), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            Switch(checked = state.spreadOn, onCheckedChange = { state.spreadOn = it })
+        }
+        AnimatedVisibility(visible = state.spreadOn) {
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(top = 8.dp)) {
+                app.tsuzuku.notifications.SpreadWindow.Presets.forEachIndexed { index, w ->
+                    FilterChip(
+                        selected = state.spreadWindow == index,
+                        onClick = { state.spreadWindow = index },
+                        label = { Text("%02d:00–%02d:00".format(w.startMinutes / 60, w.endMinutes / 60)) },
+                    )
+                }
             }
         }
     }

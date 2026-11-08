@@ -435,6 +435,36 @@ class PreviewGalleryTest {
         captureScreen("editor_alarm_options_tr")
     }
 
+    @Test fun templateLibraryTr() {
+        setVariant("tr", false)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false) {
+                app.tsuzuku.ui.screens.HabitEditorContent(existing = null, onBack = {}, onSave = {}, startInLibrary = true)
+            }
+        }
+        compose.mainClock.advanceTimeBy(800)
+        captureScreen("template_library_tr")
+        compose.onNodeWithText("Esneme").performClick()
+        compose.mainClock.advanceTimeBy(800)
+        captureScreen("template_picked_tr")
+    }
+
+    @Test fun spreadRemindersTr() {
+        setVariant("tr", false)
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false) {
+                app.tsuzuku.ui.screens.HabitEditorContent(existing = null, onBack = {}, onSave = {}, startInLibrary = true)
+            }
+        }
+        compose.mainClock.advanceTimeBy(800)
+        compose.onNodeWithText("Su iç").performScrollTo().performClick()
+        compose.mainClock.advanceTimeBy(800)
+        repeat(2) { compose.onNodeWithText("Devam et").performClick(); compose.mainClock.advanceTimeBy(800) }
+        compose.onNodeWithText("Gün boyu hatırlat").performScrollTo().performClick()
+        compose.mainClock.advanceTimeBy(800)
+        captureScreen("spread_reminders_tr")
+    }
+
     private fun renderAlarm(name: String, content: @Composable () -> Unit) {
         setVariant("tr", true)
         compose.setContent { TsuzukuTheme(darkTheme = true) { content() } }

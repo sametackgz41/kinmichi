@@ -13,6 +13,7 @@ import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.BarChart
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Search
+import androidx.compose.material.icons.rounded.CalendarMonth
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -263,6 +264,15 @@ fun TsuzukuApp(
                 MainTopBar(
                     title = stringResource(destination.labelRes),
                     onSearch = if (destination.route == "today") ({ navController.navigate("search") }) else null,
+                    // Past days are edited in Progress > Calendar; one tap from Today.
+                    onCalendar = if (destination.route == "today") ({
+                        progressPage = 1
+                        navController.navigate("progress") {
+                            popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    }) else null,
                 )
             }
         },
@@ -816,12 +826,24 @@ fun TsuzukuApp(
                 val template = remember { NewHabitTemplate.take() }
                 HabitEditorScreen(
                     template = template,
+                    onSaveMany = { drafts ->
+                        // A whole pack: add each, schedule its reminder, then leave once.
+                        drafts.forEachIndexed { index, draft ->
+                            todayViewModel.addHabit(draft) { habitId ->
+                                if (draft.reminderMinutes != null) {
+                                    reminderScheduler.schedule(habitId, draft.scheduleDaysMask, draft.reminderMinutes)
+                                }
+                                if (index == drafts.lastIndex) navController.popBackStack()
+                            }
+                        }
+                    },
                     availableHabits = history.habits,
                     customCategories = categories,
                     onBack = navController::popBackStack,
                     onSave = { draft ->
                         todayViewModel.addHabit(draft) { habitId ->
                             app.tsuzuku.notifications.HabitAlarms.set(context, habitId, draft.alarm, app.tsuzuku.notifications.AlarmMission.valueOf(draft.alarmMission), draft.alarmMarkDone)
+                            applySpread(context, habitId, draft)
                             if (draft.reminderMinutes != null) {
                                 reminderScheduler.schedule(habitId, draft.scheduleDaysMask, draft.reminderMinutes)
                             }
@@ -915,6 +937,7 @@ fun TsuzukuApp(
                         onSave = { draft ->
                             todayViewModel.updateHabit(habitId, draft) {
                                 app.tsuzuku.notifications.HabitAlarms.set(context, habitId, draft.alarm, app.tsuzuku.notifications.AlarmMission.valueOf(draft.alarmMission), draft.alarmMarkDone)
+                                applySpread(context, habitId, draft)
                                 if (draft.reminderMinutes == null) {
                                     reminderScheduler.cancel(habitId)
                                 } else {
@@ -1020,10 +1043,16 @@ internal fun MainNavigationBar(
 internal fun MainTopBar(
     title: String,
     onSearch: (() -> Unit)? = null,
+    onCalendar: (() -> Unit)? = null,
 ) {
     TopAppBar(
         title = { Text(title) },
         actions = {
+            if (onCalendar != null) {
+                IconButton(onClick = onCalendar) {
+                    Icon(Icons.Rounded.CalendarMonth, contentDescription = stringResource(R.string.edit_past_days))
+                }
+            }
             if (onSearch != null) {
                 IconButton(onClick = onSearch) {
                     Icon(Icons.Rounded.Search, contentDescription = stringResource(R.string.search_everything))
@@ -1072,4 +1101,14 @@ private fun androidx.navigation.NavGraphBuilder.screen(
     var kept by remember { mutableStateOf(live) }
     if (current) androidx.compose.runtime.SideEffect { kept = live }
     Box(Modifier.fillMaxSize().padding(if (current) live else kept)) { content(entry) }
+}
+
+/** Saves a habit's spread-reminder choice and sets its next reminder. */
+private fun applySpread(context: android.content.Context, habitId: Long, draft: app.tsuzuku.model.HabitDraft) {
+    val window = draft.spreadStartMinutes?.let { app.tsuzuku.notifications.SpreadWindow(it, draft.spreadEndMinutes) }
+    app.tsuzuku.notifications.SpreadReminders.set(context, habitId, window)
+    if (window != null) {
+        val appContext = context.applicationContext
+        kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO).launch { app.tsuzuku.notifications.SpreadReminders.schedule(appContext, habitId) }
+    }
 }

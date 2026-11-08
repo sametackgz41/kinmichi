@@ -936,3 +936,67 @@ wake_habit_name|일어나기
 alarm_verify_setting|끄려면 확인 미션 요청
 alarm_verify_description|짧은 6단계: 계산 2번, 기억력 2번, 숫자 찾기 2번이며 순서는 매번 바뀌어요
 alarm_puzzle_title9|1부터 9까지 순서대로 탭하세요
+templates_title|추천 습관
+templates_body|묶음에서 하나씩 또는 한 번에 골라요
+templates_hint|습관을 탭하면 입력되고, 묶음 전체를 추가할 수도 있어요.
+templates_add_all|모두 추가 (%1$d)
+templates_every_day|매일
+templates_days_a_week|주 %1$d일
+unit_words|단어
+pack_morning|건강한 아침
+pack_morning_desc|차분하고 상쾌하게 하루 시작
+pack_language|언어 공부
+pack_language_desc|매일 조금씩, 잊지 않게
+pack_fitness|운동 시작하기
+pack_fitness_desc|작게 시작해 꾸준히
+pack_calm|차분한 마음
+pack_calm_desc|소음을 줄여요
+pack_sleep|수면 습관
+pack_sleep_desc|같은 시간에 자고 개운하게 일어나요
+tpl_morning_water|일어나서 물 한 잔
+tpl_morning_water_tiny|몇 모금
+tpl_stretch|스트레칭
+tpl_stretch_tiny|2분
+tpl_breakfast|아침 식사
+tpl_breakfast_tiny|과일 하나
+tpl_plan_day|하루 계획
+tpl_plan_day_tiny|우선순위 하나 적기
+tpl_vocab|단어 공부
+tpl_vocab_tiny|단어 5개
+tpl_listen|듣기
+tpl_listen_tiny|노래 한 곡
+tpl_speak|말하기 연습
+tpl_speak_tiny|소리 내어 3문장
+tpl_read_lang|외국어로 읽기
+tpl_read_lang_tiny|한 문단
+tpl_walk|걷기
+tpl_walk_tiny|10분
+tpl_pushups|팔굽혀펴기
+tpl_pushups_tiny|5개
+tpl_plank|플랭크
+tpl_plank_tiny|30초
+tpl_water|물 마시기
+tpl_water_tiny|4잔
+tpl_meditate|명상
+tpl_meditate_tiny|천천히 3번 호흡
+tpl_journal|일기 쓰기
+tpl_journal_tiny|한 문장
+tpl_gratitude|오늘의 좋은 일 세 가지
+tpl_gratitude_tiny|하나만
+tpl_no_screen|화면 없는 저녁
+tpl_no_screen_tiny|자기 전 15분
+tpl_bed_on_time|제시간에 자기
+tpl_bed_on_time_tiny|조명 낮추기
+tpl_no_caffeine|오후엔 카페인 없이
+tpl_no_caffeine_tiny|반 잔
+tpl_read_bed|자기 전 독서
+tpl_read_bed_tiny|한 쪽
+tpl_wind_down|잠자리 준비
+tpl_wind_down_tiny|세수하기
+notif_enter_amount|양 입력
+notif_amount_hint|몇 %1$s?
+notif_amount_hint_plain|얼마나?
+edit_past_days|지난 날 수정
+spread_setting|하루 동안 알림
+spread_description|남은 양을 남은 시간에 나눠 알리고, 목표에 도달하면 멈춰요
+spread_add_one|+1

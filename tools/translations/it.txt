@@ -936,3 +936,67 @@ wake_habit_name|Svegliarsi
 alarm_verify_setting|Chiedi una verifica per spegnerla
 alarm_verify_description|Sei passi veloci: due calcoli, due turni di memoria e due cacce ai numeri, ogni volta in ordine diverso
 alarm_puzzle_title9|Tocca da 1 a 9 in ordine
+templates_title|Abitudini pronte
+templates_body|Scegli dai pacchetti, una alla volta o tutte insieme
+templates_hint|Tocca un'abitudine per compilare l'editor, o aggiungi un pacchetto intero.
+templates_add_all|Aggiungi tutte (%1$d)
+templates_every_day|ogni giorno
+templates_days_a_week|%1$d giorni a settimana
+unit_words|parole
+pack_morning|Mattina sana
+pack_morning_desc|Inizia la giornata calmo e sveglio
+pack_language|Imparare una lingua
+pack_language_desc|Un po' ogni giorno per non dimenticare
+pack_fitness|Iniziare con lo sport
+pack_fitness_desc|Inizia in piccolo, sii costante
+pack_calm|Mente serena
+pack_calm_desc|Abbassa il rumore
+pack_sleep|Dormire meglio
+pack_sleep_desc|Stesso orario per dormire, mattine riposate
+tpl_morning_water|Un bicchiere d'acqua al risveglio
+tpl_morning_water_tiny|Qualche sorso
+tpl_stretch|Stretching
+tpl_stretch_tiny|2 minuti
+tpl_breakfast|Colazione
+tpl_breakfast_tiny|Un frutto
+tpl_plan_day|Pianificare la giornata
+tpl_plan_day_tiny|Scrivi una priorità
+tpl_vocab|Studiare vocaboli
+tpl_vocab_tiny|5 parole
+tpl_listen|Ascolto
+tpl_listen_tiny|Una canzone
+tpl_speak|Pratica orale
+tpl_speak_tiny|Di' 3 frasi ad alta voce
+tpl_read_lang|Leggere nella lingua
+tpl_read_lang_tiny|Un paragrafo
+tpl_walk|Camminata
+tpl_walk_tiny|10 minuti
+tpl_pushups|Flessioni
+tpl_pushups_tiny|5 flessioni
+tpl_plank|Plank
+tpl_plank_tiny|30 secondi
+tpl_water|Bere acqua
+tpl_water_tiny|4 bicchieri
+tpl_meditate|Meditazione
+tpl_meditate_tiny|3 respiri lenti
+tpl_journal|Scrivere un diario
+tpl_journal_tiny|Una frase
+tpl_gratitude|Tre cose belle
+tpl_gratitude_tiny|Solo una
+tpl_no_screen|Sera senza schermi
+tpl_no_screen_tiny|15 minuti prima di dormire
+tpl_bed_on_time|A letto in orario
+tpl_bed_on_time_tiny|Abbassa le luci
+tpl_no_caffeine|Niente caffeina dopo pranzo
+tpl_no_caffeine_tiny|Mezza tazza
+tpl_read_bed|Leggere prima di dormire
+tpl_read_bed_tiny|Una pagina
+tpl_wind_down|Prepararsi al sonno
+tpl_wind_down_tiny|Lavati il viso
+notif_enter_amount|Inserisci quantità
+notif_amount_hint|Quanti %1$s?
+notif_amount_hint_plain|Quanto?
+edit_past_days|Modifica i giorni passati
+spread_setting|Ricorda durante la giornata
+spread_description|Distribuisce ciò che manca sulle ore rimaste e tace quando raggiungi l'obiettivo
+spread_add_one|+1

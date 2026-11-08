@@ -43,6 +43,16 @@ class HabitReminderReceiver : BroadcastReceiver() {
                         context.getSystemService(NotificationManager::class.java).cancel(habitId.hashCode())
                         app.tsuzuku.widget.TsuzukuWidgets.updateAll(context)
                     }
+                    ACTION_ADD_AMOUNT -> {
+                        val typed = android.app.RemoteInput.getResultsFromIntent(intent)?.getCharSequence(KEY_AMOUNT)?.toString()
+                        val amount = typed?.replace(',', '.')?.trim()?.toDoubleOrNull()
+                        if (amount != null && amount > 0) {
+                            RoomHabitRepository(dao).addProgress(habitId, amount)
+                            app.tsuzuku.widget.TsuzukuWidgets.updateAll(context)
+                        }
+                        // Answering a reply field must update or remove the notification, or it keeps spinning.
+                        context.getSystemService(NotificationManager::class.java).cancel(habitId.hashCode())
+                    }
                     ACTION_REMIND -> {
                         val habit = dao.getHabit(habitId) ?: return@launch
                         HabitReminderScheduler(context, dao).schedule(habit)
@@ -60,6 +70,7 @@ class HabitReminderReceiver : BroadcastReceiver() {
                             habit.emoji,
                             habit.reminderRepeatMinutes,
                             plan = habit.intention,
+                            amountUnit = habit.unit.takeIf { habit.type != app.tsuzuku.model.HabitType.Check.name }?.ifBlank { " " },
                         )
                     }
                 }
@@ -72,6 +83,8 @@ class HabitReminderReceiver : BroadcastReceiver() {
     companion object {
         const val ACTION_REMIND = "app.tsuzuku.action.REMIND_HABIT"
         const val ACTION_COMPLETE = "app.tsuzuku.action.COMPLETE_HABIT"
+        const val ACTION_ADD_AMOUNT = "app.tsuzuku.action.ADD_AMOUNT"
+        const val KEY_AMOUNT = "amount"
         const val EXTRA_HABIT_ID = "habit_id"
     }
 }
@@ -86,6 +99,7 @@ class ReminderBootReceiver : BroadcastReceiver() {
                 WeeklySummary.schedule(context)
                 MoodReminder.schedule(context)
                 StreakGuard.schedule(context)
+                SpreadReminders.rescheduleAll(context)
             } finally {
                 pendingResult.finish()
             }
@@ -109,7 +123,7 @@ object HabitNotifications {
         )
     }
 
-    fun show(context: Context, habitId: Long, name: String, emoji: String, repeatMinutes: Int? = null, plan: String = "") {
+    fun show(context: Context, habitId: Long, name: String, emoji: String, repeatMinutes: Int? = null, plan: String = "", amountUnit: String? = null) {
         if (Build.VERSION.SDK_INT >= 33 && context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) return
         val openIntent = PendingIntent.getActivity(
             context,
@@ -140,6 +154,30 @@ object HabitNotifications {
                     completeIntent,
                 ).build(),
             )
+        if (amountUnit != null) {
+            // Type how much straight into the notification, e.g. "3" glasses.
+            val amountIntent = PendingIntent.getBroadcast(
+                context,
+                habitId.hashCode() xor 0x08000000,
+                Intent(context, HabitReminderReceiver::class.java).apply {
+                    action = HabitReminderReceiver.ACTION_ADD_AMOUNT
+                    putExtra(HabitReminderReceiver.EXTRA_HABIT_ID, habitId)
+                },
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE,
+            )
+            val unitLabel = amountUnit.trim()
+            builder.addAction(
+                Notification.Action.Builder(
+                    android.graphics.drawable.Icon.createWithResource(context, R.drawable.ic_notification),
+                    context.getString(R.string.notif_enter_amount),
+                    amountIntent,
+                ).addRemoteInput(
+                    android.app.RemoteInput.Builder(HabitReminderReceiver.KEY_AMOUNT)
+                        .setLabel(if (unitLabel.isEmpty()) context.getString(R.string.notif_amount_hint_plain) else context.getString(R.string.notif_amount_hint, unitLabel))
+                        .build(),
+                ).build(),
+            )
+        }
         if (repeatMinutes != null) {
             val snoozeIntent = PendingIntent.getBroadcast(
                 context,

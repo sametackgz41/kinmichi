@@ -181,6 +181,9 @@ data class HabitDraft(
     /** Name of an app.tsuzuku.notifications.AlarmMission. */
     val alarmMission: String = "None",
     val alarmMarkDone: Boolean = false,
+    /** Spread-out reminders through the day (count habits); null start = off. */
+    val spreadStartMinutes: Int? = null,
+    val spreadEndMinutes: Int = 21 * 60,
 )
 
 data class WeeklyReview(

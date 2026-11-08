@@ -936,3 +936,67 @@ wake_habit_name|Aufstehen
 alarm_verify_setting|Zum Ausschalten eine Prüfung verlangen
 alarm_verify_description|Sechs kurze Schritte: zwei Rechnungen, zwei Gedächtnisrunden und zwei Zahlenjagden, jedes Mal anders sortiert
 alarm_puzzle_title9|Tippe 1 bis 9 der Reihe nach
+templates_title|Fertige Gewohnheiten
+templates_body|Aus Paketen wählen, einzeln oder alle auf einmal
+templates_hint|Tippe auf eine Gewohnheit, um den Editor auszufüllen, oder füge ein ganzes Paket hinzu.
+templates_add_all|Alle hinzufügen (%1$d)
+templates_every_day|täglich
+templates_days_a_week|%1$d Tage pro Woche
+unit_words|Wörter
+pack_morning|Gesunder Morgen
+pack_morning_desc|Ruhig und wach in den Tag
+pack_language|Sprache lernen
+pack_language_desc|Jeden Tag ein bisschen, damit nichts verloren geht
+pack_fitness|Fit werden
+pack_fitness_desc|Klein anfangen, dranbleiben
+pack_calm|Ruhiger Geist
+pack_calm_desc|Den Lärm leiser drehen
+pack_sleep|Besser schlafen
+pack_sleep_desc|Gleiche Schlafenszeit, erholte Morgen
+tpl_morning_water|Ein Glas Wasser nach dem Aufstehen
+tpl_morning_water_tiny|Ein paar Schlucke
+tpl_stretch|Dehnen
+tpl_stretch_tiny|2 Minuten
+tpl_breakfast|Frühstück
+tpl_breakfast_tiny|Ein Stück Obst
+tpl_plan_day|Den Tag planen
+tpl_plan_day_tiny|Eine Priorität aufschreiben
+tpl_vocab|Vokabeln lernen
+tpl_vocab_tiny|5 Wörter
+tpl_listen|Hören
+tpl_listen_tiny|Ein Lied
+tpl_speak|Sprechen üben
+tpl_speak_tiny|3 Sätze laut sagen
+tpl_read_lang|In der Sprache lesen
+tpl_read_lang_tiny|Ein Absatz
+tpl_walk|Spazieren gehen
+tpl_walk_tiny|10 Minuten
+tpl_pushups|Liegestütze
+tpl_pushups_tiny|5 Liegestütze
+tpl_plank|Unterarmstütz
+tpl_plank_tiny|30 Sekunden
+tpl_water|Wasser trinken
+tpl_water_tiny|4 Gläser
+tpl_meditate|Meditation
+tpl_meditate_tiny|3 langsame Atemzüge
+tpl_journal|Tagebuch schreiben
+tpl_journal_tiny|Ein Satz
+tpl_gratitude|Drei gute Dinge
+tpl_gratitude_tiny|Nur eins
+tpl_no_screen|Bildschirmfreier Abend
+tpl_no_screen_tiny|15 Minuten vor dem Schlafen
+tpl_bed_on_time|Pünktlich ins Bett
+tpl_bed_on_time_tiny|Licht dimmen
+tpl_no_caffeine|Kein Koffein am Nachmittag
+tpl_no_caffeine_tiny|Eine halbe Tasse
+tpl_read_bed|Vor dem Schlafen lesen
+tpl_read_bed_tiny|Eine Seite
+tpl_wind_down|Zur Ruhe kommen
+tpl_wind_down_tiny|Gesicht waschen
+notif_enter_amount|Menge eingeben
+notif_amount_hint|Wie viele %1$s?
+notif_amount_hint_plain|Wie viel?
+edit_past_days|Vergangene Tage bearbeiten
+spread_setting|Über den Tag erinnern
+spread_description|Verteilt den Rest auf die verbleibenden Stunden und ist still, sobald das Ziel erreicht ist
+spread_add_one|+1
