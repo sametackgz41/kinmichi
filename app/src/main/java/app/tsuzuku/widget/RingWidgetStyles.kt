@@ -56,6 +56,50 @@ internal fun badgeBitmap(size: Int, fraction: Float, paper: Int, track: Int, ink
     return b
 }
 
+/** How the count is written inside the ensō. */
+enum class EnsoLabel { Fraction, Count, Italic, None }
+
+/** The app's serif (Newsreader); widgets can't use it as a font, so it is drawn into the bitmap. */
+internal fun appSerif(context: android.content.Context, weight: Int, italic: Boolean): android.graphics.Typeface {
+    val res = if (italic) app.tsuzuku.R.font.newsreader_italic else app.tsuzuku.R.font.newsreader
+    val base = runCatching { androidx.core.content.res.ResourcesCompat.getFont(context, res) }.getOrNull() ?: android.graphics.Typeface.SERIF
+    return if (android.os.Build.VERSION.SDK_INT >= 28) android.graphics.Typeface.create(base, weight, italic) else base
+}
+
+internal fun drawEnsoLabel(
+    c: Canvas, size: Int, label: EnsoLabel, done: Int, total: Int, fraction: Float,
+    ink: Int, muted: Int, gold: Int, serif: android.graphics.Typeface, serifItalic: android.graphics.Typeface,
+) {
+    val cx = size / 2f; val cy = size / 2f
+    fun paint(sz: Float, color: Int, face: android.graphics.Typeface) =
+        Paint(Paint.ANTI_ALIAS_FLAG).apply { textSize = sz; this.color = color; typeface = face; textAlign = Paint.Align.LEFT }
+    when (label) {
+        EnsoLabel.Fraction -> {
+            val p = paint(size * 0.2f, ink, serif); val t = "$done/$total"
+            c.drawText(t, cx - p.measureText(t) / 2, cy + p.textSize * 0.35f, p)
+        }
+        EnsoLabel.Count -> {
+            val big = paint(size * 0.3f, if (fraction >= 1f) gold else ink, serif)
+            val small = paint(size * 0.13f, muted, serif)
+            val a = done.toString(); val b = "/$total"
+            val w = big.measureText(a) + small.measureText(b)
+            val x = cx - w / 2; val base = cy + big.textSize * 0.34f
+            c.drawText(a, x, base, big)
+            c.drawText(b, x + big.measureText(a) + size * 0.01f, base, small)
+        }
+        EnsoLabel.Italic -> {
+            val p = paint(size * 0.17f, muted, serifItalic); val t = "$done / $total"
+            c.drawText(t, cx - p.measureText(t) / 2, cy + p.textSize * 0.35f, p)
+        }
+        EnsoLabel.None -> if (fraction >= 1f) {
+            // Today's step, a gold drop in the opening (like the ensō icon).
+            val a = Math.toRadians(-100.0 + 330.0 + 15.0)
+            val r = size * 0.34f
+            c.drawCircle((cx + r * cos(a)).toFloat(), (cy + r * sin(a)).toFloat(), size * 0.045f, Paint(Paint.ANTI_ALIAS_FLAG).apply { color = gold })
+        }
+    }
+}
+
 /** A brush ensō that closes as the day fills; the empty part is a faint trace. */
 internal fun ensoRingBitmap(size: Int, fraction: Float, paper: Int, faint: Int, ink: Int, gold: Int): Bitmap {
     val (b, c) = disc(size, paper)
@@ -128,7 +172,7 @@ internal fun sunDiscBitmap(size: Int, fraction: Float): Bitmap {
 }
 
 @Composable
-internal fun RingStyled(habits: List<TodayHabit>, locked: Boolean, style: RingStyle) {
+internal fun RingStyled(habits: List<TodayHabit>, locked: Boolean, style: RingStyle, ensoLabel: EnsoLabel = EnsoLabel.Count) {
     val context = LocalContext.current
     val density = context.resources.displayMetrics.density
     val total = habits.size
@@ -141,7 +185,13 @@ internal fun RingStyled(habits: List<TodayHabit>, locked: Boolean, style: RingSt
     val gold = GlanceTheme.colors.tertiary.getColor(context).toArgb()
     val bmp = when (style) {
         RingStyle.Badge -> badgeBitmap(px, fraction, paper, track, ink, gold)
-        RingStyle.Enso -> ensoRingBitmap(px, fraction, paper, track, ink, gold)
+        RingStyle.Enso -> ensoRingBitmap(px, fraction, paper, track, ink, gold).also { bmp ->
+            if (!locked && total > 0) drawEnsoLabel(
+                Canvas(bmp), px, ensoLabel, done, total, fraction,
+                GlanceTheme.colors.onSurface.getColor(context).toArgb(), GlanceTheme.colors.onSurfaceVariant.getColor(context).toArgb(), gold,
+                appSerif(context, 600, false), appSerif(context, 400, true),
+            )
+        }
         RingStyle.Path -> pathBitmap(px, fraction, paper, track, ink, gold)
         RingStyle.Sun -> sunDiscBitmap(px, fraction)
     }
@@ -149,7 +199,8 @@ internal fun RingStyled(habits: List<TodayHabit>, locked: Boolean, style: RingSt
     Box(GlanceModifier.fillMaxSize().clickable(actionStartActivity<HomeActivity>()), contentAlignment = Alignment.Center) {
         Image(ImageProvider(bmp), percent, GlanceModifier.fillMaxSize(), contentScale = ContentScale.Fit)
         when (style) {
-            RingStyle.Badge, RingStyle.Enso -> Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            RingStyle.Enso -> Unit
+            RingStyle.Badge -> Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(percent, style = TextStyle(color = GlanceTheme.colors.onSurface, fontSize = 17.sp, fontWeight = FontWeight.Bold, fontFamily = FontFamily.Serif))
                 if (!locked && total > 0) Text("$done/$total", style = TextStyle(color = GlanceTheme.colors.onSurfaceVariant, fontSize = 10.sp))
             }

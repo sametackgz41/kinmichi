@@ -1213,6 +1213,23 @@ class PreviewGalleryTest {
     @Test fun ringStylesLight() = renderRingStyles(false)
     @Test fun ringStylesDark() = renderRingStyles(true)
 
+    @Test fun ensoLabelsLight() = renderEnsoLabels(false)
+    @Test fun ensoLabelsDark() = renderEnsoLabels(true)
+
+    private fun renderEnsoLabels(dark: Boolean) {
+        setVariant("tr", dark)
+        val mode = if (dark) "dark" else "light"
+        val base = sampleToday("tr")
+        listOf(1, 3, 5).forEach { doneCount ->
+            val habits = base.mapIndexed { i, t -> if (i < doneCount) t.copy(status = HabitDayStatus.Completed, progress = t.habit.target) else t.copy(status = HabitDayStatus.Pending, progress = 0.0) }
+            app.tsuzuku.widget.EnsoLabel.entries.forEach { label ->
+                renderWidget("ensolabel_${label.name.lowercase()}_${doneCount}_$mode", 110, 110) {
+                    TsuzukuGlanceTheme { app.tsuzuku.widget.RingStyled(habits, locked = false, style = app.tsuzuku.widget.RingStyle.Enso, ensoLabel = label) }
+                }
+            }
+        }
+    }
+
     private fun renderRingStyles(dark: Boolean) {
         setVariant("tr", dark)
         val mode = if (dark) "dark" else "light"
