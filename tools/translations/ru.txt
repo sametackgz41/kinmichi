@@ -1295,3 +1295,5 @@ opening_tagline|金道 · золотой путь
 lock_welcome_back|С возвращением, %1$s
 lock_fingerprint|Откройте отпечатком
 lock_use_pin|Ввести PIN
+health_settings_allow|Установлено. Нажмите, чтобы разрешить Kinmichi читать шаги, сон и другое
+health_card_allow|Разрешить доступ

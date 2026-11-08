@@ -1283,3 +1283,5 @@ opening_tagline|金道 · la via d'oro
 lock_welcome_back|Bentornato, %1$s
 lock_fingerprint|Apri con l'impronta
 lock_use_pin|Usa il PIN
+health_settings_allow|Installato. Tocca per consentire a Kinmichi di leggere passi, sonno e altro
+health_card_allow|Consenti accesso

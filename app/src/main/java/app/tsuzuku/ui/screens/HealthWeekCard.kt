@@ -55,6 +55,9 @@ internal fun HealthWeekCardLoader(habit: Habit) {
         refresh++
         onPauseOrDispose { }
     }
+    val request = androidx.activity.compose.rememberLauncherForActivityResult(
+        androidx.health.connect.client.PermissionController.createRequestPermissionResultContract(),
+    ) { refresh++ }
     LaunchedEffect(habit.id, habit.healthMetric, refresh) {
         readable = HealthSync.canRead(context, habit.healthMetric)
         if (readable) days = HealthSync.history(context, habit.healthMetric, habit.unit)
@@ -65,7 +68,11 @@ internal fun HealthWeekCardLoader(habit: Habit) {
         ) {
             Text(stringResource(R.string.health_card_source), style = MaterialTheme.typography.labelLarge, color = HealthGreen)
             Text(stringResource(R.string.health_card_no_access), style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(top = 6.dp))
-            TextButton(onClick = { HealthSync.open(context) }) { Text(stringResource(R.string.health_card_open)) }
+            TextButton(onClick = {
+                val permission = HealthSync.permissionFor(habit.healthMetric)
+                if (HealthSync.status(context) == HealthSync.Status.Ready && permission != null) request.launch(setOf(permission))
+                else HealthSync.open(context)
+            }) { Text(stringResource(R.string.health_card_allow)) }
         }
         return
     }

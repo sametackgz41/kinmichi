@@ -89,6 +89,15 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity-alias>
+        <!-- Health Connect on Android 13 and below only shows its permission screen when this exists. -->
+        <activity
+            android:name=".health.HealthRationaleActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
+            </intent-filter>
+        </activity>
         <!-- Health Connect on Android 14+ asks for the same explanation through this alias. -->
         <activity-alias
             android:name="ViewPermissionUsageActivity"

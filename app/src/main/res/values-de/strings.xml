@@ -1263,6 +1263,8 @@
     <string name="lock_welcome_back">Willkommen zurück, %1$s</string>
     <string name="lock_fingerprint">Mit Fingerabdruck öffnen</string>
     <string name="lock_use_pin">PIN verwenden</string>
+    <string name="health_settings_allow">Installiert. Tippe, um Kinmichi Schritte, Schlaf und mehr lesen zu lassen</string>
+    <string name="health_card_allow">Zugriff erlauben</string>
     <plurals name="streak_days">
         <item quantity="one">%d Tag in Folge</item>
         <item quantity="other">%d Tage in Folge</item>

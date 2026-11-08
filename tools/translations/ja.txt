@@ -1277,3 +1277,5 @@ opening_tagline|金道 · 金の道
 lock_welcome_back|おかえりなさい、%1$sさん
 lock_fingerprint|指紋で開く
 lock_use_pin|PINで開く
+health_settings_allow|インストール済み。タップしてKinmichiに歩数や睡眠などの読み取りを許可
+health_card_allow|アクセスを許可

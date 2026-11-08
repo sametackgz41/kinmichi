@@ -1283,3 +1283,5 @@ opening_tagline|金道 · o caminho dourado
 lock_welcome_back|Bem-vindo de volta, %1$s
 lock_fingerprint|Abra com sua digital
 lock_use_pin|Usar PIN
+health_settings_allow|Instalado. Toque para permitir que o Kinmichi leia passos, sono e mais
+health_card_allow|Permitir acesso

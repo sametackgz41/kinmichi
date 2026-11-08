@@ -1644,4 +1644,6 @@
     <string name="lock_welcome_back">Tekrar hoş geldin, %1$s</string>
     <string name="lock_fingerprint">Parmak izinle aç</string>
     <string name="lock_use_pin">PIN ile aç</string>
+    <string name="health_settings_allow">Yüklü. Kinmichi\'nin adım, uyku ve dahasını okumasına izin vermek için dokun</string>
+    <string name="health_card_allow">İzin ver</string>
 </resources>

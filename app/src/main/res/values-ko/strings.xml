@@ -1263,6 +1263,8 @@
     <string name="lock_welcome_back">다시 오신 걸 환영해요, %1$s님</string>
     <string name="lock_fingerprint">지문으로 열기</string>
     <string name="lock_use_pin">PIN으로 열기</string>
+    <string name="health_settings_allow">설치됨. 눌러서 Kinmichi가 걸음 수, 수면 등을 읽도록 허용하세요</string>
+    <string name="health_card_allow">접근 허용</string>
     <plurals name="streak_days">
         <item quantity="one">%d일 연속</item>
         <item quantity="other">%d일 연속</item>

@@ -1283,3 +1283,5 @@ opening_tagline|金道 · der goldene Weg
 lock_welcome_back|Willkommen zurück, %1$s
 lock_fingerprint|Mit Fingerabdruck öffnen
 lock_use_pin|PIN verwenden
+health_settings_allow|Installiert. Tippe, um Kinmichi Schritte, Schlaf und mehr lesen zu lassen
+health_card_allow|Zugriff erlauben

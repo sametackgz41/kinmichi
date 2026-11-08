@@ -102,6 +102,14 @@ object HealthSync {
         }.onFailure { Log.w(TAG, "Health history failed", it) }.getOrNull()
     }
 
+    /** Every read permission the app can ask for. */
+    val allPermissions: Set<String> get() = HealthMetric.entries.mapNotNull(::permissionFor).toSet()
+
+    /** What has been allowed so far; empty when Health Connect isn't there. */
+    suspend fun granted(context: Context): Set<String> =
+        if (!isAvailable(context)) emptySet()
+        else runCatching { HealthConnectClient.getOrCreate(context).permissionController.getGrantedPermissions() }.getOrDefault(emptySet())
+
     /** Whether the app may read this metric right now (installed and allowed). */
     suspend fun canRead(context: Context, metric: HealthMetric): Boolean =
         metric != HealthMetric.None && isAvailable(context) && runCatching {

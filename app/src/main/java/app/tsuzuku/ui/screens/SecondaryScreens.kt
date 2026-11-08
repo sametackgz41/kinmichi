@@ -1,5 +1,7 @@
 package app.tsuzuku.ui.screens
 
+import androidx.compose.runtime.LaunchedEffect
+import kotlinx.coroutines.launch
 import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material.icons.rounded.Opacity
 import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
@@ -867,12 +869,30 @@ private fun HealthConnectRow() {
         onPauseOrDispose { }
     }
     if (status == app.tsuzuku.health.HealthSync.Status.Unsupported) return
+    val scope = androidx.compose.runtime.rememberCoroutineScope()
+    var allowed by remember { mutableStateOf(0) }
+    val request = androidx.activity.compose.rememberLauncherForActivityResult(
+        androidx.health.connect.client.PermissionController.createRequestPermissionResultContract(),
+    ) { granted -> allowed = granted.size }
+    LaunchedEffect(status) { allowed = app.tsuzuku.health.HealthSync.granted(context).size }
     ValueSettingRow(
         Icons.Rounded.FavoriteBorder,
         "Health Connect",
-        stringResource(
-            if (status == app.tsuzuku.health.HealthSync.Status.Ready) R.string.health_settings_ready else R.string.health_settings_install,
-        ),
-        onClick = { app.tsuzuku.health.HealthSync.open(context) },
+        when {
+            status != app.tsuzuku.health.HealthSync.Status.Ready -> stringResource(R.string.health_settings_install)
+            allowed == 0 -> stringResource(R.string.health_settings_allow)
+            else -> stringResource(R.string.health_settings_ready)
+        },
+        onClick = {
+            if (status != app.tsuzuku.health.HealthSync.Status.Ready) {
+                app.tsuzuku.health.HealthSync.open(context)
+            } else {
+                scope.launch {
+                    val granted = app.tsuzuku.health.HealthSync.granted(context)
+                    if (granted.containsAll(app.tsuzuku.health.HealthSync.allPermissions)) app.tsuzuku.health.HealthSync.open(context)
+                    else request.launch(app.tsuzuku.health.HealthSync.allPermissions)
+                }
+            }
+        },
     )
 }
