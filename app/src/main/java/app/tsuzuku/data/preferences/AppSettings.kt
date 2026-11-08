@@ -101,12 +101,6 @@ data class AppSettings(
     val todayHiddenSections: String = DEFAULT_TODAY_HIDDEN_SECTIONS,
     val healthSyncEnabled: Boolean = true,
     val offlineIntelligenceEnabled: Boolean = true,
-    val cloudAiEnabled: Boolean = false,
-    val geminiApiKey: String = "",
-    val aiShareHabitTitles: Boolean = true,
-    val aiShareTaskTitles: Boolean = true,
-    val aiShareNotes: Boolean = false,
-    val cloudAiModel: String = "gemini-1.5-flash",
 )
 
 class SettingsRepository(context: Context) {
@@ -146,12 +140,13 @@ class SettingsRepository(context: Context) {
     fun setTodayHiddenSections(value: String) = update(KEY_TODAY_HIDDEN_SECTIONS, value)
     fun setHealthSyncEnabled(value: Boolean) = update(KEY_HEALTH_SYNC_ENABLED, value)
     fun setOfflineIntelligenceEnabled(value: Boolean) = update(KEY_OFFLINE_INTELLIGENCE_ENABLED, value)
-    fun setCloudAiEnabled(value: Boolean) = update(KEY_CLOUD_AI_ENABLED, value)
-    fun setGeminiApiKey(value: String) = update(KEY_GEMINI_API_KEY, value.trim())
-    fun setAiShareHabitTitles(value: Boolean) = update(KEY_AI_SHARE_HABIT_TITLES, value)
-    fun setAiShareTaskTitles(value: Boolean) = update(KEY_AI_SHARE_TASK_TITLES, value)
-    fun setAiShareNotes(value: Boolean) = update(KEY_AI_SHARE_NOTES, value)
-    fun setCloudAiModel(value: String) = update(KEY_CLOUD_AI_MODEL, value)
+
+    /** The cloud AI was removed: forgets its settings, and any API key a user once entered. */
+    fun forgetCloudAi() {
+        val keys = listOf("cloud_ai_enabled", "gemini_api_key", "ai_share_habit_titles", "ai_share_task_titles", "ai_share_notes", "cloud_ai_model")
+        if (keys.none(preferences::contains)) return
+        preferences.edit().apply { keys.forEach(::remove) }.apply()
+    }
 
     fun setVacation(startEpochDay: Long, endEpochDay: Long) {
         preferences.edit().putLong(KEY_VACATION_START, startEpochDay).putLong(KEY_VACATION_END, endEpochDay).apply()
@@ -263,12 +258,6 @@ class SettingsRepository(context: Context) {
         todayHiddenSections = getString(KEY_TODAY_HIDDEN_SECTIONS, DEFAULT_TODAY_HIDDEN_SECTIONS).orEmpty(),
         healthSyncEnabled = getBoolean(KEY_HEALTH_SYNC_ENABLED, true),
         offlineIntelligenceEnabled = getBoolean(KEY_OFFLINE_INTELLIGENCE_ENABLED, true),
-        cloudAiEnabled = getBoolean(KEY_CLOUD_AI_ENABLED, false),
-        geminiApiKey = getString(KEY_GEMINI_API_KEY, "").orEmpty(),
-        aiShareHabitTitles = getBoolean(KEY_AI_SHARE_HABIT_TITLES, true),
-        aiShareTaskTitles = getBoolean(KEY_AI_SHARE_TASK_TITLES, true),
-        aiShareNotes = getBoolean(KEY_AI_SHARE_NOTES, false),
-        cloudAiModel = getString(KEY_CLOUD_AI_MODEL, "gemini-1.5-flash") ?: "gemini-1.5-flash",
     )
 
     companion object {
@@ -300,12 +289,6 @@ class SettingsRepository(context: Context) {
         private const val KEY_TODAY_HIDDEN_SECTIONS = "today_hidden_sections"
         private const val KEY_HEALTH_SYNC_ENABLED = "health_sync_enabled"
         private const val KEY_OFFLINE_INTELLIGENCE_ENABLED = "offline_intelligence_enabled"
-        private const val KEY_CLOUD_AI_ENABLED = "cloud_ai_enabled"
-        private const val KEY_GEMINI_API_KEY = "gemini_api_key"
-        private const val KEY_AI_SHARE_HABIT_TITLES = "ai_share_habit_titles"
-        private const val KEY_AI_SHARE_TASK_TITLES = "ai_share_task_titles"
-        private const val KEY_AI_SHARE_NOTES = "ai_share_notes"
-        private const val KEY_CLOUD_AI_MODEL = "cloud_ai_model"
     }
 }
 

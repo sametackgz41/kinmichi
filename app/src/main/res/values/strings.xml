@@ -612,20 +612,6 @@
     <string name="unlink">Unlink</string>
 
     <!-- Moved from hardcoded UI literals -->
-    <string name="ai_privacy_settings_title">AI &amp; Privacy Settings</string>
-    <string name="ai_offline_engine_active">Offline Rule Engine (Active)</string>
-    <string name="ai_cloud_mode_desc">Your questions and explanations are enriched by Gemini using your own API key.</string>
-    <string name="ai_offline_mode_desc">Zero internet and full privacy. Insights are generated locally from the data on your device.</string>
-    <string name="ai_cloud_title">Cloud AI (Gemini)</string>
-    <string name="ai_cloud_subtitle">Optional advanced natural-language explanations</string>
-    <string name="ai_api_key_label">Gemini API Key (BYOK)</string>
-    <string name="ai_model_selection">Model Selection</string>
-    <string name="ai_shared_data_permissions">Shared Data Permissions</string>
-    <string name="ai_shared_data_desc">Choose which data is included in the analysis context:</string>
-    <string name="ai_share_habit_names">Habit names (named when on, anonymous when off)</string>
-    <string name="ai_share_task_titles">Task titles (named when on, anonymous when off)</string>
-    <string name="ai_share_daily_notes">Daily personal notes (off by default)</string>
-    <string name="ai_save_and_close">Save &amp; Close</string>
     <string name="ask_suggestion_productive_hours">When am I most productive?</string>
     <string name="ask_suggestion_struggling_habit">Which habit is slipping?</string>
     <string name="ask_suggestion_postponed_tasks">What\'s going on with my postponed tasks?</string>
@@ -754,8 +740,6 @@
     <string name="intelligence_intro">Your data is analysed entirely offline on your device. Without judgement, it helps you notice the work and habit rhythm that suits you best.</string>
     <string name="ask_tsuzuku_cta">🌱 Ask Kinmichi</string>
     <string name="ask_tsuzuku_cta_desc">Chat with your data, discover your rhythm</string>
-    <string name="ai_plan_assistant_cta">✨ AI Plan Assistant</string>
-    <string name="ai_plan_assistant_cta_desc">Create and approve a personal day draft</string>
     <string name="intelligence_privacy_footer" formatted="false">100% offline analysis · Optional cloud AI &amp; full privacy</string>
     <string name="no_patterns_today">No clear pattern detected for today yet. Keep tracking your habits and tasks.</string>
     <string name="trends_need_more_data">A few more days of data are needed for trend analysis. Trends will appear here as daily reviews and habit entries grow.</string>
@@ -778,7 +762,6 @@
     <string name="collection_name">Collection name</string>
     <string name="collection_name_example">e.g. To read in 2026, Masterpieces</string>
     <string name="choose_icon">Choose an icon</string>
-    <string name="ai_plan_assistant">AI Plan Assistant</string>
     <string name="plan_assistant_subtitle">Modes &amp; preview-approve flow</string>
     <string name="choose_plan_mode">Choose plan mode</string>
     <string name="plan_extra_instruction">Optional extra instruction (e.g. \'Tomorrow afternoon\')</string>
@@ -848,7 +831,6 @@
     <string name="personal_records_desc">Earned badges, longest streaks and milestones</string>
     <string name="intelligence_offline_title">Kinmichi Intelligence (Offline)</string>
     <string name="intelligence_offline_desc">Analyses your habit and planning patterns locally on your device. Zero data transfer, full privacy.</string>
-    <string name="gemini_cloud_active">Gemini Cloud AI (Active)</string>
     <string name="skip_habit_title">Skip habit</string>
     <string name="skip_habit_message">You can give a reason for skipping "%1$s" this time. Discipline grows stronger with flexibility.</string>
     <string name="custom_reason">Custom reason</string>
@@ -1580,4 +1562,20 @@
     <string name="journey_context">%1$s / %2$s · today +%3$s</string>
     <string name="journey_context_done">finished · %1$s %2$s 🎉</string>
     <string name="journey_percent">%1$d%%</string>
+    <string name="target_history_title">Target history</string>
+    <string name="target_history_since">since %1$s</string>
+    <string name="target_history_note">Past days count with the target they had then; raising it never breaks an old streak.</string>
+    <string name="sealed_title">Encrypted full backup</string>
+    <string name="sealed_description">Nobody can open it without the password. If you forget the password, the backup can\'t be opened either.</string>
+    <string name="sealed_password_min">Password (at least %1$d)</string>
+    <string name="sealed_password_again">Password again</string>
+    <string name="sealed_mismatch">The passwords don\'t match</string>
+    <string name="sealed_weak">weak</string>
+    <string name="sealed_fair">fair</string>
+    <string name="sealed_strong">strong</string>
+    <string name="sealed_create">Create encrypted backup</string>
+    <string name="sealed_open_title">This backup is encrypted</string>
+    <string name="sealed_password">Password</string>
+    <string name="sealed_wrong_password">Wrong password, or the file is damaged</string>
+    <string name="sealed_open">Open</string>
 </resources>

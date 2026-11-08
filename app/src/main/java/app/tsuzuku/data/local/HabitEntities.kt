@@ -50,6 +50,8 @@ data class HabitEntity(
     val journeyTotal: Double? = null,
     /** Where it stood when the habit began (already read 40 pages). */
     val journeyStart: Double = 0.0,
+    /** Earlier targets, "2026-11-08:20.0|...": before that day the target was 20. */
+    val targetHistory: String = "",
 )
 
 @Entity(

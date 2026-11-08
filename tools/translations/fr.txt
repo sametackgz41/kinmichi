@@ -1200,3 +1200,19 @@ journey_save|Enregistrer
 journey_context|%1$s / %2$s · aujourd'hui +%3$s
 journey_context_done|fini · %1$s %2$s 🎉
 journey_percent|%1$d %%
+target_history_title|Historique des objectifs
+target_history_since|depuis le %1$s
+target_history_note|Les jours passés comptent avec l'objectif d'alors ; le relever ne casse pas une ancienne série.
+sealed_title|Sauvegarde complète chiffrée
+sealed_description|Personne ne peut l'ouvrir sans le mot de passe. Si tu l'oublies, elle ne s'ouvrira plus.
+sealed_password_min|Mot de passe (%1$d min.)
+sealed_password_again|Répète le mot de passe
+sealed_mismatch|Les mots de passe ne correspondent pas
+sealed_weak|faible
+sealed_fair|moyen
+sealed_strong|fort
+sealed_create|Créer la sauvegarde chiffrée
+sealed_open_title|Cette sauvegarde est chiffrée
+sealed_password|Mot de passe
+sealed_wrong_password|Mot de passe incorrect ou fichier endommagé
+sealed_open|Ouvrir

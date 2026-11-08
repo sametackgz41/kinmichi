@@ -97,7 +97,7 @@ class TsuzukuApplication : Application() {
         super.onCreate()
         HabitNotifications.createChannel(this)
         diagnosticStore.installCrashCapture()
-        if (settingsRepository.settings.value.geminiApiKey.isNotBlank()) settingsRepository.setGeminiApiKey("")
+        settingsRepository.forgetCloudAi()
         applicationScope.launch {
             reminderScheduler.rescheduleAll()
             app.tsuzuku.notifications.WeeklySummary.schedule(this@TsuzukuApplication)

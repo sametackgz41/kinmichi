@@ -1212,3 +1212,19 @@ journey_save|Сохранить
 journey_context|%1$s / %2$s · сегодня +%3$s
 journey_context_done|готово · %1$s %2$s 🎉
 journey_percent|%1$d%%
+target_history_title|История целей
+target_history_since|с %1$s
+target_history_note|Прошлые дни считаются по тогдашней цели; повышение цели не ломает старую серию.
+sealed_title|Зашифрованная полная копия
+sealed_description|Без пароля её никто не откроет. Если забудете пароль, копию тоже не открыть.
+sealed_password_min|Пароль (не менее %1$d)
+sealed_password_again|Повторите пароль
+sealed_mismatch|Пароли не совпадают
+sealed_weak|слабый
+sealed_fair|средний
+sealed_strong|сильный
+sealed_create|Создать зашифрованную копию
+sealed_open_title|Эта копия зашифрована
+sealed_password|Пароль
+sealed_wrong_password|Неверный пароль или файл повреждён
+sealed_open|Открыть

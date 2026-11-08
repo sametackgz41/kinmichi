@@ -366,8 +366,12 @@ class RoomHabitRepository(
 
     override suspend fun updateHabit(id: Long, draft: HabitDraft) {
         val current = dao.getHabit(id) ?: return
+        val history = if (current.type == draft.type.name && kotlin.math.abs(current.target - draft.target) > 1e-9) {
+            app.tsuzuku.model.TargetChange.record(current.targetHistory, current.target, today())
+        } else current.targetHistory
         dao.insertHabit(
             current.copy(
+                targetHistory = history,
                 name = draft.name.trim(),
                 emoji = draft.emoji,
                 colorArgb = draft.colorArgb,
@@ -677,6 +681,7 @@ private fun HabitEntity.toDomain() = Habit(
     slots = app.tsuzuku.model.HabitSlot.parse(slots),
     journeyTotal = journeyTotal,
     journeyStart = journeyStart,
+    targetHistory = app.tsuzuku.model.TargetChange.parse(targetHistory),
 )
 
 private fun HabitLevelEntity.toDomain() = HabitLevel(
@@ -723,7 +728,10 @@ private fun periodCompletionCount(habit: HabitEntity, entries: List<HabitEntryEn
     val (start, end) = habit.toDomain().periodBounds(date)
     return entries.filter { runCatching { LocalDate.parse(it.localDate) }.getOrNull()?.let { day -> !day.isBefore(start) && !day.isAfter(end) } == true }
         .groupBy(HabitEntryEntity::localDate)
-        .count { (_, dayEntries) -> dayEntries.any { it.status == HabitEntryEntity.STATUS_COMPLETED } || dayEntries.filter(HabitEntryEntity::isProgress).sumOf(HabitEntryEntity::amount) >= habit.target }
+        .count { (day, dayEntries) ->
+            val target = app.tsuzuku.model.TargetChange.parse(habit.targetHistory).firstOrNull { it.changedOn.isAfter(LocalDate.parse(day)) }?.oldTarget ?: habit.target
+            dayEntries.any { it.status == HabitEntryEntity.STATUS_COMPLETED } || dayEntries.filter(HabitEntryEntity::isProgress).sumOf(HabitEntryEntity::amount) >= target
+        }
 }
 
 private fun List<HabitEntryEntity>.toHistoryRecords(): List<HabitHistoryRecord> =

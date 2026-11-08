@@ -1180,6 +1180,22 @@
     <string name="journey_context">%1$s / %2$s・今日 +%3$s</string>
     <string name="journey_context_done">完了・%1$s %2$s 🎉</string>
     <string name="journey_percent">%1$d%%</string>
+    <string name="target_history_title">目標の履歴</string>
+    <string name="target_history_since">%1$sから</string>
+    <string name="target_history_note">過去の日はその時の目標で数えます。目標を上げても以前の連続記録は崩れません。</string>
+    <string name="sealed_title">暗号化したフルバックアップ</string>
+    <string name="sealed_description">パスワードなしでは誰も開けません。忘れるとバックアップも開けなくなります。</string>
+    <string name="sealed_password_min">パスワード（%1$d文字以上）</string>
+    <string name="sealed_password_again">パスワード（確認）</string>
+    <string name="sealed_mismatch">パスワードが一致しません</string>
+    <string name="sealed_weak">弱い</string>
+    <string name="sealed_fair">普通</string>
+    <string name="sealed_strong">強い</string>
+    <string name="sealed_create">暗号化バックアップを作成</string>
+    <string name="sealed_open_title">このバックアップは暗号化されています</string>
+    <string name="sealed_password">パスワード</string>
+    <string name="sealed_wrong_password">パスワードが違うか、ファイルが壊れています</string>
+    <string name="sealed_open">開く</string>
     <plurals name="streak_days">
         <item quantity="other">%d 日連続</item>
     </plurals>

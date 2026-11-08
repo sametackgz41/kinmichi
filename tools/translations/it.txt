@@ -1200,3 +1200,19 @@ journey_save|Salva
 journey_context|%1$s / %2$s · oggi +%3$s
 journey_context_done|finito · %1$s %2$s 🎉
 journey_percent|%1$d%%
+target_history_title|Storico obiettivi
+target_history_since|dal %1$s
+target_history_note|I giorni passati contano con l'obiettivo di allora; alzarlo non rompe una vecchia serie.
+sealed_title|Backup completo cifrato
+sealed_description|Nessuno può aprirlo senza password. Se la dimentichi, non si apre più.
+sealed_password_min|Password (almeno %1$d)
+sealed_password_again|Ripeti la password
+sealed_mismatch|Le password non coincidono
+sealed_weak|debole
+sealed_fair|media
+sealed_strong|forte
+sealed_create|Crea backup cifrato
+sealed_open_title|Questo backup è cifrato
+sealed_password|Password
+sealed_wrong_password|Password errata o file danneggiato
+sealed_open|Apri

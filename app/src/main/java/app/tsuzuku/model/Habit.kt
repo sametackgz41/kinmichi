@@ -75,6 +75,8 @@ data class Habit(
     val slots: List<HabitSlot> = emptyList(),
     val journeyTotal: Double? = null,
     val journeyStart: Double = 0.0,
+    /** Earlier targets, oldest last: each says what the target was before [TargetChange.changedOn]. */
+    val targetHistory: List<TargetChange> = emptyList(),
 )
 
 data class HabitLevel(
@@ -269,3 +271,28 @@ fun Habit.periodBounds(date: java.time.LocalDate): Pair<java.time.LocalDate, jav
         start to start.plusDays(length - 1)
     }
 }
+
+
+/** The target was [oldTarget] until the day before [changedOn]. */
+data class TargetChange(val changedOn: java.time.LocalDate, val oldTarget: Double) {
+    companion object {
+        fun parse(stored: String?): List<TargetChange> = stored.orEmpty().split('|').mapNotNull { part ->
+            val (day, value) = part.split(':').takeIf { it.size == 2 } ?: return@mapNotNull null
+            val date = runCatching { java.time.LocalDate.parse(day) }.getOrNull() ?: return@mapNotNull null
+            TargetChange(date, value.toDoubleOrNull() ?: return@mapNotNull null)
+        }.sortedBy { it.changedOn }
+
+        fun format(list: List<TargetChange>): String = list.sortedBy { it.changedOn }.joinToString("|") { "${it.changedOn}:${it.oldTarget}" }
+
+        /** Records a change made today; a second change on the same day keeps the first old value. */
+        fun record(stored: String, oldTarget: Double, today: java.time.LocalDate): String {
+            val list = parse(stored)
+            if (list.any { it.changedOn == today }) return stored
+            return format(list + TargetChange(today, oldTarget))
+        }
+    }
+}
+
+/** The target that applied on [date]: past days keep the target they had then. */
+fun Habit.targetOn(date: java.time.LocalDate): Double =
+    targetHistory.firstOrNull { it.changedOn.isAfter(date) }?.oldTarget ?: target

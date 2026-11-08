@@ -1200,3 +1200,19 @@ journey_save|Salvar
 journey_context|%1$s / %2$s · hoje +%3$s
 journey_context_done|concluído · %1$s %2$s 🎉
 journey_percent|%1$d%%
+target_history_title|Histórico de metas
+target_history_since|desde %1$s
+target_history_note|Dias passados contam com a meta da época; aumentá-la não quebra uma sequência antiga.
+sealed_title|Backup completo criptografado
+sealed_description|Ninguém abre sem a senha. Se você esquecer a senha, o backup também não abre.
+sealed_password_min|Senha (mín. %1$d)
+sealed_password_again|Repita a senha
+sealed_mismatch|As senhas não coincidem
+sealed_weak|fraca
+sealed_fair|média
+sealed_strong|forte
+sealed_create|Criar backup criptografado
+sealed_open_title|Este backup é criptografado
+sealed_password|Senha
+sealed_wrong_password|Senha errada ou arquivo danificado
+sealed_open|Abrir

@@ -127,7 +127,7 @@ data class HabitHistorySnapshot(
         return if (habit.direction == HabitDirection.Quit) {
             record.status == HabitDayStatus.Completed || (habit.maximumTarget != null && record.progress <= habit.maximumTarget && record.status != HabitDayStatus.Failed)
         } else {
-            record.status == HabitDayStatus.Completed || record.progress >= habit.target
+            record.status == HabitDayStatus.Completed || record.progress >= habit.targetOn(date)
         }
     }
 
@@ -136,7 +136,7 @@ data class HabitHistorySnapshot(
         return if (habit.direction == HabitDirection.Quit) {
             record.status == HabitDayStatus.Completed || (habit.maximumTarget != null && record.progress <= habit.maximumTarget && record.status != HabitDayStatus.Failed)
         } else {
-            record.status == HabitDayStatus.Completed || record.progress >= habit.target ||
+            record.status == HabitDayStatus.Completed || record.progress >= habit.targetOn(date) ||
                 (habit.minimumTarget > 0.0 && record.progress >= habit.minimumTarget)
         }
     }
@@ -230,7 +230,7 @@ data class HabitHistorySnapshot(
             isComplete(habit, date) -> HeatDay.Done
             record == null && !habit.isScheduledOn(date) -> HeatDay.Off
             record == null || habit.direction == HabitDirection.Quit || habit.target <= 0.0 -> HeatDay.Partial(0f)
-            else -> HeatDay.Partial((record.progress / habit.target).toFloat().coerceIn(0f, 0.99f))
+            else -> HeatDay.Partial((record.progress / habit.targetOn(date)).toFloat().coerceIn(0f, 0.99f))
         }
     }
 

@@ -1200,3 +1200,19 @@ journey_save|Speichern
 journey_context|%1$s / %2$s · heute +%3$s
 journey_context_done|geschafft · %1$s %2$s 🎉
 journey_percent|%1$d %%
+target_history_title|Zielverlauf
+target_history_since|seit %1$s
+target_history_note|Vergangene Tage zählen mit dem damaligen Ziel; ein höheres Ziel bricht keine alte Serie.
+sealed_title|Verschlüsselte Komplettsicherung
+sealed_description|Ohne Passwort kann niemand sie öffnen. Vergisst du es, lässt sie sich auch nicht mehr öffnen.
+sealed_password_min|Passwort (mind. %1$d)
+sealed_password_again|Passwort wiederholen
+sealed_mismatch|Die Passwörter stimmen nicht überein
+sealed_weak|schwach
+sealed_fair|mittel
+sealed_strong|stark
+sealed_create|Verschlüsselt sichern
+sealed_open_title|Diese Sicherung ist verschlüsselt
+sealed_password|Passwort
+sealed_wrong_password|Falsches Passwort oder beschädigte Datei
+sealed_open|Öffnen

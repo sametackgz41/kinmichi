@@ -612,20 +612,6 @@
     <string name="unlink">Bağlantıyı kaldır</string>
 
     <!-- Moved from hardcoded UI literals -->
-    <string name="ai_privacy_settings_title">Yapay Zeka &amp; Gizlilik Ayarları</string>
-    <string name="ai_offline_engine_active">Çevrimdışı Kural Motoru (Aktif)</string>
-    <string name="ai_cloud_mode_desc">Sorularınız ve açıklamalarınız kendi API anahtarınızla Gemini tarafından zenginleştirilir.</string>
-    <string name="ai_offline_mode_desc">Sıfır internet ve tam gizlilik. Analizler cihazınızdaki Room verilerinden yerel üretilir.</string>
-    <string name="ai_cloud_title">Bulut Yapay Zeka (Gemini)</string>
-    <string name="ai_cloud_subtitle">İsteğe bağlı gelişmiş doğal dil açıklamaları</string>
-    <string name="ai_api_key_label">Gemini API Anahtarı (BYOK)</string>
-    <string name="ai_model_selection">Model Seçimi</string>
-    <string name="ai_shared_data_permissions">Paylaşılan Veri İzinleri</string>
-    <string name="ai_shared_data_desc">Analiz bağlamına hangi verilerin dahil edileceğini seçin:</string>
-    <string name="ai_share_habit_names">Alışkanlık İsimleri (Açıksa isimler, kapalıysa anonim)</string>
-    <string name="ai_share_task_titles">Görev Başlıkları (Açıksa başlıklar, kapalıysa anonim)</string>
-    <string name="ai_share_daily_notes">Günlük Kişisel Notlar (Varsayılan olarak kapalı)</string>
-    <string name="ai_save_and_close">Kaydet &amp; Kapat</string>
     <string name="ask_suggestion_productive_hours">En verimli olduğum saatler?</string>
     <string name="ask_suggestion_struggling_habit">Hangi alışkanlığım aksıyor?</string>
     <string name="ask_suggestion_postponed_tasks">Ertelenen görevlerimde durum ne?</string>
@@ -754,8 +740,6 @@
     <string name="intelligence_intro">Verilerin tamamen cihazında offline olarak incelenir. Asla yargılamadan, sana en uygun çalışma ve alışkanlık ritmini fark ettirir.</string>
     <string name="ask_tsuzuku_cta">🌱 Kinmichi\'ye Sor</string>
     <string name="ask_tsuzuku_cta_desc">Verilerinle sohbet et, ritmini keşfet</string>
-    <string name="ai_plan_assistant_cta">✨ AI Plan Asistanı</string>
-    <string name="ai_plan_assistant_cta_desc">Kişisel gün taslağı oluştur ve onayla</string>
     <string name="intelligence_privacy_footer" formatted="false">%100 Çevrimdışı Analiz · İsteğe Bağlı Bulut AI &amp; Tam Gizlilik</string>
     <string name="no_patterns_today">Bugün için henüz belirgin bir kalıp tespit edilmedi. Alışkanlıklarını ve görevlerini takip etmeye devam et.</string>
     <string name="trends_need_more_data">Trend analizi için birkaç günlük daha veriye ihtiyaç var. Gün sonu değerlendirmeleri ve alışkanlık girişleri arttıkça trendler burada belirecek.</string>
@@ -778,7 +762,6 @@
     <string name="collection_name">Koleksiyon Adı</string>
     <string name="collection_name_example">Örn: 2026\'da Okunacaklar, Başyapıtlar</string>
     <string name="choose_icon">Simge Seçin</string>
-    <string name="ai_plan_assistant">AI Plan Asistanı</string>
     <string name="plan_assistant_subtitle">Modlar &amp; Önizleme-Onay Mekanizması</string>
     <string name="choose_plan_mode">Plan Modunu Seç</string>
     <string name="plan_extra_instruction">İsteğe Bağlı Ek Talimat (Örn: \'Yarın öğleden sonra\')</string>
@@ -848,7 +831,6 @@
     <string name="personal_records_desc">Kazanılan rozetler, en uzun seriler ve kilometre taşları</string>
     <string name="intelligence_offline_title">Kinmichi Intelligence (Çevrimdışı)</string>
     <string name="intelligence_offline_desc">Alışkanlık ve planlama örüntülerinizi cihazınızda yerel olarak analiz eder. Sıfır veri aktarımı, tam gizlilik.</string>
-    <string name="gemini_cloud_active">Gemini Bulut AI (Aktif)</string>
     <string name="skip_habit_title">Alışkanlığı Atla</string>
     <string name="skip_habit_message">\"%1$s\" için bu seferlik atlama nedeni belirtebilirsin. Disiplin esneklikle güçlenir.</string>
     <string name="custom_reason">Özel Sebep</string>
@@ -1579,4 +1561,20 @@
     <string name="journey_context">%1$s / %2$s · bugün +%3$s</string>
     <string name="journey_context_done">bitti · %1$s %2$s 🎉</string>
     <string name="journey_percent">%%%1$d</string>
+    <string name="target_history_title">Hedef geçmişi</string>
+    <string name="target_history_since">%1$s tarihinden beri</string>
+    <string name="target_history_note">Geçmiş günler kendi zamanındaki hedefle sayılır; hedefi yükseltmek eski serini bozmaz.</string>
+    <string name="sealed_title">Şifreli tam yedek</string>
+    <string name="sealed_description">Parolasız kimse açamaz. Parolayı unutursan yedek de açılmaz.</string>
+    <string name="sealed_password_min">Parola (en az %1$d)</string>
+    <string name="sealed_password_again">Parola tekrar</string>
+    <string name="sealed_mismatch">Parolalar aynı değil</string>
+    <string name="sealed_weak">zayıf</string>
+    <string name="sealed_fair">orta</string>
+    <string name="sealed_strong">güçlü</string>
+    <string name="sealed_create">Şifreli yedek oluştur</string>
+    <string name="sealed_open_title">Bu yedek şifreli</string>
+    <string name="sealed_password">Parola</string>
+    <string name="sealed_wrong_password">Parola yanlış ya da dosya bozuk</string>
+    <string name="sealed_open">Aç</string>
 </resources>

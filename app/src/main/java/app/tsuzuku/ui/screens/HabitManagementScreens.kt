@@ -219,6 +219,7 @@ fun HabitDetailScreen(
             if (showSummary) {
             if (habit.direction == app.tsuzuku.model.HabitDirection.Quit) item { CleanDaysCard(habit, records) }
             item { HabitYearCard(habit, records) }
+            if (habit.targetHistory.isNotEmpty()) item { TargetHistoryCard(habit) }
             if (feelingSummary.total > 0) item { FeelingSummaryCard(feelingSummary) }
             item {
                 Column(

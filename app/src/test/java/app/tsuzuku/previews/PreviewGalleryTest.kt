@@ -582,6 +582,31 @@ class PreviewGalleryTest {
         captureScreen("slots_today_tr")
     }
 
+    @Test fun historyBackupRealTr() {
+        setVariant("tr", false)
+        val base = sampleToday("tr")
+        val book = base[0].habit.copy(
+            name = "Kitap oku", emoji = "📖", type = app.tsuzuku.model.HabitType.Count, target = 30.0, unit = "sayfa",
+            createdOn = LocalDate.of(2026, 8, 14),
+            targetHistory = app.tsuzuku.model.TargetChange.parse("2026-10-01:10.0|2026-11-08:20.0"),
+        )
+        compose.setContent {
+            TsuzukuTheme(darkTheme = false) {
+                androidx.compose.material3.Surface {
+                    androidx.compose.foundation.layout.Column(
+                        androidx.compose.ui.Modifier.fillMaxSize().padding(16.dp),
+                        verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(16.dp),
+                    ) {
+                        app.tsuzuku.ui.screens.TargetHistoryCard(book)
+                        app.tsuzuku.ui.screens.SealedBackupCard("Parola2026", "Parola2026", {}, {}, true, {})
+                    }
+                }
+            }
+        }
+        compose.mainClock.advanceTimeBy(900)
+        captureScreen("history_backup_real_tr")
+    }
+
     @Test fun journeyRealTr() {
         setVariant("tr", false)
         val base = sampleToday("tr")
@@ -717,7 +742,11 @@ class PreviewGalleryTest {
     @Test fun task10() = renderTask("task10_catch") { app.tsuzuku.notifications.CatchMission(onProgress = {}, onSolved = {}, seed = 6) }
 
     @Test fun trashA() = renderMock("trash_a") { TrashOptionA() }
-    @Test fun journeyA() = renderMock("journey_a") { JourneyOptionA() }
+    @Test fun historyA() = renderMock("history_a") { HistoryOptionA() }
+    @Test fun historyB() = renderMock("history_b") { HistoryOptionB() }
+    @Test fun backupA() = renderMock("backup_a") { BackupOptionA() }
+    @Test fun backupB() = renderMock("backup_b") { BackupOptionB() }
+    @Test fun journeyA() =renderMock("journey_a") { JourneyOptionA() }
     @Test fun journeyB() = renderMock("journey_b") { JourneyOptionB() }
     @Test fun journeyC() = renderMock("journey_c") { JourneyOptionC() }
     @Test fun timerA() =renderMock("timer_a") { TimerOptionA() }

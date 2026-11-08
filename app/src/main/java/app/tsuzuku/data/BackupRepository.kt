@@ -205,7 +205,7 @@ internal object BackupCodec {
         put("goalPeriod", item.goalPeriod); put("periodTarget", item.periodTarget); put("periodDays", item.periodDays); put("routineName", item.routineName)
         putNullable("prerequisiteHabitId", item.prerequisiteHabitId); put("healthMetric", item.healthMetric)
         put("minimumTarget", item.minimumTarget); putNullable("maximumTarget", item.maximumTarget); put("difficulty", item.difficulty)
-        put("contextLabel", item.contextLabel); put("intention", item.intention); put("tinyVersion", item.tinyVersion); item.deletedAt?.let { put("deletedAt", it) }; put("slots", item.slots); item.journeyTotal?.let { put("journeyTotal", it) }; put("journeyStart", item.journeyStart)
+        put("contextLabel", item.contextLabel); put("intention", item.intention); put("tinyVersion", item.tinyVersion); item.deletedAt?.let { put("deletedAt", it) }; put("slots", item.slots); item.journeyTotal?.let { put("journeyTotal", it) }; put("journeyStart", item.journeyStart); put("targetHistory", item.targetHistory)
         putNullable("activeStartEpochDay", item.activeStartEpochDay); putNullable("activeEndEpochDay", item.activeEndEpochDay)
         put("repeatIntervalDays", item.repeatIntervalDays); putNullable("pausedUntilEpochDay", item.pausedUntilEpochDay)
         put("tags", item.tags); put("currentLevel", item.currentLevel)
@@ -221,7 +221,7 @@ internal object BackupCodec {
         routineName = o.optString("routineName", ""), prerequisiteHabitId = o.optionalLong("prerequisiteHabitId"),
         healthMetric = o.optString("healthMetric", "None"),
         minimumTarget = o.optDouble("minimumTarget", 0.0), maximumTarget = o.optionalDouble("maximumTarget"),
-        difficulty = o.optInt("difficulty", 2), contextLabel = o.optString("contextLabel", ""), intention = o.optString("intention", ""), tinyVersion = o.optString("tinyVersion", ""), deletedAt = if (o.has("deletedAt")) o.getLong("deletedAt") else null, slots = o.optString("slots", ""), journeyTotal = if (o.has("journeyTotal")) o.getDouble("journeyTotal") else null, journeyStart = o.optDouble("journeyStart", 0.0),
+        difficulty = o.optInt("difficulty", 2), contextLabel = o.optString("contextLabel", ""), intention = o.optString("intention", ""), tinyVersion = o.optString("tinyVersion", ""), deletedAt = if (o.has("deletedAt")) o.getLong("deletedAt") else null, slots = o.optString("slots", ""), journeyTotal = if (o.has("journeyTotal")) o.getDouble("journeyTotal") else null, journeyStart = o.optDouble("journeyStart", 0.0), targetHistory = o.optString("targetHistory", ""),
         activeStartEpochDay = o.optionalLong("activeStartEpochDay"), activeEndEpochDay = o.optionalLong("activeEndEpochDay"),
         repeatIntervalDays = o.optInt("repeatIntervalDays", 1), pausedUntilEpochDay = o.optionalLong("pausedUntilEpochDay"),
         tags = o.optString("tags", ""),
