@@ -406,6 +406,41 @@ footer .made a { color: var(--ink); text-decoration: none; border-bottom: 1px so
 footer .made a:hover { color: var(--gold); }
 @media (max-width: 700px) { footer .made { margin-left: 0; width: 100%; } }
 
+/* widget wall: every home-screen widget on a soft "wallpaper", sized like the launcher would */
+.wall { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-flow: dense; gap: 16px; }
+.wcell { margin: 0; display: flex; flex-direction: column; border-radius: 26px; overflow: hidden; border: 1px solid var(--line); background: var(--paper); }
+.wscreen {
+  flex: 1; display: grid; place-items: center; padding: 26px 22px; min-height: 180px;
+  background:
+    radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--indigo) 22%, transparent), transparent 60%),
+    radial-gradient(90% 80% at 100% 100%, color-mix(in srgb, var(--gold-bright) 20%, transparent), transparent 60%),
+    var(--sunk);
+}
+.wscreen img { display: block; width: 100%; height: auto; filter: drop-shadow(0 14px 22px rgba(0,0,0,.22)); }
+.wcell figcaption { padding: 14px 18px 16px; font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); }
+.wcell figcaption b { display: block; color: var(--ink); font: 600 17px/1.3 Newsreader, serif; margin-bottom: 2px; }
+.w-today { grid-column: span 2; grid-row: span 2; }
+.w-heatmap, .w-week, .w-next, .w-alarm, .w-ring { grid-column: span 2; }
+.w-today .wscreen img { max-width: 420px; }
+.w-heatmap .wscreen img, .w-week .wscreen img { max-width: 440px; }
+.w-next .wscreen img, .w-alarm .wscreen img { max-width: 420px; }
+.w-habit .wscreen img, .w-streak .wscreen img { max-width: 170px; }
+.w-ring .wscreen img { max-width: 130px; }
+#widgets .chips { margin-top: 26px; }
+@media (max-width: 900px) {
+  .wall { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .w-today { grid-row: auto; }
+}
+@media (max-width: 560px) {
+  .wall { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .wscreen { padding: 18px 14px; min-height: 130px; }
+  .w-habit .wscreen img, .w-streak .wscreen img { max-width: 120px; }
+  .w-ring .wscreen img { max-width: 96px; }
+  .wcell figcaption { padding: 12px 14px 14px; font-size: 13px; }
+}
+.wcell { transition: transform .25s ease, box-shadow .25s ease; }
+.wcell:hover { transform: translateY(-4px); box-shadow: 0 22px 44px -28px var(--shadow); }
+
 /* scroll reveal */
 .js .rv { opacity: 0; transform: translateY(22px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); transition-delay: var(--rv-delay, 0s); }
 .js .rv.in { opacity: 1; transform: none; }
@@ -644,15 +679,32 @@ footer .made a:hover { color: var(--gold); }
     </div>
   </section>
 
-  <section class="alt">
-    <div class="wrap split">
-      <div class="widget-shot"><img data-theme-img="widgets" data-i18n-alt="alt_widgets" src="img/en/widgets.webp" alt="The Today widget on a phone's home screen" width="760" height="942" loading="lazy"></div>
-      <div>
+  <section class="alt" id="widgets">
+    <div class="wrap">
+      <div class="section-head">
         <h2 data-i18n="w_title">On your home screen and wrist</h2>
-        <p class="muted" style="margin-top:14px;font-size:18px" data-i18n="w_lead">Eight widgets: Today, a single habit, this week, your streak, the next habit, a progress ring, a mini heatmap and a sunrise wake alarm. Add them straight from Settings; on Android 12 and up their boxes tick the moment you tap. A Wear OS tile and watch app mark habits from your wrist.</p>
-        <div class="chips" aria-label="Languages">
-          <span>English</span><span>Türkçe</span><span>Español</span><span>Deutsch</span><span>Français</span><span>Italiano</span><span>Português</span><span>Русский</span><span>日本語</span><span>한국어</span>
-        </div>
+        <p data-i18n="w_lead">Eight widgets: Today, a single habit, this week, your streak, the next habit, a progress ring, a mini heatmap and a sunrise wake alarm. Add them straight from Settings; on Android 12 and up their boxes tick the moment you tap. A Wear OS tile and watch app mark habits from your wrist.</p>
+      </div>
+      <div class="wall">
+        <figure class="wcell w-today"><div class="wscreen"><img data-theme-img="widget_today" src="img/en/widget_today.webp" alt="" width="600" height="520" loading="lazy"></div>
+          <figcaption><b data-i18n="wg_today_t">Today</b><span data-i18n="wg_today">Check off today's habits from your home screen</span></figcaption></figure>
+        <figure class="wcell w-heatmap"><div class="wscreen"><img data-theme-img="widget_heatmap" src="img/en/widget_heatmap.webp" alt="" width="640" height="340" loading="lazy"></div>
+          <figcaption><b data-i18n="wg_heatmap_t">Mini heatmap</b><span data-i18n="wg_heatmap">The last three months at a glance, comebacks in gold</span></figcaption></figure>
+        <figure class="wcell w-week"><div class="wscreen"><img data-theme-img="widget_week" src="img/en/widget_week.webp" alt="" width="640" height="300" loading="lazy"></div>
+          <figcaption><b data-i18n="wg_week_t">This week</b><span data-i18n="wg_week">This week, one ring per day</span></figcaption></figure>
+        <figure class="wcell w-habit"><div class="wscreen"><img data-theme-img="widget_habit" src="img/en/widget_habit.webp" alt="" width="300" height="300" loading="lazy"></div>
+          <figcaption><b data-i18n="wg_habit_t">Single habit</b><span data-i18n="wg_habit">One habit with its progress ring and streak</span></figcaption></figure>
+        <figure class="wcell w-streak"><div class="wscreen"><img data-theme-img="widget_streak" src="img/en/widget_streak.webp" alt="" width="320" height="340" loading="lazy"></div>
+          <figcaption><b data-i18n="wg_streak_t">Streak</b><span data-i18n="wg_streak">Your longest running streak, with this month's comebacks</span></figcaption></figure>
+        <figure class="wcell w-ring"><div class="wscreen"><img data-theme-img="widget_ring" src="img/en/widget_ring.webp" alt="" width="220" height="220" loading="lazy"></div>
+          <figcaption><b data-i18n="wg_ring_t">Progress ring</b><span data-i18n="wg_ring">Today's share done in a small ring</span></figcaption></figure>
+        <figure class="wcell w-next"><div class="wscreen"><img data-theme-img="widget_next" src="img/en/widget_next.webp" alt="" width="600" height="192" loading="lazy"></div>
+          <figcaption><b data-i18n="wg_next_t">Next habit</b><span data-i18n="wg_next">The one habit to do now, one tap to mark it</span></figcaption></figure>
+        <figure class="wcell w-alarm"><div class="wscreen"><img data-theme-img="widget_alarm" src="img/en/widget_alarm.webp" alt="" width="600" height="192" loading="lazy"></div>
+          <figcaption><b data-i18n="wg_alarm_t">Wake alarm</b><span data-i18n="wg_alarm">Your next alarm; tap to turn it on or off</span></figcaption></figure>
+      </div>
+      <div class="chips" aria-label="Languages">
+        <span>English</span><span>Türkçe</span><span>Español</span><span>Deutsch</span><span>Français</span><span>Italiano</span><span>Português</span><span>Русский</span><span>日本語</span><span>한국어</span>
       </div>
     </div>
   </section>
@@ -877,7 +929,7 @@ footer .made a:hover { color: var(--gold); }
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
   // Sections and cards rise in as they scroll into view; siblings follow one another a beat apart.
-  var targets = document.querySelectorAll('.section-head, .showcase, .idea, .item, .ptile, .split > *, .promise > div, .steps-list li, .faq details, .cta-card');
+  var targets = document.querySelectorAll('.section-head, .showcase, .idea, .item, .ptile, .wcell, .split > *, .promise > div, .steps-list li, .faq details, .cta-card');
   targets.forEach(function (el) {
     el.classList.add('rv');
     var i = Array.prototype.indexOf.call(el.parentNode.children, el);
