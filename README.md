@@ -8,7 +8,7 @@ Most habit apps punish you when a streak breaks. Kinmichi is built around the mo
 a smaller version of the habit for bad days, a nudge never to miss twice, and comebacks that are
 mended in gold instead of hidden. Free, open source, no ads, no tracking, works offline.
 
-[Website](https://sametackgz41.github.io/kinmichi/) · [Türkçe](README.tr.md)
+[Website](https://abdulsametacikgoz.com/kinmichi/) · [Türkçe](README.tr.md)
 
 <p>
   <img src="docs/screenshots/today_en_light.webp" width="240" alt="Today screen: week of enso circles, the day's count and habit cards">

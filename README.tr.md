@@ -8,7 +8,7 @@ odaklanır: kötü günler için alışkanlığın küçük bir sürümü, iki k
 saklanmak yerine altınla onarılan geri dönüşler. Ücretsiz, açık kaynak, reklamsız, takipsiz,
 internetsiz çalışır.
 
-[Web sitesi](https://sametackgz41.github.io/kinmichi/) · [English](README.md)
+[Web sitesi](https://abdulsametacikgoz.com/kinmichi/) · [English](README.md)
 
 <p>
   <img src="docs/screenshots/today_en_light.webp" width="240" alt="Bugün ekranı">
