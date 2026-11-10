@@ -96,7 +96,7 @@
 - Yeni diller: İspanyolca, Almanca, Portekizce (Brezilya) ve Japonca; Android 13+ uygulama dili ayarında da seçilebilir. Tarihler her dilin kendi yazılışıyla
 - Yeni ilk açılış turu: altın yol, kötü gün sürümü, kintsugi, eğer-o zaman planı ve gizlilik
 - Uyarlanabilir hedef: üç hafta neredeyse her gün tutturulan hedef için çıtayı yükseltme, nadiren yapılan her günkü alışkanlık için "haftada X" önerisi, haftalık hedefi yukarı ya da aşağı ayarlama
-- Tanıtım sitesi: sametackgz41.github.io/kinmichi (Türkçe ve İngilizce)
+- Tanıtım sitesi: abdulsametacikgoz.com/kinmichi (Türkçe ve İngilizce)
 - GitHub deposu artık github.com/sametackgz41/kinmichi; eski adres yönlendirir. APK dosyaları kinmichi-x.y.z.apk adını taşır
 
 ## 2.6.0 — Açık kaynak
