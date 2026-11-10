@@ -441,6 +441,45 @@ footer .made a:hover { color: var(--gold); }
 .wcell { transition: transform .25s ease, box-shadow .25s ease; }
 .wcell:hover { transform: translateY(-4px); box-shadow: 0 22px 44px -28px var(--shadow); }
 
+/* manual APK download: steps on the left, a picture of GitHub's Assets list on the right */
+.manual {
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 36px; align-items: start;
+  margin-top: 44px; padding-top: 40px; border-top: 1px solid var(--line);
+}
+.manual-text h3 { font-size: 28px; }
+.manual-text > p { margin: 10px 0 22px; font-size: 17px; }
+.manual-steps li { padding: 14px 18px; }
+.manual-steps li::before { background: var(--gold-bright); color: #1F1D1A; }
+.assets-card {
+  border: 1px solid var(--line); border-radius: 22px; background: var(--card); padding: 16px;
+  box-shadow: 0 22px 44px -32px var(--shadow); position: sticky; top: 88px;
+}
+.assets-head { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; padding: 4px 6px 12px; }
+.assets-head svg { width: 18px; height: 18px; color: var(--muted); }
+.assets-count { font-size: 12px; font-weight: 600; padding: 1px 8px; border-radius: 999px; background: var(--sunk); color: var(--muted); border: 1px solid var(--line); }
+.asset {
+  display: flex; align-items: center; gap: 12px; padding: 11px 12px; border-radius: 14px;
+  border: 1px solid var(--line); background: var(--paper); text-decoration: none; color: var(--ink);
+}
+.asset + .asset { margin-top: 8px; }
+.asset-name { flex: 1; min-width: 0; }
+.asset-name b { display: block; font: 600 14px/1.35 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
+.asset-name small { display: block; font-size: 12.5px; color: var(--muted); margin-top: 1px; }
+.asset-size { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+.asset-ic { flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; }
+.asset-ic svg { width: 15px; height: 15px; }
+.muted-ic { border: 2px solid var(--line); }
+.asset.pick { border: 1.5px solid var(--gold-bright); background: color-mix(in srgb, var(--gold-bright) 10%, var(--paper)); box-shadow: 0 0 0 4px color-mix(in srgb, var(--gold-bright) 14%, transparent); }
+.asset.pick .asset-ic { background: var(--gold-bright); color: #1F1D1A; }
+.asset.pick small { color: var(--gold); font-weight: 600; }
+.asset.pick:hover { transform: translateY(-1px); }
+.asset.skip { opacity: .55; }
+.apk-btn { width: 100%; margin-top: 14px; }
+@media (max-width: 860px) {
+  .manual { grid-template-columns: 1fr; gap: 24px; }
+  .assets-card { position: static; }
+}
+
 /* scroll reveal */
 .js .rv { opacity: 0; transform: translateY(22px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); transition-delay: var(--rv-delay, 0s); }
 .js .rv.in { opacity: 1; transform: none; }
@@ -734,7 +773,43 @@ footer .made a:hover { color: var(--gold); }
         <li><div data-i18n-html="i2">Add the app with this address: <code>https://github.com/sametackgz41/kinmichi</code></div></li>
         <li><div data-i18n-html="i3">Set the APK filter to <code>^(kinmichi|tsuzuku)-[0-9]</code> so it picks the phone app, then install. Updates arrive automatically.</div></li>
       </ol>
-      <p class="muted" style="margin-top:22px" data-i18n-html="i_hand">Prefer doing it by hand? Download the APK from the <a href="https://github.com/sametackgz41/kinmichi/releases/latest">latest release</a>. The app also tells you when a new version is out.</p>
+      <div class="manual" id="manual">
+        <div class="manual-text">
+          <h3 data-i18n="m_title">Downloading it yourself</h3>
+          <p class="muted" data-i18n="m_lead">Not using Obtainium? Grab the APK straight from GitHub. Here is exactly which file to pick.</p>
+          <ol class="steps-list manual-steps">
+            <li><div data-i18n-html="m1">Open the <a href="https://github.com/sametackgz41/kinmichi/releases/latest">latest release</a> and scroll down to <b>Assets</b>.</div></li>
+            <li><div data-i18n-html="m2">Tap the file that starts with <code>kinmichi-</code> and ends in <code>.apk</code>. Skip <code>kinmichi-wear</code> (that one is for watches) and the "Source code" files.</div></li>
+            <li><div data-i18n="m3">When the download finishes, open it from your notifications or the Downloads folder.</div></li>
+            <li><div data-i18n-html="m4">If Android asks, allow your browser to install unknown apps, then tap <b>Install</b>. Updating later works the same way, and your habits stay put.</div></li>
+          </ol>
+        </div>
+        <div class="assets-card" aria-label="What the Assets list on GitHub looks like">
+          <div class="assets-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg> Assets <span class="assets-count">4</span></div>
+          <a class="asset pick" id="apk-phone" href="https://github.com/sametackgz41/kinmichi/releases/latest">
+            <span class="asset-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span>
+            <span class="asset-name"><b id="apk-phone-name">kinmichi-2.10.0.apk</b><small data-i18n="m_phone">For your phone</small></span>
+            <span class="asset-size" id="apk-phone-size">7.8 MB</span>
+          </a>
+          <div class="asset">
+            <span class="asset-ic muted-ic"></span>
+            <span class="asset-name"><b id="apk-wear-name">kinmichi-wear-2.10.0.apk</b><small data-i18n="m_watch">For Wear OS watches</small></span>
+            <span class="asset-size" id="apk-wear-size">2.3 MB</span>
+          </div>
+          <div class="asset skip">
+            <span class="asset-ic muted-ic"></span>
+            <span class="asset-name"><b>Source code (zip)</b><small data-i18n="m_skip">Not needed</small></span>
+          </div>
+          <div class="asset skip">
+            <span class="asset-ic muted-ic"></span>
+            <span class="asset-name"><b>Source code (tar.gz)</b><small data-i18n="m_skip">Not needed</small></span>
+          </div>
+          <a class="button primary apk-btn" id="apk-btn" href="https://github.com/sametackgz41/kinmichi/releases/latest">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
+            <span data-i18n="m_btn">Download the phone app (APK)</span>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -920,6 +995,21 @@ footer .made a:hover { color: var(--gold); }
         document.getElementById('version').textContent = v;
         var v2 = document.getElementById('version2'); if (v2) v2.textContent = v;
       }
+      // The manual guide shows the real file names and links straight to the phone APK.
+      if (release && release.assets) {
+        var mb = function (b) { return (b / 1048576).toFixed(1) + ' MB'; };
+        release.assets.forEach(function (a) {
+          if (!/\.apk$/i.test(a.name)) return;
+          var wear = /wear/i.test(a.name);
+          var id = wear ? 'apk-wear' : 'apk-phone';
+          document.getElementById(id + '-name').textContent = a.name;
+          document.getElementById(id + '-size').textContent = mb(a.size);
+          if (!wear) {
+            document.getElementById('apk-phone').href = a.browser_download_url;
+            document.getElementById('apk-btn').href = a.browser_download_url;
+          }
+        });
+      }
     })
     .catch(function () {});
 
@@ -929,7 +1019,7 @@ footer .made a:hover { color: var(--gold); }
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
   // Sections and cards rise in as they scroll into view; siblings follow one another a beat apart.
-  var targets = document.querySelectorAll('.section-head, .showcase, .idea, .item, .ptile, .wcell, .split > *, .promise > div, .steps-list li, .faq details, .cta-card');
+  var targets = document.querySelectorAll('.section-head, .showcase, .idea, .item, .ptile, .wcell, .split > *, .promise > div, .steps-list li, .faq details, .cta-card, .manual-text > h3, .assets-card');
   targets.forEach(function (el) {
     el.classList.add('rv');
     var i = Array.prototype.indexOf.call(el.parentNode.children, el);
