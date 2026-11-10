@@ -2,6 +2,9 @@
 // data-i18n (text), data-i18n-html (markup) or data-i18n-alt (image alt) attribute.
 window.KINMICHI_I18N = {
   tr: {
+    cta_title: "Altın yoluna başla",
+    cta_lead: "Ücretsiz, açık kaynak ve internetsiz çalışır. Bir dakikada kur, hatırlama işini uygulamaya bırak.",
+    ft_made: "<a href='https://sametackgz41.github.io/'>Abdulsamet Açıkgöz</a> tarafından yapıldı",
     theme_to_dark: "Koyu temaya geç",
     theme_to_light: "Açık temaya geç",
     doc_title: "Kinmichi — sakin bir Android alışkanlık uygulaması",
@@ -113,6 +116,9 @@ window.KINMICHI_I18N = {
     n_safe: "Silinenler otuz gün çöp kutusunda bekler, yedekler parolayla kilitlenebilir, geçmiş günler kendi hedefini korur.",
   },
   es: {
+    cta_title: "Empieza tu camino dorado",
+    cta_lead: "Gratis, de código abierto y funciona sin conexión. Instálala en un minuto y deja que la app recuerde por ti.",
+    ft_made: "Hecho por <a href='https://sametackgz41.github.io/'>Abdulsamet Açıkgöz</a>",
     theme_to_dark: "Cambiar a tema oscuro",
     theme_to_light: "Cambiar a tema claro",
     doc_title: "Kinmichi — un registro de hábitos tranquilo para Android",
@@ -224,6 +230,9 @@ window.KINMICHI_I18N = {
     n_safe: "Los hábitos borrados esperan treinta días en la papelera, las copias se pueden cifrar con contraseña y los días pasados conservan su meta.",
   },
   de: {
+    cta_title: "Beginne deinen goldenen Weg",
+    cta_lead: "Kostenlos, quelloffen und funktioniert offline. In einer Minute installiert, das Erinnern übernimmt die App.",
+    ft_made: "Gemacht von <a href='https://sametackgz41.github.io/'>Abdulsamet Açıkgöz</a>",
     theme_to_dark: "Zum dunklen Design wechseln",
     theme_to_light: "Zum hellen Design wechseln",
     doc_title: "Kinmichi — ein ruhiger Gewohnheitstracker für Android",
@@ -335,6 +344,9 @@ window.KINMICHI_I18N = {
     n_safe: "Gelöschte Gewohnheiten warten dreißig Tage im Papierkorb, Sicherungen lassen sich mit Passwort sperren, und vergangene Tage behalten ihr damaliges Ziel.",
   },
   fr: {
+    cta_title: "Commencez votre chemin doré",
+    cta_lead: "Gratuite, open source et utilisable hors ligne. Installez-la en une minute et laissez l'app se souvenir pour vous.",
+    ft_made: "Créé par <a href='https://sametackgz41.github.io/'>Abdulsamet Açıkgöz</a>",
     theme_to_dark: "Passer au thème sombre",
     theme_to_light: "Passer au thème clair",
     doc_title: "Kinmichi — un suivi d'habitudes apaisé pour Android",
@@ -446,6 +458,9 @@ window.KINMICHI_I18N = {
     n_safe: "Les habitudes supprimées attendent trente jours dans la corbeille, les sauvegardes se verrouillent par mot de passe et les jours passés gardent leur objectif.",
   },
   it: {
+    cta_title: "Inizia il tuo sentiero d'oro",
+    cta_lead: "Gratuita, open source e funziona offline. Installala in un minuto e lascia che sia l'app a ricordare.",
+    ft_made: "Realizzato da <a href='https://sametackgz41.github.io/'>Abdulsamet Açıkgöz</a>",
     theme_to_dark: "Passa al tema scuro",
     theme_to_light: "Passa al tema chiaro",
     doc_title: "Kinmichi — un tracker di abitudini calmo per Android",
@@ -557,6 +572,9 @@ window.KINMICHI_I18N = {
     n_safe: "Le abitudini eliminate restano trenta giorni nel cestino, i backup si proteggono con password e i giorni passati tengono il loro obiettivo.",
   },
   pt: {
+    cta_title: "Comece seu caminho dourado",
+    cta_lead: "Gratuito, de código aberto e funciona offline. Instale em um minuto e deixe o app lembrar por você.",
+    ft_made: "Feito por <a href='https://sametackgz41.github.io/'>Abdulsamet Açıkgöz</a>",
     theme_to_dark: "Mudar para o tema escuro",
     theme_to_light: "Mudar para o tema claro",
     doc_title: "Kinmichi — um app de hábitos tranquilo para Android",
@@ -668,6 +686,9 @@ window.KINMICHI_I18N = {
     n_safe: "Hábitos apagados esperam trinta dias na lixeira, backups podem ser trancados com senha e dias passados mantêm a meta da época.",
   },
   ru: {
+    cta_title: "Начните свой золотой путь",
+    cta_lead: "Бесплатно, с открытым кодом и работает офлайн. Установите за минуту, а помнить будет приложение.",
+    ft_made: "Автор: <a href='https://sametackgz41.github.io/'>Abdulsamet Açıkgöz</a>",
     theme_to_dark: "Включить тёмную тему",
     theme_to_light: "Включить светлую тему",
     doc_title: "Kinmichi — спокойный трекер привычек для Android",
@@ -779,6 +800,9 @@ window.KINMICHI_I18N = {
     n_safe: "Удалённые привычки тридцать дней ждут в корзине, копии можно защитить паролем, а прошлые дни сохраняют свою цель.",
   },
   ja: {
+    cta_title: "あなたの金の道を始めよう",
+    cta_lead: "無料・オープンソースで、オフラインでも動きます。1分でインストールして、覚えておくのはアプリに任せましょう。",
+    ft_made: "制作：<a href='https://sametackgz41.github.io/'>Abdulsamet Açıkgöz</a>",
     theme_to_dark: "ダークテーマに切り替え",
     theme_to_light: "ライトテーマに切り替え",
     doc_title: "Kinmichi — Android のための穏やかな習慣トラッカー",
@@ -890,6 +914,9 @@ window.KINMICHI_I18N = {
     n_safe: "削除した習慣は30日間ごみ箱に。バックアップはパスワードで保護でき、過去の日は当時の目標のまま。",
   },
   ko: {
+    cta_title: "당신의 황금빛 길을 시작하세요",
+    cta_lead: "무료이고 오픈 소스이며 오프라인에서도 작동합니다. 1분 만에 설치하고 기억하는 일은 앱에 맡기세요.",
+    ft_made: "제작: <a href='https://sametackgz41.github.io/'>Abdulsamet Açıkgöz</a>",
     theme_to_dark: "어두운 테마로 전환",
     theme_to_light: "밝은 테마로 전환",
     doc_title: "Kinmichi — Android를 위한 차분한 습관 트래커",

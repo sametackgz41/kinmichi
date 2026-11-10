@@ -9,12 +9,15 @@
 <meta property="og:url" content="https://sametackgz41.github.io/kinmichi/">
 <meta property="og:title" content="Kinmichi — the golden path">
 <meta property="og:description" content="A calm, open-source habit tracker for Android that helps you keep going.">
-<meta property="og:image" content="https://sametackgz41.github.io/kinmichi/screenshots/today_en_light.webp">
+<meta property="og:image" content="https://sametackgz41.github.io/kinmichi/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F5F0E6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#15171C" media="(prefers-color-scheme: dark)">
 <script>
-// Apply a saved light/dark choice before the page paints.
+// Apply a saved light/dark choice before the page paints; enable scroll animations only when JS runs.
+document.documentElement.classList.add('js');
 try { var kt = localStorage.getItem('kinmichi-theme'); if (kt === 'light' || kt === 'dark') document.documentElement.dataset.theme = kt; } catch (e) {}
 </script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'%3E%3Crect width='108' height='108' rx='24' fill='%23F5F0E6'/%3E%3Ccircle cx='34.8' cy='74.8' r='4' fill='%232E4A7D'/%3E%3Ccircle cx='38.8' cy='65.3' r='4.4' fill='%232E4A7D'/%3E%3Ccircle cx='48.3' cy='59.6' r='4.8' fill='%232E4A7D'/%3E%3Ccircle cx='59.7' cy='54.6' r='5.2' fill='%232E4A7D'/%3E%3Ccircle cx='69.2' cy='47.4' r='5.6' fill='%232E4A7D'/%3E%3Ccircle cx='73.2' cy='34.8' r='7.4' fill='%23B8902E'/%3E%3C/svg%3E">
@@ -329,6 +332,88 @@ footer .brand { font-size: 18px; }
 .pchip { display: inline-flex; align-items: center; gap: 6px; font: 600 12px Inter, sans-serif; color: var(--pt-acc); margin-bottom: 6px; }
 .pchip i { width: 9px; height: 9px; border-radius: 50%; background: var(--pt-acc); }
 @media (max-width: 760px) { .pbento { grid-template-columns: 1fr; } .pshot { height: 240px; } }
+
+/* ---------- Premium layer ---------- */
+header.top { transition: box-shadow .25s, background .25s; }
+header.top.scrolled { box-shadow: 0 10px 30px -22px var(--shadow); }
+.hero { position: relative; padding: 88px 0 72px; }
+.hero::before {
+  content: ""; position: absolute; inset: -20% -10% auto auto; width: 60%; height: 120%; pointer-events: none;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--gold-bright) 16%, transparent), transparent 70%);
+}
+.hero .wrap { position: relative; }
+.hero h1 { font-size: clamp(44px, 7.4vw, 78px); letter-spacing: -0.015em; }
+.button.primary { box-shadow: 0 12px 28px -14px color-mix(in srgb, var(--indigo) 70%, transparent); }
+.button.primary:hover { box-shadow: 0 16px 32px -14px color-mix(in srgb, var(--indigo) 80%, transparent); }
+.button.secondary:hover { border-color: var(--gold-bright); }
+
+.hero-art { position: relative; display: grid; place-items: center; min-height: 520px; }
+.hero-enso { position: absolute; width: min(560px, 120%); aspect-ratio: 1; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-8deg); opacity: .9; }
+.enso-stroke { stroke: color-mix(in srgb, var(--gold-bright) 55%, transparent); stroke-dasharray: 1; stroke-dashoffset: 0; }
+.enso-drop { fill: var(--gold-bright); }
+.hero-phones { position: relative; width: 100%; max-width: 440px; height: 500px; }
+.hphone {
+  position: absolute; width: 58%; aspect-ratio: 900 / 1336; padding: 9px; border-radius: 34px;
+  background: #121318; box-shadow: 0 40px 80px -30px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.04) inset;
+}
+.hphone img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 26px; display: block; background: #1a1c22; }
+.hphone.back { left: 2%; top: 12%; transform: rotate(-7deg); }
+.hphone.front { right: 2%; top: 0; transform: rotate(5deg); }
+@media (prefers-reduced-motion: no-preference) {
+  .js .enso-stroke { stroke-dashoffset: 1; animation: enso-draw 1.8s .25s cubic-bezier(.6,.05,.25,1) forwards; }
+  .js .enso-drop { opacity: 0; transform-box: fill-box; transform-origin: center; animation: drop-in .6s 1.85s ease-out forwards; }
+  .hphone.front { animation: float-a 7s ease-in-out infinite; }
+  .hphone.back { animation: float-b 8s ease-in-out infinite; }
+}
+@keyframes enso-draw { to { stroke-dashoffset: 0; } }
+@keyframes drop-in { from { opacity: 0; transform: scale(.2); } to { opacity: 1; transform: scale(1); } }
+@keyframes float-a { 0%,100% { transform: rotate(5deg) translateY(0); } 50% { transform: rotate(5deg) translateY(-12px); } }
+@keyframes float-b { 0%,100% { transform: rotate(-7deg) translateY(0); } 50% { transform: rotate(-7deg) translateY(10px); } }
+@media (max-width: 860px) {
+  .hero-art { min-height: 420px; margin-top: 8px; }
+  .hero-phones { height: 410px; max-width: 360px; }
+}
+@media (max-width: 420px) { .hero-art { min-height: 360px; } .hero-phones { height: 350px; } }
+
+/* cards: one radius, one shadow, a gentle lift */
+.idea, .item, .ptile, .promise div, .steps-list li, .faq details, .tile {
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.idea:hover, .item:hover, .ptile:hover, .promise div:hover {
+  transform: translateY(-4px); box-shadow: 0 22px 44px -28px var(--shadow);
+}
+.item:hover, .promise div:hover, .idea:hover { border-color: color-mix(in srgb, var(--gold-bright) 45%, var(--line)); }
+.section-head h2 { letter-spacing: -0.01em; }
+.section-head::before {
+  content: ""; display: block; width: 44px; height: 3px; border-radius: 3px; margin-bottom: 18px;
+  background: linear-gradient(90deg, var(--gold-bright), color-mix(in srgb, var(--gold-bright) 0%, transparent));
+}
+.faq details[open] { border-color: color-mix(in srgb, var(--gold-bright) 45%, var(--line)); }
+
+/* closing call to action */
+.cta-card {
+  position: relative; overflow: hidden; text-align: center; padding: 72px 28px; border-radius: 40px;
+  background: linear-gradient(160deg, var(--card), var(--sunk)); border: 1px solid var(--line);
+}
+.cta-card .cta-enso { position: absolute; width: 520px; right: -160px; bottom: -200px; opacity: .55; pointer-events: none; }
+.cta-card .cta-enso path { stroke: color-mix(in srgb, var(--gold-bright) 40%, transparent); }
+.cta-card .cta-enso circle { fill: var(--gold-bright); }
+.cta-card h2 { position: relative; font-size: clamp(34px, 5vw, 56px); }
+.cta-card p { position: relative; color: var(--muted); font-size: 18px; max-width: 34em; margin: 16px auto 30px; }
+.cta-card .actions { position: relative; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+footer .made { margin-left: auto; }
+footer .made a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--gold-bright); }
+footer .made a:hover { color: var(--gold); }
+@media (max-width: 700px) { footer .made { margin-left: 0; width: 100%; } }
+
+/* scroll reveal */
+.js .rv { opacity: 0; transform: translateY(22px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); transition-delay: var(--rv-delay, 0s); }
+.js .rv.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .rv { opacity: 1; transform: none; transition: none; }
+  .idea, .item, .ptile, .promise div, .button { transition: none; }
+}
 </style>
 </head>
 <body>
@@ -379,11 +464,15 @@ footer .brand { font-size: 18px; }
         </div>
         <p class="note" data-i18n="hero_note">Free and open source · No ads · No tracking · Works offline</p>
       </div>
-      <div class="peek hero-peek">
-        <picture>
-          <source id="hero-dark" data-img="hero_dark" srcset="img/en/hero_dark.webp" media="(prefers-color-scheme: dark)">
-          <img data-img="hero_light" data-i18n-alt="alt_hero" src="img/en/hero_light.webp" alt="The Today screen: the week as small enso circles, the day's count, and habit cards" width="900" height="1336">
-        </picture>
+      <div class="hero-art">
+        <svg class="hero-enso" viewBox="0 0 200 200" aria-hidden="true">
+          <path class="enso-stroke" pathLength="1" d="M146 46 A70 70 0 1 0 168 92" fill="none" stroke-width="11" stroke-linecap="round"/>
+          <circle class="enso-drop" cx="160" cy="44" r="8"/>
+        </svg>
+        <div class="hero-phones">
+          <div class="hphone back"><img data-img="hero_light" src="img/en/hero_light.webp" alt="" width="900" height="1336"></div>
+          <div class="hphone front"><img data-img="hero_dark" data-i18n-alt="alt_hero" src="img/en/hero_dark.webp" alt="The Today screen: the week as small enso circles, the day's count, and habit cards" width="900" height="1336"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -609,6 +698,22 @@ footer .brand { font-size: 18px; }
       </div>
     </div>
   </section>
+
+  <section id="start">
+    <div class="wrap">
+      <div class="cta-card">
+        <svg class="cta-enso" viewBox="0 0 200 200" aria-hidden="true"><path d="M146 46 A70 70 0 1 0 168 92" fill="none" stroke-width="10" stroke-linecap="round"/><circle cx="160" cy="44" r="7"/></svg>
+        <p class="eyebrow" data-i18n="eyebrow">金道 · the golden path</p>
+        <h2 data-i18n="cta_title">Start your golden path</h2>
+        <p data-i18n="cta_lead">Free, open source and works offline. Install it in a minute, and let the app do the remembering.</p>
+        <div class="actions">
+          <a class="button primary" href="https://github.com/sametackgz41/kinmichi/releases/latest"><span data-i18n="download">Download for Android</span> <span class="version" id="version2"></span></a>
+          <a class="button secondary" href="#install" data-i18n="with_obtainium">Install with Obtainium</a>
+          <a class="button secondary" href="https://github.com/sametackgz41/kinmichi">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>
@@ -618,6 +723,7 @@ footer .brand { font-size: 18px; }
     <a href="https://github.com/sametackgz41/kinmichi/issues/new/choose" data-i18n="ft_report">Report a problem</a>
     <a href="https://github.com/sametackgz41/kinmichi/blob/main/PRIVACY.md" data-i18n="ft_privacy">Privacy</a>
     <span data-i18n="ft_license">MIT licence · formerly Tsuzuku</span>
+    <span class="made" data-i18n-html="ft_made">Made by <a href="https://sametackgz41.github.io/">Abdulsamet Açıkgöz</a></span>
   </div>
 </footer>
 
@@ -757,9 +863,32 @@ footer .brand { font-size: 18px; }
   fetch('https://api.github.com/repos/sametackgz41/kinmichi/releases/latest')
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (release) {
-      if (release && release.tag_name) document.getElementById('version').textContent = '· ' + release.tag_name.replace(/^v/, '');
+      if (release && release.tag_name) {
+        var v = '· ' + release.tag_name.replace(/^v/, '');
+        document.getElementById('version').textContent = v;
+        var v2 = document.getElementById('version2'); if (v2) v2.textContent = v;
+      }
     })
     .catch(function () {});
+
+  // Header shadow once the page scrolls.
+  var top = document.querySelector('header.top');
+  var onScroll = function () { top.classList.toggle('scrolled', window.scrollY > 8); };
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // Sections and cards rise in as they scroll into view; siblings follow one another a beat apart.
+  var targets = document.querySelectorAll('.section-head, .showcase, .idea, .item, .ptile, .split > *, .promise > div, .steps-list li, .faq details, .cta-card');
+  targets.forEach(function (el) {
+    el.classList.add('rv');
+    var i = Array.prototype.indexOf.call(el.parentNode.children, el);
+    el.style.setProperty('--rv-delay', Math.min(i, 5) * 0.07 + 's');
+  });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+    targets.forEach(function (el) { io.observe(el); });
+  } else { targets.forEach(function (el) { el.classList.add('in'); }); }
 })();
 </script>
 </body>
